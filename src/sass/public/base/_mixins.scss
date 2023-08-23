@@ -1,0 +1,61 @@
+@use 'base/variables' as v;
+
+@mixin phone {
+    @media (min-width: v.$phone){
+        @content;
+    }
+}   
+@mixin tablet {
+    @media (min-width: v.$tablet){
+        @content;
+    }
+}
+@mixin desktop {
+    @media (min-width: v.$desktop){
+        @content;
+    }
+}
+@mixin grid($columns, $gap){
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}
+@mixin fluid-text($min, $max) {
+    font-size: clamp($min,-0.8rem + 10vw,$max);
+}
+@mixin heading {
+    color: v.$bright-blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 900;
+    
+    &::after {
+        content: '';
+        background-color: v.$aqua-blue;
+        height: .2rem;
+        width: calc(30%);
+        display: inline-block;
+        margin: .2rem 0 0 0;
+    }
+}
+@mixin bgImg($url){
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@mixin btn($textColor, $bgColor){
+    background-color: $bgColor;
+    color: $textColor;
+    text-align: center;
+    border-radius: .5rem;
+    padding: .4rem;
+    transition: background-color 300ms;
+    @include tablet(){
+        padding: .5rem;
+    }
+
+    &:hover {
+        background-color: lighten(v.$bright-blue, 20%);
+    }
+}

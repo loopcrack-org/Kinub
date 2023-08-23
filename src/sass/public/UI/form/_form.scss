@@ -1,0 +1,85 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding: 3rem 3rem 5rem 3rem;
+    border-radius: .5rem;
+    background-color: v.$charcoal;
+    box-shadow: 0px 5px 8px 3px rgba(0,0,0,0.68);
+    color: v.$white;
+
+    &__icon {
+        margin: 0 auto;
+    }
+    &__legend {
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-family: v.$primary-font;
+        @include m.fluid-text(2.5rem, 4rem);
+    }
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+    }
+    &__input,
+    &__textarea {
+        background: transparent;
+        border: .2rem solid v.$aqua-blue;
+        border-radius: .5rem;
+        padding: .8rem 1rem;
+        color: v.$white;
+        transition: border-color 200ms;
+
+        &:focus {
+            border-color: v.$bright-blue;
+            outline: none;
+        }
+        &::placeholder {
+            color: v.$gray;
+        }
+    }
+    &__submit {
+        input {
+            position: relative;
+            border: none;
+            border-radius: .5rem;
+            margin-top: 2rem;
+            padding: 1rem 2rem 1rem 2rem;
+            background-color: v.$aqua-blue;
+            font-weight: 700;
+            font-family: v.$primary-font;
+            color: v.$white;
+            transition: background-color 300ms ease;
+            width: 100%;
+
+            @include m.tablet {
+                padding: 1rem 4.5rem 1rem 2rem;
+                width: auto;
+            }
+            &:hover {
+                background-color: v.$bright-blue;
+                cursor: pointer;
+            }
+        }
+        svg {
+            position: absolute;
+            left: 11.3rem;
+            bottom: 6.2rem;
+            z-index: 1;
+            display: none;
+
+            @include m.tablet {
+                display: block;
+            }
+        }
+    }
+}
