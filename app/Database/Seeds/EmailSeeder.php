@@ -3,25 +3,25 @@
 use CodeIgniter\Database\Seeder;
 use Faker\Factory;
 
-class correoSeeder extends Seeder{
+class emailSeeder extends Seeder{
     public function run(){
         $faker = Factory::create();
         $data = [];
         
         for ($i = 0; $i < 2; $i++) {
-            $contenidoCorreo = [
+            $sampleEmailContent = [
                 "nombre" => $faker->name(),
                 "telefono"=> $faker->phoneNumber(),
                 "email"=>$faker->email()
             ];
             $data[] = [
-                "tipoCorreo" => $faker->numberBetween(1,2),
-                "contenidoCorreo"=> json_encode()
+                "emailTypeId" => $faker->numberBetween(1,2),
+                "emailContent"=> json_encode($sampleEmailContent)
             ];
         }
         // Using Query Builder
-        $this->db->table("Correos")->insertBatch($data);
+        $this->db->table("Email")->insertBatch($data);
     }
-}
+} 
 
 ?>

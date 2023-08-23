@@ -16,35 +16,54 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Correos`
+-- Table structure for table `Email`
 --
 
-DROP TABLE IF EXISTS `Correos`;
+DROP TABLE IF EXISTS `Email`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Correos` (
+CREATE TABLE `Email` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipoCorreo` int NOT NULL,
-  `contenidoCorreo` varchar(255) NOT NULL,
+  `emailTypeId` int NOT NULL,
+  `emailContent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Correos_FK` (`tipoCorreo`),
-  CONSTRAINT `Correos_FK` FOREIGN KEY (`tipoCorreo`) REFERENCES `tiposCorreos` (`id`)
+  KEY `Correos_FK` (`emailTypeId`),
+  CONSTRAINT `Correos_FK` FOREIGN KEY (`emailTypeId`) REFERENCES `emailTypes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `tiposCorreos`
+-- Dumping data for table `Email`
 --
 
-DROP TABLE IF EXISTS `tiposCorreos`;
+LOCK TABLES `Email` WRITE;
+/*!40000 ALTER TABLE `Email` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Email` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `emailTypes`
+--
+
+DROP TABLE IF EXISTS `emailTypes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tiposCorreos` (
+CREATE TABLE `emailTypes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `nombreTipo` varchar(45) NOT NULL,
+  `typeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `emailTypes`
+--
+
+LOCK TABLES `emailTypes` WRITE;
+/*!40000 ALTER TABLE `emailTypes` DISABLE KEYS */;
+INSERT INTO `emailTypes` VALUES (1,'contacto'),(2,'soporte tecnico');
+/*!40000 ALTER TABLE `emailTypes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'Kinub'
@@ -59,4 +78,4 @@ CREATE TABLE `tiposCorreos` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-22 16:04:34
+-- Dump completed on 2023-08-22 22:45:10
