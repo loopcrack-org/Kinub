@@ -24,6 +24,10 @@ const paths = {
         public: './src/sass/public/app.scss',
         bootstrap: './src/sass/admin/config/bootstrap.scss',
     },
+    watchScss: {
+        admin: './src/sass/admin/**/*.scss',
+        public: './src/sass/public/**/*.scss',
+    },
     js: "./src/js/**/*.js",
     images: "./src/images/**/**",
     dest: "./public/assets",
@@ -88,8 +92,8 @@ function imageAvif() {
 }
 
 function watchFiles() {
-  watch(paths.scss.public, publicCss);
-  watch(paths.scss.admin, adminCss);
+  watch(paths.watchScss.public, publicCss);
+  watch(paths.watchScss.admin, adminCss);
   watch(paths.js, javascript);
   watch(paths.images, imagenes);
   watch(paths.images, imageAvif);
