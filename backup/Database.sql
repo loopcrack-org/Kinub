@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `Email`;
 CREATE TABLE `Email` (
   `id` int NOT NULL AUTO_INCREMENT,
   `emailTypeId` int NOT NULL,
-  `emailContent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `emailContent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Correos_FK` (`emailTypeId`),
   CONSTRAINT `Correos_FK` FOREIGN KEY (`emailTypeId`) REFERENCES `emailTypes` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,9 +50,9 @@ DROP TABLE IF EXISTS `emailTypes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `emailTypes` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `typeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `typeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -61,7 +61,7 @@ CREATE TABLE `emailTypes` (
 
 LOCK TABLES `emailTypes` WRITE;
 /*!40000 ALTER TABLE `emailTypes` DISABLE KEYS */;
-INSERT INTO `emailTypes` VALUES (1,'contacto'),(2,'soporte tecnico');
+INSERT INTO `emailTypes` VALUES (1,'contact'),(2,'technical support');
 /*!40000 ALTER TABLE `emailTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,4 +78,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-22 22:45:10
+-- Dump completed on 2023-08-23  9:39:17

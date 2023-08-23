@@ -3,7 +3,7 @@
 use CodeIgniter\Database\Seeder;
 use Faker\Factory;
 
-class emailSeeder extends Seeder{
+class EmailSeeder extends Seeder{
     public function run(){
         $faker = Factory::create();
         $data = [];
