@@ -18,25 +18,26 @@ const rename = require("gulp-rename");
 const uglify = require('gulp-uglify');
 
 const paths = {
-  src: "./src",
-  scss: {
-    admin: './src/sass/admin/app.scss',
-    public: './src/sass/public/app.scss',
-  },
-  js: "./src/js/**/*.js",
-  images: "./src/images/**/**",
-  dest: "./public/assets",
+    src: "./src",
+    scss: {
+        admin: './src/sass/admin/config/app.scss',
+        public: './src/sass/public/app.scss',
+        bootstrap: './src/sass/admin/config/bootstrap.scss',
+    },
+    js: "./src/js/**/*.js",
+    images: "./src/images/**/**",
+    dest: "./public/assets",
 };
 
 function publicCss() {
-  const destPath = `${paths.dest}/css`;
-  return src(paths.scss.public)
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(postcss([autoprefixer(), cssnano()]))
-    .pipe(rename('public.min.css'))
-    .pipe(sourcemaps.write("."))
-    .pipe(dest(destPath));
+    const destPath = `${paths.dest}/css`;
+    return src(paths.scss.public)
+        .pipe(sourcemaps.init())
+        .pipe(sass())
+        .pipe(postcss([autoprefixer(), cssnano()]))
+        .pipe(rename('public.min.css'))
+        .pipe(sourcemaps.write("."))
+        .pipe(dest(destPath));
 }
 
 function adminCss() {
@@ -46,6 +47,16 @@ function adminCss() {
     .pipe(sass())
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(rename('admin.min.css'))
+    .pipe(sourcemaps.write("."))
+    .pipe(dest(destPath));
+}
+function bootstrap() {
+  const destPath = `${paths.dest}/css`;
+  return src(paths.scss.bootstrap)
+    .pipe(sourcemaps.init())
+    .pipe(sass())
+    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(rename('bootstrap.min.css'))
     .pipe(sourcemaps.write("."))
     .pipe(dest(destPath));
 }
@@ -77,16 +88,15 @@ function imageAvif() {
 }
 
 function watchFiles() {
-  watch(paths.scss.global, globalCss);
   watch(paths.scss.public, publicCss);
   watch(paths.scss.admin, adminCss);
   watch(paths.js, javascript);
-  watch(paths.img, imagenes);
-  watch(paths.img, imageAvif);
-  watch(paths.img, imageWebp);
+  watch(paths.images, imagenes);
+  watch(paths.images, imageAvif);
+  watch(paths.images, imageWebp);
 }
 
-
+exports.bootstrap = bootstrap;
 exports.css = parallel(adminCss, publicCss);
 exports.javascript = javascript;
 exports.watchFiles = watchFiles;
