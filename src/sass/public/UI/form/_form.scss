@@ -7,37 +7,57 @@
     flex-direction: column;
     gap: 1.5rem;
     margin-top: 2rem;
-    padding: 3rem 3rem 5rem 3rem;
-    border-radius: .5rem;
-    background-color: v.$charcoal;
-    box-shadow: 0px 5px 8px 3px rgba(0,0,0,0.68);
-    color: v.$white;
+    padding: 3rem;
+    border-radius: 1.25rem;
+    background-color: v.$white;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    color: v.$black;
+    overflow: hidden;
 
+    &::before {
+        content: '';
+        position: absolute;
+        top: -88rem;
+        left: 50%;
+        translate: -50% 0;
+        width: 100rem;
+        height: 100rem;
+        border-radius: 50%;
+        background-color: v.$bright-blue;
+    
+        @include m.tablet {
+            width: 150rem;
+        }
+    }
     &__icon {
+        z-index: 10;
         margin: 0 auto;
     }
     &__legend {
-        margin-top: 1rem;
-        margin-bottom: 2rem;
+        margin-top: 5rem;
+        margin-bottom: 1.5rem;
         text-align: center;
-        text-transform: uppercase;
-        font-weight: bold;
+        text-transform: capitalize;
         font-family: v.$primary-font;
-        @include m.fluid-text(2.5rem, 4rem);
+        @include m.fluid-text(3rem, 4rem);
     }
     &__field {
         display: flex;
         flex-direction: column;
         gap: .8rem;
     }
+    &__label {
+        margin-left: 1rem;
+        @include m.fluid-text(1.7rem, 2rem);
+    }
     &__input,
     &__textarea {
         background: transparent;
-        border: .2rem solid v.$aqua-blue;
-        border-radius: .5rem;
-        padding: .8rem 1rem;
-        color: v.$white;
+        border: .2rem solid darken(v.$light-gray, 5%);
+        padding: 1.5rem;
+        color: v.$black;
         transition: border-color 200ms;
+        resize: none;
 
         &:focus {
             border-color: v.$bright-blue;
@@ -47,39 +67,35 @@
             color: v.$gray;
         }
     }
+    &__input {
+        border-radius: 2.8rem;
+    }
+    &__textarea {
+        border-radius: 1.5rem;
+    }
+    &__error {
+        line-height: 0;
+        margin-left: 1rem;
+        font-size: 1.7rem;
+        font-weight: 700;
+        color: v.$error;
+    }
     &__submit {
-        input {
-            position: relative;
-            border: none;
-            border-radius: .5rem;
-            margin-top: 2rem;
-            padding: 1rem 2rem 1rem 2rem;
-            background-color: v.$aqua-blue;
-            font-weight: 700;
-            font-family: v.$primary-font;
-            color: v.$white;
-            transition: background-color 300ms ease;
-            width: 100%;
-
-            @include m.tablet {
-                padding: 1rem 4.5rem 1rem 2rem;
-                width: auto;
-            }
-            &:hover {
-                background-color: v.$bright-blue;
-                cursor: pointer;
-            }
+        @include m.btn(v.$white, v.$bright-blue, v.$white, v.$aqua-blue);
+        margin-top: 2rem;
+        
+        @include m.tablet {
+            width: 40rem;
+            margin: 0 auto;
         }
-        svg {
-            position: absolute;
-            left: 11.3rem;
-            bottom: 6.2rem;
-            z-index: 1;
-            display: none;
+    }
+}
 
-            @include m.tablet {
-                display: block;
-            }
-        }
+.swal2 {
+    &-popup {
+        zoom: 150%;
+    }
+    &-html-container {
+        zoom: 1.3;
     }
 }
