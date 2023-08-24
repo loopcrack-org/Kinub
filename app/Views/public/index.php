@@ -27,15 +27,15 @@
     ?>
         <script type="module">
             Swal.fire({
-                title: <?php echo $response['title']; ?>,
-                text: <?php echo $response['message']; ?>,
-                icon: <?php echo $response['type']; ?>,
+                title: "<?= $response['title']; ?>",
+                text: "<?= $response['message']; ?>",
+                icon: "<?= $response['type']; ?>",
                 confirmButtonColor: '#0174F6'
             })
         </script>
     <?php endif;?>
 
-    <form class="container-sm form" method="POST">
+    <form class="container-sm form" action="/email/contacto" method="POST">
         <div class="form__icon">
             <svg xmlns="http://www.w3.org/2000/svg" height="60" fill="#ffffff" class="bi bi-envelope-fill" viewBox="0 0 16 16">
                 <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
@@ -46,25 +46,25 @@
         
         <div class="form__field">
             <label for="product-name" class="form__label">Nombre del Producto</label>
-            <?php echo isset($errors['product-name']) ? '<p class="form__error">'.$errors['product-name'].'</p>' : '' ?>
+            <?= isset($errors['product-name']) ? '<p class="form__error">'.$errors['product-name'].'</p>' : '' ?>
             <input id="product-name" name="product-name" type="text" class="form__input" value="<?php echo old("product-name")?>" placeholder="Ingrese el nombre del producto">
         </div>
 
         <div class="form__field">
             <label for="inquirer-name" class="form__label">Nombre del Solicitante</label>
-            <?php echo isset($errors['inquirer-name']) ? '<p class="form__error">'.$errors['inquirer-name'].'</p>' : '' ?>
+            <?= isset($errors['inquirer-name']) ? '<p class="form__error">'.$errors['inquirer-name'].'</p>' : '' ?>
             <input id="inquirer-name" name="inquirer-name" type="text" class="form__input" value="<?php echo old("inquirer-name")?>" placeholder="Ingrese su nombre">
         </div>
 
         <div class="form__field">
             <label for="inquirer-email" class="form__label">E-Mail</label>
-            <?php echo isset($errors['inquirer-email']) ? '<p class="form__error">'.$errors['inquirer-email'].'</p>' : '' ?>
+            <?= isset($errors['inquirer-email']) ? '<p class="form__error">'.$errors['inquirer-email'].'</p>' : '' ?>
             <input id="inquirer-email" name="inquirer-email" type="email" class="form__input" value="<?php echo old("inquirer-email")?>" placeholder="Ingrese su correo">
         </div>
 
         <div class="form__field">
             <label for="message" class="form__label">Mensaje</label>
-            <?php echo isset($errors['message']) ? '<p class="form__error">'.$errors['message'].'</p>' : '' ?>
+            <?= isset($errors['message']) ? '<p class="form__error">'.$errors['message'].'</p>' : '' ?>
             <textarea id="message" name="message" rows="5" class="form__textarea" placeholder="Ingrese su mensaje"><?php echo old("message")?></textarea>
         </div>
 
