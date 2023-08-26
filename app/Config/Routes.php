@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlLogin;
 
 // Create a new instance of our RouteCollection class.
@@ -48,8 +49,9 @@ $routes->group('login', static function($routes) {
     $routes->get('password/reset', [CtrlLogin::class, 'viewPasswordEmail']);
     $routes->get('password/reset/(:any)', [CtrlLogin::class, 'viewPasswordReset']);
     $routes->post('', [CtrlLogin::class, 'login']);
+    $routes->post('password/reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
     $routes->post('password/reset/(:any)', [CtrlLogin::class, 'passwordReset']);
-    $routes->post('logout', [CtrlLogin::class, 'logout']);
+    $routes->post('out', [CtrlLogin::class, 'logout']);
 });
 /*
  * --------------------------------------------------------------------
