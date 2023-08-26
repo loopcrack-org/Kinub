@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\CtrlLogin;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -32,6 +34,21 @@ $routes->set404Override();
 $routes->get('/', 'CtrlPublicPages::index');
 $routes->post('/email/contacto', 'CtrlEmail::sendContactEmail');
 
+
+/*
+ * --------------------------------------------------------------------
+ * LOGIN
+ * --------------------------------------------------------------------
+ */
+$routes->group('login', static function($routes) {
+    /** @var \CodeIgniter\Router\RouteCollection $routes */
+    $routes->get('', [CtrlLogin::class, 'index']);
+    $routes->get('password/reset', [CtrlLogin::class, 'viewPasswordEmail']);
+    $routes->get('password/reset/(:any)', [CtrlLogin::class, 'viewPasswordReset']);
+    $routes->post('', [CtrlLogin::class, 'login']);
+    $routes->post('password/reset/(:any)', [CtrlLogin::class, 'passwordReset']);
+    $routes->post('logout', [CtrlLogin::class, 'logout']);
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing
