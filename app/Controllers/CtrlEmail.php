@@ -31,7 +31,22 @@ class CtrlEmail extends BaseController
 
         $email->setSubject($POST["subject"]);
 
-        $email->setMessage(view('mailDetail',  ['message' => $POST] ));
+        $email->setMessage(view('mailDetail',  [
+            'formData' => [
+                "product-name" => [
+                    "label" => "Producto",
+                    "output" => $POST["product-name"]
+                ],
+                "message" => [
+                    "label" => "Mensaje",
+                    "output" => $POST["message"]
+                ]
+            ],
+            "senderName" => [
+                "label" => "Nombre del cliente",
+                "output" => $POST["inquirer-name"]
+            ],
+        ]));
 
         if($email->send()){
             $response = [
