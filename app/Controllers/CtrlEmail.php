@@ -31,4 +31,8 @@ class CtrlEmail extends BaseController
 
         return redirect()->back();
     }
+    
+    public function sendEmailToResetPassword() {
+        return "sending email to reset password...";
+    }
 }
