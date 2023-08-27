@@ -17,12 +17,26 @@ class CtrlEmail extends BaseController
         }
 
         $POST["subject"] = "Mensaje del formulario de contacto";
-        $response = $this->sendEmail($POST);
+        $formData = [
+            "product-name" => [
+                "label" => "Producto",
+                "output" => $POST["product-name"]
+            ],
+            "message" => [
+                "label" => "Mensaje",
+                "output" => $POST["message"]
+            ]
+        ];
+        $senderName = [
+            "label" => "Nombre del cliente",
+            "output" => $POST["inquirer-name"]
+        ];
+        $response = $this->sendEmail($POST, $formData, $senderName);
     
         return redirect()->back()->with("response", $response);
     }
 
-    private function sendEmail($POST): array
+    private function sendEmail($POST, $formData, $senderName): array
     {
         $email = \Config\Services::email();
 
@@ -32,20 +46,8 @@ class CtrlEmail extends BaseController
         $email->setSubject($POST["subject"]);
 
         $email->setMessage(view('mailDetail',  [
-            'formData' => [
-                "product-name" => [
-                    "label" => "Producto",
-                    "output" => $POST["product-name"]
-                ],
-                "message" => [
-                    "label" => "Mensaje",
-                    "output" => $POST["message"]
-                ]
-            ],
-            "senderName" => [
-                "label" => "Nombre del cliente",
-                "output" => $POST["inquirer-name"]
-            ],
+            'formData' => $formData,
+            'senderName' => $senderName
         ]));
 
         if($email->send()){
