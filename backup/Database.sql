@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `Email`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Email` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `emailTypeId` int NOT NULL,
-  `emailContent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idTypeEmail` int NOT NULL,
+  `information` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Correos_FK` (`emailTypeId`),
-  CONSTRAINT `Correos_FK` FOREIGN KEY (`emailTypeId`) REFERENCES `emailTypes` (`id`)
+  KEY `Correos_FK` (`idTypeEmail`),
+  CONSTRAINT `Correos_FK` FOREIGN KEY (`idTypeEmail`) REFERENCES `TypeEmail` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -42,27 +42,56 @@ LOCK TABLES `Email` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `emailTypes`
+-- Table structure for table `TypeEmail`
 --
 
-DROP TABLE IF EXISTS `emailTypes`;
+DROP TABLE IF EXISTS `TypeEmail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `emailTypes` (
+CREATE TABLE `TypeEmail` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `typeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Type` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `emailTypes`
+-- Dumping data for table `TypeEmail`
 --
 
-LOCK TABLES `emailTypes` WRITE;
-/*!40000 ALTER TABLE `emailTypes` DISABLE KEYS */;
-INSERT INTO `emailTypes` VALUES (1,'contact'),(2,'technical support');
-/*!40000 ALTER TABLE `emailTypes` ENABLE KEYS */;
+LOCK TABLES `TypeEmail` WRITE;
+/*!40000 ALTER TABLE `TypeEmail` DISABLE KEYS */;
+INSERT INTO `TypeEmail` VALUES (1,'contact'),(2,'technical support');
+/*!40000 ALTER TABLE `TypeEmail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `User`
+--
+
+DROP TABLE IF EXISTS `User`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `User` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(13) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `confirm` tinyint DEFAULT NULL,
+  `admin` tinyint DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `User`
+--
+
+LOCK TABLES `User` WRITE;
+/*!40000 ALTER TABLE `User` DISABLE KEYS */;
+/*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -78,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-23  9:39:17
+-- Dump completed on 2023-08-28  0:56:34
