@@ -8,4 +8,9 @@ class CtrlPublicPages extends BaseController
     {
         return view('public/index');
     }
+
+    public function viewSupport(): string
+    {
+        return view('public/support');
+    }
 }
