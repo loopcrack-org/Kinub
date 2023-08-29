@@ -8,7 +8,6 @@ const postcss = require("gulp-postcss");
 const sourcemaps = require("gulp-sourcemaps");
 
 // Imagenes
-const cache = require("gulp-cache");
 const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 const avif = require("gulp-avif");
@@ -17,6 +16,8 @@ const avif = require("gulp-avif");
 const rename = require("gulp-rename");
 const uglify = require('gulp-uglify');
 
+// ------------------------------------------------------------------- //
+// PATHS
 const paths = {
     admin: {
       scss: {
@@ -29,6 +30,12 @@ const paths = {
         js: './src/js/admin/**/*.js',
       }
     },
+    pages: {
+      js: './src/js/pages/**/*.js',
+      watch: {
+        js: './src/js/pages/**/*.js',
+      }
+    },
     public: {
       scss: './src/sass/public/app.scss',
       js: './src/js/public/**/*.js',
@@ -37,10 +44,14 @@ const paths = {
         js: './src/js/public/**/*.js',
       }
     },
-    images: "./src/images/**/*",
+    images: "./src/img/**/*",
     dest: "./public/assets", 
 };
+// ------------------------------------------------------------------- //
 
+
+// ------------------------------------------------------------------- //
+// CSS
 function publicCss() {
     const destPath = `${paths.dest}/css`;
     return src(paths.public.scss)
@@ -72,43 +83,63 @@ function bootstrap() {
     .pipe(sourcemaps.write("."))
     .pipe(dest(destPath));
 }
+// ------------------------------------------------------------------- //
 
+
+// JAVASCRIPT
+// ------------------------------------------------------------------- //
 function adminJavascript() {
   return src(paths.admin.js)
       .pipe(sourcemaps.init())
       .pipe(uglify())
       .pipe(sourcemaps.write("."))
-      .pipe(dest(`${paths.dest}/js`));
+      .pipe(dest(`${paths.dest}/js/admin`));
+}
+function pagesJavascript() {
+  return src(paths.pages.js)
+      .pipe(sourcemaps.init())
+      .pipe(uglify())
+      .pipe(sourcemaps.write("."))
+      .pipe(dest(`${paths.dest}/js/pages`));
 }
 function publicJavascript() {
   return src(paths.public.js)
       .pipe(sourcemaps.init())
       .pipe(uglify())
       .pipe(sourcemaps.write("."))
-      .pipe(dest(`${paths.dest}/js`));
+      .pipe(dest(`${paths.dest}/js/public`));
 }
+// ------------------------------------------------------------------- //
 
+
+// IMAGES
+// ------------------------------------------------------------------- //
 function imagenes() {
-  return src(paths.img)
-    .pipe(cache(imagemin({ optimizationLevel: 3 })))
+  return src(paths.images)
+    .pipe(imagemin({ optimizationLevel: 3 }))
     .pipe(dest(`${paths.dest}/img`));
 }
 
 function imageWebp() {
-  return src(paths.img)
-    .pipe(cache(webp()))
+  return src(paths.images)
+    .pipe(webp())
     .pipe(dest(`${paths.dest}/img`));
 }
 
 function imageAvif() {
-  return src(paths.img)
-    .pipe(cache(avif()))
-    .pipe(dest(`${paths.dest}/avif`));
+  return src(paths.images)
+    .pipe(avif())
+    .pipe(dest(`${paths.dest}/img`));
 }
+// ------------------------------------------------------------------- //
 
+
+// WATCHERS
+// ------------------------------------------------------------------- //
 function watchAdmin() {
   watch(paths.admin.watch.scss, adminCss);
   watch(paths.admin.watch.js, adminJavascript);
+  watch(paths.pages.watch.js, pagesJavascript);
   watch(paths.images, imagenes);
   watch(paths.images, imageAvif);
   watch(paths.images, imageWebp);
@@ -121,8 +152,9 @@ function watchPublic() {
   watch(paths.images, imageAvif);
   watch(paths.images, imageWebp);
 }
+// ------------------------------------------------------------------- //
 
 exports.bootstrap = bootstrap; // bootstrap
-exports.admin = parallel(adminCss, adminJavascript, watchAdmin); // admin
+exports.admin = parallel(adminCss, adminJavascript, pagesJavascript, watchAdmin); // admin
 exports.default = parallel(publicCss, publicJavascript, watchPublic);  // public
 exports.images = parallel(imagenes, imageWebp, imageAvif); // imagenes
