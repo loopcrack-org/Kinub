@@ -15,8 +15,8 @@ class EmailSeeder extends Seeder{
                 "email"=>$faker->email()
             ];
             $data[] = [
-                "emailTypeId" => $faker->numberBetween(1,2),
-                "emailContent"=> json_encode($sampleEmailContent)
+                "idTypeEmail" => $faker->numberBetween(1,2),
+                "information"=> json_encode($sampleEmailContent)
             ];
         }
         // Using Query Builder
