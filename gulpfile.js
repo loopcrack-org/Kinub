@@ -44,7 +44,7 @@ const paths = {
         js: './src/js/public/**/*.js',
       }
     },
-    images: "./src/img/**/*",
+    images: "./src/images/**/*",
     dest: "./public/assets", 
 };
 // ------------------------------------------------------------------- //
@@ -117,19 +117,19 @@ function publicJavascript() {
 function imagenes() {
   return src(paths.images)
     .pipe(imagemin({ optimizationLevel: 3 }))
-    .pipe(dest(`${paths.dest}/img`));
+    .pipe(dest(`${paths.dest}/images`));
 }
 
 function imageWebp() {
   return src(paths.images)
     .pipe(webp())
-    .pipe(dest(`${paths.dest}/img`));
+    .pipe(dest(`${paths.dest}/images`));
 }
 
 function imageAvif() {
   return src(paths.images)
     .pipe(avif())
-    .pipe(dest(`${paths.dest}/img`));
+    .pipe(dest(`${paths.dest}/images`));
 }
 // ------------------------------------------------------------------- //
 
