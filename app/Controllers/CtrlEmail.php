@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\EmailModel;
 use App\Validation\ContactEmailValidation;
 use App\Validation\SupportEmailValidation;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -32,8 +33,18 @@ class CtrlEmail extends BaseController
             "label" => "Nombre del cliente",
             "output" => $POST["inquirer-name"]
         ];
+        
         $response = $this->sendEmail($POST, $formData, $senderName);
-    
+
+        if($response['type'] === "success"){
+            $emailModel = new EmailModel();
+            unset($POST["subject"]);
+            $data = [
+                "idTypeEmail" => 1,
+                "information" => json_encode($POST)
+            ];
+            $emailModel->insert($data);
+        }
         return redirect()->back()->with("response", $response);
     }
 
