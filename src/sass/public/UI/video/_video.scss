@@ -1,0 +1,49 @@
+@use 'base/variables' as v;
+
+.video {
+    padding: 3rem 0;
+    background-image: linear-gradient(v.$bright-blue, v.$bright-blue 50%, v.$light-gray 50%);
+}
+.kinub-video {   
+    &__container {
+        max-width: 70rem;
+        width: 100%;
+        margin: 0 auto;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    }
+    &:hover {
+        cursor: pointer;
+
+        .vjs-big-play-button {
+            background-color: v.$aqua-blue;
+        }
+    }
+    .vjs {
+        &-big-play-button {
+            position: absolute;
+            width: 5rem;
+            height: 5rem;
+            line-height: 5rem;
+            left: 53%;
+            border-radius: 50%;
+            border: none;
+        }
+        &-control-bar {
+            background-color: rgb(1 116 246 / .35);
+            color: lighten(v.$aqua-blue, 40%);
+        }
+        &-load-progress {
+            background-color: v.$aqua-blue;
+        }
+        &-play-progress,
+        &-volume-level {
+            background-color: lighten(v.$aqua-blue, 30%);
+        }
+    }
+    .vjs-progress-control {
+        .vjs-mouse-display,
+        .vjs-mouse-display > div {
+            background-color: v.$bright-blue;
+        }
+    }
+}

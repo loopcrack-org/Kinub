@@ -2,11 +2,14 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
+<link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
+<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+<script src="assets/js/kinub-video.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php $this->endSection(); ?>
 
@@ -17,7 +20,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
 <?php $this->endSection(); ?>
 
-<?php $this->section('content'); ?>
+<?php $this->section('video'); ?>
+    <section class="video">
+        <div class="kinub-video__container">
+            <video
+            id="kinub-video"
+            class="kinub-video video-js vjs-16-9 vjs-big-play-centered"
+            controls
+            preload="auto"
+            width="500"
+            height="264"
+            data-setup="[]"
+        >
+
+            <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
+            <source src="assets/video/kinub-video-example.webm" type="video/webm" />
+        </video>
+        </div>
+    </section>
+<?php $this->endSection('video'); ?>
+
+<?php $this->section('form'); ?>
 <?php $errors = session()->get('errors'); ?>
 
 <section id="form">
@@ -71,4 +94,4 @@
         <input class="form__submit" type="submit" value="Enviar">
     </form>
 </section>
-<?php $this->endSection('content');?>
+<?php $this->endSection('form');?>

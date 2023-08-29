@@ -10,7 +10,9 @@
 </head>
 <body>
 
-<?php $this->renderSection('content'); ?>
+<?php $this->renderSection('video'); ?>
+
+<?php $this->renderSection('form'); ?>
 
 <?php $this->renderSection('js'); ?>
 </body>
