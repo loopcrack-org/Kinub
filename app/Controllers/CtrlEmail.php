@@ -71,7 +71,7 @@ class CtrlEmail extends BaseController
         }else{
             $response = [
                 "title" => "Envio fallido",
-                "mensaje" => "No se pudo realizar el envio del email",
+                "message" => "No se pudo realizar el envio del email",
                 "type" => "error",
             ];
         }
