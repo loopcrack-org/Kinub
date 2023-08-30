@@ -3,6 +3,7 @@
 namespace App\Validation;
 
 use App\Models\UserModel;
+use Exception;
 
 class LoginValidation extends BaseValidation
 {
@@ -23,19 +24,14 @@ class LoginValidation extends BaseValidation
 
     protected $invalid_credentials_message = "Email o contraseña inválidos";
 
-    public function validateCredentials($email, $password) {
-        $userModel = new UserModel();
-        $user = $userModel->where("email", $email)->findAll(1)[0] ?? false;
-        if($user) {
-            if($email == $user["email"]) {
-                if(password_verify($password, $user["password"])) {
-                    return $user;
-                }
-            }
+    public function validateCredentials($user, $password) {
+        if(!$user || !password_verify($password, $user["password"])) {
+            $this->errors = [
+                "credentials" => $this->invalid_credentials_message,
+            ];
+
+            throw new Exception();
         }
-        $this->errors = [
-            "credentials" => $this->invalid_credentials_message,
-        ];
-        return false;
+        return true;
     }
 }

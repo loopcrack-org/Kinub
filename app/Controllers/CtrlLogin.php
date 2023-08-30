@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Validation\LoginValidation;
+use Exception;
 
 class CtrlLogin extends BaseController
 {
@@ -30,15 +31,21 @@ class CtrlLogin extends BaseController
         $email = trim($data["email"]);
         $password = trim($data["password"]);
 
-        if($loginValidation->validateInputs($data)) {
-            if($user = $loginValidation->validateCredentials($email, $password)) {
-                session()->set("user", $user);
-                session()->set("is_logged", true);
-                return "administration panel";
-            }
+        try {
+            if(!$loginValidation->validateInputs($data)) throw new Exception();
+            $user = (new UserModel())->where("email", $email)->first();
+            $loginValidation->validateCredentials($user, $password);
+            session()->set("user", [
+                "name" => $user["name"] . " " . $user["lastName"],
+                "email" => $user["email"],
+                "admin" => $user["admin"],
+            ]);
+            session()->set("is_logged", true);
+        } catch (\Throwable $th) {
+            return redirect()->back()->with("errors", $loginValidation->getErrors());
         }
 
-        return redirect()->back()->with("errors", $loginValidation->getErrors());
+        return "administration panel";
     }
     public function logout() {
         return "Closing session...";
