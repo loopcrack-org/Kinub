@@ -18,7 +18,7 @@ class CtrlEmail extends BaseController
             return redirect()->back()->withInput()->with("errors", $contactEmailValidation->getErrors());
         }
 
-        $POST["subject"] = "Mensaje del formulario de contacto";
+        $subject = "Mensaje del formulario de contacto";
         $formData = [
             "product-name" => [
                 "label" => "Producto",
@@ -34,11 +34,10 @@ class CtrlEmail extends BaseController
             "output" => $POST["inquirer-name"]
         ];
         
-        $response = $this->sendEmail($POST, $formData, $senderName);
+        $response = $this->sendEmail($subject, $POST['inquirer-email'], $senderName, $formData);
 
         if($response['type'] === "success"){
             $emailModel = new EmailModel();
-            unset($POST["subject"]);
             $data = [
                 "idTypeEmail" => 1,
                 "information" => json_encode($POST)
@@ -48,14 +47,14 @@ class CtrlEmail extends BaseController
         return redirect()->back()->with("response", $response);
     }
 
-    private function sendEmail($POST, $formData, $senderName): array
+    private function sendEmail($subject, $senderEmail, $senderName, $formData): array
     {
         $email = \Config\Services::email();
 
-        $email->setFrom($POST["inquirer-email"], $POST["inquirer-name"]);
+        $email->setFrom($senderEmail, $senderName['output']);
         $email->setTo("codeIgniter@gmail.com");
 
-        $email->setSubject($POST["subject"]);
+        $email->setSubject($subject);
 
         $email->setMessage(view('mailDetail',  [
             'formData' => $formData,
