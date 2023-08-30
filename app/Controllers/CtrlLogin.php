@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
+use App\Validation\LoginValidation;
 
 class CtrlLogin extends BaseController
 {
@@ -21,7 +23,22 @@ class CtrlLogin extends BaseController
         return "Changing Password with token: $token...";
     }
     public function login() {
-        return "Sending access credentials..";
+        $loginValidation = new LoginValidation();
+
+        $data = $this->request->getPost();
+
+        $email = trim($data["email"]);
+        $password = trim($data["password"]);
+
+        if($loginValidation->validateInputs($data)) {
+            if($user = $loginValidation->validateCredentials($email, $password)) {
+                session()->set("user", $user);
+                session()->set("is_logged", true);
+                return "administration panel";
+            }
+        }
+
+        return redirect()->back()->with("errors", $loginValidation->getErrors());
     }
     public function logout() {
         return "Closing session...";
