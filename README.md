@@ -23,7 +23,7 @@ Kinub monorepo containing Kinub app and internal libs.
   - assets
     - css
     - fonts
-    - images
+    - img
     - js
     - libs
   - .htaccess
@@ -31,6 +31,7 @@ Kinub monorepo containing Kinub app and internal libs.
   - index.php
   - robots.txt
 - src 
+  - img
   - js
   - sass
 - system
