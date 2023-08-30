@@ -44,23 +44,41 @@
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form action="/login" method="POST">
-
+                                        <?php $errors = session()->get('errors'); ?>
+                                        
+                                        <?php if(isset($errors["credentials"])): ?>
+                                            <!-- alert credentials -->
+                                            <div class="alert alert-warning" role="alert">
+                                                <?= $errors["credentials"] ?>
+                                            </div>
+                                        <?php endif ?>
+                                        <!-- email -->
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Correo</label>
-                                            <input type="email" class="form-control" id="username" placeholder="Ej: jhonson@gmail.com" required>
+                                            <input name="email" type="email" class="form-control <?= isset($errors["email"]) ? 'is-invalid' : '' ?>" id="username validation" placeholder="Ej: jhonson@gmail.com" value="<?= old("email") ?>"  required>
+                                            <?php if(isset($errors["email"])): ?>
+                                                <div class="invalid-feedback">
+                                                    <?= $errors["email"] ?>
+                                                </div> 
+                                            <?php endif ?>
                                         </div>
-
+                                        <!-- password -->
                                         <div class="mb-3">
                                             <div class="float-end">
                                                 <a href="/login/password/reset" class="text-muted">Olvidaste tu contraseña?</a>
                                             </div>
                                             <label class="form-label" for="password-input">Contraseña</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input type="password" class="form-control pe-5 password-input" placeholder="Ingresa tu contraseña" id="password-input" required>
+                                                <input name="password" type="password" class="form-control pe-5 password-input <?= isset($errors["password"]) ? 'is-invalid' : '' ?>" placeholder="Ingresa tu contraseña" id="password-input" style="background-image:none" required>
+                                                <?php if(isset($errors["password"])): ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $errors["password"] ?>
+                                                    </div> 
+                                                <?php endif ?>
                                                 <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             </div>
                                         </div>
-
+                                        <!-- button submit -->
                                         <div class="mt-4">
                                             <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
                                         </div>
