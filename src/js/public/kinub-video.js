@@ -1,3 +1,4 @@
 const videoPlayer = videojs('#kinub-video', {
-    fluid: true
+    fluid: true,
+    muted: true
 });

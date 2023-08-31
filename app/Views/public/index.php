@@ -2,14 +2,13 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
-<link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet">
+<link href="assets/css/vjs_8.5.2.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
-<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
-<script src="assets/js/kinub-video.js"></script>
+<script src="assets/js/public/vjs_8.5.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <?php $this->endSection(); ?>
 
@@ -24,6 +23,8 @@
     <section class="video">
         <div class="kinub-video__container">
             <video
+            autoplay
+            muted
             id="kinub-video"
             class="kinub-video video-js vjs-16-9 vjs-big-play-centered"
             controls
