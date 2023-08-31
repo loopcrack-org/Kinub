@@ -1,0 +1,56 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.nosotros {
+    @include m.grid(1, 2rem);
+    margin: 3rem 0;
+
+    @include m.tablet{
+        &__grid {
+            @include m.grid(2, 4rem);
+            padding-right: 5rem;
+        }   
+    }
+
+    &__heading {
+        color: v.$aqua-blue;
+        text-align: center;
+        font-size: 4rem;
+        margin: 0;
+    }
+    
+    @include m.tablet{
+        
+        &__heading {
+            font-size: 7rem;
+        }
+        
+        &__imagen-contenedor {
+            border-top-right-radius: 8rem;
+            border-bottom-right-radius: 50%;
+            overflow: hidden;
+        }
+    }
+    
+    
+    &__imagen {
+        object-fit: cover;
+    }
+
+    @include m.tablet{     
+        &__imagen {
+            height: 40rem;
+        }
+    }
+
+    &__texto {
+        margin: 0;
+        padding: 0 3rem;
+    }
+
+    @include m.tablet{
+        &__texto {
+            padding: 0;
+        }
+    }
+}

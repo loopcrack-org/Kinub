@@ -20,6 +20,19 @@
 <?php $this->section('content'); ?>
 <?php $errors = session()->get('errors'); ?>
 
+<section class="nosotros">
+    <div class="nosotros__grid">
+        <div class="nosotros__imagen-contenedor">
+            <img class="nosotros__imagen" src="/assets/images/auth-one-bg.jpg" alt="Imagen Sobre Nosotros">
+        </div>
+
+        <div class="nosotros__contenido">
+            <h2 class="nosotros__heading">Nosotros</h2>
+            <p class="nosotros__texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolor itaque sit nesciunt nihil maiores placeat sequi recusandae earum voluptatibus accusantium modi natus dolorem, tenetur, quod reprehenderit nostrum. Error, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, illum saepe ab, sit iure dignissimos quasi ex eius velit cum laudantium aspernatur vitae error doloribus. Quod quibusdam doloribus aspernatur ducimus?</p>
+        </div>
+    </div>
+</section>
+
 <section id="form">
     <?php 
         $response = session()->get('response');
