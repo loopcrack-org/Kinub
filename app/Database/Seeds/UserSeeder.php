@@ -10,7 +10,7 @@ class UserSeeder extends Seeder{
             "name" => $faker->name(),
             "lastName" => $faker->lastName(),
             "email"=>$faker->email(),
-            "password"=> password_hash($faker->password(), PASSWORD_BCRYPT),
+            "password"=> password_hash("fake_password", PASSWORD_BCRYPT),
             "token"=> "FrIDLkk60SIde",
             "confirm"=> 0,
             "admin" => 0
