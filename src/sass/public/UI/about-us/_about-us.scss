@@ -15,15 +15,17 @@
     &__heading {
         @include m.fluid-text(4rem, 10rem);
         color: v.$aqua-blue;
-        text-align: center;
+        text-align: left;
         font-weight: 800;
-        margin: 0;
+        margin: 1.2rem 0 0 0;
+        padding: 0 3rem;
     }
     
     @include m.tablet{
-        
+
         &__heading {
-            text-align: left;
+            margin: 0;
+            padding: 0;
         }
         
         &__image-container {
@@ -50,7 +52,7 @@
     }
 
     &__text {
-        margin: -1rem 0 0 0;
+        margin: 0;
         padding: 0 3rem;
         font-weight: 400;
         color: v.$gray;
