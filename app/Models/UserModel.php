@@ -28,4 +28,18 @@ class UserModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    // Callbacks
+    protected $beforeUpdate = ["hashPassword"];
+
+    protected function hashPassword(array $data)
+    {
+        if (! isset($data['data']['password'])) {
+            return $data;
+        }
+
+        $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_BCRYPT);
+
+        return $data;
+    }
 }

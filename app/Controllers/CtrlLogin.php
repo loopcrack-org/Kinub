@@ -4,7 +4,10 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
+use CodeIgniter\Database\Exceptions\DatabaseException;
+use CodeIgniter\Database\Exceptions\DataException;
 use Exception;
 
 class CtrlLogin extends BaseController
@@ -21,7 +24,44 @@ class CtrlLogin extends BaseController
         ]);
     }
     public function passwordReset($token) {
-        return "Changing Password with token: $token...";
+        $changePasswordValidation = new ChangePasswordValidation();
+        
+        $data = $this->request->getPost();
+
+        try {
+            // validar los campos de input
+            if(!$changePasswordValidation->validateInputs($data)) throw new Exception();
+            // se valida si el usuario existe dado el token 
+            $userModel = new UserModel();
+            $user = $userModel->where("token", $token)->first(); // Database Exception
+            
+            $changePasswordValidation->existUserWithToken($user); // Exception
+
+            $result = $userModel->update($user["id"], [
+                "token" => null,
+                "password" =>$data["password"]
+            ]);
+            if($result) {
+                $response = [
+                    "type" => "success",
+                    "title" => "Contraseña actualizada correctamente",
+                    "message" => "Porfavor, inicia sesión para comenzar",
+                ];
+            }
+        } catch (Exception $e) {
+            $errors = $changePasswordValidation->getErrors();
+            if(isset($errors["connection"])) {
+                $response = [
+                    "type" => "danger",
+                    "title" => "¡Oops!",
+                    "message" => $errors["connection"],
+                ];
+            } else {
+                return redirect()->back()->with("errors", $errors);
+            }
+        }
+        return redirect()->back()->with("response", $response);
+
     }
     public function login() {
         $loginValidation = new LoginValidation();
