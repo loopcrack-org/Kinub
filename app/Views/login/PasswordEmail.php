@@ -36,52 +36,56 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card mt-4">
+                            <?php
+                            $response = session()->get('response');
+                            if ($response) { ?>
+                                <?= view("login/response", ['response' => $response]) ?>
+                            <?php } else { ?>
+                                <div class="card-body p-4">
+                                    <div class="text-center mt-2">
+                                        <h5 class="text-primary">¿Olvidaste tu contraseña?</h5>
+                                        <p class="text-muted">¡Restablécela!</p>
+                                        <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0ab39c" class="avatar-xl">
+                                        </lord-icon>
 
-                            <div class="card-body p-4">
-                                <div class="text-center mt-2">
-                                    <h5 class="text-primary">¿Olvidaste tu contraseña?</h5>
-                                    <p class="text-muted">¡Restablécela!</p>
-                                    <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0ab39c" class="avatar-xl">
-                                    </lord-icon>
+                                    </div>
 
+                                    <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+                                        Ingresa tu correo para enviarte las instrucciones
+                                    </div>
+
+                                    <?php $errors = session()->get('errors') ?>
+
+                                    <div class="p-2">
+                                        <form action="/login/password/reset" method="post">
+                                            <div class="mb-4">
+                                                <label class="form-label">Correo</label>
+                                                <input type="email" class="form-control <?= isset($errors["email"]) ? 'is-invalid' : '' ?>" id="email" placeholder="Ej: johnson@gmail.com" name="email" required value=<?= old("email") ?>>
+
+                                                <?php if (isset($errors["email"])) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $errors["email"] ?>
+                                                    </div>
+                                                <?php endif ?>
+                                            </div>
+
+                                            <div class="text-center mt-4">
+                                                <button class="btn btn-success w-100" type="submit">Enviar</button>
+                                            </div>
+                                            <div class="mt-4 text-center">
+                                                <p class="mb-0"> He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz click aquí</a> </p>
+                                            </div>
+                                        </form><!-- end form -->
+                                    </div>
                                 </div>
-
-                                <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
-                                    Ingresa tu correo para enviarte las instrucciones
-                                </div>
-
-                                <?php $errors = session()->get('errors') ?>
-
-                                <div class="p-2">
-                                    <form action="/login/password/reset" method="post">
-                                        <div class="mb-4">
-                                            <label class="form-label">Correo</label>
-                                            <input type="email" class="form-control <?= isset($errors["email"]) ? 'is-invalid' : '' ?>" id="email" placeholder="Ej: johnson@gmail.com" name="email" required value=<?= old("email")?>>
-
-                                            <?php if (isset($errors["email"])) : ?>
-                                                <div class="invalid-feedback">
-                                                    <?= $errors["email"] ?>
-                                                </div>
-                                            <?php endif ?>
-                                        </div>
-
-                                        <div class="text-center mt-4">
-                                            <button class="btn btn-success w-100" type="submit">Enviar</button>
-                                        </div>
-                                    </form><!-- end form -->
-                                </div>
-                            </div>
-                            <!-- end card body -->
+                                <!-- end card body -->
+                            <?php } ?>
                         </div>
                         <!-- end card -->
-
-                        <div class="mt-4 text-center">
-                            <p class="mb-0"> He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz click aquí</a> </p>
-                        </div>
-
                     </div>
                 </div>
                 <!-- end row -->
+
             </div>
             <!-- end container -->
         </div>
