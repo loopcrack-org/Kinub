@@ -10,6 +10,8 @@
 </head>
 <body>
 
+<?= $this->include('public/templates/header');?>
+
 <?php $this->renderSection('content'); ?>
 
 <?php $this->renderSection('js'); ?>
