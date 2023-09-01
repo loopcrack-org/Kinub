@@ -92,13 +92,28 @@ class CtrlEmail extends BaseController
                 "label" => "Problema",
                 "output" => $POST["support-problem"]
             ],
-        ];
-        $senderName = [
-            "label" => "Nombre del cliente",
-            "output" => $POST["support-customer"]
+            "customer" => [
+                "label" => "Nombre del cliente",
+                "output" => $POST["support-customer"]
+            ]
         ];
 
-        $response = $this->sendEmail($subject, $POST["support-email"], $senderName, $formData);
+        $successEmail =  EmailSender::sendEmail($POST["support-customer"],$POST['support-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
+
+        if($successEmail){
+            $response = [
+                "title" => "Envío exitoso",
+                "message" => "Se ha enviado correctamente",
+                "type" => "success",
+            ];
+            //Store form data in database
+        }else{
+            $response = [
+                "title" => "Envío fallido",
+                "message" => "No se pudo realizar el envío del email",
+                "type" => "error",
+            ];
+        }
 
         return redirect()->back()->with("response", $response);
     }
