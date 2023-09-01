@@ -28,5 +28,8 @@
     "gulp-webp": "^4.0.1",
     "postcss": "^8.4.27",
     "sass": "^1.64.2"
+  },
+  "dependencies": {
+    "plyr": "^3.7.8"
   }
 }
