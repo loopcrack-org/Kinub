@@ -1,0 +1,131 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.footer {
+    background-color: #C7D9E7;
+    margin-top: 2rem;
+    box-shadow: 0px 0px 20px v.$gray;
+    padding-bottom: 1rem;
+
+    @include m.tablet{
+        padding: 2rem 0;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-rows: 2fr 1fr;
+
+        @include m.tablet{
+            grid-template-rows: unset;
+            @include m.grid(2, 2rem);
+            align-items: center;
+        }
+    }
+
+    &__advice-container {
+        margin-top: 1.2rem;
+        text-align: center;
+    }
+
+    @include m.tablet{
+        &__advice-container {
+            margin-top: 0;
+        }
+    }
+
+    &__advice {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: darken(v.$bright-blue, 15%);
+        font-weight: bold;
+        text-transform: capitalize;
+        transition: 300ms color ease-in-out;
+
+        @include m.tablet{
+            margin: 0;
+        }
+
+        &:hover {
+            color: v.$aqua-blue;
+        }
+    }
+}
+
+.network {
+    grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+
+    @include m.tablet{
+        gap: 2rem;
+        margin: 0;
+    }
+
+    &__link {
+        background-color: darken(v.$bright-blue, 15%);
+        padding: 1rem;
+        border-radius: 50%;
+        height: 4.2rem;
+        transition: 300ms background-color ease-in-out;
+
+        &:hover {
+            background-color: v.$aqua-blue;
+        }
+
+        @include m.tablet {
+            height: 4.5rem;
+        }
+        &::before {
+            content: '';
+            display: block;
+            background-size: cover;
+            margin: 0;
+            height: 2.2rem;
+            width: 2.2rem;
+
+            @include m.tablet {
+                margin: 0;
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+
+        &[href*="facebook.com"]::before {
+            background-image: url(/assets/images/facebook-icon.svg);
+        }
+
+        &[href*="instagram.com"]::before {
+            background-image: url(/assets/images/instagram-icon.svg);
+            background-size: cover;
+        }
+
+        &[href*="youtube.com"]::before {
+            background-image: url(/assets/images/youtube-icon.svg);
+            background-size: cover;
+        }
+
+        &[href*="twitter.com"]::before {
+            background-image: url(/assets/images/twitter-icon.svg);
+            background-size: cover;
+        }
+
+        &[href*="linkedin.com"]::before {
+            background-image: url(/assets/images/linkedin-icon.svg);
+            background-size: cover;
+        }
+    }
+
+    
+    &__accessible {
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+        display: block;
+    }
+}
