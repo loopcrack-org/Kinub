@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EmailModel;
+use App\Utils\EmailSender;
 use App\Validation\ContactEmailValidation;
 use App\Validation\SupportEmailValidation;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -27,56 +28,38 @@ class CtrlEmail extends BaseController
             "message" => [
                 "label" => "Mensaje",
                 "output" => $POST["message"]
+            ],
+            "customer" => [
+                "label" => "Nombre del cliente",
+                "output" => $POST["inquirer-name"]
             ]
         ];
-        $senderName = [
-            "label" => "Nombre del cliente",
-            "output" => $POST["inquirer-name"]
-        ];
         
-        $response = $this->sendEmail($subject, $POST['inquirer-email'], $senderName, $formData);
+        $successEmail =  EmailSender::sendEmail($POST["inquirer-name"],$POST['inquirer-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
 
-        if($response['type'] === "success"){
+        if($successEmail){
+            $response = [
+                "title" => "Envío exitoso",
+                "message" => "Se ha enviado correctamente",
+                "type" => "success",
+            ];
             $emailModel = new EmailModel();
             $data = [
                 "idTypeEmail" => 1,
                 "information" => json_encode($POST)
             ];
             $emailModel->insert($data);
-        }
-        return redirect()->back()->with("response", $response);
-    }
-
-    private function sendEmail($subject, $senderEmail, $senderName, $formData): array
-    {
-        $email = \Config\Services::email();
-
-        $email->setFrom($senderEmail, $senderName['output']);
-        $email->setTo("codeIgniter@gmail.com");
-
-        $email->setSubject($subject);
-
-        $email->setMessage(view('mailDetail',  [
-            'formData' => $formData,
-            'senderName' => $senderName
-        ]));
-
-        if($email->send()){
-            $response = [
-                "title" => "Envio exitoso",
-                "message" => "El email se envio correctamente",
-                "type" => "success",
-            ];
         }else{
             $response = [
-                "title" => "Envio fallido",
-                "message" => "No se pudo realizar el envio del email",
+                "title" => "Envío fallido",
+                "message" => "No se pudo realizar el envío del email",
                 "type" => "error",
             ];
         }
 
-        return $response;
+        return redirect()->back()->with("response", $response);
     }
+
 
     public function sendSupportEmail(): RedirectResponse
     {
