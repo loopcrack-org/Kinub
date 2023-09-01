@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EmailModel;
-use App\Utils\SendEmail;
+use App\Utils\EmailSender;
 use App\Validation\ContactEmailValidation;
 use App\Validation\SupportEmailValidation;
 use CodeIgniter\HTTP\RedirectResponse;
@@ -35,7 +35,7 @@ class CtrlEmail extends BaseController
             ]
         ];
         
-        $successEmail = SendEmail::sendEmailMailer($POST["inquirer-name"],$POST['inquirer-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
+        $successEmail =  EmailSender::sendEmail($POST["inquirer-name"],$POST['inquirer-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
 
         if($successEmail){
             $response = [
