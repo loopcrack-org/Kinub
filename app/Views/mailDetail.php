@@ -80,13 +80,15 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>
         </div>
         <div class="mail__content">
-            <?php foreach($formData as $data){ ?>
-                <p class="mail__text"><span><?php echo $data['label']?>:</span> <?php echo $data['output']?></p>
+            <?php foreach($formData as $key => $value){ ?>
+                <?php if($key !== 'customer'){ ?>
+                    <p class="mail__text"><span><?= $value['label']?>:</span> <?= $value['output']?></p>
+                <?php };?>
             <?php }?>
             <hr>
             <div class="mail_user">
                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>
-                <p class="mail__text"><span><?php echo $senderName['label']?>:</span> <?php echo $senderName['output']?></p>
+                <p class="mail__text"><span><?= $formData["customer"]['label']?>:</span> <?= $formData["customer"]['output']?></p>
             </div>
         </div>
     </section>
