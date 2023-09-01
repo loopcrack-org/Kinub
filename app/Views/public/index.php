@@ -12,23 +12,24 @@
 
 <!-- FONTS -->
 <?php $this->section('fonts'); ?>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&display=swap" rel="stylesheet">
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
 <?php $errors = session()->get('errors'); ?>
 
-<section class="nosotros">
-    <div class="nosotros__grid">
-        <div class="nosotros__imagen-contenedor">
-            <img class="nosotros__imagen" src="/assets/images/auth-one-bg.jpg" alt="Imagen Sobre Nosotros">
+<section class="about-us">
+    <div class="about-us__grid">
+        <div class="about-us__image-container">
+            <img class="about-us__image" src="/assets/images/auth-one-bg.jpg" alt="About us image">
         </div>
 
-        <div class="nosotros__contenido">
-            <h2 class="nosotros__heading">Nosotros</h2>
-            <p class="nosotros__texto">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolor itaque sit nesciunt nihil maiores placeat sequi recusandae earum voluptatibus accusantium modi natus dolorem, tenetur, quod reprehenderit nostrum. Error, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, illum saepe ab, sit iure dignissimos quasi ex eius velit cum laudantium aspernatur vitae error doloribus. Quod quibusdam doloribus aspernatur ducimus?</p>
+        <div class="about-us__content">
+            <h2 class="about-us__heading">Nosotros</h2>
+            <p class="about-us__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolor itaque sit nesciunt nihil maiores placeat sequi recusandae earum voluptatibus accusantium modi natus dolorem, tenetur, quod reprehenderit nostrum. Error, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, illum saepe ab, sit iure dignissimos</p>
         </div>
     </div>
 </section>
