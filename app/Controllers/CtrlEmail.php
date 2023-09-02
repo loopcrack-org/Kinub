@@ -72,7 +72,52 @@ class CtrlEmail extends BaseController
             return redirect()->back()->withInput()->with("errors", $supportEmailValidation->getErrors());
         }
 
-        return redirect()->back();
+        $subject = "Mensaje del formulario de soporte técnico";
+        $formData = [
+            "support-phone" => [
+                "label" => "Teléfono",
+                "output" => $POST["support-phone"]
+            ],
+            "support-model" => [
+                "label" => "Modelo del producto",
+                "output" => $POST["support-model"]
+            ],
+            "support-serial" => [
+                "label" => "Número de serie del producto",
+                "output" => $POST["support-serial"]
+            ],
+            "support-problem-type" => [
+                "label" => "Tipo de problema",
+                "output" => $POST["support-problem-type"]
+            ],
+            "support-problem" => [
+                "label" => "Problema",
+                "output" => $POST["support-problem"]
+            ],
+            "customer" => [
+                "label" => "Nombre del cliente",
+                "output" => $POST["support-customer"]
+            ]
+        ];
+
+        $successEmail =  EmailSender::sendEmail($POST["support-customer"],$POST['support-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
+
+        if($successEmail){
+            $response = [
+                "title" => "Envío exitoso",
+                "message" => "Se ha enviado correctamente",
+                "type" => "success",
+            ];
+            //Store form data in database
+        }else{
+            $response = [
+                "title" => "Envío fallido",
+                "message" => "No se pudo realizar el envío del email",
+                "type" => "error",
+            ];
+        }
+
+        return redirect()->back()->with("response", $response);
     }
 
     public function sendEmailToResetPassword()
