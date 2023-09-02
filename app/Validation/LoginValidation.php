@@ -25,10 +25,6 @@ class LoginValidation extends BaseValidation
     protected $invalid_credentials_message = "Email o contraseña inválidos";
 
     public function validateCredentials($user, $password) {
-        // var_dump($password);
-        // var_dump($user["password"]);
-        // var_dump(password_verify($password, $user["password"]));
-        // exit;
         if(!$user || !password_verify($password, $user["password"])) {
             $this->errors = [
                 "credentials" => $this->invalid_credentials_message,
