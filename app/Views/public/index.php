@@ -21,7 +21,7 @@
 <?php $this->section('content'); ?>
 <?php $errors = session()->get('errors'); ?>
 
-<!-- <section id="form">
+<section id="form">
     <?php 
         $response = session()->get('response');
         if(isset($response)):
@@ -70,6 +70,6 @@
         </div>
 
         <input class="form__submit" type="submit" value="Enviar">
-    </form> -->
+    </form>
 </section>
 <?php $this->endSection('content');?>
