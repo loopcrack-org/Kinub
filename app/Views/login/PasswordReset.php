@@ -72,7 +72,6 @@
                                             <div class="mb-3">
                                                 <label class="form-label" for="confirm-password-input">Confirmar Contraseña</label>
                                                 <div class="position-relative auth-pass-inputgroup mb-3">
-                                                    <!-- pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" -->
                                                     <input name="confirm-password" required type="password" class="form-control pe-5 password-input <?= isset($errors["confirm-password"]) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Confirma tu contraseña" id="confirm-password-input" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                                     <?php if (isset($errors["confirm-password"])) : ?>
                                                         <div class="invalid-feedback">

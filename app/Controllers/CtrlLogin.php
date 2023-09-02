@@ -29,13 +29,11 @@ class CtrlLogin extends BaseController
         $data = $this->request->getPost();
 
         try {
-            // validar los campos de input
             if(!$changePasswordValidation->validateInputs($data)) throw new Exception();
-            // se valida si el usuario existe dado el token 
             $userModel = new UserModel();
-            $user = $userModel->where("token", $token)->first(); // Database Exception
+            $user = $userModel->where("token", $token)->first();
             
-            $changePasswordValidation->existUserWithToken($user); // Exception
+            $changePasswordValidation->existUserWithToken($user);
 
             $result = $userModel->update($user["id"], [
                 "token" => null,
@@ -60,7 +58,7 @@ class CtrlLogin extends BaseController
                 return redirect()->back()->with("errors", $errors);
             }
         }
-        return redirect()->back()->with("response", $response);
+        return redirect()->to("login/password/reset")->with("response", $response);
 
     }
     public function login() {
