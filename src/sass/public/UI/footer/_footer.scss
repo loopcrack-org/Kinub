@@ -12,17 +12,13 @@
     }
 
     &__grid {
-        display: grid;
-        grid-template-rows: 2fr 1fr;
-
-        @include m.tablet{
-            grid-template-rows: unset;
-            @include m.grid(2, 2rem);
-            align-items: center;
-        }
+        @include m.grid(3, 2rem);
     }
 
     &__advice-container {
+        grid-column: 1 / 2;
+        display: flex;
+        align-items: flex-end;
         margin-top: 1.2rem;
         text-align: center;
     }
@@ -34,15 +30,17 @@
     }
 
     &__advice {
+        font-size: 1rem;
         text-align: center;
-        margin-bottom: 2rem;
+        padding-left: 2rem;
+        text-decoration: underline;
         color: darken(v.$bright-blue, 15%);
-        font-weight: bold;
-        text-transform: capitalize;
         transition: 300ms color ease-in-out;
 
         @include m.tablet{
             margin: 0;
+            font-size: 1.6rem;
+            padding-bottom: .5rem;
         }
 
         &:hover {
@@ -52,7 +50,6 @@
 }
 
 .network {
-    grid-row: 1 / 2;
     display: flex;
     justify-content: center;
     gap: 2rem;
@@ -65,10 +62,34 @@
 
     &__link {
         background-color: darken(v.$bright-blue, 15%);
-        padding: 1rem;
+        padding: .8rem 1rem 2.5rem 1rem;
         border-radius: 50%;
-        height: 4.2rem;
+        height: 3.5rem;
         transition: 300ms background-color ease-in-out;
+
+        @include m.tablet{
+            padding: 1rem 1rem 2.5rem 1rem;
+        }
+
+        &:nth-child(1){
+            padding: 0.4rem 0.77rem 0 0.77rem;
+        }
+
+        @include m.tablet{
+            &:nth-child(1){
+                padding: .7rem .8rem 0 0.7rem;
+            }
+        }
+
+        &:nth-child(4){
+            padding: 0.2rem 0.2rem 0 0.2rem;
+        }
+
+        @include m.tablet{
+            &:nth-child(4){
+                padding: 0.2rem .4rem 0 0.4rem;
+            }
+        }
 
         &:hover {
             background-color: v.$aqua-blue;
@@ -77,13 +98,62 @@
         @include m.tablet {
             height: 4.5rem;
         }
+
+        &:nth-child(1){
+            &::before {
+                content: '';
+                display: block;
+                background-size: cover;
+                margin: 0;
+                height: 2.5rem;
+                width: 2.5rem;
+            }
+        }
+
+        @include m.tablet{
+            &:nth-child(1){
+                &::before {
+                    content: '';
+                    display: block;
+                    background-size: cover;
+                    margin: 0;
+                    height: 3rem;
+                    width: 3rem;
+                }
+            }
+        }
+
+        &:nth-child(4){
+            &::before {
+                content: '';
+                display: block;
+                background-size: cover;
+                margin: 0;
+                height: 3rem;
+                width: 3rem;
+            }
+        }
+
+        @include m.tablet{
+            &:nth-child(4){
+                &::before {
+                    content: '';
+                    display: block;
+                    background-size: cover;
+                    margin: 0;
+                    height: 4rem;
+                    width: 4rem;
+                }
+            }
+        }
+        
         &::before {
             content: '';
             display: block;
             background-size: cover;
             margin: 0;
-            height: 2.2rem;
-            width: 2.2rem;
+            height: 1.8rem;
+            width: 1.8rem;
 
             @include m.tablet {
                 margin: 0;
