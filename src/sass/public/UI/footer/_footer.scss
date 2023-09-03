@@ -52,7 +52,7 @@
 .network {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: 1rem;
     margin-top: 2rem;
 
     @include m.tablet{
@@ -62,32 +62,50 @@
 
     &__link {
         background-color: darken(v.$bright-blue, 15%);
-        padding: .8rem 1rem 2.5rem 1rem;
         border-radius: 50%;
-        height: 3.5rem;
         transition: 300ms background-color ease-in-out;
+        height: 2.5rem;
+        padding: .6rem .7rem 0 .7rem;
+
+        @include m.phone{
+            padding: .8rem 1rem 2.5rem 1rem;
+            height: 3.5rem;
+        }
 
         @include m.tablet{
             padding: 1rem 1rem 2.5rem 1rem;
+            height: 4.5rem;
         }
 
         &:nth-child(1){
-            padding: 0.4rem 0.77rem 0 0.77rem;
+            padding: .4rem .4rem .2rem .4rem;
+        }
+
+        @include m.phone{
+            &:nth-child(1){
+                padding: .4rem .5rem 0 .5rem;
+            }  
         }
 
         @include m.tablet{
             &:nth-child(1){
-                padding: .7rem .8rem 0 0.7rem;
+                padding: .7rem .8rem 0 .7rem;
             }
         }
 
         &:nth-child(4){
-            padding: 0.2rem 0.2rem 0 0.2rem;
+            padding: .2rem .2rem 0 .25rem;
+        }
+
+        @include m.phone{
+            &:nth-child(4){
+                padding: .2rem .2rem 0 .2rem;
+            }
         }
 
         @include m.tablet{
             &:nth-child(4){
-                padding: 0.2rem .4rem 0 0.4rem;
+                padding: .2rem .4rem 0 .4rem;
             }
         }
 
@@ -95,8 +113,25 @@
             background-color: v.$aqua-blue;
         }
 
-        @include m.tablet {
-            height: 4.5rem;
+                
+        &::before {
+            content: '';
+            display: block;
+            background-size: cover;
+            margin: 0;
+            height: 1.2rem;
+            width: 1.2rem;
+
+            @include m.phone{
+                height: 1.8rem;
+                width: 1.8rem;
+            }
+
+            @include m.tablet {
+                margin: 0;
+                height: 2.5rem;
+                width: 2.5rem;
+            }
         }
 
         &:nth-child(1){
@@ -105,8 +140,21 @@
                 display: block;
                 background-size: cover;
                 margin: 0;
-                height: 2.5rem;
-                width: 2.5rem;
+                height: 1.7rem;
+                width: 1.8rem;
+            }
+        }
+
+        @include m.phone{
+            &:nth-child(1){
+                &::before {
+                    content: '';
+                    display: block;
+                    background-size: cover;
+                    margin: 0;
+                    height: 2rem;
+                    width: 2rem;
+                }
             }
         }
 
@@ -129,8 +177,21 @@
                 display: block;
                 background-size: cover;
                 margin: 0;
-                height: 3rem;
-                width: 3rem;
+                height: 2rem;
+                width: 2rem;
+            }
+        }
+
+        @include m.phone{
+            &:nth-child(4){
+                &::before {
+                    content: '';
+                    display: block;
+                    background-size: cover;
+                    margin: 0;
+                    height: 3rem;
+                    width: 3rem;
+                }
             }
         }
 
@@ -144,21 +205,6 @@
                     height: 4rem;
                     width: 4rem;
                 }
-            }
-        }
-        
-        &::before {
-            content: '';
-            display: block;
-            background-size: cover;
-            margin: 0;
-            height: 1.8rem;
-            width: 1.8rem;
-
-            @include m.tablet {
-                margin: 0;
-                height: 2.5rem;
-                width: 2.5rem;
             }
         }
 
@@ -186,7 +232,6 @@
             background-size: cover;
         }
     }
-
     
     &__accessible {
         width: 1px;
