@@ -1,6 +1,8 @@
 <header class="header" id="header-nav">
         <div class="header__logo">
-            <a href="index.php">Kinub</a>
+            <a href="/">
+                <img src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="Logo Kinub">
+            </a>
         </div>
 
         <nav class="navigation">
@@ -12,7 +14,9 @@
     </header>
 
     <div class="header-mobile">
-        <a class="header-mobile__logo" href="/">Kinub</a>
+        <a class="header-mobile__logo" href="/">
+            <img src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="Logo Kinub">
+        </a>
 
         <div class="header-mobile__menu">
             <img id="mobile-menu" src="assets/images/menu.svg" alt="Menu">
@@ -22,8 +26,9 @@
 <aside class="sidebar"> 
     <div class="sidebar__header">
 
-        <!--Logo-->
-        <a href="/"><h2>Kinub</h2></a>
+        <a href="/">
+            <img src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="Logo Kinub">
+        </a>
 
         <div class="sidebar__close">
             <img id="close-menu" src="assets/images/close.svg" alt="Close Menu">

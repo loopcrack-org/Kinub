@@ -3,27 +3,45 @@
 
 .header {
     box-shadow: 0px 10px 15px 0px v.$gray;   
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
     display: none;
     
     @include m.tablet{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 3rem 3rem; 
+        padding: 1rem 3rem; 
     
         &__logo {
-            flex-grow: 5;
+            height: 7rem;
+            width: 7rem;
+            padding-top: .5rem;
+            margin-right: 10rem;
+
+            @include m.tablet{
+                margin-right: 17rem;
+            }
+
+            @include m.desktop{
+                height: 8rem;
+                width: 9rem;
+                padding-top: .5rem;
+                margin-right: 25rem; 
+            }
+
+            @include m.desktopXL{
+                margin-right: 40rem; 
+            }
         }   
     }    
+    
     @include m.desktop {
-        padding: 3rem 7rem; 
+        padding: 0 4rem; 
     }
 }
 
 .header-mobile {
     box-shadow: 0px 10px 15px 0px v.$gray;   
-    padding: 3rem 2rem;
     display: flex;
     align-items: center;
 }
@@ -41,6 +59,14 @@
         text-transform: uppercase;
         transition: color 300ms ease;
 
+        @include m.desktop{
+            font-size: 1.8rem;
+        }
+
+        @include m.desktopXL{
+            font-size: 2rem;
+        }
+
         &:hover {
             color: lighten(v.$bright-blue, 20%);
         }
@@ -52,11 +78,5 @@
         flex-grow: 2;
         justify-content: space-between;
         margin: 0;
-    }
-
-    @include m.desktop{    
-        &__link {
-            font-size: 2rem;
-        }
     }
 }
