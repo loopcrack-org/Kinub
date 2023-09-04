@@ -6,8 +6,6 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
-use CodeIgniter\Database\Exceptions\DatabaseException;
-use CodeIgniter\Database\Exceptions\DataException;
 use Exception;
 
 class CtrlLogin extends BaseController
@@ -20,6 +18,7 @@ class CtrlLogin extends BaseController
     }
     
     public function viewPasswordReset($token): string {
+
         try {
             $changePasswordValidation = new ChangePasswordValidation();
             $userModel = new UserModel(); 
@@ -32,12 +31,11 @@ class CtrlLogin extends BaseController
                 "title" => "¡Oops!",
                 "message" => "Parece que no cuenta con el permiso para restablecer su contraseña o el token es invalido",
             ]; 
-
-            session()->setFlashdata("response", $response); 
         }
 
         return view("login/PasswordReset", [
-            "token" => $token
+            "token" => $token, 
+            "response" => $response ?? null
         ]);
     }
 
