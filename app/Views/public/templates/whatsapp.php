@@ -1,6 +1,3 @@
-<?php $this->section('js'); ?>
-<script src="assets/js/public/whatsapp.js"></script>
-<?php $this->endSection(); ?>
 <a target="_blank" href="https://api.whatsapp.com/send/?phone=529993102600&text=*_WHATSAPP KINUB_*%0A*Hola, solicito información sobre dispositivos*">
     <button class="btn-whatsapp">
         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#ffffff" class="bi bi-whatsapp" viewBox="0 0 16 16">
