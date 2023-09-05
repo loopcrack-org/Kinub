@@ -12,13 +12,32 @@
 
 <!-- FONTS -->
 <?php $this->section('fonts'); ?>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Nunito+Sans:opsz@6..12&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&display=swap" rel="stylesheet">
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
 <?php $errors = session()->get('errors'); ?>
+
+<section class="about-us">
+    <div class="about-us__grid">
+        <div class="about-us__image-container">
+
+        <picture>
+            <source srcset="assets/images/auth-one-bg.avif" type="image/avif">
+            <source srcset="assets/images/auth-one-bg.webp" type="image/webp">
+            <img class="about-us__image" loading="lazy" width="200" height="300" src="assets/images/auth-one-bg.jpg" alt="About us image">
+        </picture>
+        </div>
+
+        <div class="about-us__content">
+            <h2 class="about-us__heading">Nosotros</h2>
+            <p class="about-us__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolor itaque sit nesciunt nihil maiores placeat sequi recusandae earum voluptatibus accusantium modi natus dolorem, tenetur, quod reprehenderit nostrum. Error, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, illum saepe ab, sit iure dignissimos</p>
+        </div>
+    </div>
+</section>
 
 <section id="form">
     <?php 
