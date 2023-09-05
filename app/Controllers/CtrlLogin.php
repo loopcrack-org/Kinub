@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
+use CodeIgniter\Database\Exceptions\DatabaseException;
+use CodeIgniter\Database\Exceptions\DataException;
 use Exception;
 
 class CtrlLogin extends BaseController
