@@ -41,7 +41,9 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card mt-4"> 
-                            <?php $response = session()->get("response"); ?>
+                            
+                            <?php $response = $response ?? session()->get("response"); ?>
+
                             <?php if($response): ?>
                                 <?= view("login/response", ['response' => $response]) ?>
                             <?php else: ?>
