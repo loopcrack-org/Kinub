@@ -18,11 +18,29 @@ class CtrlLogin extends BaseController
     public function viewPasswordEmail(): string {
         return view("login/PasswordEmail");
     }
+    
     public function viewPasswordReset($token): string {
+
+        try {
+            $changePasswordValidation = new ChangePasswordValidation();
+            $userModel = new UserModel(); 
+            $user = $userModel->where("token", $token)->first(); 
+            $changePasswordValidation->existUserWithToken($user);           
+            
+        } catch (\Throwable $th) {
+            $response = [
+                "type" => "danger",
+                "title" => "¡Oops!",
+                "message" => "Parece que no cuenta con el permiso para restablecer su contraseña o el token es invalido",
+            ]; 
+        }
+
         return view("login/PasswordReset", [
-            "token" => $token
+            "token" => $token, 
+            "response" => $response ?? null
         ]);
     }
+
     public function passwordReset($token) {
         $changePasswordValidation = new ChangePasswordValidation();
         
