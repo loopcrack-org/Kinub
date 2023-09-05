@@ -12,7 +12,7 @@ class UserSeeder extends Seeder{
                 "lastName" => $faker->lastName(),
                 "email"=> "admin@admin.com",
                 "password"=> password_hash("fake_password", PASSWORD_BCRYPT),
-                "token"=> "",
+                "token"=> "FAS12AQajqa",
                 "confirm"=> 0,
                 "admin" => 1
             ], 
@@ -21,7 +21,7 @@ class UserSeeder extends Seeder{
                 "lastName" => $faker->lastName(),
                 "email"=> "nkutch@gmail.com",
                 "password"=> password_hash("fake_password", PASSWORD_BCRYPT),
-                "token"=> "",
+                "token"=> "FAS12AQajqa",
                 "confirm"=> 0,
                 "admin" => 0  
             ]
