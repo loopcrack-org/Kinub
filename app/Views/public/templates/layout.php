@@ -13,6 +13,7 @@
 <?= $this->include('public/templates/header');?>
 
 <?php $this->renderSection('content'); ?>
+<?= $this->include("public/templates/footer"); ?>
 
 <?php $this->renderSection('js'); ?>
 </body>
