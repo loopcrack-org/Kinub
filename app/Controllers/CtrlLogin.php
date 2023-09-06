@@ -4,7 +4,10 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UserModel;
+use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
+use CodeIgniter\Database\Exceptions\DatabaseException;
+use CodeIgniter\Database\Exceptions\DataException;
 use Exception;
 
 class CtrlLogin extends BaseController
@@ -15,13 +18,66 @@ class CtrlLogin extends BaseController
     public function viewPasswordEmail(): string {
         return view("login/PasswordEmail");
     }
+    
     public function viewPasswordReset($token): string {
+
+        try {
+            $changePasswordValidation = new ChangePasswordValidation();
+            $userModel = new UserModel(); 
+            $user = $userModel->where("token", $token)->first(); 
+            $changePasswordValidation->existUserWithToken($user);           
+            
+        } catch (\Throwable $th) {
+            $response = [
+                "type" => "danger",
+                "title" => "¡Oops!",
+                "message" => "Parece que no cuenta con el permiso para restablecer su contraseña o el token es invalido",
+            ]; 
+        }
+
         return view("login/PasswordReset", [
-            "token" => $token
+            "token" => $token, 
+            "response" => $response ?? null
         ]);
     }
+
     public function passwordReset($token) {
-        return "Changing Password with token: $token...";
+        $changePasswordValidation = new ChangePasswordValidation();
+        
+        $data = $this->request->getPost();
+
+        try {
+            if(!$changePasswordValidation->validateInputs($data)) throw new Exception();
+            $userModel = new UserModel();
+            $user = $userModel->where("token", $token)->first();
+            
+            $changePasswordValidation->existUserWithToken($user);
+
+            $result = $userModel->update($user["id"], [
+                "token" => null,
+                "password" =>$data["password"]
+            ]);
+            if($result) {
+                $response = [
+                    "type" => "success",
+                    "title" => "Contraseña actualizada correctamente",
+                    "message" => "Porfavor, inicia sesión para comenzar",
+                ];
+            }
+        } catch (Exception $e) {
+            $errors = $changePasswordValidation->getErrors();
+            if(isset($errors["connection"])) {
+                $response = [
+                    "type" => "danger",
+                    "title" => "¡Oops!",
+                    "message" => $errors["connection"],
+                ];
+            } else {
+                return redirect()->back()->with("errors", $errors);
+            }
+        }
+        return redirect()->to("login/password/reset")->with("response", $response);
+
     }
     public function login() {
         $loginValidation = new LoginValidation();
