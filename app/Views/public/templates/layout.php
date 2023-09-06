@@ -6,12 +6,12 @@
     <title>Kinub | Home</title>
     <?php $this->renderSection('fonts'); ?>
     <?php $this->renderSection('css'); ?>
-
 </head>
 <body>
 
 <?= $this->include("public/templates/whatsapp");?>
 <?php $this->renderSection('content'); ?>
+
 <?= $this->include("public/templates/footer"); ?>
 
 <?php $this->renderSection('js'); ?>
