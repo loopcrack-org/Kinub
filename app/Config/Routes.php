@@ -2,10 +2,10 @@
 
 namespace Config;
 
-use App\Controllers\CtrlCategorie;
+use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlLogin;
-use App\Controllers\CtrlPublicSection;
+use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlSolution;
 
 // Create a new instance of our RouteCollection class.
@@ -64,11 +64,11 @@ $routes->group('login', static function($routes) {
 $routes->group('admin', static function($routes) {
     /** @var \CodeIgniter\Router\RouteCollection $routes */
 
-    $routes->get('', [CtrlPublicSection::class, 'viewPublicSection']);
+    $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
     $routes->group('home', static function($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
-        $routes->get('edit', [CtrlPublicSection::class, 'viewPublicSectionEdit']);
-        $routes->post('edit', [CtrlPublicSection::class, 'editPublicSection']);
+        $routes->get('edit', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
+        $routes->post('edit', [CtrlHomeSection::class, 'editHomeSection']);
     });
 
     $routes->group('soluciones', static function($routes) {
@@ -83,12 +83,12 @@ $routes->group('admin', static function($routes) {
 
     $routes->group('categorias', static function($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
-        $routes->get('', [CtrlCategorie::class, 'viewCategories']);
-        $routes->get('create', [CtrlCategorie::class, 'viewCategorieCreate']);
-        $routes->post('create', [CtrlCategorie::class, 'createCategorie']);
-        $routes->get('edit/(:num)', [CtrlCategorie::class, 'viewCategorieEdit']);
-        $routes->post('edit/(:num)', [CtrlCategorie::class, 'updateCategorie']);
-        $routes->post('delete', [CtrlCategorie::class, 'deleteCategorie']);
+        $routes->get('', [CtrlCategory::class, 'viewCategories']);
+        $routes->get('create', [CtrlCategory::class, 'viewCategoryCreate']);
+        $routes->post('create', [CtrlCategory::class, 'createCategory']);
+        $routes->get('edit/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
+        $routes->post('edit/(:num)', [CtrlCategory::class, 'updateCategory']);
+        $routes->post('delete', [CtrlCategory::class, 'deleteCategory']);
     });
 });
 /*
