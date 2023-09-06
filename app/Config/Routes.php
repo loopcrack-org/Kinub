@@ -2,8 +2,11 @@
 
 namespace Config;
 
+use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlLogin;
+use App\Controllers\CtrlHomeSection;
+use App\Controllers\CtrlSolution;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -52,6 +55,41 @@ $routes->group('login', static function($routes) {
     $routes->post('password/reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
     $routes->post('password/reset/(:any)', [CtrlLogin::class, 'passwordReset']);
     $routes->post('out', [CtrlLogin::class, 'logout']);
+});
+/*
+ * --------------------------------------------------------------------
+ * ADMIN
+ * --------------------------------------------------------------------
+ */
+$routes->group('admin', static function($routes) {
+    /** @var \CodeIgniter\Router\RouteCollection $routes */
+
+    $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
+    $routes->group('home', static function($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('edit', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
+        $routes->post('edit', [CtrlHomeSection::class, 'editHomeSection']);
+    });
+
+    $routes->group('soluciones', static function($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlSolution::class, 'viewSolutions']);
+        $routes->get('create', [CtrlSolution::class, 'viewSolutionCreate']);
+        $routes->post('create', [CtrlSolution::class, 'createSolution']);
+        $routes->get('edit/(:num)', [CtrlSolution::class, 'viewSolutionEdit']);
+        $routes->post('edit/(:num)', [CtrlSolution::class, 'updateSolution']);
+        $routes->post('delete', [CtrlSolution::class, 'deleteSolution']);
+    });
+
+    $routes->group('categorias', static function($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlCategory::class, 'viewCategories']);
+        $routes->get('create', [CtrlCategory::class, 'viewCategoryCreate']);
+        $routes->post('create', [CtrlCategory::class, 'createCategory']);
+        $routes->get('edit/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
+        $routes->post('edit/(:num)', [CtrlCategory::class, 'updateCategory']);
+        $routes->post('delete', [CtrlCategory::class, 'deleteCategory']);
+    });
 });
 /*
  * --------------------------------------------------------------------
