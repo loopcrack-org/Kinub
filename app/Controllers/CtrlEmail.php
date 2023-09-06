@@ -108,7 +108,12 @@ class CtrlEmail extends BaseController
                 "message" => "Se ha enviado correctamente",
                 "type" => "success",
             ];
-            //Store form data in database
+            $emailModel = new EmailModel();
+            $data = [
+                "idTypeEmail" => 2,
+                "information" => json_encode($POST)
+            ];
+            $emailModel->insert($data);
         }else{
             $response = [
                 "title" => "Envío fallido",
