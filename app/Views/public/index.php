@@ -2,17 +2,19 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
+<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="assets/js/public/home.js"></script>
 <?php $this->endSection(); ?>
 
 <!-- FONTS -->
 <?php $this->section('fonts'); ?>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&display=swap" rel="stylesheet">
@@ -36,6 +38,25 @@
             <h2 class="about-us__heading">Nosotros</h2>
             <p class="about-us__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolor itaque sit nesciunt nihil maiores placeat sequi recusandae earum voluptatibus accusantium modi natus dolorem, tenetur, quod reprehenderit nostrum. Error, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, illum saepe ab, sit iure dignissimos</p>
         </div>
+    </div>
+</section>
+
+<section class="kinub-video">
+    <div class="kinub-video__container">
+        <video
+        id="kinub-video"
+        class="kinub-video__video"
+        preload="auto"
+        width="500"
+        height="264"
+        muted
+        autoplay
+        playsinline
+        controls
+        >
+            <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
+            <source src="assets/video/kinub-video-example.webm" type="video/webm" />
+        </video>
     </div>
 </section>
 
