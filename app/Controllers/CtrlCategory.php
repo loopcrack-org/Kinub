@@ -8,13 +8,13 @@ class CtrlCategory extends BaseController
 {
     public function viewCategories()
     {
-        return view("admin/Categories");
+        return view("admin/categories/Categories");
     }
     public function viewCategoryCreate() {
-        return view("admin/CategoryCreate");
+        return view("admin/categories/CategoryCreate");
     }
     public function viewCategoryEdit($id) {
-        return view("admin/CategoryEdit", ["id"=>$id]);
+        return view("admin/categories/CategoryEdit", ["id"=>$id]);
     }
     public function createCategory() {
         return "creating Category...";

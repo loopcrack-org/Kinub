@@ -8,10 +8,10 @@ class CtrlHomeSection extends BaseController
 {
     public function viewHomeSection()
     {
-        return view("admin/HomeSection");
+        return view("admin/homeSection/HomeSection");
     }
     public function viewHomeSectionEdit() {
-        return view("admin/HomeSectionEdit");
+        return view("admin/homeSection/HomeSectionEdit");
     }
     public function editHomeSection() {
         return "editing HomeSection...";
