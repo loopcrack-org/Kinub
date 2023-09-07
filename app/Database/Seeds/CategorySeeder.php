@@ -22,6 +22,6 @@ class CategorySeeder extends Seeder
 
 
         // Using Query Builder
-        $this->db->table("Category")->insertBatch($data);
+        $this->db->table("categories")->insertBatch($data);
     }
 }

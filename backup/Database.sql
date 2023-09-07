@@ -16,28 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Category`
+-- Table structure for table `categories`
 --
 
-DROP TABLE IF EXISTS `Category`;
+DROP TABLE IF EXISTS `categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Category` (
+CREATE TABLE `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `icon` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Category`
+-- Dumping data for table `categories`
 --
 
-LOCK TABLES `Category` WRITE;
-/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -67,29 +67,29 @@ LOCK TABLES `Email` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Tags`
+-- Table structure for table `tags`
 --
 
-DROP TABLE IF EXISTS `Tags`;
+DROP TABLE IF EXISTS `tags`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Tags` (
+CREATE TABLE `tags` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `categoryId` int NOT NULL,
+  `idCategory` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Tags_FK` (`categoryId`),
-  CONSTRAINT `Tags_FK` FOREIGN KEY (`categoryId`) REFERENCES `Category` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  KEY `Tags_FK` (`idCategory`),
+  CONSTRAINT `Tags_FK` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `Tags`
+-- Dumping data for table `tags`
 --
 
-LOCK TABLES `Tags` WRITE;
-/*!40000 ALTER TABLE `Tags` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Tags` ENABLE KEYS */;
+LOCK TABLES `tags` WRITE;
+/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -142,7 +142,6 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'Prof. Burdette Abbott','Jerde','skassulke@nitzsche.biz','$2y$10$iN/o9dA1CLUUPYqly4ntUO579yvP8d1y8G947rzdrcaNRxlRmPT46',NULL,0,0);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -159,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-07  0:41:33
+-- Dump completed on 2023-09-07 12:50:57

@@ -10,23 +10,23 @@ class TagsSeeder extends Seeder
         $data = [
             [
                 "name" => "Tag1",
-                "categoryId" => 1,
+                "idCategory" => 1,
             ],
             [
                 "name" => "Tag2",
-                "categoryId" => 1,
+                "idCategory" => 1,
             ],
             [
                 "name" => "Tag3",
-                "categoryId" => 2,
+                "idCategory" => 2,
             ],
             [
                 "name" => "Tag4",
-                "categoryId" => 2,
+                "idCategory" => 2,
             ]
         ];
 
         // Using Query Builder
-        $this->db->table("Tags")->insertBatch($data);
+        $this->db->table("tags")->insertBatch($data);
     }
 }
