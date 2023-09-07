@@ -83,13 +83,7 @@
         text-align: center;
         cursor: pointer;
     }
-    &__btn {
-        background-color: v.$bright-blue;
-        
-        &:hover {
-            background-color: v.$aqua-blue;
-        }
-    }
+    &__btn,
     &__submit {
         background-color: v.$aqua-blue;
 
@@ -98,10 +92,10 @@
         }
     }
     &__error {
-        line-height: 0;
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: v.$error;
+        margin: 0;
+        line-height: 1.3;
+        font-size: 1.6rem;
+        color: darken(v.$error, 5%);
         display: none;
 
         &--active {
@@ -139,14 +133,14 @@
         margin-bottom: .8rem;
         font-size: 1.8rem;
         font-weight: bold;
-        color: v.$aqua-blue;
+        color: lighten(v.$aqua-blue, 8%);
         transition: color 300ms ease;
     
         @include m.phone {
             display: block;
         }
         &--active {
-            color: v.$bright-blue;
+            color: darken(v.$aqua-blue, 2%);
         }
     }
     &__bullet {
@@ -158,7 +152,7 @@
         width: 2.5rem;
         margin: 0 auto;
         padding: 2rem;
-        border: .2rem solid v.$aqua-blue;
+        border: .2rem solid lighten(v.$aqua-blue, 20%);
         border-radius: 50%;
         background-color: v.$white;
         font-weight: bold;
@@ -173,7 +167,7 @@
             height: .3rem;
             width: 5rem;
             left: 4.1rem;
-            background-color: v.$aqua-blue;
+            background-color: lighten(v.$aqua-blue, 20%);
 
             @include m.phone {
                 width: 11rem;
@@ -183,13 +177,15 @@
             }
         }
         &--active {
-            border-color: v.$bright-blue;
+            border-color: v.$aqua-blue;
+            background-color: v.$aqua-blue;
+            color: v.$white;
 
             &::after {
                 transform: scaleX(0);
                 transform-origin: left;
                 animation: animate 400ms linear forwards;
-                background-color: v.$bright-blue;
+                background-color: v.$aqua-blue;
             }
         }
     }

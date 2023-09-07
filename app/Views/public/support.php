@@ -83,6 +83,50 @@
             <?php endif;?>
 
             <form class="support-form" id="support-form" method="POST"> 
+                <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
+                    <legend class="support-form__legend">Fieldset</legend>
+                    <p>This fieldset is not available until ticket KIN-84 is completed</p>
+                    <a class="support-form__btn" id="btn-next-1">Siguiente</a>
+                </fieldset>
+
+                <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
+                    <legend class="support-form__legend">Información del Producto</legend>
+                    <div class="support-form__field">
+                        <label for="support-model" class="support-form__label">Modelo del Producto</label>
+                        
+                        <?= isset($errors['support-model']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-model'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-model"
+                            name="support-model"
+                            type="text" 
+                            class="support-form__input" 
+                            placeholder="Ingrese el modelo del producto"
+                            value="<?php echo old("support-model")?>"
+                        >
+                    </div>
+
+                    <div class="support-form__field">
+                        <label for="support-serial" class="support-form__label">Número de Serie</label>
+                        
+                        <?= isset($errors['support-serial']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-serial'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-serial"
+                            name="support-serial"
+                            type="text" 
+                            class="support-form__input" 
+                            placeholder="Ingrese el numero de serie"
+                            value="<?php echo old("support-serial")?>"
+                        >
+                    </div>
+
+                    <div class="support-form__btns">
+                    <a class="support-form__btn" id="btn-prev-1">Anterior</a>
+                    <a class="support-form__btn" id="btn-next-2">Siguiente</a>
+                    </div>
+                </fieldset>
+
                 <fieldset class="support-form__fieldset">
                     <legend class="support-form__legend">Detalles del Problema</legend>
                     
