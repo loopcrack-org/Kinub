@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Category`
+--
+
+DROP TABLE IF EXISTS `Category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Category` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `icon` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Category`
+--
+
+LOCK TABLES `Category` WRITE;
+/*!40000 ALTER TABLE `Category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Email`
 --
 
@@ -29,7 +54,7 @@ CREATE TABLE `Email` (
   PRIMARY KEY (`id`),
   KEY `Correos_FK` (`idTypeEmail`),
   CONSTRAINT `Correos_FK` FOREIGN KEY (`idTypeEmail`) REFERENCES `type_email` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,6 +64,32 @@ CREATE TABLE `Email` (
 LOCK TABLES `Email` WRITE;
 /*!40000 ALTER TABLE `Email` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Email` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Tags`
+--
+
+DROP TABLE IF EXISTS `Tags`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `Tags` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `categoryId` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `Tags_FK` (`categoryId`),
+  CONSTRAINT `Tags_FK` FOREIGN KEY (`categoryId`) REFERENCES `Category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Tags`
+--
+
+LOCK TABLES `Tags` WRITE;
+/*!40000 ALTER TABLE `Tags` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Tags` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -91,7 +142,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'Prof. Burdette Abbott','Jerde','skassulke@nitzsche.biz','$2y$10$pO4CZZ6yKuqgZNw.XIcOwOhmjwld45Bka4EOicfuBmvi2LcvfcSbW','FrIDLkk60SIde',0,0);
+INSERT INTO `User` VALUES (1,'Prof. Burdette Abbott','Jerde','skassulke@nitzsche.biz','$2y$10$iN/o9dA1CLUUPYqly4ntUO579yvP8d1y8G947rzdrcaNRxlRmPT46',NULL,0,0);
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,4 +159,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-28 11:04:23
+-- Dump completed on 2023-09-07  0:41:33
