@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<?= $this->include("public/templates/whatsapp");?>
 <?php $this->renderSection('content'); ?>
 
 <?= $this->include("public/templates/footer"); ?>
