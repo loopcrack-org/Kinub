@@ -24,12 +24,7 @@
     <main class="support">
         <h1 class="support__heading">Soporte Técnico</h1>
 
-        <?php foreach(session()->get('errors') ?? [] as $error): ?>
-            <p class="alert alert__error"><?php echo $error ?></p>
-        <?php endforeach; ?>
-
         <div class="container-sm support__content">
-
             <div class="support-progress">
                 <div class="support-progress__step">
                     <p class="support-progress__name">Cliente</p>
@@ -78,34 +73,78 @@
                         text: "<?= $response['message']; ?>",
                         icon: "<?= $response['type']; ?>",
                         confirmButtonColor: '#0174F6'
-                    })
+                    });
                 </script>
             <?php endif;?>
 
-            <form class="support-form" id="support-form" method="POST"> 
+            <form class="support-form" id="support-form" method="POST" action="/email/soporte"> 
+                <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
+                    <legend class="support-form__legend">Fieldset</legend>
+                    <p>This fieldset is not available until ticket KIN-84 is completed</p>
+                    <a class="support-form__btn" id="btn-next-1">Siguiente</a>
+                </fieldset>
+
+                <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
+                    <legend class="support-form__legend">Información del Producto</legend>
+                    <div class="support-form__field">
+                        <label for="support-model" class="support-form__label">Modelo del Producto</label>
+                        
+                        <?= isset($errors['support-model']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-model'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-model"
+                            name="support-model"
+                            type="text" 
+                            class="support-form__input" 
+                            placeholder="Ingrese el modelo del producto"
+                            value="<?php echo old("support-model")?>"
+                        >
+                    </div>
+
+                    <div class="support-form__field">
+                        <label for="support-serial" class="support-form__label">Número de Serie</label>
+                        
+                        <?= isset($errors['support-serial']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-serial'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-serial"
+                            name="support-serial"
+                            type="text" 
+                            class="support-form__input" 
+                            placeholder="Ingrese el numero de serie"
+                            value="<?php echo old("support-serial")?>"
+                        >
+                    </div>
+
+                    <div class="support-form__btns">
+                    <a class="support-form__btn" id="btn-prev-1">Anterior</a>
+                    <a class="support-form__btn" id="btn-next-2">Siguiente</a>
+                    </div>
+                </fieldset>
+
                 <fieldset class="support-form__fieldset">
                     <legend class="support-form__legend">Detalles del Problema</legend>
                     
                     <div class="support-form__field">   
-                        <label for="support-categories" class="support-form__label">Tipo de Problema</label>
+                        <label for="support-problem-type" class="support-form__label">Tipo de Problema</label>
                         
-                        <?= isset($errors['support-categories']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-categories'].'</p>' : '<p class="support-form__error"></p>' ?>
+                        <?= isset($errors['support-problem-type']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-problem-type'].'</p>' : '<p class="support-form__error"></p>' ?>
 
-                        <select class="support-form__select" id="support-categories" name="support-categories">
+                        <select class="support-form__select" id="support-problem-type" name="support-problem-type">
                             <option class="support-form__option support-form__option--selected" value="" disabled selected>Seleccionar opción</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "1") ?  'selected' : '' ?> value="1">categoria 1</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "2") ?  'selected' : '' ?>  value="2">categoria 2</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "3") ?  'selected' : '' ?> value="3">categoria 3</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "4") ?  'selected' : '' ?> value="4">categoria 4</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "1") ?  'selected' : '' ?> value="1">categoria 1</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "2") ?  'selected' : '' ?>  value="2">categoria 2</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "3") ?  'selected' : '' ?> value="3">categoria 3</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "4") ?  'selected' : '' ?> value="4">categoria 4</option>
                         </select>
                     </div>
 
                     <div class="support-form__field">
-                        <label for="support-message" class="support-form__label">Problema del Producto</label>
+                        <label for="support-problem" class="support-form__label">Problema del Producto</label>
                         
-                        <?= isset($errors['support-message']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-message'].'</p>' : '<p class="support-form__error"></p>' ?>
+                        <?= isset($errors['support-problem']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-problem'].'</p>' : '<p class="support-form__error"></p>' ?>
 
-                        <textarea class="support-form__textarea" id="support-message" name="support-message" rows="5" placeholder="Describa el problema del producto"><?php echo old("support-message")?></textarea>
+                        <textarea class="support-form__textarea" id="support-problem" name="support-problem" rows="5" placeholder="Describa el problema del producto"><?php echo old("support-problem")?></textarea>
                     </div>
 
                     <div class="support-form__btns">
