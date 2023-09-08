@@ -82,7 +82,7 @@
                 </script>
             <?php endif;?>
 
-            <form class="support-form" id="support-form" method="POST"> 
+            <form class="support-form" id="support-form" method="POST" action="/email/soporte"> 
                 <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
                     <legend class="support-form__legend">Fieldset</legend>
                     <p>This fieldset is not available until ticket KIN-84 is completed</p>
@@ -131,25 +131,25 @@
                     <legend class="support-form__legend">Detalles del Problema</legend>
                     
                     <div class="support-form__field">   
-                        <label for="support-categories" class="support-form__label">Tipo de Problema</label>
+                        <label for="support-problem-type" class="support-form__label">Tipo de Problema</label>
                         
-                        <?= isset($errors['support-categories']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-categories'].'</p>' : '<p class="support-form__error"></p>' ?>
+                        <?= isset($errors['support-problem-type']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-problem-type'].'</p>' : '<p class="support-form__error"></p>' ?>
 
-                        <select class="support-form__select" id="support-categories" name="support-categories">
+                        <select class="support-form__select" id="support-problem-type" name="support-problem-type">
                             <option class="support-form__option support-form__option--selected" value="" disabled selected>Seleccionar opción</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "1") ?  'selected' : '' ?> value="1">categoria 1</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "2") ?  'selected' : '' ?>  value="2">categoria 2</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "3") ?  'selected' : '' ?> value="3">categoria 3</option>
-                            <option class="support-form__option" <?php echo (old("support-categories") == "4") ?  'selected' : '' ?> value="4">categoria 4</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "1") ?  'selected' : '' ?> value="1">categoria 1</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "2") ?  'selected' : '' ?>  value="2">categoria 2</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "3") ?  'selected' : '' ?> value="3">categoria 3</option>
+                            <option class="support-form__option" <?php echo (old("support-problem-type") == "4") ?  'selected' : '' ?> value="4">categoria 4</option>
                         </select>
                     </div>
 
                     <div class="support-form__field">
-                        <label for="support-message" class="support-form__label">Problema del Producto</label>
+                        <label for="support-problem" class="support-form__label">Problema del Producto</label>
                         
-                        <?= isset($errors['support-message']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-message'].'</p>' : '<p class="support-form__error"></p>' ?>
+                        <?= isset($errors['support-problem']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-problem'].'</p>' : '<p class="support-form__error"></p>' ?>
 
-                        <textarea class="support-form__textarea" id="support-message" name="support-message" rows="5" placeholder="Describa el problema del producto"><?php echo old("support-message")?></textarea>
+                        <textarea class="support-form__textarea" id="support-problem" name="support-problem" rows="5" placeholder="Describa el problema del producto"><?php echo old("support-problem")?></textarea>
                     </div>
 
                     <div class="support-form__btns">

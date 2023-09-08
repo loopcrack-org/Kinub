@@ -1,14 +1,10 @@
-let fieldsetsCount = 3;
 let currentFieldset = 1;
-//form elements
 const supportForm = document.querySelector('#support-form');
-const firstNextBtn = document.querySelector('#btn-next-1');
-const secondNextBtn = document.querySelector('#btn-next-2');
-const firstPrevBtn = document.querySelector('#btn-prev-1');
-const secondPrevBtn = document.querySelector('#btn-prev-2');
 const progressName = document.querySelectorAll('.support-progress__name');
 const progressCheck = document.querySelectorAll('.support-progress__check');
 const progressBullet = document.querySelectorAll('.support-progress__bullet');
+
+const firstNextBtn = document.querySelector('#btn-next-1');
 
 firstNextBtn.addEventListener('click', function() {
     supportForm.style.transform = 'translateX(-100%)';
@@ -18,7 +14,8 @@ firstNextBtn.addEventListener('click', function() {
 });
 
 // FIELDSET 2
-
+const secondNextBtn = document.querySelector('#btn-next-2');
+const firstPrevBtn = document.querySelector('#btn-prev-1');
 const productModel = document.querySelector('#support-model');
 const serialNumber = document.querySelector('#support-serial');
 
@@ -41,31 +38,29 @@ secondNextBtn.addEventListener('click', function() {
           }
     } else {
         supportForm.style.transform = 'translateX(-200%)';
-        progressName[currentFieldset - 1].classList.add("support-progress__name--active");
-        progressBullet[currentFieldset - 1].classList.add("support-progress__bullet--active");
+        progressName[currentFieldset - 1].classList.add('support-progress__name--active');
+        progressBullet[currentFieldset - 1].classList.add('support-progress__bullet--active');
         currentFieldset += 1;
     }
 });
-
 firstPrevBtn.addEventListener('click', function() {
     supportForm.style.transform = 'translateX(0%)';
-    progressName[currentFieldset - 2].classList.remove("support-progress__name--active");
-    progressBullet[currentFieldset - 2].classList.remove("support-progress__bullet--active");
+    progressName[currentFieldset - 2].classList.remove('support-progress__name--active');
+    progressBullet[currentFieldset - 2].classList.remove('support-progress__bullet--active');
     currentFieldset -= 1;
 });
 
 // FIELDSET 3
-
-const selectCategories = document.querySelector('#support-categories');
-const problemMessage = document.querySelector('#support-message');
+const secondPrevBtn = document.querySelector('#btn-prev-2');
+const selectCategories = document.querySelector('#support-problem-type');
+const problemMessage = document.querySelector('#support-problem');
 
 secondPrevBtn.addEventListener('click', function() {
     supportForm.style.transform = 'translateX(-100%)';
-    progressName[currentFieldset - 2].classList.remove("support-progress__name--active");
-    progressBullet[currentFieldset - 2].classList.remove("support-progress__bullet--active");
+    progressName[currentFieldset - 2].classList.remove('support-progress__name--active');
+    progressBullet[currentFieldset - 2].classList.remove('support-progress__bullet--active');
     currentFieldset -= 1;
 });
-
 supportForm.addEventListener('submit', function(e) {
     const selectCategoriesError = selectCategories.closest('.support-form__field').querySelector('.support-form__error');
     const problemMessageError = problemMessage.closest('.support-form__field').querySelector('.support-form__error');
