@@ -24,19 +24,10 @@
             padding-top: .5rem;
             margin-right: 10rem;
 
-            @include m.tablet{
-                margin-right: 17rem;
-            }
-
             @include m.desktop{
                 height: 6rem;
                 width: 7rem;
                 padding-top: .5rem;
-                margin-right: 25rem; 
-            }
-
-            @include m.desktopXL{
-                margin-right: 40rem; 
             }
         }   
     }    
@@ -59,12 +50,22 @@
         text-transform: uppercase;
         transition: color 300ms ease;
 
+        &:last-child {
+            margin-right: 0;
+        }
+
+        @include m.tablet{
+            margin-right: 3rem;
+        }
+
         @include m.desktop{
             font-size: 1.8rem;
+            margin-right: 4rem;
         }
 
         @include m.desktopXL{
             font-size: 2rem;
+            margin-right: 12rem;
         }
 
         &:hover {
@@ -75,8 +76,6 @@
     @include m.tablet{
         gap: 0;
         flex-direction: row;
-        flex-grow: 2;
-        justify-content: space-between;
         margin: 0;
     }
 }
