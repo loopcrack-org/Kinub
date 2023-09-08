@@ -1,25 +1,23 @@
-const btnMobileMenu = document.querySelector("#mobile-menu");
-const btnCloseMenu = document.querySelector("#close-menu")
+const btnMobileMenu = document.querySelector("#menu-mobile");
 const sidebar = document.querySelector(".sidebar");
 if(btnMobileMenu){
     btnMobileMenu.addEventListener("click", function(){
-        sidebar.classList.add("show");
+        btnMobileMenu.classList.toggle("is-active");
+        if(sidebar.classList.contains("show")) {
+            sidebar.classList.add("hide");
+
+            setTimeout(() => {
+             sidebar.classList.remove("show");
+             sidebar.classList.remove("hide");
+            }, 500);
+        } else {
+            sidebar.classList.add("show");
+        }
     });
 }
 
-if((btnCloseMenu)){
-    btnCloseMenu.addEventListener("click", function(){
-        sidebar.classList.add("hide");
-
-        setTimeout(() => {
-            sidebar.classList.remove("show");
-            sidebar.classList.remove("hide");
-        }, 500);
-    })
-}
-
 window.addEventListener("resize", function(){
-    const displayWidth = document.body.clientWidth; //Get the display size
+    const displayWidth = document.body.clientWidth;
     if(displayWidth>=768){
         sidebar.classList.remove("show");
     }
