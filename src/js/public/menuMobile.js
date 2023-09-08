@@ -20,5 +20,6 @@ window.addEventListener("resize", function(){
     const displayWidth = document.body.clientWidth;
     if(displayWidth>=768){
         sidebar.classList.remove("show");
+        btnMobileMenu.classList.remove("is-active");
     }
 })
