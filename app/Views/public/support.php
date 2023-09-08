@@ -24,12 +24,7 @@
     <main class="support">
         <h1 class="support__heading">Soporte Técnico</h1>
 
-        <?php foreach(session()->get('errors') ?? [] as $error): ?>
-            <p class="alert alert__error"><?php echo $error ?></p>
-        <?php endforeach; ?>
-
         <div class="container-sm support__content">
-
             <div class="support-progress">
                 <div class="support-progress__step">
                     <p class="support-progress__name">Cliente</p>
@@ -78,7 +73,7 @@
                         text: "<?= $response['message']; ?>",
                         icon: "<?= $response['type']; ?>",
                         confirmButtonColor: '#0174F6'
-                    })
+                    });
                 </script>
             <?php endif;?>
 

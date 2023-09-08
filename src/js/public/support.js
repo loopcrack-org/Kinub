@@ -71,7 +71,7 @@ supportForm.addEventListener('submit', function(e) {
 
     if(!validateProblemDetails()) {
         e.preventDefault();
-        
+
         if (selectCategories.value.trim() === '') {
             selectCategoriesError.classList.add('support-form__error--active');
             selectCategoriesError.textContent = 'Campo Obligatorio';
@@ -80,6 +80,10 @@ supportForm.addEventListener('submit', function(e) {
             problemMessageError.classList.add('support-form__error--active');
             problemMessageError.textContent = 'Campo Obligatorio';
         }
+    } else {
+        progressName[currentFieldset - 1].classList.add("support-progress__name--active");
+        progressBullet[currentFieldset - 1].classList.add("support-progress__bullet--active");
+        currentFieldset += 1;
     }
 });
 
