@@ -31,11 +31,6 @@
                     <div class="support-progress__bullet">
                         <span class="support-progress__span">1</span>
                     </div>
-                    <div class="support-progress__check">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                        </svg>
-                    </div>
                 </div>
 
                 <div class="support-progress__step">
@@ -43,22 +38,12 @@
                     <div class="support-progress__bullet">
                         <span class="support-progress__span">2</span>
                     </div>
-                    <div class="support-progress__check">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                        </svg>
-                    </div>
                 </div>
 
                 <div class="support-progress__step">
                     <p class="support-progress__name">Problema</p>
                     <div class="support-progress__bullet">
                         <span class="support-progress__span">3</span>
-                    </div>
-                    <div class="support-progress__check">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-                        </svg>
                     </div>
                 </div>
             </div>
@@ -77,14 +62,58 @@
                 </script>
             <?php endif;?>
 
-            <form class="support-form" id="support-form" method="POST" action="/email/soporte"> 
-                <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
-                    <legend class="support-form__legend">Fieldset</legend>
-                    <p>This fieldset is not available until ticket KIN-84 is completed</p>
+            <form class="support-form" id="support-form" action="/email/soporte" method="POST" novalidate> 
+                <fieldset class="support-form__fieldset">
+                    <legend class="support-form__legend">Información del Cliente</legend>
+
+                    <div class="support-form__field">
+                        <label for="support-customer" class="support-form__label">Nombre</label>
+                        
+                        <?= isset($errors['support-customer']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-customer'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-customer"
+                            name="support-customer"
+                            type="text" 
+                            class="support-form__input" 
+                            placeholder="Ingrese su nombre"
+                            value="<?php echo old("support-customer")?>"
+                        >
+                    </div>
+
+                    <div class="support-form__field">
+                        <label for="support-phone" class="support-form__label">Teléfono</label>
+                        
+                        <?= isset($errors['support-phone']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-phone'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-phone"
+                            name="support-phone"
+                            type="tel" 
+                            class="support-form__input" 
+                            placeholder="Ingrese su número telefónico"
+                            value="<?php echo old("support-phone")?>"
+                        >
+                    </div>
+
+                    <div class="support-form__field">
+                        <label for="support-email" class="support-form__label">Correo</label>
+                        
+                        <?= isset($errors['support-email']) ? '<p class="support-form__error support-form__error--active">'.$errors['support-email'].'</p>' : '<p class="support-form__error"></p>' ?>
+
+                        <input 
+                            id="support-email"
+                            name="support-email"
+                            type="email" 
+                            class="support-form__input" 
+                            placeholder="Ingrese su correo"
+                            value="<?php echo old("support-email")?>"
+                        >
+                    </div>
                     <a class="support-form__btn" id="btn-next-1">Siguiente</a>
                 </fieldset>
 
-                <fieldset class="support-form__fieldset" id="soporte-fieldset-2">
+                <fieldset class="support-form__fieldset">
                     <legend class="support-form__legend">Información del Producto</legend>
                     <div class="support-form__field">
                         <label for="support-model" class="support-form__label">Modelo del Producto</label>

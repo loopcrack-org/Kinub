@@ -1,95 +1,114 @@
-let currentFieldset = 1;
 const supportForm = document.querySelector('#support-form');
 const progressName = document.querySelectorAll('.support-progress__name');
-const progressCheck = document.querySelectorAll('.support-progress__check');
 const progressBullet = document.querySelectorAll('.support-progress__bullet');
 
-const firstNextBtn = document.querySelector('#btn-next-1');
-
-firstNextBtn.addEventListener('click', function() {
-    supportForm.style.transform = 'translateX(-100%)';
-    progressName[currentFieldset - 1].classList.add("support-progress__name--active");
-    progressBullet[currentFieldset - 1].classList.add("support-progress__bullet--active");
-    currentFieldset += 1;
-});
-
-// FIELDSET 2
-const secondNextBtn = document.querySelector('#btn-next-2');
-const firstPrevBtn = document.querySelector('#btn-prev-1');
-const productModel = document.querySelector('#support-model');
-const serialNumber = document.querySelector('#support-serial');
-
-secondNextBtn.addEventListener('click', function() {
-    const productModelError = productModel.closest('.support-form__field').querySelector('.support-form__error');
-    const serialNumberError = serialNumber.closest('.support-form__field').querySelector('.support-form__error');
-    productModelError.classList.remove('support-form__error--active');
-    serialNumberError.classList.remove('support-form__error--active');
-    productModelError.textContent = '';
-    serialNumberError.textContent = '';
-
-    if(!validateProductDetails()) {  
-        if (productModel.value.trim() === '') {
-            productModelError.classList.add('support-form__error--active');
-            productModelError.textContent = 'Campo Obligatorio';
-          }
-          if (serialNumber.value.trim() === '') {
-            serialNumberError.classList.add('support-form__error--active');
-            serialNumberError.textContent = 'Campo Obligatorio';
-          }
-    } else {
-        supportForm.style.transform = 'translateX(-200%)';
-        progressName[currentFieldset - 1].classList.add('support-progress__name--active');
-        progressBullet[currentFieldset - 1].classList.add('support-progress__bullet--active');
-        currentFieldset += 1;
+const fieldsets = [
+    {
+        nextButton: document.querySelector('#btn-next-1'),
+        fields: [
+            { element: document.querySelector('#support-customer'), errorElement: null },
+            { element: document.querySelector('#support-phone'), errorElement: null },
+            { element: document.querySelector('#support-email'), errorElement: null }
+        ]
+    },
+    {
+        nextButton: document.querySelector('#btn-next-2'),
+        prevButton: document.querySelector('#btn-prev-1'),
+        fields: [
+            { element: document.querySelector('#support-model'), errorElement: null },
+            { element: document.querySelector('#support-serial'), errorElement: null }
+        ]
+    },
+    {
+        prevButton: document.querySelector('#btn-prev-2'),
+        submitButton: supportForm.querySelector('[type="submit"]'),
+        fields: [
+            { element: document.querySelector('#support-problem-type'), errorElement: null },
+            { element: document.querySelector('#support-problem'), errorElement: null }
+        ]
     }
-});
-firstPrevBtn.addEventListener('click', function() {
-    supportForm.style.transform = 'translateX(0%)';
-    progressName[currentFieldset - 2].classList.remove('support-progress__name--active');
-    progressBullet[currentFieldset - 2].classList.remove('support-progress__bullet--active');
-    currentFieldset -= 1;
-});
+];
 
-// FIELDSET 3
-const secondPrevBtn = document.querySelector('#btn-prev-2');
-const selectCategories = document.querySelector('#support-problem-type');
-const problemMessage = document.querySelector('#support-problem');
+initializeFieldsets();
 
-secondPrevBtn.addEventListener('click', function() {
-    supportForm.style.transform = 'translateX(-100%)';
-    progressName[currentFieldset - 2].classList.remove('support-progress__name--active');
-    progressBullet[currentFieldset - 2].classList.remove('support-progress__bullet--active');
-    currentFieldset -= 1;
-});
-supportForm.addEventListener('submit', function(e) {
-    const selectCategoriesError = selectCategories.closest('.support-form__field').querySelector('.support-form__error');
-    const problemMessageError = problemMessage.closest('.support-form__field').querySelector('.support-form__error');
-    selectCategoriesError.classList.remove('support-form__error--active');
-    problemMessageError.classList.remove('support-form__error--active');
-    selectCategoriesError.textContent = '';
-    problemMessageError.textContent = '';
-
-    if(!validateProblemDetails()) {
-        e.preventDefault();
-
-        if (selectCategories.value.trim() === '') {
-            selectCategoriesError.classList.add('support-form__error--active');
-            selectCategoriesError.textContent = 'Campo Obligatorio';
+function initializeFieldsets() {
+    fieldsets.forEach((fieldset, index) => {
+        if (fieldset.nextButton) {
+            fieldset.nextButton.addEventListener('click', () => handleNextButtonClick(index));
         }
-        if (problemMessage.value.trim() === '') {
-            problemMessageError.classList.add('support-form__error--active');
-            problemMessageError.textContent = 'Campo Obligatorio';
+        if (fieldset.prevButton) {
+            fieldset.prevButton.addEventListener('click', () => handlePrevButtonClick(index));
         }
-    } else {
-        progressName[currentFieldset - 1].classList.add("support-progress__name--active");
-        progressBullet[currentFieldset - 1].classList.add("support-progress__bullet--active");
-        currentFieldset += 1;
-    }
-});
+        if (fieldset.submitButton) {
+            supportForm.addEventListener('submit', (e) => handleFormSubmit(e, index));
+        }
 
-function validateProblemDetails() {
-    return !(selectCategories.value.trim() === '' || problemMessage.value.trim() === '');
+        fieldset.fields.forEach((field) => {
+            field.errorElement = field.element.closest('.support-form__field').querySelector('.support-form__error');
+            field.element.addEventListener('keydown', (e) => handleFieldKeydown(e));
+        });
+    });
 }
-function validateProductDetails() {
-    return !(productModel.value.trim() === '' || serialNumber.value.trim() === '');
+
+function handleNextButtonClick(index) {
+    const currentFieldset = fieldsets[index];
+    const nextFieldset = fieldsets[index + 1];
+
+    if (!validateFields(currentFieldset.fields)) {
+        return;
+    }
+
+    if (nextFieldset) {
+        supportForm.style.transform = `translateX(-${(index + 1) * 100}%)`;
+        progressName[index].classList.add('support-progress__name--active');
+        progressBullet[index].classList.add('support-progress__bullet--active');
+    }
+}
+
+function handlePrevButtonClick(index) {
+    const prevFieldset = fieldsets[index - 1];
+
+    if (prevFieldset) {
+        supportForm.style.transform = `translateX(-${(index - 1) * 100}%)`;
+        progressName[index - 1].classList.remove('support-progress__name--active');
+        progressBullet[index - 1].classList.remove('support-progress__bullet--active');
+    }
+}
+
+function handleFormSubmit(e, index) {
+    const currentFieldset = fieldsets[index];
+
+    if (!validateFields(currentFieldset.fields)) {
+        e.preventDefault();
+    } else {
+        progressName[index].classList.add('support-progress__name--active');
+        progressBullet[index].classList.add('support-progress__bullet--active');
+        index += 1;
+    }
+}
+
+function handleFieldKeydown(e) {
+    if (e.key === 'Tab') {
+        e.preventDefault();
+    }
+}
+
+function validateFields(fields) {
+    let isValid = true;
+
+    fields.forEach((field) => {
+        const { element, errorElement } = field;
+        const trimmedValue = element.value.trim();
+
+        errorElement.classList.remove('support-form__error--active');
+        errorElement.textContent = '';
+
+        if (trimmedValue === '') {
+            errorElement.classList.add('support-form__error--active');
+            errorElement.textContent = 'Campo Obligatorio';
+            isValid = false;
+        }
+    });
+
+    return isValid;
 }
