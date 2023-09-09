@@ -16,7 +16,7 @@
         </nav>
     </header>
 
-    <div class="header-mobile">
+    <div class="header-mobile" id="header-mobile">
         <a class="header-mobile__logo" href="/">
             <img src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="Logo Kinub">
         </a>

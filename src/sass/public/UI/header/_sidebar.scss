@@ -8,15 +8,16 @@
     overflow: hidden;
 
     &.show {
-        padding: 10rem 2rem 2rem 2rem;
+        padding: 2rem;
         opacity: 1;
         height: 100%;
         width: 100%;
         position: fixed;
-        top: 0;
+        top: v.$mobile-height;
         left: 0;
         background-color: rgb(0 0 0 / 0.90);
         z-index: 2;
+        backdrop-filter: blur(3px);
     }
 
     &.hide {

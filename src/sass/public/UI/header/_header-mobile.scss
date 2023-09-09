@@ -8,11 +8,15 @@
     align-items: center;
     position: sticky;
     width: 100%;
-    height: 6rem;
+    height: v.$mobile-height;
     top: 0;
     z-index: 100;
     background-color: #FFF;
-    box-shadow: 0px 10px 15px 0px v.$gray;   
+    box-shadow: 0px 4px 15px 0px v.$gray;   
+
+    &.no-shadow {
+        box-shadow: 0px 0px 0px 0px;   
+    }
 
     @include m.tablet{
         display: none;
@@ -21,7 +25,7 @@
     &__logo {
         padding-top: .5rem;
         height: 5rem;
-        width: 6rem;
+        width: v.$mobile-height;
     }
 
     &__menu {

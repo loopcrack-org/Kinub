@@ -1,7 +1,10 @@
 const btnMobileMenu = document.querySelector("#menu-mobile");
+const headerMobile = document.querySelector("#header-mobile");
 const sidebar = document.querySelector(".sidebar");
+
 if(btnMobileMenu){
     btnMobileMenu.addEventListener("click", function(){
+        headerMobile.classList.toggle("no-shadow");
         btnMobileMenu.classList.toggle("is-active");
         if(sidebar.classList.contains("show")) {
             sidebar.classList.add("hide");
