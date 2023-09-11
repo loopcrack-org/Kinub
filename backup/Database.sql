@@ -47,13 +47,13 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `emails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `Email` (
+CREATE TABLE `emails` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idTypeEmail` int NOT NULL,
   `information` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `Correos_FK` (`idTypeEmail`),
-  CONSTRAINT `Correos_FK` FOREIGN KEY (`idTypeEmail`) REFERENCES `email_types` (`id`)
+  KEY `emails_fk` (`idTypeEmail`),
+  CONSTRAINT `emails_fk` FOREIGN KEY (`idTypeEmail`) REFERENCES `email_types` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -80,7 +80,7 @@ CREATE TABLE `tags` (
   PRIMARY KEY (`id`),
   KEY `Tags_FK` (`idCategory`),
   CONSTRAINT `Tags_FK` FOREIGN KEY (`idCategory`) REFERENCES `categories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
