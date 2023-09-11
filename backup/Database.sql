@@ -28,7 +28,7 @@ CREATE TABLE `categories` (
   `image` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `icon` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ UNLOCK TABLES;
 -- Table structure for table `Email`
 --
 
-DROP TABLE IF EXISTS `Email`;
+DROP TABLE IF EXISTS `emails`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Email` (
@@ -53,7 +53,7 @@ CREATE TABLE `Email` (
   `information` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `Correos_FK` (`idTypeEmail`),
-  CONSTRAINT `Correos_FK` FOREIGN KEY (`idTypeEmail`) REFERENCES `type_email` (`id`)
+  CONSTRAINT `Correos_FK` FOREIGN KEY (`idTypeEmail`) REFERENCES `email_types` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -96,7 +96,7 @@ UNLOCK TABLES;
 -- Table structure for table `type_email`
 --
 
-DROP TABLE IF EXISTS `type_email`;
+DROP TABLE IF EXISTS `email_types`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `type_email` (
@@ -110,20 +110,20 @@ CREATE TABLE `type_email` (
 -- Dumping data for table `type_email`
 --
 
-LOCK TABLES `type_email` WRITE;
-/*!40000 ALTER TABLE `type_email` DISABLE KEYS */;
-INSERT INTO `type_email` VALUES (1,'contact'),(2,'technical support');
-/*!40000 ALTER TABLE `type_email` ENABLE KEYS */;
+LOCK TABLES `email_types` WRITE;
+/*!40000 ALTER TABLE `email_types` DISABLE KEYS */;
+INSERT INTO `email_types` VALUES (1,'contact'),(2,'technical support');
+/*!40000 ALTER TABLE `email_types` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `User`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `User`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `User` (
+CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -137,25 +137,11 @@ CREATE TABLE `User` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `User`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `User` WRITE;
-/*!40000 ALTER TABLE `User` DISABLE KEYS */;
-/*!40000 ALTER TABLE `User` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Dumping routines for database 'Kinub'
---
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2023-09-07 12:50:57
