@@ -61,7 +61,7 @@ CREATE TABLE `emails` (
 -- Dumping data for table `Email`
 --
 
-LOCK TABLES `Email` WRITE;
+LOCK TABLES `emails` WRITE;
 /*!40000 ALTER TABLE `Email` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Email` ENABLE KEYS */;
 UNLOCK TABLES;
