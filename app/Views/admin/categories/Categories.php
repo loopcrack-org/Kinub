@@ -34,7 +34,6 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Icono</th>
-                                    <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -47,7 +46,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -63,7 +61,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -79,7 +76,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -95,7 +91,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -111,7 +106,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -127,7 +121,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -143,7 +136,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -159,7 +151,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -175,7 +166,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -191,7 +181,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -207,7 +196,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -223,7 +211,6 @@
                                         </div>
                                     </td>
                                     <td>Icono.jpeg</td>
-                                    <td>Imagen.jpeg</td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -237,7 +224,6 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Icono</th>
-                                    <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
