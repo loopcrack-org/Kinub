@@ -8,8 +8,6 @@
 
     <?= $this->include('partials/head-css') ?>
 
-    <style>
-    </style>
 </head>
 
 <body>

@@ -1,4 +1,4 @@
-<?= $this->extend('templates/admin/dashboardTable') ?>
+<?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section("title-meta") ?>
 <?php echo view('partials/title-meta', array('title' => 'Categoria')); ?>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="category" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
+                        <table id="categories-table" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>ID</th>
