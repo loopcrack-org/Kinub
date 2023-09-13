@@ -35,7 +35,7 @@ CREATE TABLE `email_types` (
 
 
 LOCK TABLES `email_types` WRITE;
-INSERT INTO `email_types` VALUES (1,'contact'),(2,'technical support');
+INSERT INTO `email_types` VALUES (1,'contacto'),(2,'soporte tecnico'),(3,'info producto');
 UNLOCK TABLES;
 
 CREATE TABLE `emails` (
