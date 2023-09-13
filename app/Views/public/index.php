@@ -26,12 +26,11 @@
 <section class="about-us">
     <div class="about-us__grid">
         <div class="about-us__image-container">
-
-        <picture>
-            <source srcset="assets/images/auth-one-bg.avif" type="image/avif">
-            <source srcset="assets/images/auth-one-bg.webp" type="image/webp">
-            <img class="about-us__image" loading="lazy" width="200" height="300" src="assets/images/auth-one-bg.jpg" alt="About us image">
-        </picture>
+            <picture>
+                <source srcset="assets/images/auth-one-bg.avif" type="image/avif">
+                <source srcset="assets/images/auth-one-bg.webp" type="image/webp">
+                <img class="about-us__image" loading="lazy" width="200" height="300" src="assets/images/auth-one-bg.jpg" alt="About us image">
+            </picture>
         </div>
 
         <div class="about-us__content">
