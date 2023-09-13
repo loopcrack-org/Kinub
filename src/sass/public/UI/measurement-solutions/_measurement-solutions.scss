@@ -1,0 +1,38 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.measurement-solutions {
+    margin: 8rem 0 12rem 0;
+
+    &__heading {
+        position: relative;
+        margin-bottom: 8rem;
+        @include m.fluid-text(2.5rem, 6rem);
+        font-weight: 900;
+        color: v.$blue;
+    
+        &::after {
+            content: '';
+            position: absolute; 
+            width: 80%;
+            max-width: 70rem; 
+            height: 0.3rem; 
+            bottom: -1rem; 
+            left: 50%; 
+            background-color: v.$light-blue; 
+            transform: translateX(-50%);
+        }
+    }
+    &__grid {
+        width: 100%;
+        max-width: 120rem;
+        margin: 0 auto;
+
+        @include m.tablet {
+            @include m.grid(2, 1fr);
+        }
+        @include m.desktop {
+            @include m.grid(4, 1fr);
+        }
+    }
+}
