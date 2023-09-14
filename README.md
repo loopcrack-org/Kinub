@@ -21,19 +21,22 @@ Kinub monorepo containing Kinub app and internal libs.
   - index.html
 - public
   - assets
-    - css
+    - admin
+    - public
+    - common
     - fonts
-    - img
-    - js
     - libs
+    - video
+  - uploads
   - .htaccess
   - favicon.ico
   - index.php
   - robots.txt
 - src 
-  - img
-  - js
-  - sass
+  - images
+  - admin
+  - public
+  - common
 - system
 - writable
 - composer.json
