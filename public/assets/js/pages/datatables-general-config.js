@@ -1,16 +1,2 @@
-document.addEventListener('DOMContentLoaded', function () {
-    $.extend($.fn.dataTable.defaults, {
-        "language": {
-            "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-            "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-            "infoFiltered": "(filtrado de _MAX_ entradas totales)",
-            "lengthMenu": "Mostrar _MENU_ entradas",
-            "search": "Buscar:",
-            "zeroRecords": "No se encontraron registros coincidentes",
-            "paginate": {
-                "next": "&raquo",
-                "previous": "&laquo"
-            },
-        }
-    });
-});
+document.addEventListener("DOMContentLoaded",function(){$.extend($.fn.dataTable.defaults,{language:{info:"Mostrando _START_ a _END_ de _TOTAL_ entradas",infoEmpty:"Mostrando 0 a 0 de 0 entradas",infoFiltered:"(filtrado de _MAX_ entradas totales)",lengthMenu:"Mostrar _MENU_ entradas",search:"Buscar:",zeroRecords:"No se encontraron registros coincidentes",paginate:{next:"&raquo",previous:"&laquo"}}})});
+//# sourceMappingURL=datatables-general-config.js.map
