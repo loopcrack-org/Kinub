@@ -68,6 +68,9 @@ computer, you can skip this step.
 | `npm install`      | This would install all the required packages in the `node_modules` folder                                                                                                                 |
 
 ### Build
+| Command             | Description                                                                                                                           | 
+| ------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run build`       | Build all assets for the project such as Css, Js and files like images ready to production   
 
 ### Test
 
@@ -76,7 +79,9 @@ computer, you can skip this step.
 ### Run
 | Command             | Description                                                                                                                           | 
 | ------------------- | :------------------------------------------------------------------------------------------------------------------------------------ |
-| `npm run dev`       | Build all the necessary assets for the project such as Css, Js and files like images.                                                 |
+| `npm run dev:public`       | Build all the necessary assets for the project such as Css, Js and files like images on public area                                               |
+| `npm run dev:admin`       | Build all the necessary assets for the project such as Css, Js and files like images on admin area                                               |
+| `npm run dev:common`       | Build all the necessary assets for the project such as Css, Js and files like images on common area                                               |                                       |
 
 ### Local
 
