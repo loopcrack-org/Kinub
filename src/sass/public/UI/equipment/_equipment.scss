@@ -36,7 +36,8 @@
             padding: 7rem 4rem;
         }
         @include m.tablet{
-            padding: 8rem 5rem;
+            padding: 6rem 5rem;
+            row-gap: 3rem;
         }
         @include m.desktop {
             @include m.grid(3, 2rem);
@@ -59,6 +60,10 @@
             width: 12rem;
         }
 
+        @include m.tablet{
+            height: 11rem;   
+        }
+
         @include m.desktop{
             height: 20rem;
             width: 20rem;
@@ -71,12 +76,13 @@
     }
 
     @include m.tablet{
-        padding: 1rem 2rem 2rem 2rem;
-        height: auto;
+        padding: 1.5rem 2rem 2rem 2rem;
+        height: 23rem;
     }
 
     @include m.desktop{
         padding-top: 6rem;
+        height: auto;
     }
 
     &__name,
