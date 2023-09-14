@@ -2,13 +2,13 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="assets/js/public/support.js"></script>
+<script src="assets/public/js/support.min.js"></script>
 <?php $this->endSection(); ?>
 
 <!-- FONTS -->

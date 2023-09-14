@@ -37,7 +37,7 @@
     <?= $this->renderSection('js') ?>
 
     <!-- App js -->
-    <script src="/assets/js/admin/app.js"></script>
+    <script src="/assets/admin/js/app.min.js"></script>
 
 
 </body>

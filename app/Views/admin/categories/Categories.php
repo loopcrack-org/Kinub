@@ -246,6 +246,6 @@
 <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/b-2.4.2/b-colvis-2.4.2/r-2.5.0/datatables.min.js"></script>
 
 
-<script src="/assets/js/pages/datatables-general-config.js"></script>
-<script src="/assets/js/pages/category.js"></script>
+<script src="/assets/admin/js/datatables-general-config.min.js"></script>
+<script src="/assets/admin/js/category.min.js"></script>
 <?= $this->endSection() ?>
