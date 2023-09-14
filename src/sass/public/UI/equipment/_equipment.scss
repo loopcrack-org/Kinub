@@ -1,0 +1,136 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.equipments {
+    text-align: center;
+
+    &__heading {
+        margin-top: 2rem;
+        @include m.heading;
+
+        @include m.tablet{
+            font-size: 6rem;
+        }
+    }
+
+    &__content {
+        position: relative;
+        overflow: hidden;
+        margin: -1rem 0 4rem 0;
+        @include m.phoneXL{
+            margin: 0 0 7rem 0;
+        }
+    }
+
+    &__grid {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        padding: 3rem;
+        @include m.grid(1, 1.5rem);
+        @include m.phoneXL{
+            @include m.grid(2, 2rem);
+            row-gap: 4rem;
+            padding: 7rem 4rem;
+        }
+        @include m.tablet{
+            padding: 8rem 5rem;
+        }
+        @include m.desktop {
+            @include m.grid(3, 2rem);
+            row-gap: 6rem;
+        }
+    }
+}
+
+.equipment {
+    border: 2px solid v.$white;
+    padding: .75rem;
+    height: 12rem;
+    
+    &__icon {
+        height: 6rem;
+        margin: 0 auto;
+
+        @include m.phoneXL{
+            height: 10rem;   
+            width: 12rem;
+        }
+
+        @include m.desktop{
+            height: 20rem;
+            width: 20rem;
+        }
+    }
+
+    @include m.phoneXL{
+        padding: 2rem 2rem 0 2rem;
+        height: 21rem;
+    }
+
+    @include m.tablet{
+        padding: 1rem 2rem 2rem 2rem;
+        height: auto;
+    }
+
+    @include m.desktop{
+        padding-top: 6rem;
+    }
+
+    &__name,
+    &__text {
+        color: v.$white;
+    }
+
+    &__name {
+        margin-bottom: 0;
+        font-size: 1.5rem;
+
+        @include m.phoneXL{
+            font-size: 2.5rem;
+        }
+
+        @include m.desktop{
+            font-size: 3rem;
+        }
+    }
+
+    &__text {
+        transition: opacity 300ms ease-in-out;
+        margin: 0;
+        font-size: 1.2rem;
+
+        @include m.phoneXL{
+            font-size: 1.6rem;
+        }
+
+        @include m.desktop{
+        font-size: 1.8rem;
+        }
+    }
+
+    &__icon,
+    &__name {
+        transition: transform 300ms ease-in-out;
+    }
+
+    transition: background-color 300ms ease-in-out;
+
+    &:hover {
+        backdrop-filter: blur(50px);
+        .equipment__icon {
+            transform: translateY(.8rem) scale(1.2);
+        }
+
+        .equipment__name {
+            transform: translateY(1.1rem);
+        }
+
+        .equipment__text {
+            opacity: 0;
+        }
+        cursor: pointer;
+    }
+}
