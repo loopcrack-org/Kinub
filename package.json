@@ -11,7 +11,7 @@
     "build:public": "gulp --mode=public",
     "build:common": "gulp --mode=common",
     "build:admin": "gulp --mode=admin",
-    "build": "npm run build:images && npm run build:public && npm run build:common && npm run build:admin",
+    "build": "npm run build:public && npm run build:common && npm run build:admin",
     "dev:public": "gulp dev --mode=public",
     "dev:common": "gulp dev --mode=common",
     "dev:admin": "gulp dev --mode=admin"
