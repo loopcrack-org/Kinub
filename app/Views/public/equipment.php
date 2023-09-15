@@ -4,6 +4,15 @@
 <link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
+<?php $this->section('js'); ?>
+<script src="assets/js/public/equipments.js"></script>
+<?php $this->endSection(); ?>
+
+<?php $this->section('fonts'); ?>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Nunito+Sans:opsz,wght@6..12,200;6..12,400;6..12,700;6..12,900&display=swap" rel="stylesheet">
+<?php $this->endSection(); ?>
+
 <?php $this->section('content'); ?>
 <main class="equipments">
 
@@ -17,7 +26,7 @@
 
         <div class="equipments__grid">
             
-            <a href="productos.php" class="equipment">
+            <a href="#" class="equipment">
                 <img src="assets/images/drop.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">Telemetría</h3>
                 <p class="equipment__text">Electromagnéticos</p>
