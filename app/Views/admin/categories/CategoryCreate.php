@@ -25,77 +25,8 @@
                             <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                         </a>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <label class="form-label mb-0" for="category-title-input">
-                                        <h5 class="card-title mb-0">Titulo de la categoría</h5>
-                                    </label>
-                                </div>
-                                <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
-                                        <input type="text" class="form-control" name="category_title" id="category-title-input" value="" placeholder="Ingrese el título" required>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end col -->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Tags de la categoría</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
-                                        <div class="flex-grow-1">
-                                            <input class="form-control" name="category_tags" id="choices-text-remove-button" data-choices data-choices-multiple-remove="true" type="text"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-                        </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- end row -->
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title mb-0">Icono</h4>
-                                </div><!-- end card header -->
-
-                                <div class="card-body">
-                                    <input type="file" class="filepond filepond-input-multiple" name="category_icon" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-                        </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- end row -->
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title mb-0">Imagen de fondo</h4>
-                                </div><!-- end card header -->
-
-                                <div class="card-body">
-                                    <input type="file" class="filepond filepond-input-multiple" name="category_bgImg" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
-                                </div>
-                                <!-- end card body -->
-                            </div>
-                            <!-- end card -->
-                        </div>
-                        <!-- end col -->
-                    </div>
-                    <!-- end row -->
+                    <?= $this->include('templates/admin/categoriesFormTemplate') ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
