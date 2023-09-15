@@ -39,10 +39,7 @@ $routes->get('/', 'CtrlPublicPages::index');
 $routes->get('/soporte', 'CtrlPublicPages::viewSupport');
 $routes->post('/email/contacto', 'CtrlEmail::sendContactEmail');
 $routes->post('/email/soporte', 'CtrlEmail::sendSupportEmail');
-
-
-
-$routes->get('/equipment', 'CtrlPublicPages::viewEquipment');
+$routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 
 
 /*
