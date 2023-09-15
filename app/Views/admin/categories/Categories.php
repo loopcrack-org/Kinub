@@ -14,7 +14,7 @@
 <div class="page-content">
     <div class="container-fluid">
 
-        <?php echo view('partials/page-title', array('pagetitle' => 'Pages', 'title' => 'Categorías')); ?>
+        <?php echo view('partials/page-title', array('pagetitle' => 'Categorías', 'title' => 'Categorías')); ?>
 
         <div class="row">
             <div class="col-lg-12">
@@ -22,9 +22,9 @@
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Categorías</h5>
                         <div class="mt-2 mt-md-0 float-md-right">
-                            <button type="button" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
+                            <a href="/admin/categorias/create" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
                                 <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Categoría
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
