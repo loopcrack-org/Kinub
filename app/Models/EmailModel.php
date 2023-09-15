@@ -6,10 +6,10 @@ use CodeIgniter\Model;
 
 class EmailModel extends Model
 {
-    protected $table      = 'email';
+    protected $table = 'emails';
     protected $primaryKey = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType     = 'array';
+    protected $returnType = 'array';
     protected $allowedFields = ['idTypeEmail', 'information'];
 
 }
