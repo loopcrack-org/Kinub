@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="category_title" id="category-title-input" value="<?= $category["name"] ?? "";?>" placeholder="Ingrese el título" required>
+                    <input type="text" class="form-control" name="name" id="name" value="<?= $category["name"] ?? "";?>" placeholder="Ingrese el título" required>
                 </div>
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <input class="form-control" name="category_tags" id="choices-text-remove-button" data-choices data-choices-multiple-remove="true" type="text" value="<?= $category["tags"] ?? "";?>"/>
+                        <input class="form-control" name="tags" id="choices-text-remove-button" data-choices data-choices-multiple-remove="true" type="text" value="<?= $category["tags"] ?? "";?>"/>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond filepond-input-multiple" name="category_icon" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                <input type="file" class="filepond filepond-input-multiple" name="icon" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +60,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond filepond-input-multiple" name="category_bgImg" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                <input type="file" class="filepond filepond-input-multiple" name="image" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
             </div>
             <!-- end card body -->
         </div>
