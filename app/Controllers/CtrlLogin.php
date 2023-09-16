@@ -104,6 +104,8 @@ class CtrlLogin extends BaseController
         return redirect()->to("admin");
     }
     public function logout() {
-        return "Closing session...";
+        $session = session();
+        $session->destroy();
+        return redirect()->to("login");
     }
 }

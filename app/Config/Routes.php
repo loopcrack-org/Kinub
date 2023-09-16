@@ -54,7 +54,7 @@ $routes->group('login', static function($routes) {
     $routes->post('', [CtrlLogin::class, 'login']);
     $routes->post('password/reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
     $routes->post('password/reset/(:any)', [CtrlLogin::class, 'passwordReset']);
-    $routes->post('out', [CtrlLogin::class, 'logout']);
+    $routes->post('logout', [CtrlLogin::class, 'logout']);
 });
 /*
  * --------------------------------------------------------------------
