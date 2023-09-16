@@ -7,7 +7,7 @@
     }
     &__heading {
         color: v.$aqua-blue;
-        margin-top: 3rem;
+        margin: 3rem 0 0 0;
     }
 }
 .support-form {
@@ -130,7 +130,7 @@
     }
     &__name {
         display: none;
-        margin-bottom: .8rem;
+        margin: .8rem 0;
         font-size: 1.8rem;
         font-weight: bold;
         color: lighten(v.$aqua-blue, 8%);
