@@ -17,7 +17,7 @@
     <div class="container-fluid">
         <?php echo view('partials/page-title', array('pagetitle' => 'Crear categoría', 'title' => 'Crear categoría')); ?>
 
-        <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate>
+        <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate  method="POST">
             <div class="row justify-content-center">
                 <div class="col-sm-11">
                     <div class="d-flex justify-content-start align-items-center mb-3">
