@@ -152,7 +152,7 @@
     transition: backdrop-filter 200ms ease-in-out;
 
     &:hover {
-        backdrop-filter: blur(50px);
+        backdrop-filter: blur(50px) hue-rotate(15deg) saturate(1.8);
         .equipment__icon {
             transform: translateY(.8rem) scale(1.2);
         }
