@@ -26,7 +26,7 @@
                         </a>
                     </div>
 
-                    <?= $this->include('templates/admin/categoriesFormTemplate') ?>
+                    <?= $this->include('admin/categories/categoriesFormTemplate') ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
