@@ -27,6 +27,7 @@ Kinub monorepo containing Kinub app and internal libs.
     - fonts
     - libs
     - video
+    - images
   - uploads
   - .htaccess
   - favicon.ico

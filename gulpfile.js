@@ -20,50 +20,45 @@ const webp = require("gulp-webp");
 const avif = require("gulp-avif");
 
 // mode
-function getMode() {
-  const pattern = /--mode=(admin|public|common)/;
-  const value = process.argv.find((e) => e.match(pattern)) ?? "";
-  const mode = value.replace("--mode=", "");
-  return mode;
-}
-
-const mode = getMode();
+const modes = ['public', 'common', 'admin'];
 
 // ------------------------------------------------------------------- //
 // PATHS
-const paths = {
-  input: {
-    sass: `./src/${mode}/sass/**/*.scss`,
-    js: `./src/${mode}/js/**/*.js`,
-    images: "./src/images/**/*",
-  },
-  output: {
-    dir: `./public/assets/${mode}`,
-    css: `./public/assets/${mode}/css`,
-    js: `./public/assets/${mode}/js`,
-    images: "./public/assets/images",
-  },
-};
+function getPaths(mode = "public") {
+  return {
+    input: {
+      sass: `./src/${mode}/sass/**/*.scss`,
+      js: `./src/${mode}/js/**/*.js`,
+      images: "./src/images/**/*",
+    },
+    output: {
+      dir: `./public/assets/${mode}`,
+      css: `./public/assets/${mode}/css`,
+      js: `./public/assets/${mode}/js`,
+      images: "./public/assets/images",
+    },
+  };
+}
 // ------------------------------------------------------------------- //
 
 // ------------------------------------------------------------------- //
 // CSS
-async function compileSass(path, emptyDir = false, production = false) {
-  if (emptyDir) await del(paths.output.css);
-  if(!production) {
-    return src(path)
+async function compileSass(srcPath, destPath, production = false) {
+  if(production) {
+    await del(destPath);
+    return src(srcPath)
+    .pipe(sass())
+    .pipe(postcss([autoprefixer(), cssnano()]))
+    .pipe(rename({ dirname: ".", suffix: ".min" }))
+    .pipe(dest(destPath));
+  } else {
+    return src(srcPath)
       .pipe(sourcemaps.init())
       .pipe(sass())
       .pipe(postcss([autoprefixer(), cssnano()]))
       .pipe(rename({ dirname: ".", suffix: ".min" }))
       .pipe(sourcemaps.write("."))
-      .pipe(dest(paths.output.css));
-  } else {
-    return src(path)
-      .pipe(sass())
-      .pipe(postcss([autoprefixer(), cssnano()]))
-      .pipe(rename({ dirname: ".", suffix: ".min" }))
-      .pipe(dest(paths.output.css));
+      .pipe(dest(destPath));
   }
 }
 // ------------------------------------------------------------------- //
@@ -71,98 +66,105 @@ async function compileSass(path, emptyDir = false, production = false) {
 // JS
 // ------------------------------------------------------------------- //
 
-async function javascript(path, emptyDir = false, production = false) {
-  if (emptyDir) await del(paths.output.js);
-  if(!production) {
-    return src(path)
-    .pipe(named())
-    .pipe(
-      webpack({
-        mode: "production",
-        output: { filename: "[name].min.js" },
-        devtool: "source-map",
-      })
-    )
-    .pipe(rename({ dirname: "." }))
-    .pipe(dest(paths.output.js));  
-  } else {
-    return src(path)
-      .pipe(named())
-      .pipe(webpack({mode: "production", output: {filename: "[name].min.js" }}))
-      .pipe(rename({ dirname: "." }))
-      .pipe(dest(paths.output.js));  
+async function javascript(srcPath, destPath, production = false) {
+  const webpackConfig = {
+    mode: "production",
+    output: {filename: '[name].min.js'}
   }
+  if(production) {
+    await del(destPath);
+  } else {
+    webpackConfig["devtool"] = "source-map";
+  }
+  return src(srcPath)
+    .pipe(named())
+    .pipe(webpack(webpackConfig))
+    .pipe(rename({ dirname: "." }))
+    .pipe(dest(destPath));  
 }
 // ------------------------------------------------------------------- //
 
 // IMAGES
 // ------------------------------------------------------------------- //
-function imagenes() {
-  return src(paths.input.images)
+async function minifyImage(src, dist) {
+  return src(src)
     .pipe(imagemin({ optimizationLevel: 3 }))
-    .pipe(dest(paths.output.images));
+    .pipe(dest(dist));
 }
 
-function imageWebp() {
-  return src(paths.input.images).pipe(webp()).pipe(dest(paths.output.images));
+async function convertToWebp(src, dist) {
+  return src(src).pipe(webp()).pipe(dest(dist));
 }
 
-function imageAvif() {
-  return src(paths.input.images).pipe(avif()).pipe(dest(paths.output.images));
+async function convertToAvif(src, dist) {
+  return src(src).pipe(avif()).pipe(dest(dist));
 }
 // ------------------------------------------------------------------- //
 
 // DELETE FILE
 // ------------------------------------------------------------------- //
-async function clean(filepath = "", typefile = "") {
+async function clean(filepath = "", dist) {
   const fileName = basename(filepath, extname(filepath));
-  const patternName = `${paths.output.dir}/${typefile}/${fileName}.*`;
+  const patternName = `${dist}/${fileName}.*`;
   return await del(patternName);
 }
 // ------------------------------------------------------------------- //
 
 // WATCHERS
 // ------------------------------------------------------------------- //
-function watchFiles() {
+function watchFiles(input, output) {
   // CSS
-  watch(paths.input.sass).on("change", function (path, stats) {
-    compileSass(path);
+  watch(input.sass).on("change", function (path, stats) {
+    compileSass(path, output.css);
     console.log(`Changed ${path}`);
   });
-  watch(paths.input.sass).on("add", function (path, stats) {
-    compileSass(path);
+  watch(input.sass).on("add", function (path, stats) {
+    compileSass(path, output.css);
     console.log(`Added ${path}`);
   });
-  watch(paths.input.sass).on("unlink", async function (path, stats) {
-    const deletedFiles = await clean(path, "css");
+  watch(input.sass).on("unlink", async function (path, stats) {
+    const deletedFiles = await clean(path, output.css);
     deletedFiles.forEach((file) => console.log(`Deleted ${file}`));
   });
 
   // JS
-  watch(paths.input.js).on("change", function (path, stats) {
-    javascript(path);
+  watch(input.js).on("change", function (path, stats) {
+    javascript(path, output.js);
     console.log(`Changed ${path}`);
   });
-  watch(paths.input.js).on("add", function (path, stats) {
-    javascript(path);
+  watch(input.js).on("add", function (path, stats) {
+    javascript(path, output.js);
     console.log(`Added ${path}`);
   });
-  watch(paths.input.js).on("unlink", async function (path, stats) {
-    const deletedFiles = await clean(path, "js");
+  watch(input.js).on("unlink", async function (path, stats) {
+    const deletedFiles = await clean(path, output.js);
     deletedFiles.forEach((file) => console.log(`Deleted ${file}`));
   });
 }
 
-task("development", async function() {
-  await javascript(paths.input.js, true);
-  await compileSass(paths.input.sass, true);
-});
+function runMode(mode, production = false) {
+  const {input, output} = getPaths(mode);
+  
+  return async function devTasks() {
+    await compileSass(input.sass, output.css, production);
+    await javascript(input.js, output.js, production);
+    if(!production) watchFiles(input, output);
+  }
+}
 
-task('build', async function() {
-  await javascript(paths.input.js, true, true);
-  await compileSass(paths.input.sass, true, true);
-})
+function images() {
+  const {input, output} = getPaths();
+  return async function images() {
+    await minifyImage(input.images, output.images);
+    await convertToWebp(input.images, output.images);
+    await convertToAvif(input.images, output.images);
+  }
+}
 
-exports.default = parallel("build");
-exports.dev = parallel("development", watchFiles);
-exports.images = parallel(imagenes, imageWebp, imageAvif); // imagenes
+
+task('dev:public', runMode('public'));
+task('dev:common', runMode('common'));
+task('dev:admin', runMode('admin'));
+task('dev:all', parallel(modes.map( mode => runMode(mode) )));
+task('build', parallel(modes.map( mode => runMode(mode, true) )));
+task('images', images);

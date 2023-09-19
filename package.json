@@ -7,14 +7,12 @@
     "test": "tests"
   },
   "scripts": {
-    "build:images": "gulp images",
-    "build:public": "gulp --mode=public",
-    "build:common": "gulp --mode=common",
-    "build:admin": "gulp --mode=admin",
-    "build": "npm run build:public && npm run build:common && npm run build:admin",
-    "dev:public": "gulp dev --mode=public",
-    "dev:common": "gulp dev --mode=common",
-    "dev:admin": "gulp dev --mode=admin"
+    "images": "gulp images",
+    "dev:public": "gulp dev:public",
+    "dev:common": "gulp dev:common",
+    "dev:admin": "gulp dev:admin",
+    "dev:all": "gulp dev:all",
+    "build": "gulp build"
   },
   "author": "",
   "license": "ISC",
