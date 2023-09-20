@@ -21,6 +21,11 @@
         flex-direction: column;
         gap: 1rem;
         border: none;
+        visibility: hidden;
+
+        &--active {
+            visibility: visible;
+        }
     }
     &__legend {
         width: 100%;
@@ -197,6 +202,9 @@
     100% {
         transform: scaleX(1);
     }
+}
+#alert-response {
+    display: none;
 }
 .swal2 {
     &-popup {

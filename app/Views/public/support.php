@@ -50,18 +50,14 @@
             </div>
 
             <?php 
+                if (session()->has('response')):
                 $response = session()->get('response');
-                if(isset($response)):
             ?>
-            <div id="alert-response"
-                data-title="<?= $response['title']; ?>"
-                data-message="<?= $response['message']; ?>"
-                data-type="<?= $response['type']; ?>"
-                style="display: none;"></div>
+            <div id="alert-response" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
             <?php endif;?>
 
             <form class="support-form" id="support-form" action="/email/soporte" method="POST" novalidate> 
-                <fieldset class="support-form__fieldset support-form__step" data-step="1">
+                <fieldset class="support-form__fieldset support-form__fieldset--active support-form__step" data-step="1">
                     <legend class="support-form__legend">Información del Cliente</legend>
 
                     <div class="support-form__field">
