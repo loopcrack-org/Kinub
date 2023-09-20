@@ -15,7 +15,8 @@
 <?= $this->section("content") ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('pagetitle' => 'Editar categoría', 'title' => 'Editar categoría')); ?>
+    <?php echo view('partials/page-title', array('title' => 'Editar categoría', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Editar categoría',)); ?>
+
 
         <div class="row justify-content-center">
             <div class="col-sm-11">
