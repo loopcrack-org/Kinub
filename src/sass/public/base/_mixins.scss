@@ -36,6 +36,25 @@
     grid-template-columns: repeat($columns, 1fr);
     gap: $gap;
 }
+@mixin flex-columns(
+    $columns,
+    $column-gap,
+    $row-gap,
+    $items-max-height: none,
+    $justify: center,
+    $align-content: flex-start
+) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-content: flex-start;
+    row-gap: $row-gap;
+    column-gap: $column-gap;
+    > * {
+    flex-basis: calc((100% - $column-gap * ($columns - 1)) / $columns);
+    max-height: $items-max-height;
+  }
+}
 @mixin fluid-text($min, $max) {
     font-size: clamp($min,-0.8rem + 10vw,$max);
 }

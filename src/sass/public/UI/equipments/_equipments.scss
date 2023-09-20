@@ -13,10 +13,14 @@
         }
     }
 
-    @include m.desktop{
-        &__video {
-            width: 100%;
-        }
+    &__video {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        object-fit: cover;
     }
 
     &__content {
@@ -29,11 +33,6 @@
     }
 
     &__grid {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        left: 0;
         padding: 3rem;
         @include m.grid(1, 1.5rem);
         @include m.phoneXL{
@@ -46,7 +45,8 @@
         }
         @include m.desktop {
             padding: 4rem 5rem;
-            @include m.grid(3, 4rem 2rem);
+            @include m.flex-columns(3, 2rem, 4rem);
+            
         }
     }
 }
@@ -55,8 +55,9 @@
 
 .equipment {
     border: 2px solid v.$white;
+    transition: backdrop-filter 200ms ease-in-out, border ease 500ms;
     padding: .75rem;
-    height: 12rem;
+    height: auto;
 
     &--center {
         grid-column: 2 / 3;
@@ -87,19 +88,8 @@
     }
 
     @include m.phoneXL{
-        padding: 2rem 2rem 0 2rem;
-        height: 21rem;
-    }
-
-    @include m.tablet{
-        padding: 1.5rem 2rem 2rem 2rem;
-        height: 23rem;
-    }
-
-    @include m.desktop{
-        padding-top: 2rem;
-        padding-bottom: 0;
-        height: auto;
+        padding: 2rem;
+        // height: 21rem;
     }
 
     &__name,
@@ -109,39 +99,15 @@
 
     &__name {
         margin-bottom: 0;
-        font-size: 1.5rem;
+        @include m.fluid-text(1.5rem, 2.5rem);
         font-weight: 500;
-
-        @include m.phoneXL{
-            font-size: 2.5rem;
-        }
-
-        @include m.desktop{
-            font-size: 2rem;
-        }
-
-        @include m.desktopXL{
-            font-size: 2.5rem;
-        }
     }
 
     &__text {
         transition: opacity 300ms ease-in-out;
         margin: -1rem 0 0 0;
-        font-size: 1.2rem;
+        @include m.fluid-text(1.2rem, 1.8rem);
         font-weight: 200;
-
-        @include m.phoneXL{
-            font-size: 1.6rem;
-        }
-
-        @include m.desktop{
-            font-size: 1.4rem;
-        }
-
-        @include m.desktopXL{
-            font-size: 1.8rem;
-        }
     }
 
     &__icon,
@@ -149,9 +115,8 @@
         transition: transform 300ms ease-in-out;
     }
 
-    transition: backdrop-filter 200ms ease-in-out;
-
     &:hover {
+        border: 2px solid transparent;
         backdrop-filter: blur(50px) hue-rotate(15deg) saturate(1.8);
         .equipment__icon {
             transform: translateY(.8rem) scale(1.2);
