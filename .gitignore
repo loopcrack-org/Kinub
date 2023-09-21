@@ -131,3 +131,8 @@ nb-configuration.xml
 
 # .map files
 /**/*.map
+
+# assets
+/public/assets/public/**
+/public/assets/admin/**
+/public/assets/common/**
