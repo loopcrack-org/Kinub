@@ -10,9 +10,9 @@ class AuthFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        $user = session()->get("user"); 
+        if (!session()->has('user')){
+            session()->set('redirectUrl', uri_string());
 
-        if (!$user){
             return redirect()->to("login"); 
         }
     }
