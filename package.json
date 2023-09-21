@@ -11,7 +11,7 @@
     "dev:public": "gulp dev:public",
     "dev:common": "gulp dev:common",
     "dev:admin": "gulp dev:admin",
-    "dev:all": "gulp dev:all",
+    "dev": "gulp dev:all",
     "build": "gulp build"
   },
   "author": "",
