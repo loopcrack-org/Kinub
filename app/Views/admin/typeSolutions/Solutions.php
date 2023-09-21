@@ -22,7 +22,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Soluciones de Medición</h5>
                         <div class="mt-2 mt-md-0 float-md-right">
-                            <a href="/admin/soluciones/create" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
+                            <a href="/admin/soluciones/crear" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
                                 <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Solución
                             </a>
                         </div>
