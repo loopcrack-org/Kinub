@@ -1,0 +1,115 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.measurement-solution {
+    position: relative;
+    background-image: 
+    linear-gradient(to right, transparentize(v.$white, .1) 0%, transparentize(v.$white, .1) 100%), 
+    url(../images/auth-one-bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 3rem;
+    text-align: center;
+    color: transparent;
+
+    &__icon {
+        -webkit-mask: url(../images/icon-example.svg) no-repeat 100% 100% / 100% 100%;
+        mask: url(../images/icon-example.svg)  no-repeat 100% 100% / 100% 100%;
+        background: v.$bright-blue;
+        background: -webkit-linear-gradient(to right, v.$blue, v.$bright-blue, v.$light-blue, v.$aqua-blue); 
+        background: linear-gradient(to right, v.$blue, v.$bright-blue, v.$light-blue, v.$aqua-blue); 
+        height: 15rem;
+        width: 15rem;
+        transition: all 300ms ease;
+    }
+    &__title,
+    &__description {
+        color: lighten(v.$black, 25%);
+        transition: all 300ms ease;
+    }
+    &__title {
+        display: flex;
+        flex-direction: column;
+        margin: 4rem 0 2rem 0;
+        font-size: 1.8rem;
+        line-height: 1;
+
+        &--strong {
+            order: -1;
+            font-size: 2.5rem;
+            font-weight: 900;
+            text-transform: capitalize;
+        }
+    }
+    &__description {
+        margin: 0 auto;
+        width: 75%;
+        font-size: 1.8rem;
+        font-weight: lighter;
+        font-style: italic;
+        line-height: 1;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 200ms ease;
+
+        @include m.desktop {
+            width: 70%;
+        }
+    }
+    &::after {
+        content: '';
+        width: 100%;
+        height: 2.5rem;
+        position: absolute;
+        bottom: 0;
+    }
+    &:nth-child(4n + 1) {
+        &::after {
+            background-color: v.$blue;
+        }
+    }
+    &:nth-child(4n + 2) {
+        &::after {
+            background-color: v.$aqua-blue;
+        }
+    }
+    &:nth-child(4n + 3) {
+        &::after {
+            background-color: darken(v.$aqua-blue, 5%);
+        }
+    }
+    &:nth-child(4n + 4) {
+        &::after {
+            background-color: v.$bright-blue;
+        }
+    }
+}
+.measurement-solution:hover {
+    cursor: pointer;
+    background-image: linear-gradient(to bottom, transparentize(v.$black, .2) 0%, transparentize(v.$blue, .2) 20%, transparentize(v.$green-blue, .2) 40%, transparentize(v.$green-blue, .2) 60%, transparentize(v.$blue, .2) 80%, transparentize(v.$black, .2) 100%), 
+    url(../images/auth-one-bg.jpg);
+    color: v.$white;
+
+    .measurement-solution {
+        &__title,
+        &__description {
+            color: v.$white;
+        }
+        &__title {
+          transform: scale(.8) translateY(-10rem);
+        }
+        &__description {
+            visibility: visible;
+            opacity: 1;
+            transform:scale(1.4) translateY(-4rem);
+        }
+        &__icon {
+            background: v.$white;
+            transform: scale(.7) translateY(-5rem);
+        }
+    }
+}

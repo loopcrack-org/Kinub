@@ -17,7 +17,7 @@
 <?php $this->section('fonts'); ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Nunito+Sans:opsz,wght@6..12,200;6..12,400&display=swap" rel="stylesheet">
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -56,6 +56,56 @@
             <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
             <source src="assets/video/kinub-video-example.webm" type="video/webm" />
         </video>
+    </div>
+</section>
+
+<section class="measurement-solutions">
+    <h3 class="measurement-solutions__heading">Soluciones de medición</h3>
+
+    <div class="measurement-solutions__grid">
+        <div class="measurement-solution">
+            <div class="measurement-solution__icon"></div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Residenciales</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+        </div>
+
+        <div class="measurement-solution">
+            <div class="measurement-solution__icon"></div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Industriales</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+        </div>
+
+        <div class="measurement-solution">
+            <div class="measurement-solution__icon"></div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medición</span> Remota</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+        </div>
+
+        <div class="measurement-solution">
+            <div class="measurement-solution__icon"></div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Calidad</span> del agua</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+        </div>
     </div>
 </section>
 
