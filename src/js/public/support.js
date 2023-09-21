@@ -2,15 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const supportForm = document.querySelector('#support-form');
     const progressName = document.querySelectorAll('.support-progress__name');
     const progressBullet = document.querySelectorAll('.support-progress__bullet');
+    const fieldsetsElements = document.querySelectorAll(".support-form__fieldset");
 
     let currentStep = 1;
-
-    const fieldsetsElements = document.querySelectorAll(".support-form__fieldset");
-    
-    fieldsetsElements.forEach((fieldset) => {
-        fieldset.classList.remove("support-form__fieldset--active");
-    });
-    fieldsetsElements[currentStep - 1].classList.add("support-form__fieldset--active");
 
     const MESSAGES = {
         required: "campo obligatorio",
@@ -47,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         onContainerSuccess: function (container) {
             currentStep++;
             supportForm.style.transform = `translateX(-${(currentStep - 1) * 100}%)`;
-            fieldsetsElements[currentStep - 1].classList.add("support-form__fieldset--active");
+            displayCurrentFieldset(currentStep);
             handleProgress(currentStep - 1);
         },
     };
@@ -100,6 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (currentStep > 1) {
                 currentStep--;
                 supportForm.style.transform = `translateX(-${(currentStep - 1) * 100}%)`;
+                displayCurrentFieldset(currentStep);
                 progressName[currentStep - 1].classList.remove('support-progress__name--active');
                 progressBullet[currentStep - 1].classList.remove('support-progress__bullet--active');
             }
@@ -108,6 +103,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     displayAlert();
 
+    function displayCurrentFieldset(step) {
+        fieldsetsElements.forEach((fieldset) => {
+            fieldset.classList.remove("support-form__fieldset--active");
+        });
+        fieldsetsElements[step - 1].classList.add("support-form__fieldset--active");
+    }
+    
     function displayAlert() {
         const alertResponse = document.querySelector("#alert-response");
         
