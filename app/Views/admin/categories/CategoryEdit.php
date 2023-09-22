@@ -55,5 +55,5 @@
 <script src="/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 
-<script src="/assets/js/pages/form-file-upload-category.init.js"></script>
+<script src="/assets/js/pages/form-file-upload-img.init.js"></script>
 <?= $this->endSection() ?>

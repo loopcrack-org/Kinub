@@ -1,2 +1,2 @@
 FilePond.registerPlugin(FilePondPluginFileEncode,FilePondPluginFileValidateSize,FilePondPluginImageExifOrientation,FilePondPluginImagePreview,FilePondPluginFileValidateType);var inputMultipleElements=document.querySelectorAll("input.filepond-input-multiple");inputMultipleElements&&Array.from(inputMultipleElements).forEach(function(e){FilePond.create(e,{labelIdle:'Arrastra y suelta tu imagen o  <u style="cursor:pointer;">Selecciona</u>',acceptedFileTypes:["image/png","image/jpg","image/jpeg"],labelFileTypeNotAllowed:"Archivo no valido",fileValidateTypeLabelExpectedTypes:"Se espera {allTypes}"})});
-//# sourceMappingURL=form-file-upload-measurementSolution.init.js.map
+//# sourceMappingURL=form-file-upload-img.init.js.map
