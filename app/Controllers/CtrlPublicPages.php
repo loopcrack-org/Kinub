@@ -13,4 +13,9 @@ class CtrlPublicPages extends BaseController
     {
         return view('public/support');
     }
+
+    public function viewEquipment(): string
+    {
+        return view('public/equipment');
+    }
 }
