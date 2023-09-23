@@ -41,15 +41,18 @@ if(btnMobileMenu){
 }
 
 links.forEach(link => link.addEventListener("click", function(){
-    sidebar.classList.add("hide");
+    headerBackground.classList.add("hide");
+    navigation.classList.add("hide-opacity");
     header.classList.toggle("no-shadow");
 
     setTimeout(() => {
-        sidebar.classList.remove("show");
-        sidebar.classList.remove("hide");
-       }, 500);
+        headerBackground.classList.remove("show");
+        headerBackground.classList.remove("hide");
 
-    btnMobileMenu.classList.remove("is-active");
+        navigation.classList.remove("show");
+        navigation.classList.add("no-visible");
+        navigation.classList.remove("hide-opacity");
+    }, 500);
 }));
 
 window.addEventListener("resize", function(){
