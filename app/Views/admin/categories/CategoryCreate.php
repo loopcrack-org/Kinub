@@ -15,7 +15,7 @@
 <?= $this->section("content") ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('pagetitle' => 'Crear categoría', 'title' => 'Crear categoría')); ?>
+        <?php echo view('partials/page-title', array('title' => 'Crear categoría', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Crear categoría',)); ?>
 
         <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate  method="POST">
             <div class="row justify-content-center">

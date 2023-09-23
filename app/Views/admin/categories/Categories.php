@@ -14,7 +14,7 @@
 <div class="page-content">
     <div class="container-fluid">
 
-        <?php echo view('partials/page-title', array('pagetitle' => 'Categorías', 'title' => 'Categorías')); ?>
+        <?php echo view('partials/page-title', array('title' => 'Categorías')); ?>
 
         <div class="row">
             <div class="col-lg-12">
