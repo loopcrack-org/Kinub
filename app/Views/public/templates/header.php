@@ -8,33 +8,18 @@
             </a>
         </div>
 
-        <nav class="navigation">
-            <a href="#" class="navigation__link">Equipos</a>
-            <a href="#" class="navigation__link">Soporte técnico</a>
-            <a href="#" class="navigation__link">Certificados</a>
+        <div class="header-mobile__background" id="background"></div>
+
+        <nav class="navigation" id="navigation">
+            <a href="/equipos" class="navigation__link">Equipos</a>
+            <a href="/soporte" class="navigation__link">Soporte técnico</a>
+            <a href="/certificados" class="navigation__link">Certificados</a>
             <a href="/#form" class="navigation__link">Contacto</a>
         </nav>
-    </header>
 
-    <div class="header-mobile" id="header-mobile">
-        <a class="header-mobile__logo" href="/">
-            <img src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="Logo Kinub">
-        </a>
-
-        <div class="menu menu--collapse" id="menu-mobile">
+        <div class="menu menu--collapse display-none" id="menu-mobile">
             <div class="menu-box">
                 <div class="menu-inner"></div>
             </div>
         </div>
-    </div>
-
-<aside class="sidebar"> 
-
-    <!--Active link function is missing-->
-    <nav class="navigation-mobile">
-        <a href="#" class="navigation-mobile__link active">Equipos</a>
-        <a href="#" class="navigation-mobile__link">Soporte técnico</a>
-        <a href="#" class="navigation-mobile__link">Certificados</a>
-        <a href="/#form" class="navigation-mobile__link">Contacto</a>
-    </nav>
-</aside>
+    </header>

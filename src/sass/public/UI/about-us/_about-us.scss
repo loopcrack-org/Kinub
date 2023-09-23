@@ -3,8 +3,6 @@
 
 .about-us {
     @include m.grid(1, 2rem);
-    margin: 3rem 0;
-
     @include m.tablet{
         &__grid {
             @include m.grid(2, 4rem);
