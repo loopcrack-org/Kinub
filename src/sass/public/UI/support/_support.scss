@@ -7,7 +7,7 @@
     }
     &__heading {
         color: v.$aqua-blue;
-        margin-top: 3rem;
+        margin: 3rem 0 0 0;
     }
 }
 .support-form {
@@ -21,6 +21,11 @@
         flex-direction: column;
         gap: 1rem;
         border: none;
+        visibility: hidden;
+
+        &--active {
+            visibility: visible;
+        }
     }
     &__legend {
         width: 100%;
@@ -130,7 +135,7 @@
     }
     &__name {
         display: none;
-        margin-bottom: .8rem;
+        margin: .8rem 0;
         font-size: 1.8rem;
         font-weight: bold;
         color: lighten(v.$aqua-blue, 8%);
@@ -197,6 +202,9 @@
     100% {
         transform: scaleX(1);
     }
+}
+#alert-response {
+    display: none;
 }
 .swal2 {
     &-popup {
