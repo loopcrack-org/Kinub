@@ -73,7 +73,7 @@
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
-                                    <input type="file" class="filepond filepond-input-multiple" name="icon" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                                    <input type="file" class="filepond" name="icon">
                                 </div>
                                 <!-- end card body -->
                             </div>
@@ -88,7 +88,7 @@
                                 </div><!-- end card header -->
 
                                 <div class="card-body">
-                                    <input type="file" class="filepond filepond-input-multiple" name="image" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                                    <input type="file" class="filepond" name="image">
                                 </div>
                                 <!-- end card body -->
                             </div>
@@ -125,5 +125,5 @@
 <script src="/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js"></script>
 <script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
 
-<script src="/assets/js/pages/form-file-upload-img.init.js"></script>
+<script src="/assets/js/pages/form-file-upload-measurementSolution.init.js"></script>
 <?= $this->endSection() ?>
