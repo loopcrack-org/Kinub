@@ -21,7 +21,7 @@ class SupportEmailValidation
         ],
         "support-phone" => [
             "required" => "El teléfono es obligatorio",
-            "regex_match" => "El campo teléfono debe contener 10 dígitos numéricos y puede incluir una lada opcional"
+            "regex_match" => "El campo teléfono debe contener 10 dígitos y puede incluir una lada opcional"
         ],
         "support-email" => [
             "required" => "El email es obligatorio",
