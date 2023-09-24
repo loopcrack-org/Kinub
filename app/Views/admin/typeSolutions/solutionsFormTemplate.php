@@ -45,7 +45,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond filepond-input-multiple" name="icon" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                <input type="file" class="filepond" name="icon">
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +60,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond filepond-input-multiple" name="image" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                <input type="file" class="filepond" name="image">
             </div>
             <!-- end card body -->
         </div>
