@@ -8,6 +8,7 @@
 <!-- JS -->
 <?php $this->section('js'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="assets/libs/vanilla-validator/vanilla-validator-concat.min.js"></script>
 <script src="assets/public/js/support.min.js"></script>
 <?php $this->endSection(); ?>
 

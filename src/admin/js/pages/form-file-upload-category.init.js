@@ -1,4 +1,16 @@
 // FilePond
+import * as FilePond from "filepond";
+
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+
+import FilePondPluginImageExifOrientation from "filepond-plugin-image-exif-orientation";
+
+import FilePondPluginFileEncode from "filepond-plugin-file-encode";
+
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+
 FilePond.registerPlugin(
     // encodes the file as base64 data
     FilePondPluginFileEncode,
