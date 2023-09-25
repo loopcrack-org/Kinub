@@ -10,6 +10,11 @@
         @content;
     }
 }   
+@mixin phoneXL {
+    @media (min-width: v.$phoneXL){
+        @content;
+    }
+}   
 @mixin tablet {
     @media (min-width: v.$tablet){
         @content;
@@ -31,11 +36,30 @@
     grid-template-columns: repeat($columns, 1fr);
     gap: $gap;
 }
+@mixin flex-columns(
+    $columns,
+    $column-gap,
+    $row-gap,
+    $items-max-height: none,
+    $justify: center,
+    $align-content: flex-start
+) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-content: flex-start;
+    row-gap: $row-gap;
+    column-gap: $column-gap;
+    > * {
+    flex-basis: calc((100% - $column-gap * ($columns - 1)) / $columns);
+    max-height: $items-max-height;
+  }
+}
 @mixin fluid-text($min, $max) {
     font-size: clamp($min,-0.8rem + 10vw,$max);
 }
 @mixin heading {
-    color: v.$bright-blue;
+    color: darken(v.$bright-blue, 15%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,7 +69,7 @@
         content: '';
         background-color: v.$aqua-blue;
         height: .2rem;
-        width: calc(30%);
+        width: calc(50%);
         display: inline-block;
         margin: .2rem 0 0 0;
     }
@@ -55,6 +79,7 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
 @mixin btn($textColor, $bgColor, $textHover, $bgHover) {
     background-color: $bgColor;
     color: $textColor;

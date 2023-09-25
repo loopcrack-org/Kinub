@@ -101,9 +101,14 @@ class CtrlLogin extends BaseController
             return redirect()->back()->with("errors", $loginValidation->getErrors());
         }
 
-        return redirect()->to("admin");
+        $redirectUrl = session()->get('redirectUrl') ?? "admin"; 
+        session()->remove('redirectUrl');
+
+        return redirect()->to($redirectUrl);
     }
     public function logout() {
-        return "Closing session...";
+        $session = session();
+        $session->destroy();
+        return redirect()->to("login");
     }
 }

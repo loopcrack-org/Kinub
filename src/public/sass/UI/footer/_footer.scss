@@ -3,7 +3,7 @@
 
 .footer {
     background-color: #C7D9E7;
-    margin-top: 2rem;
+    margin-top: auto;
     box-shadow: 0px 0px 20px v.$gray;
     padding-bottom: 1rem;
 
@@ -83,7 +83,7 @@
 
         @include m.phone{
             &:nth-child(1){
-                padding: .4rem .5rem 0 .5rem;
+                padding: .625rem .6rem 0 .7rem;
             }  
         }
 
@@ -153,7 +153,7 @@
                     background-size: cover;
                     margin: 0;
                     height: 2rem;
-                    width: 2rem;
+                    width: 2.2rem;
                 }
             }
         }

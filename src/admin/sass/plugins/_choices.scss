@@ -383,6 +383,14 @@
     border-radius: 0;
     max-width: 100%;
     padding: 2px 0 2px 2px;
+    
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+      display: none;
+    }
+
     &:focus {
         outline: 0;
     }
@@ -390,6 +398,7 @@
         color: $input-placeholder-color;
     }
 }
+
   
 .choices__placeholder {
     color: $input-placeholder-color;

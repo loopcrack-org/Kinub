@@ -14,7 +14,7 @@
 <div class="page-content">
     <div class="container-fluid">
 
-        <?php echo view('partials/page-title', array('pagetitle' => 'Pages', 'title' => 'Categorías')); ?>
+        <?php echo view('partials/page-title', array('title' => 'Categorías')); ?>
 
         <div class="row">
             <div class="col-lg-12">
@@ -22,9 +22,9 @@
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Categorías</h5>
                         <div class="mt-2 mt-md-0 float-md-right">
-                            <button type="button" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
+                            <a href="/admin/categorias/create" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
                                 <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Categoría
-                            </button>
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -38,186 +38,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>01</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Telemetría</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>02</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie E</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>03</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Software</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>04</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie M</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>05</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie U</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>06</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie L</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>07</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie I</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>08</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie F</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>09</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie J</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie P</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie X</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>12</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Serie S</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php foreach ($categories as $category) { ?>
+                                    <tr>
+                                        <td><?= $category["id"]?></td>
+                                        <td>
+                                            <div class="d-flex align-items-center fw-medium">
+                                                <p><?= $category["name"]?></p>
+                                            </div>
+                                        </td>
+                                        <td><?= $category["icon"] . ".jpeg"?></td>
+                                        <td>
+                                            <div class="d-flex justify-content-between">
+                                                <a href="/admin/categorias/edit/<?= $category["id"]?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                             <tfoot>
                                 <tr>
