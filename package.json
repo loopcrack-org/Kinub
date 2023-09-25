@@ -11,7 +11,7 @@
     "dev:public": "gulp dev:public",
     "dev:common": "gulp dev:common",
     "dev:admin": "gulp dev:admin",
-    "dev": "gulp dev:all",
+    "dev": "concurrently -n \"php serve,gulp\" -c \"magenta,green\" \"php spark serve\" \"gulp dev:all\"",
     "build": "gulp build"
   },
   "author": "",
@@ -44,6 +44,8 @@
     "webpack-stream": "^7.0.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.1",
+    "gulp-plumber": "^1.2.1",
     "gulp-sourcemaps": "^3.0.0"
   }
 }
