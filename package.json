@@ -11,17 +11,23 @@
     "dev:public": "gulp dev:public",
     "dev:common": "gulp dev:common",
     "dev:admin": "gulp dev:admin",
-    "dev": "gulp dev:all",
+    "dev": "concurrently -n \"php serve,gulp\" -c \"magenta,green\" \"php spark serve\" \"gulp dev:all\"",
     "build": "gulp build"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sweetalert2/theme-dark": "^5.0.15",
     "autoprefixer": "^10.4.14",
     "bootstrap": "^5.3.1",
     "cssnano": "^6.0.1",
     "del": "^6.1.1",
-    "feather-icons": "^4.29.1",
+    "filepond": "^4.30.4",
+    "filepond-plugin-file-encode": "^2.1.11",
+    "filepond-plugin-file-validate-size": "^2.2.8",
+    "filepond-plugin-file-validate-type": "^1.2.8",
+    "filepond-plugin-image-exif-orientation": "^1.0.11",
+    "filepond-plugin-image-preview": "^4.6.11",
     "gulp": "^4.0.2",
     "gulp-avif": "^1.1.1",
     "gulp-imagemin": "^7.1.0",
@@ -32,13 +38,16 @@
     "lord-icon-element": "^4.1.1",
     "lottie-web": "^5.12.2",
     "node-waves": "^0.7.6",
+    "plyr": "^3.7.8",
     "postcss": "^8.4.27",
     "sass": "^1.64.2",
-    "simplebar": "^6.2.5",
+    "sweetalert2": "^11.7.29",
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^7.0.0"
   },
   "devDependencies": {
+    "concurrently": "^8.2.1",
+    "gulp-plumber": "^1.2.1",
     "gulp-sourcemaps": "^3.0.0"
   }
 }

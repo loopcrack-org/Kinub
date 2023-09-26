@@ -1,7 +1,7 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('fonts'); ?>

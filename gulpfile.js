@@ -1,6 +1,7 @@
 const { src, dest, watch, parallel, task } = require("gulp");
 const rename = require("gulp-rename");
 const { basename, extname } = require("path");
+const plumber = require("gulp-plumber");
 
 //Css
 const sass = require("gulp-sass")(require("sass"));
@@ -53,6 +54,7 @@ async function compileSass(srcPath, destPath, production = false) {
     .pipe(dest(destPath));
   } else {
     return src(srcPath)
+      .pipe(plumber())
       .pipe(sourcemaps.init())
       .pipe(sass())
       .pipe(postcss([autoprefixer(), cssnano()]))
@@ -68,36 +70,42 @@ async function compileSass(srcPath, destPath, production = false) {
 
 async function javascript(srcPath, destPath, production = false) {
   const webpackConfig = {
-    mode: "production",
+    mode: production ? "production" : "development",
     output: {filename: '[name].min.js'}
   }
   if(production) {
     await del(destPath);
-  } else {
-    webpackConfig["devtool"] = "source-map";
+      return src(srcPath)
+        .pipe(named())
+        .pipe(webpack(webpackConfig))
+        .pipe(rename({ dirname: "." }))
+        .pipe(dest(destPath));  
+    } else {
+      webpackConfig["devtool"] = "source-map";
+      return src(srcPath)
+        .pipe(plumber())
+        .pipe(named())
+        .pipe(webpack(webpackConfig))
+        .pipe(rename({ dirname: "." }))
+        .pipe(dest(destPath));  
   }
-  return src(srcPath)
-    .pipe(named())
-    .pipe(webpack(webpackConfig))
-    .pipe(rename({ dirname: "." }))
-    .pipe(dest(destPath));  
 }
 // ------------------------------------------------------------------- //
 
 // IMAGES
 // ------------------------------------------------------------------- //
-async function minifyImage(src, dist) {
-  return src(src)
+async function minifyImage(sourcePath, dist) {
+  return src(sourcePath)
     .pipe(imagemin({ optimizationLevel: 3 }))
     .pipe(dest(dist));
 }
 
-async function convertToWebp(src, dist) {
-  return src(src).pipe(webp()).pipe(dest(dist));
+async function convertToWebp(sourcePath, dist) {
+  return src(sourcePath).pipe(webp()).pipe(dest(dist));
 }
 
-async function convertToAvif(src, dist) {
-  return src(src).pipe(avif()).pipe(dest(dist));
+async function convertToAvif(sourcePath, dist) {
+  return src(sourcePath).pipe(avif()).pipe(dest(dist));
 }
 // ------------------------------------------------------------------- //
 
@@ -152,7 +160,7 @@ function runMode(mode, production = false) {
   }
 }
 
-function images() {
+function compileImages() {
   const {input, output} = getPaths();
   return async function images() {
     await minifyImage(input.images, output.images);
@@ -167,4 +175,4 @@ task('dev:common', runMode('common'));
 task('dev:admin', runMode('admin'));
 task('dev:all', parallel(modes.map( mode => runMode(mode) )));
 task('build', parallel(modes.map( mode => runMode(mode, true) )));
-task('images', images);
+task('images', compileImages());
