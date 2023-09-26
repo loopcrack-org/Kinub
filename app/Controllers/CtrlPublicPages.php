@@ -18,4 +18,9 @@ class CtrlPublicPages extends BaseController
     {
         return view('public/equipment');
     }
+
+    public function viewCertificates(): string
+    {
+        return view('public/certificates');
+    }
 }

@@ -1,5 +1,6 @@
 const btnMobileMenu = document.querySelector("#menu-mobile");
 const headerMobile = document.querySelector("#header-mobile");
+
 const sidebar = document.querySelector(".sidebar");
 const links = document.querySelectorAll(".navigation-mobile__link");
 
