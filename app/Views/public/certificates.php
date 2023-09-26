@@ -17,7 +17,7 @@
     <h1 class="certificates__heading">Certificados</h1>
     
     <section class="certificates__grid">
-        <div href="#" class="certificate">
+        <div href="#" target="_blank" class="certificate">
             <div class="certificate__image">
                 <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="" class="certificate__image">
             </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div href="#" class="certificate">
+        <div href="#" target="_blank" class="certificate">
             <div class="certificate__image">
                 <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
             </div>
@@ -36,7 +36,7 @@
             </div>
         </div>
 
-        <div href="#" class="certificate">
+        <div href="#" target="_blank" class="certificate">
             <div class="certificate__image">
                 <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
             </div>
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div href="#" class="certificate">
+        <div href="#" target="_blank" class="certificate">
             <div class="certificate__image">
                 <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
             </div>
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-        <div href="#" class="certificate">
+        <div href="#" target="_blank" class="certificate">
             <div class="certificate__image">
                 <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
             </div>
@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div href="#" class="certificate">
+        <div href="#" target="_blank" class="certificate">
             <div class="certificate__image">
                 <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
             </div>
