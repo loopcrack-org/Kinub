@@ -97,11 +97,11 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- particles js -->
-    <script src="/assets/libs/particles/particles.js"></script>
+    <script src="/assets/admin/js/particles.min.js"></script>
     <!-- particles app js -->
-    <script src="/assets/js/pages/particles.app.js"></script>
+    <script src="/assets/admin/js/particles.app.min.js"></script>
     <!-- password-addon init -->
-    <script src="/assets/js/pages/password-addon.init.js"></script>
+    <script src="/assets/admin/js/password-addon.init.min.js"></script>
 </body>
 
 </html>
