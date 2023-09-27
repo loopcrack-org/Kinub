@@ -1,0 +1,144 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.certificates {
+    &__heading {
+        margin-top: 5rem;
+        @include m.heading;
+        @include m.fluid-text(3rem, 6rem);
+    }
+
+    &__grid {
+        max-width: 90%;
+        margin: 5rem auto 0 auto;
+        @include m.grid(1, 1.5rem);
+        @include m.phoneXL{
+            @include m.grid(2, 4rem 2rem);
+        }
+        @include m.tablet{
+            row-gap: 3rem;
+            padding: 2rem;
+        }
+        @include m.desktop {
+            @include m.flex-columns(3, 2rem, 4rem);
+            
+        }
+    }
+}
+
+.certificate {
+    padding: 2rem 2rem 0 2rem;
+    border: 1px solid v.$aqua-blue;
+    transition: border 100ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    &__information {
+        margin: 3rem 0 2rem 0 auto;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    &__name {
+        color: v.$gray;
+        font-size: 1.8rem;
+        text-decoration: none;
+        padding: 0 .5rem;
+    }
+
+    &__image {
+        margin: auto 0;
+        max-width: 30rem;
+        max-height: 28rem;
+        transition: box-shadow 500ms ease-in-out;
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    &:hover {
+        border: 3px solid v.$aqua-blue;
+    }
+
+    &:hover &__image {
+        box-shadow: 7px 10px 20px 5px darken(v.$gray, 20%);
+        
+    }
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 3rem 0 6rem 0;
+}
+
+.pagination {
+    height: 4rem;
+    @include m.desktop{
+        height: 5rem;
+    }
+    align-items: center;
+    margin: 0;
+}
+
+.page-link {
+    height: 3.5rem;
+    width: 3.5rem;
+
+    @include m.phoneXL{
+        height: 4rem;
+        width: 4rem;
+    }
+    
+    @include m.tablet{
+        height: 5rem;
+        width: 5rem;
+    }
+}
+
+.link-container {
+    border-radius: 10%;
+    border: 1px solid darken(v.$aqua-blue, 5%);
+    overflow: hidden;
+    transition: all 100ms ease-in-out;
+    &:hover {
+        border: 3px solid darken(v.$aqua-blue, 5%);
+    }
+}
+
+.page-item {
+
+    &:first-child,
+    &:last-child {
+        border-radius: 50%;
+        margin: 1rem;
+    }
+
+    &:not(.page-item:first-child):not(.page-item:last-child) {
+        margin: 0 .5rem;
+    }
+
+    @include m.tablet{
+        &:not(.page-item:first-child):not(.page-item:last-child) {
+            margin: 0 1rem;
+        }
+
+        &:first-child,
+        &:last-child {
+            margin: 0 2rem;
+        }
+    }
+}
+
+.arrow {
+    height: 3.5rem;
+    width: 3.5rem;
+
+    @include m.tablet{
+        height: 5rem;
+        width: 5rem;
+    }
+}
