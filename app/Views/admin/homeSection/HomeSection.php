@@ -28,7 +28,7 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- App js -->
-    <script src="/assets/js/admin/app.js"></script>
+    <script src="/assets/admin/js/app.min.js"></script>
 </body>
 
 </html>
