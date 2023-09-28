@@ -3,12 +3,10 @@
 
 .measurement-solution {
     position: relative;
-    background-image: 
-    linear-gradient(to right, transparentize(v.$white, .1) 0%, transparentize(v.$white, .1) 100%), 
-    url(../images/auth-one-bg.jpg);
+    /* background-image: url(../images/auth-one-bg.jpg); */
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: center center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -16,20 +14,32 @@
     text-align: center;
     color: transparent;
 
+    &__bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
     &__icon {
-        -webkit-mask: url(../images/icon-example.svg) no-repeat 100% 100% / 100% 100%;
+/*         -webkit-mask: url(../images/icon-example.svg) no-repeat 100% 100% / 100% 100%;
         mask: url(../images/icon-example.svg)  no-repeat 100% 100% / 100% 100%;
         background: v.$bright-blue;
         background: -webkit-linear-gradient(to right, v.$blue, v.$bright-blue, v.$light-blue, v.$aqua-blue); 
-        background: linear-gradient(to right, v.$blue, v.$bright-blue, v.$light-blue, v.$aqua-blue); 
+        background: linear-gradient(to right, v.$blue, v.$bright-blue, v.$light-blue, v.$aqua-blue);  
         height: 15rem;
         width: 15rem;
-        transition: all 300ms ease;
+        transition: all 800ms ease;
+        z-index: 10;  */
+
+        transition: all 800ms ease;
+        z-index: 1;
+    }
+    &__content {
+        z-index: 1;
     }
     &__title,
     &__description {
         color: lighten(v.$black, 25%);
-        transition: all 300ms ease;
+        transition: all 800ms ease;
     }
     &__title {
         display: flex;
@@ -54,7 +64,7 @@
         line-height: 1;
         visibility: hidden;
         opacity: 0;
-        transition: all 200ms ease;
+        transition: all 800ms ease;
 
         @include m.desktop {
             width: 70%;
@@ -87,11 +97,30 @@
             background-color: v.$bright-blue;
         }
     }
+    &__mask {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background:  linear-gradient(to right, transparentize(v.$white, .1) 0%, transparentize(v.$white, .1) 100%);
+        transition: all 800ms ease-out;
+        opacity: 1;
+        visibility: visible;
+
+        &--hover {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparentize(v.$black, .2) 0%, transparentize(v.$blue, .2) 20%, transparentize(v.$green-blue, .2) 40%, transparentize(v.$green-blue, .2) 60%, transparentize(v.$blue, .2) 80%, transparentize(v.$black, .2) 100%);
+            transition: all 800ms ease-out;
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
 }
 .measurement-solution:hover {
     cursor: pointer;
-    background-image: linear-gradient(to bottom, transparentize(v.$black, .2) 0%, transparentize(v.$blue, .2) 20%, transparentize(v.$green-blue, .2) 40%, transparentize(v.$green-blue, .2) 60%, transparentize(v.$blue, .2) 80%, transparentize(v.$black, .2) 100%), 
-    url(../images/auth-one-bg.jpg);
     color: v.$white;
 
     .measurement-solution {
@@ -100,16 +129,28 @@
             color: v.$white;
         }
         &__title {
-          transform: scale(.8) translateY(-10rem);
+          transform: scale(.8) translateY(-12rem);
         }
         &__description {
             visibility: visible;
             opacity: 1;
-            transform:scale(1.4) translateY(-4rem);
+            transform:scale(1.4) translateY(-5rem);
         }
         &__icon {
-            background: v.$white;
             transform: scale(.7) translateY(-5rem);
+
+            rect {
+                fill: #ffffff;
+            }
+        }
+        &__mask {
+            opacity: 0;
+            visibility: hidden;
+
+            &--hover {
+                opacity: 1;
+                visibility: visible;
+            }
         }
     }
 }

@@ -63,8 +63,43 @@
     <h3 class="measurement-solutions__heading">Soluciones de medición</h3>
 
     <div class="measurement-solutions__grid">
-        <div class="measurement-solution">
-            <div class="measurement-solution__icon"></div>
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+ 
+            <div class="measurement-solution__icon">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <defs>
+                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
+                        <image href="assets/images/drop.svg" width="100%" height="100%" />
+                    </mask>
+
+                    <linearGradient
+                        id="mask-degraded"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                    >
+                        <stop offset="0%" style="stop-color: #0032AB" />
+                        <stop offset="33%" style="stop-color: #0174F6" />
+                        <stop offset="66%" style="stop-color: #1B90C7" />
+                        <stop offset="100%" style="stop-color: #00A7DE" />
+                    </linearGradient>
+                </defs>
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
             
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Residenciales</p>
@@ -72,10 +107,48 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
             </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
         </div>
 
-        <div class="measurement-solution">
-            <div class="measurement-solution__icon"></div>
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+ 
+            <div class="measurement-solution__icon">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <defs>
+                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
+                        <image href="assets/images/drop.svg" width="100%" height="100%" />
+                    </mask>
+
+                    <linearGradient
+                        id="mask-degraded"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                    >
+                        <stop offset="0%" style="stop-color: #0032AB" />
+                        <stop offset="33%" style="stop-color: #0174F6" />
+                        <stop offset="66%" style="stop-color: #1B90C7" />
+                        <stop offset="100%" style="stop-color: #00A7DE" />
+                    </linearGradient>
+                </defs>
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
             
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Industriales</p>
@@ -83,10 +156,48 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
             </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
         </div>
 
-        <div class="measurement-solution">
-            <div class="measurement-solution__icon"></div>
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+ 
+            <div class="measurement-solution__icon">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <defs>
+                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
+                        <image href="assets/images/drop.svg" width="100%" height="100%" />
+                    </mask>
+
+                    <linearGradient
+                        id="mask-degraded"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                    >
+                        <stop offset="0%" style="stop-color: #0032AB" />
+                        <stop offset="33%" style="stop-color: #0174F6" />
+                        <stop offset="66%" style="stop-color: #1B90C7" />
+                        <stop offset="100%" style="stop-color: #00A7DE" />
+                    </linearGradient>
+                </defs>
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
             
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medición</span> Remota</p>
@@ -94,10 +205,48 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
             </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
         </div>
 
-        <div class="measurement-solution">
-            <div class="measurement-solution__icon"></div>
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+ 
+            <div class="measurement-solution__icon">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <defs>
+                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
+                        <image href="assets/images/drop.svg" width="100%" height="100%" />
+                    </mask>
+
+                    <linearGradient
+                        id="mask-degraded"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                    >
+                        <stop offset="0%" style="stop-color: #0032AB" />
+                        <stop offset="33%" style="stop-color: #0174F6" />
+                        <stop offset="66%" style="stop-color: #1B90C7" />
+                        <stop offset="100%" style="stop-color: #00A7DE" />
+                    </linearGradient>
+                </defs>
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
             
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Calidad</span> del agua</p>
@@ -105,8 +254,10 @@
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
             </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
         </div>
-    </div>
 </section>
 
 <section id="form">
