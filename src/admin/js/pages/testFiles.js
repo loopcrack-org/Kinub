@@ -32,7 +32,7 @@ FilePond.registerPlugin(
 );
 
 FilePond.setOptions({
-    labelIdle: 'Arrastra y suelta tu imagen o  <u style="cursor:pointer;">Selecciona</u>',
+    labelIdle: 'Arrastra y suelta tu archivo o  <u style="cursor:pointer;">Selecciona</u>',
     imagePreviewHeight: 170,
     imageCropAspectRatio: '1:1',
     imageResizeTargetWidth: 200,

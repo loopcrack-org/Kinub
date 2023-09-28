@@ -28,6 +28,7 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
+                                        <p class="card-text">Ingresa un nombre</p>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" required>
                                     </div>
                                     <!-- end card body -->
@@ -45,8 +46,9 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
-
+                                    
                                     <div class="card-body">
+                                        <p class="card-text">Ingresa imagenes en formato jpg, jpeg o png</p>
                                         <input type="file" id="images-files" name="image">
                                     </div>
                                     <!-- end card body -->
@@ -64,6 +66,7 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
+                                        <p class="card-text">Ingresa un ícono en formato svg</p>
                                         <input type="file" id="svg-files" name="image">
                                     </div>
                                     <!-- end card body -->
@@ -81,6 +84,7 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
+                                        <p class="card-text">Ingresa videos en formato mp4</p>
                                         <input type="file" id="video-files" name="image">
                                     </div>
                                     <!-- end card body -->
@@ -99,6 +103,7 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
+                                        <p class="card-text">Ingresa archivos en formato pdf</p>
                                         <input type="file" id="document-files" name="image">
                                     </div>
                                     <!-- end card body -->
