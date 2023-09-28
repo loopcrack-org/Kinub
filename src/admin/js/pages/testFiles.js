@@ -44,7 +44,7 @@ FilePond.setOptions({
     maxFiles: 3,
     
     server: {
-        url: window.location,
+        url: "/api/file",
         process: {
             url: '/process',
             method: 'POST',
