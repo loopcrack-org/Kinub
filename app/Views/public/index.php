@@ -2,15 +2,14 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="assets/js/public/home.js"></script>
+<script src="assets/public/js/home.min.js"></script>
 <?php $this->endSection(); ?>
 
 <!-- FONTS -->

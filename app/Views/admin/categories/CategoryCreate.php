@@ -6,8 +6,7 @@
 
 <?= $this->section("css") ?>
 <!-- Filepond css -->
-<link rel="stylesheet" href="/assets/libs/filepond/filepond.min.css" type="text/css" />
-<link rel="stylesheet" href="/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.css">
+<link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
 
 
 <?= $this->endSection() ?>
@@ -15,7 +14,7 @@
 <?= $this->section("content") ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('pagetitle' => 'Crear categoría', 'title' => 'Crear categoría')); ?>
+        <?php echo view('partials/page-title', array('title' => 'Crear categoría', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Crear categoría',)); ?>
 
         <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate  method="POST">
             <div class="row justify-content-center">
@@ -43,15 +42,6 @@
 
 
 <?= $this->section("js") ?>
-<script src="/assets/js/admin/plugins.js"></script>
-
 <!-- filepond js -->
-<script src="/assets/libs/filepond/filepond.min.js"></script>
-<script src="/assets/libs/filepond-plugin-image-preview/filepond-plugin-image-preview.min.js"></script>
-<script src="/assets/libs/filepond-plugin-file-validate-size/filepond-plugin-file-validate-size.min.js"></script>
-<script src="/assets/libs/filepond-plugin-image-exif-orientation/filepond-plugin-image-exif-orientation.min.js"></script>
-<script src="/assets/libs/filepond-plugin-file-encode/filepond-plugin-file-encode.min.js"></script>
-<script src="https://unpkg.com/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js"></script>
-
-<script src="/assets/js/pages/form-file-upload-category.init.js"></script>
+<script src="/assets/admin/js/form-file-upload-category.init.min.js"></script>
 <?= $this->endSection() ?>
