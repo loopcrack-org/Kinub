@@ -61,9 +61,6 @@ FilePond.setOptions({
                 return response.key;
             },
             onerror: (response) => {
-                console.table({
-                    "data": response.data
-                });
                 return response.data;
             },
             ondata: (formData) => {
