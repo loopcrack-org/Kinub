@@ -16,61 +16,86 @@
     <h1 class="certificates__heading">Certificados</h1>
     
     <section class="certificates__grid">
-        <div href="#" target="_blank" class="certificate">
+        <a href="#" target="_blank" class="certificate">
             <div class="certificate__image">
-                <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="" class="certificate__image">
+                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Certificado" class="certificate__image">
             </div>
             <div class="certificate__information">
-                <a href="#" class="certificate__name">Certificado con algún nombre no tan largo</a>
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
             </div>
-        </div>
+        </a>
 
-        <div href="#" target="_blank" class="certificate">
+        <a href="#" target="_blank" class="certificate">
             <div class="certificate__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
-            </div>
-            
-            <div class="certificate__information">
-                <a href="#" class="certificate__name">Certificado con nombre un poco más largo que el otro</a>
-            </div>
-        </div>
-
-        <div href="#" target="_blank" class="certificate">
-            <div class="certificate__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
             </div>
             <div class="certificate__information">
-                <a href="#" class="certificate__name">Certificado con algún nombre no tan largo</a>
+                <p class="certificate__name">Certificado con nombre un poco más largo que el otro</p>
             </div>
-        </div>
+        </a>
 
-        <div href="#" target="_blank" class="certificate">
+        <a href="#" target="_blank" class="certificate">
             <div class="certificate__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
             </div>
             <div class="certificate__information">
-                <a href="#" class="certificate__name">Certificado con algún nombre no tan largo</a>
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
             </div>
-        </div>
+        </a>
 
-        <div href="#" target="_blank" class="certificate">
+        <a href="#" target="_blank" class="certificate">
             <div class="certificate__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
             </div>
             <div class="certificate__information">
-                <a href="#" class="certificate__name">Certificado con algún nombre no tan largo</a>
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
             </div>
-        </div>
+        </a>
 
-        <div href="#" target="_blank" class="certificate">
+        <a href="#" target="_blank" class="certificate">
             <div class="certificate__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
             </div>
             <div class="certificate__information">
-                <a href="#" class="certificate__name">Certificado con algún nombre no tan largo</a>
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
             </div>
-        </div>
+        </a>
 
+        <a href="#" target="_blank" class="certificate">
+            <div class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
+            </div>
+            <div class="certificate__information">
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
+            </div>
+        </a>
+
+        <a href="#" target="_blank" class="certificate">
+            <div class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
+            </div>
+            <div class="certificate__information">
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
+            </div>
+        </a>
+
+        <a href="#" target="_blank" class="certificate">
+            <div class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
+            </div>
+            <div class="certificate__information">
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
+            </div>
+        </a>
+
+        <a href="#" target="_blank" class="certificate">
+            <div class="certificate__image">
+                    <img src="assets/images/auth-one-bg.jpg" alt="Certificado" class="certificate__image">
+            </div>
+            <div class="certificate__information">
+                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
+            </div>
+        </a>
     </section>
 </main>
 

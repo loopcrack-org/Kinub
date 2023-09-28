@@ -17,7 +17,7 @@
         }
         @include m.tablet{
             row-gap: 3rem;
-            padding: 2rem;
+            padding: 2rem 2rem 0 2rem;
         }
         @include m.desktop {
             @include m.flex-columns(3, 2rem, 4rem);
@@ -64,81 +64,7 @@
     }
 
     &:hover &__image {
-        box-shadow: 7px 10px 20px 5px darken(v.$gray, 20%);
+        box-shadow: v.$gray 7px 8px 7px;
         
-    }
-}
-
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    margin: 3rem 0 6rem 0;
-}
-
-.pagination {
-    height: 4rem;
-    @include m.desktop{
-        height: 5rem;
-    }
-    align-items: center;
-    margin: 0;
-}
-
-.page-link {
-    height: 3.5rem;
-    width: 3.5rem;
-
-    @include m.phoneXL{
-        height: 4rem;
-        width: 4rem;
-    }
-    
-    @include m.tablet{
-        height: 5rem;
-        width: 5rem;
-    }
-}
-
-.link-container {
-    border-radius: 10%;
-    border: 1px solid darken(v.$aqua-blue, 5%);
-    overflow: hidden;
-    transition: all 100ms ease-in-out;
-    &:hover {
-        border: 3px solid darken(v.$aqua-blue, 5%);
-    }
-}
-
-.page-item {
-
-    &:first-child,
-    &:last-child {
-        border-radius: 50%;
-        margin: 1rem;
-    }
-
-    &:not(.page-item:first-child):not(.page-item:last-child) {
-        margin: 0 .5rem;
-    }
-
-    @include m.tablet{
-        &:not(.page-item:first-child):not(.page-item:last-child) {
-            margin: 0 1rem;
-        }
-
-        &:first-child,
-        &:last-child {
-            margin: 0 2rem;
-        }
-    }
-}
-
-.arrow {
-    height: 3.5rem;
-    width: 3.5rem;
-
-    @include m.tablet{
-        height: 5rem;
-        width: 5rem;
     }
 }
