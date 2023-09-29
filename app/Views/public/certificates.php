@@ -2,6 +2,7 @@
 
 <?php $this->section('css'); ?>
 <link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/certificates.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('fonts'); ?>
@@ -99,6 +100,6 @@
     </section>
 </main>
 
-<?= $this->include("public/templates/pagination-nav");?>
+<?= $this->include("public/templates/pagination");?>
 
 <?php $this->endSection('content');?>
