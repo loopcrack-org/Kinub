@@ -1,7 +1,3 @@
-<?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
-<?php $this->endSection(); ?>
-
 <div class="pagination-container">
   <nav class="pagination">
       <a class="pagination__link arrow" href="#" >
