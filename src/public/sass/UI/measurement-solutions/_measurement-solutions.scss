@@ -28,9 +28,12 @@
         margin: 0 auto;
 
         @include m.tablet {
-            @include m.grid(2, 1fr);
+            @include m.grid(2, 1fr)
         }
         @include m.desktop {
+            @include m.grid(3, 1fr);
+        }
+        @include m.desktopXL {
             @include m.grid(4, 1fr);
         }
     }

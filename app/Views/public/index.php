@@ -63,9 +63,9 @@
 
     <div class="measurement-solutions__grid">
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
- 
             <div class="measurement-solution__icon">
                 <svg
+                    class="measurement-solution__svg"
                     xmlns="http://www.w3.org/2000/svg"
                     width="200"
                     height="200"
@@ -83,10 +83,10 @@
                         x2="100%"
                         y2="0%"
                     >
-                        <stop offset="0%" style="stop-color: #0032AB" />
-                        <stop offset="33%" style="stop-color: #0174F6" />
-                        <stop offset="66%" style="stop-color: #1B90C7" />
-                        <stop offset="100%" style="stop-color: #00A7DE" />
+                        <stop offset="20%" style="stop-color: #0D65A7" />
+                        <stop offset="40%" style="stop-color: #54B4DB" />
+                        <stop offset="60%" style="stop-color: #7FBCD6" />
+                        <stop offset="80%" style="stop-color: #2892BC" />
                     </linearGradient>
                 </defs>
                 <rect
@@ -95,6 +95,23 @@
                     width="100%"
                     height="100%"
                     fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
                     mask="url(#icon-mask)"
                 />
                 </svg>
@@ -112,38 +129,37 @@
         </div>
 
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
- 
             <div class="measurement-solution__icon">
                 <svg
+                    class="measurement-solution__svg"
                     xmlns="http://www.w3.org/2000/svg"
                     width="200"
                     height="200"
                     viewBox="0 0 200 200"
                 >
-                <defs>
-                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
-                        <image href="assets/images/drop.svg" width="100%" height="100%" />
-                    </mask>
-
-                    <linearGradient
-                        id="mask-degraded"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="0%"
-                    >
-                        <stop offset="0%" style="stop-color: #0032AB" />
-                        <stop offset="33%" style="stop-color: #0174F6" />
-                        <stop offset="66%" style="stop-color: #1B90C7" />
-                        <stop offset="100%" style="stop-color: #00A7DE" />
-                    </linearGradient>
-                </defs>
                 <rect
                     x="0"
                     y="0"
                     width="100%"
                     height="100%"
                     fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
                     mask="url(#icon-mask)"
                 />
                 </svg>
@@ -161,38 +177,37 @@
         </div>
 
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
- 
             <div class="measurement-solution__icon">
                 <svg
+                    class="measurement-solution__svg"
                     xmlns="http://www.w3.org/2000/svg"
                     width="200"
                     height="200"
                     viewBox="0 0 200 200"
                 >
-                <defs>
-                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
-                        <image href="assets/images/drop.svg" width="100%" height="100%" />
-                    </mask>
-
-                    <linearGradient
-                        id="mask-degraded"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="0%"
-                    >
-                        <stop offset="0%" style="stop-color: #0032AB" />
-                        <stop offset="33%" style="stop-color: #0174F6" />
-                        <stop offset="66%" style="stop-color: #1B90C7" />
-                        <stop offset="100%" style="stop-color: #00A7DE" />
-                    </linearGradient>
-                </defs>
                 <rect
                     x="0"
                     y="0"
                     width="100%"
                     height="100%"
                     fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
                     mask="url(#icon-mask)"
                 />
                 </svg>
@@ -210,38 +225,37 @@
         </div>
 
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
- 
             <div class="measurement-solution__icon">
                 <svg
+                    class="measurement-solution__svg"
                     xmlns="http://www.w3.org/2000/svg"
                     width="200"
                     height="200"
                     viewBox="0 0 200 200"
                 >
-                <defs>
-                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
-                        <image href="assets/images/drop.svg" width="100%" height="100%" />
-                    </mask>
-
-                    <linearGradient
-                        id="mask-degraded"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="0%"
-                    >
-                        <stop offset="0%" style="stop-color: #0032AB" />
-                        <stop offset="33%" style="stop-color: #0174F6" />
-                        <stop offset="66%" style="stop-color: #1B90C7" />
-                        <stop offset="100%" style="stop-color: #00A7DE" />
-                    </linearGradient>
-                </defs>
                 <rect
                     x="0"
                     y="0"
                     width="100%"
                     height="100%"
                     fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
                     mask="url(#icon-mask)"
                 />
                 </svg>
