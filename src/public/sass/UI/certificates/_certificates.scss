@@ -50,12 +50,12 @@
 
     &__image {
         margin: auto 0;
-        max-width: 30rem;
-        max-height: 28rem;
         transition: box-shadow 500ms ease-in-out;
 
         img {
             object-fit: cover;
+            max-width: 30rem;
+            max-height: 28rem;
         }
     }
 
