@@ -28,13 +28,13 @@
         margin: 0 auto;
 
         @include m.tablet {
-            @include m.grid(2, 1fr)
+            @include m.flex-columns(2, 0rem, 0rem);
         }
         @include m.desktop {
-            @include m.grid(3, 1fr);
+            @include m.flex-columns(3, 0rem, 0rem);
         }
         @include m.desktopXL {
-            @include m.grid(4, 1fr);
+            @include m.flex-columns(4, 0rem, 0rem);
         }
     }
 }
