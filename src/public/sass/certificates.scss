@@ -34,6 +34,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
+    transition: box-shadow 500ms ease-in-out;
 
     &__information {
         margin: 3rem 0 2rem 0 auto;
@@ -60,7 +62,15 @@
     }
 
     &:hover {
-        border: 3px solid v.$aqua-blue;
+        $border-size: 3px;
+        $border-blur: 0px;
+        $border-spread: 0px; 
+        &:hover {
+            box-shadow: $border-size $border-size $border-blur $border-spread v.$aqua-blue , 
+                        $border-size (-$border-size) $border-blur $border-spread v.$aqua-blue , 
+                        (-$border-size) $border-size $border-blur $border-spread v.$aqua-blue , 
+                        (-$border-size) (-$border-size) $border-blur $border-spread v.$aqua-blue ;
+        }
     }
 
     &:hover &__image {
