@@ -1,8 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
+import intlTelInput from 'intl-tel-input';
+document.addEventListener('DOMContentLoaded', function () {
     const supportForm = document.querySelector('#support-form');
     const progressName = document.querySelectorAll('.support-progress__name');
     const progressBullet = document.querySelectorAll('.support-progress__bullet');
     const fieldsetsElements = document.querySelectorAll(".support-form__fieldset");
+    const phoneInputField = document.querySelector("#support-phone"); 
+    const phoneInput = intlTelInput(phoneInputField, {
+        preferredCountries: ["mx"],
+        utilsScript: require('intl-tel-input/build/js/utils.js'),
+    });
 
     let currentStep = 1;
 
@@ -55,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         customViewErrors: commonCustomViewErrors,
         onFormSubmit: function (container) {
-            handleProgress(currentStep);
+            handleProgress(currentStep);  
+            const phoneNumber = phoneInput.getNumber(intlTelInputUtils.numberFormat.E164);
+            phoneInputField.value = phoneNumber;
             document.querySelector("#support-form").submit();
         },
     };
@@ -65,32 +73,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function setContainerVisibility(container, isVisible, cls, message) {
         if (isVisible) {
-        container.classList.add("support-form__error--active", cls);
-        container.innerHTML = message;
+            container.classList.add("support-form__error--active", cls);
+            container.innerHTML = message;
+            console.log("hola");
         } else {
-        container.classList.remove("support-form__error--active", cls);
-        container.innerHTML = "";
+            container.classList.remove("support-form__error--active", cls);
+            container.innerHTML = "";
         }
     }
-    
+
     function updateErrorContainer(field, message, cls) {
         const containerErrorsID = field.getAttribute("data-errors-id");
-        
-        if (!containerErrorsID) return; 
-    
+
+        if (!containerErrorsID) return;
+
         const containerErrors = document.getElementById(containerErrorsID);
-    
-        if (!containerErrors) return; 
-    
+
+        if (!containerErrors) return;
+
         const shouldDisplayError = Boolean(message);
-    
+
         setContainerVisibility(containerErrors, shouldDisplayError, cls, message);
     }
 
     const prevButtons = document.querySelectorAll('.prev-step');
 
     prevButtons.forEach((button) => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             if (currentStep > 1) {
                 currentStep--;
                 supportForm.style.transform = `translateX(-${(currentStep - 1) * 100}%)`;
@@ -109,10 +118,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         fieldsetsElements[step - 1].classList.add("support-form__fieldset--active");
     }
-    
+
     function displayAlert() {
         const alertResponse = document.querySelector("#alert-response");
-        
+
         if (alertResponse) {
             const responseData = JSON.parse(
                 alertResponse.getAttribute("data-response")

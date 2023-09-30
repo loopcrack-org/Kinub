@@ -67,11 +67,9 @@ class CtrlEmail extends BaseController
     {
         $supportEmailValidation = new SupportEmailValidation();
         $POST = $this->request->getPost();
-
-        if (!$supportEmailValidation->validateData($POST)) {
+        if (!($supportEmailValidation->validateData($POST) & $supportEmailValidation->validatePhoneNumber($POST["support-phone"]))) {
             return redirect()->back()->withInput()->with("errors", $supportEmailValidation->getErrors());
         }
-
         $subject = "Mensaje del formulario de soporte técnico";
         $formData = [
             "support-phone" => [
@@ -100,7 +98,7 @@ class CtrlEmail extends BaseController
             ]
         ];
 
-        $successEmail =  EmailSender::sendEmail($POST["support-customer"],$POST['support-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
+        $successEmail = EmailSender::sendEmail($POST["support-customer"],$POST['support-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
 
         if($successEmail){
             $response = [

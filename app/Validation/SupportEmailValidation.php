@@ -6,7 +6,7 @@ class SupportEmailValidation
 {
     private $validationRules = [
         "support-customer" => "required|alpha_space",
-        "support-phone" => "required|regex_match[^(?:\+\d{1,3}\s?)?\d{10}$]",
+        "support-phone" => "required",
         "support-email" => "required|valid_emails",
         "support-model" => "required",
         "support-serial" => "required",
@@ -20,8 +20,7 @@ class SupportEmailValidation
             "alpha_space" => "El campo nombre solo debe contener carácteres alfabéticos y espacios"
         ],
         "support-phone" => [
-            "required" => "El teléfono es obligatorio",
-            "regex_match" => "El campo teléfono debe contener 10 dígitos y puede incluir una lada opcional"
+            "required" => "El teléfono es obligatorio"
         ],
         "support-email" => [
             "required" => "El email es obligatorio",
@@ -51,6 +50,19 @@ class SupportEmailValidation
         if(!$validation->run($data)){
             $this->errors = $validation->getErrors();
             return false;
+        }
+        return true;
+    }
+
+    public function validatePhoneNumber($phoneNumber): bool
+    {
+        if (strpos($phoneNumber, "+52") === 0) {
+            if (!preg_match("/^\+52\d{10}$/", $phoneNumber)) {
+                $this->errors = [
+                    "support-phone" => "El número de teléfono ingresado es inválido. Debe tener una longitud 10 dígitos"
+                ];
+                return false;
+            }
         }
         return true;
     }
