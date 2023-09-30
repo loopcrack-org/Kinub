@@ -50,16 +50,16 @@
                             <tbody>
                                 <?php foreach ($categories as $category) { ?>
                                     <tr>
-                                        <td><?= $category["id"] ?></td>
+                                        <td><?= $category["categoryId"] ?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p><?= $category["name"] ?></p>
+                                                <p><?= $category["categoryName"] ?></p>
                                             </div>
                                         </td>
-                                        <td><?= $category["icon"] . ".jpeg" ?></td>
+                                        <td><?= $category["categoryIconId"] . ".jpeg" ?></td>
                                         <td>
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/categorias/edit/<?= $category["id"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="/admin/categorias/edit/<?= $category["categoryId"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
