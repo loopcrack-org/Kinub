@@ -18,26 +18,6 @@ class CtrlApiFiles extends BaseController
         return $this->response->download($fileName, null, true);
     }
 
-    public function save()
-    {
-        $images = $this->request->getPost('icon');
-
-        $idFolder = md5(uniqid(rand(), true));
-
-        foreach ($images as $value) {
-            FileManager::changeFileDirectory($value, "./uploads/$idFolder/");
-        }
-
-        return redirect('/')->with('response', 'Imagenes guardadas con éxito');
-    }
-
-    public function index(): string
-    {
-        $data = glob("./files/img/**");
-
-        return view('index', ['filesSaved' => $data]);
-    }
-
     public function process()
     {
         $fileName = $this->request->getPost()['fileName'];
