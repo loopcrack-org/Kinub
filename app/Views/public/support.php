@@ -73,7 +73,7 @@
                     <label for="support-phone" class="support-form__label">Teléfono</label>
 
                     <?= isset($errors['support-phone']) ? '<p class="support-form__error support-form__error--active">' . $errors['support-phone'] . '</p>' : '<p class="support-form__error" id="errors-2"></p>' ?>
-                    <input id="support-phone" name="support-phone" type="tel" class="support-form__input support-form__input--tel required phone" data-errors-id="errors-2" value="<?php echo old("support-phone") ?>">
+                    <input id="support-phone" name="support-phone" type="tel" class="support-form__input support-form__input--tel required pattern" data-errors-id="errors-2" data-pattern="^(\+?\d{1,4}[-\s]?)?\(?\d{1,4}\)?[-\s]?\d{1,4}[-\s]?\d{1,9}$" value="<?php echo old("support-phone") ?>">
                 </div>
 
                 <div class="support-form__field">

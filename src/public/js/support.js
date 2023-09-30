@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const MESSAGES = {
         required: "campo obligatorio",
         email: "correo inválido",
-        phone: "teléfono inválido",
+        pattern: "teléfono inválido",
     };
 
     const SELECTORS = {
