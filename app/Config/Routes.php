@@ -65,8 +65,8 @@ $routes->group('admin', static function($routes) {
     $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
     $routes->group('home', static function($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
-        $routes->get('edit', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
-        $routes->post('edit', [CtrlHomeSection::class, 'editHomeSection']);
+        $routes->get('editar', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
+        $routes->post('editar', [CtrlHomeSection::class, 'editHomeSection']);
     });
 
     $routes->group('soluciones', static function($routes) {
