@@ -67,7 +67,7 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa un ícono en formato svg</p>
-                                        <input type="file" id="svg-files" name="image">
+                                        <input type="file" id="svg-files" name="svg">
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -85,7 +85,7 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa videos en formato mp4</p>
-                                        <input type="file" id="video-files" name="image">
+                                        <input type="file" id="video-files" name="video">
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -104,7 +104,7 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa archivos en formato pdf</p>
-                                        <input type="file" id="document-files" name="image">
+                                        <input type="file" id="document-files" name="pdf">
                                     </div>
                                     <!-- end card body -->
                                 </div>

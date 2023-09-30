@@ -18,6 +18,7 @@ class FileManager{
 
     public static function changeFileDirectory(String $sourcePath, String $destPath){
         if (file_exists($sourcePath)) {
+            static::createFolder($destPath); 
             $file = new File($sourcePath, true); 
             $file->move($destPath);
         }

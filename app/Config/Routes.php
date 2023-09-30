@@ -48,7 +48,7 @@ $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
  * LOGIN
  * --------------------------------------------------------------------
  */
-$routes->group('login', static function($routes) {
+$routes->group('login', static function ($routes) {
     /** @var \CodeIgniter\Router\RouteCollection $routes */
     $routes->get('', [CtrlLogin::class, 'index']);
     $routes->get('password/reset', [CtrlLogin::class, 'viewPasswordEmail']);
@@ -63,17 +63,17 @@ $routes->group('login', static function($routes) {
  * ADMIN
  * --------------------------------------------------------------------
  */
-$routes->group('admin', static function($routes) {
+$routes->group('admin', static function ($routes) {
     /** @var \CodeIgniter\Router\RouteCollection $routes */
 
     $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
-    $routes->group('home', static function($routes) {
+    $routes->group('home', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('edit', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
         $routes->post('edit', [CtrlHomeSection::class, 'editHomeSection']);
     });
 
-    $routes->group('soluciones', static function($routes) {
+    $routes->group('soluciones', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlSolution::class, 'viewSolutions']);
         $routes->get('create', [CtrlSolution::class, 'viewSolutionCreate']);
@@ -83,7 +83,7 @@ $routes->group('admin', static function($routes) {
         $routes->post('delete', [CtrlSolution::class, 'deleteSolution']);
     });
 
-    $routes->group('categorias', static function($routes) {
+    $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlCategory::class, 'viewCategories']);
         $routes->get('create', [CtrlCategory::class, 'viewCategoryCreate']);
@@ -92,10 +92,25 @@ $routes->group('admin', static function($routes) {
         $routes->post('edit/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('delete', [CtrlCategory::class, 'deleteCategory']);
     });
+    
+    $routes->group('api/files', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('load', 'CtrlApiFiles::getFiles');
+        $routes->patch('process', 'CtrlApiFiles::processChunk');
+        $routes->post('process', 'CtrlApiFiles::process');
+        $routes->delete('revert', 'CtrlApiFiles::revert');
+    });
 
     $routes->get('testFiles', [CtrlTestFiles::class, 'index']);
     $routes->post('testFiles', [CtrlTestFiles::class, 'saveData']);
 });
+
+/*
+ * --------------------------------------------------------------------
+ * Api
+ * --------------------------------------------------------------------
+ */
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
