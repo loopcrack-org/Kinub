@@ -9,7 +9,12 @@ class CtrlTestFiles extends BaseController
 {
     public function index()
     {
-        $data = glob("./uploads/**/**/**");
+        $img = glob("./uploads/**/image/**");
+        $video = glob("./uploads/**/video/**");
+        $pdf = glob("./uploads/**/pdf/**");
+        $svg = glob("./uploads/**/svg/**");
+
+        $data = ["img" => $img, "video" => $video, "pdf" => $pdf, "svg" => $svg]; 
         
         return view('admin/test/testFiles', ['filesSaved' => $data]); 
     }

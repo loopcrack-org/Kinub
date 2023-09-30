@@ -54,7 +54,7 @@ export function addData(formData, objectFilePond, nameInput) {
 }
 
 export async function removeFile(source, load, error) {
-  const response = await fetch("./revert", {
+  const response = await fetch("./api/files/revert", {
     headers: {
       "Content-Type": "text/plain;charset=UTF-8",
     },

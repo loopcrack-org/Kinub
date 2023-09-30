@@ -13,7 +13,7 @@ class CtrlApiFiles extends BaseController
     public function getFiles()
     {
 
-        $fileName = $this->request->getGet()['load'];
+        $fileName = $this->request->getGet()['file'];
 
         return $this->response->download($fileName, null, true);
     }
