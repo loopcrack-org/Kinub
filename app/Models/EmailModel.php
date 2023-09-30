@@ -7,9 +7,9 @@ use CodeIgniter\Model;
 class EmailModel extends Model
 {
     protected $table = 'emails';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'emailId';
     protected $useAutoIncrement = true;
     protected $returnType = 'array';
-    protected $allowedFields = ['idTypeEmail', 'information'];
+    protected $allowedFields = ['emailTypeId', 'emailContent'];
 
 }

@@ -8,6 +8,6 @@ class CategoryModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'categories';
-    protected $primaryKey       = 'id';
-    protected $allowedFields    = ["name", "image", "icon"];
+    protected $primaryKey       = 'categoryId';
+    protected $allowedFields    = ["name", "imageId", "iconId"];
 }
