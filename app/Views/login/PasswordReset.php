@@ -40,13 +40,13 @@
 
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card mt-4"> 
-                            
+                        <div class="card mt-4">
+
                             <?php $response = $response ?? session()->get("response"); ?>
 
-                            <?php if($response): ?>
+                            <?php if ($response) : ?>
                                 <?= view("login/response", ['response' => $response]) ?>
-                            <?php else: ?>
+                            <?php else : ?>
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
                                         <h5 class="text-primary">Restablece tu contraseña</h5>
@@ -58,7 +58,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label" for="password-input">Contraseña</label>
 
-                                                <?php $errors = session()->get("errors")?>
+                                                <?php $errors = session()->get("errors") ?>
 
                                                 <div class="position-relative auth-pass-inputgroup">
                                                     <input name="password" required type="password" class="form-control pe-5 password-input <?= isset($errors["password"]) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Ingresa tu nueva contraseña" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
@@ -90,7 +90,7 @@
                                                 <p id="pass-upper" class="invalid fs-12 mb-2">Al menos una letra <b>mayúscula</b> de la (A-Z)</p>
                                                 <p id="pass-number" class="invalid fs-12 mb-0">Al menos un <b>número</b> del (0-9)</p>
                                             </div>
-            
+
                                             <div class="mt-4">
                                                 <button class="btn btn-success w-100" type="submit">Restablecer Contraseña</button>
                                             </div>
@@ -117,12 +117,12 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- particles js -->
-    <script src="/assets/libs/particles/particles.js"></script>
+    <script src="/assets/admin/js/particles.min.js"></script>
     <!-- particles app js -->
-    <script src="/assets/js/pages/particles.app.js"></script>
+    <script src="/assets/admin/js/particles.app.min.js"></script>
 
     <!-- password-create init -->
-    <script src="/assets/js/pages/passowrd-create.init.js"></script>
+    <script src="/assets/admin/js/passowrd-create.init.min.js"></script>
 </body>
 
 </html>
