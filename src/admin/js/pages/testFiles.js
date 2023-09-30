@@ -16,6 +16,15 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode';
 // validation-type
 // ----
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
+// ----
+// media preview
+// ----
+import FilepondPluginMediaPreview from 'filepond-plugin-media-preview';
+// ----
+// pdf preview
+// ----
+import FilepondPluginPdfPreview from 'filepond-plugin-pdf-preview';
+
 
 
 FilePond.registerPlugin(
@@ -28,7 +37,11 @@ FilePond.registerPlugin(
     // previews dropped images
     FilePondPluginImagePreview,
     // validation types
-    FilePondPluginFileValidateType
+    FilePondPluginFileValidateType,
+    // preview media
+    FilepondPluginMediaPreview,
+    // preview pdf
+    FilepondPluginPdfPreview
 );
 
 FilePond.setOptions({
@@ -40,9 +53,13 @@ FilePond.setOptions({
     labelFileTypeNotAllowed: 'Achivo no válido',
     chunkUploads: true,
     chunkSize: 1000000,
+    maxFiles: 10,
     allowMultiple: true,
-    maxFiles: 3,
-    
+    allowVideoPreview: true,
+    mediaPreviewHeight: 200,
+    allowAudioPreview: true,
+    allowPdfPreview: true,
+    pdfPreviewHeight: 200,
     server: {
         url: "/api/file",
         process: {
