@@ -93,6 +93,14 @@ $routes->group('admin', static function($routes) {
         $routes->post('delete', [CtrlCategory::class, 'deleteCategory']);
     });
 
+    $routes->group('api/files', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('load', 'CtrlApiFiles::getFileFromServer');
+        $routes->patch('process', 'CtrlApiFiles::processTempFileChunk');
+        $routes->post('process', 'CtrlApiFiles::processTempFile');
+        $routes->delete('revert', 'CtrlApiFiles::deleteFile');
+    });
+
     $routes->get('testFiles', [CtrlTestFiles::class, 'index']);
     $routes->post('testFiles', [CtrlTestFiles::class, 'saveData']);
 });
