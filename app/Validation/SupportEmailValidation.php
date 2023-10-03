@@ -54,19 +54,6 @@ class SupportEmailValidation
         return true;
     }
 
-    public function validatePhoneNumber($phoneNumber): bool
-    {
-        if (strpos($phoneNumber, "+52") === 0) {
-            if (!preg_match("/^\+52\d{10}$/", $phoneNumber)) {
-                $this->errors = [
-                    "support-phone" => "El número de teléfono ingresado es inválido. Debe tener una longitud 10 dígitos"
-                ];
-                return false;
-            }
-        }
-        return true;
-    }
-
     public function getErrors(): array
     {
         return $this->errors;

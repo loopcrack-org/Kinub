@@ -4,7 +4,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const progressName = document.querySelectorAll('.support-progress__name');
     const progressBullet = document.querySelectorAll('.support-progress__bullet');
     const fieldsetsElements = document.querySelectorAll(".support-form__fieldset");
-    const phoneInputField = document.querySelector("#support-phone"); 
+    const errorMsg = document.querySelector("#error-msg");
+    const phoneInputField = document.querySelector("#support-phone");
+    const errorMap = [
+        "El número de teléfono proporcionado no es válido",
+        "Código de país no válido",
+        "El número de teléfono es demasiado corto.", 
+        "El número de teléfono es demasiado largo", 
+        "El número de teléfono proporcionado no es válido"
+    ];
     const phoneInput = intlTelInput(phoneInputField, {
         preferredCountries: ["mx"],
         utilsScript: require('intl-tel-input/build/js/utils.js'),
@@ -52,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     };
 
+
     const configForm = {
         container: "#support-form",
         button: "#btn-submit",
@@ -61,10 +70,21 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         customViewErrors: commonCustomViewErrors,
         onFormSubmit: function (container) {
-            handleProgress(currentStep);  
-            const phoneNumber = phoneInput.getNumber(intlTelInputUtils.numberFormat.E164);
-            phoneInputField.value = phoneNumber;
-            document.querySelector("#support-form").submit();
+            handleProgress(currentStep);
+            if (phoneInputField.value.trim()) {
+                if (phoneInput.isValidNumber()) {
+                    const phoneNumber = phoneInput.getNumber(intlTelInputUtils.numberFormat.E164);
+                    phoneInputField.value = phoneNumber;
+                    document.querySelector("#support-form").submit();
+                } else {
+                    const errorCode = phoneInput.getValidationError();
+                    errorMsg.innerHTML = errorMap[errorCode];
+                    errorMsg.classList.add("support-form__error--active");
+                    prevButtons.forEach(function(elemento) {
+                        elemento.click();
+                    });
+                }
+            }
         },
     };
 
@@ -75,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isVisible) {
             container.classList.add("support-form__error--active", cls);
             container.innerHTML = message;
-            console.log("hola");
         } else {
             container.classList.remove("support-form__error--active", cls);
             container.innerHTML = "";
@@ -135,4 +154,5 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
+
 }); 
