@@ -20,13 +20,15 @@ export const serverOptions = {
 export const defaultConfig = {
   chunkUploads: true,
   chunkSize: 1000000,
-  labelFileTypeNotAllowed: "Archivo no valido",
+  labelFileTypeNotAllowed: "Archivo no válido",
   fileValidateTypeLabelExpectedTypes: `Se espera {allTypes}`,
   chunkUploads: true,
   chunkSize: 1000000,
+  allowMultiple: true,
+  maxFiles: 10,
 
   beforeRemoveFile: (item) => {
-    return item.origin === 1 ? true : confirm("Quieres eliminarlo?");
+    return item.origin === 1 ? true : confirm("¿Quieres eliminarlo?");
   },
 };
 

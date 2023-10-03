@@ -82,7 +82,10 @@ const svgPond = FilePond.create(svgInput, {
     ...serverOptions,
     process: {
       ...serverOptions.process,
-      ondata: (formData) => addData(formData, svgPond, "svg"),
+      ondata: (formData) => {
+        console.log(formData);
+        addData(formData, svgPond, "svg")
+      },
     },
   },
 });
