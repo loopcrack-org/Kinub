@@ -7,6 +7,7 @@ use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlSolution;
+use App\Controllers\CtrlTestFiles;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -91,6 +92,9 @@ $routes->group('admin', static function($routes) {
         $routes->post('edit/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('delete', [CtrlCategory::class, 'deleteCategory']);
     });
+
+    $routes->get('testFiles', [CtrlTestFiles::class, 'index']);
+    $routes->post('testFiles', [CtrlTestFiles::class, 'saveData']);
 });
 /*
  * --------------------------------------------------------------------
