@@ -1,52 +1,104 @@
 <?php
+
 namespace App\Utils;
 
 use CodeIgniter\Files\File;
+use Exception;
 
-class FileManager{
+class FileManager
+{
 
-    public static function createFolder(String $path){
-        if (!is_dir($path)) {
-            mkdir($path, 0777, true); 
+    public static function createFolder(String $path)
+    {
+
+        try {
+            if (!is_dir($path)) {
+                mkdir($path, 0777, true);
+            }
+        } catch (\Throwable $th) {
+            throw new Exception("Ha ocurrido un error al crear la carpeta");
         }
     }
 
-    public static function moveClientFileToServer(File $file, String $destPath) {
-        $file->move($destPath); 
-    }
-
-
-    public static function changeFileDirectory(String $sourcePath, String $destPath){
-        if (file_exists($sourcePath)) {
-            $file = new File($sourcePath, true); 
+    public static function moveClientFileToServer(File $file, String $destPath)
+    {
+        try {
             $file->move($destPath);
+        } catch (\Throwable $th) {
+            throw new Exception("Ha ocurrido un error al guardar el archivo del cliente en el servidor");
         }
     }
 
-    public static function mergeChunckFiles(String $filePath, String $fileData, String $fileOffset){
-        if (!file_exists($filePath)) {
-            file_put_contents($filePath, '');    
-        }
 
-        $fileOpen = fopen($filePath, 'r+');
-        fseek($fileOpen, $fileOffset);
-        fwrite($fileOpen, $fileData);
-        fclose($fileOpen);
-    }
+    public static function changeFileDirectory(String $sourcePath, String $destPath)
+    {
 
-    public static function deleteFile(String $filePath) {
-        if (file_exists($filePath)){
-            unlink($filePath); 
+        try {
+            $file = new File($sourcePath, true);
+            $file->move($destPath);
+        } catch (\Throwable $th) {
+            throw new Exception("El archivo no existe o ha ocurrido un error al moverlo");
         }
     }
 
-    public static function deleteFolder(String $folderPath){
-        if (is_dir($folderPath)) {
-            $files = glob($folderPath . '/*');
-            foreach ($files as $file) {
-                is_dir($file) ? static::deleteFolder($file) : unlink($file);
-            }    
-            rmdir($folderPath);
+    public static function mergeChunckFiles(String $filePath, String $fileData, String $fileOffset)
+    {
+
+        try {
+            if (!file_exists($filePath)) {
+                file_put_contents($filePath, '');
+            }
+
+            $fileOpen = fopen($filePath, 'r+');
+            fseek($fileOpen, $fileOffset);
+            fwrite($fileOpen, $fileData);
+            fclose($fileOpen);
+        } catch (\Throwable $th) {
+            throw new Exception("Ha ocurrido un error al procesar el archivo por partes");
+        }
+    }
+
+    public static function deleteFile(String $filePath)
+    {
+        try {
+            unlink($filePath);
+        } catch (\Throwable $th) {
+            throw new Exception("El archivo no existe o ha ocurrido un error al eliminarlo");
+        }
+    }
+
+    public static function deleteFolderWithContent(String $folderPath)
+    {
+        try {
+            if (is_dir($folderPath)) {
+                $files = glob($folderPath . '/*');
+                foreach ($files as $file) {
+                    is_dir($file) ? static::deleteFolderWithContent($file) : unlink($file);
+                }
+                rmdir($folderPath);
+            }
+        } catch (\Throwable $th) {
+            throw new Exception("Ha ocurrido un error al eliminar la carpeta con su contenido");
+        }
+    }
+
+    public static function deleteEmptyFolder(String $folderPath)
+    {
+        try {
+            if (is_dir($folderPath)) {
+                rmdir($folderPath);
+            }
+        } catch (\Throwable $th) {
+            throw new Exception("Ha ocurrido un error al eliminar la carptea");
+        }
+    }
+
+    public static function isEmptyFolder(String $folderPath)
+    {
+        try {
+            return count(glob($folderPath . "/*")) === 0;
+        } catch (\Throwable $th) {
+            throw new Exception("La dirección no corresponde a una carpeta");
         }
     }
 }
