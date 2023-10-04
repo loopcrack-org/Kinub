@@ -99,7 +99,7 @@ $routes->group('admin', static function($routes) {
         $routes->get('load', 'CtrlApiFiles::getFileFromServer');
         $routes->patch('process', 'CtrlApiFiles::processTempFileChunk');
         $routes->post('process', 'CtrlApiFiles::processTempFile');
-        $routes->delete('revert', 'CtrlApiFiles::deleteFile');
+        $routes->delete('delete', 'CtrlApiFiles::deleteFile');
     });
 
     $routes->get('testFiles', [CtrlTestFiles::class, 'index']);

@@ -65,6 +65,12 @@ class CtrlApiFiles extends BaseController
 
             FileManager::deleteFile($filePath);
 
+            $folder = dirname($filePath); 
+
+            if (FileManager::isEmptyFolder($folder)) {
+                FileManager::deleteEmptyFolder($folder); 
+            }
+
             return $this->response->setStatusCode(201);
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500);
