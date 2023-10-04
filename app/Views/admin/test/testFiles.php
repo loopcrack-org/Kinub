@@ -14,7 +14,7 @@
         <div class="container-sm">
 
             <h1 class="text-center">Test Files Form</h1>
-            
+
             <form id="form" autocomplete="off" class="needs-validation" novalidate method="POST">
                 <div class="row justify-content-center">
                     <div class="col-sm-11">
@@ -46,10 +46,21 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
-                                    
+
                                     <div class="card-body">
                                         <p class="card-text">Ingresa imagenes en formato jpg, jpeg o png</p>
-                                        <input type="file" id="images-files" name="image">
+                                        <fieldset id="images-files">
+                                            <?php if (isset($filesSaved['img'])) : ?>
+                                                <ul>
+                                                    <?php foreach ($filesSaved['img'] as $file) : ?>
+                                                        <li>
+                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
+                                                        </li>
+                                                    <?php endforeach ?>
+                                                </ul>
+                                            <?php endif ?>
+                                            <input type="file" name="image">
+                                        </fieldset>
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -67,7 +78,18 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa un ícono en formato svg</p>
-                                        <input type="file" id="svg-files" name="image">
+                                        <fieldset id="svg-files">
+                                            <?php if (isset($filesSaved['svg'])) : ?>
+                                                <ul>
+                                                    <?php foreach ($filesSaved['svg'] as $file) : ?>
+                                                        <li>
+                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
+                                                        </li>
+                                                    <?php endforeach ?>
+                                                </ul>
+                                            <?php endif ?>
+                                            <input type="file" name="svg">
+                                        </fieldset>
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -85,7 +107,18 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa videos en formato mp4</p>
-                                        <input type="file" id="video-files" name="image">
+                                        <fieldset id="video-files">
+                                            <?php if (isset($filesSaved['video'])) : ?>
+                                                <ul>
+                                                    <?php foreach ($filesSaved['video'] as $file) : ?>
+                                                        <li>
+                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
+                                                        </li>
+                                                    <?php endforeach ?>
+                                                </ul>
+                                            <?php endif ?>
+                                            <input type="file" name="video">
+                                        </fieldset>
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -104,7 +137,18 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa archivos en formato pdf</p>
-                                        <input type="file" id="document-files" name="image">
+                                        <fieldset id="document-files">
+                                            <?php if (isset($filesSaved['pdf'])) : ?>
+                                                <ul>
+                                                    <?php foreach ($filesSaved['pdf'] as $file) : ?>
+                                                        <li>
+                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
+                                                        </li>
+                                                    <?php endforeach ?>
+                                                </ul>
+                                            <?php endif ?>
+                                            <input type="file" name="pdf">
+                                        </fieldset>
                                     </div>
                                     <!-- end card body -->
                                 </div>
