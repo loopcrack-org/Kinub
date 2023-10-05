@@ -1,6 +1,18 @@
 {
   "branchNameLinter": {
-    "regex": "^((feature|bugfix|task|subtask|spike|test|epic|release|revert)\\/(KIN-[0-9]+\\/[-a-z0-9]+)|merge-conflict\\/[-a-z0-9]+-[-a-z0-9]+\\/[-a-z0-9]+)",
+    "regex": "^([a-z-]+\\/(KIN-[0-9]+\\/[-a-z0-9]+)|merge-conflict\\/[-a-z0-9]+-[-a-z0-9]+\\/[-a-z0-9]+)",
+    "prefixes": [
+      "feature",
+      "bugfix",
+      "task",
+      "subtask",
+      "spike",
+      "test",
+      "epic",
+      "release",
+      "revert",
+      "demo"
+    ],
     "suggestions": {
       "features": "feature",
       "feat": "feature",
@@ -27,7 +39,7 @@
     },
     "msgDoesNotMatchRegex": "Branch \"%s\" does not match the allowed pattern: \"%s\"",
     "separator": "/",
-    "msgBranchDisallowed": "Pushing to \"%s\" is not allowed, use git-flow.",
+    "msgBranchDisallowed": "Pushing to \"%s\" is not allowed, use the allowed pattern.",
     "msgPrefixNotAllowed": "Branch prefix \"%s\" is not allowed.",
     "msgPrefixSuggestion": "Instead of \"%s\" try \"%s\".",
     "msgseparatorRequired": "Branch \"%s\" must contain a separator \"%s\"."
