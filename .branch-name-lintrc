@@ -1,0 +1,35 @@
+{
+  "branchNameLinter": {
+    "regex": "^((feature|bugfix|task|subtask|spike|test|epic|release|revert)\\/(KIN-[0-9]+\\/[-a-z0-9]+)|merge-conflict\\/[-a-z0-9]+-[-a-z0-9]+\\/[-a-z0-9]+)",
+    "suggestions": {
+      "features": "feature",
+      "feat": "feature",
+      "bug": "bugfix",
+      "fix": "bugfix",
+      "bugs": "bugfix",
+      "tasks": "task",
+      "tk": "task",
+      "subtasks": "subtask",
+      "st": "subtask",
+      "spikes": "spike",
+      "spk": "spike",
+      "tst": "test",
+      "testing": "test",
+      "epics": "epic",
+      "ep": "epic",
+      "conflict": "merge-conflict",
+      "mc": "merge-conflict",
+      "mergec": "merge-conflict",
+      "releases": "release",
+      "rls": "release",
+      "rev": "revert",
+      "reverts": "revert"
+    },
+    "msgDoesNotMatchRegex": "Branch \"%s\" does not match the allowed pattern: \"%s\"",
+    "separator": "/",
+    "msgBranchDisallowed": "Pushing to \"%s\" is not allowed, use git-flow.",
+    "msgPrefixNotAllowed": "Branch prefix \"%s\" is not allowed.",
+    "msgPrefixSuggestion": "Instead of \"%s\" try \"%s\".",
+    "msgseparatorRequired": "Branch \"%s\" must contain a separator \"%s\"."
+  }
+}

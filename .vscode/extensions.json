@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "streetsidesoftware.code-spell-checker",
+    "naumovs.color-highlight",
+    "mikestead.dotenv",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "visualstudioexptteam.vscodeintellicode",
+    "redhat.vscode-yaml",
+    "stylelint.vscode-stylelint",
+    "anseki.vscode-color",
+    "kisstkondoros.vscode-gutter-preview",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "xdebug.php-debug",
+    "junstyle.php-cs-fixer",
+    "bmewburn.vscode-intelephense-client",
+    "mehedidracula.php-namespace-resolver",
+    "streetsidesoftware.code-spell-checker-spanish",
+    "simonsiefke.svg-preview"
+  ]
+}
