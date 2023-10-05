@@ -82,17 +82,14 @@ const svgPond = FilePond.create(svgInput, {
     ...serverOptions,
     process: {
       ...serverOptions.process,
-      ondata: (formData) => {
-        console.log(formData);
-        addData(formData, svgPond, "svg")
-      },
+      ondata: (formData) => addData(formData, svgPond, "svg"),
     },
   },
 });
 const videoPond = FilePond.create(videoInput, {
   acceptedFileTypes: ["video/mp4"],
   fileValidateTypeLabelExpectedTypes: "Selecciona mp4",
-  ...mediaOptions, 
+  ...mediaOptions,
   server: {
     ...serverOptions,
     process: {
@@ -105,7 +102,7 @@ const videoPond = FilePond.create(videoInput, {
 const pdfPond = FilePond.create(documentInput, {
   acceptedFileTypes: ["application/pdf"],
   fileValidateTypeLabelExpectedTypes: "Selecciona pdf",
-  ...pdfOptions, 
+  ...pdfOptions,
   server: {
     ...serverOptions,
     process: {

@@ -4,8 +4,6 @@ export const serverOptions = {
     url: "/process",
     method: "POST",
     onload: (response) => {
-      console.log(response);
-
       const result =
         response instanceof XMLHttpRequest
           ? JSON.parse(response.responseText)
