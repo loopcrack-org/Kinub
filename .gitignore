@@ -127,8 +127,10 @@ nb-configuration.xml
 # Visual Studio Code
 
 .vscode/
-!/.vscode/recommended-extensions.json
+!/.vscode/extensions.json
+!/.vscode/recommended-launch.json
 !/.vscode/recommended-settings.json
+!/.vscode/README.md
 
 /results/
 /phpunit*.xml

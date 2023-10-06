@@ -4,7 +4,7 @@ When creating a new branch, please ensure that you follow the naming conventions
 
 1. **Branch Format**: The general format for branches should be:
    - `prefix/JIRA-ID_descriptive-name` for standard branches.
-   - `merge-conflict/from_branch_to_branch_descriptive-name` for conflict resolution branches.
+   - `conflict/from_branch_to_branch_descriptive-name` for conflict resolution branches.
 2. **Allowed Prefixes**: The following prefixes are allowed for branches:
 
    - `feature`
@@ -17,7 +17,7 @@ When creating a new branch, please ensure that you follow the naming conventions
    - `release`
    - `revert`
    - `demo`
-   - `merge-conflict` (For conflict resolution branches only)
+   - `conflict` (For conflict resolution branches only)
 
 3. **Suggestions**: If you are unsure or make a mistake, the system might suggest a proper format:
 
