@@ -49,4 +49,5 @@ jobs:
         with:
           mode: minimum
           count: 1
+          labels: "do not merge, backend, bug, database, documentation, frontend, private, public, setup, enhancement"
         # This ensures that at least one label is applied to the PR.
