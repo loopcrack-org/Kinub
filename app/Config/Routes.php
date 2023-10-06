@@ -7,6 +7,7 @@ use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlSolution;
+use App\Controllers\CtrlUser;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -91,6 +92,14 @@ $routes->group('admin', static function($routes) {
         $routes->get('edit/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('edit/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('delete', [CtrlCategory::class, 'deleteCategory']);
+    });
+
+    $routes->group('usuarios', static function($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlUser::class, 'viewUsers']);
+        $routes->get('crear', [CtrlCategory::class, 'viewUserCreate']);
+        $routes->post('crear', [CtrlCategory::class, 'createUser']);
+        $routes->post('eliminar', [CtrlCategory::class, 'deleteUser']);
     });
 });
 /*
