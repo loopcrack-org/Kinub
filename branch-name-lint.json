@@ -1,6 +1,6 @@
 {
   "branchNameLinter": {
-    "regex": "^([a-z-]+\\/KIN-[0-9]+_[-a-z0-9]+|merge-conflict\\/[-a-z0-9]+_[-a-z0-9]+_[-a-z0-9]+)",
+    "regex": "^([a-z-]+\\/KIN-[0-9]+_[-a-z0-9]+conflict\\/[-a-z0-9]+_[-a-z0-9]+_[-a-z0-9]+)",
     "prefixes": [
       "feature",
       "bugfix",
@@ -11,7 +11,8 @@
       "epic",
       "release",
       "revert",
-      "demo"
+      "demo",
+      "conflict"
     ],
     "suggestions": {
       "features": "feature",
@@ -30,8 +31,9 @@
       "epics": "epic",
       "ep": "epic",
       "conflict": "merge-conflict",
-      "mc": "merge-conflict",
-      "mergec": "merge-conflict",
+      "merge-conflict": "conflict",
+      "mc": "conflict",
+      "mergec": "conflict",
       "releases": "release",
       "rls": "release",
       "rev": "revert",
