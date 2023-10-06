@@ -1,5 +1,5 @@
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/pagination.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <div class="pagination-container">

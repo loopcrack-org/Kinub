@@ -72,6 +72,6 @@
 
 </main>
 
-<?= $this->include("public/templates/pagination-nav");?>
+<?= $this->include("public/templates/pagination");?>
 
 <?php $this->endSection('content');?>
