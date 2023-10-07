@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="name" id="name" value="<?= $category["name"] ?? "";?>" placeholder="Ingrese el título" required>
+                    <input type="text" class="form-control" name="name" id="name" value="<?= $category["categoryName"] ?? "";?>" placeholder="Ingrese el título" required>
                 </div>
             </div>
         </div>

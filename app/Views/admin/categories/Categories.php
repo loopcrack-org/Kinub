@@ -23,7 +23,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Categorías</h5>
                         <div class="mt-2 mt-md-0 float-md-right">
-                            <a href="/admin/categorias/create" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
+                            <a href="/admin/categorias/crear" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
                                 <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Categoría
                             </a>
                         </div>
@@ -50,16 +50,18 @@
                             <tbody>
                                 <?php foreach ($categories as $category) { ?>
                                     <tr>
-                                        <td><?= $category["id"] ?></td>
+                                        <td><?= $category["categoryId"] ?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p><?= $category["name"] ?></p>
+                                                <p><?= $category["categoryName"] ?></p>
                                             </div>
                                         </td>
-                                        <td><?= $category["icon"] . ".jpeg" ?></td>
+                                        <td><?= $category["categoryIconId"] . ".jpeg" ?></td>
                                         <td>
                                             <div class="d-flex justify-content-between">
-                                                <a href="/admin/categorias/edit/<?= $category["id"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+
+                                                <a href="/admin/categorias/editar/<?= $category["categoryId"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
@@ -100,7 +102,7 @@
                                 </div>
                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                                    <form action="/admin/categorias/delete" method="post">
+                                    <form action="/admin/categorias/borrar" method="post">
                                         <button type="submit" class="btn w-sm btn-primary" id="delete-record">¡Sí, bórralo!</button>
                                     </form>
                                 </div>
