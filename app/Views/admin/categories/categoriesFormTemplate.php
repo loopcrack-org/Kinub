@@ -42,7 +42,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="icon">
+                <input type="file" class="filepond" name="icon" required>
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +60,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="image">
+                <input type="file" class="filepond" name="image" required>
             </div>
             <!-- end card body -->
         </div>
