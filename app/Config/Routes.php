@@ -94,9 +94,9 @@ $routes->group('admin', static function($routes) {
     $routes->group('usuarios', static function($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlUser::class, 'viewUsers']);
-        $routes->get('crear', [CtrlCategory::class, 'viewUserCreate']);
-        $routes->post('crear', [CtrlCategory::class, 'createUser']);
-        $routes->post('eliminar', [CtrlCategory::class, 'deleteUser']);
+        $routes->get('crear', [CtrlUser::class, 'viewUserCreate']);
+        $routes->post('crear', [CtrlUser::class, 'createUser']);
+        $routes->post('eliminar', [CtrlUser::class, 'deleteUser']);
     });
 });
 /*
