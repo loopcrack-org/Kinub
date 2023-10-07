@@ -24,7 +24,7 @@
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Usuarios</h5>
                         <div class="mt-2 mt-md-0 float-md-right">
                             <a href="/admin/usuarios/crear" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
-                                <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Usuarios
+                                <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Usuario
                             </a>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Icono</th>
+                                    <th>Email</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
