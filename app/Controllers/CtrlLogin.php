@@ -76,7 +76,7 @@ class CtrlLogin extends BaseController
                 return redirect()->back()->with("errors", $errors);
             }
         }
-        return redirect()->to("login/password/reset")->with("response", $response);
+        return redirect()->to("/password_reset")->with("response", $response);
 
     }
     public function login() {

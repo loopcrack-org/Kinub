@@ -65,7 +65,7 @@
                                         <!-- password -->
                                         <div class="mb-3">
                                             <div class="float-end">
-                                                <a href="/login/password/reset" class="text-muted">Olvidaste tu contraseña?</a>
+                                                <a href="/password_reset" class="text-muted">Olvidaste tu contraseña?</a>
                                             </div>
                                             <label class="form-label" for="password-input">Contraseña</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">

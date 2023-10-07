@@ -20,8 +20,12 @@ const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 const avif = require("gulp-avif");
 
+//BrowserSync
+const browserSync = require("browser-sync").create();
+require("dotenv").config();
+
 // mode
-const modes = ['public', 'common', 'admin'];
+const modes = ["public", "common", "admin"];
 
 // ------------------------------------------------------------------- //
 // PATHS
@@ -42,16 +46,33 @@ function getPaths(mode = "public") {
 }
 // ------------------------------------------------------------------- //
 
+function serve() {
+  browserSync.init({
+    proxy: process.env.virtualHost,
+    port: 8080,
+    notify: true,
+  });
+
+  browserSync
+    .watch([
+      "public/**/*.*",
+      "!public/**/css/*.css", //Ignore CSS changes since we are using browserSync.stream() for CSS
+    ])
+    .on("change", browserSync.reload);
+
+  browserSync.watch(["app/Views/**/*.*"]).on("change", browserSync.reload);
+}
+
 // ------------------------------------------------------------------- //
 // CSS
 async function compileSass(srcPath, destPath, production = false) {
-  if(production) {
+  if (production) {
     await del(destPath);
     return src(srcPath)
-    .pipe(sass())
-    .pipe(postcss([autoprefixer(), cssnano()]))
-    .pipe(rename({ dirname: ".", suffix: ".min" }))
-    .pipe(dest(destPath));
+      .pipe(sass())
+      .pipe(postcss([autoprefixer(), cssnano()]))
+      .pipe(rename({ dirname: ".", suffix: ".min" }))
+      .pipe(dest(destPath));
   } else {
     return src(srcPath)
       .pipe(plumber())
@@ -60,7 +81,8 @@ async function compileSass(srcPath, destPath, production = false) {
       .pipe(postcss([autoprefixer(), cssnano()]))
       .pipe(rename({ dirname: ".", suffix: ".min" }))
       .pipe(sourcemaps.write("."))
-      .pipe(dest(destPath));
+      .pipe(dest(destPath))
+      .pipe(browserSync.stream());
   }
 }
 // ------------------------------------------------------------------- //
@@ -71,23 +93,23 @@ async function compileSass(srcPath, destPath, production = false) {
 async function javascript(srcPath, destPath, production = false) {
   const webpackConfig = {
     mode: production ? "production" : "development",
-    output: {filename: '[name].min.js'}
-  }
-  if(production) {
+    output: { filename: "[name].min.js" },
+  };
+  if (production) {
     await del(destPath);
-      return src(srcPath)
-        .pipe(named())
-        .pipe(webpack(webpackConfig))
-        .pipe(rename({ dirname: "." }))
-        .pipe(dest(destPath));  
-    } else {
-      webpackConfig["devtool"] = "source-map";
-      return src(srcPath)
-        .pipe(plumber())
-        .pipe(named())
-        .pipe(webpack(webpackConfig))
-        .pipe(rename({ dirname: "." }))
-        .pipe(dest(destPath));  
+    return src(srcPath)
+      .pipe(named())
+      .pipe(webpack(webpackConfig))
+      .pipe(rename({ dirname: "." }))
+      .pipe(dest(destPath));
+  } else {
+    webpackConfig["devtool"] = "source-map";
+    return src(srcPath)
+      .pipe(plumber())
+      .pipe(named())
+      .pipe(webpack(webpackConfig))
+      .pipe(rename({ dirname: "." }))
+      .pipe(dest(destPath));
   }
 }
 // ------------------------------------------------------------------- //
@@ -123,7 +145,7 @@ async function clean(filepath = "", dist) {
 function watchFiles(input, output) {
   // CSS
   watch(input.sass).on("change", function (path, stats) {
-    compileSass(path, output.css);
+    compileSass(input.sass, output.css);
     console.log(`Changed ${path}`);
   });
   watch(input.sass).on("add", function (path, stats) {
@@ -151,28 +173,33 @@ function watchFiles(input, output) {
 }
 
 function runMode(mode, production = false) {
-  const {input, output} = getPaths(mode);
-  
+  const { input, output } = getPaths(mode);
+
   return async function devTasks() {
     await compileSass(input.sass, output.css, production);
     await javascript(input.js, output.js, production);
-    if(!production) watchFiles(input, output);
-  }
+    if (!production) watchFiles(input, output);
+  };
 }
 
 function compileImages() {
-  const {input, output} = getPaths();
+  const { input, output } = getPaths();
   return async function images() {
     await minifyImage(input.images, output.images);
     await convertToWebp(input.images, output.images);
     await convertToAvif(input.images, output.images);
-  }
+  };
 }
 
-
-task('dev:public', runMode('public'));
-task('dev:common', runMode('common'));
-task('dev:admin', runMode('admin'));
-task('dev:all', parallel(modes.map( mode => runMode(mode) )));
-task('build', parallel(modes.map( mode => runMode(mode, true) )));
-task('images', compileImages());
+task("dev:public", runMode(serve, "public"));
+task("dev:common", runMode(serve, "common"));
+task("dev:admin", runMode(serve, "admin"));
+task(
+  "dev:all",
+  parallel(
+    serve,
+    modes.map((mode) => runMode(mode))
+  )
+);
+task("build", parallel(modes.map((mode) => runMode(mode, true))));
+task("images", compileImages());

@@ -31,7 +31,7 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <h6 class="dropdown-header">Bienvenido</h6>
-                        <form action="/login/logout" method="post">
+                        <form action="/logout" method="post">
                             <button class="dropdown-item" type="submit"><i class="mdi mdi-logout text-muted fs-16 align-middle me-1"></i> <span class="align-middle" data-key="t-logout">Cerrar Sesión</span></button>
                         </form>
                     </div>
