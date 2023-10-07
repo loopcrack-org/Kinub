@@ -89,7 +89,7 @@ class FileManager
                 rmdir($folderPath);
             }
         } catch (\Throwable $th) {
-            throw new Exception("Ha ocurrido un error al eliminar la carptea");
+            throw new Exception("Ha ocurrido un error al eliminar la carpeta");
         }
     }
 
