@@ -8,6 +8,6 @@ class PublicSectionModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'home_section';
-    protected $primaryKey       = 'id';
-    protected $allowedFields    = ["information", "imageName"];
+    protected $primaryKey       = 'homePageId';
+    protected $allowedFields    = ["aboutUsText", "aboutUsImageId", "aboutUsVideoId"];
 }

@@ -9,19 +9,17 @@ class CategorySeeder extends Seeder
     {
         $data = [
             [
-                "name" => "Software",
-                "image" => md5(uniqid(rand(), true)),
-                "icon" => md5(uniqid(rand(), true)),
+                "categoryName" => "Software",
+                "categoryImageId" => 1,
+                "categoryIconId" => 2,
             ],
             [
-                "name" => "Telemetría",
-                "image" => md5(uniqid(rand(), true)),
-                "icon" => md5(uniqid(rand(), true)),
+                "categoryName" => "Telemetría",
+                "categoryImageId" => 1,
+                "categoryIconId" => 2,
             ]
         ];
 
-
-        // Using Query Builder
         $this->db->table("categories")->insertBatch($data);
     }
 }

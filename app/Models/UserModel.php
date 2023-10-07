@@ -7,19 +7,19 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
     protected $table = 'users';
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'userId';
     protected $useAutoIncrement = true;
     protected $returnType = "array";
     protected $useSoftDeletes = false;
     protected $protectFields = true;
     protected $allowedFields = [
-        "name",
-        "lastName",
-        "email",
-        "password",
-        "token",
-        "confirm",
-        "admin",
+        "userFirstName",
+        "userLastName",
+        "userEmail",
+        "userPassword",
+        "userToken",
+        "confirmed",
+        "isAdmin"
     ];
 
     // Dates
@@ -34,11 +34,11 @@ class UserModel extends Model
 
     protected function hashPassword(array $data)
     {
-        if (!isset($data['data']['password'])) {
+        if (!isset($data['data']['userPassword'])) {
             return $data;
         }
 
-        $data['data']['password'] = password_hash($data['data']['password'], PASSWORD_BCRYPT);
+        $data['data']['userPassword'] = password_hash($data['data']['userPassword'], PASSWORD_BCRYPT);
 
         return $data;
     }

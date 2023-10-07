@@ -24,7 +24,7 @@ class CtrlLogin extends BaseController
         try {
             $changePasswordValidation = new ChangePasswordValidation();
             $userModel = new UserModel(); 
-            $user = $userModel->where("token", $token)->first(); 
+            $user = $userModel->where("userToken", $token)->first(); 
             $changePasswordValidation->existUserWithToken($user);           
             
         } catch (\Throwable $th) {
@@ -49,13 +49,13 @@ class CtrlLogin extends BaseController
         try {
             if(!$changePasswordValidation->validateInputs($data)) throw new Exception();
             $userModel = new UserModel();
-            $user = $userModel->where("token", $token)->first();
+            $user = $userModel->where("userToken", $token)->first();
             
             $changePasswordValidation->existUserWithToken($user);
 
-            $result = $userModel->update($user["id"], [
-                "token" => null,
-                "password" =>$data["password"]
+            $result = $userModel->update($user["userId"], [
+                "userToken" => null,
+                "userPassword" =>$data["password"]
             ]);
             if($result) {
                 $response = [
@@ -89,12 +89,12 @@ class CtrlLogin extends BaseController
 
         try {
             if(!$loginValidation->validateInputs($data)) throw new Exception();
-            $user = (new UserModel())->where("email", $email)->first();
+            $user = (new UserModel())->where("userEmail", $email)->first();
             $loginValidation->validateCredentials($user, $password);
             session()->set("user", [
-                "name" => $user["name"] . " " . $user["lastName"],
-                "email" => $user["email"],
-                "admin" => $user["admin"],
+                "name" => $user["userFirstName"] . " " . $user["userLastName"],
+                "email" => $user["userEmail"],
+                "admin" => $user["isAdmin"],
             ]);
             session()->set("is_logged", true);
         } catch (\Throwable $th) {
