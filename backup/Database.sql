@@ -42,7 +42,7 @@ UNLOCK TABLES;
 CREATE TABLE IF NOT EXISTS `Kinub`.`emails` (
   `emailId` INT NOT NULL AUTO_INCREMENT,
   `emailTypeId` INT NOT NULL,
-  `emailContent` VARCHAR(255) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
+  `emailContent` TEXT CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
   PRIMARY KEY (`emailId`),
   INDEX `email_type_FK` (`emailTypeId` ASC) VISIBLE,
   CONSTRAINT `email_type_FK`
