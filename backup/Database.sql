@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `Kinub`.`users` (
   `userFirstName` VARCHAR(60) NOT NULL,
   `userLastName` VARCHAR(60) NOT NULL,
   `userEmail` VARCHAR(40) NOT NULL,
-  `userPassword` VARCHAR(60) NOT NULL,
+  `userPassword` VARCHAR(60),
   `userToken` VARCHAR(13) NULL DEFAULT NULL,
   `confirmed` TINYINT NULL DEFAULT NULL,
   `isAdmin` TINYINT NULL DEFAULT NULL,
