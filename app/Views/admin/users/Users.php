@@ -43,20 +43,24 @@
                             <tbody>
                                 <?php foreach ($users as $user) { ?>
                                     <tr>
-                                        <td><?= $user["userId"] ?></td>
+                                        <td><?= $user["userId"];?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p><?= $user["userFirstName"] . $user["userLastName"];  ?></p>
+                                                <p class="text-wrap"><?= $user["userFirstName"] . $user["userLastName"];?></p>
                                             </div>
                                         </td>
-                                        <td><?= $user["userEmail"]; ?></td>
+                                        <td>
+                                            <div class="d-flex align-items-center fw-medium">
+                                                <p class="text-wrap"><?= $user["userEmail"];?></p>
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 100%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>
-                                <?php } ?>
+                                <?php };?>
                             </tbody>
                             <tfoot>
                                 <tr>
