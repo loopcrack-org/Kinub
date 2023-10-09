@@ -51,6 +51,9 @@ function serve() {
     proxy: process.env.virtualHost,
     port: 8080,
     notify: true,
+    serveStaticOptions: {
+      cacheControl: false,
+    },
   });
 
   browserSync
@@ -191,9 +194,10 @@ function compileImages() {
   };
 }
 
-task("dev:public", runMode(serve, "public"));
-task("dev:common", runMode(serve, "common"));
-task("dev:admin", runMode(serve, "admin"));
+modes.forEach((mode) => {
+  task(`dev:${mode}`, parallel(serve, runMode(mode)));
+});
+
 task(
   "dev:all",
   parallel(
