@@ -73,8 +73,8 @@
                     <label for="support-phone" class="support-form__label">Teléfono</label>
 
                     <?= isset($errors['support-phone']) ? '<p class="support-form__error support-form__error--active">' . $errors['support-phone'] . '</p>' : '<p class="support-form__error" id="errors-2"></p>' ?>
-                    <span id="error-msg" class="support-form__error"></span>
-                    <input id="support-phone" name="support-phone" type="tel" class="support-form__input support-form__input--tel required" data-errors-id="errors-2" value="<?php echo old("support-phone") ?>">
+
+                    <input id="support-phone" name="support-phone" type="tel" class="support-form__input support-form__input--tel async" data-async-key="intlTelInput" data-errors-id="errors-2" value="<?php echo old("support-phone") ?>">
                 </div>
 
                 <div class="support-form__field">
@@ -113,7 +113,7 @@
                 </div>
             </fieldset>
 
-            <fieldset class="support-form__fieldset" data-step="3">
+            <fieldset class="support-form__fieldset support-form__step" data-step="3">
                 <legend class="support-form__legend">Detalles del Problema</legend>
 
                 <div class="support-form__field">
@@ -141,7 +141,7 @@
                 <div class="support-form__btns">
                     <span class="support-form__btn prev-step">Anterior</span>
 
-                    <input class="support-form__submit" id="btn-submit" type="submit" value="Enviar">
+                    <button class="support-form__submit" id="btn-submit" type="submit" value="Enviar"> Enviar </button>                  
                 </div>
             </fieldset>
         </form>
