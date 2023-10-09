@@ -23,281 +23,175 @@ USE `Kinub` ;
 -- -----------------------------------------------------
 -- Table `Kinub`.`email_types`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`email_types` (
-  `emailTypeId` INT NOT NULL AUTO_INCREMENT,
-  `emailTypeName` VARCHAR(45) CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
-  PRIMARY KEY (`emailTypeId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
-
-LOCK TABLES `email_types` WRITE;
-INSERT INTO `email_types` VALUES (1,'contacto'),(2,'soporte tecnico'),(3,'info producto');
-UNLOCK TABLES;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`emails`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`emails` (
-  `emailId` INT NOT NULL AUTO_INCREMENT,
-  `emailTypeId` INT NOT NULL,
-  `emailContent` TEXT CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci' NOT NULL,
-  PRIMARY KEY (`emailId`),
-  INDEX `email_type_FK` (`emailTypeId` ASC) VISIBLE,
-  CONSTRAINT `email_type_FK`
-    FOREIGN KEY (`emailTypeId`)
-    REFERENCES `Kinub`.`email_types` (`emailTypeId`)
-    ON DELETE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`users`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`users` (
-  `userId` INT NOT NULL AUTO_INCREMENT,
-  `userFirstName` VARCHAR(60) NOT NULL,
-  `userLastName` VARCHAR(60) NOT NULL,
-  `userEmail` VARCHAR(40) NOT NULL,
-  `userPassword` VARCHAR(60),
-  `userToken` VARCHAR(13) NULL DEFAULT NULL,
-  `confirmed` TINYINT NULL DEFAULT NULL,
-  `isAdmin` TINYINT NULL DEFAULT NULL,
-  PRIMARY KEY (`userId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`files`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`files` (
-  `fileId` INT NOT NULL AUTO_INCREMENT,
-  `fileRoute` VARCHAR(255) NOT NULL,
-  `uuid` VARCHAR(36) NOT NULL,
-  `fileName` VARCHAR(45) NOT NULL,
-  `fileDirectoryRoute` VARCHAR(150) NOT NULL,
-  PRIMARY KEY (`fileId`))
-ENGINE = InnoDB;
-
-LOCK TABLES `files` WRITE;
-INSERT INTO `files` VALUES 
-(1,'/assets/images/auth-one-bg.jpg','79c4387d-c1cb-4e6f-b418-8c391d852e2c','auth-one-bg.jpg','/assets/images/'),
-(2,'/assets/images/drop.svg','9d7b76e0-a31f-4e0f-9ac6-b71bc35f2ed4','drop.svg','/assets/images/'); 
-UNLOCK TABLES;
-
--- -----------------------------------------------------
--- Table `Kinub`.`categories`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`categories` (
-  `categoryId` INT NOT NULL AUTO_INCREMENT,
-  `categoryName` VARCHAR(60) NOT NULL,
-  `categoryImageId` INT NOT NULL,
-  `categoryIconId` INT NOT NULL,
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `categoryId` int NOT NULL AUTO_INCREMENT,
+  `categoryName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `categoryImageId` int NOT NULL,
+  `categoryIconId` int NOT NULL,
   PRIMARY KEY (`categoryId`),
-  INDEX `icon_FK_idx` (`categoryIconId` ASC) VISIBLE,
-  INDEX `image_FK_idx` (`categoryImageId` ASC) VISIBLE,
-  CONSTRAINT `category_icon_FK`
-    FOREIGN KEY (`categoryIconId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `category_image_FK`
-    FOREIGN KEY (`categoryImageId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
+  KEY `icon_FK_idx` (`categoryIconId`),
+  KEY `image_FK_idx` (`categoryImageId`),
+  CONSTRAINT `category_icon_FK` FOREIGN KEY (`categoryIconId`) REFERENCES `files` (`fileId`),
+  CONSTRAINT `category_image_FK` FOREIGN KEY (`categoryImageId`) REFERENCES `files` (`fileId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
-
--- -----------------------------------------------------
--- Table `Kinub`.`category_tags`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`category_tags` (
-  `categoryTagId` INT NOT NULL AUTO_INCREMENT,
-  `categoryTagName` VARCHAR(60) NOT NULL,
-  `categoryId` INT NOT NULL,
+DROP TABLE IF EXISTS `category_tags`;
+CREATE TABLE `category_tags` (
+  `categoryTagId` int NOT NULL AUTO_INCREMENT,
+  `categoryTagName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `categoryId` int NOT NULL,
   PRIMARY KEY (`categoryTagId`),
-  INDEX `category_FK` (`categoryId` ASC) VISIBLE,
-  CONSTRAINT `category_FK`
-    FOREIGN KEY (`categoryId`)
-    REFERENCES `Kinub`.`categories` (`categoryId`)
-    ON DELETE CASCADE)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_unicode_ci;
+  KEY `category_FK` (`categoryId`),
+  CONSTRAINT `category_FK` FOREIGN KEY (`categoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
-
--- -----------------------------------------------------
--- Table `Kinub`.`products`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`products` (
-  `productId` INT NOT NULL AUTO_INCREMENT,
-  `productName` VARCHAR(60) NOT NULL,
-  `productModel` VARCHAR(60) NOT NULL,
-  `productDescription` VARCHAR(255) NOT NULL,
-  `productTechnicalInfo` VARCHAR(255) NOT NULL,
-  `productDemoVideoId` INT NOT NULL,
-  `productCategoryId` INT NOT NULL,
-  PRIMARY KEY (`productId`),
-  INDEX `product_category_FK_idx` (`productCategoryId` ASC) VISIBLE,
-  INDEX `demo_video_FK_idx` (`productDemoVideoId` ASC) VISIBLE,
-  CONSTRAINT `product_category_FK`
-    FOREIGN KEY (`productCategoryId`)
-    REFERENCES `Kinub`.`categories` (`categoryId`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `demo_video_FK`
-    FOREIGN KEY (`productDemoVideoId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`product_files`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`product_files` (
-  `productsId` INT NOT NULL,
-  `filesId` INT NOT NULL,
-  `fileType` ENUM('image', 'video', 'product certificate', 'datasheet', 'brochure', 'user manual') NOT NULL,
-  `pfId` INT NOT NULL AUTO_INCREMENT,
-  INDEX `fk_products-files_products1_idx` (`productsId` ASC) VISIBLE,
-  INDEX `fk_products-files_files1_idx` (`filesId` ASC) VISIBLE,
-  PRIMARY KEY (`pfId`),
-  CONSTRAINT `product_file_FK`
-    FOREIGN KEY (`productsId`)
-    REFERENCES `Kinub`.`products` (`productId`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `file_FK`
-    FOREIGN KEY (`filesId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`products-category_tags`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`products-category_tags` (
-  `products_id` INT NOT NULL,
-  `tags_id` INT NOT NULL,
-  `pfId` INT NOT NULL AUTO_INCREMENT,
-  INDEX `fk_products-tags_products1_idx` (`products_id` ASC) VISIBLE,
-  INDEX `fk_products-tags_tags1_idx` (`tags_id` ASC) VISIBLE,
-  PRIMARY KEY (`pfId`),
-  CONSTRAINT `product_Id`
-    FOREIGN KEY (`products_id`)
-    REFERENCES `Kinub`.`products` (`productId`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `tag_id`
-    FOREIGN KEY (`tags_id`)
-    REFERENCES `Kinub`.`category_tags` (`categoryTagId`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`measurement_solutions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`measurement_solutions` (
-  `msId` INT NOT NULL AUTO_INCREMENT,
-  `msName` VARCHAR(45) NOT NULL,
-  `msIconId` INT NOT NULL,
-  `msImageId` INT NOT NULL,
-  `msDescription` VARCHAR(120) NOT NULL,
-  PRIMARY KEY (`msId`),
-  INDEX `measurement_solution_icon_FK_idx` (`msIconId` ASC) VISIBLE,
-  INDEX `measurement_solution_image_FK_idx` (`msImageId` ASC) VISIBLE,
-  CONSTRAINT `measurement_solution_icon_FK`
-    FOREIGN KEY (`msIconId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `measurement_solution_image_FK`
-    FOREIGN KEY (`msImageId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`home_page`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`home_page` (
-  `homePageId` INT NOT NULL,
-  `aboutUsText` VARCHAR(255) NOT NULL,
-  `aboutUsImageId` INT NOT NULL,
-  `aboutUsVideoId` INT NOT NULL,
-  PRIMARY KEY (`homePageId`),
-  INDEX `about_us_image_FK_idx` (`aboutUsImageId` ASC) VISIBLE,
-  INDEX `about_us_video_FK_idx` (`aboutUsVideoId` ASC) VISIBLE,
-  CONSTRAINT `about_us_image_FK`
-    FOREIGN KEY (`aboutUsImageId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION,
-  CONSTRAINT `about_us_video_FK`
-    FOREIGN KEY (`aboutUsVideoId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `Kinub`.`certificates`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`certificates` (
-  `certificateId` INT NOT NULL AUTO_INCREMENT,
-  `certificatefileName` VARCHAR(60) NOT NULL,
-  `certificatePreviewId` INT NOT NULL,
-  `certificatefileId` INT NOT NULL,
+DROP TABLE IF EXISTS `certificates`;
+CREATE TABLE `certificates` (
+  `certificateId` int NOT NULL AUTO_INCREMENT,
+  `certificatefileName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `certificatePreviewId` int NOT NULL,
+  `certificatefileId` int NOT NULL,
   PRIMARY KEY (`certificateId`),
-  INDEX `certificate_file_FK_idx` (`certificatefileId` ASC) VISIBLE,
-  INDEX `certificate_preview_FK_idx` (`certificatePreviewId` ASC) VISIBLE,
-  CONSTRAINT `certificate_file_FK`
-    FOREIGN KEY (`certificatefileId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `certificate_preview_FK`
-    FOREIGN KEY (`certificatePreviewId`)
-    REFERENCES `Kinub`.`files` (`fileId`)
-    ON DELETE CASCADE
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+  KEY `certificate_file_FK_idx` (`certificatefileId`),
+  KEY `certificate_preview_FK_idx` (`certificatePreviewId`),
+  CONSTRAINT `certificate_file_FK` FOREIGN KEY (`certificatefileId`) REFERENCES `files` (`fileId`),
+  CONSTRAINT `certificate_preview_FK` FOREIGN KEY (`certificatePreviewId`) REFERENCES `files` (`fileId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
+DROP TABLE IF EXISTS `email_types`;
+CREATE TABLE `email_types` (
+  `emailTypeId` int NOT NULL AUTO_INCREMENT,
+  `emailTypeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`emailTypeId`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
 
--- -----------------------------------------------------
--- Table `Kinub`.`product_tags`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Kinub`.`product_tags` (
-  `productTagId` INT NOT NULL AUTO_INCREMENT,
-  `productTagName` VARCHAR(45) NOT NULL,
-  `producTagId` INT NOT NULL,
+DROP TABLE IF EXISTS `emails`;
+CREATE TABLE `emails` (
+  `emailId` int NOT NULL AUTO_INCREMENT,
+  `emailTypeId` int NOT NULL,
+  `emailContent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`emailId`),
+  KEY `email_type_FK` (`emailTypeId`),
+  CONSTRAINT `email_type_FK` FOREIGN KEY (`emailTypeId`) REFERENCES `email_types` (`emailTypeId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `files`;
+CREATE TABLE `files` (
+  `fileId` int NOT NULL AUTO_INCREMENT,
+  `fileRoute` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fileName` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fileDirectoryRoute` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`fileId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `home_page`;
+CREATE TABLE `home_page` (
+  `homePageId` int NOT NULL,
+  `aboutUsText` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `aboutUsImageId` int NOT NULL,
+  `aboutUsVideoId` int NOT NULL,
+  PRIMARY KEY (`homePageId`),
+  KEY `about_us_image_FK_idx` (`aboutUsImageId`),
+  KEY `about_us_video_FK_idx` (`aboutUsVideoId`),
+  CONSTRAINT `about_us_image_FK` FOREIGN KEY (`aboutUsImageId`) REFERENCES `files` (`fileId`) ON DELETE CASCADE,
+  CONSTRAINT `about_us_video_FK` FOREIGN KEY (`aboutUsVideoId`) REFERENCES `files` (`fileId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `measurement_solutions`;
+CREATE TABLE `measurement_solutions` (
+  `msId` int NOT NULL AUTO_INCREMENT,
+  `msName` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `msIconId` int NOT NULL,
+  `msImageId` int NOT NULL,
+  `msDescription` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`msId`),
+  KEY `measurement_solution_icon_FK_idx` (`msIconId`),
+  KEY `measurement_solution_image_FK_idx` (`msImageId`),
+  CONSTRAINT `measurement_solution_icon_FK` FOREIGN KEY (`msIconId`) REFERENCES `files` (`fileId`),
+  CONSTRAINT `measurement_solution_image_FK` FOREIGN KEY (`msImageId`) REFERENCES `files` (`fileId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `product_files`;
+CREATE TABLE `product_files` (
+  `productsId` int NOT NULL,
+  `filesId` int NOT NULL,
+  `fileType` enum('image','video','product certificate','datasheet','brochure','user manual') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pfId` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`pfId`),
+  KEY `fk_products-files_products1_idx` (`productsId`),
+  KEY `fk_products-files_files1_idx` (`filesId`),
+  CONSTRAINT `file_FK` FOREIGN KEY (`filesId`) REFERENCES `files` (`fileId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `product_file_FK` FOREIGN KEY (`productsId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `product_tags`;
+CREATE TABLE `product_tags` (
+  `productTagId` int NOT NULL AUTO_INCREMENT,
+  `productTagName` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `producTagId` int NOT NULL,
   PRIMARY KEY (`productTagId`),
-  INDEX `product_FK_idx` (`producTagId` ASC) VISIBLE,
-  CONSTRAINT `product_tag_FK`
-    FOREIGN KEY (`producTagId`)
-    REFERENCES `Kinub`.`products` (`productId`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+  KEY `product_FK_idx` (`producTagId`),
+  CONSTRAINT `product_tag_FK` FOREIGN KEY (`producTagId`) REFERENCES `products` (`productId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `products`;
+CREATE TABLE `products` (
+  `productId` int NOT NULL AUTO_INCREMENT,
+  `productName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productModel` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productDescription` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productTechnicalInfo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productDemoVideoId` int NOT NULL,
+  `productCategoryId` int NOT NULL,
+  PRIMARY KEY (`productId`),
+  KEY `product_category_FK_idx` (`productCategoryId`),
+  KEY `demo_video_FK_idx` (`productDemoVideoId`),
+  CONSTRAINT `demo_video_FK` FOREIGN KEY (`productDemoVideoId`) REFERENCES `files` (`fileId`),
+  CONSTRAINT `product_category_FK` FOREIGN KEY (`productCategoryId`) REFERENCES `categories` (`categoryId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `products-category_tags`;
+CREATE TABLE `products-category_tags` (
+  `products_id` int NOT NULL,
+  `tags_id` int NOT NULL,
+  `pfId` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`pfId`),
+  KEY `fk_products-tags_products1_idx` (`products_id`),
+  KEY `fk_products-tags_tags1_idx` (`tags_id`),
+  CONSTRAINT `product_Id` FOREIGN KEY (`products_id`) REFERENCES `products` (`productId`) ON DELETE CASCADE,
+  CONSTRAINT `tag_id` FOREIGN KEY (`tags_id`) REFERENCES `category_tags` (`categoryTagId`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `userId` int NOT NULL AUTO_INCREMENT,
+  `userFirstName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userLastName` varchar(60) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userEmail` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userPassword` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `userToken` varchar(13) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `confirmed` tinyint DEFAULT NULL,
+  `isAdmin` tinyint DEFAULT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;;
+
+INSERT INTO `email_types` (`emailTypeId`, `emailTypeName`) VALUES
+(1, 'contacto'),
+(2, 'soporte tecnico'),
+(3, 'info producto');
+
+INSERT INTO `files` (`fileId`, `fileRoute`, `uuid`, `fileName`, `fileDirectoryRoute`) VALUES
+(1, '/assets/images/auth-one-bg.jpg', '79c4387d-c1cb-4e6f-b418-8c391d852e2c', 'auth-one-bg.jpg', '/assets/images/'),
+(2, '/assets/images/drop.svg', '9d7b76e0-a31f-4e0f-9ac6-b71bc35f2ed4', 'drop.svg', '/assets/images/');
 
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
