@@ -11,94 +11,98 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
+<header class="header-category" style="background-image: url('assets/images/auth-one-bg.jpg');">
+    <div class="header-category__mask"></div>
+    <h1 class="header-category__title">Categoría Seleccionada</h1>
 
-<div class="filter">
-    <input 
-        class="filter__attribute"
-        type="text" 
-        placeholder="Escriba el nombre del producto"
-    >
+    <div class="filter header-category__filter">
+        <input 
+            class="filter__attribute"
+            type="text" 
+            placeholder="Escriba el nombre del producto"
+        >
 
-    <div class="multiple-options-select" data-placeholder="Seleccionar Categorías">
-        <div class="select-btn">
-            <span class="select-btn__btn-text"></span>
-            <span class="select-btn__icon">
-                <img class="select-btn__icon-img" src="assets/images/arrow-down.svg" alt="select icon">
-            </span>
+        <div class="multiple-options-select" data-placeholder="Seleccionar Categorías">
+            <div class="select-btn">
+                <span class="select-btn__btn-text"></span>
+                <span class="select-btn__icon">
+                    <img class="select-btn__icon-img" src="assets/images/arrow-down.svg" alt="select icon">
+                </span>
+            </div>
+
+            <ul class="select-list">
+                <li class="select-list__option">
+                    <input 
+                        class="select-list__checkbox"
+                        type="checkbox" 
+                        name=""
+                        value=""
+                    >
+                    <span class="select-list__text">Ejemplo de opción</span>
+                </li>
+                <li class="select-list__option">
+                    <input 
+                        class="select-list__checkbox"
+                        type="checkbox" 
+                        name=""
+                        value=""
+                    >
+                    <span class="select-list__text">Ejemplo de opción</span>
+                </li>
+                <li class="select-list__option">
+                    <input 
+                        class="select-list__checkbox"
+                        type="checkbox" 
+                        name=""
+                        value=""
+                    >
+                    <span class="select-list__text">Ejemplo de opción</span>
+                </li>
+            </ul>
         </div>
 
-        <ul class="select-list">
-            <li class="select-list__option">
-                <input 
-                    class="select-list__checkbox"
-                    type="checkbox" 
-                    name=""
-                    value=""
-                >
-                <span class="select-list__text">Ejemplo de opción</span>
-            </li>
-            <li class="select-list__option">
-                <input 
-                    class="select-list__checkbox"
-                    type="checkbox" 
-                    name=""
-                    value=""
-                >
-                <span class="select-list__text">Ejemplo de opción</span>
-            </li>
-            <li class="select-list__option">
-                <input 
-                    class="select-list__checkbox"
-                    type="checkbox" 
-                    name=""
-                    value=""
-                >
-                <span class="select-list__text">Ejemplo de opción</span>
-            </li>
-        </ul>
-    </div>
+        <div class="multiple-options-select" data-placeholder="Seleccionar Tags">
+            <div class="select-btn">
+                <span class="select-btn__btn-text"></span>
+                <span class="select-btn__icon">
+                    <img class="select-btn__icon-img" src="assets/images/arrow-down.svg" alt="select icon">
+                </span>
+            </div>
 
-    <div class="multiple-options-select" data-placeholder="Seleccionar Tags">
-        <div class="select-btn">
-            <span class="select-btn__btn-text"></span>
-            <span class="select-btn__icon">
-                <img class="select-btn__icon-img" src="assets/images/arrow-down.svg" alt="select icon">
-            </span>
+            <ul class="select-list">
+                <li class="select-list__option">
+                    <input 
+                        class="select-list__checkbox"
+                        type="checkbox" 
+                        name=""
+                        value=""
+                    >
+                    <span class="select-list__text">Ejemplo de opción</span>
+                </li>
+                <li class="select-list__option">
+                    <input 
+                        class="select-list__checkbox"
+                        type="checkbox" 
+                        name=""
+                        value=""
+                    >
+                    <span class="select-list__text">Ejemplo de opción</span>
+                </li>
+                <li class="select-list__option">
+                    <input 
+                        class="select-list__checkbox"
+                        type="checkbox" 
+                        name=""
+                        value=""
+                    >
+                    <span class="select-list__text">Ejemplo de opción</span>
+                </li>
+            </ul>
         </div>
 
-        <ul class="select-list">
-            <li class="select-list__option">
-                <input 
-                    class="select-list__checkbox"
-                    type="checkbox" 
-                    name=""
-                    value=""
-                >
-                <span class="select-list__text">Ejemplo de opción</span>
-            </li>
-            <li class="select-list__option">
-                <input 
-                    class="select-list__checkbox"
-                    type="checkbox" 
-                    name=""
-                    value=""
-                >
-                <span class="select-list__text">Ejemplo de opción</span>
-            </li>
-            <li class="select-list__option">
-                <input 
-                    class="select-list__checkbox"
-                    type="checkbox" 
-                    name=""
-                    value=""
-                >
-                <span class="select-list__text">Ejemplo de opción</span>
-            </li>
-        </ul>
+        <input type="submit" class="filter__submit" value="Buscar">
     </div>
-
-    <input type="submit" class="filter__submit" value="Buscar">
-</div>
+</header>
 
 <main class="category">
     <div class="category__grid">

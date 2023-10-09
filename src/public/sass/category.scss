@@ -1,6 +1,43 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
 
+.header-category {
+    display: flex;
+    padding: 5rem 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
+    &__mask {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+        linear-gradient(
+            to bottom, 
+            transparentize(v.$bright-blue, .2) 0%, 
+            transparentize(v.$bright-blue, .7) 50%,
+            transparentize(v.$bright-blue, .5) 100%
+        );
+        background-size: cover;
+    }
+    &__title {
+        text-align: center;
+        text-transform: uppercase;
+        @include m.fluid-text(3rem, 5rem);
+        color: v.$white;
+        margin: 0;
+        z-index: 1;
+    }
+    &__filter {
+        z-index: 1;
+    }
+}
 .category {
 
     &__grid {
