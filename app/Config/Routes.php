@@ -7,6 +7,7 @@ use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlSolution;
+use App\Controllers\CtrlTestFiles;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -89,6 +90,17 @@ $routes->group('admin', static function($routes) {
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
     });
+
+    $routes->group('api/files', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('load', 'CtrlApiFiles::getFileFromServer');
+        $routes->patch('process', 'CtrlApiFiles::processTempFileChunk');
+        $routes->post('process', 'CtrlApiFiles::processTempFile');
+        $routes->delete('delete', 'CtrlApiFiles::deleteFile');
+    });
+
+    $routes->get('testFiles', [CtrlTestFiles::class, 'index']);
+    $routes->post('testFiles', [CtrlTestFiles::class, 'saveData']);
 });
 /*
  * --------------------------------------------------------------------
