@@ -47,8 +47,8 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data = [
-                "idTypeEmail" => 1,
-                "information" => json_encode($POST)
+                "emailTypeId" => 1,
+                "emailContent" => json_encode($POST)
             ];
             $emailModel->insert($data);
         } else {
@@ -108,8 +108,8 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data = [
-                "idTypeEmail" => 2,
-                "information" => json_encode($POST)
+                "emailTypeId" => 2,
+                "emailContent" => json_encode($POST)
             ];
             $emailModel->insert($data);
         }else{
@@ -132,13 +132,13 @@ class CtrlEmail extends BaseController
             if (!$validateEmail->validateInputs($data)) throw new Exception();
 
             $userModel = new UserModel();
-            $user = $userModel->where("email", $data['email'])->first();
+            $user = $userModel->where("userEmail", $data['email'])->first();
 
             $validateEmail->existUserWithEmail($user);
-            $validateEmail->isNotSuperAdmin($user['admin']);
+            $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
             $token = uniqid();
-            $userName =  $user['name'] . " " . $user['lastName'];
+            $userName =  $user['userFirstName'] . " " . $user['userLastName'];
 
             $isSend = EmailSender::sendEmail("Kinub", 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset',  ['userName' =>  $userName, 'token' => $token] );
 
@@ -150,7 +150,7 @@ class CtrlEmail extends BaseController
                 'type' => 'success',
             ];
 
-            $userModel->update($user['id'], ['token' => $token]);
+            $userModel->update($user['userId'], ['userToken' => $token]);
         } catch (\Throwable $th) {
             $errors = $validateEmail->getErrors();
 

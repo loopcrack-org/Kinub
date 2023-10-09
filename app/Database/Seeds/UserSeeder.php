@@ -11,22 +11,22 @@ class UserSeeder extends Seeder
         $faker = Factory::create();
         $data = [
             [
-                "name" => $faker->name(),
-                "lastName" => $faker->lastName(),
-                "email" => "admin@admin.com",
-                "password" => password_hash("fake_password", PASSWORD_BCRYPT),
-                "token" => "FAS12AQajqa",
-                "confirm" => 0,
-                "admin" => 1
+                "userFirstName" => $faker->name(),
+                "userLastName" => $faker->lastName(),
+                "userEmail" => "admin@admin.com",
+                "userPassword" => password_hash("fake_password", PASSWORD_BCRYPT),
+                "userToken" => "FAS12AQajqa",
+                "confirmed" => 0,
+                "isAdmin" => 1
             ],
             [
-                "name" => $faker->name(),
-                "lastName" => $faker->lastName(),
-                "email" => "nkutch@gmail.com",
-                "password" => password_hash("fake_password", PASSWORD_BCRYPT),
-                "token" => "FAS12AQajqa",
-                "confirm" => 0,
-                "admin" => 0
+                "userFirstName" => $faker->name(),
+                "userLastName" => $faker->lastName(),
+                "userEmail" => "nkutch@gmail.com",
+                "userPassword" => password_hash("fake_password", PASSWORD_BCRYPT),
+                "userToken" => "FAS12AQajqa",
+                "confirmed" => 0,
+                "isAdmin" => 0
             ]
         ];
 
