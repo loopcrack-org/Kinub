@@ -59,7 +59,7 @@
     font-size: clamp($min,-0.8rem + 10vw,$max);
 }
 @mixin heading {
-    color: darken(v.$bright-blue, 15%);
+    color: darken(v.$bright-blue,20%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -71,7 +71,7 @@
         height: .2rem;
         width: calc(50%);
         display: inline-block;
-        margin: .2rem 0 0 0;
+        margin: .6rem 0 0 0;
     }
 }
 @mixin bgImg($url){

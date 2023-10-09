@@ -23,4 +23,9 @@ class CtrlPublicPages extends BaseController
     {
         return view('public/category');
     }
+
+    public function viewCertificates(): string
+    {
+        return view('public/certificates');
+    }
 }
