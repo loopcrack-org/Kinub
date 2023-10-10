@@ -12,19 +12,19 @@ class CategoryTagSeeder extends Seeder
         $data = [
             [
                 "categoryTagName" => "Tag1",
-                "categoryId" => $faker->numberBetween(1, 3),
+                "categoryId" => $faker->numberBetween(1, 2),
             ],
             [
                 "categoryTagName" => "Tag2",
-                "categoryId" => $faker->numberBetween(1, 3),
+                "categoryId" => $faker->numberBetween(1, 2),
             ],
             [
                 "categoryTagName" => "Tag3",
-                "categoryId" => $faker->numberBetween(1, 3),
+                "categoryId" => $faker->numberBetween(1, 2),
             ],
             [
                 "categoryTagName" => "Tag4",
-                "categoryId" => $faker->numberBetween(1, 3),
+                "categoryId" => $faker->numberBetween(1, 2),
             ]
         ];
 
