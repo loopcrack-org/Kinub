@@ -1,5 +1,5 @@
 <?php $this->section('js'); ?>
-<script src="assets/js/public/menuMobile.js"></script>
+<script src="assets/public/js/menuMobile.min.js"></script>
 <?php $this->endSection(); ?>
 <header class="header" id="header-nav">
     <div class="header__logo">

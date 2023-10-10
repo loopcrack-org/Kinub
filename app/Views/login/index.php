@@ -65,7 +65,7 @@
                                         <!-- password -->
                                         <div class="mb-3">
                                             <div class="float-end">
-                                                <a href="/login/password/reset" class="text-muted">Olvidaste tu contraseña?</a>
+                                                <a href="/password_reset" class="text-muted">Olvidaste tu contraseña?</a>
                                             </div>
                                             <label class="form-label" for="password-input">Contraseña</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
@@ -102,10 +102,10 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- particles js -->
-    <script src="/assets/libs/particles/particles.js"></script>
+    <script src="/assets/admin/js/particles.min.js"></script>
     <!-- particles app js -->
-    <script src="/assets/js/pages/particles.app.js"></script>
+    <script src="/assets/admin/js/particles.app.min.js"></script>
     <!-- password-addon init -->
-    <script src="/assets/js/pages/password-addon.init.js"></script>
+    <script src="/assets/admin/js/password-addon.init.min.js"></script>
 </body>
 </html>

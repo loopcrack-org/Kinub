@@ -1,4 +1,7 @@
-const { src, dest, watch, parallel} = require("gulp");
+const { src, dest, watch, parallel, task } = require("gulp");
+const rename = require("gulp-rename");
+const { basename, extname } = require("path");
+const plumber = require("gulp-plumber");
 
 //Css
 const sass = require("gulp-sass")(require("sass"));
@@ -6,155 +9,201 @@ const autoprefixer = require("autoprefixer");
 const cssnano = require("cssnano");
 const postcss = require("gulp-postcss");
 const sourcemaps = require("gulp-sourcemaps");
+const del = require("del");
+
+// JS
+const webpack = require("webpack-stream");
+const named = require("vinyl-named");
 
 // Imagenes
 const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 const avif = require("gulp-avif");
 
-//Js
-const rename = require("gulp-rename");
-const uglify = require('gulp-uglify');
+//BrowserSync
+const browserSync = require("browser-sync").create();
+require("dotenv").config();
+
+// mode
+const modes = ["public", "common", "admin"];
 
 // ------------------------------------------------------------------- //
 // PATHS
-const paths = {
-    admin: {
-      scss: {
-        app: './src/sass/admin/config/app.scss',
-        bootstrap: './src/sass/admin/config/bootstrap.scss',
-      },
-      js: './src/js/admin/**/*.js',
-      watch: {
-        scss: './src/sass/admin/**/*.scss',
-        js: './src/js/admin/**/*.js',
-      }
+function getPaths(mode = "public") {
+  return {
+    input: {
+      sass: `./src/${mode}/sass/**/*.scss`,
+      js: `./src/${mode}/js/**/*.js`,
+      images: "./src/images/**/*",
     },
-    pages: {
-      js: './src/js/pages/**/*.js',
-      watch: {
-        js: './src/js/pages/**/*.js',
-      }
+    output: {
+      dir: `./public/assets/${mode}`,
+      css: `./public/assets/${mode}/css`,
+      js: `./public/assets/${mode}/js`,
+      images: "./public/assets/images",
     },
-    public: {
-      scss: './src/sass/public/app.scss',
-      js: './src/js/public/**/*.js',
-      watch: {
-        scss: './src/sass/public/**/*.scss',
-        js: './src/js/public/**/*.js',
-      }
-    },
-    images: "./src/images/**/*",
-    dest: "./public/assets", 
-};
+  };
+}
 // ------------------------------------------------------------------- //
 
+function serve() {
+  browserSync.init({
+    proxy: process.env.virtualHost,
+    port: 8080,
+    notify: true,
+    serveStaticOptions: {
+      cacheControl: false,
+    },
+  });
+
+  browserSync
+    .watch([
+      "public/**/*.*",
+      "!public/**/css/*.css", //Ignore CSS changes since we are using browserSync.stream() for CSS
+    ])
+    .on("change", browserSync.reload);
+
+  browserSync.watch(["app/Views/**/*.*"]).on("change", browserSync.reload);
+}
 
 // ------------------------------------------------------------------- //
 // CSS
-function publicCss() {
-    const destPath = `${paths.dest}/css`;
-    return src(paths.public.scss)
-        .pipe(sourcemaps.init())
-        .pipe(sass())
-        .pipe(postcss([autoprefixer(), cssnano()]))
-        .pipe(rename('public.min.css'))
-        .pipe(sourcemaps.write("."))
-        .pipe(dest(destPath));
-}
-
-function adminCss() {
-  const destPath = `${paths.dest}/css`;
-  return src(paths.admin.scss.app)
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(postcss([autoprefixer(), cssnano()]))
-    .pipe(rename('admin.min.css'))
-    .pipe(sourcemaps.write("."))
-    .pipe(dest(destPath));
-}
-function bootstrap() {
-  const destPath = `${paths.dest}/css`;
-  return src(paths.admin.scss.bootstrap)
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(postcss([autoprefixer(), cssnano()]))
-    .pipe(rename('bootstrap.min.css'))
-    .pipe(sourcemaps.write("."))
-    .pipe(dest(destPath));
+async function compileSass(srcPath, destPath, production = false) {
+  if (production) {
+    await del(destPath);
+    return src(srcPath)
+      .pipe(sass())
+      .pipe(postcss([autoprefixer(), cssnano()]))
+      .pipe(rename({ dirname: ".", suffix: ".min" }))
+      .pipe(dest(destPath));
+  } else {
+    return src(srcPath)
+      .pipe(plumber())
+      .pipe(sourcemaps.init())
+      .pipe(sass())
+      .pipe(postcss([autoprefixer(), cssnano()]))
+      .pipe(rename({ dirname: ".", suffix: ".min" }))
+      .pipe(sourcemaps.write("."))
+      .pipe(dest(destPath))
+      .pipe(browserSync.stream());
+  }
 }
 // ------------------------------------------------------------------- //
 
-
-// JAVASCRIPT
-// ------------------------------------------------------------------- //
-function adminJavascript() {
-  return src(paths.admin.js)
-      .pipe(sourcemaps.init())
-      .pipe(uglify())
-      .pipe(sourcemaps.write("."))
-      .pipe(dest(`${paths.dest}/js/admin`));
-}
-function pagesJavascript() {
-  return src(paths.pages.js)
-      .pipe(sourcemaps.init())
-      .pipe(uglify())
-      .pipe(sourcemaps.write("."))
-      .pipe(dest(`${paths.dest}/js/pages`));
-}
-function publicJavascript() {
-  return src(paths.public.js)
-      .pipe(sourcemaps.init())
-      .pipe(uglify())
-      .pipe(sourcemaps.write("."))
-      .pipe(dest(`${paths.dest}/js/public`));
-}
+// JS
 // ------------------------------------------------------------------- //
 
+async function javascript(srcPath, destPath, production = false) {
+  const webpackConfig = {
+    mode: production ? "production" : "development",
+    output: { filename: "[name].min.js" },
+  };
+  if (production) {
+    await del(destPath);
+    return src(srcPath)
+      .pipe(named())
+      .pipe(webpack(webpackConfig))
+      .pipe(rename({ dirname: "." }))
+      .pipe(dest(destPath));
+  } else {
+    webpackConfig["devtool"] = "source-map";
+    return src(srcPath)
+      .pipe(plumber())
+      .pipe(named())
+      .pipe(webpack(webpackConfig))
+      .pipe(rename({ dirname: "." }))
+      .pipe(dest(destPath));
+  }
+}
+// ------------------------------------------------------------------- //
 
 // IMAGES
 // ------------------------------------------------------------------- //
-function imagenes() {
-  return src(paths.images)
+async function minifyImage(sourcePath, dist) {
+  return src(sourcePath)
     .pipe(imagemin({ optimizationLevel: 3 }))
-    .pipe(dest(`${paths.dest}/images`));
+    .pipe(dest(dist));
 }
 
-function imageWebp() {
-  return src(paths.images)
-    .pipe(webp())
-    .pipe(dest(`${paths.dest}/images`));
+async function convertToWebp(sourcePath, dist) {
+  return src(sourcePath).pipe(webp()).pipe(dest(dist));
 }
 
-function imageAvif() {
-  return src(paths.images)
-    .pipe(avif())
-    .pipe(dest(`${paths.dest}/images`));
+async function convertToAvif(sourcePath, dist) {
+  return src(sourcePath).pipe(avif()).pipe(dest(dist));
 }
 // ------------------------------------------------------------------- //
 
+// DELETE FILE
+// ------------------------------------------------------------------- //
+async function clean(filepath = "", dist) {
+  const fileName = basename(filepath, extname(filepath));
+  const patternName = `${dist}/${fileName}.*`;
+  return await del(patternName);
+}
+// ------------------------------------------------------------------- //
 
 // WATCHERS
 // ------------------------------------------------------------------- //
-function watchAdmin() {
-  watch(paths.admin.watch.scss, adminCss);
-  watch(paths.admin.watch.js, adminJavascript);
-  watch(paths.pages.watch.js, pagesJavascript);
-  watch(paths.images, imagenes);
-  watch(paths.images, imageAvif);
-  watch(paths.images, imageWebp);
+function watchFiles(input, output) {
+  // CSS
+  watch(input.sass).on("change", function (path, stats) {
+    compileSass(input.sass, output.css);
+    console.log(`Changed ${path}`);
+  });
+  watch(input.sass).on("add", function (path, stats) {
+    compileSass(path, output.css);
+    console.log(`Added ${path}`);
+  });
+  watch(input.sass).on("unlink", async function (path, stats) {
+    const deletedFiles = await clean(path, output.css);
+    deletedFiles.forEach((file) => console.log(`Deleted ${file}`));
+  });
+
+  // JS
+  watch(input.js).on("change", function (path, stats) {
+    javascript(path, output.js);
+    console.log(`Changed ${path}`);
+  });
+  watch(input.js).on("add", function (path, stats) {
+    javascript(path, output.js);
+    console.log(`Added ${path}`);
+  });
+  watch(input.js).on("unlink", async function (path, stats) {
+    const deletedFiles = await clean(path, output.js);
+    deletedFiles.forEach((file) => console.log(`Deleted ${file}`));
+  });
 }
 
-function watchPublic() {
-  watch(paths.public.watch.scss, publicCss);
-  watch(paths.public.watch.js, publicJavascript);
-  watch(paths.images, imagenes);
-  watch(paths.images, imageAvif);
-  watch(paths.images, imageWebp);
-}
-// ------------------------------------------------------------------- //
+function runMode(mode, production = false) {
+  const { input, output } = getPaths(mode);
 
-exports.bootstrap = bootstrap; // bootstrap
-exports.admin = parallel(adminCss, adminJavascript, pagesJavascript, watchAdmin); // admin
-exports.default = parallel(publicCss, publicJavascript, watchPublic);  // public
-exports.images = parallel(imagenes, imageWebp, imageAvif); // imagenes
+  return async function devTasks() {
+    await compileSass(input.sass, output.css, production);
+    await javascript(input.js, output.js, production);
+    if (!production) watchFiles(input, output);
+  };
+}
+
+function compileImages() {
+  const { input, output } = getPaths();
+  return async function images() {
+    await minifyImage(input.images, output.images);
+    await convertToWebp(input.images, output.images);
+    await convertToAvif(input.images, output.images);
+  };
+}
+
+modes.forEach((mode) => {
+  task(`dev:${mode}`, parallel(serve, runMode(mode)));
+});
+
+task(
+  "dev:all",
+  parallel(
+    serve,
+    modes.map((mode) => runMode(mode))
+  )
+);
+task("build", parallel(modes.map((mode) => runMode(mode, true))));
+task("images", compileImages());

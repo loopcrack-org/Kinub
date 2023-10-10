@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="name" id="name" value="<?= $category["name"] ?? "";?>" placeholder="Ingrese el título" required>
+                    <input type="text" class="form-control" name="name" id="name" value="<?= $category["categoryName"] ?? "";?>" placeholder="Ingrese el título" required>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond filepond-input-multiple" name="icon" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                <input type="file" class="filepond" name="icon">
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +60,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond filepond-input-multiple" name="image" data-allow-reorder="true" data-max-file-size="3MB" data-max-files="3">
+                <input type="file" class="filepond" name="image">
             </div>
             <!-- end card body -->
         </div>

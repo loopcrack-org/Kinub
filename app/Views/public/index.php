@@ -2,22 +2,21 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<link rel="stylesheet" href="assets/css/public.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="assets/js/public/home.js"></script>
+<script src="assets/public/js/home.min.js"></script>
 <?php $this->endSection(); ?>
 
 <!-- FONTS -->
 <?php $this->section('fonts'); ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Nunito+Sans:opsz,wght@6..12,200;6..12,400&display=swap" rel="stylesheet">
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -57,6 +56,221 @@
             <source src="assets/video/kinub-video-example.webm" type="video/webm" />
         </video>
     </div>
+</section>
+
+<section class="measurement-solutions">
+    <h3 class="measurement-solutions__heading">Soluciones de medición</h3>
+
+    <div class="measurement-solutions__grid">
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+            <div class="measurement-solution__icon">
+                <svg
+                    class="measurement-solution__svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <defs>
+                    <mask id="icon-mask" x="0" y="0" width="200" height="200">
+                        <image href="assets/images/drop.svg" width="100%" height="100%" />
+                    </mask>
+
+                    <linearGradient
+                        id="mask-degraded"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                    >
+                        <stop offset="20%" style="stop-color: #0D65A7" />
+                        <stop offset="40%" style="stop-color: #54B4DB" />
+                        <stop offset="60%" style="stop-color: #7FBCD6" />
+                        <stop offset="80%" style="stop-color: #2892BC" />
+                    </linearGradient>
+                </defs>
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Residenciales</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
+        </div>
+
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+            <div class="measurement-solution__icon">
+                <svg
+                    class="measurement-solution__svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Industriales</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
+        </div>
+
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+            <div class="measurement-solution__icon">
+                <svg
+                    class="measurement-solution__svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medición</span> Remota</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
+        </div>
+
+        <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
+            <div class="measurement-solution__icon">
+                <svg
+                    class="measurement-solution__svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="url(#mask-degraded)"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+
+                <svg
+                    class="measurement-solution__svg--mask"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                >
+                <rect
+                    x="0"
+                    y="0"
+                    width="100%"
+                    height="100%"
+                    fill="#ffffff"
+                    mask="url(#icon-mask)"
+                />
+                </svg>
+            </div>
+            
+            <div class="measurement-solution__content">
+                <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Calidad</span> del agua</p>
+                <p class="measurement-solution__description">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                </p>
+            </div>  
+            
+            <div class="measurement-solution__mask"></div>  
+            <div class="measurement-solution__mask--hover"></div>  
+        </div>
 </section>
 
 <section id="form">

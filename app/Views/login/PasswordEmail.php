@@ -57,7 +57,7 @@
                                     <?php $errors = session()->get('errors') ?>
 
                                     <div class="p-2">
-                                        <form action="/login/password/reset" method="post">
+                                        <form action="/password_reset" method="post">
                                             <div class="mb-4">
                                                 <label class="form-label">Correo</label>
                                                 <input type="email" class="form-control <?= isset($errors["email"]) ? 'is-invalid' : '' ?>" id="email" placeholder="Ej: johnson@gmail.com" name="email" required value=<?= old("email") ?>>
@@ -97,11 +97,11 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- particles js -->
-    <script src="/assets/libs/particles/particles.js"></script>
+    <script src="/assets/admin/js/particles.min.js"></script>
     <!-- particles app js -->
-    <script src="/assets/js/pages/particles.app.js"></script>
+    <script src="/assets/admin/js/particles.app.min.js"></script>
     <!-- password-addon init -->
-    <script src="/assets/js/pages/password-addon.init.js"></script>
+    <script src="/assets/admin/js/password-addon.init.min.js"></script>
 </body>
 
 </html>
