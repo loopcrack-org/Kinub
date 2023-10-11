@@ -8,7 +8,7 @@
         </a>
     </div>
 
-    <div class="header-mobile__background" id="background"></div>
+    <div class="header__background" id="background"></div>
 
     <nav class="navigation" id="navigation">
         <a href="/equipos" class="navigation__link">Equipos</a>
