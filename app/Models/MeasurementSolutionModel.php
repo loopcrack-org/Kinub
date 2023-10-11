@@ -8,6 +8,6 @@ class MeasurementSolutionModel extends Model
 {
     protected $DBGroup          = 'default';
     protected $table            = 'type_solutions';
-    protected $primaryKey       = 'id';
+    protected $primaryKey       = 'msId';
     protected $allowedFields    = ["msName", "msDescription", "msImageId", "msIconId"];
 }
