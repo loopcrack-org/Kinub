@@ -26,7 +26,7 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <textarea class="form-control" rows="3" name="description"><?= $solution["description"] ?? "";?></textarea>
+                        <textarea class="form-control" rows="3" name="description" required><?= $solution["description"] ?? "";?></textarea>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="icon">
+                <input type="file" class="filepond" name="icon" required>
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +60,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="image">
+                <input type="file" class="filepond" name="image" required>
             </div>
             <!-- end card body -->
         </div>
