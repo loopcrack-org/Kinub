@@ -39,9 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const commonCustomViewErrors = {
     add: function (field, message, cls) {
       updateErrorContainer(field, message, cls);
+      field.classList.add(this.config.selectors.error);
     },
     remove: function (field, cls) {
       updateErrorContainer(field, "", cls);
+      field.classList.remove(this.config.selectors.error);
     },
   };
 
@@ -64,17 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const errorCode = phoneInput.getValidationError();
             message = errorMap[errorCode] ?? errorMap[0];
           }
-
           this.asyncValidationFinish(field, message, container, status);
-
-          const isValidPhone = document.querySelector(
-            "[data-validation-status]"
-          );
-          if (status) {
-            isValidPhone.setAttribute("data-validation-status", "valid");
-          } else {
-            isValidPhone.setAttribute("data-validation-status", "invalid");
-          }
         },
       },
     },
