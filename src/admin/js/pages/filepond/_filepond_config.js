@@ -17,6 +17,28 @@ export const serverOptions = {
   remove: removeFile,
 };
 
+export function getServerOptions(pond, type) {
+  return {
+    url: "api/files",
+    process: {
+      url: "/process",
+      method: "POST",
+      onload: (response) => {
+        const result =
+          response instanceof XMLHttpRequest
+            ? JSON.parse(response.responseText)
+            : JSON.parse(response);
+        return result.key;
+      },
+      ondata: (formData) => addData(formData, pond, type),
+    },
+    patch: "/process?patch=",
+    revert: "/delete",
+    load: "/load?file=",
+    remove: removeFile,
+  };
+}
+
 export const defaultConfig = {
   chunkUploads: true,
   labelFileTypeNotAllowed: "Archivo no válido",
@@ -24,7 +46,7 @@ export const defaultConfig = {
   chunkUploads: true,
   chunkSize: 1000000,
   allowMultiple: true,
-  maxFiles: 10,
+  maxFiles: 2,
 
   beforeRemoveFile: (item) => {
     return item.origin === 1 ? true : confirm("¿Quieres eliminarlo?");

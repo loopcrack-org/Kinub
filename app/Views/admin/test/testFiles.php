@@ -59,7 +59,7 @@
                                                     <?php endforeach ?>
                                                 </ul>
                                             <?php endif ?>
-                                            <input type="file" name="image">
+                                            <input id="inputImage" type="file" name="image[]">
                                         </fieldset>
                                     </div>
                                     <!-- end card body -->
@@ -88,7 +88,7 @@
                                                     <?php endforeach ?>
                                                 </ul>
                                             <?php endif ?>
-                                            <input type="file" name="svg">
+                                            <input id="inputSvg" type="file" name="svg">
                                         </fieldset>
                                     </div>
                                     <!-- end card body -->
@@ -117,7 +117,7 @@
                                                     <?php endforeach ?>
                                                 </ul>
                                             <?php endif ?>
-                                            <input type="file" name="video">
+                                            <input id="inputVideo" type="file" name="video">
                                         </fieldset>
                                     </div>
                                     <!-- end card body -->
@@ -137,7 +137,7 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa archivos en formato pdf</p>
-                                        <fieldset id="document-files">
+                                        <fieldset id="pdf-files">
                                             <?php if (isset($filesSaved['pdf'])) : ?>
                                                 <ul>
                                                     <?php foreach ($filesSaved['pdf'] as $file) : ?>
@@ -147,7 +147,7 @@
                                                     <?php endforeach ?>
                                                 </ul>
                                             <?php endif ?>
-                                            <input type="file" name="pdf">
+                                            <input id="inputPdf" type="file" name="pdf">
                                         </fieldset>
                                     </div>
                                     <!-- end card body -->
@@ -164,6 +164,9 @@
                             <button type="submit" class="btn btn-primary w-lg">Guardar</button>
                         </div>
                     </div>
+                </div>
+                <div class="filepondConfig">
+                    <input id="config" type="hidden" value="<?= $config ?? "" ?>">
                 </div>
             </form>
         </div>
