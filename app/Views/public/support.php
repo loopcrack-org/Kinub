@@ -68,7 +68,7 @@
 
                     <input id="support-customer" name="support-customer" type="text" class="support-form__input required" data-errors-id="errors-1" placeholder="Ingrese su nombre" value="<?php echo old("support-customer") ?>">
                 </div>
-
+                
                 <div class="support-form__field">
                     <label for="support-phone" class="support-form__label">Teléfono</label>
 

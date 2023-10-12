@@ -64,7 +64,17 @@ document.addEventListener("DOMContentLoaded", function () {
             const errorCode = phoneInput.getValidationError();
             message = errorMap[errorCode] ?? errorMap[0];
           }
+
           this.asyncValidationFinish(field, message, container, status);
+
+          const isValidPhone = document.querySelector(
+            "[data-validation-status]"
+          );
+          if (status) {
+            isValidPhone.setAttribute("data-validation-status", "valid");
+          } else {
+            isValidPhone.setAttribute("data-validation-status", "invalid");
+          }
         },
       },
     },
