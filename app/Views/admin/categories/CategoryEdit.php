@@ -14,7 +14,7 @@
 <?= $this->section("content") ?>
 <div class="page-content">
     <div class="container-fluid">
-    <?php echo view('partials/page-title', array('title' => 'Editar categoría', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Editar categoría',)); ?>
+    <?php echo view('partials/page-title', array('title' => 'Editar categoría', "titleUrl" => "/admin/categorias", 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Editar categoría',)); ?>
 
 
         <div class="row justify-content-center">
@@ -24,7 +24,7 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
-                <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate method="POST">
+                <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
                     <?= $this->include('admin/categories/categoriesFormTemplate') ?>
 
                     <div class="text-end mb-3">
