@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
         );
         phoneInputField.value = phoneNumber;
         document.querySelector("#support-form").submit();
+        return;
       }
       supportForm.style.transform = `translateX(-${(currentStep - 1) * 100}%)`;
       displayCurrentFieldset(currentStep);
