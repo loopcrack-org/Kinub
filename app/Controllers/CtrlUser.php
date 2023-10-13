@@ -13,13 +13,31 @@ class CtrlUser extends BaseController
         $users = $userModel->findAll();
         return view("admin/users/Users", ["users" => $users]);
     }
-    public function viewUserCreate() {
+    public function viewUserCreate()
+    {
         return view("admin/users/UserCreate");
     }
-    public function createUser() {
+    public function createUser()
+    {
         return "creating user...";
     }
-    public function deleteUser() {
-        return "deleting user...";
+    public function deleteUser()
+    {
+        $isDeleted = true;
+        if($isDeleted) {
+            $response = [
+                "title" => "Eliminación exitosa",
+                "message" => "Se ha elimnado el usuario correctamente",
+                "type" => "success",
+            ];
+        } else {
+            $response = [
+                "title" => "Eliminación fallida",
+                "message" => "No se pudo realizar la eliminación del usuario",
+                "type" => "error",
+            ];
+        }
+
+        return redirect()->back()->with("response", $response);
     }
 }
