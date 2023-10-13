@@ -1,8 +1,13 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
+<link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/product.min.css" type="text/css">
+<?php $this->endSection(); ?>
+
+<?php $this->section('js'); ?>
+<script src="assets/public/js/product-page.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -61,19 +66,42 @@
     <a href="#" class="product-navigation__link">Área de descarga</a>
 </nav>
 
-<section class="description">
-    <h2 class="description__heading">Descripción</h2>
-    <div class="description__text-container">
-        <p class="description__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magni pariatur vero doloremque, id ipsa praesentium a nesciunt! Ullam, porro laudantium. Voluptas fugit possimus vero explicabo rerum id omnis nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum alias praesentium explicabo, nesciunt expedita ducimus dolor a, id maxime quasi, cum culpa tempora quibusdam et. Rerum itaque soluta quo suscipit.</p>
+<section class="product-info">
+    <h2 class="product-info__heading">Descripción</h2>
+    <div class="product-info__text-container">
+        <p class="product-info__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magni pariatur vero doloremque, id ipsa praesentium a nesciunt! Ullam, porro laudantium. Voluptas fugit possimus vero explicabo rerum id omnis nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum alias praesentium explicabo, nesciunt expedita ducimus dolor a, id maxime quasi, cum culpa tempora quibusdam et. Rerum itaque soluta quo suscipit.</p>
     </div>
 </section>
 
-<section class="specifications">
-    <h2 class="specifications__heading">Especificaciones Técnicas</h2>
-    <div class="specifications__text-container">
-        <p class="specifications__text"><span>Titulo:</span>Datos</p>
-        <p class="specifications__text"><span>Titulo:</span>Datos</p>
-        <p class="specifications__text"><span>Titulo:</span>Datos</p>
+<section class="product-info">
+    <h2 class="product-info__heading product-info__heading--technical-spec">Especificaciones Técnicas</h2>
+    <div class="product-info__text-container">
+        <ul>
+            <li class="product-info__text"><span class="product-info__text--title">Frecuencia:</span>Sit amet, consectetuer</li>
+            <li class="product-info__text"><span class="product-info__text--title">Rango de medición:</span>Euismod tincidunt ut laore</li>
+            <li class="product-info__text"><span class="product-info__text--title">Presición de medición:</span>Commodo</li>
+            <li class="product-info__text"><span class="product-info__text--title">Potencia:</span>Sit amet, consectetuer</li>
+            <li class="product-info__text"><span class="product-info__text--title">Comunicación:</span>Ut wisi enim ad minim</li>
+        </ul>
+    </div>
+</section>
+
+<section class="product-info product-info--video">
+    <div class="product-info__video-container">
+            <video
+            id="product-video"
+            class="product-video__video"
+            preload="auto"
+            width="500"
+            height="264"
+            muted
+            autoplay
+            playsinline
+            controls
+            >
+                <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
+                <source src="assets/video/kinub-video-example.webm" type="video/webm" />
+            </video>
     </div>
 </section>
 
