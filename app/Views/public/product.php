@@ -6,6 +6,11 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
+<header class="header-product" style="background-image: url('assets/images/auth-one-bg.jpg');">
+    <div class="header-product__mask"></div>
+
+    <h1 class="header-product__title">TELEMETRÍA</h1>
+</header>
 
 <main class="details">
     <div class="details__grid">
