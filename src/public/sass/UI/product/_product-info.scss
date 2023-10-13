@@ -26,6 +26,9 @@
         @include m.tablet {
             margin-bottom: 4rem;
         }
+        &--description {
+            color: v.$sky-blue;
+        }
         &--technical-spec {
             color: v.$bright-blue;
         }

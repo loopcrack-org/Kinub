@@ -67,7 +67,7 @@
 </nav>
 
 <section class="product-info">
-    <h2 class="product-info__heading">Descripción</h2>
+    <h2 class="product-info__heading product-info__heading--description">Descripción</h2>
     <div class="product-info__text-container">
         <p class="product-info__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magni pariatur vero doloremque, id ipsa praesentium a nesciunt! Ullam, porro laudantium. Voluptas fugit possimus vero explicabo rerum id omnis nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum alias praesentium explicabo, nesciunt expedita ducimus dolor a, id maxime quasi, cum culpa tempora quibusdam et. Rerum itaque soluta quo suscipit.</p>
     </div>
