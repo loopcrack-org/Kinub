@@ -112,7 +112,7 @@
     text-align: center;
 
     &:hover,
-    &.active {
+    &--active {
       background-color: darken(v.$bright-blue, 20%);
       border-radius: 0.5rem;
     }
