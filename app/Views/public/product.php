@@ -49,11 +49,11 @@
             </div>
 
             <div class="details__data-container">
-            <p class="details__data"><span>Frecuencia:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos amet</p>
-            <p class="details__data"><span>Rango de medición:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos amet</p>
-            <p class="details__data"><span>Precisión de medición:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos amet</p>
-            <p class="details__data"><span>Potencia:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos amet</p>
-            <p class="details__data"><span>Comunicación:</span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos amet</p>       
+            <p class="details__data"><span>Frecuencia:</span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Rango de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Precisión de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Potencia:</span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Comunicación:</span>Lorem ipsum dolor sit amet consectetur</p>       
             </div>
             <a href="#" class="details__button">Más información acerca de este equipo</a>
         </div>
@@ -61,9 +61,16 @@
 </main>
 
 <nav class="product-navigation">
-    <a href="#" class="product-navigation__link">Descripción</a>
-    <a href="#" class="product-navigation__link">Especificaciones técnicas</a>
-    <a href="#" class="product-navigation__link">Área de descarga</a>
+    <a href="#description" class="product-navigation__link-container">
+        <p class="product-navigation__link">Descripción</p>
+    </a>
+    <a href="#tech-info" class="product-navigation__link-container">
+        <p class="product-navigation__link">Especificaciones técnicas</p>
+    </a>
+    <a href="#download-area" class="product-navigation__link-container">
+        <p class="product-navigation__link">Área de descarga</p>
+    </a>
+
 </nav>
 
 <section class="product-info">
@@ -103,6 +110,10 @@
                 <source src="assets/video/kinub-video-example.webm" type="video/webm" />
             </video>
     </div>
+</section>
+
+<section class="download-area" id="download-area">
+
 </section>
 
 <?php $this->endSection('content');?>
