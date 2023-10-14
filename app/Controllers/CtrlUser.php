@@ -24,7 +24,8 @@ class CtrlUser extends BaseController
         $POST = $this->request->getPost();
 
         return view("templates/emails/createUserAccount", [
-            "user" => $POST
+            "user" => $POST,
+            "userToken" => "FAS12AQajqa"
         ]);
     }
     public function deleteUser()
