@@ -25,8 +25,6 @@ import FilepondPluginMediaPreview from "filepond-plugin-media-preview";
 // ----
 import FilepondPluginPdfPreview from "filepond-plugin-pdf-preview";
 
-// import { getServerOptions } from "./filepond/_filepond_config";
-
 FilePond.registerPlugin(
   // encodes the file as base64 data
   FilePondPluginFileEncode,
@@ -44,78 +42,57 @@ FilePond.registerPlugin(
   FilepondPluginPdfPreview
 );
 
-function getServerOptions(nameInput, pond) {
-  return {
-    server: {
-      url: "api/files",
-      process: {
-        url: "/process",
-        method: "POST",
-        ondata: (formData) => {
-          formData.append("inputName", nameInput);
-          return formData;
-        },
-        onload: (response) => {
-          const result =
-            response instanceof XMLHttpRequest
-              ? JSON.parse(response.responseText)
-              : JSON.parse(response);
-          return result.key;
-        },
-      },
-      patch: "/process?patch=",
-      revert: "/delete",
-      load: "/load?file=",
-      remove: async (source, load, error) => {
-        const response = await fetch("./api/files/delete", {
-          headers: {
-            "Content-Type": "text/plain;charset=UTF-8",
-          },
-          method: "DELETE",
-          body: source,
-        });
+const inputsConfig = JSON.parse(document.querySelector("#config").value);
 
-        load();
+inputsConfig.forEach((inputConfig) => {
+  const { name, files, ...config } = inputConfig;
+  const input = document.querySelector(`#${name}`);
+  const pond = createPond(input, config, name, files);
+});
+
+function getServerOptions(nameInput) {
+  return {
+    url: "api/files",
+    process: {
+      url: "/process",
+      method: "POST",
+      ondata: (formData) => {
+        formData.append("inputName", nameInput);
+        return formData;
       },
+      onload: (response) => {
+        const result =
+          response instanceof XMLHttpRequest
+            ? JSON.parse(response.responseText)
+            : JSON.parse(response);
+        return result.key;
+      },
+    },
+    patch: "/process?patch=",
+    revert: "/delete",
+    load: "/load?file=",
+    remove: async (source, load, error) => {
+      const response = await fetch("./api/files/delete", {
+        headers: {
+          "Content-Type": "text/plain;charset=UTF-8",
+        },
+        method: "DELETE",
+        body: source,
+      });
+
+      load();
     },
   };
 }
-function createPond(input, config, type) {
-  const pond = FilePond.create(input, config);
-  pond.setOptions(getServerOptions(type, pond));
+
+function createPond(input, config, type, files) {
+  const pond = FilePond.create(input, {
+    ...config,
+    files: files ? [...files] : [],
+    server: getServerOptions(type),
+    beforeRemoveFile: (item) => {
+      return item.origin === 1 ? true : confirm("¿Quieres eliminarlo?");
+    },
+  });
   return pond;
 }
-
-// get a reference to the fieldset elements
-const imageFieldset = document.querySelector("#images-files");
-const svgFieldset = document.querySelector("#svg-files");
-const videoFieldset = document.querySelector("#video-files");
-const pdfFieldset = document.querySelector("#pdf-files");
-// get a reference to the input elements
-const inputImage = document.querySelector("#inputImage");
-const inputSvg = document.querySelector("#inputSvg");
-const inputVideo = document.querySelector("#inputVideo");
-const inputPdf = document.querySelector("#inputPdf");
-const config = JSON.parse(document.querySelector("#config").value);
-
-const imagePond = createPond(
-  imageFieldset,
-  config.image,
-  inputImage.getAttribute("name").replace("[]", "")
-);
-console.log(imagePond.server.load);
-const svgPond = createPond(
-  svgFieldset,
-  config.svg,
-  inputSvg.getAttribute("name").replace("[]", "")
-);
-const videoPond = createPond(
-  videoFieldset,
-  config.video,
-  inputVideo.getAttribute("name").replace("[]", "")
-);
-const pdfPond = createPond(
-  pdfFieldset,
-  config.pdf,
-  inputPdf.getAttribute("name").replace("[]", "")
-);

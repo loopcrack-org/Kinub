@@ -46,23 +46,8 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
+                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config[0]]) ?>
 
-                                    <div class="card-body">
-                                        <p class="card-text">Ingresa imagenes en formato jpg, jpeg o png</p>
-                                        <fieldset id="images-files">
-                                            <?php if (isset($filesSaved['img'])) : ?>
-                                                <ul>
-                                                    <?php foreach ($filesSaved['img'] as $file) : ?>
-                                                        <li>
-                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
-                                                        </li>
-                                                    <?php endforeach ?>
-                                                </ul>
-                                            <?php endif ?>
-                                            <input id="inputImage" type="file" name="image[]">
-                                        </fieldset>
-                                    </div>
-                                    <!-- end card body -->
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -76,22 +61,7 @@
                                         <h4 class="card-title mb-0">Íconos (SVG)</h4>
                                     </div><!-- end card header -->
 
-                                    <div class="card-body">
-                                        <p class="card-text">Ingresa un ícono en formato svg</p>
-                                        <fieldset id="svg-files">
-                                            <?php if (isset($filesSaved['svg'])) : ?>
-                                                <ul>
-                                                    <?php foreach ($filesSaved['svg'] as $file) : ?>
-                                                        <li>
-                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
-                                                        </li>
-                                                    <?php endforeach ?>
-                                                </ul>
-                                            <?php endif ?>
-                                            <input id="inputSvg" type="file" name="svg">
-                                        </fieldset>
-                                    </div>
-                                    <!-- end card body -->
+                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config['1']]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -105,21 +75,8 @@
                                         <h4 class="card-title mb-0">Video</h4>
                                     </div><!-- end card header -->
 
-                                    <div class="card-body">
-                                        <p class="card-text">Ingresa videos en formato mp4</p>
-                                        <fieldset id="video-files">
-                                            <?php if (isset($filesSaved['video'])) : ?>
-                                                <ul>
-                                                    <?php foreach ($filesSaved['video'] as $file) : ?>
-                                                        <li>
-                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
-                                                        </li>
-                                                    <?php endforeach ?>
-                                                </ul>
-                                            <?php endif ?>
-                                            <input id="inputVideo" type="file" name="video">
-                                        </fieldset>
-                                    </div>
+                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config[2]]) ?>
+
                                     <!-- end card body -->
                                 </div>
                                 <!-- end card -->
@@ -134,23 +91,7 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Documents (PDF)</h4>
                                     </div><!-- end card header -->
-
-                                    <div class="card-body">
-                                        <p class="card-text">Ingresa archivos en formato pdf</p>
-                                        <fieldset id="pdf-files">
-                                            <?php if (isset($filesSaved['pdf'])) : ?>
-                                                <ul>
-                                                    <?php foreach ($filesSaved['pdf'] as $file) : ?>
-                                                        <li>
-                                                            <input value="<?= $file ?>" data-type="local" checked type="checkbox" />
-                                                        </li>
-                                                    <?php endforeach ?>
-                                                </ul>
-                                            <?php endif ?>
-                                            <input id="inputPdf" type="file" name="pdf">
-                                        </fieldset>
-                                    </div>
-                                    <!-- end card body -->
+                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config['3']]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -158,15 +99,13 @@
                         </div>
                         <!-- end row -->
 
-
-
                         <div class="text-end mb-3">
                             <button type="submit" class="btn btn-primary w-lg">Guardar</button>
                         </div>
                     </div>
                 </div>
                 <div class="filepondConfig">
-                    <input id="config" type="hidden" value="<?= $config ?? "" ?>">
+                    <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($config)) ?? "" ?>">
                 </div>
             </form>
         </div>
