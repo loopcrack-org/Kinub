@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\FileModel;
 use App\Utils\FileManager;
-use Exception;
 
 class CtrlApiFiles extends BaseController
 {
@@ -64,7 +63,7 @@ class CtrlApiFiles extends BaseController
         }
     }
 
-    public function deleteFile()
+    public function deleteTmpFile()
     {
         try {
             $key = $this->request->getBody();
@@ -74,6 +73,26 @@ class CtrlApiFiles extends BaseController
 
             if (FileManager::isEmptyFolder($folder)) {
                 FileManager::deleteEmptyFolder($folder);
+            }
+
+            return $this->response->setStatusCode(201);
+        } catch (\Throwable $th) {
+            return $this->response->setStatusCode(500);
+        }
+    }
+    
+    public function deleteFile() {
+        try {
+            $fileId = $this->request->getBody();
+            $fileModel = new FileModel();
+            $file = $fileModel->select(["fileRoute", "fileDirectoryRoute"])->where("fileId", $fileId)->first();
+            if($file["fileRoute"]) {
+                $fileModel->delete($fileId);
+                FileManager::deleteFile($file["fileRoute"]);
+    
+                if (FileManager::isEmptyFolder($file["fileDirectoryRoute"])) {
+                    FileManager::deleteEmptyFolder($file["fileDirectoryRoute"]);
+                }
             }
 
             return $this->response->setStatusCode(201);

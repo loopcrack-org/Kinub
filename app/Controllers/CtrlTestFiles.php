@@ -110,8 +110,7 @@ class CtrlTestFiles extends BaseController
     ];
 
 
-    public function viewTestFiles()
-    {
+    public function viewTestFiles() {
         $tests = (new TestModel())->findAll();
         return view("admin/test/testFiles", ["tests" => $tests]);
     }
@@ -200,6 +199,10 @@ class CtrlTestFiles extends BaseController
             "config" => $this->configFiles,
         ]);
     }
-    public function testFilesEdit($id) {}
-    public function deleteTestFiles() {}
+    public function updateTestFiles($id) {
+        echo "actualizando test No. $id";
+    }
+    public function deleteTestFiles() {
+        echo "borrando test";
+    }
 }

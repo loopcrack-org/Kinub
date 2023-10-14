@@ -70,7 +70,7 @@ function getServerOptions(nameInput) {
       },
     },
     patch: "/process?patch=",
-    revert: "/delete",
+    revert: "/deleteTmp",
     load: "/load?file=",
     remove: async (source, load, error) => {
       const response = await fetch("/admin/api/files/delete", {
