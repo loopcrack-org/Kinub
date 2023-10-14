@@ -96,6 +96,7 @@ $routes->group('admin', static function($routes) {
         $routes->get('load', 'CtrlApiFiles::getFileFromServer');
         $routes->patch('process', 'CtrlApiFiles::processTempFileChunk');
         $routes->post('process', 'CtrlApiFiles::processTempFile');
+        $routes->delete('deleteTmp', 'CtrlApiFiles::deleteTmpFile');
         $routes->delete('delete', 'CtrlApiFiles::deleteFile');
     });
 
