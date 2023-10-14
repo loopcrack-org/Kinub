@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\FileModel;
-use App\Models\TestFileModel;
+use App\Models\TestFilesModel;
+use App\Models\TestModel;
 use App\Utils\FileManager;
 
 class CtrlTestFiles extends BaseController
@@ -109,33 +109,30 @@ class CtrlTestFiles extends BaseController
         ],
     ];
 
-    public function index()
-    {
-        $testFileModel = new TestFileModel();
-        $files = $testFileModel->select("fileId")->where("type", "image")->findAll() ?? [];
-        foreach($files as $file) {
-            $this->configFiles[0]['files'][] = [
-                "source" => $file['fileId'],
-                "options" => [
-                    "type" => "local"
-                ],
-            ];
-        }
 
-        return view('admin/test/testFiles', ["config" => $this->configFiles]);
+    public function viewTestFiles()
+    {
+        $tests = (new TestModel())->findAll();
+        return view("admin/test/testFiles", ["tests" => $tests]);
     }
-
-    public function saveData()
+    public function viewTestFilesCreate()
     {
-        $files = $this->request->getPost();
+        return view('admin/test/testFilesCreate', ["config" => $this->configFiles]);
+    }
+    public function createTestFiles()
+    {
+        $data = $this->request->getPost();
         $folderId = FileManager::getFolderId();
         $outputFolder = "./uploads/$folderId/";
         FileManager::createFolder($outputFolder);
 
+        $testModel = new TestModel();
+        $testModel->insert(["testName" => $data["name"]]);
+        $testId = $testModel->getInsertID();
 
         // Save Images
-        if ($files['image']) {
-            foreach($files["image"] as $keyfile) {
+        if ($data['image']) {
+            foreach($data["image"] as $keyfile) {
                 $actualFolder = $this->folderTemp . $keyfile;
                 $filePath = scandir($actualFolder)[2];
 
@@ -145,9 +142,9 @@ class CtrlTestFiles extends BaseController
                     "fileDirectoryRoute" => $outputFolder,
                     "fileName" => $filePath
                 ];
-                $testFileModel = new TestFileModel();
+                $testFileModel = new TestFilesModel();
 
-                $testFileModel->createNewFile($folderData, "image");
+                $testFileModel->createNewFile($folderData, $testId, "image");
 
                 FileManager::changeFileDirectory("$actualFolder/$filePath", $outputFolder);
                 if(FileManager::isEmptyFolder($actualFolder)) {
@@ -158,4 +155,51 @@ class CtrlTestFiles extends BaseController
 
         return redirect("admin/testFiles");
     }
+    public function viewTestFilesEdit($id)
+    {
+        $name = (new TestModel())->select("testName")->where("testId", $id)->first()["testName"];
+        $testFileModel = new TestFilesModel();
+        $files = $testFileModel->select(["fileId", "fileType"])->where("testId", $id)->findAll() ?? [];
+        foreach($files as $file) {
+            if($file["fileType"] === "image") {
+                $this->configFiles[0]['files'][] = [
+                    "source" => $file['fileId'],
+                    "options" => [
+                        "type" => "local"
+                    ],
+                ];
+            }
+            if($file["fileType"] === "svg") {
+                $this->configFiles[1]['files'][] = [
+                    "source" => $file['fileId'],
+                    "options" => [
+                        "type" => "local"
+                    ],
+                ];
+            }
+            if($file["fileType"] === "video") {
+                $this->configFiles[2]['files'][] = [
+                    "source" => $file['fileId'],
+                    "options" => [
+                        "type" => "local"
+                    ],
+                ];
+            }
+            if($file["fileType"] === "pdf") {
+                $this->configFiles[3]['files'][] = [
+                    "source" => $file['fileId'],
+                    "options" => [
+                        "type" => "local"
+                    ],
+                ];
+            }
+        }
+
+        return view('admin/test/testFilesEdit', [
+            "name" => $name,
+            "config" => $this->configFiles,
+        ]);
+    }
+    public function testFilesEdit($id) {}
+    public function deleteTestFiles() {}
 }
