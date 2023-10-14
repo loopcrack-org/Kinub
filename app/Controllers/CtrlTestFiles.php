@@ -138,26 +138,16 @@ class CtrlTestFiles extends BaseController
             foreach($files["image"] as $keyfile) {
                 $actualFolder = $this->folderTemp . $keyfile;
                 $filePath = scandir($actualFolder)[2];
-                $fileModel = new FileModel();
 
-                $fileData = [
+                $folderData = [
                     "fileRoute" => "$outputFolder/$filePath",
                     "uuid" => $folderId,
                     "fileDirectoryRoute" => $outputFolder,
                     "fileName" => $filePath
                 ];
-                $fileModel->insert($fileData);
-
-                $fileId = $fileModel->getInsertID();
-
                 $testFileModel = new TestFileModel();
-                $testFileData = [
-                    "fileId" => $fileId,
-                    "type" => "image",
-                ];
 
-                $testFileModel->insert($testFileData);
-
+                $testFileModel->createNewFile($folderData, "image");
 
                 FileManager::changeFileDirectory("$actualFolder/$filePath", $outputFolder);
                 if(FileManager::isEmptyFolder($actualFolder)) {
