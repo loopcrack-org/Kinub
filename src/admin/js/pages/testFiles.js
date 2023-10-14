@@ -88,7 +88,7 @@ function getServerOptions(nameInput) {
 function createPond(input, config, type, files) {
   const pond = FilePond.create(input, {
     ...config,
-    files: files ? [...files] : [],
+    files: files,
     server: getServerOptions(type),
     beforeRemoveFile: (item) => {
       return item.origin === 1 ? true : confirm("¿Quieres eliminarlo?");
