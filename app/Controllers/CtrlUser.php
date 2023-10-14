@@ -3,7 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Database\Seeds\EmailSeeder;
 use App\Models\UserModel;
+use App\Utils\EmailSender;
 
 class CtrlUser extends BaseController
 {
@@ -13,13 +15,20 @@ class CtrlUser extends BaseController
         $users = $userModel->findAll();
         return view("admin/users/Users", ["users" => $users]);
     }
-    public function viewUserCreate() {
+    public function viewUserCreate()
+    {
         return view("admin/users/UserCreate");
     }
-    public function createUser() {
-        return "creating user...";
+    public function createUser()
+    {
+        $POST = $this->request->getPost();
+
+        return view("templates/emails/createUserAccount", [
+            "user" => $POST
+        ]);
     }
-    public function deleteUser() {
+    public function deleteUser()
+    {
         return "deleting user...";
     }
 }
