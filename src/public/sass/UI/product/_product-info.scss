@@ -1,66 +1,66 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
+@use "base/variables" as v;
+@use "base/mixins" as m;
 
 .product-info {
-    width: 90%;
-    max-width: 120rem;
-    margin: 0 auto;
-    margin-bottom: 6rem;
+  width: 90%;
+  max-width: 120rem;
+  margin: 0 auto;
+  margin-bottom: 6rem;
+
+  @include m.tablet {
+    margin-bottom: 8rem;
+  }
+  @include m.desktopXXL {
+    max-width: 180rem;
+  }
+  &--video {
+    width: 100%;
+  }
+  &__heading {
+    margin: 0;
+    margin-bottom: 2rem;
+    @include m.fluid-text(3rem, 5rem);
+    text-align: left;
+    text-transform: capitalize;
 
     @include m.tablet {
-        margin-bottom: 8rem;
+      margin-bottom: 4rem;
     }
-    @include m.desktopXXL {
-        max-width: 180rem;
+    &--description {
+      color: v.$sky-blue;
     }
-    &--video {
-        width: 100%;
+    &--technical-spec {
+      color: v.$bright-blue;
     }
-    &__heading {
-        margin: 0;
-        margin-bottom: 2rem;
-        @include m.fluid-text(3rem, 5rem);
-        text-align: left;
-        text-transform: capitalize;
+  }
+  &__text-container {
+    border-top: 0.8rem solid v.$turquoise-blue;
+    padding-top: 4rem;
 
-        @include m.tablet {
-            margin-bottom: 4rem;
-        }
-        &--description {
-            color: v.$sky-blue;
-        }
-        &--technical-spec {
-            color: v.$bright-blue;
-        }
+    @include m.tablet {
+      border-top: none;
+      padding-top: 0;
+      border-left: 0.8rem solid v.$turquoise-blue;
+      margin-left: 0.2rem;
+      padding-left: 3.5rem;
     }
-    &__text-container {
-        border-top: .8rem solid v.$turquoise-blue;
-        padding-top: 4rem;
+  }
+  &__text {
+    margin: 0;
+    line-height: 1.4;
+    color: v.$gray;
+    font-size: 2.2rem;
 
-        @include m.tablet {
-            border-top: none;
-            padding-top: 0;
-            border-left: .8rem solid v.$turquoise-blue;
-            margin-left: .2rem;
-            padding-left: 3.5rem;
-        }
+    &--title {
+      font-weight: 700;
+      margin-right: 0.5rem;
     }
-    &__text {
-        margin: 0;
-        line-height: 1.4;
-        color: v.$gray;
-        font-size: 2.2rem;
-        
-        &--title {
-            font-weight: 700;
-            margin-right: .5rem;
-        }
-    }
-    &__video-container {
-        margin: 0 auto;
+  }
+  &__video-container {
+    margin: 0 auto;
 
-        @include m.tablet {
-            max-width: 80%;
-        }
+    @include m.tablet {
+      max-width: 80%;
     }
+  }
 }

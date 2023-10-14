@@ -1,0 +1,70 @@
+accordion-element {
+  border-radius: 0.5rem;
+  display: inline-block;
+  height: unset;
+  margin-top: 0.1em;
+  width: 95%;
+
+  & > .ploiu-accordion-title {
+    border-radius: inherit;
+    padding: 1rem;
+    text-decoration: underline;
+    text-transform: capitalize;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
+  & > .ploiu-accordion-body {
+    word-wrap: anywhere;
+    border: 1px solid transparent;
+    overflow: hidden;
+    transition: height 300ms;
+    width: 95%;
+  }
+
+  & > accordion-element {
+    margin-left: 1em;
+  }
+
+  &:not(.open) > .ploiu-accordion-body {
+    border: 0;
+    height: 0 !important;
+  }
+
+  &.open {
+    height: -moz-max-content;
+    height: max-content;
+  }
+
+  & > .ploiu-accordion-title {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+accordion-fan {
+  display: block;
+  padding-top: 1vh;
+  width: 95%;
+
+  & > accordion-element {
+    border-radius: 0;
+    margin-top: -1vh;
+    width: 100%;
+  }
+
+  & > .ploiu-accordion-title {
+    width: auto;
+  }
+
+  & > accordion-element:first-child {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  & > accordion-element:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+}

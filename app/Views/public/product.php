@@ -4,16 +4,17 @@
 <link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/product.min.css" type="text/css">
+<link rel="stylesheet" href="assets/public/css/accordion.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
 <script src="assets/public/js/product-page.min.js"></script>
+<script src="assets/libs/vanilla-js-accordions/accordionElement.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
 <header class="header-product" style="background-image: url('assets/images/auth-one-bg.jpg');">
     <div class="header-product__mask"></div>
-
     <h1 class="header-product__title">TELEMETRÍA</h1>
 </header>
 
@@ -73,14 +74,14 @@
 
 </nav>
 
-<section class="product-info">
+<section class="product-info" id="description">
     <h2 class="product-info__heading product-info__heading--description">Descripción</h2>
     <div class="product-info__text-container">
         <p class="product-info__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magni pariatur vero doloremque, id ipsa praesentium a nesciunt! Ullam, porro laudantium. Voluptas fugit possimus vero explicabo rerum id omnis nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum alias praesentium explicabo, nesciunt expedita ducimus dolor a, id maxime quasi, cum culpa tempora quibusdam et. Rerum itaque soluta quo suscipit.</p>
     </div>
 </section>
 
-<section class="product-info">
+<section class="product-info" id="tech-info">
     <h2 class="product-info__heading product-info__heading--technical-spec">Especificaciones Técnicas</h2>
     <div class="product-info__text-container">
         <ul>
@@ -112,8 +113,65 @@
     </div>
 </section>
 
-<section class="download-area" id="download-area">
+<section class="product-info download-area" id="download-area">
 
+    <h2 class="download-area__heading">Área de descarga</h2>
+
+    <div class="download-area__accordion-container">
+        <accordion-fan class="download-area__accordion-fan">
+            <accordion-element class="download-area__accordion" data-title="&#8226; Brochure">
+                <ul class="download-area__links-container">
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                </ul>   
+            </accordion-element>
+            <accordion-element class="download-area__accordion" data-title="&#8226; Datasheet">
+                <ul class="download-area__links-container">
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                </ul>
+            </accordion-element>
+
+            <a href="#" class="download-area__link download-area__link--single">&#8226; Manual de Usuario</a>
+
+            <accordion-element class="download-area__accordion" data-title="&#8226; Certificados">
+                <ul class="download-area__links-container">
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                    <li>
+                        <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
+                    </li>
+                </ul>
+            </accordion-element>
+        </accordion-fan>
+    </div>
 </section>
 
 <?php $this->endSection('content');?>
