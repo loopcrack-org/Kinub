@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\FileModel;
+use App\Models\TestFileModel;
 use App\Utils\FileManager;
 
 class CtrlTestFiles extends BaseController
 {
     private $folderTemp = "./files/tmp/";
     protected $configFiles = [
-        "image" => [
+       [
+            "name" => "image",
             "acceptedFileTypes" => ["image/jpg", "image/png", "image/jpeg"],
             "fileValidateTypeLabelExpectedTypes" => "Selecciona jpg, jpeg o png",
             "chunkUploads" => true,
@@ -26,7 +29,8 @@ class CtrlTestFiles extends BaseController
             "labelMaxFileSizeExceeded" => "El archivo es demasiado grande",
             "labelMaxFileSize" => "El tamaño máximo permitido es {filesize}",
         ],
-        "svg" => [
+        [
+            "name" => 'svg',
             "acceptedFileTypes" => ["image/svg+xml"],
             "fileValidateTypeLabelExpectedTypes" => "Selecciona svg",
             "chunkUploads" => true,
@@ -39,7 +43,8 @@ class CtrlTestFiles extends BaseController
             "imageResizeTargetWidth" => 200,
             "imageResizeTargetHeight" => 200,
         ],
-        "video" => [
+        [
+            "name" => 'video',
             "acceptedFileTypes" => ["video/mp4"],
             "fileValidateTypeLabelExpectedTypes" => "Selecciona mp4",
             "chunkUploads" => true,
@@ -52,7 +57,8 @@ class CtrlTestFiles extends BaseController
             "labelMaxFileSizeExceeded" => "El archivo es demasiado grande",
             "labelMaxFileSize" => "El tamaño máximo permitido es {filesize}",
         ],
-        "pdf" => [
+        [
+            "name" => "pdf",
             "acceptedFileTypes" => ["application/pdf"],
             "fileValidateTypeLabelExpectedTypes" => "Selecciona pdf",
             "chunkUploads" => true,
@@ -105,21 +111,25 @@ class CtrlTestFiles extends BaseController
 
     public function index()
     {
-        $img = glob("./uploads/**/*.png");
-        $video = glob("./uploads/**/*.mp4");
-        $pdf = glob("./uploads/**/*.pdf");
-        $svg = glob("./uploads/**/*.svg");
+        $testFileModel = new TestFileModel();
+        $files = $testFileModel->select("fileId")->where("type", "image")->findAll() ?? [];
+        foreach($files as $file) {
+            $this->configFiles[0]['files'][] = [
+                "source" => $file['fileId'],
+                "options" => [
+                    "type" => "local"
+                ],
+            ];
+        }
 
-        $data = ["img" => $img, "video" => $video, "pdf" => $pdf, "svg" => $svg];
-
-        return view('admin/test/testFiles', ['filesSaved' => $data, "config" => htmlspecialchars(json_encode($this->configFiles))]);
+        return view('admin/test/testFiles', ["config" => $this->configFiles]);
     }
 
     public function saveData()
     {
         $files = $this->request->getPost();
-        $idFolder = md5(uniqid(rand(), true));
-        $outputFolder = "./uploads/$idFolder/";
+        $folderId = FileManager::getFolderId();
+        $outputFolder = "./uploads/$folderId/";
         FileManager::createFolder($outputFolder);
 
 
@@ -127,24 +137,33 @@ class CtrlTestFiles extends BaseController
         if ($files['image']) {
             foreach($files["image"] as $keyfile) {
                 $actualFolder = $this->folderTemp . $keyfile;
-                $filePath = glob("$actualFolder/*.*")[0];
-                FileManager::changeFileDirectory($filePath, $outputFolder);
+                $filePath = scandir($actualFolder)[2];
+                $fileModel = new FileModel();
+
+                $fileData = [
+                    "fileRoute" => "$outputFolder/$filePath",
+                    "uuid" => $folderId,
+                    "fileDirectoryRoute" => $outputFolder,
+                    "fileName" => $filePath
+                ];
+                $fileModel->insert($fileData);
+
+                $fileId = $fileModel->getInsertID();
+
+                $testFileModel = new TestFileModel();
+                $testFileData = [
+                    "fileId" => $fileId,
+                    "type" => "image",
+                ];
+
+                $testFileModel->insert($testFileData);
+
+
+                FileManager::changeFileDirectory("$actualFolder/$filePath", $outputFolder);
                 if(FileManager::isEmptyFolder($actualFolder)) {
                     FileManager::deleteEmptyFolder($actualFolder);
                 }
             }
-        }
-        // Save Other files
-        if ($files['svg']) {
-            FileManager::changeFileDirectory($files['svg'], $outputFolder);
-        }
-
-        if ($files['video']) {
-            FileManager::changeFileDirectory($files['video'], $outputFolder);
-        }
-
-        if ($files['pdf']) {
-            FileManager::changeFileDirectory($files['pdf'], $outputFolder);
         }
 
         return redirect("admin/testFiles");

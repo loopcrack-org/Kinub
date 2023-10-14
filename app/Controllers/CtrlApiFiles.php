@@ -3,33 +3,38 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\FileModel;
 use App\Utils\FileManager;
 use Exception;
 
 class CtrlApiFiles extends BaseController
 {
     private $folderTemp = "./files/tmp/";
+    private $folderUpload = "./uploads/";
 
     public function getFileFromServer()
     {
 
         try {
-            $fileName = $this->request->getGet()['file'];
-            return $this->response->setStatusCode(200)->download($fileName, null, true);
+            $fileId = $this->request->getGet()['file'];
+            $fileModel = new FileModel();
+            $fileRoute = $fileModel->select("fileRoute")->where("fileId", $fileId)->first() ?? "";
+
+            return $this->response->setStatusCode(200)->download($fileRoute['fileRoute'], null, true);
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(404, $fileName);
+            return $this->response->setStatusCode(404, $fileId);
         }
     }
 
     public function processTempFile()
     {
         try {
-            $key = md5(uniqid(rand(), true));
+            $key = FileManager::getFolderId();
             $folder = $this->folderTemp . $key;
             FileManager::createFolder($folder);
 
             $inputName = $this->request->getPost()['inputName'];
-            $file = $this->request->getFiles()[$inputName][0] ?? new Exception("input no encontrado");
+            $file = $this->request->getFiles()[$inputName][0] ?? null;
             if ($file) {
                 FileManager::moveClientFileToServer($file, $folder);
             }
@@ -44,11 +49,12 @@ class CtrlApiFiles extends BaseController
     {
         try {
             //code...
+            $key = $this->request->getGet("patch");
             $fileName = $this->request->header('Upload-Name')->getValue();
             $fileData = $this->request->getBody();
             $offset = $this->request->header('Upload-Offset')->getValue();
 
-            $fileTmp = $this->folderTemp . $fileName;
+            $fileTmp = "$this->folderTemp/$key/$fileName";
 
             FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
 
@@ -63,8 +69,8 @@ class CtrlApiFiles extends BaseController
         try {
             $key = $this->request->getBody();
             $folder = $this->folderTemp . $key;
-            $file = glob("$folder/*.*")[0];
-            FileManager::deleteFile($file);
+            $file = scandir($folder)[2];
+            FileManager::deleteFile("$folder/$file");
 
             if (FileManager::isEmptyFolder($folder)) {
                 FileManager::deleteEmptyFolder($folder);
