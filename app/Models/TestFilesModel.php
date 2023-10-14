@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class TestFileModel extends Model
+class TestFilesModel extends Model
 {
     protected $table = 'test_files';
     protected $primaryKey = 'testFileId';
-    protected $allowedFields = ['fileId', 'type'];
+    protected $allowedFields = ['fileId', 'testId', 'type'];
 }

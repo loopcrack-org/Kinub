@@ -45,14 +45,15 @@ FilePond.registerPlugin(
 const inputsConfig = JSON.parse(document.querySelector("#config").value);
 
 inputsConfig.forEach((inputConfig) => {
-  const { name, files, ...config } = inputConfig;
+  const { name, ...config } = inputConfig;
   const input = document.querySelector(`#${name}`);
-  const pond = createPond(input, config, name, files);
+  const pond = createPond(input, config, name);
+  console.log(pond.files);
 });
 
 function getServerOptions(nameInput) {
   return {
-    url: "api/files",
+    url: "/admin/api/files",
     process: {
       url: "/process",
       method: "POST",
@@ -72,9 +73,10 @@ function getServerOptions(nameInput) {
     revert: "/delete",
     load: "/load?file=",
     remove: async (source, load, error) => {
-      const response = await fetch("./api/files/delete", {
+      const response = await fetch("/admin/api/files/delete", {
         headers: {
           "Content-Type": "text/plain;charset=UTF-8",
+          type: "local",
         },
         method: "DELETE",
         body: source,
@@ -85,10 +87,9 @@ function getServerOptions(nameInput) {
   };
 }
 
-function createPond(input, config, type, files) {
+function createPond(input, config, type) {
   const pond = FilePond.create(input, {
     ...config,
-    files: files ? [...files] : [],
     server: getServerOptions(type),
     beforeRemoveFile: (item) => {
       return item.origin === 1 ? true : confirm("¿Quieres eliminarlo?");
