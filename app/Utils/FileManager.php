@@ -7,10 +7,8 @@ use Exception;
 
 class FileManager
 {
-
     public static function createFolder(String $path)
     {
-
         try {
             if (!is_dir($path)) {
                 mkdir($path, 0777, true);
@@ -18,6 +16,11 @@ class FileManager
         } catch (\Throwable $th) {
             throw new Exception("Ha ocurrido un error al crear la carpeta");
         }
+    }
+
+    public static function getFolderId()
+    {
+        return md5(uniqid(rand(), true));
     }
 
     public static function moveClientFileToServer(File $file, String $destPath)
