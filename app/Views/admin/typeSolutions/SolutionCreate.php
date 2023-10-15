@@ -13,7 +13,7 @@
 <?= $this->section("content") ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('title' => 'Crear Solución', 'pagetitle' => 'Soluciones de Medición', 'pagetitleInner' => 'Crear Solución',)); ?>
+        <?php echo view('partials/page-title', array('title' => 'Crear Solución', "titleUrl" => "/admin/soluciones", 'pagetitle' => 'Soluciones de Medición', 'pagetitleInner' => 'Crear Solución',)); ?>
 
 
         <div class="row justify-content-center">
@@ -23,7 +23,7 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
-                <form id="createproduct-form" autocomplete="off" class="needs-validation" novalidate method="POST">
+                <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
 
                     <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
 

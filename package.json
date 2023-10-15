@@ -43,6 +43,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-webp": "^4.0.1",
+    "intl-tel-input": "^18.2.1",
     "lord-icon-element": "^4.1.1",
     "lottie-web": "^5.12.2",
     "node-waves": "^0.7.6",
