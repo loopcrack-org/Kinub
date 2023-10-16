@@ -6,7 +6,7 @@ class SupportEmailValidation
 {
     private $validationRules = [
         "support-customer" => "required|alpha_space",
-        "support-phone" => "required|numeric|exact_length[10]|",
+        "support-phone" => "required",
         "support-email" => "required|valid_emails",
         "support-model" => "required",
         "support-serial" => "required",
@@ -20,9 +20,7 @@ class SupportEmailValidation
             "alpha_space" => "El campo nombre solo debe contener carácteres alfabéticos y espacios"
         ],
         "support-phone" => [
-            "required" => "El teléfono es obligatorio",
-            "numeric" => "El campo teléfono solo debe contener carácteres numéricos",
-            "exact_length" => "El teléfono debe tener 10 dígitos"
+            "required" => "El teléfono es obligatorio"
         ],
         "support-email" => [
             "required" => "El email es obligatorio",

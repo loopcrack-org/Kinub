@@ -12,7 +12,14 @@
     "dev:common": "gulp dev:common",
     "dev:admin": "gulp dev:admin",
     "dev": "gulp dev:all",
-    "build": "gulp build"
+    "build": "gulp build",
+    "prepare": "husky install",
+    "lint": "eslint '**/*.{ts,js}'",
+    "lint:fix": "npm run lint --fix",
+    "lint:styles": "stylelint '**/*.{scss,css}'",
+    "lint:styles:fix": "npm run lint:styles --fix",
+    "prettier": "prettier --check '**/*.{ts,js,json,html,css,md,scss,sass,xml,svg,less,postcss,markdown,yml,yaml}'",
+    "prettier:fix": "yarn run prettier --write"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +43,7 @@
     "gulp-rename": "^2.0.0",
     "gulp-sass": "^5.1.0",
     "gulp-webp": "^4.0.1",
+    "intl-tel-input": "^18.2.1",
     "lord-icon-element": "^4.1.1",
     "lottie-web": "^5.12.2",
     "node-waves": "^0.7.6",
@@ -47,9 +55,33 @@
     "webpack-stream": "^7.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.7.2",
+    "@commitlint/config-conventional": "^17.7.0",
+    "branch-name-lint": "^2.1.1",
     "browser-sync": "^2.29.3",
     "concurrently": "^8.2.1",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-compat": "^4.2.0",
     "gulp-plumber": "^1.2.1",
-    "gulp-sourcemaps": "^3.0.0"
+    "gulp-sourcemaps": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.1",
+    "prettier": "3.0.3",
+    "stylelint": "^15.10.3",
+    "stylelint-config-idiomatic-order": "^9.0.0",
+    "stylelint-config-recommended-scss": "^13.0.0",
+    "stylelint-no-unsupported-browser-features": "^7.0.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-scss": "^5.2.1",
+    "stylelint-selector-bem-pattern": "^3.0.1"
+  },
+  "browserslist": [
+    ">1% and last 3 versions",
+    "not OperaMini all",
+    "not dead"
+  ],
+  "volta": {
+    "node": "18.14.0"
   }
 }

@@ -1,42 +1,46 @@
-const btnMobileMenu = document.querySelector("#menu-mobile");
-const headerMobile = document.querySelector("#header-mobile");
+const hamburgerBtn = document.querySelector("#menu-mobile");
+const header = document.querySelector("#header-nav");
+const navigation = document.querySelector("#navigation");
+const MOBILE_MEDIA_QUERY = "(min-width: 768px)";
+const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
 
-const sidebar = document.querySelector(".sidebar");
-const links = document.querySelectorAll(".navigation-mobile__link");
-
-if(btnMobileMenu){
-    btnMobileMenu.addEventListener("click", function(){
-        headerMobile.classList.toggle("no-shadow");
-        btnMobileMenu.classList.toggle("is-active");
-        if(sidebar.classList.contains("show")) {
-            sidebar.classList.add("hide");
-
-            setTimeout(() => {
-             sidebar.classList.remove("show");
-             sidebar.classList.remove("hide");
-            }, 500);
-        } else {
-            sidebar.classList.add("show");
-        }
-    });
+// UI-Related Functions
+function setUIBasedOnMediaQuery() {
+  if (mediaQuery.matches) {
+    hideNavBar();
+  }
 }
 
-links.forEach(link => link.addEventListener("click", function(){
-    sidebar.classList.add("hide");
-    headerMobile.classList.toggle("no-shadow");
+function toggleActiveMobileMenu() {
+  header.classList.toggle("header--active");
+  navigation.classList.toggle("navigation--active");
+}
 
-    setTimeout(() => {
-        sidebar.classList.remove("show");
-        sidebar.classList.remove("hide");
-       }, 500);
+// Event-related functions
+function watchMenuClicks() {
+  hamburgerBtn.addEventListener("click", toggleActiveMobileMenu);
+}
 
-    btnMobileMenu.classList.remove("is-active");
-}));
+function watchLinkClicks() {
+  const links = document.querySelectorAll(".navigation__link");
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (!mediaQuery.matches) {
+        hideNavBar();
+      }
+    });
+  });
+}
 
-window.addEventListener("resize", function(){
-    const displayWidth = document.body.clientWidth;
-    if(displayWidth>=768){
-        sidebar.classList.remove("show");
-        btnMobileMenu.classList.remove("is-active");
-    }
-})
+export function initializeUI() {
+  watchMenuClicks();
+  watchLinkClicks();
+  mediaQuery.addEventListener("change", setUIBasedOnMediaQuery);
+}
+
+function hideNavBar() {
+  navigation.classList.remove("navigation--active");
+  header.classList.remove("header--active");
+}
+
+initializeUI();
