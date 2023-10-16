@@ -3,13 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\EmailModel;
-use App\Utils\EmailSender; 
+use App\Utils\EmailSender;
 use App\Models\UserModel;
 use App\Validation\ContactEmailValidation;
 use App\Validation\PasswordEmailValidation;
 use App\Validation\SupportEmailValidation;
 use CodeIgniter\HTTP\RedirectResponse;
 use Exception;
+
 class CtrlEmail extends BaseController
 {
     public function sendContactEmail(): RedirectResponse
@@ -98,9 +99,9 @@ class CtrlEmail extends BaseController
             ]
         ];
 
-        $successEmail = EmailSender::sendEmail($POST["support-customer"],$POST['support-email'],"kinub_admin@gmail.com", $subject, "mailDetail", $formData );
+        $successEmail = EmailSender::sendEmail($POST["support-customer"], $POST['support-email'], "kinub_admin@gmail.com", $subject, "mailDetail", $formData);
 
-        if($successEmail){
+        if($successEmail) {
             $response = [
                 "title" => "Envío exitoso",
                 "message" => "Se ha enviado correctamente",
@@ -112,7 +113,7 @@ class CtrlEmail extends BaseController
                 "emailContent" => json_encode($POST)
             ];
             $emailModel->insert($data);
-        }else{
+        } else {
             $response = [
                 "title" => "Envío fallido",
                 "message" => "No se pudo realizar el envío del email",
@@ -129,20 +130,25 @@ class CtrlEmail extends BaseController
         $data = $this->request->getPost();
 
         try {
-            if (!$validateEmail->validateInputs($data)) throw new Exception();
+            if (!$validateEmail->validateInputs($data)) {
+                throw new Exception();
+            }
 
             $userModel = new UserModel();
             $user = $userModel->where("userEmail", $data['email'])->first();
 
             $validateEmail->existUserWithEmail($user);
+            $validateEmail->validateConfirmedAccount($user);
             $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
             $token = uniqid();
             $userName =  $user['userFirstName'] . " " . $user['userLastName'];
 
-            $isSend = EmailSender::sendEmail("Kinub", 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset',  ['userName' =>  $userName, 'token' => $token] );
+            $isSend = EmailSender::sendEmail("Kinub", 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' =>  $userName, 'token' => $token]);
 
-            if (!$isSend) throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');
+            if (!$isSend) {
+                throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');
+            }
 
             $response = [
                 'title' => "Restablezca su contraseña",

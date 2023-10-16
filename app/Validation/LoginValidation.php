@@ -23,7 +23,7 @@ class LoginValidation extends BaseValidation
     ];
 
     protected $invalid_credentials_message = "Email o contraseña inválidos";
-    protected $unconfirmed_account_message = "La cuenta no ha sido confirmada";
+    protected $unconfirmed_account_message = "Tu cuenta no ha sido confirmada. Por favor, revisa tu correo electrónico para finalizar el proceso de confirmación de tu cuenta.";
 
     public function validateCredentials($user, $password)
     {
