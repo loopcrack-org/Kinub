@@ -68,6 +68,8 @@ writable/debugbar/*
 
 php_errors.log
 
+.php-cs-fixer.cache
+
 #-------------------------
 # User Guide Temp Files
 #-------------------------
@@ -123,7 +125,12 @@ nb-configuration.xml
 /api/
 
 # Visual Studio Code
+
 .vscode/
+!/.vscode/extensions.json
+!/.vscode/recommended-launch.json
+!/.vscode/recommended-settings.json
+!/.vscode/README.md
 
 /results/
 /phpunit*.xml
