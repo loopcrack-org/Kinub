@@ -136,3 +136,7 @@ nb-configuration.xml
 /public/assets/public/**
 /public/assets/admin/**
 /public/assets/common/**
+
+# files
+/public/files/**/*
+/public/uploads/**/*

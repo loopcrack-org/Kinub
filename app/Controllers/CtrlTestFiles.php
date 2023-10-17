@@ -108,22 +108,15 @@ class CtrlTestFiles extends BaseController
             ]
         ],
     ];
-
-
     public function viewTestFiles() {
         $tests = (new TestModel())->findAll();
         return view("admin/test/testFiles", ["tests" => $tests]);
     }
-    public function viewTestFilesCreate()
-    {
+    public function viewTestFilesCreate() {
         return view('admin/test/testFilesCreate', ["config" => $this->configFiles]);
     }
-    public function createTestFiles()
-    {
+    public function createTestFiles() {
         $data = $this->request->getPost();
-        $folderId = FileManager::getFolderId();
-        $outputFolder = "./uploads/$folderId/";
-        FileManager::createFolder($outputFolder);
 
         $testModel = new TestModel();
         $testModel->insert(["testName" => $data["name"]]);
@@ -132,6 +125,10 @@ class CtrlTestFiles extends BaseController
         // Save Images
         if ($data['image']) {
             foreach($data["image"] as $keyfile) {
+                $folderId = FileManager::getFolderId();
+                $outputFolder = "./uploads/$folderId/";
+                FileManager::createFolder($outputFolder);
+
                 $actualFolder = $this->folderTemp . $keyfile;
                 $filePath = scandir($actualFolder)[2];
 
@@ -142,7 +139,6 @@ class CtrlTestFiles extends BaseController
                     "fileName" => $filePath
                 ];
                 $testFileModel = new TestFilesModel();
-
                 $testFileModel->createNewFile($folderData, $testId, "image");
 
                 FileManager::changeFileDirectory("$actualFolder/$filePath", $outputFolder);
@@ -154,15 +150,14 @@ class CtrlTestFiles extends BaseController
 
         return redirect("admin/testFiles");
     }
-    public function viewTestFilesEdit($id)
-    {
-        $name = (new TestModel())->select("testName")->where("testId", $id)->first()["testName"];
-        $testFileModel = new TestFilesModel();
-        $files = $testFileModel->select(["fileId", "fileType"])->where("testId", $id)->findAll() ?? [];
+    public function viewTestFilesEdit($id) {
+        $testModel = new TestModel();
+        $name = $testModel->select("testName")->where("testId", $id)->first()["testName"];
+        $files = $testModel->getKeyFiles($id);
         foreach($files as $file) {
             if($file["fileType"] === "image") {
                 $this->configFiles[0]['files'][] = [
-                    "source" => $file['fileId'],
+                    "source" => $file['uuid'],
                     "options" => [
                         "type" => "local"
                     ],
@@ -170,7 +165,7 @@ class CtrlTestFiles extends BaseController
             }
             if($file["fileType"] === "svg") {
                 $this->configFiles[1]['files'][] = [
-                    "source" => $file['fileId'],
+                    "source" => $file['uuid'],
                     "options" => [
                         "type" => "local"
                     ],
@@ -178,7 +173,7 @@ class CtrlTestFiles extends BaseController
             }
             if($file["fileType"] === "video") {
                 $this->configFiles[2]['files'][] = [
-                    "source" => $file['fileId'],
+                    "source" => $file['uuid'],
                     "options" => [
                         "type" => "local"
                     ],
@@ -186,7 +181,7 @@ class CtrlTestFiles extends BaseController
             }
             if($file["fileType"] === "pdf") {
                 $this->configFiles[3]['files'][] = [
-                    "source" => $file['fileId'],
+                    "source" => $file['uuid'],
                     "options" => [
                         "type" => "local"
                     ],

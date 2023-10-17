@@ -15,13 +15,13 @@ class CtrlApiFiles extends BaseController
     {
 
         try {
-            $fileId = $this->request->getGet()['file'];
+            $fileKey = $this->request->getGet()['file'];
             $fileModel = new FileModel();
-            $fileRoute = $fileModel->select("fileRoute")->where("fileId", $fileId)->first() ?? "";
+            $fileRoute = $fileModel->select("fileRoute")->where("uuid", $fileKey)->first();
 
             return $this->response->setStatusCode(200)->download($fileRoute['fileRoute'], null, true);
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(404, $fileId);
+            return $this->response->setStatusCode(404, $fileKey);
         }
     }
 
@@ -83,18 +83,15 @@ class CtrlApiFiles extends BaseController
     
     public function deleteFile() {
         try {
-            $fileId = $this->request->getBody();
+            $fileKey = $this->request->getBody();
+            $fileFolder = $this->folderUpload . $fileKey . "/";
+            $fileRoute = $fileFolder . scandir($fileFolder)[2];
             $fileModel = new FileModel();
-            $file = $fileModel->select(["fileRoute", "fileDirectoryRoute"])->where("fileId", $fileId)->first();
-            if($file["fileRoute"]) {
-                $fileModel->delete($fileId);
-                FileManager::deleteFile($file["fileRoute"]);
-    
-                if (FileManager::isEmptyFolder($file["fileDirectoryRoute"])) {
-                    FileManager::deleteEmptyFolder($file["fileDirectoryRoute"]);
-                }
+            $fileModel->where("uuid", $fileKey)->delete();
+            FileManager::deleteFile($fileRoute);
+            if (FileManager::isEmptyFolder($fileFolder)) {
+                FileManager::deleteEmptyFolder($fileFolder);
             }
-
             return $this->response->setStatusCode(201);
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500);

@@ -44,11 +44,17 @@ FilePond.registerPlugin(
 
 const inputsConfig = JSON.parse(document.querySelector("#config").value);
 
+const deletedFiles = [];
+const references = {};
+
 inputsConfig.forEach((inputConfig) => {
   const { name, ...config } = inputConfig;
-  const input = document.querySelector(`#${name}`);
+  const pondBox = document.querySelector(`[data-name=${name}]`);
+  const input = pondBox.querySelector(`#${name}`);
+  const alert = pondBox.querySelector(".alert");
   const pond = createPond(input, config, name);
-  console.log(pond.files);
+  registerPond(name, pond, input, pondBox);
+  // console.log(references);
 });
 
 function getServerOptions(nameInput) {
@@ -73,6 +79,15 @@ function getServerOptions(nameInput) {
     revert: "/deleteTmp",
     load: "/load?file=",
     remove: async (source, load, error) => {
+      // const { pond, input, box } = references[`${nameInput}`];
+      // console.log(pond);
+      // console.log(pond.chunkSize);
+      // console.log(input);
+      // console.log(box);
+      // const alert = box.querySelector("#alert");
+      // alert.classList.remove("d-none");
+      // alert.classList.add("alert-warning");
+      // alert.textContent = "Ejemplo de alerta";
       const response = await fetch("/admin/api/files/delete", {
         headers: {
           "Content-Type": "text/plain;charset=UTF-8",
@@ -81,19 +96,27 @@ function getServerOptions(nameInput) {
         method: "DELETE",
         body: source,
       });
-
       load();
     },
   };
 }
 
-function createPond(input, config, type) {
+function createPond(input, config, type, alert) {
   const pond = FilePond.create(input, {
     ...config,
     server: getServerOptions(type),
+    alert: alert,
     beforeRemoveFile: (item) => {
       return item.origin === 1 ? true : confirm("¿Quieres eliminarlo?");
     },
   });
   return pond;
+}
+
+function registerPond(name, pond, input, box) {
+  references[`${name}`] = {
+    pond: pond,
+    input: input,
+    box: box,
+  };
 }
