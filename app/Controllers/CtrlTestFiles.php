@@ -20,6 +20,7 @@ class CtrlTestFiles extends BaseController
             "chunkSize" => 1000000,
             "allowMultiple" => true,
             "maxFiles" => 3,
+            "minFiles" => 2,
             "imagePreviewHeight" => 170,
             "imageCropAspectRatio" => "1:1",
             "imageResizeTargetWidth" => 200,
@@ -108,14 +109,17 @@ class CtrlTestFiles extends BaseController
             ]
         ],
     ];
-    public function viewTestFiles() {
+    public function viewTestFiles()
+    {
         $tests = (new TestModel())->findAll();
         return view("admin/test/testFiles", ["tests" => $tests]);
     }
-    public function viewTestFilesCreate() {
+    public function viewTestFilesCreate()
+    {
         return view('admin/test/testFilesCreate', ["config" => $this->configFiles]);
     }
-    public function createTestFiles() {
+    public function createTestFiles()
+    {
         $data = $this->request->getPost();
 
         $testModel = new TestModel();
@@ -150,7 +154,8 @@ class CtrlTestFiles extends BaseController
 
         return redirect("admin/testFiles");
     }
-    public function viewTestFilesEdit($id) {
+    public function viewTestFilesEdit($id)
+    {
         $testModel = new TestModel();
         $name = $testModel->select("testName")->where("testId", $id)->first()["testName"];
         $files = $testModel->getKeyFiles($id);
@@ -194,10 +199,12 @@ class CtrlTestFiles extends BaseController
             "config" => $this->configFiles,
         ]);
     }
-    public function updateTestFiles($id) {
+    public function updateTestFiles($id)
+    {
         echo "actualizando test No. $id";
     }
-    public function deleteTestFiles() {
+    public function deleteTestFiles()
+    {
         echo "borrando test";
     }
 }

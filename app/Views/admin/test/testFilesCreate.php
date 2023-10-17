@@ -6,6 +6,7 @@
 
 <?= $this->section("css") ?>
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css">
+<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section("content") ?>
