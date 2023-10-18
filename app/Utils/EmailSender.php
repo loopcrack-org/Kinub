@@ -27,7 +27,7 @@ class EmailSender
         if (preg_match('/<body>(.*?)<\/body>/is', $emailHTML, $matches)) {
             $emailBody = $matches[1];
 
-            $emailBody = preg_replace('/\s+/', '', $emailBody);
+            $emailBody = trim(preg_replace('/\s+/', ' ', $emailBody));
         }
 
         return $emailBody;
