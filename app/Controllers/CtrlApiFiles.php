@@ -80,21 +80,4 @@ class CtrlApiFiles extends BaseController
             return $this->response->setStatusCode(500);
         }
     }
-    
-    public function deleteFile() {
-        try {
-            $fileKey = $this->request->getBody();
-            $fileFolder = $this->folderUpload . $fileKey . "/";
-            $fileRoute = $fileFolder . scandir($fileFolder)[2];
-            $fileModel = new FileModel();
-            $fileModel->where("uuid", $fileKey)->delete();
-            FileManager::deleteFile($fileRoute);
-            if (FileManager::isEmptyFolder($fileFolder)) {
-                FileManager::deleteEmptyFolder($fileFolder);
-            }
-            return $this->response->setStatusCode(201);
-        } catch (\Throwable $th) {
-            return $this->response->setStatusCode(500);
-        }
-    }
 }

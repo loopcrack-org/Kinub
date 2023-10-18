@@ -26,24 +26,9 @@ FilePond.registerPlugin(
   FilepondPluginPdfPreview
 );
 
-const inputsConfig = JSON.parse(document.querySelector("#config").value);
 const form = document.querySelector("#form");
-
-form.addEventListener("submit", function (e) {
-  e.preventDefault();
-  const alerts = references.map((element) => {
-    return hasMinFilesIntoFilePond(element);
-  });
-
-  //if (alerts.some((alert) => alert === false)) return;
-
-  deleteFilesFromServer();
-
-  //this.submit();
-});
-
-let deletedFiles = [];
-
+const inputsConfig = JSON.parse(document.querySelector("#config").value);
+let filesToDelete = [];
 const references = inputsConfig.map((inputConfig) => {
   const { name, minFiles, ...config } = inputConfig;
   const input = document.querySelector(`#${name}`);
@@ -53,6 +38,17 @@ const references = inputsConfig.map((inputConfig) => {
   return reference;
 });
 
+form.addEventListener("submit", function (e) {
+  e.preventDefault();
+  const alerts = references.map((element) => {
+    return hasMinFilesIntoFilePond(element);
+  });
+
+  if (alerts.some((alert) => alert === false)) return;
+
+  this.submit();
+});
+
 function createPond(input, config, type) {
   const pond = FilePond.create(input, {
     ...config,
@@ -60,15 +56,13 @@ function createPond(input, config, type) {
     beforeRemoveFile: createAlertToDeleteServerFile,
   });
 
+  const submitBtn = form.querySelector("[type='submit']");
   pond.on("addfilestart", (e) => {
     if (e.origin === 1) {
-      const submitBtn = form.querySelector("[type='submit']");
       submitBtn.disabled = true;
     }
   });
-
-  pond.on("processfiles", () => {
-    const submitBtn = form.querySelector("[type='submit']");
+  pond.on("processfile", () => {
     submitBtn.disabled = false;
   });
 
@@ -85,10 +79,6 @@ async function createAlertToDeleteServerFile(item) {
       cancelButtonText: "Cancelar",
       showCancelButton: true,
     });
-
-    if (response.isConfirmed) {
-      deletedFiles = [...deletedFiles, item.serverId];
-    }
 
     return response.isConfirmed;
   }
@@ -118,6 +108,7 @@ function getServerOptions(nameInput) {
     revert: "/deleteTmp",
     load: "/load?file=",
     remove: async (source, load, error) => {
+      addFileToDelete(nameInput, source);
       load();
     },
   };
@@ -151,15 +142,11 @@ function createAlertModal(input, message, type) {
   }
 }
 
-function deleteFilesFromServer() {
-  const url = `${window.location.origin}/admin/api/files/delete`;
-  deletedFiles.forEach(async (deleteFile) => {
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "text/plain;charset=UTF-8",
-      },
-      method: "DELETE",
-      body: deleteFile,
-    });
-  });
+function addFileToDelete(nameInput, source) {
+  const deleteFileContainer = document.querySelector(`#delete-${nameInput}`);
+  const fileToDelete = document.createElement("INPUT");
+  fileToDelete.name = `delete-${nameInput}[]`;
+  fileToDelete.type = "hidden";
+  fileToDelete.value = source;
+  deleteFileContainer.appendChild(fileToDelete);
 }
