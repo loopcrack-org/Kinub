@@ -9,7 +9,6 @@ use App\Utils\FileManager;
 class CtrlApiFiles extends BaseController
 {
     private $folderTemp = "./files/tmp/";
-    private $folderUpload = "./uploads/";
 
     public function getFileFromServer()
     {
@@ -47,7 +46,6 @@ class CtrlApiFiles extends BaseController
     public function processTempFileChunk()
     {
         try {
-            //code...
             $key = $this->request->getGet("patch");
             $fileName = $this->request->header('Upload-Name')->getValue();
             $fileData = $this->request->getBody();

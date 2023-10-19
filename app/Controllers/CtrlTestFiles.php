@@ -205,10 +205,10 @@ class CtrlTestFiles extends BaseController
     {
         $files = $this->request->getPost();
         $testModel = new TestModel();
-        $actualImages = array_map(function($file) {return $file["uuid"];}, $testModel->getKeyFiles($id));
+        $actualImages = array_map(function ($file) {return $file["uuid"];}, $testModel->getKeyFiles($id));
         $newImages = array_diff($files["image"], $actualImages);
         $deleteImages = $files["delete-image"] ?? [];
-        
+
         // Save Images
         if ($newImages) {
             foreach($newImages as $keyfile) {
