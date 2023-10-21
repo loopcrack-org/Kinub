@@ -11,7 +11,6 @@ class Categories extends Migration
         $this->forge->addField([
             'categoryId' => [
                 'type'           => 'int',
-                'null'           => false,
                 'auto_increment' => true,
             ],
             'categoryName' => [
