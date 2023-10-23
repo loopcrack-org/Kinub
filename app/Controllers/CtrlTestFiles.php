@@ -7,6 +7,7 @@ use App\Models\FileModel;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
+use App\Validation\ChunkFilesValidation;
 
 class CtrlTestFiles extends BaseController
 {
@@ -19,7 +20,8 @@ class CtrlTestFiles extends BaseController
             "fileValidateTypeLabelExpectedTypes" => "Selecciona jpg, jpeg o png",
             "chunkUploads" => true,
             "labelFileTypeNotAllowed" => "Archivo no válido",
-            "chunkSize" => 1000000,
+            // "chunkSize" => 1000000,
+            "chunkSize" => 100000,
             "allowMultiple" => true,
             "maxFiles" => 3,
             "minFiles" => 2,
@@ -78,37 +80,24 @@ class CtrlTestFiles extends BaseController
         ]
     ];
     protected $validation = [
-        "image" => [
-            "rulesValidation" => "max_size[image,2000]|mime_in[image,image/jpg,image/png,image/jpeg]|ext_in[image,jpg,png,jpeg]|is_image[image]",
-            "messages" => [
+        "chunkValidation" => [
+            "chunkSize" => 100000, // in bytes
+            "image" => [
+                "beforeUpload" => "max_size[2000]",
+                "afterUpload" => "max_dims[3000,3000]|is_image[]|mime_in[image/jpg,image/png,image/jpeg]|ext_in[jpg,png,jpeg]",
+            ],
+        ],
+        "validationRules" => [
+            "image" => "max_size[image,2000]|mime_in[image,image/jpg,image/png,image/jpeg]|ext_in[image,jpg,png,jpeg]|is_image[image]|max_dims[image,300,300]",
+        ],
+        "messages" => [
+            "image" => [
+                "max_dims" => "Dimensiones de imagen no válidas",
+                "mime_in" => "Tipo inválido",
                 "max_size" => "El archivo es demasiado grande",
                 "ext_in" => "Ingresa un archivo válido",
                 "is_image" => "El archivo no es una imagen",
-            ]
-        ],
-        "svg" => [
-            "rulesValidation" => [
-                ""
             ],
-            "messages" => [
-                ""
-            ]
-        ],
-        "video" => [
-            "rulesValidation" => [
-                ""
-            ],
-            "messages" => [
-                ""
-            ]
-        ],
-        "pdf" => [
-            "rulesValidation" => [
-                ""
-            ],
-            "messages" => [
-                ""
-            ]
         ],
     ];
     public function viewTestFiles()
@@ -118,6 +107,7 @@ class CtrlTestFiles extends BaseController
     }
     public function viewTestFilesCreate()
     {
+        session()->set("fileValidation", $this->validation);
         return view('admin/test/testFilesCreate', ["config" => $this->configFiles]);
     }
     public function createTestFiles()
@@ -158,6 +148,7 @@ class CtrlTestFiles extends BaseController
     }
     public function viewTestFilesEdit($id)
     {
+        // session()->set("validation", $this->validation);
         $testModel = new TestModel();
         $name = $testModel->select("testName")->where("testId", $id)->first()["testName"];
         $files = $testModel->getKeyFiles($id);
