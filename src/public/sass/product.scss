@@ -1,6 +1,7 @@
+/* stylelint-disable scss/no-global-function-names */
 @use 'UI/product';
-@use "base/variables" as v;
-@use "base/mixins" as m;
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
 
 .details {
   padding-left: 2rem;
@@ -27,13 +28,13 @@
   }
 
   &__heading {
-    font-size: 3rem;
+    margin: -2rem 0 0 0;
     color: v.$gray;
+    font-size: 3rem;
     font-weight: 900;
+    line-height: 1;
     text-align: left;
     text-transform: none;
-    margin: -2rem 0 0 0;
-    line-height: 1;
 
     @include m.phoneXL {
       @include m.fluid-text(2rem, 5rem);
@@ -64,9 +65,9 @@
   }
 
   &__data {
-    font-size: 1.4rem;
-    color: darken(v.$gray, 20%);
     margin: 0;
+    color: darken(v.$gray, 20%);
+    font-size: 1.4rem;
     span {
       color: darken(v.$gray, 10%);
       font-weight: 700;
@@ -92,30 +93,30 @@
 
   &__button {
     @include m.btn(v.$white, #0497b4, v.$white, v.$aqua-blue);
-    font-weight: 400;
-    font-size: 1.4rem;
     display: block;
+    font-size: 1.4rem;
+    font-weight: 400;
 
     @include m.desktopXL {
-      font-size: 2rem;
       margin-top: 6rem;
+      font-size: 2rem;
     }
   }
 }
 
 .tags {
   display: flex;
-  gap: 1.5rem;
   margin-top: 2rem;
+  gap: 1.5rem;
 }
 
 .tag {
-  background-color: darken(v.$bright-blue, 20%);
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
+  background-color: darken(v.$bright-blue, 20%);
   &__content {
-    color: v.$white;
     margin: 0;
+    color: v.$white;
     font-size: 1rem;
 
     @include m.desktopXL {
@@ -137,15 +138,15 @@
   }
 
   &__big-image {
-    border: 1px solid v.$aqua-blue;
+    overflow: hidden;
     max-width: 90%;
     max-height: 28rem;
-    overflow: hidden;
+    border: 1px solid v.$aqua-blue;
 
     @include m.tablet {
+      max-width: 80%;
       max-height: 35rem;
       margin: 0 auto;
-      max-width: 80%;
     }
 
     @include m.desktopXL {
@@ -154,10 +155,10 @@
   }
 
   &__image {
+    overflow: hidden;
     width: 7rem;
     height: 6rem;
     border: 1px solid v.$aqua-blue;
-    overflow: hidden;
 
     @include m.phoneXL {
       width: 12rem;
@@ -177,12 +178,12 @@
   }
 
   &__under-image {
+    display: flex;
+    overflow: hidden;
     max-width: 90%;
     max-height: 20rem;
-    display: flex;
-    column-gap: 2rem;
     margin: 2rem auto;
-    overflow: hidden;
+    column-gap: 2rem;
 
     @include m.tablet {
       max-width: 80%;
@@ -199,26 +200,23 @@
 }
 
 .product-navigation {
+  position: sticky;
+  z-index: 99;
+  top: v.$mobile-height;
   display: flex;
-  z-index: 100;
+  width: 100%;
+  margin: 4rem 0;
 
-  &--sticky {
-    position: sticky;
-    width: 100%;
-    top: 2rem;
-
-    @include m.tablet{
-        top: 4rem;
-    }
+  @include m.desktop {
+    top: v.$desktop-height;
   }
 
   &__link-container {
-    width: 100%;
     display: flex;
+    width: 100%;
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem;
-    margin: 4rem 0;
 
     &:nth-child(odd) {
       background-color: darken(v.$bright-blue, 20%);
@@ -230,10 +228,10 @@
   }
 
   &__link {
-    text-align: center;
+    color: v.$white;
     font-size: 1.2rem;
     line-height: 1.2;
-    color: v.$white;
+    text-align: center;
 
     @include m.phoneXL {
       font-size: 1.4rem;
@@ -250,79 +248,79 @@
 }
 
 .download-area {
-    &__heading {
-      margin: 0;
-      margin-bottom: 2rem;
-      @include m.fluid-text(3rem, 5rem);
-      text-align: left;
-      text-transform: capitalize;
-      color: darken(v.$bright-blue,10%);
-
-      @include m.tablet {
-        margin-bottom: 4rem;
-      }
-    }
-
-    &__accordion-container {
-    border-top: 0.8rem solid v.$turquoise-blue;
-    padding-top: 4rem;
+  &__heading {
+    margin: 0;
+    margin-bottom: 2rem;
+    color: darken(v.$bright-blue, 10%);
+    text-align: left;
+    text-transform: capitalize;
+    @include m.fluid-text(3rem, 5rem);
 
     @include m.tablet {
-      border-top: none;
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__accordion-container {
+    padding-top: 4rem;
+    border-top: 0.8rem solid v.$turquoise-blue;
+
+    @include m.tablet {
       padding-top: 0;
+      padding-left: 3.5rem;
+      border-top: none;
       border-left: 0.8rem solid v.$turquoise-blue;
       margin-left: 0.2rem;
-      padding-left: 3.5rem;
     }
   }
 
   &__accordion-fan {
-      display: flex;
-      flex-direction: column;
-      gap: 0rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
 
-      span {
-        font-size: 1.4rem;
-        vertical-align: middle;
-      }
+    span {
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
   }
 
   &__accordion {
-      color: darken(v.$light-gray,35%);  
-      font-size: 2.4rem;
-      transition: color 300ms ease-in-out;
+    color: darken(v.$light-gray, 35%);
+    font-size: 2.4rem;
+    transition: color 300ms ease-in-out;
 
-      &:hover {
-        color: darken(v.$gray, 10%);
-      }
+    &:hover {
+      color: darken(v.$gray, 10%);
+    }
   }
 
   &__links-container {
-      padding-left: 2rem;
-      display: flex;
-      flex-direction: column;
-      row-gap: 1rem;
-      margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+    margin-bottom: 1rem;
+    row-gap: 1rem;
   }
 
   &__link {
-      color: darken(v.$light-gray,35%);  
-      font-size: 1.8rem;
-      transition: color 300ms ease-in-out;
-      
-      &:hover {
-        color: darken(v.$gray, 10%);
-      }
+    color: darken(v.$light-gray, 35%);
+    font-size: 1.8rem;
+    text-decoration: underline;
+    transition: color 300ms ease-in-out;
 
-      span {
-        font-size: 1.4rem;
-        vertical-align: middle;
-      }
+    &:hover {
+      color: darken(v.$gray, 10%);
+    }
 
-      &--single {
-        text-decoration: underline;
-        padding: 0 0 1rem 1rem;
-        font-size: 2.4rem;
-      }
+    span {
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
+
+    &--single {
+      padding: 0 0 1rem 1rem;
+      font-size: 2.4rem;
+    }
   }
 }

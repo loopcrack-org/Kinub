@@ -1,5 +1,5 @@
-@use "base/variables" as v;
-@use "base/mixins" as m;
+@use '../../base/variables' as v;
+@use '../../base/mixins' as m;
 
 .product-info {
   width: 90%;
@@ -34,30 +34,30 @@
     }
   }
   &__text-container {
-    border-top: 0.8rem solid v.$turquoise-blue;
     padding-top: 4rem;
+    border-top: 0.8rem solid v.$turquoise-blue;
 
     @include m.tablet {
-      border-top: none;
       padding-top: 0;
+      padding-left: 3.5rem;
+      border-top: none;
       border-left: 0.8rem solid v.$turquoise-blue;
       margin-left: 0.2rem;
-      padding-left: 3.5rem;
     }
   }
   &__text {
     margin: 0;
-    line-height: 1.4;
     color: v.$gray;
     font-size: 2.2rem;
+    line-height: 1.4;
 
     &--title {
-      font-weight: 700;
       margin-right: 0.5rem;
+      font-weight: 700;
     }
   }
   &__video-container {
-    margin: 0 auto;
+    margin: 4rem auto 0 auto;
 
     @include m.tablet {
       max-width: 80%;

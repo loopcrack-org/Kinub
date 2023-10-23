@@ -1,14 +1,15 @@
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-descending-specificity */
 accordion-element {
-  border-radius: 0.5rem;
   display: inline-block;
-  height: unset;
-  margin-top: 0.1em;
   width: 95%;
+  height: unset;
+  border-radius: 0.5rem;
+  margin-top: 0.1em;
 
   & > .ploiu-accordion-title {
-    border-radius: inherit;
     padding: 1rem;
-    text-decoration: underline;
+    border-radius: inherit;
     text-transform: capitalize;
   }
   &:hover {
@@ -16,11 +17,11 @@ accordion-element {
   }
 
   & > .ploiu-accordion-body {
-    word-wrap: anywhere;
-    border: 1px solid transparent;
     overflow: hidden;
-    transition: height 300ms;
     width: 95%;
+    border: 1px solid transparent;
+    transition: height 300ms;
+    word-wrap: anywhere;
   }
 
   & > accordion-element {
@@ -28,8 +29,8 @@ accordion-element {
   }
 
   &:not(.open) > .ploiu-accordion-body {
-    border: 0;
     height: 0 !important;
+    border: 0;
   }
 
   &.open {
@@ -45,13 +46,13 @@ accordion-element {
 
 accordion-fan {
   display: block;
-  padding-top: 1vh;
   width: 95%;
+  padding-top: 1vh;
 
   & > accordion-element {
+    width: 100%;
     border-radius: 0;
     margin-top: -1vh;
-    width: 100%;
   }
 
   & > .ploiu-accordion-title {

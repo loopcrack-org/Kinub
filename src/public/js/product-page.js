@@ -1,16 +1,5 @@
-import Plyr from "plyr";
-const player = new Plyr("#product-video");
-const navbar = document.querySelector(".product-navigation");
-const stickyOffset = navbar.offsetTop - 40;
+import Plyr from 'plyr';
+import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 
-window.onscroll = function () {
-  initProductNav();
-};
-
-function initProductNav() {
-  if (window.scrollY >= stickyOffset) {
-    navbar.classList.add("product-navigation--sticky");
-  } else {
-    navbar.classList.remove("product-navigation--sticky");
-  }
-}
+// eslint-disable-next-line no-unused-vars
+const player = new Plyr('#product-video');

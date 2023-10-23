@@ -9,7 +9,6 @@
 
 <?php $this->section('js'); ?>
 <script src="assets/public/js/product-page.min.js"></script>
-<script src="assets/libs/vanilla-js-accordions/accordionElement.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -41,12 +40,12 @@
             <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
 
             <div class="tags">
-                <div class="tag">
+                <a href="#" class="tag">
                     <p class="tag__content">Dialog 3Gtm 9xx Mhz</p>
-                </div>
-                <div class="tag">
+                </a>
+                <a href="#" class="tag">
                     <p class="tag__content">LoRaWAN OMS</p>
-                </div>
+                </a>
             </div>
 
             <div class="details__data-container">
@@ -54,7 +53,7 @@
             <p class="details__data"><span>Rango de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span>Precisión de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span>Potencia:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Comunicación:</span>Lorem ipsum dolor sit amet consectetur</p>       
+            <p class="details__data"><span>Comunicación:</span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
             <a href="#" class="details__button">Más información acerca de este equipo</a>
         </div>
@@ -92,26 +91,28 @@
             <li class="product-info__text"><span class="product-info__text--title">Comunicación:</span>Ut wisi enim ad minim</li>
         </ul>
     </div>
-</section>
 
-<section class="product-info product-info--video">
     <div class="product-info__video-container">
-            <video
-            id="product-video"
-            class="product-video__video"
-            preload="auto"
-            width="500"
-            height="264"
-            muted
-            autoplay
-            playsinline
-            controls
-            >
-                <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
-                <source src="assets/video/kinub-video-example.webm" type="video/webm" />
-            </video>
+        <video
+        id="product-video"
+        class="product-video__video"
+        preload="auto"
+        width="500"
+        height="264"
+        muted
+        autoplay
+        playsinline
+        controls
+        >
+            <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
+            <source src="assets/video/kinub-video-example.webm" type="video/webm" />
+        </video>
     </div>
 </section>
+
+<!-- <section class="product-info product-info--video">
+
+</section> -->
 
 <section class="product-info download-area" id="download-area">
 
@@ -133,7 +134,7 @@
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
                     </li>
-                </ul>   
+                </ul>
             </accordion-element>
             <accordion-element class="download-area__accordion" data-title="&#8226; Datasheet">
                 <ul class="download-area__links-container">
@@ -174,4 +175,4 @@
     </div>
 </section>
 
-<?php $this->endSection('content');?>
+<?php $this->endSection('content'); ?>
