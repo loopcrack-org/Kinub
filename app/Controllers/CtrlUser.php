@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Models\UserModel;
 
 class CtrlUser extends BaseController
@@ -10,17 +9,26 @@ class CtrlUser extends BaseController
     public function viewUsers()
     {
         $userModel = new UserModel();
-        $users = $userModel->findAll();
-        return view("admin/users/Users", ["users" => $users]);
+        $users     = $userModel->findAll();
+
+        return view('admin/users/Users', ['users' => $users]);
     }
+  
     public function viewUserCreate()
     {
-        return view("admin/users/UserCreate");
+        return view('admin/users/UserCreate');
     }
+
     public function createUser()
     {
-        return "creating user...";
+        $POST              = $this->request->getPost();
+        $POST['userToken'] = 'FAS12AQajqa';
+
+        return view('templates/emails/createUserAccount', [
+            'formData' => $POST,
+        ]);
     }
+
     public function deleteUser()
     {
         $isDeleted = true;
@@ -37,7 +45,6 @@ class CtrlUser extends BaseController
                 "type" => "error",
             ];
         }
-
-        return redirect()->back()->with("response", $response);
+      return redirect()->back()->with("response", $response);
     }
 }
