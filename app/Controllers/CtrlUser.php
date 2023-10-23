@@ -19,6 +19,14 @@ class CtrlUser extends BaseController
         return view('admin/users/UserCreate');
     }
 
+    public function viewUserEdit($id)
+    {
+        $userModel = new UserModel();
+        $user      = $userModel->find($id);
+
+        return view('admin/users/UserEdit', ['user' => $user]);
+    }
+
     public function createUser()
     {
         $POST              = $this->request->getPost();
@@ -27,6 +35,26 @@ class CtrlUser extends BaseController
         return view('templates/emails/createUserAccount', [
             'formData' => $POST,
         ]);
+    }
+
+    public function updateUser($id)
+    {
+        $isEdited = true;
+        if ($isEdited) {
+            $response = [
+                'title'   => 'Edición exitosa',
+                'message' => 'Se ha editado el usuario correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Error en la edición',
+                'message' => 'Ha ocurrido un error al editar el usuario. Por favor, inténtalo de nuevo.',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->to('admin/usuarios')->with('response', $response);
     }
 
     public function deleteUser()
