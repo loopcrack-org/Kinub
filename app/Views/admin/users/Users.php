@@ -1,21 +1,21 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
-<?= $this->section("title-meta") ?>
-<?php echo view('partials/title-meta', array('title' => 'Usuarios')); ?>
+<?= $this->section('title-meta') ?>
+<?= view('partials/title-meta', ['title' => 'Usuarios']); ?>
 <?= $this->endSection() ?>
 
-<?= $this->section("css") ?>
+<?= $this->section('css') ?>
 <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css" rel="stylesheet">
 <link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
-<?= $this->section("content") ?>
+<?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
 
-        <?php echo view('partials/page-title', array('title' => 'Usuarios')); ?>
+        <?= view('partials/page-title', ['title' => 'Usuarios']); ?>
 
         <div class="row">
             <div class="col-lg-12">
@@ -33,8 +33,8 @@
                         if (session()->has('response')) {
                             $response = session()->get('response');
                             ?>
-                        <div id="alert-deletedcategory" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
-                    <?php }; ?>
+                        <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                    <?php } ?>
                     <div class="card-body">
                         <table id="users-table" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
                             <thead>
@@ -48,15 +48,15 @@
                             <tbody>
                                 <?php foreach ($users as $user) { ?>
                                     <tr>
-                                        <td><?= $user["userId"];?></td>
+                                        <td><?= $user['userId']; ?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user["userFirstName"] . $user["userLastName"];?></p>
+                                                <p class="text-wrap"><?= $user['userFirstName'] . $user['userLastName']; ?></p>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user["userEmail"];?></p>
+                                                <p class="text-wrap"><?= $user['userEmail']; ?></p>
                                             </div>
                                         </td>
                                         <td>
@@ -66,7 +66,7 @@
                                             </div>
                                         </td>
                                     </tr>
-                                <?php };?>
+                                <?php }?>
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -122,7 +122,7 @@
 <?= $this->endSection() ?>
 
 
-<?= $this->section("js") ?>
+<?= $this->section('js') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <!--datatable js-->
@@ -130,5 +130,5 @@
 
 <script src="/assets/admin/js/datatables-general-config.min.js"></script>
 <script src="/assets/admin/js/user.min.js"></script>
-<script src="/assets/admin/js/alert-deleteElement.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>

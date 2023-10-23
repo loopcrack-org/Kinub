@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 
 displayAlert();
 function displayAlert() {
-  const alertResponse = document.querySelector('#alert-deletedcategory');
+  const alertResponse = document.querySelector('#alertElement');
   const darkMode = document.querySelector('[data-bs-theme]');
 
   if (alertResponse) {
