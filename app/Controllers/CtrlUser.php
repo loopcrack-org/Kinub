@@ -13,7 +13,7 @@ class CtrlUser extends BaseController
 
         return view('admin/users/Users', ['users' => $users]);
     }
-  
+
     public function viewUserCreate()
     {
         return view('admin/users/UserCreate');
@@ -32,19 +32,20 @@ class CtrlUser extends BaseController
     public function deleteUser()
     {
         $isDeleted = true;
-        if($isDeleted) {
+        if ($isDeleted) {
             $response = [
-                "title" => "Eliminación exitosa",
-                "message" => "Se ha elimnado el usuario correctamente",
-                "type" => "success",
+                'title'   => 'Eliminación exitosa',
+                'message' => 'Se ha elimnado el usuario correctamente',
+                'type'    => 'success',
             ];
         } else {
             $response = [
-                "title" => "Eliminación fallida",
-                "message" => "No se pudo realizar la eliminación del usuario",
-                "type" => "error",
+                'title'   => 'Eliminación fallida',
+                'message' => 'No se pudo realizar la eliminación del usuario',
+                'type'    => 'error',
             ];
         }
-      return redirect()->back()->with("response", $response);
+
+        return redirect()->back()->with('response', $response);
     }
 }
