@@ -14,7 +14,7 @@ import FilepondPluginMediaPreview from "filepond-plugin-media-preview";
 // pdf preview
 import FilepondPluginPdfPreview from "filepond-plugin-pdf-preview";
 
-import { createAlertToDeleteServerFile } from "./_alerts";
+import { createAlert, createAlertToDeleteServerFile } from "./_alerts";
 import {
   validateMaxFilesIntoFilePond,
   validateMinFilesIntoFilePond,
@@ -51,17 +51,29 @@ export function createPond(input, config, name, minFiles) {
     if (e.origin === FILE_ORIGIN_INPUT) {
       submitBtn.disabled = true;
     }
-    validateMaxFilesIntoFilePond(pond, input);
+  });
+
+  pond.on("error", (error, file) => {
+    if (error.code === 404) {
+      createAlert(
+        input,
+        `${error.body}. Por favor remueva el archivo ${file.filename}`,
+        "danger",
+        file.id
+      );
+    }
   });
 
   pond.on("processfile", () => {
     submitBtn.disabled = false;
-    validateMinFilesIntoFilePond(pond, input, minFiles);
   });
 
   pond.on("removefile", () => {
     validateMinFilesIntoFilePond(pond, input, minFiles);
-    validateMaxFilesIntoFilePond(pond, input);
+  });
+
+  pond.on("warning", (error) => {
+    validateMaxFilesIntoFilePond(pond, input, minFiles);
   });
 
   return pond;

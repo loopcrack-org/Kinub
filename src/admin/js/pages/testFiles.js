@@ -16,12 +16,15 @@ const references = inputsConfig.map((inputConfig) => {
 form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const existAlert = references.map((reference) => {
+  const existError = references.map((reference) => {
     const { pond, input, minFiles } = reference;
-    return !validateMinFilesIntoFilePond(pond, input, minFiles);
+    return (
+      pond.getFiles().some((file) => file.status === 8) ||
+      !validateMinFilesIntoFilePond(pond, input, minFiles)
+    );
   });
 
-  if (existAlert.some((isTrue) => isTrue)) {
+  if (existError.some((isTrue) => isTrue)) {
     Swal.fire({
       icon: "error",
       title: "Oops!!",
@@ -31,5 +34,5 @@ form.addEventListener("submit", async function (e) {
     return;
   }
 
-  this.submit();
+  //this.submit();
 });
