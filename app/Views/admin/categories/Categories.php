@@ -1,21 +1,21 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
-<?= $this->section("title-meta") ?>
-<?php echo view('partials/title-meta', array('title' => 'Categoria')); ?>
+<?= $this->section('title-meta') ?>
+<?= view('partials/title-meta', ['title' => 'Categoria']); ?>
 <?= $this->endSection() ?>
 
-<?= $this->section("css") ?>
+<?= $this->section('css') ?>
 <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.bootstrap5.min.css" rel="stylesheet">
 <link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
-<?= $this->section("content") ?>
+<?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
 
-        <?php echo view('partials/page-title', array('title' => 'Categorías')); ?>
+        <?= view('partials/page-title', ['title' => 'Categorías']); ?>
 
         <div class="row">
             <div class="col-lg-12">
@@ -31,10 +31,10 @@
 
                     <?php
                         if (session()->has('response')) {
-                        $response = session()->get('response');
-                    ?>
-                        <div id="alert-deletedcategory" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
-                    <?php }; ?>
+                            $response = session()->get('response');
+                            ?>
+                        <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                    <?php } ?>
 
                     <!-- card-header -->
                     <div class="card-body">
@@ -50,17 +50,17 @@
                             <tbody>
                                 <?php foreach ($categories as $category) { ?>
                                     <tr>
-                                        <td><?= $category["categoryId"] ?></td>
+                                        <td><?= $category['categoryId'] ?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p><?= $category["categoryName"] ?></p>
+                                                <p><?= $category['categoryName'] ?></p>
                                             </div>
                                         </td>
-                                        <td><?= $category["categoryIconId"] . ".jpeg" ?></td>
+                                        <td><?= $category['categoryIconId'] . '.jpeg' ?></td>
                                         <td>
                                             <div class="d-flex justify-content-between">
 
-                                                <a href="/admin/categorias/editar/<?= $category["categoryId"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="/admin/categorias/editar/<?= $category['categoryId'] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
 
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
@@ -123,7 +123,7 @@
 <?= $this->endSection() ?>
 
 
-<?= $this->section("js") ?>
+<?= $this->section('js') ?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <!--datatable js-->
@@ -131,5 +131,5 @@
 
 <script src="/assets/admin/js/datatables-general-config.min.js"></script>
 <script src="/assets/admin/js/category.min.js"></script>
-<script src="/assets/admin/js/alert-deleteElement.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>
