@@ -21,7 +21,20 @@ class CtrlApiFiles extends BaseController
 
             return $this->response->setStatusCode(200)->download($fileRoute['fileRoute'], null, true);
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(404, $fileKey);
+            return $this->response->setStatusCode(404, "No se ha podido encontrar el archivo");
+        }
+    }
+
+    public function restoreTempFile()
+    {
+        try {
+            $key = $this->request->getGet()['file'];
+            $folder = $this->folderTemp . $key;
+            $file = FileManager::getFileFromFolder($folder)[0];
+
+            return $this->response->setStatusCode(200)->download($file, null, true);
+        } catch (\Throwable $th) {
+            return $this->response->setStatusCode(404, "No se ha podido encontrar el archivo");
         }
     }
 
@@ -64,8 +77,8 @@ class CtrlApiFiles extends BaseController
                     if($validation->hasError()) {
                         return $this->response->setStatusCode(500, $validation->getError());
                     }
-                    FileManager::createFolder($folder);
                 }
+                FileManager::createFolder($folder);
             }
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);
         } catch (\Throwable $th) {
@@ -103,10 +116,8 @@ class CtrlApiFiles extends BaseController
                     $file = new File($fileTmp);
                     $validation->runAfterUpload($file);
                     if($validation->hasError()) {
-                        FileManager::deleteFile($fileTmp);
-                        if (FileManager::isEmptyFolder($folder)) {
-                            FileManager::deleteEmptyFolder($folder);
-                        }
+                        FileManager::deleteFolderWithContent($folder);
+
                         return $this->response->setStatusCode(500, $validation->getError());
                     }
                 }
@@ -124,16 +135,10 @@ class CtrlApiFiles extends BaseController
         try {
             $key = $this->request->getBody();
             $folder = $this->folderTemp . $key;
-            $file = scandir($folder)[2];
-            FileManager::deleteFile("$folder/$file");
-
-            if (FileManager::isEmptyFolder($folder)) {
-                FileManager::deleteEmptyFolder($folder);
-            }
-
+            FileManager::deleteFolderWithContent($folder);
             return $this->response->setStatusCode(201);
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(500);
+            return $this->response->setStatusCode(500, $th->getMessage());
         }
     }
 }

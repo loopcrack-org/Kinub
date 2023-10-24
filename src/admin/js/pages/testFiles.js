@@ -19,20 +19,20 @@ form.addEventListener("submit", async function (e) {
   const existError = references.map((reference) => {
     const { pond, input, minFiles } = reference;
     return (
-      pond.getFiles().some((file) => file.status === 8) ||
+      pond.getFiles().some((file) => file.status === 8 || file.status === 3) ||
       !validateMinFilesIntoFilePond(pond, input, minFiles)
     );
   });
 
-  if (existError.some((isTrue) => isTrue)) {
+  if (existError.some((error) => error)) {
     Swal.fire({
-      icon: "error",
+      icon: "warning",
       title: "Oops!!",
-      text: "Verifique que haya proporcionado los datos necesarios para poder guardar sus cambios.",
+      text: "Verifique que haya proporcionado los datos necesarios o que los archivos se hayan subido correctamente.",
     });
 
     return;
   }
 
-  //this.submit();
+  this.submit();
 });

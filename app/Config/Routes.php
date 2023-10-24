@@ -61,17 +61,17 @@ $routes->post('logout', [CtrlLogin::class, 'logout']);
  * ADMIN
  * --------------------------------------------------------------------
  */
-$routes->group('admin', static function($routes) {
+$routes->group('admin', static function ($routes) {
     /** @var \CodeIgniter\Router\RouteCollection $routes */
 
     $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
-    $routes->group('home', static function($routes) {
+    $routes->group('home', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('editar', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
         $routes->post('editar', [CtrlHomeSection::class, 'editHomeSection']);
     });
 
-    $routes->group('soluciones', static function($routes) {
+    $routes->group('soluciones', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlSolution::class, 'viewSolutions']);
         $routes->get('crear', [CtrlSolution::class, 'viewSolutionCreate']);
@@ -81,7 +81,7 @@ $routes->group('admin', static function($routes) {
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
     });
 
-    $routes->group('categorias', static function($routes) {
+    $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlCategory::class, 'viewCategories']);
         $routes->get('crear', [CtrlCategory::class, 'viewCategoryCreate']);
@@ -94,13 +94,14 @@ $routes->group('admin', static function($routes) {
     $routes->group('api/files', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('load', 'CtrlApiFiles::getFileFromServer');
+        $routes->get('restore', 'CtrlApiFiles::restoreTempFile');
         $routes->patch('process', 'CtrlApiFiles::processTempFileChunk');
         $routes->post('process', 'CtrlApiFiles::processTempFile');
         $routes->delete('deleteTmp', 'CtrlApiFiles::deleteTmpFile');
         $routes->delete('delete', 'CtrlApiFiles::deleteFile');
     });
 
-    $routes->group('testFiles', static function($routes) {
+    $routes->group('testFiles', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlTestFiles::class, 'viewTestFiles']);
         $routes->get('crear', [CtrlTestFiles::class, 'viewTestFilesCreate']);

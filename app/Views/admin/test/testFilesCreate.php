@@ -36,7 +36,7 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa un nombre</p>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" required>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" value="<?= old("name") ?? ''?>" required>
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -53,6 +53,12 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
+                                    <?php
+                                        $files = session()->get('files');
+if ($files) {
+    $config[0]['files'] = $files;
+}
+?>
                                     <?= view("admin/components/inputFilePond", ["inputConfig" => $config[0]]) ?>
 
                                 </div>

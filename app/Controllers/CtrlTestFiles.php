@@ -8,6 +8,7 @@ use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
 use App\Validation\ChunkFilesValidation;
+use Exception;
 
 class CtrlTestFiles extends BaseController
 {
@@ -20,19 +21,18 @@ class CtrlTestFiles extends BaseController
             "fileValidateTypeLabelExpectedTypes" => "Selecciona jpg, jpeg o png",
             "chunkUploads" => true,
             "labelFileTypeNotAllowed" => "Archivo no válido",
-            // "chunkSize" => 1000000,
+            "checkValidity" => true,
             "chunkSize" => 100000,
             "allowMultiple" => true,
             "maxFiles" => 3,
-            "minFiles" => 2,
+             "minFiles" => 2,
             "imagePreviewHeight" => 170,
             "imageCropAspectRatio" => "1:1",
             "imageResizeTargetWidth" => 200,
             "imageResizeTargetHeight" => 200,
             "allowFileSizeValidation" => true,
-            "maxFileSize" => "3MB",
-            "labelMaxFileSizeExceeded" => "El archivo es demasiado grande",
-            "labelMaxFileSize" => "El tamaño máximo permitido es {filesize}",
+            "labelMaxFileSizeExceeded" => "El archivo es demasiado grande.",
+            "labelMaxFileSize" => "El tamaño máximo permitido es de {filesize}",
         ],
         [
             "name" => 'svg',
@@ -57,7 +57,7 @@ class CtrlTestFiles extends BaseController
             "chunkSize" => 1000000,
             "allowMultiple" => true,
             "maxFiles" => 1,
-            "allowFileSizeValidation" => true,
+          "allowFileSizeValidation" => true,
             "maxFileSize" => "10MB",
             "labelMaxFileSizeExceeded" => "El archivo es demasiado grande",
             "labelMaxFileSize" => "El tamaño máximo permitido es {filesize}",
@@ -120,7 +120,10 @@ class CtrlTestFiles extends BaseController
 
         // Save Images
         if ($data['image']) {
+
+            $array = [];
             foreach($data["image"] as $keyfile) {
+
                 $folderId = FileManager::getFolderId();
                 $outputFolder = $this->folderUpload . "$folderId/";
                 FileManager::createFolder($outputFolder);
@@ -229,12 +232,8 @@ class CtrlTestFiles extends BaseController
             $fileModel = new FileModel();
             foreach ($deleteImages as $keyfile) {
                 $fileFolder = $this->folderUpload . $keyfile . "/";
-                $fileRoute = $fileFolder . scandir($fileFolder)[2];
                 $fileModel->where("uuid", $keyfile)->delete();
-                FileManager::deleteFile($fileRoute);
-                if (FileManager::isEmptyFolder($fileFolder)) {
-                    FileManager::deleteEmptyFolder($fileFolder);
-                }
+                FileManager::deleteFolderWithContent($fileFolder);
             }
         }
         return redirect("admin/testFiles");

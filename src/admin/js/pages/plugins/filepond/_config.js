@@ -13,6 +13,8 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilepondPluginMediaPreview from "filepond-plugin-media-preview";
 // pdf preview
 import FilepondPluginPdfPreview from "filepond-plugin-pdf-preview";
+// validation file size
+import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 import { createAlert, createAlertToDeleteServerFile } from "./_alerts";
 import {
@@ -31,7 +33,8 @@ FilePond.registerPlugin(
   FilePondPluginImagePreview,
   FilePondPluginFileValidateType,
   FilepondPluginMediaPreview,
-  FilepondPluginPdfPreview
+  FilepondPluginPdfPreview,
+  FilePondPluginFileValidateSize
 );
 
 export function createPond(input, config, name, minFiles) {
@@ -46,34 +49,24 @@ export function createPond(input, config, name, minFiles) {
     },
   });
 
-  const submitBtn = form.querySelector("[type='submit']");
-  pond.on("addfilestart", (e) => {
-    if (e.origin === FILE_ORIGIN_INPUT) {
-      submitBtn.disabled = true;
-    }
-  });
-
   pond.on("error", (error, file) => {
-    if (error.code === 404) {
-      createAlert(
-        input,
-        `${error.body}. Por favor remueva el archivo ${file.filename}`,
-        "danger",
-        file.id
-      );
-    }
+    const flag = error.code && error.code === 500;
+    const message = flag ? error.body : `${error.main} ${error.sub}`;
+    createAlert(
+      input,
+      `${file.filename}. ${message}. Por favor ingrese otro.`,
+      "danger",
+      file.id
+    );
+    pond.removeFile(file.id);
   });
 
-  pond.on("processfile", () => {
-    submitBtn.disabled = false;
-  });
-
-  pond.on("removefile", () => {
+  pond.on("removefile", (error, file) => {
     validateMinFilesIntoFilePond(pond, input, minFiles);
   });
 
   pond.on("warning", (error) => {
-    validateMaxFilesIntoFilePond(pond, input, minFiles);
+    validateMaxFilesIntoFilePond(pond, input);
   });
 
   return pond;
@@ -98,6 +91,7 @@ function getServerOptions(nameInput) {
       },
     },
     patch: "/process?patch=",
+    restore: "/restore?file=",
     revert: "/deleteTmp",
     load: "/load?file=",
     remove: (source, load, error) => {

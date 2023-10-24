@@ -7,6 +7,20 @@ use Exception;
 
 class FileManager
 {
+    public static function getFolderId()
+    {
+        return md5(uniqid(rand(), true));
+    }
+
+    public static function getFileFromFolder(String $folderPath)
+    {
+        try {
+            return glob("$folderPath/*");
+        } catch (\Throwable $th) {
+            throw new Exception("No se ha encontrado el archivo en la carpeta dada");
+        }
+    }
+
     public static function createFolder(String $path)
     {
         try {
@@ -18,10 +32,6 @@ class FileManager
         }
     }
 
-    public static function getFolderId()
-    {
-        return md5(uniqid(rand(), true));
-    }
 
     public static function moveClientFileToServer(File $file, String $destPath)
     {
@@ -35,7 +45,6 @@ class FileManager
 
     public static function changeFileDirectory(String $sourcePath, String $destPath)
     {
-
         try {
             $file = new File($sourcePath, true);
             $file->move($destPath);
@@ -46,7 +55,6 @@ class FileManager
 
     public static function mergeChunckFiles(String $filePath, String $fileData, String $fileOffset)
     {
-
         try {
             if (!file_exists($filePath)) {
                 file_put_contents($filePath, '');
@@ -58,15 +66,6 @@ class FileManager
             fclose($fileOpen);
         } catch (\Throwable $th) {
             throw new Exception("Ha ocurrido un error al procesar el archivo por partes");
-        }
-    }
-
-    public static function deleteFile(String $filePath)
-    {
-        try {
-            unlink($filePath);
-        } catch (\Throwable $th) {
-            throw new Exception("El archivo no existe o ha ocurrido un error al eliminarlo");
         }
     }
 
@@ -99,7 +98,7 @@ class FileManager
     public static function isEmptyFolder(String $folderPath)
     {
         try {
-            return count(glob($folderPath . "/*")) === 0;
+            return count(glob("$folderPath/*")) === 0;
         } catch (\Throwable $th) {
             throw new Exception("La dirección no corresponde a una carpeta");
         }
