@@ -31,6 +31,21 @@ class CtrlUser extends BaseController
 
     public function deleteUser()
     {
-        return 'deleting user...';
+        $isDeleted = true;
+        if ($isDeleted) {
+            $response = [
+                'title'   => 'Eliminación exitosa',
+                'message' => 'Se ha elimnado el usuario correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Eliminación fallida',
+                'message' => 'No se pudo realizar la eliminación del usuario',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->back()->with('response', $response);
     }
 }
