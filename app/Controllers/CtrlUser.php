@@ -31,7 +31,16 @@ class CtrlUser extends BaseController
 
     public function deleteUser()
     {
-        $isDeleted = true;
+        $POST      = $this->request->getPost();
+        $userId    = $POST['elementId'];
+        $userModel = new UserModel();
+        $user      = $userModel->find($userId);
+        if (! empty($user)) {
+            $isDeleted = $userModel->delete($userId);
+        } else {
+            $isDeleted = false;
+        }
+
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',

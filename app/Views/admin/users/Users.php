@@ -62,7 +62,7 @@
                                         <td>
                                             <div class="d-flex justify-content-between">
                                                 <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id="<?= $user['userId']; ?>" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -103,6 +103,7 @@
                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
                                     <form action="/admin/usuarios/borrar" method="post">
+                                        <input type="hidden" name="elementId" value="">
                                         <button type="submit" class="btn w-sm btn-primary" id="delete-record">¡Sí, bórralo!</button>
                                     </form>
                                 </div>
@@ -131,4 +132,5 @@
 <script src="/assets/admin/js/datatables-general-config.min.js"></script>
 <script src="/assets/admin/js/user.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="/assets/admin/js/deleteElement.min.js"></script>
 <?= $this->endSection() ?>
