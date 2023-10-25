@@ -51,7 +51,7 @@
                                         <td><?= $user['userId']; ?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user['userFirstName'] . $user['userLastName']; ?></p>
+                                                <p class="text-wrap"><?= $user['userFirstName'] . ' ' . $user['userLastName']; ?></p>
                                             </div>
                                         </td>
                                         <td>
