@@ -1,6 +1,9 @@
 import Swal from "sweetalert2";
 import { createPond } from "./plugins/filepond/_config";
-import { validateMinFilesIntoFilePond } from "./plugins/filepond/_validations";
+import {
+  filepondHasFileErrorOrInProcessing,
+  validateMinFilesInFilepond,
+} from "./plugins/filepond/_validations";
 
 const form = document.querySelector("#form");
 const inputsConfig = JSON.parse(document.querySelector("#config").value);
@@ -20,8 +23,8 @@ form.addEventListener("submit", async function (e) {
     const { pond, input, minFiles } = reference;
     const { id: inputId } = input;
     return (
-      pond.getFiles().some((file) => file.status === 8 || file.status === 3) ||
-      !validateMinFilesIntoFilePond(pond, inputId, minFiles)
+      filepondHasFileErrorOrInProcessing(pond) ||
+      !validateMinFilesInFilepond(pond, inputId, minFiles)
     );
   });
 
@@ -31,9 +34,9 @@ form.addEventListener("submit", async function (e) {
       title: "Oops!!",
       text: "Verifique que haya proporcionado los datos necesarios o que los archivos se hayan subido correctamente.",
     });
-
     return;
   }
 
   this.submit();
+  6;
 });

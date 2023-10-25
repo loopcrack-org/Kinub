@@ -18,13 +18,14 @@ import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 
 import { createAlert, createAlertToDeleteServerFile } from "./_alerts";
 import {
-  validateMaxFilesIntoFilePond,
-  validateMinFilesIntoFilePond,
+  validateMaxFilesInFilepond,
+  validateMinFilesInFilepond,
 } from "./_validations";
 
-const FILE_ORIGIN_INPUT = 1; // Is a file input by the user
-const FILE_ORIGIN_LIMBO = 1; //Restore from the server as a temporaly file
-const FILE_ORIGIN_LOCAL = 3; //Is a local server file
+export const FILE_ORIGIN_INPUT = 1; // Is a file input by the user
+export const FILE_ORIGIN_LIMBO = 1; //Restore from the server as a temporaly file
+export const FILE_ORIGIN_LOCAL = 3; //Is a local server file
+export const FILE_PROCESSING_COMPLETE = 5;
 
 FilePond.registerPlugin(
   FilePondPluginFileEncode,
@@ -50,24 +51,31 @@ export function createPond(input, config, name, minFiles) {
   });
 
   const { id: inputId } = input;
+  validateMinFilesInFilepond(pond, inputId, minFiles);
 
   pond.on("error", (error, file) => {
-    const flag = error.code && error.code === 500;
-    const message = flag ? error.body : `${error.main} ${error.sub}`;
+    const message = error.code
+      ? JSON.parse(error.body)
+      : `${error.main} ${error.sub}`;
     createAlert(
       inputId,
-      `${file.filename}. ${message}. Por favor ingrese otro.`,
-      "danger"
+      `${file.filename}. ${message}. Por favor ingrese un archivo diferente`,
+      "danger",
+      true
     );
     pond.removeFile(file.id);
   });
 
   pond.on("removefile", (error, file) => {
-    validateMinFilesIntoFilePond(pond, inputId, minFiles);
+    validateMinFilesInFilepond(pond, inputId, minFiles);
+  });
+
+  pond.on("processfile", (error, file) => {
+    validateMinFilesInFilepond(pond, inputId, minFiles);
   });
 
   pond.on("warning", (error) => {
-    validateMaxFilesIntoFilePond(pond, inputId);
+    validateMaxFilesInFilepond(pond, inputId);
   });
 
   return pond;

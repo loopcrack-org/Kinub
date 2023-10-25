@@ -7,6 +7,7 @@ use App\Models\FileModel;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
+use App\Utils\FilePondManager;
 use App\Validation\ChunkFilesValidation;
 use Exception;
 
@@ -25,7 +26,7 @@ class CtrlTestFiles extends BaseController
             "chunkSize" => 100000,
             "allowMultiple" => true,
             "maxFiles" => 3,
-             "minFiles" => 2,
+            "minFiles" => 1,
             "imagePreviewHeight" => 170,
             "imageCropAspectRatio" => "1:1",
             "imageResizeTargetWidth" => 200,
@@ -112,38 +113,28 @@ class CtrlTestFiles extends BaseController
     }
     public function createTestFiles()
     {
-        $data = $this->request->getPost();
 
+        $data = $this->request->getPost();
         $testModel = new TestModel();
         $testModel->insert(["testName" => $data["name"]]);
         $testId = $testModel->getInsertID();
 
-        // Save Images
         if ($data['image']) {
-
-            $array = [];
             foreach($data["image"] as $keyfile) {
-
-                $folderId = FileManager::getFolderId();
-                $outputFolder = $this->folderUpload . "$folderId/";
-                FileManager::createFolder($outputFolder);
-
-                $actualFolder = $this->folderTemp . $keyfile;
-                $filePath = scandir($actualFolder)[2];
+                $outputFolder = $this->folderUpload . $keyfile;
+                $sourceFolder = $this->folderTemp . $keyfile;
+                $filePath = scandir($sourceFolder)[2];
 
                 $folderData = [
                     "fileRoute" => "$outputFolder/$filePath",
-                    "uuid" => $folderId,
+                    "uuid" => $keyfile,
                     "fileDirectoryRoute" => $outputFolder,
                     "fileName" => $filePath
                 ];
+
                 $testFileModel = new TestFilesModel();
                 $testFileModel->createNewFile($folderData, $testId, "image");
-
-                FileManager::changeFileDirectory("$actualFolder/$filePath", $outputFolder);
-                if(FileManager::isEmptyFolder($actualFolder)) {
-                    FileManager::deleteEmptyFolder($actualFolder);
-                }
+                FileManager::changeDirectoryFolder($sourceFolder, $outputFolder);
             }
         }
 
@@ -154,88 +145,47 @@ class CtrlTestFiles extends BaseController
         // session()->set("validation", $this->validation);
         $testModel = new TestModel();
         $name = $testModel->select("testName")->where("testId", $id)->first()["testName"];
-        $files = $testModel->getKeyFiles($id);
-        foreach($files as $file) {
-            if($file["fileType"] === "image") {
-                $this->configFiles[0]['files'][] = [
-                    "source" => $file['uuid'],
-                    "options" => [
-                        "type" => "local"
-                    ],
-                ];
-            }
-            if($file["fileType"] === "svg") {
-                $this->configFiles[1]['files'][] = [
-                    "source" => $file['uuid'],
-                    "options" => [
-                        "type" => "local"
-                    ],
-                ];
-            }
-            if($file["fileType"] === "video") {
-                $this->configFiles[2]['files'][] = [
-                    "source" => $file['uuid'],
-                    "options" => [
-                        "type" => "local"
-                    ],
-                ];
-            }
-            if($file["fileType"] === "pdf") {
-                $this->configFiles[3]['files'][] = [
-                    "source" => $file['uuid'],
-                    "options" => [
-                        "type" => "local"
-                    ],
-                ];
-            }
-        }
+        $filesImage = $testModel->getKeyFilesByType($id, "image");
+
+        $this->configFiles[0]['files'] = FilepondManager::getSourceFiles($filesImage, "local");
 
         return view('admin/test/testFilesEdit', [
-            "name" => $name,
-            "config" => $this->configFiles,
+          "name" => $name,
+          "config" => $this->configFiles,
         ]);
     }
     public function updateTestFiles($id)
     {
         $files = $this->request->getPost();
         $testModel = new TestModel();
-        $actualImages = array_map(function ($file) {return $file["uuid"];}, $testModel->getKeyFiles($id));
-        $newImages = array_diff($files["image"], $actualImages);
+        $newImages = FilepondManager::getNewFilesInFilepond($files['image'], $testModel->getKeyFilesByType($id, "image"));
         $deleteImages = $files["delete-image"] ?? [];
 
-        // Save Images
-        if ($newImages) {
-            foreach($newImages as $keyfile) {
-                $folderId = FileManager::getFolderId();
-                $outputFolder = "./uploads/$folderId/";
-                FileManager::createFolder($outputFolder);
+        foreach($newImages as $keyfile) {
 
-                $actualFolder = $this->folderTemp . $keyfile;
-                $filePath = scandir($actualFolder)[2];
+            $outputFolder = $this->folderUpload . $keyfile;
+            $sourceFolder = $this->folderTemp . $keyfile;
+            $filePath = scandir($sourceFolder)[2];
 
-                $folderData = [
-                    "fileRoute" => "$outputFolder/$filePath",
-                    "uuid" => $folderId,
-                    "fileDirectoryRoute" => $outputFolder,
-                    "fileName" => $filePath
-                ];
-                $testFileModel = new TestFilesModel();
-                $testFileModel->createNewFile($folderData, $id, "image");
+            $folderData = [
+                "fileRoute" => "$outputFolder/$filePath",
+                "uuid" => $keyfile,
+                "fileDirectoryRoute" => $outputFolder,
+                "fileName" => $filePath
+            ];
 
-                FileManager::changeFileDirectory("$actualFolder/$filePath", $outputFolder);
-                if(FileManager::isEmptyFolder($actualFolder)) {
-                    FileManager::deleteEmptyFolder($actualFolder);
-                }
-            }
+            $testFileModel = new TestFilesModel();
+            $testFileModel->createNewFile($folderData, $id, "image");
+            FileManager::changeDirectoryFolder($sourceFolder, $outputFolder);
         }
-        if($deleteImages) {
-            $fileModel = new FileModel();
-            foreach ($deleteImages as $keyfile) {
-                $fileFolder = $this->folderUpload . $keyfile . "/";
-                $fileModel->where("uuid", $keyfile)->delete();
-                FileManager::deleteFolderWithContent($fileFolder);
-            }
+
+        $fileModel = new FileModel();
+        foreach ($deleteImages as $keyfile) {
+            $fileFolder = $this->folderUpload . $keyfile . "/";
+            $fileModel->where("uuid", $keyfile)->delete();
+            FileManager::deleteFolderWithContent($fileFolder);
         }
+
         return redirect("admin/testFiles");
     }
     public function deleteTestFiles()

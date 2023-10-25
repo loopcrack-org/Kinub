@@ -17,16 +17,16 @@ export function removeAlert(inputId, origin) {
   document.querySelector(`#alert-${inputId}-${origin}`)?.remove();
 }
 
-export function createAlert(inputId, message, type, origin = "") {
+export function createAlert(
+  inputId,
+  message,
+  type,
+  hasCloseBtn,
+  origin = "error"
+) {
   const auxAlert = document.querySelector(`#alert-${inputId}-${origin}`);
 
   if (!auxAlert) {
-    const closeBtn = document.createElement("BUTTON");
-    closeBtn.type = "button";
-    closeBtn.classList.add("btn-close");
-    closeBtn.setAttribute("data-bs-dismiss", "alert");
-    closeBtn.setAttribute("aria-label", "Close");
-
     const alert = document.createElement("DIV");
     alert.id = `alert-${inputId}-${origin}`;
     alert.classList.add(
@@ -38,9 +38,18 @@ export function createAlert(inputId, message, type, origin = "") {
     );
     alert.role = "alert";
     alert.textContent = message;
-
-    alert.appendChild(closeBtn);
+    hasCloseBtn ? alert.appendChild(createCloseBtn()) : "";
 
     document.querySelector(`#${inputId}`).before(alert);
   }
+}
+
+function createCloseBtn() {
+  const closeBtn = document.createElement("BUTTON");
+  closeBtn.type = "button";
+  closeBtn.classList.add("btn-close");
+  closeBtn.setAttribute("data-bs-dismiss", "alert");
+  closeBtn.setAttribute("aria-label", "Close");
+
+  return closeBtn;
 }

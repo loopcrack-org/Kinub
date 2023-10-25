@@ -43,13 +43,12 @@ class FileManager
     }
 
 
-    public static function changeFileDirectory(String $sourcePath, String $destPath)
+    public static function changeDirectoryFolder(String $sourcePath, String $destPath)
     {
         try {
-            $file = new File($sourcePath, true);
-            $file->move($destPath);
+            rename($sourcePath, $destPath);
         } catch (\Throwable $th) {
-            throw new Exception("El archivo no existe o ha ocurrido un error al moverlo");
+            throw new Exception("La carpeta no existe o ha ocurrido un error al moverlo");
         }
     }
 
@@ -81,26 +80,6 @@ class FileManager
             }
         } catch (\Throwable $th) {
             throw new Exception("Ha ocurrido un error al eliminar la carpeta con su contenido");
-        }
-    }
-
-    public static function deleteEmptyFolder(String $folderPath)
-    {
-        try {
-            if (is_dir($folderPath)) {
-                rmdir($folderPath);
-            }
-        } catch (\Throwable $th) {
-            throw new Exception("Ha ocurrido un error al eliminar la carpeta");
-        }
-    }
-
-    public static function isEmptyFolder(String $folderPath)
-    {
-        try {
-            return count(glob("$folderPath/*")) === 0;
-        } catch (\Throwable $th) {
-            throw new Exception("La dirección no corresponde a una carpeta");
         }
     }
 }

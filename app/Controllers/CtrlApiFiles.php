@@ -56,7 +56,9 @@ class CtrlApiFiles extends BaseController
                         [$inputName => session()->get("fileValidation")["messages"][$inputName]],
                     );
                     $validation->run([$inputName => $file]);
-                    if($validation->hasError($inputName)) throw new FileValidationException($validation->getError($inputName));
+                    if($validation->hasError($inputName)) {
+                        throw new FileValidationException($validation->getError($inputName));
+                    }
                 }
                 FileManager::createFolder($folder);
                 FileManager::moveClientFileToServer($file, $folder);
@@ -76,9 +78,9 @@ class CtrlApiFiles extends BaseController
             }
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);
         } catch (FileValidationException $th) {
-            return $this->response->setStatusCode(500)->setJSON(["error" => $th->getFileValidationError()]);
+            return $this->response->setStatusCode(500, json_encode($th->getFileValidationError()));
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(500, 'Ha ocurrido un error mientras se cargaba el archivo');
+            return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
     }
 
@@ -117,9 +119,9 @@ class CtrlApiFiles extends BaseController
             return $this->response->setStatusCode(204);
         } catch (FileValidationException $th) {
             FileManager::deleteFolderWithContent($folder);
-            return $this->response->setStatusCode(500)->setJSON(["error" => $th->getFileValidationError()]);
+            return $this->response->setStatusCode(500, json_encode($th->getFileValidationError()));
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(500, 'Ha ocurrido un error mientras se cargaba el archivo');
+            return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
     }
     public function deleteTmpFile()

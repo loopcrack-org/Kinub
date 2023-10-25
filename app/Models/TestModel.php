@@ -11,11 +11,12 @@ class TestModel extends Model
     protected $primaryKey = 'testId';
     protected $allowedFields = ['testId', 'testName'];
 
-    public function getKeyFiles($id) {
-        $result = $this->select("fileType, uuid")
+    public function getKeyFilesByType($id, $type)
+    {
+        $result = $this->select("uuid")
             ->join("test_files", "test.testId=test_files.testId")
             ->join("files", "test_files.fileId=files.fileId")
-            ->where("test.testId", $id)
+            ->where("test.testId", $id)->where("test_files.fileType", $type)
             ->findAll();
         return $result;
     }
