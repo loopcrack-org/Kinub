@@ -16,6 +16,14 @@ class Emails extends Migration
             'emailTypeId' => [
                 'type' => 'int',
             ],
+            'inquirerName' => [
+                'type'       => 'varchar',
+                'constraint' => 120,
+            ],
+            'inquirerEmail' => [
+                'type'       => 'varchar',
+                'constraint' => 40,
+            ],
             'emailContent' => [
                 'type' => 'text',
             ],
