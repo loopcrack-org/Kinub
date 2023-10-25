@@ -13,11 +13,11 @@ export async function createAlertToDeleteServerFile(item) {
   return response.isConfirmed;
 }
 
-export function removeAlert({ id: inputId }, origin) {
+export function removeAlert(inputId, origin) {
   document.querySelector(`#alert-${inputId}-${origin}`)?.remove();
 }
 
-export function createAlert({ id: inputId }, message, type, origin) {
+export function createAlert(inputId, message, type, origin = "") {
   const auxAlert = document.querySelector(`#alert-${inputId}-${origin}`);
 
   if (!auxAlert) {
@@ -43,16 +43,4 @@ export function createAlert({ id: inputId }, message, type, origin) {
 
     document.querySelector(`#${inputId}`).before(alert);
   }
-}
-
-export async function createAlertToBlockSubmit() {
-  const response = await Swal.fire({
-    icon: "warning",
-    text: "Verifique que haya llenado el formulario correctamente",
-    confirmButtonText: "Eliminar",
-    cancelButtonText: "Cancelar",
-    showCancelButton: true,
-  });
-
-  return response.isConfirmed;
 }

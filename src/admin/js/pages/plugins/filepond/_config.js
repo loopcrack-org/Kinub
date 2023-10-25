@@ -49,24 +49,25 @@ export function createPond(input, config, name, minFiles) {
     },
   });
 
+  const { id: inputId } = input;
+
   pond.on("error", (error, file) => {
     const flag = error.code && error.code === 500;
     const message = flag ? error.body : `${error.main} ${error.sub}`;
     createAlert(
-      input,
+      inputId,
       `${file.filename}. ${message}. Por favor ingrese otro.`,
-      "danger",
-      file.id
+      "danger"
     );
     pond.removeFile(file.id);
   });
 
   pond.on("removefile", (error, file) => {
-    validateMinFilesIntoFilePond(pond, input, minFiles);
+    validateMinFilesIntoFilePond(pond, inputId, minFiles);
   });
 
   pond.on("warning", (error) => {
-    validateMaxFilesIntoFilePond(pond, input);
+    validateMaxFilesIntoFilePond(pond, inputId);
   });
 
   return pond;

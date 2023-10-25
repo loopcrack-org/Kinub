@@ -18,9 +18,10 @@ form.addEventListener("submit", async function (e) {
 
   const existError = references.map((reference) => {
     const { pond, input, minFiles } = reference;
+    const { id: inputId } = input;
     return (
       pond.getFiles().some((file) => file.status === 8 || file.status === 3) ||
-      !validateMinFilesIntoFilePond(pond, input, minFiles)
+      !validateMinFilesIntoFilePond(pond, inputId, minFiles)
     );
   });
 
