@@ -62,17 +62,17 @@ $routes->post('logout', [CtrlLogin::class, 'logout']);
  * ADMIN
  * --------------------------------------------------------------------
  */
-$routes->group('admin', static function($routes) {
+$routes->group('admin', static function ($routes) {
     /** @var \CodeIgniter\Router\RouteCollection $routes */
 
     $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
-    $routes->group('home', static function($routes) {
+    $routes->group('home', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('editar', [CtrlHomeSection::class, 'viewHomeSectionEdit']);
         $routes->post('editar', [CtrlHomeSection::class, 'editHomeSection']);
     });
 
-    $routes->group('soluciones', static function($routes) {
+    $routes->group('soluciones', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlSolution::class, 'viewSolutions']);
         $routes->get('crear', [CtrlSolution::class, 'viewSolutionCreate']);
@@ -82,7 +82,7 @@ $routes->group('admin', static function($routes) {
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
     });
 
-    $routes->group('categorias', static function($routes) {
+    $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlCategory::class, 'viewCategories']);
         $routes->get('crear', [CtrlCategory::class, 'viewCategoryCreate']);
@@ -92,12 +92,12 @@ $routes->group('admin', static function($routes) {
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
     });
 
-    $routes->group('usuarios', static function($routes) {
+    $routes->group('usuarios', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlUser::class, 'viewUsers']);
         $routes->get('crear', [CtrlUser::class, 'viewUserCreate']);
         $routes->post('crear', [CtrlUser::class, 'createUser']);
-        $routes->post('eliminar', [CtrlUser::class, 'deleteUser']);
+        $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
     });
 });
 /*

@@ -12,51 +12,69 @@ use Exception;
 
 class CtrlLogin extends BaseController
 {
-    public function index(): string {
+    public function index(): string
+    {
         return view("login/index");
     }
-    public function viewPasswordEmail(): string {
+    public function viewPasswordEmail(): string
+    {
         return view("login/PasswordEmail");
     }
-    
-    public function viewPasswordReset($token): string {
+
+    public function viewPasswordReset($token): string
+    {
 
         try {
             $changePasswordValidation = new ChangePasswordValidation();
-            $userModel = new UserModel(); 
-            $user = $userModel->where("userToken", $token)->first(); 
-            $changePasswordValidation->existUserWithToken($user);           
-            
+            $userModel = new UserModel();
+            $user = $userModel->where("userToken", $token)->first();
+            $changePasswordValidation->existUserWithToken($user);
+            $isAccountConfirmed = $user["confirmed"];
+
         } catch (\Throwable $th) {
             $response = [
                 "type" => "danger",
                 "title" => "¡Oops!",
                 "message" => "Parece que no cuenta con el permiso para restablecer su contraseña o el token es invalido",
-            ]; 
+            ];
         }
 
         return view("login/PasswordReset", [
-            "token" => $token, 
+            "token" => $token,
+            "isAccountConfirmed" => $isAccountConfirmed,
             "response" => $response ?? null
         ]);
     }
 
-    public function passwordReset($token) {
+    public function passwordReset($token)
+    {
         $changePasswordValidation = new ChangePasswordValidation();
-        
+
         $data = $this->request->getPost();
 
         try {
-            if(!$changePasswordValidation->validateInputs($data)) throw new Exception();
+            if(!$changePasswordValidation->validateInputs($data)) {
+                throw new Exception();
+            }
             $userModel = new UserModel();
             $user = $userModel->where("userToken", $token)->first();
-            
-            $changePasswordValidation->existUserWithToken($user);
 
-            $result = $userModel->update($user["userId"], [
-                "userToken" => null,
-                "userPassword" =>$data["password"]
-            ]);
+            $changePasswordValidation->existUserWithToken($user);
+            $isAccountConfirmed = $user["confirmed"];
+
+            if($isAccountConfirmed) {
+                $result = $userModel->update($user["userId"], [
+                    "userToken" => null,
+                    "userPassword" => $data["password"]
+                ]);
+            } else {
+                $result = $userModel->update($user["userId"], [
+                    "userToken" => null,
+                    "userPassword" => $data["password"],
+                    "confirmed" => 1
+                ]);
+            }
+
             if($result) {
                 $response = [
                     "type" => "success",
@@ -79,7 +97,8 @@ class CtrlLogin extends BaseController
         return redirect()->to("/password_reset")->with("response", $response);
 
     }
-    public function login() {
+    public function login()
+    {
         $loginValidation = new LoginValidation();
 
         $data = $this->request->getPost();
@@ -88,8 +107,11 @@ class CtrlLogin extends BaseController
         $password = trim($data["password"]);
 
         try {
-            if(!$loginValidation->validateInputs($data)) throw new Exception();
+            if(!$loginValidation->validateInputs($data)) {
+                throw new Exception();
+            }
             $user = (new UserModel())->where("userEmail", $email)->first();
+            $loginValidation->validateConfirmedAccount($user);
             $loginValidation->validateCredentials($user, $password);
             session()->set("user", [
                 "name" => $user["userFirstName"] . " " . $user["userLastName"],
@@ -101,12 +123,13 @@ class CtrlLogin extends BaseController
             return redirect()->back()->with("errors", $loginValidation->getErrors());
         }
 
-        $redirectUrl = session()->get('redirectUrl') ?? "admin"; 
+        $redirectUrl = session()->get('redirectUrl') ?? "admin";
         session()->remove('redirectUrl');
 
         return redirect()->to($redirectUrl);
     }
-    public function logout() {
+    public function logout()
+    {
         $session = session();
         $session->destroy();
         return redirect()->to("login");

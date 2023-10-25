@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\EmailModel;
+
 use App\Models\UserModel;
 use App\Utils\EmailSender;
 use App\Validation\ContactEmailValidation;
@@ -138,6 +139,7 @@ class CtrlEmail extends BaseController
             $user      = $userModel->where('userEmail', $data['email'])->first();
 
             $validateEmail->existUserWithEmail($user);
+            $validateEmail->validateConfirmedAccount($user);
             $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
             $token    = uniqid();
