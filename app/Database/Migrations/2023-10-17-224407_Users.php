@@ -35,7 +35,7 @@ class Users extends Migration
                 'constraint' => 13,
                 'null'       => true,
             ],
-            'isConfirmed' => [
+            'confirmed' => [
                 'type' => 'tinyint',
                 'null' => true,
             ],
