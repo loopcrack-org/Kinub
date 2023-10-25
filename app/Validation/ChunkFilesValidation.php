@@ -3,6 +3,7 @@
 namespace App\Validation;
 
 use CodeIgniter\Validation\Exceptions\ValidationException;
+use App\Exceptions\FileValidationException;
 use InvalidArgumentException;
 
 class ChunkFilesValidation
@@ -10,7 +11,6 @@ class ChunkFilesValidation
     protected $beforeUploadRules = [];
     protected $afterUploadRules = [];
     protected $customErrors = [];
-    protected $error;
     
     public function runBeforeUpload($data) {
         $rules = $this->beforeUploadRules;
@@ -55,16 +55,10 @@ class ChunkFilesValidation
             $passed = $instance->{$rule}($data, $param);
 
             if($passed === false) {
-                $this->error = $this->customErrors[$rule] ?? "validation failed on rule $rule";
-                return false;
+                $error = $this->customErrors[$rule] ?? "validation failed on rule $rule";
+                throw new FileValidationException($error);
             }
         }
         return true;
-    }
-    public function hasError() {
-        return !empty($this->error);
-    }
-    public function getError() {
-        return $this->error;
     }
 }
