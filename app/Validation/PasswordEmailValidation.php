@@ -36,12 +36,10 @@ class PasswordEmailValidation extends BaseValidation
         return true;
     }
 
-    public function validateConfirmedAccount($user)
+    public function validateConfirmedAccount($isConfirmed)
     {
-        if (! $user || $user['confirmed'] === 0) {
+        if ($isConfirmed === '0') {
             throw new Exception('Tu cuenta no ha sido confirmada. Por favor, revisa tu correo electrónico para finalizar el proceso de confirmación de tu cuenta.');
-
-            throw new Exception();
         }
 
         return true;
