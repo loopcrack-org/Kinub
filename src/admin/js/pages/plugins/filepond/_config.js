@@ -87,9 +87,8 @@ function getServerOptions(nameInput) {
     process: {
       url: "/process",
       method: "POST",
-      ondata: (formData) => {
-        formData.append("inputName", nameInput);
-        return formData;
+      headers: {
+        input: nameInput,
       },
       onload: (response) => {
         const result =
@@ -99,7 +98,12 @@ function getServerOptions(nameInput) {
         return result.key;
       },
     },
-    patch: "/process?patch=",
+    patch: {
+      url: "/process?patch=",
+      headers: {
+        input: nameInput,
+      },
+    },
     restore: "/restore?file=",
     revert: "/deleteTmp",
     load: "/load?file=",

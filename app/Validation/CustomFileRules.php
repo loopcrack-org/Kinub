@@ -5,7 +5,7 @@ namespace App\Validation;
 use CodeIgniter\Files\File;
 use Config\Mimes;
 
-class ChunkFileRules {
+class CustomFileRules {
     /**
      * Verifies if the file's size in Kilobytes is no larger than the parameter.
      */
@@ -98,6 +98,22 @@ class ChunkFileRules {
             return false;
         }
 
+        return true;
+    }
+    public function maxFiles($files, $params) {
+        $maxFiles = $params;
+        $numFiles = count($files);
+        if($numFiles > $maxFiles) {
+            return false;
+        }
+        return true;
+    }
+    public function minFiles($files, $params) {
+        $minFiles = $params;
+        $numFiles = count($files);
+        if($numFiles < $minFiles) {
+            return false;
+        }
         return true;
     }
 }

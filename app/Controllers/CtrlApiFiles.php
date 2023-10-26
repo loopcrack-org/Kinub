@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\FileModel;
 use App\Utils\FileManager;
-use App\Validation\ChunkFilesValidation;
+use App\Validation\CustomFileValidation;
 use CodeIgniter\Files\File;
 use App\Exceptions\FileValidationException;
 
@@ -42,8 +42,7 @@ class CtrlApiFiles extends BaseController
     public function processTempFile()
     {
         try {
-            $inputName = $this->request->getPost()['inputName'];
-            session()->set("field", $inputName);
+            $inputName = $this->request->header("Input")->getValue();
             $file = $this->request->getFiles()[$inputName][0] ?? null;
             $key = FileManager::getFolderId();
             $folder = $this->folderTemp . $key;
@@ -67,12 +66,12 @@ class CtrlApiFiles extends BaseController
                     $file = [
                         "size" => $this->request->header("Upload-Length")->getValue(),
                     ];
-                    $validation = new ChunkFilesValidation();
+                    $validation = new CustomFileValidation();
                     $validation->setRules(
-                        session()->get("fileValidation")["chunkValidation"][$inputName],
-                        session()->get("fileValidation")["messages"][$inputName],
+                        session()->get("fileValidation")["customValidationRules"][$inputName]["beforeUpload"],
+                        session()->get("fileValidation")["messages"][$inputName] ?? [],
                     );
-                    $validation->runBeforeUpload($file);
+                    $validation->run($file);
                 }
                 FileManager::createFolder($folder);
             }
@@ -100,18 +99,18 @@ class CtrlApiFiles extends BaseController
 
             if(session()->has("fileValidation")) {
                 $configValidation = session()->get("fileValidation");
-                $chunkSize = $configValidation["chunkValidation"]["chunkSize"];
+                $chunkSize = $configValidation["customValidationRules"]["chunkSize"];
                 $uploaded = $offset + $chunkSize > $fileLength;
 
                 if($uploaded) {
-                    $inputName = session()->get("field");
-                    $validation = new ChunkFilesValidation();
+                    $inputName = $this->request->header("Input")->getValue();
+                    $validation = new CustomFileValidation();
                     $validation->setRules(
-                        $configValidation["chunkValidation"][$inputName],
+                        $configValidation["customValidationRules"][$inputName]["afterUpload"],
                         $configValidation["messages"][$inputName],
                     );
                     $file = new File($fileTmp);
-                    $validation->runAfterUpload($file);
+                    $validation->run($file);
                 }
             }
 
@@ -119,7 +118,7 @@ class CtrlApiFiles extends BaseController
             return $this->response->setStatusCode(204);
         } catch (FileValidationException $th) {
             FileManager::deleteFolderWithContent($folder);
-            return $this->response->setStatusCode(500, json_encode($th->getFileValidationError()));
+            return $this->response->setStatusCode(500)->setJSON(["error" => $th->getFileValidationError()]);
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }

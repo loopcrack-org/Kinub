@@ -6,16 +6,14 @@ class FilepondManager
 {
     public static function getSourceFiles(array $foldersFiles, string $sourceType): array
     {
-        $sourceFiles = [];
-        foreach ($foldersFiles as $folderFile) {
-            $sourceFiles[] = [
-                "source" => $folderFile['uuid'],
+        return array_map(function ($folderFile) use ($sourceType) {
+            return [
+                "source" => $folderFile,
                 "options" => [
                     "type" => $sourceType
                 ],
             ];
-        }
-        return $sourceFiles;
+        }, $foldersFiles);
     }
 
     public static function getNewFilesInFilepond(array $filesFromPost, array $filesSaved): array

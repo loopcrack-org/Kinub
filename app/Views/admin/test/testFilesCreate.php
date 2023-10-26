@@ -22,6 +22,18 @@
                 </a>
             </div>
 
+            <!-- Filepond Config -->
+            <?php
+                if(session()->has("Test_filepondConfig")) {
+                    $config = session()->get("Test_filepondConfig");
+                    session()->remove("Test_filepondConfig");
+                }
+                $validationError = [];
+                if(session()->has("Test_validationError")) {
+                    $validationError = session()->get("Test_validationError");
+                    session()->remove("Test_validationError");
+                }
+            ?>
             <form id="form" autocomplete="off" class="needs-validation" novalidate method="POST">
                 <div class="row justify-content-center">
                     <div class="col-sm-11">
@@ -53,13 +65,10 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
-                                    <?php
-                                        $files = session()->get('files');
-if ($files) {
-    $config[0]['files'] = $files;
-}
-?>
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config[0]]) ?>
+                                    <?= view("admin/components/inputFilePond", [
+                                        "inputConfig" => $config[0],
+                                        "error" => $validationError["image"] ?? "",
+                                    ]) ?>
 
                                 </div>
                                 <!-- end card -->
@@ -74,7 +83,10 @@ if ($files) {
                                         <h4 class="card-title mb-0">Íconos (SVG)</h4>
                                     </div><!-- end card header -->
 
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config['1']]) ?>
+                                    <?= view("admin/components/inputFilePond", [
+                                        "inputConfig" => $config['1'],
+                                        "error" => $validationError["svg"] ?? "",
+                                    ]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -88,7 +100,10 @@ if ($files) {
                                         <h4 class="card-title mb-0">Video</h4>
                                     </div><!-- end card header -->
 
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config[2]]) ?>
+                                    <?= view("admin/components/inputFilePond", [
+                                        "inputConfig" => $config[2],
+                                        "error" => $validationError["video"] ?? "",
+                                    ]) ?>
 
                                     <!-- end card body -->
                                 </div>
@@ -104,7 +119,10 @@ if ($files) {
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Documents (PDF)</h4>
                                     </div><!-- end card header -->
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config['3']]) ?>
+                                    <?= view("admin/components/inputFilePond", [
+                                        "inputConfig" => $config['3'],
+                                        "error" => $validationError["pdf"] ?? "",
+                                    ]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>
