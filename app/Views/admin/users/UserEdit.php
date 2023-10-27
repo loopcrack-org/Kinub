@@ -1,13 +1,13 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
-<?= view('partials/title-meta', ['title' => 'Editar Usuario']); ?>
+<?= view('partials/title-meta', ['title' => 'Crear Usuario']); ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?= view('partials/page-title', ['title' => 'Editar Usuario', 'titleUrl' => '/admin/usuarios', 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Editar Usuario']); ?>
+        <?= view('partials/page-title', ['title' => 'Crear Usuario', 'titleUrl' => '/admin/usuarios', 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Crear Usuario']); ?>
 
 
         <div class="row justify-content-center">
@@ -17,8 +17,9 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
+
+                <?php $errors = session()->get('errors'); ?>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
-                    <!-- end row -->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -29,8 +30,13 @@
                                 </div>
                                 <!-- end card-header -->
                                 <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
-                                        <input type="text" class="form-control" name="userFirstName" id="userFirstName" value="<?= $user['userFirstName']?>" placeholder="Ingrese el nombre del usuario a registrar" required>
+                                    <div>
+                                        <input type="text" class="form-control <?= isset($errors['userFirstName']) ? 'is-invalid' : '' ?>" name="userFirstName" id="userFirstName" value="<?= old('userFirstName') ?? $user['userFirstName']; ?>" placeholder="Ingrese el nombre del usuario a registrar" required>
+                                        <?php if (isset($errors['userFirstName'])) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= $errors['userFirstName'] ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <!-- end card-body -->
@@ -45,8 +51,13 @@
                                 </div>
                                 <!-- end card-header -->
                                 <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
-                                        <input type="text" class="form-control" name="userLastName" id="userLastName" value="<?= $user['userLastName']?>" placeholder="Ingrese el apellido del usuario a registrar" required>
+                                    <div>
+                                        <input type="text" class="form-control <?= isset($errors['userLastName']) ? 'is-invalid' : '' ?>" name="userLastName" id="userLastName" value="<?= old('userLastName') ?? $user['userLastName']; ?>" placeholder="Ingrese el apellido del usuario a registrar" required>
+                                        <?php if (isset($errors['userLastName'])) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= $errors['userLastName'] ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <!-- end card body -->
@@ -61,20 +72,19 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h5 class="card-title">Email</h5>
+                                    <h5 class="card-title mb-0">Email</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-md-7 mb-2">
-                                            <input type="email" class="form-control" name="userEmail" id="userEmail" value="<?= $user['userEmail']?>" placeholder="Ingrese un correo electrónico" required>
-                                        </div>
-                                        <div class="col-md-5 mb-2">
-                                            <div class="alert alert-<?= ($user['confirmed']) ? 'success' : 'warning'?> alert-dismissible alert-label-icon label-arrow fade show mb-0">
-                                                <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line label-icon"></i><strong><?= ($user['confirmed']) ? 'Cuenta confirmada' : 'Cuenta por confirmar'?></strong>
-                                            </div>
+                                    <div>
+                                        <div class="flex-grow-1">
+                                            <input type="email" class="form-control <?= isset($errors['userEmail']) ? 'is-invalid' : '' ?>" name="userEmail" id="userEmail" value="<?= old('userEmail') ?? $user['userEmail']; ?>" placeholder="Ingrese un correo electrónico" required>
+                                            <?php if (isset($errors['userEmail'])) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= $errors['userEmail'] ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
-                                </div>
                                 <!-- end card body -->
                             </div>
                             <!-- end card -->
@@ -96,4 +106,11 @@
     <!-- container-fluid -->
 </div>
 <!-- End Page-content -->
+<?= $this->endSection() ?>
+
+<?= $this->section('js') ?>
+<!-- particles js -->
+<script src="/assets/admin/js/particles.min.js"></script>
+<!-- particles app js -->
+<script src="/assets/admin/js/particles.app.min.js"></script>
 <?= $this->endSection() ?>
