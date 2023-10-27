@@ -40,5 +40,6 @@ class Files extends Migration
 
     public function down()
     {
+        $this->forge->dropTable('files');
     }
 }
