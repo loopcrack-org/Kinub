@@ -17,7 +17,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'admin@admin.com',
                 'userPassword'  => password_hash('fake_password', PASSWORD_BCRYPT),
                 'userToken'     => 'FAS12AQajqa',
-                'isConfirmed'   => 1,
+                'confirmed'     => 1,
                 'isAdmin'       => 1,
             ],
             [
@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
                 'userEmail'     => 'nkutch@gmail.com',
                 'userPassword'  => password_hash('fake_password', PASSWORD_BCRYPT),
                 'userToken'     => 'FAS12AQajqa',
-                'isConfirmed'   => 0,
+                'confirmed'     => 0,
                 'isAdmin'       => 0,
             ],
         ];
