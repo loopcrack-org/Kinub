@@ -27,8 +27,8 @@ class Certificates extends Migration
 
         $this->forge->addKey('certificateId', true);
 
-        $this->forge->addForeignKey('certificatePreviewId', 'files', 'fileId');
-        $this->forge->addForeignKey('certificatefileId', 'files', 'fileId');
+        $this->forge->addForeignKey('certificatePreviewId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'certificate_preview_FK');
+        $this->forge->addForeignKey('certificatefileId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'certificate_file_FK');
 
         $this->forge->createTable('certificates');
     }

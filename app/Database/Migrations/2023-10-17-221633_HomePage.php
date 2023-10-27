@@ -25,8 +25,8 @@ class HomePage extends Migration
 
         $this->forge->addKey('homePageId', true);
 
-        $this->forge->addForeignKey('aboutUsImageId', 'files', 'fileId');
-        $this->forge->addForeignKey('aboutUsVideoId', 'files', 'fileId');
+        $this->forge->addForeignKey('aboutUsImageId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'about_us_image_FK');
+        $this->forge->addForeignKey('aboutUsVideoId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'about_us_video_FK');
 
         $this->forge->createTable('home_page');
     }

@@ -22,8 +22,8 @@ class ProductsCategoryTags extends Migration
         ]);
         $this->forge->addKey('pctId', true);
 
-        $this->forge->addForeignKey('pctProductId', 'products', 'productId');
-        $this->forge->addForeignKey('pctCategoryTagId', 'category_tags', 'categoryTagId');
+        $this->forge->addForeignKey('pctProductId', 'products', 'productId', 'CASCADE', 'CASCADE', 'pct_product_FK');
+        $this->forge->addForeignKey('pctCategoryTagId', 'category_tags', 'categoryTagId', 'CASCADE', 'CASCADE', 'pct_categoryTag_FK');
 
         $this->forge->createTable('products-category_tags');
     }

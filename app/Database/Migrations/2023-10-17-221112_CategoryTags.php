@@ -24,7 +24,7 @@ class CategoryTags extends Migration
 
         $this->forge->addKey('categoryTagId', true);
 
-        $this->forge->addForeignKey('categoryId', 'categories', 'categoryId');
+        $this->forge->addForeignKey('categoryId', 'categories', 'categoryId', 'CASCADE', 'CASCADE', 'categoryTag_category_FK');
 
         $this->forge->createTable('category_tags');
     }

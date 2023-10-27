@@ -31,7 +31,7 @@ class Emails extends Migration
 
         $this->forge->addKey('emailId', true);
 
-        $this->forge->addForeignKey('emailTypeId', 'email_types', 'emailTypeId');
+        $this->forge->addForeignKey('emailTypeId', 'email_types', 'emailTypeId', 'CASCADE', 'CASCADE', 'email_emailType_FK');
 
         $this->forge->createTable('emails');
     }

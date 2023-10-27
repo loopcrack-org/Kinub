@@ -31,8 +31,8 @@ class MeasurementSolutions extends Migration
 
         $this->forge->addKey('msId', true);
 
-        $this->forge->addForeignKey('msIconId', 'files', 'fileId');
-        $this->forge->addForeignKey('msImageId', 'files', 'fileId');
+        $this->forge->addForeignKey('msIconId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'measurement_solution_icon_FK');
+        $this->forge->addForeignKey('msImageId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'measurement_solution_image_FK');
 
         $this->forge->createTable('measurement_solutions');
     }

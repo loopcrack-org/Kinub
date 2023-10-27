@@ -26,8 +26,8 @@ class ProductsFiles extends Migration
 
         $this->forge->addKey('pfId', true);
 
-        $this->forge->addForeignKey('pfProductId', 'products', 'productId');
-        $this->forge->addForeignKey('pfFileId', 'files', 'fileId');
+        $this->forge->addForeignKey('pfProductId', 'products', 'productId', 'CASCADE', 'CASCADE', 'pf_product_FK');
+        $this->forge->addForeignKey('pfFileId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'pf_file_FK');
 
         $this->forge->createTable('product_files');
     }

@@ -38,8 +38,8 @@ class Products extends Migration
 
         $this->forge->addKey('productId', true);
 
-        $this->forge->addForeignKey('productDemoVideoId', 'files', 'fileId');
-        $this->forge->addForeignKey('productCategoryId', 'categories', 'categoryId');
+        $this->forge->addForeignKey('productDemoVideoId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'product_demo_video_FK');
+        $this->forge->addForeignKey('productCategoryId', 'categories', 'categoryId', 'CASCADE', 'CASCADE', 'product_category_FK');
 
         $this->forge->createTable('products');
     }
