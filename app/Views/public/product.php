@@ -49,11 +49,11 @@
             </div>
 
             <div class="details__data-container">
-            <p class="details__data"><span>Frecuencia:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Rango de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Precisión de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Potencia:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Comunicación:</span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
             <a href="#" class="details__button">Más información acerca de este equipo</a>
         </div>
