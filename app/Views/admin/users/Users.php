@@ -47,25 +47,27 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($users as $user) { ?>
-                                    <tr>
-                                        <td><?= $user['userId']; ?></td>
-                                        <td>
-                                            <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user['userFirstName'] . $user['userLastName']; ?></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user['userEmail']; ?></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
-                                                <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id="<?= $user['userId']; ?>" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <?php if ($user['confirmed'] !== '1') { ?>
+                                        <tr>
+                                            <td><?= $user['userId']; ?></td>
+                                            <td>
+                                                <div class="d-flex align-items-center fw-medium">
+                                                    <p class="text-wrap"><?= $user['userFirstName'] . $user['userLastName']; ?></p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex align-items-center fw-medium">
+                                                    <p class="text-wrap"><?= $user['userEmail']; ?></p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-between">
+                                                    <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                    <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id="<?= $user['userId']; ?>" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php }?>
                                 <?php }?>
                             </tbody>
                             <tfoot>
