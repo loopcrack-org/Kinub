@@ -83,7 +83,7 @@ export function createPond(input, config, name, minFiles) {
 
 function getServerOptions(nameInput) {
   return {
-    url: "/admin/api/files",
+    url: "/admin/testFiles",
     process: {
       url: "/process",
       method: "POST",
@@ -105,7 +105,7 @@ function getServerOptions(nameInput) {
       },
     },
     restore: "/restore?file=",
-    revert: "/deleteTmp",
+    revert: "/delete",
     load: "/load?file=",
     remove: (source, load, error) => {
       addFileToDelete(nameInput, source);

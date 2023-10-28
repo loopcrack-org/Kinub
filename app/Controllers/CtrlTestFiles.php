@@ -11,10 +11,8 @@ use App\Utils\FileManager;
 use App\Utils\FilePondManager;
 use App\Validation\CustomFileValidation;
 
-class CtrlTestFiles extends BaseController
+class CtrlTestFiles extends CtrlApiFiles
 {
-    private $folderTemp = "./files/tmp/";
-    private $folderUpload = "./uploads/";
     protected $configFiles = [
        [
             "name" => "image",
@@ -163,7 +161,7 @@ class CtrlTestFiles extends BaseController
         $inputFiles = ["image", "svg", "video", "pdf"];
         $validationErrors = [];
         foreach ($inputFiles as $i => $inputName) {
-            $collection = empty($data[$inputName][0]) ?  [] : $data[$inputName];
+            $collection = empty($data[$inputName][0]) ? [] : $data[$inputName];
             // if(session()->has("fileValidation")) {
             //     $validation = session()->get("fileValidation");
             // }
@@ -173,7 +171,7 @@ class CtrlTestFiles extends BaseController
                     $validationRules = $this->validation["customValidationRules"][$inputName]["collection"];
                     $messages = $this->validation["messages"][$inputName] ?? [];
                     $validation = new CustomFileValidation();
-                    $validation->setRules($validationRules,$messages);
+                    $validation->setRules($validationRules, $messages);
                     $validation->run($collection);
                 }
             } catch (FileValidationException $th) {
@@ -185,23 +183,23 @@ class CtrlTestFiles extends BaseController
             $testModel->insert(["testName" => $data["name"]]);
             $testId = $testModel->getInsertID();
             foreach ($inputFiles as $i => $inputName) {
-                $collection = empty($data[$inputName][0]) ?  [] : $data[$inputName];
+                $collection = empty($data[$inputName][0]) ? [] : $data[$inputName];
                 foreach($collection as $keyfile) {
-                        $outputFolder = $this->folderUpload . $keyfile;
-                        $sourceFolder = $this->folderTemp . $keyfile;
-                        $filePath = scandir($sourceFolder)[2];
+                    $outputFolder = FILES_UPLOAD_DIRECTORY . $keyfile;
+                    $sourceFolder = FILES_TEMP_DIRECTORY . $keyfile;
+                    $filePath = scandir($sourceFolder)[2];
 
-                        $folderData = [
-                            "fileRoute" => "$outputFolder/$filePath",
-                            "uuid" => $keyfile,
-                            "fileDirectoryRoute" => $outputFolder,
-                            "fileName" => $filePath
-                        ];
-                        $testFileModel = new TestFilesModel();
-                        $testFileModel->createNewFile($folderData, $testId, $inputName);
-                        FileManager::changeDirectoryFolder($sourceFolder, $outputFolder);
-                    }
+                    $folderData = [
+                        "fileRoute" => "$outputFolder/$filePath",
+                        "uuid" => $keyfile,
+                        "fileDirectoryRoute" => $outputFolder,
+                        "fileName" => $filePath
+                    ];
+                    $testFileModel = new TestFilesModel();
+                    $testFileModel->createNewFile($folderData, $testId, $inputName);
+                    FileManager::changeDirectoryFolder($sourceFolder, $outputFolder);
                 }
+            }
         } else {
             return redirect()->to("/admin/testFiles/crear")
                 ->withInput()
@@ -236,8 +234,8 @@ class CtrlTestFiles extends BaseController
         $deleteImages = $files["delete-image"] ?? [];
 
         foreach($newImages as $keyfile) {
-            $outputFolder = $this->folderUpload . $keyfile;
-            $sourceFolder = $this->folderTemp . $keyfile;
+            $outputFolder = FILES_UPLOAD_DIRECTORY . $keyfile;
+            $sourceFolder = FILES_TEMP_DIRECTORY . $keyfile;
             $filePath = scandir($sourceFolder)[2];
 
             $folderData = [
@@ -254,7 +252,7 @@ class CtrlTestFiles extends BaseController
 
         $fileModel = new FileModel();
         foreach ($deleteImages as $keyfile) {
-            $fileFolder = $this->folderUpload . $keyfile . "/";
+            $fileFolder = FILES_UPLOAD_DIRECTORY . $keyfile . "/";
             $fileModel->where("uuid", $keyfile)->delete();
             FileManager::deleteFolderWithContent($fileFolder);
         }

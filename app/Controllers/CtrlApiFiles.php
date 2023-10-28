@@ -11,8 +11,6 @@ use App\Exceptions\FileValidationException;
 
 class CtrlApiFiles extends BaseController
 {
-    private $folderTemp = "./files/tmp/";
-
     public function getFileFromServer()
     {
         try {
@@ -26,11 +24,11 @@ class CtrlApiFiles extends BaseController
         }
     }
 
-    public function restoreTempFile()
+    public function restoreTemporalFile()
     {
         try {
             $key = $this->request->getGet()['file'];
-            $folder = $this->folderTemp . $key;
+            $folder = FILES_TEMP_DIRECTORY . $key;
             $file = FileManager::getFileFromFolder($folder)[0];
 
             return $this->response->setStatusCode(200)->download($file, null, true);
@@ -39,13 +37,13 @@ class CtrlApiFiles extends BaseController
         }
     }
 
-    public function processTempFile()
+    public function processTemporalFile()
     {
         try {
             $inputName = $this->request->header("Input")->getValue();
             $file = $this->request->getFiles()[$inputName][0] ?? null;
             $key = FileManager::getFolderId();
-            $folder = $this->folderTemp . $key;
+            $folder = FILES_TEMP_DIRECTORY . $key;
 
             if ($file) {
                 if(session()->has("fileValidation")) {
@@ -83,7 +81,7 @@ class CtrlApiFiles extends BaseController
         }
     }
 
-    public function processTempFileChunk()
+    public function processTemporalFileByChunks()
     {
         try {
             $key = $this->request->getGet("patch");
@@ -92,7 +90,7 @@ class CtrlApiFiles extends BaseController
             $fileData = $this->request->getBody();
             $offset = $this->request->header('Upload-Offset')->getValue();
 
-            $folder = "$this->folderTemp/$key";
+            $folder = FILES_TEMP_DIRECTORY . $key;
             $fileTmp = "$folder/$fileName";
 
             FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
@@ -123,11 +121,11 @@ class CtrlApiFiles extends BaseController
             return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
     }
-    public function deleteTmpFile()
+    public function deleteTemporalFile()
     {
         try {
             $key = $this->request->getBody();
-            $folder = $this->folderTemp . $key;
+            $folder = FILES_TEMP_DIRECTORY . $key;
             FileManager::deleteFolderWithContent($folder);
             return $this->response->setStatusCode(201);
         } catch (\Throwable $th) {

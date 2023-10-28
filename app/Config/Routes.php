@@ -8,6 +8,7 @@ use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlTestFiles;
+use CodeIgniter\Router\RouteCollection;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -91,16 +92,6 @@ $routes->group('admin', static function ($routes) {
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
     });
 
-    $routes->group('api/files', static function ($routes) {
-        /** @var \CodeIgniter\Router\RouteCollection $routes */
-        $routes->get('load', 'CtrlApiFiles::getFileFromServer');
-        $routes->get('restore', 'CtrlApiFiles::restoreTempFile');
-        $routes->patch('process', 'CtrlApiFiles::processTempFileChunk');
-        $routes->post('process', 'CtrlApiFiles::processTempFile');
-        $routes->delete('deleteTmp', 'CtrlApiFiles::deleteTmpFile');
-        $routes->delete('delete', 'CtrlApiFiles::deleteFile');
-    });
-
     $routes->group('testFiles', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlTestFiles::class, 'viewTestFiles']);
@@ -109,6 +100,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlTestFiles::class, 'viewTestFilesEdit']);
         $routes->post('editar/(:num)', [CtrlTestFiles::class, 'updateTestFiles']);
         $routes->post('borrar', [CtrlTestFiles::class, 'deleteTestFiles']);
+        generateFileApiRoutesByController($routes, CtrlTestFiles::class);
     });
 });
 /*
@@ -126,4 +118,14 @@ $routes->group('admin', static function ($routes) {
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+
+function generateFileApiRoutesByController(RouteCollection $routes, String $controller)
+{
+    $routes->post('process', [$controller, 'processTemporalFile']);
+    $routes->patch('process', [$controller, 'processTemporalFileByChunks']);
+    $routes->get('restore', [$controller, 'restoreTemporalFile']);
+    $routes->get('load', [$controller, 'getFileFromServer']);
+    $routes->delete('delete', [$controller, 'deleteTemporalFile']);
 }
