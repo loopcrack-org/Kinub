@@ -5,7 +5,7 @@
 
 .details {
   padding-left: 2rem;
-  margin-right: 3rem;
+  margin-right: 2rem;
 
   @include m.tablet {
     padding-left: 0;
@@ -18,7 +18,7 @@
 
     @include m.tablet {
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
     }
   }
 
@@ -126,82 +126,17 @@
 }
 
 .carousel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
+  margin: 0;
+
   @include m.tablet {
-    width: 60%;
-  }
-
-  @include m.desktop {
-    width: 100%;
-  }
-
-  &__big-image {
-    overflow: hidden;
-    max-width: 90%;
-    max-height: 28rem;
-    border: 1px solid v.$aqua-blue;
-
-    @include m.tablet {
-      max-width: 80%;
-      max-height: 35rem;
-      margin: 0 auto;
-    }
-
-    @include m.desktopXL {
-      max-height: 47.5rem;
-    }
-  }
-
-  &__image {
-    overflow: hidden;
-    width: 7rem;
-    height: 6rem;
-    border: 1px solid v.$aqua-blue;
-
-    @include m.phoneXL {
-      width: 12rem;
-      height: 11rem;
-    }
-
-    @include m.desktop {
-      width: 13rem;
-      height: 15rem;
-    }
-
-    @include m.desktopXL {
-      width: 15.9rem;
-      height: 14rem;
-      border: 1px solid v.$aqua-blue;
-    }
-  }
-
-  &__under-image {
-    display: flex;
-    overflow: hidden;
-    max-width: 90%;
-    max-height: 20rem;
-    margin: 2rem auto;
-    column-gap: 2rem;
-
-    @include m.tablet {
-      max-width: 80%;
-    }
-
-    @include m.desktop {
-      max-width: 100%;
-    }
-
-    @include m.desktopXL {
-      max-height: 20rem;
-    }
+    width: 50%;
   }
 }
 
 .product-navigation {
   position: sticky;
-  z-index: 99;
+  z-index: 0;
   top: v.$mobile-height;
   display: flex;
   width: 100%;

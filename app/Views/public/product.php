@@ -19,22 +19,45 @@
 
 <main class="details">
     <div class="details__grid">
-        <div class="carousel">
-            <div class="carousel__big-image">
-                <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-            </div>
-            <div class="carousel__under-image">
-                <div class="carousel__image">
-                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen pequeña">
-                </div>
-                <div class="carousel__image">
-                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen pequeña">
-                </div>
-                <div class="carousel__image">
-                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen pequeña">
-                </div>
-            </div>
+
+    <div class="carousel">
+        <div class="image-container">
+            <img class="main-image" id="main-image" src="https://tse1.mm.bing.net/th?id=OIF.%2bqEV7L45ecgTwypI8taaXQ&pid=Api&P=0&h=180" alt="">
         </div>
+
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    <li class="glide__slide">
+                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="https://tse1.mm.bing.net/th?id=OIF.%2bqEV7L45ecgTwypI8taaXQ&pid=Api&P=0&h=180" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide">
+                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    </li>
+                </ul>
+            </div>
+
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><</button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">></button>
+        </div>
+        </div>
+    </div>
 
         <div class="details__information">
             <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
@@ -49,11 +72,11 @@
             </div>
 
             <div class="details__data-container">
-            <p class="details__data"><span>Frecuencia:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Rango de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Precisión de medición:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Potencia:</span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Comunicación:</span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span>Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
             <a href="#" class="details__button">Más información acerca de este equipo</a>
         </div>
@@ -70,7 +93,6 @@
     <a href="#download-area" class="product-navigation__link-container">
         <p class="product-navigation__link">Área de descarga</p>
     </a>
-
 </nav>
 
 <section class="product-info" id="description">
@@ -109,10 +131,6 @@
         </video>
     </div>
 </section>
-
-<!-- <section class="product-info product-info--video">
-
-</section> -->
 
 <section class="product-info download-area" id="download-area">
 
