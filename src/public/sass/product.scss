@@ -205,9 +205,9 @@
   top: v.$mobile-height;
   display: flex;
   width: 100%;
-  margin: 4rem 0;
+  margin: 4rem 0 0 0;
 
-  @include m.desktop {
+  @include m.tablet {
     top: v.$desktop-height;
   }
 
@@ -217,13 +217,11 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem;
+    background-color: darken(v.$bright-blue, 20%);
+    transition: background-color 500ms ease-in-out;
 
-    &:nth-child(odd) {
-      background-color: darken(v.$bright-blue, 20%);
-    }
-
-    &:nth-child(even) {
-      background-color: darken(v.$aqua-blue, 2%);
+    &--active {
+      background-color: v.$sky-blue;
     }
   }
 
@@ -263,13 +261,10 @@
 
   &__accordion-container {
     padding-top: 4rem;
-    border-top: 0.8rem solid v.$turquoise-blue;
 
     @include m.tablet {
       padding-top: 0;
       padding-left: 3.5rem;
-      border-top: none;
-      border-left: 0.8rem solid v.$turquoise-blue;
       margin-left: 0.2rem;
     }
   }
