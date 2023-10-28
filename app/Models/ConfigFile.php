@@ -12,6 +12,6 @@ class ConfigFile {
         return new ConfigFileBuilder();
     }
     public function getFilepondConfig() {
-        $this->builder->
+        
     }
 }
