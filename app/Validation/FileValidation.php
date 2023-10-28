@@ -6,12 +6,13 @@ use CodeIgniter\Validation\Exceptions\ValidationException;
 use App\Exceptions\FileValidationException;
 use InvalidArgumentException;
 
-class CustomFileValidation
+class FileValidation
 {
     protected $rules = [];
     protected $customErrors = [];
 
-    public function setRules(string $rules, array $messages = []) {
+    public function __construct(string $rules, array $messages = [])
+    {
         $this->customErrors = $messages;
         if(!isset($rules) || empty($rules)) {
             throw new InvalidArgumentException("Invalid argument. Not rules founded");

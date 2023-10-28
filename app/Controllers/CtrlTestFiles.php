@@ -4,15 +4,20 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Exceptions\FileValidationException;
+use App\Models\ConfigFileBuilder;
 use App\Models\FileModel;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
 use App\Utils\FilePondManager;
-use App\Validation\CustomFileValidation;
+use Config\Services;
 
 class CtrlTestFiles extends CtrlApiFiles
 {
+
+    protected $config = [
+        "image" => "",
+    ];
     protected $configFiles = [
        [
             "name" => "image",
@@ -20,8 +25,7 @@ class CtrlTestFiles extends CtrlApiFiles
             "fileValidateTypeLabelExpectedTypes" => "Selecciona jpg, jpeg o png",
             "chunkUploads" => true,
             "labelFileTypeNotAllowed" => "Archivo no válido",
-            "checkValidity" => true,
-            "chunkSize" => 100000,
+            "chunkSize" => 1000000,
             "allowMultiple" => true,
             // "maxFiles" => 3,
             // "minFiles" => 2,
@@ -80,34 +84,27 @@ class CtrlTestFiles extends CtrlApiFiles
         ]
     ];
     protected $validation = [
-        "customValidationRules" => [
+        "validationRules" => [
             "chunkSize" => 100000, // in bytes
             "image" => [
                 "collection" => "maxFiles[2]|minFiles[1]",
-                "beforeUpload" => "max_size[200]",
-                "afterUpload" => "max_dims[3000,3000]|is_image[]|mime_in[image/jpg,image/png,image/jpeg]|ext_in[jpg,png,jpeg]",
+                "rules" => "max_size[200]|max_dims[3000,3000]|is_image[]|mime_in[image/jpg,image/png,image/jpeg]|ext_in[jpg,png,jpeg]",
             ],
             "svg" => [
                 "collection" => "maxFiles[2]|minFiles[1]",
                 "beforeUpload" => "max_size[200]",
-                "afterUpload" => "is_image[]|mime_in[image/svg+xml]|ext_in[svg]"
+                "rules" => "max_size[200]|is_image[]|mime_in[image/svg+xml]|ext_in[svg]"
             ],
             "video" => [
                 "collection" => "maxFiles[2]|minFiles[1]",
                 "beforeUpload" => "max_size[200000]",
-                "afterUpload" => "mime_in[video/mp4]|ext_in[mp4]",
+                "rules" => "max_size[200000]|mime_in[video/mp4]|ext_in[mp4]",
             ],
             "pdf" => [
                 "collection" => "maxFiles[2]|minFiles[1]",
                 "beforeUpload" => "max_size[200]",
-                "afterUpload" => "mime_in[application/pdf]|ext_in[pdf]",
+                "rules" => "max_size[200]|mime_in[application/pdf]|ext_in[pdf]",
             ]
-        ],
-        "validationRules" => [
-            "image" => "max_size[image,2000]|mime_in[image,image/jpg,image/png,image/jpeg]|ext_in[image,jpg,png,jpeg]|is_image[image]|max_dims[image,300,300]",
-            "svg" => "max_size[svg,2000]|mime_in[svg,image/svg+xml]|ext_in[svg,svg]|is_image[svg]",
-            "video" => "max_size[video,2000]|mime_in[video,video/mp4]|ext_in[video,mp4]",
-            "pdf" => "max_size[pdf,2000]|mime_in[pdf,application/pdf]|ext_in[pdf,pdf]",
         ],
         "messages" => [
             "image" => [
@@ -168,11 +165,9 @@ class CtrlTestFiles extends CtrlApiFiles
             try {
                 if(isset($this->validation)) {
                     $this->configFiles[$i]["files"] = FilePondManager::getSourceFiles($collection, "limbo");
-                    $validationRules = $this->validation["customValidationRules"][$inputName]["collection"];
+                    $rules = $this->validation["customValidationRules"][$inputName]["collection"];
                     $messages = $this->validation["messages"][$inputName] ?? [];
-                    $validation = new CustomFileValidation();
-                    $validation->setRules($validationRules, $messages);
-                    $validation->run($collection);
+                    Services::fileValidation($rules, $messages)->run($collection);
                 }
             } catch (FileValidationException $th) {
                 $validationErrors[$inputName] = $th->getFileValidationError();

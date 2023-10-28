@@ -63,6 +63,7 @@ class FileManager
             fseek($fileOpen, $fileOffset);
             fwrite($fileOpen, $fileData);
             fclose($fileOpen);
+            return filesize($filePath);
         } catch (\Throwable $th) {
             throw new Exception("Ha ocurrido un error al procesar el archivo por partes");
         }

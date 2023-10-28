@@ -9,10 +9,22 @@ class CustomFileRules {
     /**
      * Verifies if the file's size in Kilobytes is no larger than the parameter.
      */
-    public function max_size( $data,  $params) {
-        if(!isset($data["size"])) return false;
+    public function max_size( $file,  $params) {
+        if($file === null) {
+            return false;
+        }
+
+        $size = null;
+
+        if(is_array($file)) {
+            if(!isset($file["size"])) return false;
+            $size = $file["size"] / 1024;
+        } else {
+            $size = $file->getSizeByUnit('kb');
+        }
+
         $accepted = $params;
-        $size = $data["size"] / 1024;
+
         return $accepted > $size;
     }
     /**

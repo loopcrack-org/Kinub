@@ -5,9 +5,10 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\FileModel;
 use App\Utils\FileManager;
-use App\Validation\CustomFileValidation;
 use CodeIgniter\Files\File;
 use App\Exceptions\FileValidationException;
+use CodeIgniter\HTTP\Files\UploadedFile;
+use Config\Services;
 
 class CtrlApiFiles extends BaseController
 {
@@ -44,34 +45,17 @@ class CtrlApiFiles extends BaseController
             $file = $this->request->getFiles()[$inputName][0] ?? null;
             $key = FileManager::getFolderId();
             $folder = FILES_TEMP_DIRECTORY . $key;
+            FileManager::createFolder($folder);
+            
+            if($file && session()->has("fileValidation")) {
+                $validationConfig = session()->get("fileValidation")["validationRules"][$inputName];
+                $messages = session()->get("fileValidation")["messages"][$inputName] ?? [];
+                $rules = $validationConfig["rules"];
+                Services::fileValidation($rules, $messages)->run($file);
+            }
 
             if ($file) {
-                if(session()->has("fileValidation")) {
-                    $validation = \Config\Services::validation();
-                    $validation->setRules(
-                        [$inputName => session()->get("fileValidation")["validationRules"][$inputName]],
-                        [$inputName => session()->get("fileValidation")["messages"][$inputName]],
-                    );
-                    $validation->run([$inputName => $file]);
-                    if($validation->hasError($inputName)) {
-                        throw new FileValidationException($validation->getError($inputName));
-                    }
-                }
-                FileManager::createFolder($folder);
                 FileManager::moveClientFileToServer($file, $folder);
-            } else {
-                if(session()->has("fileValidation")) {
-                    $file = [
-                        "size" => $this->request->header("Upload-Length")->getValue(),
-                    ];
-                    $validation = new CustomFileValidation();
-                    $validation->setRules(
-                        session()->get("fileValidation")["customValidationRules"][$inputName]["beforeUpload"],
-                        session()->get("fileValidation")["messages"][$inputName] ?? [],
-                    );
-                    $validation->run($file);
-                }
-                FileManager::createFolder($folder);
             }
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);
         } catch (FileValidationException $th) {
@@ -93,22 +77,17 @@ class CtrlApiFiles extends BaseController
             $folder = FILES_TEMP_DIRECTORY . $key;
             $fileTmp = "$folder/$fileName";
 
-            FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
+            $fileSize = FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
+            
+            $uploaded = $fileSize == $fileLength;
 
-            if(session()->has("fileValidation")) {
-                $configValidation = session()->get("fileValidation");
-                $chunkSize = $configValidation["customValidationRules"]["chunkSize"];
-                $uploaded = $offset + $chunkSize > $fileLength;
-
-                if($uploaded) {
+            if($uploaded) {
+                if(session()->has("fileValidation")) {
                     $inputName = $this->request->header("Input")->getValue();
-                    $validation = new CustomFileValidation();
-                    $validation->setRules(
-                        $configValidation["customValidationRules"][$inputName]["afterUpload"],
-                        $configValidation["messages"][$inputName],
-                    );
+                    $rules = session()->get("fileValidation")["validationRules"][$inputName]["rules"];
+                    $messages = session()->get("fileValidation")["messages"][$inputName] ?? [];
                     $file = new File($fileTmp);
-                    $validation->run($file);
+                    Services::fileValidation($rules, $messages)->run($file);
                 }
             }
 
