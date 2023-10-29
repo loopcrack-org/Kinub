@@ -3,7 +3,8 @@ function setIdInModal() {
   deleteButtons.forEach(function (deleteButton) {
     deleteButton.addEventListener('click', function () {
       const elementId = this.getAttribute('data-id');
-      const deleteButtonModal = document.querySelector('input[name="elementId"]');
+      const deleteButtonModal = document.getElementById('elementId');
+      console.log(deleteButtonModal);
       deleteButtonModal.value = elementId;
     });
   });
