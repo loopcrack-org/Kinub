@@ -2,87 +2,27 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
 use App\Exceptions\FileValidationException;
-use App\Models\ConfigFileBuilder;
 use App\Models\FileModel;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
-use App\Utils\FilePondManager;
+use App\Utils\FilepondManager;
+use App\Utils\FilesConfig;
 use Config\Services;
 
 class CtrlTestFiles extends CtrlApiFiles
 {
+    protected $config;
 
-    protected $config = [
-        "image" => "",
-    ];
-    protected $configFiles = [
-       [
-            "name" => "image",
-            "acceptedFileTypes" => ["image/jpg", "image/png", "image/jpeg"],
-            "fileValidateTypeLabelExpectedTypes" => "Selecciona jpg, jpeg o png",
-            "chunkUploads" => true,
-            "labelFileTypeNotAllowed" => "Archivo no válido",
-            "chunkSize" => 1000000,
-            "allowMultiple" => true,
-            // "maxFiles" => 3,
-            // "minFiles" => 2,
-            "imagePreviewHeight" => 170,
-            "imageCropAspectRatio" => "1:1",
-            "imageResizeTargetWidth" => 200,
-            "imageResizeTargetHeight" => 200,
-            "allowFileSizeValidation" => true,
-            "labelMaxFileSizeExceeded" => "El archivo es demasiado grande.",
-            "labelMaxFileSize" => "El tamaño máximo permitido es de {filesize}",
-        ],
-        [
-            "name" => 'svg',
-            "acceptedFileTypes" => ["image/svg+xml"],
-            "fileValidateTypeLabelExpectedTypes" => "Selecciona svg",
-            "chunkUploads" => true,
-            "labelFileTypeNotAllowed" => "Archivo no válido",
-            "chunkSize" => 1000000,
-            "allowMultiple" => false, //default
-            // "minFiles" => 1,
-            // "maxFiles" => 1, //default if allowMultiple is set to false
-            "imagePreviewHeight" => 170,
-            "imageCropAspectRatio" => "1:1",
-            "imageResizeTargetWidth" => 200,
-            "imageResizeTargetHeight" => 200,
-        ],
-        [
-            "name" => 'video',
-            "acceptedFileTypes" => ["video/mp4"],
-            "fileValidateTypeLabelExpectedTypes" => "Selecciona mp4",
-            "chunkUploads" => true,
-            "labelFileTypeNotAllowed" => "Archivo no válido",
-            "chunkSize" => 1000000,
-            "allowMultiple" => true,
-            // "maxFiles" => 1,
-            "allowFileSizeValidation" => true,
-            "maxFileSize" => "10000000000000MB",
-            "labelMaxFileSizeExceeded" => "El archivo es demasiado grande",
-            "labelMaxFileSize" => "El tamaño máximo permitido es {filesize}",
-        ],
-        [
-            "name" => "pdf",
-            "acceptedFileTypes" => ["application/pdf"],
-            "fileValidateTypeLabelExpectedTypes" => "Selecciona pdf",
-            "chunkUploads" => true,
-            "labelFileTypeNotAllowed" => "Archivo no válido",
-            "chunkSize" => 1000000,
-            "allowMultiple" => true,
-            // "maxFiles" => 2,
-            "allowPdfPreview" => true,
-            "pdfPreviewHeight" => 200,
-            "allowFileSizeValidation" => true,
-            "maxFileSize" => "2MB",
-            "labelMaxFileSizeExceeded" => "El archivo es demasiado grande",
-            "labelMaxFileSize" => "El tamaño máximo permitido es {filesize}",
-        ]
-    ];
+    public function __construct()
+    {
+        $this->config['image'] = FilesConfig::builder('image')->isImage()->minFiles(1)->maxFiles(3)->maxSize(3000)->build();
+        $this->config['svg'] = FilesConfig::builder('svg')->isSvg()->minFiles(1)->maxFiles(3)->maxSize(3000)->build();
+        $this->config['pdf'] = FilesConfig::builder('pdf')->isPDF()->minFiles(1)->maxFiles(3)->maxSize(3000)->build();
+        $this->config['video'] = FilesConfig::builder('video')->isVideo()->minFiles(1)->maxFiles(3)->maxSize(3000)->build();
+    }
+
     protected $validation = [
         "validationRules" => [
             "chunkSize" => 100000, // in bytes
@@ -149,7 +89,7 @@ class CtrlTestFiles extends CtrlApiFiles
     public function viewTestFilesCreate()
     {
         session()->set("fileValidation", $this->validation);
-        return view('admin/test/testFilesCreate', ["config" => $this->configFiles]);
+        return view('admin/test/testFilesCreate', ["config" => FilepondManager::getFilepondConfig($this->config)]);
     }
     public function createTestFiles()
     {
@@ -164,7 +104,7 @@ class CtrlTestFiles extends CtrlApiFiles
             // }
             try {
                 if(isset($this->validation)) {
-                    $this->configFiles[$i]["files"] = FilePondManager::getSourceFiles($collection, "limbo");
+                    //$this->configFiles[$i]["files"] = FilePondManager::getSourceFiles($collection, "limbo");
                     $rules = $this->validation["customValidationRules"][$inputName]["collection"];
                     $messages = $this->validation["messages"][$inputName] ?? [];
                     Services::fileValidation($rules, $messages)->run($collection);
@@ -197,9 +137,9 @@ class CtrlTestFiles extends CtrlApiFiles
             }
         } else {
             return redirect()->to("/admin/testFiles/crear")
-                ->withInput()
-                ->with("Test_filepondConfig", $this->configFiles)
-                ->with("Test_validationError", $validationErrors);
+                ->withInput();
+            /*                 ->with("Test_filepondConfig", $this->configFiles)
+                            ->with("Test_validationError", $validationErrors); */
         }
 
         return redirect("admin/testFiles");
@@ -214,11 +154,11 @@ class CtrlTestFiles extends CtrlApiFiles
             $files = array_map(function ($file) {
                 return $file["uuid"];
             }, $testModel->getKeyFilesByType($id, $inputName));
-            $this->configFiles[$i]["files"] = FilepondManager::getSourceFiles($files, "local");
+            //$this->configFiles[$i]["files"] = FilepondManager::getSourceFiles($files, "local");
         }
         return view('admin/test/testFilesEdit', [
             "name" => $name,
-            "config" => $this->configFiles,
+            "config" => FilepondManager::getFilepondConfig($this->config)
         ]);
     }
     public function updateTestFiles($id)

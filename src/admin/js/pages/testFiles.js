@@ -38,5 +38,4 @@ form.addEventListener("submit", async function (e) {
   }
 
   this.submit();
-  6;
 });

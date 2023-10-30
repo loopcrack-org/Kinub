@@ -9,7 +9,7 @@ export function validateMinFilesInFilepond(pond, inputId, minFiles) {
     createAlert(
       inputId,
       `El mínimo de archivos necesarios es de ${minFiles}`,
-      "warning",
+      "primary",
       false,
       "minFile"
     );

@@ -21,4 +21,15 @@ class FilepondManager
         $auxFilesSaved =  array_map(function ($file) {return $file["uuid"];}, $filesSaved);
         return array_diff($filesFromPost, $auxFilesSaved) ?? [];
     }
+
+    public static function getFilepondConfig(array $configFiles)
+    {
+        $configFilepond = [];
+
+        foreach($configFiles as $value) {
+            $configFilepond[] = $value->getFilepondConfig();
+        }
+
+        return $configFilepond;
+    }
 }
