@@ -69,7 +69,7 @@
                                             <input type="email" class="form-control" name="userEmail" id="userEmail" value="<?= $user['userEmail']?>" placeholder="Ingrese un correo electrónico" required>
                                         </div>
                                         <div class="col-md-5 mb-2">
-                                            <div class="alert alert-<?= ($user['confirmed']) ? 'success' : 'warning'?> alert-dismissible alert-label-icon label-arrow fade show mb-0">
+                                            <div class="alert alert-<?= ($user['confirmed']) ? 'success' : 'warning'?> alert-dismissible alert-label-icon label-arrow fade show mb-0 text-wrap" style="min-height: 39px; padding: 8px 40px 8px 58px">
                                                 <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line label-icon"></i><strong><?= ($user['confirmed']) ? 'Cuenta confirmada' : 'Cuenta por confirmar'?></strong>
                                             </div>
                                         </div>
