@@ -137,7 +137,7 @@
                                     <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
                                         <h4>¿Estás seguro?</h4>
                                         <p class="text-muted mx-4 mb-0">
-                                            Eliminar la solución de medición resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer.</p>
+                                            Eliminar la solución de medición es una acción irrevertible.</p>
                                     </div>
                                 </div>
                                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
