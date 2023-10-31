@@ -12,6 +12,8 @@ use Config\Services;
 
 class CtrlApiFiles extends BaseController
 {
+    protected $config;
+
     public function getFileFromServer()
     {
         try {
@@ -47,11 +49,9 @@ class CtrlApiFiles extends BaseController
             $folder = FILES_TEMP_DIRECTORY . $key;
             FileManager::createFolder($folder);
             
-            if($file && session()->has("fileValidation")) {
-                $validationConfig = session()->get("fileValidation")["validationRules"][$inputName];
-                $messages = session()->get("fileValidation")["messages"][$inputName] ?? [];
-                $rules = $validationConfig["rules"];
-                Services::fileValidation($rules, $messages)->run($file);
+            if($file && $this->config[$inputName]) {
+                $validation = $this->config[$inputName]->getValidationConfig();
+                Services::fileValidation($validation["rules"], $validation["messages"])->run($file);
             }
 
             if ($file) {
@@ -81,14 +81,11 @@ class CtrlApiFiles extends BaseController
             
             $uploaded = $fileSize == $fileLength;
 
-            if($uploaded) {
-                if(session()->has("fileValidation")) {
-                    $inputName = $this->request->header("Input")->getValue();
-                    $rules = session()->get("fileValidation")["validationRules"][$inputName]["rules"];
-                    $messages = session()->get("fileValidation")["messages"][$inputName] ?? [];
-                    $file = new File($fileTmp);
-                    Services::fileValidation($rules, $messages)->run($file);
-                }
+            $inputName = $this->request->header("Input")->getValue();
+            if($uploaded && $this->config[$inputName]) {
+                $file = new File($fileTmp);
+                $validation = $this->config[$inputName]->getValidationConfig();
+                Services::fileValidation($validation["rules"], $validation["messages"])->run($file);
             }
 
 

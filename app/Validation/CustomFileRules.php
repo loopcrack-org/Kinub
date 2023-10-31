@@ -9,19 +9,12 @@ class CustomFileRules {
     /**
      * Verifies if the file's size in Kilobytes is no larger than the parameter.
      */
-    public function max_size( $file,  $params) {
+    public function maxSize( $file,  $params) {
         if($file === null) {
             return false;
         }
 
-        $size = null;
-
-        if(is_array($file)) {
-            if(!isset($file["size"])) return false;
-            $size = $file["size"] / 1024;
-        } else {
-            $size = $file->getSizeByUnit('kb');
-        }
+        $size = $file->getSizeByUnit('kb');
 
         $accepted = $params;
 
@@ -37,7 +30,7 @@ class CustomFileRules {
      * Uses the mime config file to determine if a file is considered an "image",
      * which for our purposes basically means that it's a raster image or svg.
      */
-    public function is_image( $file,  $params) {
+    public function isImage( $file,  $params) {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -57,7 +50,7 @@ class CustomFileRules {
     /**
      * Checks to see if an uploaded file's mime type matches one in the parameter.
      */
-    public function mime_in( $file,  $params) {
+    public function mimeIn( $file,  $params) {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -73,7 +66,7 @@ class CustomFileRules {
     /**
      * Checks to see if an uploaded file's extension matches one in the parameter.
      */
-    public function ext_in( $file,  $params) {
+    public function extIn( $file,  $params) {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -90,7 +83,7 @@ class CustomFileRules {
      * Checks an uploaded file to verify that the dimensions are within
      * a specified allowable dimension.
      */
-    public function max_dims(File $file, $params) {
+    public function maxDims(File $file, $params) {
         $params = explode(',', $params);
 
         if ($file === null) {
