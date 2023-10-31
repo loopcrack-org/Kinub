@@ -33,51 +33,12 @@ class CtrlUser extends BaseController
 
     public function createUser()
     {
-        $validateUser = new UserValidation();
-        $POST         = $this->request->getPost();
+        $POST              = $this->request->getPost();
+        $POST['userToken'] = 'FAS12AQajqa';
 
-        try {
-            if (! $validateUser->validateInputs($POST)) {
-                throw new Exception();
-            }
-            $userModel = new UserModel();
-            $user      = $userModel->where('userEmail', $POST['userEmail'])->first();
-            $validateUser->existUserEmail($user);
-
-            $token             = uniqid();
-            $POST['userToken'] = $token;
-            $POST['confirmed'] = 0;
-            $POST['isAdmin']   = 0;
-            $userModel->insert($POST);
-
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
-
-            if (! $isSend) {
-                $userModel->where('userEmail', $POST['userEmail'])->delete();
-
-                throw new Exception('Algo salio mal al crear el usuario. Por favor, inténtalo de nuevo.');
-            }
-
-            $response = [
-                'title'   => 'Usuario creado con éxito',
-                'message' => 'La cuenta se ha creado con éxito. Por favor, revise su correo electrónico para establecer su contraseña.',
-                'type'    => 'success',
-            ];
-        } catch (Throwable $th) {
-            $errors = $validateUser->getErrors();
-
-            if (empty($errors)) {
-                $response = [
-                    'title'   => '¡Oops!',
-                    'message' => $th->getMessage(),
-                    'type'    => 'error',
-                ];
-            } else {
-                return redirect()->back()->withInput()->with('errors', $errors);
-            }
-        }
-
-        return redirect()->to('/admin/usuarios')->with('response', $response);
+        return view('templates/emails/createUserAccount', [
+            'formData' => $POST,
+        ]);
     }
 
     public function updateUser($id)
