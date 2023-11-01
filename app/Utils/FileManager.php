@@ -52,6 +52,19 @@ class FileManager
         }
     }
 
+    public static function changeDirectoryCollectionFolder(array $keys)
+    {
+        try {
+            foreach ($keys as $key) {
+                $outputFolder = FILES_UPLOAD_DIRECTORY . $key;
+                $sourceFolder = FILES_TEMP_DIRECTORY . $key;
+                rename($sourceFolder, $outputFolder);
+            }
+        } catch (\Throwable $th) {
+            throw new Exception("Error al mover los archivos");
+        }
+    }
+
     public static function mergeChunckFiles(String $filePath, String $fileData, String $fileOffset)
     {
         try {

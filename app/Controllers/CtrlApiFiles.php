@@ -49,14 +49,11 @@ class CtrlApiFiles extends BaseController
             $folder = FILES_TEMP_DIRECTORY . $key;
             FileManager::createFolder($folder);
             
-            if($file && $this->config[$inputName]) {
-                $validation = $this->config[$inputName]->getValidationConfig();
-                Services::fileValidation($validation["rules"], $validation["messages"])->run($file);
-            }
-
-            if ($file) {
+            if($file) {
+                $this->validateFiles($inputName, $file);
                 FileManager::moveClientFileToServer($file, $folder);
             }
+            
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);
         } catch (FileValidationException $th) {
             return $this->response->setStatusCode(500, json_encode($th->getFileValidationError()));
@@ -82,10 +79,9 @@ class CtrlApiFiles extends BaseController
             $uploaded = $fileSize == $fileLength;
 
             $inputName = $this->request->header("Input")->getValue();
-            if($uploaded && $this->config[$inputName]) {
-                $file = new File($fileTmp);
-                $validation = $this->config[$inputName]->getValidationConfig();
-                Services::fileValidation($validation["rules"], $validation["messages"])->run($file);
+            $file = new File($fileTmp);
+            if($uploaded) {
+                $this->validateFiles($inputName, $file);
             }
 
 
@@ -108,4 +104,14 @@ class CtrlApiFiles extends BaseController
             return $this->response->setStatusCode(500, $th->getMessage());
         }
     }
+    private function validateFiles($inputName, $file) {
+        foreach ($this->config as $config) {
+            if($config->getInputName() === $inputName) {
+                /** @var \App\Utils\FilesConfig $config*/
+                $config->getValidationConfig()->validate($file);
+            }
+        }
+    }
+
+
 }

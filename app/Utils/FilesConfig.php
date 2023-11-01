@@ -2,20 +2,27 @@
 
 namespace App\Utils;
 
+use App\Validation\FileCollectionValidation;
+use App\Validation\FileValidation;
+
 class FilesConfig
 {
     private array $filepondConfig;
     private array $validationConfig;
+    private array $validationCollectionConfig;
+    private $inputName;
 
-    public function __construct(FilesConfigBuilder $filesConfigBuilder)
+    public function __construct(FileponBuilder $filesConfigBuilder)
     {
+        $this->inputName = $filesConfigBuilder->inputName();
         $this->filepondConfig = $filesConfigBuilder->filePondConfig();
         $this->validationConfig = $filesConfigBuilder->validationConfig();
+        $this->validationCollectionConfig = $filesConfigBuilder->validationCollectionConfig();
     }
 
     public static function builder(String $inputName)
     {
-        return new FilesConfigBuilder($inputName);
+        return new FileponBuilder($inputName);
     }
 
     public function setFiles(array $files)
@@ -30,11 +37,20 @@ class FilesConfig
 
     public function getValidationConfig()
     {
-        return $this->validationConfig;
+        return new FileValidation($this->validationConfig["rules"], $this->validationConfig["messages"]);
+    }
+
+    public function getValidationCollectionConfig()
+    {
+        return new FileCollectionValidation($this->validationCollectionConfig["rules"], $this->validationCollectionConfig["messages"]);
+    }
+
+    public function getInputName() {
+        return $this->inputName;
     }
 }
 
-class FilesConfigBuilder
+class FileponBuilder
 {
     private $mimeTypes = [
         'image' => ["image/jpg", "image/png", "image/jpeg"],
@@ -71,20 +87,26 @@ class FilesConfigBuilder
         "allowMultiple" => true,
     ];
     private $validationConfig = [
-        "collection" => "",
+        "rules" => "",
+        "messages" => [],
+    ];
+    private $validationCollectionConfig = [
         "rules" => "",
         "messages" => [],
     ];
 
+    private $inputName;
+
     public function __construct(String $inputName)
     {
+        $this->inputName = $inputName;
         $this->filepondConfig['name'] = $inputName;
     }
 
     public function build()
     {
         $this->validationConfig["rules"] = trim($this->validationConfig["rules"], "|");
-        $this->validationConfig["collection"] = trim($this->validationConfig["collection"], "|");
+        $this->validationCollectionConfig["rules"] = trim($this->validationCollectionConfig["rules"], "|");
         return new FilesConfig($this);
     }
 
@@ -161,8 +183,8 @@ class FilesConfigBuilder
         $this->filepondConfig["allowMultiple"] = $maxFiles > 1;
         $this->filepondConfig["maxFiles"] = $maxFiles;
 
-        $this->validationConfig["collection"] .= "maxFiles[$maxFiles]|";
-        $this->validationConfig["messages"]["maxFiles"] = $maxFiles > 1 ? "Se aceptan como máximo $maxFiles archivos":"Se acepta como máximo 1 archivo";
+        $this->validationCollectionConfig["rules"] .= "maxFiles[$maxFiles]|";
+        $this->validationCollectionConfig["messages"]["maxFiles"] = $maxFiles > 1 ? "Se aceptan como máximo $maxFiles archivos":"Se acepta como máximo 1 archivo";
 
         return $this;
     }
@@ -171,8 +193,8 @@ class FilesConfigBuilder
     {
         $this->filepondConfig["minFiles"] = $minFiles;
 
-        $this->validationConfig["collection"] .= "minFiles[$minFiles]|";
-        $this->validationConfig["messages"]["minFiles"] = $minFiles > 1 ? "Se aceptan como mínimo $minFiles archivos":"Se acepta como mínimo 1 archivo";
+        $this->validationCollectionConfig["rules"] .= "minFiles[$minFiles]|";
+        $this->validationCollectionConfig["messages"]["minFiles"] = $minFiles > 1 ? "Se aceptan como mínimo $minFiles archivos":"Se acepta como mínimo 1 archivo";
 
         return $this;
     }
@@ -192,5 +214,12 @@ class FilesConfigBuilder
     public function validationConfig()
     {
         return $this->validationConfig;
+    }
+    public function validationCollectionConfig()
+    {
+        return $this->validationCollectionConfig;
+    }
+    public function inputName() {
+        return $this->inputName;
     }
 }

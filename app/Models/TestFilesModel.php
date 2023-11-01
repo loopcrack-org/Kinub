@@ -10,13 +10,15 @@ class TestFilesModel extends Model
     protected $primaryKey = 'testFilesId';
     protected $allowedFields = ['fileId', 'testId', 'fileType'];
 
-    public function createNewFile($folderData, $testId, $type)
+    public function saveFiles($files, $testId, $type)
     {
         try {
             $this->db->transStart();
-            $fileModel = new FileModel();
-            $fileModelId = $fileModel->insert($folderData, true);
-            $this->insert(["fileId" => $fileModelId, 'testId' => $testId, "fileType" => $type]);
+            foreach($files as $file) {
+                $fileModel = new FileModel();
+                $fileInsertedId = $fileModel->insert($file, true);
+                $this->insert(["fileId" => $fileInsertedId, 'testId' => $testId, "fileType" => $type]);
+            }
             $this->db->transComplete();
         } catch (\Throwable $th) {
             $this->db->transRollback();

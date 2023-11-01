@@ -29,8 +29,8 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
-    public static function fileValidation(string $rules, array $messages)
+    public static function FileValidation(string $rules, array $messages)
     {
-        return new \App\Validation\FileValidation($rules, $messages);
+        return new \App\Libraries\fileValidation\FileValidationLibrary($rules,$messages);
     }
 }

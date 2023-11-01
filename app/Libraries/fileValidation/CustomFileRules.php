@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validation;
+namespace App\Libraries\fileValidation;
 
 use CodeIgniter\Files\File;
 use Config\Mimes;
