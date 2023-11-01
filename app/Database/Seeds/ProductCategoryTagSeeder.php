@@ -8,16 +8,21 @@ class ProductCategoryTagSeeder extends Seeder
 {
     public function run()
     {
-        $productCategoryTags = [
-            [
-                'pctProductId'     => 1,
-                'pctCategoryTagId' => 3,
-            ],
-            [
-                'pctProductId'     => 1,
-                'pctCategoryTagId' => 4,
-            ],
-        ];
+        $products = $this->db->query('SELECT * FROM products');
+        $products = $products->getResultArray();
+
+        $productCategoryTags = [];
+
+        foreach ($products as $product) {
+            $categoryTagsIds = $this->db->query('SELECT categoryTagId FROM category_tags WHERE categoryId=\'' . $product['productCategoryId'] . '\'')->getResultArray();
+
+            for ($i = 0; $i < 2; $i++) {
+                $productCategoryTags[] = [
+                    'pctProductId'     => $product['productId'],
+                    'pctCategoryTagId' => $categoryTagsIds[$i]['categoryTagId'],
+                ];
+            }
+        }
 
         $this->db->table('products-category_tags')->insertBatch($productCategoryTags);
     }

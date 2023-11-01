@@ -12,12 +12,14 @@ class ProductFileSeeder extends Seeder
 
         $productFiles = [];
 
-        foreach ($productFileTypes as $productFileType) {
-            $productFiles[] = [
-                'pfProductId' => 1,
-                'pfFileId'    => 1,
-                'pfFileType'  => $productFileType,
-            ];
+        for ($i = 1; $i < 7; $i++) {
+            foreach ($productFileTypes as $productFileType) {
+                $productFiles[] = [
+                    'pfProductId' => $i,
+                    'pfFileId'    => $productFileType === 'video' ? 3 : 1,
+                    'pfFileType'  => $productFileType,
+                ];
+            }
         }
 
         $this->db->table('product_files')->insertBatch($productFiles);
