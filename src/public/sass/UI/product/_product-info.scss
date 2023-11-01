@@ -4,11 +4,12 @@
 .product-info {
   width: 90%;
   max-width: 120rem;
-  padding-top: 15rem;
-  margin: 0 auto;
+  margin: 1rem auto;
+  scroll-margin-top: 11rem;
 
   @include m.tablet {
     margin-bottom: 8rem;
+    scroll-margin-top: 15rem;
   }
   @include m.desktopXXL {
     max-width: 180rem;
