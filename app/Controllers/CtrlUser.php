@@ -87,6 +87,26 @@ class CtrlUser extends BaseController
         return "updating user... {$id}";
     }
 
+    public function updateUser($id)
+    {
+        $isEdited = true;
+        if ($isEdited) {
+            $response = [
+                'title'   => 'Edición exitosa',
+                'message' => 'Se ha editado el usuario correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Error en la edición',
+                'message' => 'Ha ocurrido un error al editar el usuario. Por favor, inténtalo de nuevo.',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->to('admin/usuarios')->with('response', $response);
+    }
+
     public function deleteUser()
     {
         $isDeleted = true;
