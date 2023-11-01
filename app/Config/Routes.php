@@ -4,8 +4,8 @@ namespace Config;
 
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlEmail;
-use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlHomeSection;
+use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlUser;
 
@@ -44,7 +44,6 @@ $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 
-
 /*
  * --------------------------------------------------------------------
  * LOGIN
@@ -64,7 +63,6 @@ $routes->post('logout', [CtrlLogin::class, 'logout']);
  */
 $routes->group('admin', static function ($routes) {
     /** @var \CodeIgniter\Router\RouteCollection $routes */
-
     $routes->get('', [CtrlHomeSection::class, 'viewHomeSection']);
     $routes->group('home', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
@@ -97,6 +95,8 @@ $routes->group('admin', static function ($routes) {
         $routes->get('', [CtrlUser::class, 'viewUsers']);
         $routes->get('crear', [CtrlUser::class, 'viewUserCreate']);
         $routes->post('crear', [CtrlUser::class, 'createUser']);
+        $routes->get('editar/(:num)', [CtrlUser::class, 'viewUserEdit']);
+        $routes->post('editar/(:num)', [CtrlUser::class, 'updateUser']);
         $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
     });
 });

@@ -1,6 +1,6 @@
-@use "./node_modules/sweetalert2/dist/sweetalert2.css";
+@use './node_modules/sweetalert2/dist/sweetalert2.css';
 
-.darkMode {
+[data-bs-theme='dark'] {
   .swal2-popup {
     background: #19191a;
     color: #545454;
