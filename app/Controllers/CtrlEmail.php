@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\EmailModel;
-
 use App\Models\UserModel;
 use App\Utils\EmailSender;
 use App\Validation\ContactEmailValidation;
@@ -50,8 +49,10 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'  => 1,
-                'emailContent' => EmailSender::getEmailBody($formData, 'mailDetail'),
+                'emailTypeId'   => 1,
+                'inquirerName'  => $POST['inquirer-name'],
+                'inquirerEmail' => $POST['inquirer-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
             ];
             $emailModel->insert($data);
         } else {
@@ -110,8 +111,10 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'  => 2,
-                'emailContent' => EmailSender::getEmailBody($formData, 'mailDetail'),
+                'emailTypeId'   => 2,
+                'inquirerName'  => $POST['support-customer'],
+                'inquirerEmail' => $POST['support-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
             ];
             $emailModel->insert($data);
         } else {
