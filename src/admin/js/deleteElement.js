@@ -4,7 +4,6 @@ function setIdInModal() {
     deleteButton.addEventListener('click', function () {
       const elementId = this.getAttribute('data-id');
       const deleteButtonModal = document.getElementById('elementId');
-      console.log(deleteButtonModal);
       deleteButtonModal.value = elementId;
     });
   });
