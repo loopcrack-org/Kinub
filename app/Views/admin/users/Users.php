@@ -28,13 +28,15 @@
                             </a>
                         </div>
                     </div>
-                    <!-- card-header -->
+
                     <?php
                         if (session()->has('response')) {
                             $response = session()->get('response');
                             ?>
                         <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
                     <?php } ?>
+
+                    <!-- card-header -->
                     <div class="card-body">
                         <table id="users-table" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
                             <thead>
@@ -42,6 +44,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -60,9 +63,15 @@
                                             </div>
                                         </td>
                                         <td>
+                                            <div class="text-<?= ($user['confirmed']) ? 'success' : 'warning'?>">
+                                                <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line fs-17 align-middle"></i>
+                                                <?= ($user['confirmed']) ? 'Confirmado' : 'Por Confirmar'?>
+                                            </div>
+                                        </td>
+                                        <td>
                                             <div class="d-flex justify-content-between">
-                                                <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id="<?= $user['userId']; ?>" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                <a href="/admin/usuarios/editar/<?= $user['userId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -73,6 +82,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Email</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
