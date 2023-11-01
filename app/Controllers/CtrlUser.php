@@ -84,11 +84,6 @@ class CtrlUser extends BaseController
 
     public function updateUser($id)
     {
-        return "updating user... {$id}";
-    }
-
-    public function updateUser($id)
-    {
         $isEdited = true;
         if ($isEdited) {
             $response = [
