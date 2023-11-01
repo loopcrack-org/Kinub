@@ -1,7 +1,67 @@
-/* stylelint-disable no-descending-specificity */
-/* stylelint-disable scss/no-global-function-names */
 @use '../../base/variables' as v;
 @use '../../base/mixins' as m;
+
+@function custom-darken($color, $amount) {
+  @return mix(black, $color, $amount);
+}
+
+@function custom-lighten($color, $amount) {
+  @return mix(white, $color, $amount);
+}
+
+.menu-inner {
+  top: 50%;
+  display: block;
+  margin-top: -0.2rem;
+
+  &::before {
+    top: -1rem;
+  }
+
+  &::after {
+    bottom: -1rem;
+  }
+
+  &::before,
+  &::after {
+    display: block;
+    content: '';
+  }
+}
+
+.menu-inner,
+.menu-inner::before,
+.menu-inner::after {
+  position: absolute;
+  width: 4rem;
+  height: 0.4rem;
+  border-radius: 0.4rem;
+  background-color: #000;
+  transition-duration: 150ms;
+  transition-property: transform;
+  transition-timing-function: ease;
+}
+
+.menu--collapse .menu-inner {
+  top: auto;
+  bottom: 0;
+  transition-delay: 130ms;
+  transition-duration: 130ms;
+  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+  &::before {
+    transition:
+      top 120ms 200ms cubic-bezier(0.33333, 0.66667, 0.66667, 1),
+      transform 130ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  &::after {
+    top: -20px;
+    transition:
+      top 200ms 200ms cubic-bezier(0.33333, 0.66667, 0.66667, 1),
+      opacity 100ms linear;
+  }
+}
 
 .header {
   position: sticky;
@@ -120,14 +180,14 @@
     &:hover,
     &--active {
       border-radius: 0.5rem;
-      background-color: darken(v.$bright-blue, 20%);
+      background-color: custom-darken(v.$bright-blue, 20%);
     }
 
     @include m.tablet {
       width: auto;
       padding: 0;
       margin-right: 2.8rem;
-      color: darken(v.$bright-blue, 20%);
+      color: custom-darken(v.$bright-blue, 20%);
       font-size: 1.6rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -139,7 +199,7 @@
 
       &:hover {
         background-color: inherit;
-        color: lighten(v.$bright-blue, 20%);
+        color: custom-lighten(v.$bright-blue, 20%);
       }
     }
 
@@ -209,58 +269,4 @@
   display: inline-block;
   width: 40px;
   height: 24px;
-}
-
-.menu-inner {
-  top: 50%;
-  display: block;
-  margin-top: -0.2rem;
-
-  &::before,
-  &::after {
-    display: block;
-    content: '';
-  }
-
-  &::before {
-    top: -1rem;
-  }
-
-  &::after {
-    bottom: -1rem;
-  }
-}
-
-.menu-inner,
-.menu-inner::before,
-.menu-inner::after {
-  position: absolute;
-  width: 4rem;
-  height: 0.4rem;
-  border-radius: 0.4rem;
-  background-color: #000;
-  transition-duration: 150ms;
-  transition-property: transform;
-  transition-timing-function: ease;
-}
-
-.menu--collapse .menu-inner {
-  top: auto;
-  bottom: 0;
-  transition-delay: 130ms;
-  transition-duration: 130ms;
-  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-
-  &::before {
-    transition:
-      top 120ms 200ms cubic-bezier(0.33333, 0.66667, 0.66667, 1),
-      transform 130ms cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  }
-
-  &::after {
-    top: -20px;
-    transition:
-      top 200ms 200ms cubic-bezier(0.33333, 0.66667, 0.66667, 1),
-      opacity 100ms linear;
-  }
 }

@@ -17,7 +17,7 @@
         <a href="/#form" class="navigation__link">Contacto</a>
     </nav>
 
-    <div class="menu menu--collapse display-none" id="menu-mobile">
+    <div class="menu menu--collapse" id="menu-mobile">
         <div class="menu-box">
             <div class="menu-inner"></div>
         </div>

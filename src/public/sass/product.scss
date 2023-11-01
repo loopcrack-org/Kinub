@@ -1,7 +1,10 @@
-/* stylelint-disable scss/no-global-function-names */
 @use 'UI/product';
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
+
+@function custom-darken($color, $amount) {
+  @return mix(black, $color, $amount);
+}
 
 .details {
   padding-left: 2rem;
@@ -66,10 +69,10 @@
 
   &__data {
     margin: 0;
-    color: darken(v.$gray, 20%);
+    color: custom-darken(v.$gray, 20%);
     font-size: 1.4rem;
     span {
-      color: darken(v.$gray, 10%);
+      color: custom-darken(v.$gray, 10%);
       font-weight: 700;
     }
 
@@ -113,7 +116,7 @@
 .tag {
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
-  background-color: darken(v.$bright-blue, 20%);
+  background-color: custom-darken(v.$bright-blue, 20%);
   &__content {
     margin: 0;
     color: v.$white;
@@ -205,7 +208,7 @@
   top: v.$mobile-height;
   display: flex;
   width: 100%;
-  margin: 4rem 0;
+  margin: 4rem 0 0 0;
 
   @include m.tablet {
     top: v.$desktop-height;
@@ -217,7 +220,7 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem;
-    background-color: darken(v.$bright-blue, 20%);
+    background-color: custom-darken(v.$bright-blue, 20%);
     transition: background-color 500ms ease-in-out;
 
     &--active {
@@ -249,7 +252,7 @@
   &__heading {
     margin: 0;
     margin-bottom: 2rem;
-    color: darken(v.$bright-blue, 10%);
+    color: custom-darken(v.$bright-blue, 10%);
     text-align: left;
     text-transform: capitalize;
     @include m.fluid-text(3rem, 5rem);
@@ -281,12 +284,12 @@
   }
 
   &__accordion {
-    color: darken(v.$light-gray, 35%);
+    color: custom-darken(v.$light-gray, 35%);
     font-size: 2.4rem;
     transition: color 300ms ease-in-out;
 
     &:hover {
-      color: darken(v.$gray, 10%);
+      color: custom-darken(v.$gray, 10%);
     }
   }
 
@@ -299,13 +302,13 @@
   }
 
   &__link {
-    color: darken(v.$light-gray, 35%);
+    color: custom-darken(v.$light-gray, 35%);
     font-size: 1.8rem;
     text-decoration: underline;
     transition: color 300ms ease-in-out;
 
     &:hover {
-      color: darken(v.$gray, 10%);
+      color: custom-darken(v.$gray, 10%);
     }
 
     span {
