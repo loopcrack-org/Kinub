@@ -1,39 +1,50 @@
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
+import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 
-// eslint-disable-next-line no-unused-vars
-const player = new Plyr('#product-video');
+new Plyr('#product-video');
 
 const controller = new ScrollMagic.Controller();
 
-function createScrollMagicScene(triggerElement, sectionId, triggerHook, duration) {
-  // eslint-disable-next-line no-unused-vars
-  const scene = new ScrollMagic.Scene({
-    triggerElement,
-    triggerHook,
-    duration,
+const sections = document.querySelectorAll('.product-info');
+
+function createScrollScene(section, triggerHookValue) {
+  const id = section.getAttribute('id');
+  const menuLink = document.querySelector(`.product-navigation__link-container[href="#${id}"]`);
+
+  return new ScrollMagic.Scene({
+    triggerElement: section,
+    triggerHook: triggerHookValue,
   })
-    .setClassToggle(`#${sectionId}`, 'product-info--active')
-    .addTo(controller)
-    .on('enter', function () {
-      const links = document.querySelectorAll('.product-navigation__link-container');
-      links.forEach((link) => {
-        if (link) {
-          link.classList.remove('product-navigation__link-container--active');
-        }
-      });
-      document
-        .querySelector(`.product-navigation__link-container[href="#${sectionId}"]`)
-        .classList.add('product-navigation__link-container--active');
+    .on('enter', () => {
+      const menuLinkSelected = document.querySelector(
+        '.product-navigation__link-container.product-navigation__link-container--active'
+      );
+      if (menuLinkSelected) {
+        menuLinkSelected.classList.remove('product-navigation__link-container--active');
+      }
+
+      const sectionSelected = document.querySelector('.product-info.product-info--active');
+      if (sectionSelected) {
+        sectionSelected.classList.remove('product-info--active');
+      }
+
+      menuLink.classList.add('product-navigation__link-container--active');
+      section.classList.add('product-info--active');
     })
-    .on('leave', function (e) {
-      const sectionId = e.target.triggerElement().id;
-      document
-        .querySelector(`.product-navigation__link-container[href="#${sectionId}"]`)
-        .classList.remove('product-navigation__link-container--active');
-    });
+    .on('leave', () => {
+      menuLink.classList.remove('product-navigation__link-container--active');
+      section.classList.remove('product-info--active');
+    })
+    .addTo(controller);
 }
 
-createScrollMagicScene('#description', 'description', 'onCenter', '100%');
-createScrollMagicScene('#tech-info', 'tech-info', 'onCenter', '100%');
-createScrollMagicScene('#download-area', 'download-area', 'onCenter', '50%');
+sections.forEach((section, index) => {
+  let triggerHookValue = 0.5;
+
+  if (index === sections.length - 1) {
+    triggerHookValue = 0.8;
+  }
+
+  createScrollScene(section, triggerHookValue);
+});
