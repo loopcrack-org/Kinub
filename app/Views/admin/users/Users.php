@@ -71,7 +71,7 @@
                                         <td>
                                             <div class="d-flex justify-content-between">
                                                 <a href="/admin/usuarios/editar/<?= $user['userId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id=<?= $user['userId']?> style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -93,7 +93,7 @@
                 </div>
                 <!-- card -->
 
-                <?= view('deleteModalElement', ['idModal' => 'deleteUsersModal', 'message' => 'Eliminar el usuario resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer.', 'action' => '/admin/usuarios/borrar', 'inputName' => 'userId']); ?>
+                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteUsersModal', 'message' => 'Eliminar el usuario resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer.', 'action' => '/admin/usuarios/borrar', 'inputName' => 'userId']); ?>
             </div>
             <!-- col -->
         </div>
