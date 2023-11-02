@@ -7,12 +7,18 @@ use App\Models\FileModel;
 use App\Utils\FileManager;
 use CodeIgniter\Files\File;
 use App\Exceptions\FileValidationException;
-use CodeIgniter\HTTP\Files\UploadedFile;
-use Config\Services;
+use Kint\Zval\Value;
 
 class CtrlApiFiles extends BaseController
 {
-    protected $config;
+    private array $config = [];
+
+    public function __construct(array $inputConfig)
+    {
+        foreach ($inputConfig as $value) {
+            $this->config[$value->getInputName()] = $value;
+        }
+    }
 
     public function getFileFromServer()
     {
@@ -48,15 +54,15 @@ class CtrlApiFiles extends BaseController
             $key = FileManager::getFolderId();
             $folder = FILES_TEMP_DIRECTORY . $key;
             FileManager::createFolder($folder);
-            
+
             if($file) {
-                $this->validateFiles($inputName, $file);
+                $this->config[$inputName]->getValidation()->validateFile($file);
                 FileManager::moveClientFileToServer($file, $folder);
             }
-            
+
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);
         } catch (FileValidationException $th) {
-            return $this->response->setStatusCode(500, json_encode($th->getFileValidationError()));
+            return $this->response->setStatusCode(500, json_encode($th->getMessage()));
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
@@ -74,21 +80,18 @@ class CtrlApiFiles extends BaseController
             $folder = FILES_TEMP_DIRECTORY . $key;
             $fileTmp = "$folder/$fileName";
 
-            $fileSize = FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
-            
-            $uploaded = $fileSize == $fileLength;
+            $temporalFileLength = FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
 
-            $inputName = $this->request->header("Input")->getValue();
-            $file = new File($fileTmp);
-            if($uploaded) {
-                $this->validateFiles($inputName, $file);
+            if($temporalFileLength === $fileLength) {
+                $file = new File($fileTmp);
+                $inputName = $this->request->header("Input")->getValue();
+                $this->config[$inputName]->getValidation()->validateFile($file);
             }
-
 
             return $this->response->setStatusCode(204);
         } catch (FileValidationException $th) {
             FileManager::deleteFolderWithContent($folder);
-            return $this->response->setStatusCode(500)->setJSON(["error" => $th->getFileValidationError()]);
+            return $this->response->setStatusCode(500)->setJSON(["error" => $th->getMessage()]);
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
@@ -104,14 +107,9 @@ class CtrlApiFiles extends BaseController
             return $this->response->setStatusCode(500, $th->getMessage());
         }
     }
-    private function validateFiles($inputName, $file) {
-        foreach ($this->config as $config) {
-            if($config->getInputName() === $inputName) {
-                /** @var \App\Utils\FilesConfig $config*/
-                $config->getValidationConfig()->validate($file);
-            }
-        }
+
+    public function getConfig()
+    {
+        return $this->config;
     }
-
-
 }

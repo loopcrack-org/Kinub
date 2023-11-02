@@ -19,10 +19,12 @@ class FileValidationLibrary
         }
         $this->rules = explode("|", $rules);
     }
-    public function run($data) {
+    public function run($data)
+    {
         return $this->processRule($this->rules, $data);
     }
-    protected function processRule(array $rules, $data) {
+    protected function processRule(array $rules, $data)
+    {
         foreach($rules as $rule) {
             $param = false;
             $passed = false;

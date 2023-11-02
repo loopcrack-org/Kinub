@@ -45,7 +45,8 @@ class FilesConfig
         return new FileCollectionValidation($this->validationCollectionConfig["rules"], $this->validationCollectionConfig["messages"]);
     }
 
-    public function getInputName() {
+    public function getInputName()
+    {
         return $this->inputName;
     }
 }
@@ -184,7 +185,7 @@ class FileponBuilder
         $this->filepondConfig["maxFiles"] = $maxFiles;
 
         $this->validationCollectionConfig["rules"] .= "maxFiles[$maxFiles]|";
-        $this->validationCollectionConfig["messages"]["maxFiles"] = $maxFiles > 1 ? "Se aceptan como máximo $maxFiles archivos":"Se acepta como máximo 1 archivo";
+        $this->validationCollectionConfig["messages"]["maxFiles"] = $maxFiles > 1 ? "Se aceptan como máximo $maxFiles archivos" : "Se acepta como máximo 1 archivo";
 
         return $this;
     }
@@ -194,24 +195,26 @@ class FileponBuilder
         $this->filepondConfig["minFiles"] = $minFiles;
 
         $this->validationCollectionConfig["rules"] .= "minFiles[$minFiles]|";
-        $this->validationCollectionConfig["messages"]["minFiles"] = $minFiles > 1 ? "Se aceptan como mínimo $minFiles archivos":"Se acepta como mínimo 1 archivo";
+        $this->validationCollectionConfig["messages"]["minFiles"] = $minFiles > 1 ? "Se aceptan como mínimo $minFiles archivos" : "Se acepta como mínimo 1 archivo";
 
         return $this;
     }
 
-    public function maxDims(int $width, int $height) {
-
-        $this->validationConfig["rules"] .= "maxDims[$width, $height]|";
-        $this->validationConfig["messages"]["minFiles"] = "El archivo debe ser de $width por $height pixeles";
+    public function maxDims(int $maxWidth, int $maxHeight)
+    {
+        $this->filepondConfig["imageValidateSizeMaxWidth"] = $maxWidth;
+        $this->filepondConfig["imageValidateSizeMaxHeight"] = $maxHeight;
+        $this->validationConfig["rules"] .= "maxDims[$maxWidth, $maxHeight]|";
+        $this->validationConfig["messages"]["minFiles"] = "El archivo debe ser de $maxWidth por $maxHeight pixeles";
 
         return $this;
     }
 
-    public function filePondConfig()
+    public function filePondConfig(): array
     {
         return $this->filepondConfig;
     }
-    public function validationConfig()
+    public function validationConfig(): array
     {
         return $this->validationConfig;
     }
@@ -219,7 +222,8 @@ class FileponBuilder
     {
         return $this->validationCollectionConfig;
     }
-    public function inputName() {
+    public function inputName()
+    {
         return $this->inputName;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Classes\FileConfig;
 use App\Exceptions\FileValidationException;
 use App\Models\FileModel;
 use App\Models\TestFilesModel;
@@ -9,23 +10,25 @@ use App\Models\TestModel;
 use App\Utils\FileCollection;
 use App\Utils\FileManager;
 use App\Utils\FilepondManager;
-use App\Utils\FilesConfig;
 use App\Utils\FileUtils;
-use App\Utils\FileValidationCollection;
-use Config\Services;
+
+use function PHPUnit\Framework\isEmpty;
+
+//use App\Utils\FileUtils;
+
 
 class CtrlTestFiles extends CtrlApiFiles
 {
-    protected $config;
-
     public function __construct()
     {
-        $this->config= [
-            FilesConfig::builder('image')->isImage()->minFiles(2)->maxFiles(3)->maxSize(30)->build(),
-            FilesConfig::builder('svg')->isSvg()->minFiles(1)->maxFiles(3)->maxSize(3000)->build(),
-            FilesConfig::builder('video')->isVideo()->minFiles(1)->maxFiles(3)->maxSize(5000)->build(),
-            FilesConfig::builder('pdf')->isPDF()->minFiles(2)->maxFiles(3)->maxSize(3000)->build(),
+        $config = [
+            FileConfig::builder('image')->previewImage()->acceptTypesFile(['image/jpg', 'image/png', 'image/jpeg'], "Selecciona archivos jpg, jpeg o png")->minFiles(1)->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
+            FileConfig::builder('svg')->previewImage()->acceptTypesFile(['image/svg+xml'], "Selecciona archivos svg")->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
+            FileConfig::builder('video')->previewVideo()->acceptTypesFile(['video/mp4'], "Selecciona archivos de video")->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
+            FileConfig::builder('pdf')->previewPDF()->acceptTypesFile(['application/pdf'], "Selecciona archivos pdf")->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
         ];
+
+        parent::__construct($config);
     }
 
     public function viewTestFiles()
@@ -35,7 +38,7 @@ class CtrlTestFiles extends CtrlApiFiles
     }
     public function viewTestFilesCreate()
     {
-        return view('admin/test/testFilesCreate', ["config" => FilepondManager::getFilepondConfig($this->config)]);
+        return view('admin/test/testFilesCreate', ["config" => FilepondManager::getFilepondConfig(parent::getConfig())]);
     }
     public function createTestFiles()
     {
@@ -44,29 +47,34 @@ class CtrlTestFiles extends CtrlApiFiles
             $data = $this->request->getPost();
             // validate
             $validation = new FileCollection();
-            $validation->validateCollectionFiles($data, $this->config);
-            if($validation->hasCollectionErrors()) new FileValidationException();
-            
+
+            $validation->validateCollectionFiles($data, parent::getConfig());
+            if($validation->hasCollectionErrors()) {
+                new FileValidationException($validation->getErrors());
+            }
+
             // save name on db
             $testModel = new TestModel();
             $testId = $testModel->insert(["testName" => $data["name"]], true);
             // save files on db
-            foreach ($this->config as $config) {
-                $type = $config->getInputName();
-                $keys = $data[$type];
-                $files = FileUtils::getFileEntities($keys);
-                $testFileModel = new TestFilesModel();
-                $testFileModel->saveFiles($files, $testId, $type);
-                FileManager::changeDirectoryCollectionFolder($keys);
+            foreach (parent::getConfig() as $key => $config) {
+                $type = $key;
+                $keys = $data[$type] ?? [];
+                if (!isEmpty($keys)) {
+                    $files = FileUtils::getFileEntities($keys);
+                    $testFileModel = new TestFilesModel();
+                    $testFileModel->saveFiles($files, $testId, $type);
+                    FileManager::changeDirectoryCollectionFolder($keys);
+                }
             }
             return redirect("admin/testFiles");
         } catch (FileValidationException $th) {
             return redirect()->to("/admin/testFiles/crear")
                 ->withInput()
-                ->with("Test_filepondConfig", FilepondManager::getFilepondConfig($this->config))
-                ->with("Test_validationError", $validation->getErrors());
+                ->with("Test_filepondConfig", FilepondManager::getFilepondConfig(parent::getConfig()))
+                ->with("Test_validationError", $th->getMessage());
         } catch (\Throwable $th) {
-            return "Hubo un error";
+            return $th->getMessage();
             return redirect()->to("/admin/testFiles/crear")
                 ->withInput()
                 ->with("error", "Error el guardar el test");
@@ -77,11 +85,11 @@ class CtrlTestFiles extends CtrlApiFiles
         $testModel = new TestModel();
         $name = $testModel->select("testName")->where("testId", $id)->first()["testName"];
 
-        
+
 
         return view('admin/test/testFilesEdit', [
             "name" => $name,
-            "config" => FilepondManager::getFilepondConfig($this->config)
+            "config" => FilepondManager::getFilepondConfig(parent::getConfig())
         ]);
     }
     public function updateTestFiles($id)
@@ -105,7 +113,7 @@ class CtrlTestFiles extends CtrlApiFiles
 
             $testFileModel = new TestFilesModel();
             $testFileModel->createNewFile($folderData, $id, "image");
-            // FileManager::changeDirectoryFolder($sourceFolder, $outputFolder);
+            //FileManager::changeDirectoryFolder($sourceFolder, $outputFolder);
         }
 
         $fileModel = new FileModel();

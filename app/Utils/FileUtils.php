@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Utils;
 
 use App\Exceptions\FileValidationException;
 use Config\Services;
 
-class FileUtils {
-    static function getFileEntities(array $keyFiles) {
+class FileUtils
+{
+    public static function getFileEntities(array $keyFiles)
+    {
         try {
             return array_map(function ($key) {
                 $outputFolder = FILES_UPLOAD_DIRECTORY . $key;
@@ -23,5 +26,5 @@ class FileUtils {
             throw $th;
         }
     }
-    
+
 }

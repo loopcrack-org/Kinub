@@ -1,29 +1,33 @@
 <?php
+
 namespace App\Utils;
 
 use App\Exceptions\FileValidationException;
 use Config\Services;
 
-class FileCollection {
+class FileCollection
+{
     protected array $errors = [];
 
-    public function validateCollectionFiles($data, $configs) {
+    public function validateCollectionFiles($data, $configs)
+    {
         $errors = [];
-        foreach ($configs as $config) {
-            /** @var \App\Utils\FilesConfig $config*/
-            $inputName = $config->getInputName();
+        foreach ($configs as $key => $config) {
+            $inputName = $key;
             $keyFiles = empty($data[$inputName][0]) ? [] : $data[$inputName];
-            $validation = $config->getValidationCollectionConfig();
-            $validation->validate($keyFiles);
-            if($validation->hasError()) {
-                $errors[$inputName] = $validation->getError();
+            $fileValidation = $config->getFileValidation();
+            $hasError = $fileValidation->validateCollectionFiles($keyFiles);
+            if($hasError) {
+                $errors[$inputName] = $fileValidation->getError();
             }
         }
     }
-    public function getErrors() {
+    public function getErrors()
+    {
         return $this->errors;
     }
-    public function hasCollectionErrors() {
+    public function hasCollectionErrors()
+    {
         return !empty($this->errors);
     }
 

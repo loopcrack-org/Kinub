@@ -27,7 +27,7 @@ class FilepondManager
         $configFilepond = [];
 
         foreach($configFiles as $value) {
-            $configFilepond[] = $value->getFilepondConfig();
+            $configFilepond[] = $value->getFilepondConfig()->getConfig();
         }
 
         return $configFilepond;
