@@ -9,7 +9,7 @@ class CtrlUser extends BaseController
     public function viewUsers()
     {
         $userModel = new UserModel();
-        $users     = $userModel->findAll();
+        $users     = $userModel->where('isAdmin', '0')->findAll();
 
         return view('admin/users/Users', ['users' => $users]);
     }
@@ -59,7 +59,17 @@ class CtrlUser extends BaseController
 
     public function deleteUser()
     {
-        $isDeleted = true;
+        $POST      = $this->request->getPost();
+        $userId    = $POST['userId'];
+        $userModel = new UserModel();
+        $user      = $userModel->find($userId);
+        $isDeleted = false;
+        if (! empty($user)) {
+            if ($user['isAdmin'] !== '1') {
+                $isDeleted = $userModel->delete($userId);
+            }
+        }
+
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',
@@ -69,7 +79,7 @@ class CtrlUser extends BaseController
         } else {
             $response = [
                 'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la eliminación del usuario',
+                'message' => 'Algo salio mal al eliminar el usuario. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
         }

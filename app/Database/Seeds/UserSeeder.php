@@ -10,7 +10,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $data  = [
+        $users = [
             [
                 'userFirstName' => $faker->name(),
                 'userLastName'  => $faker->lastName(),
@@ -31,7 +31,6 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        // Using Query Builder
-        $this->db->table('users')->insertBatch($data);
+        $this->db->table('users')->insertBatch($users);
     }
 }
