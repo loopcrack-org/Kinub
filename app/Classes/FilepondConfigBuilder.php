@@ -68,7 +68,6 @@ class FilepondConfigBuilder implements FileBuilder
 
     public function maxSize(int $maxSize)
     {
-
         $this->filepondConfig["maxFileSize"] = ceil((float) $maxSize / 1000) . "MB";
         $this->filepondConfig["labelMaxFileSizeExceeded"] = "El archivo es demasiado grande.";
         $this->filepondConfig["labelMaxFileSize"] = "El tamaño máximo permitido es de {filesize}";

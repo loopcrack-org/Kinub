@@ -7,7 +7,7 @@ use App\Exceptions\FileValidationException;
 use App\Models\FileModel;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
-use App\Utils\FileCollection;
+use App\Utils\FileCollectionValidation;
 use App\Utils\FileManager;
 use App\Utils\FilepondManager;
 use App\Utils\FileUtils;
@@ -22,7 +22,7 @@ class CtrlTestFiles extends CtrlApiFiles
     public function __construct()
     {
         $config = [
-            FileConfig::builder('image')->previewImage()->acceptTypesFile(['image/jpg', 'image/png', 'image/jpeg'], "Selecciona archivos jpg, jpeg o png")->minFiles(1)->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
+            FileConfig::builder('image')->previewImage()->acceptTypesFile(['image/jpg', 'image/png', 'image/jpeg'], "Selecciona archivos jpg, jpeg o png")->minFiles(1)->maxFiles(1)->maxSize(3000)->allowMultipleFiles()->build(),
             FileConfig::builder('svg')->previewImage()->acceptTypesFile(['image/svg+xml'], "Selecciona archivos svg")->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
             FileConfig::builder('video')->previewVideo()->acceptTypesFile(['video/mp4'], "Selecciona archivos de video")->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
             FileConfig::builder('pdf')->previewPDF()->acceptTypesFile(['application/pdf'], "Selecciona archivos pdf")->maxFiles(3)->maxSize(3000)->allowMultipleFiles()->build(),
@@ -44,23 +44,28 @@ class CtrlTestFiles extends CtrlApiFiles
     {
         try {
             // get data
-            $data = $this->request->getPost();
+            $data = FileUtils::sanitizeAndMapPostData($this->request->getPost());
             // validate
-            $validation = new FileCollection();
-
-            $validation->validateCollectionFiles($data, parent::getConfig());
+            $validation = new FileCollectionValidation();
+            $validation->validateCollectionFiles($data, $this->getConfig());
             if($validation->hasCollectionErrors()) {
-                new FileValidationException($validation->getErrors());
+                // set files into config if error
+                foreach ($this->getConfig() as $inputName => $config) {
+                    /** @var \App\Classes\FileConfig $config*/
+                    $config->getFilepondConfig()->setFiles(
+                        FilepondManager::getSourceFiles($data[$inputName], "limbo")
+                    );
+                }
+                throw new FileValidationException();
             }
-
             // save name on db
             $testModel = new TestModel();
             $testId = $testModel->insert(["testName" => $data["name"]], true);
             // save files on db
-            foreach (parent::getConfig() as $key => $config) {
-                $type = $key;
-                $keys = $data[$type] ?? [];
-                if (!isEmpty($keys)) {
+            foreach ($this->getConfig() as $inputName => $config) {
+                $type = $inputName;
+                $keys = $data[$type];
+                if (!empty($keys)) {
                     $files = FileUtils::getFileEntities($keys);
                     $testFileModel = new TestFilesModel();
                     $testFileModel->saveFiles($files, $testId, $type);
@@ -71,8 +76,8 @@ class CtrlTestFiles extends CtrlApiFiles
         } catch (FileValidationException $th) {
             return redirect()->to("/admin/testFiles/crear")
                 ->withInput()
-                ->with("Test_filepondConfig", FilepondManager::getFilepondConfig(parent::getConfig()))
-                ->with("Test_validationError", $th->getMessage());
+                ->with("Test_filepondConfig", FilepondManager::getFilepondConfig($this->getConfig()))
+                ->with("Test_validationError", $validation->getErrors());
         } catch (\Throwable $th) {
             return $th->getMessage();
             return redirect()->to("/admin/testFiles/crear")

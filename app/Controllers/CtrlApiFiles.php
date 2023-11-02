@@ -56,7 +56,7 @@ class CtrlApiFiles extends BaseController
             FileManager::createFolder($folder);
 
             if($file) {
-                $this->config[$inputName]->getValidation()->validateFile($file);
+                $this->config[$inputName]->getFileValidation()->validateFile($file);
                 FileManager::moveClientFileToServer($file, $folder);
             }
 

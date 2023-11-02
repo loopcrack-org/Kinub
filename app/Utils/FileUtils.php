@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Exceptions\FileValidationException;
+use CodeIgniter\HTTP\Request;
 use Config\Services;
 
 class FileUtils
@@ -25,6 +26,14 @@ class FileUtils
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+    public static function sanitizeAndMapPostData(array $post) {
+        return array_map(function($value) {
+            if(is_array($value)) {
+                return empty($value[0]) ? [] : $value;
+            }
+            return $value;
+        }, $post);
     }
 
 }

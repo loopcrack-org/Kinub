@@ -17,7 +17,7 @@ class FileValidationLibrary
         if(!isset($rules) || empty($rules)) {
             throw new InvalidArgumentException("Invalid argument. Not rules founded");
         }
-        $this->rules = explode("|", $rules);
+        $this->rules = explode("|", trim($rules, "|"));
     }
     public function run($data)
     {

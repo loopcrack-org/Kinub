@@ -18,10 +18,6 @@ class FileValidationBuilder implements FileBuilder
 
     public function build()
     {
-
-        $this->validationFile["rules"] = trim($this->validationFile["rules"], "|");
-        $this->validationCollectionFiles["rules"] = trim($this->validationCollectionFiles["rules"], "|");
-
         return new FileValidation($this);
     }
 
@@ -41,7 +37,6 @@ class FileValidationBuilder implements FileBuilder
 
     public function maxFiles(int $maxFiles)
     {
-
         $this->validationCollectionFiles["rules"] .= "maxFiles[$maxFiles]|";
         $this->validationCollectionFiles["messages"]["maxFiles"] = $maxFiles > 1 ? "Se aceptan como máximo $maxFiles archivos" : "Se acepta como máximo 1 archivo";
         return $this;
@@ -54,7 +49,6 @@ class FileValidationBuilder implements FileBuilder
     }
     public function maxDims(int $maxWidth, int $maxHeight)
     {
-
         $this->validationFile["rules"] .= "maxDims[$maxWidth, $maxHeight]|";
         $this->validationFile["messages"]["maxDims"] = "El archivo debe ser de $maxWidth por $maxHeight pixeles";
         return $this;

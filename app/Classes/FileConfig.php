@@ -10,7 +10,7 @@ class FileConfig
     private FileValidation $fileValidation;
     private String $inputName;
 
-    public function __construct(FilepondConfig $filepondConfig, FileValidation $fileValidation, $inputName)
+    public function __construct(FilepondConfig $filepondConfig, FileValidation $fileValidation, string $inputName)
     {
         $this->filepondConfig = $filepondConfig;
         $this->fileValidation = $fileValidation;
@@ -32,7 +32,7 @@ class FileConfig
         return $this->filepondConfig;
     }
 
-    public function getInputName()
+    public function getInputName(): string
     {
         return $this->inputName;
     }
