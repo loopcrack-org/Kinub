@@ -10,7 +10,8 @@ class HomePage extends Migration
     {
         $this->forge->addField([
             'homePageId' => [
-                'type' => 'int',
+                'type'           => 'int',
+                'auto_increment' => true,
             ],
             'aboutUsText' => [
                 'type' => 'text',
