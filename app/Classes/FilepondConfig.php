@@ -21,6 +21,14 @@ class FilepondConfig
         $this->config['files'] = $files;
     }
 
+    public function setDeletedFiles(array $files) {
+        $this->config["deleteFiles"] = $files;
+    }
+
+    public function setError(string $error) {
+        $this->config["error"] = $error;
+    }
+
     public function getConfig(): array
     {
         return $this->config;

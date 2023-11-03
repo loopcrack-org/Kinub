@@ -16,18 +16,21 @@ class FilepondManager
         }, $foldersFiles);
     }
 
-    public static function getNewFilesInFilepond(array $filesFromPost, array $filesSaved): array
+    public static function getFilesInFilepond(array $filesFromPost, array $filesSaved): array
     {
-        $auxFilesSaved =  array_map(function ($file) {return $file["uuid"];}, $filesSaved);
-        return array_diff($filesFromPost, $auxFilesSaved) ?? [];
+        $newFiles = array_diff($filesFromPost, $filesSaved) ?? [];
+        return array_merge([
+            self::getSourceFiles($filesSaved, "local"),
+            self::getSourceFiles($newFiles, "limbo"),
+        ]);
     }
 
     public static function getFilepondConfig(array $configFiles)
     {
         $configFilepond = [];
 
-        foreach($configFiles as $value) {
-            $configFilepond[] = $value->getFilepondConfig()->getConfig();
+        foreach($configFiles as $inputName => $value) {
+            $configFilepond[$inputName] = $value->getFilepondConfig()->getConfig();
         }
 
         return $configFilepond;

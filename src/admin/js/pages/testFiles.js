@@ -8,7 +8,7 @@ import {
 const form = document.querySelector("#form");
 const inputsConfig = JSON.parse(document.querySelector("#config").value);
 
-const references = inputsConfig.map((inputConfig) => {
+const references = Object.values(inputsConfig).map((inputConfig) => {
   const { name, minFiles, ...config } = inputConfig;
   const input = document.querySelector(`#${name}`);
   const pond = createPond(input, config, name, minFiles);

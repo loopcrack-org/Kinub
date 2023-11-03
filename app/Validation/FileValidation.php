@@ -40,7 +40,6 @@ class FileValidation
             $this->error = $th->getMessage();
             return false;
         }
-
         return true;
     }
 

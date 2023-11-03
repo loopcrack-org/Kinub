@@ -53,7 +53,7 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config[0]]) ?>
+                                    <?= view("admin/components/inputFilePond", ["config" => $config["image"]]) ?>
 
                                 </div>
                                 <!-- end card -->
@@ -68,7 +68,7 @@
                                         <h4 class="card-title mb-0">Íconos (SVG)</h4>
                                     </div><!-- end card header -->
 
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config['1']]) ?>
+                                    <?= view("admin/components/inputFilePond", ["config" => $config["icon"]]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -82,7 +82,7 @@
                                         <h4 class="card-title mb-0">Video</h4>
                                     </div><!-- end card header -->
 
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config[2]]) ?>
+                                    <?= view("admin/components/inputFilePond", ["config" => $config["video"]]) ?>
 
                                     <!-- end card body -->
                                 </div>
@@ -98,7 +98,7 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Documents (PDF)</h4>
                                     </div><!-- end card header -->
-                                    <?= view("admin/components/inputFilePond", ["inputConfig" => $config['3']]) ?>
+                                    <?= view("admin/components/inputFilePond", ["config" => $config["datasheet"]]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>

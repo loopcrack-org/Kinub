@@ -26,4 +26,18 @@ class TestFilesModel extends Model
         }
     }
 
+    public function deleteFiles($keyFiles) {
+        try {
+            $this->db->transStart();
+            foreach($keyFiles as $keyFile) {
+                $fileModel = new FileModel();
+                $fileModel->where("uuid", $keyFile)->delete();
+            }
+            $this->db->transComplete();
+        } catch (\Throwable $th) {
+            $this->db->transRollback();
+            throw $th;
+        }
+    }
+
 }

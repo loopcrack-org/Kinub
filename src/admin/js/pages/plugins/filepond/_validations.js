@@ -1,5 +1,5 @@
 import { createAlert, removeAlert } from "./_alerts";
-import { FILE_PROCESSING_COMPLETE } from "./_config";
+import { FILE_LOCAL, FILE_PROCESSING_COMPLETE } from "./_config";
 export function validateMinFilesInFilepond(pond, inputId, minFiles) {
   if (!minFiles) return true;
 
@@ -40,6 +40,6 @@ export function validateMaxFilesInFilepond(pond, inputId) {
 
 export function filepondHasFileErrorOrInProcessing(pond) {
   return pond.getFiles().some(({ status }) => {
-    return status !== FILE_PROCESSING_COMPLETE;
+    return status !== FILE_PROCESSING_COMPLETE && status !== FILE_LOCAL;
   });
 }

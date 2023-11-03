@@ -22,10 +22,13 @@ import {
   validateMinFilesInFilepond,
 } from "./_validations";
 
+// File Origin
 export const FILE_ORIGIN_INPUT = 1; // Is a file input by the user
-export const FILE_ORIGIN_LIMBO = 1; //Restore from the server as a temporaly file
+export const FILE_ORIGIN_LIMBO = 2; //Restore from the server as a temporaly file
 export const FILE_ORIGIN_LOCAL = 3; //Is a local server file
-export const FILE_PROCESSING_COMPLETE = 5;
+// File Status
+export const FILE_LOCAL = 2; // Files are located on server, local files
+export const FILE_PROCESSING_COMPLETE = 5; // Files was processed well
 
 FilePond.registerPlugin(
   FilePondPluginFileEncode,

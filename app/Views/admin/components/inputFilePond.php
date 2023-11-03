@@ -1,8 +1,18 @@
-<div class="card-body" data-name="<?= $inputConfig['name']?>">
-    <?php if(isset($error) && !empty($error)): ?>
-        <p class="card-text alert alert-danger"><?=$error?></p>
+<div class="card-body" data-name="<?= $config['name']?>">
+    <?php if(isset($config["error"])): ?>
+        <!-- show an alert if validation failed -->
+        <p class="card-text alert alert-danger"><?=$config["error"]?></p>
     <?php endif; ?>
-    <p class="card-text"><?=$inputConfig['fileValidateTypeLabelExpectedTypes']?></p>
-    <input id="<?= $inputConfig['name']?>" type="file" name="<?= $inputConfig['name']?>[]">
-    <div id="delete-<?=$inputConfig['name']?>" class="deleteFile"></div>
+    <!-- show expected types -->
+    <p class="card-text"><?=$config['fileValidateTypeLabelExpectedTypes']?></p>
+    <!-- input filepond -->
+    <input id="<?= $config['name']?>" type="file" name="<?= $config['name']?>[]">
+    <!-- for delete files -->
+    <div id="delete-<?=$config['name']?>" class="deleteFile">
+        <?php if(isset($config["deleteFiles"])): ?>
+            <?php foreach($config["deleteFiles"] as $forDeleteFile): ?>
+                <input type="hidden" name="delete-<?=$config['name']?>" value="<?=$forDeleteFile?>">
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
 </div>

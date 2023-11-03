@@ -27,6 +27,7 @@ class FileUtils
             throw $th;
         }
     }
+    
     public static function sanitizeAndMapPostData(array $post) {
         return array_map(function($value) {
             if(is_array($value)) {
