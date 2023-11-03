@@ -1,13 +1,13 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
-<?= $this->section("title-meta") ?>
-<?php echo view('partials/title-meta', array('title' => 'Crear Usuario')); ?>
+<?= $this->section('title-meta') ?>
+<?= view('partials/title-meta', ['title' => 'Crear Usuario']); ?>
 <?= $this->endSection() ?>
 
-<?= $this->section("content") ?>
+<?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('title' => 'Crear Usuario', "titleUrl" => "/admin/usuarios", 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Crear Usuario',)); ?>
+        <?= view('partials/page-title', ['title' => 'Crear Usuario', 'titleUrl' => '/admin/usuarios', 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Crear Usuario']); ?>
 
 
         <div class="row justify-content-center">
@@ -17,6 +17,8 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
+
+                <?php $errors = session()->get('errors'); ?>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
                     <div class="row">
                         <div class="col-md-6">
@@ -28,8 +30,13 @@
                                 </div>
                                 <!-- end card-header -->
                                 <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
-                                        <input type="text" class="form-control" name="userFirstName" id="userFirstName" value="" placeholder="Ingrese el nombre del usuario a registrar" required>
+                                    <div>
+                                        <input type="text" class="form-control <?= isset($errors['userFirstName']) ? 'is-invalid' : '' ?>" name="userFirstName" id="userFirstName" value="<?= old('userFirstName'); ?>" placeholder="Ingrese el nombre del usuario a registrar" required>
+                                        <?php if (isset($errors['userFirstName'])) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= $errors['userFirstName'] ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <!-- end card-body -->
@@ -44,8 +51,13 @@
                                 </div>
                                 <!-- end card-header -->
                                 <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
-                                        <input type="text" class="form-control" name="userLastName" id="userLastName" value="" placeholder="Ingrese el apellido del usuario a registrar" required>
+                                    <div>
+                                        <input type="text" class="form-control <?= isset($errors['userLastName']) ? 'is-invalid' : '' ?>" name="userLastName" id="userLastName" value="<?= old('userLastName'); ?>" placeholder="Ingrese el apellido del usuario a registrar" required>
+                                        <?php if (isset($errors['userLastName'])) : ?>
+                                            <div class="invalid-feedback">
+                                                <?= $errors['userLastName'] ?>
+                                            </div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <!-- end card body -->
@@ -63,12 +75,16 @@
                                     <h5 class="card-title mb-0">Email</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div class="hstack gap-3 align-items-start">
+                                    <div>
                                         <div class="flex-grow-1">
-                                            <input type="email" class="form-control" name="userEmail" id="userEmail" value="" placeholder="Ingrese un correo electrónico" required>
+                                            <input type="email" class="form-control <?= isset($errors['userEmail']) ? 'is-invalid' : '' ?>" name="userEmail" id="userEmail" value="<?= old('userEmail'); ?>" placeholder="Ingrese un correo electrónico" required>
+                                            <?php if (isset($errors['userEmail'])) : ?>
+                                                <div class="invalid-feedback">
+                                                    <?= $errors['userEmail'] ?>
+                                                </div>
+                                            <?php endif ?>
                                         </div>
                                     </div>
-                                </div>
                                 <!-- end card body -->
                             </div>
                             <!-- end card -->
