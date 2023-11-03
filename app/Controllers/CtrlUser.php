@@ -103,7 +103,8 @@ class CtrlUser extends BaseController
             } else {
                 $user = $userModel->where('userEmail', $POST['userEmail'])->first();
                 $validateUser->existUserEmail($user);
-                $token                = uniqid();
+                $token = TokenGenerator::generateToken();
+
                 $POST['userToken']    = $token;
                 $POST['confirmed']    = 0;
                 $POST['userPassword'] = null;
@@ -116,7 +117,7 @@ class CtrlUser extends BaseController
 
                 $response = [
                     'title'   => 'Edición exitosa',
-                    'message' => 'La cuenta se ha actualizado con éxito. Por favor, revise su correo electrónico para establecer su contraseña.',
+                    'message' => 'La cuenta se ha actualizado con éxito. Por favor, notifique al usuario para que verifique su bandeja de entrada y confirme su cuenta.',
                     'type'    => 'success',
                 ];
             }
