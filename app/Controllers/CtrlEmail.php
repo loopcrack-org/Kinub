@@ -4,7 +4,9 @@ namespace App\Controllers;
 
 use App\Models\EmailModel;
 use App\Models\UserModel;
+use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
+use App\Utils\TokenGenerator;
 use App\Validation\ContactEmailValidation;
 use App\Validation\PasswordEmailValidation;
 use App\Validation\SupportEmailValidation;
@@ -144,10 +146,17 @@ class CtrlEmail extends BaseController
             $validateEmail->validateConfirmedAccount($user['confirmed']);
             $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
-            $token    = uniqid();
             $userName = $user['userFirstName'] . ' ' . $user['userLastName'];
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => $token]);
+            $tokenData = [
+                'userToken'       => TokenGenerator::generateToken(),
+                'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
+                'userId'          => $user['userId'],
+            ];
+            $userTokenModel = new UserTokenModel();
+            $userTokenModel->insert($tokenData);
+
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => $tokenData['userToken']]);
 
             if (! $isSend) {
                 throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');
@@ -158,8 +167,6 @@ class CtrlEmail extends BaseController
                 'message' => 'Verifique su bandeja de entrada para poder restablecer su contraseña.',
                 'type'    => 'success',
             ];
-
-            $userModel->update($user['userId'], ['userToken' => $token]);
         } catch (Throwable $th) {
             $errors = $validateEmail->getErrors();
             if (! isset($errors['email'])) {

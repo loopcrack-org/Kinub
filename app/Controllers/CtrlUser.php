@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
 use App\Utils\TokenGenerator;
 use App\Validation\UserValidation;
@@ -45,12 +46,19 @@ class CtrlUser extends BaseController
             $userModel = new UserModel();
             $user      = $userModel->where('userEmail', $POST['userEmail'])->first();
             $validateUser->existUserEmail($user);
-
-            $token             = TokenGenerator::generateToken();
-            $POST['userToken'] = $token;
             $POST['confirmed'] = 0;
             $POST['isAdmin']   = 0;
-            $userModel->insert($POST);
+
+            $tokenData = [
+                'userToken'       => TokenGenerator::generateToken(),
+                'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
+                'userId'          => $userModel->insert($POST),
+            ];
+
+            $userTokenModel = new UserTokenModel();
+            $userTokenModel->insert($tokenData);
+
+            $POST['userToken'] = $tokenData['userToken'];
 
             $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
 
