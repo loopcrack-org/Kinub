@@ -8,13 +8,13 @@ use Throwable;
 class CtrlApiFiles extends BaseController
 {
     /**
-     * --------------------------------------------------------------------------
      * Get a file
-     * --------------------------------------------------------------------------
      *
      * Here you can get a file saved on database and server
      *
      * @return \CodeIgniter\HTTP\DownloadResponse|\CodeIgniter\HTTP\ResponseInterface
+     *
+     * @throws Throwable if the $fileRoute doesn´t exist on server
      */
     public function getFileFromServer()
     {
@@ -30,13 +30,13 @@ class CtrlApiFiles extends BaseController
     }
 
     /**
-     * --------------------------------------------------------------------------
      * Get temporary file
-     * --------------------------------------------------------------------------
      *
      * Filepond send a request with the file key to load a file on client side.
      *
      * @return \CodeIgniter\HTTP\DownloadResponse|\CodeIgniter\HTTP\ResponseInterface
+     *
+     * @throws Throwable if the $folder doesn´t exist on server
      */
     public function restoreTemporalFile()
     {
@@ -52,9 +52,7 @@ class CtrlApiFiles extends BaseController
     }
 
     /**
-     * --------------------------------------------------------------------------
      * Process a file
-     * --------------------------------------------------------------------------
      *
      * When filepond wants to process a file send a request. Here generates a folder with the key.
      * If the file exist (filepond send the file because the file is small) then it is saved on the
@@ -63,6 +61,8 @@ class CtrlApiFiles extends BaseController
      * -- and begin a process for chunk files and it is going to be added later --.
      *
      * @return \CodeIgniter\HTTP\ResponseInterface
+     *
+     * @throws Throwable If $inputName doesn´t exist
      */
     public function processTemporalFile()
     {
@@ -84,13 +84,13 @@ class CtrlApiFiles extends BaseController
     }
 
     /**
-     * --------------------------------------------------------------------------
      * Delete a file
-     * --------------------------------------------------------------------------
      *
      * Filepond send a delete request to delete a temporary file
      *
      * @return \CodeIgniter\HTTP\ResponseInterface
+     *
+     * @throws Throwable if the $folder doesn´t exist on server
      */
     public function deleteTemporalFile()
     {
