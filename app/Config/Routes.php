@@ -2,6 +2,7 @@
 
 namespace Config;
 
+use App\Controllers\CtrlAdminEmail;
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlHomeSection;
@@ -88,6 +89,12 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
+    });
+
+    $routes->group('emails', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlAdminEmail::class, 'viewEmails']);
+        $routes->post('borrar', [CtrlAdminEmail::class, 'deleteEmail']);
     });
 
     $routes->group('usuarios', static function ($routes) {
