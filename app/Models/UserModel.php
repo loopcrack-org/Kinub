@@ -13,7 +13,6 @@ class UserModel extends Model
         'userLastName',
         'userEmail',
         'userPassword',
-        'userToken',
         'confirmed',
         'isAdmin',
     ];
