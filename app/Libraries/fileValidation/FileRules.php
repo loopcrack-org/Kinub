@@ -5,11 +5,13 @@ namespace App\Libraries\fileValidation;
 use CodeIgniter\Files\File;
 use Config\Mimes;
 
-class CustomFileRules {
+class FileRules
+{
     /**
      * Verifies if the file's size in Kilobytes is no larger than the parameter.
      */
-    public function maxSize( $file,  $params) {
+    public function maxSize($file, $params)
+    {
         if($file === null) {
             return false;
         }
@@ -23,14 +25,16 @@ class CustomFileRules {
     /**
      * Verifies that $name is the name of a valid uploaded file.
      */
-    public function uploaded( $data,  $params) {
+    public function uploaded($data, $params)
+    {
         return false;
     }
     /**
      * Uses the mime config file to determine if a file is considered an "image",
      * which for our purposes basically means that it's a raster image or svg.
      */
-    public function isImage( $file,  $params) {
+    public function isImage($file, $params)
+    {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -46,11 +50,12 @@ class CustomFileRules {
         }
 
         return true;
-    }    
+    }
     /**
      * Checks to see if an uploaded file's mime type matches one in the parameter.
      */
-    public function mimeIn( $file,  $params) {
+    public function mimeIn($file, $params)
+    {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -66,7 +71,8 @@ class CustomFileRules {
     /**
      * Checks to see if an uploaded file's extension matches one in the parameter.
      */
-    public function extIn( $file,  $params) {
+    public function extIn($file, $params)
+    {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -83,7 +89,8 @@ class CustomFileRules {
      * Checks an uploaded file to verify that the dimensions are within
      * a specified allowable dimension.
      */
-    public function maxDims(File $file, $params) {
+    public function maxDims(File $file, $params)
+    {
         $params = explode(',', $params);
 
         if ($file === null) {
@@ -105,7 +112,8 @@ class CustomFileRules {
 
         return true;
     }
-    public function maxFiles($files, $params) {
+    public function maxFiles($files, $params)
+    {
         $maxFiles = $params;
         $numFiles = count($files);
         if($numFiles > $maxFiles) {
@@ -113,7 +121,8 @@ class CustomFileRules {
         }
         return true;
     }
-    public function minFiles($files, $params) {
+    public function minFiles($files, $params)
+    {
         $minFiles = $params;
         $numFiles = count($files);
         if($numFiles < $minFiles) {

@@ -7,6 +7,7 @@ use App\Models\FileModel;
 use App\Utils\FileManager;
 use CodeIgniter\Files\File;
 use App\Exceptions\FileValidationException;
+use Config\Services;
 use Kint\Zval\Value;
 
 class CtrlApiFiles extends BaseController
@@ -56,8 +57,25 @@ class CtrlApiFiles extends BaseController
             FileManager::createFolder($folder);
 
             if($file) {
-                $this->config[$inputName]->getFileValidation()->validateFile($file);
-                FileManager::moveClientFileToServer($file, $folder);
+                // validación con codeigniter
+                $configValidation = $this->config[$inputName]->getFileValidation()->getValidation();
+                $validation = Services::validation();
+                $validation->setRules(
+                    [
+                        $inputName => $configValidation["rules"],
+                    ],
+                    [
+                        $inputName => $configValidation["messages"],
+                    ]
+                );
+                $validation->run([$inputName => $file]);
+                if($validation->hasError($inputName)) {
+                    $error = $validation->getError($inputName);
+                    throw new FileValidationException($error);
+                }
+                // validación con la clase FileValidation
+                // $this->config[$inputName]->getFileValidation()->validateFile($file);
+                // FileManager::moveClientFileToServer($file, $folder);
             }
 
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);

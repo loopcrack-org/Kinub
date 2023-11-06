@@ -48,4 +48,13 @@ class FileValidation
         return $this->error;
     }
 
+    public function getValidation()
+    {
+        return $this->validationFile;
+    }
+    public function getValidationCollection()
+    {
+        return $this->validationCollectionFiles;
+    }
+
 }
