@@ -1,10 +1,7 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/product.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/accordion.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
@@ -108,10 +105,6 @@
         </video>
     </div>
 </section>
-
-<!-- <section class="product-info product-info--video">
-
-</section> -->
 
 <section class="product-info download-area" id="download-area">
 

@@ -4,35 +4,40 @@ import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 
 new Plyr('#product-video');
 
-const controller = new ScrollMagic.Controller();
+const scrollmagicController = new ScrollMagic.Controller();
+const sections = document.querySelectorAll('.product-info');
+const navLinks = document.querySelectorAll('.product-navigation__link-container');
 
-function createScrollMagicScene(triggerElement, sectionId, triggerHook, duration) {
+const updateActiveLink = (sectionId) => {
+  navLinks.forEach((link) => {
+    link.classList.remove('product-navigation__link-container--active');
+    const href = link.getAttribute('href');
+    if (href === `#${sectionId}`) {
+      link.classList.add('product-navigation__link-container--active');
+    }
+  });
+};
+
+sections.forEach((section, index) => {
+  let triggerHookValue = 0.5;
+  if (index === sections.length - 1) {
+    triggerHookValue = 0.7;
+  }
   new ScrollMagic.Scene({
-    triggerElement,
-    triggerHook,
-    duration,
+    triggerElement: section,
+    duration: section.offsetHeight,
+    triggerHook: triggerHookValue,
   })
-    .setClassToggle(`#${sectionId}`, 'product-info--active')
-    .addTo(controller)
-    .on('enter', function () {
-      const links = document.querySelectorAll('.product-navigation__link-container');
-      links.forEach((link) => {
-        if (link) {
-          link.classList.remove('product-navigation__link-container--active');
-        }
-      });
-      document
-        .querySelector(`.product-navigation__link-container[href="#${sectionId}"]`)
-        .classList.add('product-navigation__link-container--active');
+    .on('enter', () => {
+      section.classList.add('product-info--active');
+      updateActiveLink(section.id);
     })
-    .on('leave', function (e) {
-      const sectionId = e.target.triggerElement().id;
-      document
-        .querySelector(`.product-navigation__link-container[href="#${sectionId}"]`)
-        .classList.remove('product-navigation__link-container--active');
-    });
-}
-
-createScrollMagicScene('#description', 'description', 'onCenter', '100%');
-createScrollMagicScene('#tech-info', 'tech-info', 'onCenter', '100%');
-createScrollMagicScene('#download-area', 'download-area', 'onCenter', '50%');
+    .on('leave', (event) => {
+      if (event.scrollDirection === 'REVERSE' && index > 0) {
+        const previousSectionId = sections[index - 1].id;
+        updateActiveLink(previousSectionId);
+        section.classList.remove('product-info--active');
+      }
+    })
+    .addTo(scrollmagicController);
+});

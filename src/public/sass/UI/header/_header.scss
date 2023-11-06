@@ -1,13 +1,6 @@
+@use 'sass:color';
 @use '../../base/variables' as v;
 @use '../../base/mixins' as m;
-
-@function custom-darken($color, $amount) {
-  @return mix(black, $color, $amount);
-}
-
-@function custom-lighten($color, $amount) {
-  @return mix(white, $color, $amount);
-}
 
 .menu-inner {
   top: 50%;
@@ -180,14 +173,14 @@
     &:hover,
     &--active {
       border-radius: 0.5rem;
-      background-color: custom-darken(v.$bright-blue, 20%);
+      color: color.adjust($color: v.$bright-blue, $lightness: -20%);
     }
 
     @include m.tablet {
       width: auto;
       padding: 0;
       margin-right: 2.8rem;
-      color: custom-darken(v.$bright-blue, 20%);
+      color: color.adjust($color: v.$bright-blue, $lightness: -20%);
       font-size: 1.6rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -199,7 +192,7 @@
 
       &:hover {
         background-color: inherit;
-        color: custom-lighten(v.$bright-blue, 20%);
+        color: color.adjust($color: v.$bright-blue, $lightness: 20%);
       }
     }
 
