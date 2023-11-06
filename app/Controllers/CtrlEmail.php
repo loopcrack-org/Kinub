@@ -140,9 +140,8 @@ class CtrlEmail extends BaseController
 
             $userModel = new UserModel();
             $user      = $userModel->where('userEmail', $data['email'])->first();
-
             $validateEmail->existUserWithEmail($user);
-            $validateEmail->validateConfirmedAccount($user);
+            $validateEmail->validateConfirmedAccount($user['confirmed']);
             $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
             $token    = uniqid();
@@ -163,7 +162,6 @@ class CtrlEmail extends BaseController
             $userModel->update($user['userId'], ['userToken' => $token]);
         } catch (Throwable $th) {
             $errors = $validateEmail->getErrors();
-
             if (! isset($errors['email'])) {
                 $response = [
                     'title'   => 'Oops',
