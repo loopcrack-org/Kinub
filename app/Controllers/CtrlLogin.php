@@ -93,10 +93,7 @@ class CtrlLogin extends BaseController
         } catch (Exception $e) {
             $errors = $changePasswordValidation->getErrors();
 
-            exit();
-
             if (isset($errors['connection'])) {
-                exit($errors);
                 $response = [
                     'type'    => 'danger',
                     'title'   => '¡Oops!',
