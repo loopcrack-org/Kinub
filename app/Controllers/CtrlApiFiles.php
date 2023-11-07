@@ -21,7 +21,7 @@ class CtrlApiFiles extends BaseController
         try {
             $fileKey = $this->request->getGet()['file'];
             // here you get the file route on database with the fileKey;
-            $fileRoute = FILES_UPLOAD_DIRECTORY . '/8303bd6a-0b6b-43ea-ac23-31e02a64ba82/foto.png'; // example
+            $fileRoute = FILES_UPLOAD_DIRECTORY . "/{$fileKey}/foto.png"; // example
 
             return $this->response->setStatusCode(200)->download($fileRoute['fileRoute'], null, true);
         } catch (Throwable $th) {
