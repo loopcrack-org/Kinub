@@ -12,6 +12,7 @@ export function validateMinFilesInFilepond(pond, inputId, minFiles) {
       `El mínimo de archivos necesarios es de ${minFiles}`,
       'primary',
       false,
+      false,
       'minFile'
     );
   } else {
@@ -32,6 +33,7 @@ export function validateMaxFilesInFilepond(pond, inputId) {
       `Ha alcanzado el numero máximo de archivos permitidos, por favor elimine uno si desea agregar otro`,
       'primary',
       true,
+      false,
       'maxFile'
     );
   } else {

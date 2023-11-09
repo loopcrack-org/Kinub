@@ -17,10 +17,16 @@ export function removeAlert(inputId, origin) {
   document.querySelector(`#alert-${inputId}-${origin}`)?.remove();
 }
 
-export function createAlert(inputId, message, type, hasCloseBtn, origin = 'error') {
+export function createAlert(
+  inputId,
+  message,
+  type,
+  hasCloseBtn,
+  allowMultiple = false,
+  origin = 'error'
+) {
   const auxAlert = document.querySelector(`#alert-${inputId}-${origin}`);
-
-  if (!auxAlert) {
+  if (allowMultiple || !auxAlert) {
     const alert = document.createElement('DIV');
     alert.id = `alert-${inputId}-${origin}`;
     alert.classList.add(`alert-${type}`, 'alert', 'alert-dismissible', 'fade', 'show');

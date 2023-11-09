@@ -57,6 +57,7 @@ export function createPond(input, config, name, minFiles, baseUrl) {
       inputId,
       `${file.filename}. ${message}. Por favor ingrese un archivo diferente`,
       'danger',
+      true,
       true
     );
     pond.removeFile(file.id);
