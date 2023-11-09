@@ -1,9 +1,6 @@
 import Swal from 'sweetalert2';
-import { createPond } from './plugins/filepond/_config';
-import {
-  filepondHasFileErrorOrInProcessing,
-  validateMinFilesInFilepond,
-} from './plugins/filepond/_validations';
+import { createPond } from './_config';
+import { filepondHasFileErrorOrInProcessing, validateMinFilesInFilepond } from './_validations';
 
 const form = document.querySelector('#form');
 const inputsConfig = JSON.parse(document.querySelector('#config').value);

@@ -14,9 +14,7 @@ class CtrlTestFiles extends CtrlApiFiles
             'name'                               => 'image',
             'acceptedFileTypes'                  => ['image/jpg', 'image/png', 'image/jpeg'],
             'fileValidateTypeLabelExpectedTypes' => 'Selecciona jpg, jpeg o png',
-            'chunkUploads'                       => true,
             'labelFileTypeNotAllowed'            => 'Archivo no válido',
-            'chunkSize'                          => 1000000,
             'allowMultiple'                      => true,
             'maxFiles'                           => 3,
             'minFiles'                           => 2,
@@ -25,8 +23,12 @@ class CtrlTestFiles extends CtrlApiFiles
             'imageResizeTargetWidth'             => 200,
             'imageResizeTargetHeight'            => 200,
             'allowFileSizeValidation'            => true,
+            'maxFileSize'                        => '5MB',
+            'minFileSize'                        => '100KB',
             'labelMaxFileSizeExceeded'           => 'El archivo es demasiado grande.',
             'labelMaxFileSize'                   => 'El tamaño máximo permitido es de {filesize}',
+            'labelMinFileSizeExceeded'           => 'El archivo es demasiado pequeño',
+            'labelMinFileSize'                   => 'El tamaño mínimo permitido es de {filesize}',
         ],
     ];
 

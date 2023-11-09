@@ -65,6 +65,7 @@ export function createPond(input, config, name, minFiles, baseUrl) {
 
   pond.on('removefile', () => {
     validateMinFilesInFilepond(pond, inputId, minFiles);
+    validateMaxFilesInFilepond(pond, inputId);
   });
 
   pond.on('processfile', () => {
