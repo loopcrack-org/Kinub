@@ -16,7 +16,7 @@ class FileManager
      *
      * @return string
      */
-    public static function getFolderId()
+    public static function generateFolderId()
     {
         return md5(uniqid(mt_rand(), true));
     }
@@ -85,7 +85,15 @@ class FileManager
     public static function changeDirectoryFolder(string $sourcePath, string $destPath)
     {
         try {
-            rename($sourcePath, $destPath);
+            if (! is_dir($sourcePath)) {
+                throw new Exception("{$sourcePath}, carpeta no encontrada");
+            }
+            if (! is_dir($destPath)) {
+                throw new Exception("{$destPath}, carpeta no encontrada");
+            }
+            if (! rename($sourcePath, $destPath)) {
+                throw new Exception('Ocurrió un error al mover la carpeta');
+            }
         } catch (Throwable $th) {
             throw new Exception('La carpeta no existe o ha ocurrido un error al moverla');
         }
@@ -104,10 +112,18 @@ class FileManager
             foreach ($keys as $key) {
                 $outputFolder = FILES_UPLOAD_DIRECTORY . $key;
                 $sourceFolder = FILES_TEMP_DIRECTORY . $key;
-                rename($sourceFolder, $outputFolder);
+                if (! is_dir($outputFolder)) {
+                    throw new Exception("{$outputFolder}, carpeta no encontrada");
+                }
+                if (! is_dir($sourceFolder)) {
+                    throw new Exception("{$sourceFolder}, carpeta no encontrada");
+                }
+                if (! rename($sourceFolder, $outputFolder)) {
+                    throw new Exception('Ocurrió un error al mover la carpeta');
+                }
             }
         } catch (Throwable $th) {
-            throw new Exception('Error al mover los archivos');
+            throw new Exception($th->getMessage());
         }
     }
 
