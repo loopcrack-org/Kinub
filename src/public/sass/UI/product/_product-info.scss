@@ -50,6 +50,10 @@
       border-left: 0.8rem solid v.$bluish-green;
       margin-left: 0.2rem;
     }
+
+    &--download-area {
+      padding-top: 0;
+    }
   }
   &__text {
     margin: 0;

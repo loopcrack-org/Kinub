@@ -2,12 +2,15 @@ accordion-element {
   display: inline-block;
   width: 95%;
   height: unset;
+  padding-left: 3.5rem;
   border-radius: 0.5rem;
   margin-top: 0.1em;
 
   & > .ploiu-accordion-title {
-    padding: 1rem;
+    display: list-item;
+    padding: 1rem 0;
     border-radius: inherit;
+    margin-left: -1rem;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     text-transform: capitalize;
@@ -49,7 +52,6 @@ accordion-element {
 accordion-fan {
   display: block;
   width: 95%;
-  padding-top: 1vh;
 
   & > .ploiu-accordion-title {
     width: auto;

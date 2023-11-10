@@ -110,9 +110,9 @@
 
     <h2 class="product-info__heading product-info__heading--download-area">Área de descarga</h2>
 
-    <div class="product-info__text-container">
+    <div class="product-info__text-container product-info__text-container--download-area">
         <accordion-fan class="download-area__accordion-fan">
-            <accordion-element class="download-area__accordion" data-title="&#8226; Brochure">
+            <accordion-element class="download-area__accordion" data-title="Brochure">
                 <ul class="download-area__links-container">
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
@@ -128,7 +128,7 @@
                     </li>
                 </ul>
             </accordion-element>
-            <accordion-element class="download-area__accordion" data-title="&#8226; Datasheet">
+            <accordion-element class="download-area__accordion" data-title="Datasheet">
                 <ul class="download-area__links-container">
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
@@ -145,9 +145,9 @@
                 </ul>
             </accordion-element>
 
-            <a href="#" class="download-area__link download-area__link--single">&#8226; Manual de Usuario</a>
+            <a href="#" class="download-area__link download-area__link--single">Manual de Usuario</a>
 
-            <accordion-element class="download-area__accordion" data-title="&#8226; Certificados">
+            <accordion-element class="download-area__accordion" data-title="Certificados">
                 <ul class="download-area__links-container">
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
