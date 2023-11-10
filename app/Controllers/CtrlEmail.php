@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\EmailModel;
-
 use App\Models\UserModel;
 use App\Utils\EmailSender;
 use App\Validation\ContactEmailValidation;
@@ -50,8 +49,10 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'  => 1,
-                'emailContent' => EmailSender::getEmailBody($formData, 'mailDetail'),
+                'emailTypeId'   => 1,
+                'inquirerName'  => $POST['inquirer-name'],
+                'inquirerEmail' => $POST['inquirer-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
             ];
             $emailModel->insert($data);
         } else {
@@ -110,8 +111,10 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'  => 2,
-                'emailContent' => EmailSender::getEmailBody($formData, 'mailDetail'),
+                'emailTypeId'   => 2,
+                'inquirerName'  => $POST['support-customer'],
+                'inquirerEmail' => $POST['support-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
             ];
             $emailModel->insert($data);
         } else {
@@ -137,9 +140,8 @@ class CtrlEmail extends BaseController
 
             $userModel = new UserModel();
             $user      = $userModel->where('userEmail', $data['email'])->first();
-
             $validateEmail->existUserWithEmail($user);
-            $validateEmail->validateConfirmedAccount($user);
+            $validateEmail->validateConfirmedAccount($user['confirmed']);
             $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
             $token    = uniqid();
@@ -160,7 +162,6 @@ class CtrlEmail extends BaseController
             $userModel->update($user['userId'], ['userToken' => $token]);
         } catch (Throwable $th) {
             $errors = $validateEmail->getErrors();
-
             if (! isset($errors['email'])) {
                 $response = [
                     'title'   => 'Oops',
