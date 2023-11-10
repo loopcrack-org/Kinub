@@ -13,7 +13,7 @@ class CtrlTestFiles extends CtrlApiFiles
         'image'   => [
             'name'                               => 'image',
             'acceptedFileTypes'                  => ['image/jpg', 'image/png', 'image/jpeg'],
-            'fileValidateTypeLabelExpectedTypes' => 'Selecciona jpg, jpeg o png',
+            'fileValidateTypeLabelExpectedTypes' => 'Selecciona sólo archivos con la extensión .jpg, .jpeg o .png',
             'labelFileTypeNotAllowed'            => 'Archivo no válido',
             'allowMultiple'                      => true,
             'maxFiles'                           => 3,
