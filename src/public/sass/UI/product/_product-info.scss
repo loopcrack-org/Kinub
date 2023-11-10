@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use '../../base/variables' as v;
 @use '../../base/mixins' as m;
 
@@ -20,7 +21,6 @@
   &__heading {
     margin: 0;
     margin-bottom: 2rem;
-    color: v.$sky-blue;
     text-align: left;
     text-transform: capitalize;
     transition: color 1000ms ease-in-out;
@@ -29,16 +29,25 @@
     @include m.tablet {
       margin-bottom: 4rem;
     }
+    &--description {
+      color: v.$sky-blue;
+    }
+    &--tech-info {
+      color: v.$bright-blue;
+    }
+    &--download-area {
+      color: v.$blue;
+    }
   }
   &__text-container {
     padding-top: 4rem;
-    border-top: 0.8rem solid v.$sky-blue;
+    border-top: 0.8rem solid v.$bluish-green;
     transition: border-color 1000ms ease-in-out;
     @include m.tablet {
       padding-top: 0;
       padding-left: 3.5rem;
       border-top: none;
-      border-left: 0.8rem solid v.$sky-blue;
+      border-left: 0.8rem solid v.$bluish-green;
       margin-left: 0.2rem;
     }
   }
@@ -58,14 +67,6 @@
 
     @include m.tablet {
       max-width: 80%;
-    }
-  }
-  &--active {
-    .product-info__heading {
-      color: v.$turquoise-blue;
-    }
-    .product-info__text-container {
-      border-color: v.$turquoise-blue;
     }
   }
 }

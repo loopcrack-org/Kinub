@@ -207,7 +207,8 @@
   top: v.$mobile-height;
   display: flex;
   width: 100%;
-  margin: 4rem 0 0 0;
+  max-width: 190rem;
+  margin: 4rem auto;
 
   @include m.tablet {
     top: v.$desktop-height;
@@ -223,7 +224,7 @@
     transition: background-color 500ms ease-in-out;
 
     &--active {
-      background-color: v.$sky-blue;
+      background-color: v.$bright-blue;
     }
   }
 

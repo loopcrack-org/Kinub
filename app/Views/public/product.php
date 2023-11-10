@@ -5,7 +5,7 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
-<script src="assets/public/js/product-page.min.js"></script>
+<script src="assets/public/js/product.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -70,14 +70,14 @@
 </nav>
 
 <section class="product-info" id="description">
-    <h2 class="product-info__heading">Descripción</h2>
+    <h2 class="product-info__heading product-info__heading--description">Descripción</h2>
     <div class="product-info__text-container">
         <p class="product-info__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magni pariatur vero doloremque, id ipsa praesentium a nesciunt! Ullam, porro laudantium. Voluptas fugit possimus vero explicabo rerum id omnis nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum alias praesentium explicabo, nesciunt expedita ducimus dolor a, id maxime quasi, cum culpa tempora quibusdam et. Rerum itaque soluta quo suscipit.</p>
     </div>
 </section>
 
 <section class="product-info" id="tech-info">
-    <h2 class="product-info__heading">Especificaciones Técnicas</h2>
+    <h2 class="product-info__heading product-info__heading--tech-info">Especificaciones Técnicas</h2>
     <div class="product-info__text-container">
         <ul>
             <li class="product-info__text"><span class="product-info__text--title">Frecuencia:</span>Sit amet, consectetuer</li>
@@ -108,7 +108,7 @@
 
 <section class="product-info download-area" id="download-area">
 
-    <h2 class="product-info__heading">Área de descarga</h2>
+    <h2 class="product-info__heading product-info__heading--download-area">Área de descarga</h2>
 
     <div class="product-info__text-container">
         <accordion-fan class="download-area__accordion-fan">
