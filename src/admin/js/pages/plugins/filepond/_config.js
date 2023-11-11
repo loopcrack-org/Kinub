@@ -52,9 +52,7 @@ export function createPond(input, config, name, minFiles, baseUrl) {
   validateMinFilesInFilepond(pond, inputId, minFiles);
 
   pond.on('error', (error, file) => {
-    console.log(error);
     const message = error.code ? JSON.parse(error.body) : `${error.main} ${error.sub}`;
-
     createAlert(
       inputId,
       `${file.filename}. ${message}. Por favor ingrese un archivo diferente`,
