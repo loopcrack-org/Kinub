@@ -18,7 +18,7 @@
     <div id="delete-<?=$config['name']?>" class="deleteFile">
         <?php if(isset($config['deleteFiles'])): ?>
             <?php foreach($config['deleteFiles'] as $forDeleteFile): ?>
-                <input type="hidden" name="delete-<?=$config['name']?>" value="<?=$forDeleteFile?>">
+                <input type="hidden" name="delete-<?=$config['name']?>[]" value="<?=$forDeleteFile?>">
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
