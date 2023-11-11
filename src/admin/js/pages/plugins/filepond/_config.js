@@ -52,7 +52,9 @@ export function createPond(input, config, name, minFiles, baseUrl) {
   validateMinFilesInFilepond(pond, inputId, minFiles);
 
   pond.on('error', (error, file) => {
+    console.log(error);
     const message = error.code ? JSON.parse(error.body) : `${error.main} ${error.sub}`;
+
     createAlert(
       inputId,
       `${file.filename}. ${message}. Por favor ingrese un archivo diferente`,
@@ -70,10 +72,12 @@ export function createPond(input, config, name, minFiles, baseUrl) {
 
   pond.on('processfile', () => {
     validateMinFilesInFilepond(pond, inputId, minFiles);
+    validateMaxFilesInFilepond(pond, inputId);
   });
 
-  pond.on('warning', () => {
+  pond.on('warning', (error, files) => {
     validateMaxFilesInFilepond(pond, inputId);
+    validateMaxFilesInFilepond(pond, inputId, files);
   });
 
   return pond;

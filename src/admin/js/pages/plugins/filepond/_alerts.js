@@ -33,7 +33,6 @@ export function createAlert(
     alert.role = 'alert';
     alert.textContent = message;
     hasCloseBtn ? alert.appendChild(createCloseBtn()) : '';
-
     document.querySelector(`#${inputId}`).before(alert);
   }
 }
