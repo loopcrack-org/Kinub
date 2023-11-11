@@ -49,16 +49,9 @@ class CtrlUser extends BaseController
             $POST['confirmed'] = 0;
             $POST['isAdmin']   = 0;
 
-            $tokenData = [
-                'userToken'       => TokenGenerator::generateToken(),
-                'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
-                'userId'          => $userModel->insert($POST),
-            ];
+            $newUserToken = $this->newToken($userModel->insert($POST));
 
-            $userTokenModel = new UserTokenModel();
-            $userTokenModel->insert($tokenData);
-
-            $POST['userToken'] = $tokenData['userToken'];
+            $POST['userToken'] = $newUserToken;
 
             $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
 
@@ -111,13 +104,14 @@ class CtrlUser extends BaseController
             } else {
                 $user = $userModel->where('userEmail', $POST['userEmail'])->first();
                 $validateUser->existUserEmail($user);
-                $token = TokenGenerator::generateToken();
 
-                $POST['userToken']    = $token;
+                $newUserToken = $this->newToken($id);
+
                 $POST['confirmed']    = 0;
                 $POST['userPassword'] = null;
+                $emailInfo            = [...$POST, 'userToken' => $newUserToken];
 
-                $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
+                $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $emailInfo);
 
                 if (! $isSend) {
                     throw new Exception('Algo salio mal al editar el usuario. Por favor, inténtalo de nuevo.');
@@ -175,5 +169,19 @@ class CtrlUser extends BaseController
         }
 
         return redirect()->back()->with('response', $response);
+    }
+
+    private function newToken($userId)
+    {
+        $tokenData = [
+            'userToken'       => TokenGenerator::generateToken(),
+            'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
+            'userId'          => $userId,
+        ];
+
+        $userTokenModel = new UserTokenModel();
+        $userTokenModel->insert($tokenData);
+
+        return $tokenData['userToken'];
     }
 }
