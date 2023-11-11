@@ -22,11 +22,11 @@ export function createAlert(
   message,
   type,
   hasCloseBtn,
+  allowMultiple = false,
   origin = "error"
 ) {
   const auxAlert = document.querySelector(`#alert-${inputId}-${origin}`);
-
-  if (!auxAlert) {
+  if (allowMultiple || !auxAlert) {
     const alert = document.createElement("DIV");
     alert.id = `alert-${inputId}-${origin}`;
     alert.classList.add(
@@ -39,7 +39,6 @@ export function createAlert(
     alert.role = "alert";
     alert.textContent = message;
     hasCloseBtn ? alert.appendChild(createCloseBtn()) : "";
-
     document.querySelector(`#${inputId}`).before(alert);
   }
 }

@@ -1,17 +1,19 @@
 import Swal from "sweetalert2";
-import { createPond } from "./plugins/filepond/_config";
+import { createPond } from "./_config";
 import {
   filepondHasFileErrorOrInProcessing,
   validateMinFilesInFilepond,
-} from "./plugins/filepond/_validations";
+} from "./_validations";
 
 const form = document.querySelector("#form");
 const inputsConfig = JSON.parse(document.querySelector("#config").value);
 
-const references = Object.values(inputsConfig).map((inputConfig) => {
+const { baseUrl, ...config } = inputsConfig;
+
+const references = Object.values(config).map((inputConfig) => {
   const { name, minFiles, ...config } = inputConfig;
   const input = document.querySelector(`#${name}`);
-  const pond = createPond(input, config, name, minFiles);
+  const pond = createPond(input, config, name, minFiles, baseUrl);
   const reference = { pond, input, minFiles };
   return reference;
 });

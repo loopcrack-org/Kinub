@@ -1,5 +1,6 @@
 import { createAlert, removeAlert } from "./_alerts";
 import { FILE_LOCAL, FILE_PROCESSING_COMPLETE } from "./_config";
+
 export function validateMinFilesInFilepond(pond, inputId, minFiles) {
   if (!minFiles) return true;
 
@@ -11,6 +12,7 @@ export function validateMinFilesInFilepond(pond, inputId, minFiles) {
       `El mínimo de archivos necesarios es de ${minFiles}`,
       "primary",
       false,
+      false,
       "minFile"
     );
   } else {
@@ -20,21 +22,26 @@ export function validateMinFilesInFilepond(pond, inputId, minFiles) {
   return hasMinFiles;
 }
 
-export function validateMaxFilesInFilepond(pond, inputId) {
+export function validateMaxFilesInFilepond(pond, inputId, files = []) {
   if (!pond.maxFiles) return;
-
-  const hasMaxFiles = pond.getFiles().length === pond.maxFiles;
-
-  if (hasMaxFiles) {
+  const numPondFiles = pond.getFiles().length;
+  const payloadLength = files.length;
+  const exceedFiles = payloadLength + numPondFiles > pond.maxFiles;
+  const hasMaxFiles = numPondFiles === pond.maxFiles;
+  if (exceedFiles || hasMaxFiles) {
+    removeAlert(inputId, "maxFiles");
     createAlert(
       inputId,
-      `Ha alcanzado el numero máximo de archivos permitidos, por favor elimine uno si desea agregar otro`,
+      hasMaxFiles
+        ? `Ha alcanzado el numero máximo de archivos permitidos. Por favor elimine uno si desea agregar otro`
+        : `Ha intentado ingresar más archivos de los permitidos. Por favor, intente con una menor cantidad de archivos`,
       "primary",
       true,
-      "maxFile"
+      false,
+      "maxFiles"
     );
   } else {
-    removeAlert(inputId, "maxFile");
+    removeAlert(inputId, "maxFiles");
   }
 }
 

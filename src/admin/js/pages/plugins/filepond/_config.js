@@ -24,8 +24,8 @@ import {
 
 // File Origin
 export const FILE_ORIGIN_INPUT = 1; // Is a file input by the user
-export const FILE_ORIGIN_LIMBO = 2; //Restore from the server as a temporaly file
-export const FILE_ORIGIN_LOCAL = 3; //Is a local server file
+export const FILE_ORIGIN_LIMBO = 2; // Restore from the server as a temporary file
+export const FILE_ORIGIN_LOCAL = 3; // Is a local server file
 // File Status
 export const FILE_LOCAL = 2; // Files are located on server, local files
 export const FILE_PROCESSING_COMPLETE = 5; // Files was processed well
@@ -41,10 +41,10 @@ FilePond.registerPlugin(
   FilePondPluginFileValidateSize
 );
 
-export function createPond(input, config, name, minFiles) {
+export function createPond(input, config, name, minFiles, baseUrl) {
   const pond = FilePond.create(input, {
     ...config,
-    server: getServerOptions(name),
+    server: getServerOptions(name, baseUrl),
     beforeRemoveFile: async (item) => {
       const { origin } = item;
       return origin === FILE_ORIGIN_LOCAL
@@ -64,29 +64,33 @@ export function createPond(input, config, name, minFiles) {
       inputId,
       `${file.filename}. ${message}. Por favor ingrese un archivo diferente`,
       "danger",
+      true,
       true
     );
     pond.removeFile(file.id);
   });
 
-  pond.on("removefile", (error, file) => {
+  pond.on("removefile", () => {
     validateMinFilesInFilepond(pond, inputId, minFiles);
-  });
-
-  pond.on("processfile", (error, file) => {
-    validateMinFilesInFilepond(pond, inputId, minFiles);
-  });
-
-  pond.on("warning", (error) => {
     validateMaxFilesInFilepond(pond, inputId);
+  });
+
+  pond.on("processfile", () => {
+    validateMinFilesInFilepond(pond, inputId, minFiles);
+    validateMaxFilesInFilepond(pond, inputId);
+  });
+
+  pond.on("warning", (error, files) => {
+    validateMaxFilesInFilepond(pond, inputId);
+    validateMaxFilesInFilepond(pond, inputId, files);
   });
 
   return pond;
 }
 
-function getServerOptions(nameInput) {
+function getServerOptions(nameInput, baseUrl) {
   return {
-    url: "/admin/testFiles",
+    url: baseUrl,
     process: {
       url: "/process",
       method: "POST",
@@ -110,7 +114,7 @@ function getServerOptions(nameInput) {
     restore: "/restore?file=",
     revert: "/delete",
     load: "/load?file=",
-    remove: (source, load, error) => {
+    remove: (source, load) => {
       addFileToDelete(nameInput, source);
       load();
     },
