@@ -2,7 +2,6 @@
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
@@ -116,16 +115,16 @@
                 />
                 </svg>
             </div>
-            
+
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Residenciales</p>
                 <p class="measurement-solution__description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
-            </div>  
-            
-            <div class="measurement-solution__mask"></div>  
-            <div class="measurement-solution__mask--hover"></div>  
+            </div>
+
+            <div class="measurement-solution__mask"></div>
+            <div class="measurement-solution__mask--hover"></div>
         </div>
 
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
@@ -164,16 +163,16 @@
                 />
                 </svg>
             </div>
-            
+
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Industriales</p>
                 <p class="measurement-solution__description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
-            </div>  
-            
-            <div class="measurement-solution__mask"></div>  
-            <div class="measurement-solution__mask--hover"></div>  
+            </div>
+
+            <div class="measurement-solution__mask"></div>
+            <div class="measurement-solution__mask--hover"></div>
         </div>
 
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
@@ -212,16 +211,16 @@
                 />
                 </svg>
             </div>
-            
+
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medición</span> Remota</p>
                 <p class="measurement-solution__description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
-            </div>  
-            
-            <div class="measurement-solution__mask"></div>  
-            <div class="measurement-solution__mask--hover"></div>  
+            </div>
+
+            <div class="measurement-solution__mask"></div>
+            <div class="measurement-solution__mask--hover"></div>
         </div>
 
         <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
@@ -260,23 +259,23 @@
                 />
                 </svg>
             </div>
-            
+
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Calidad</span> del agua</p>
                 <p class="measurement-solution__description">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
-            </div>  
-            
-            <div class="measurement-solution__mask"></div>  
-            <div class="measurement-solution__mask--hover"></div>  
+            </div>
+
+            <div class="measurement-solution__mask"></div>
+            <div class="measurement-solution__mask--hover"></div>
         </div>
 </section>
 
 <section id="form">
-    <?php 
+    <?php
         $response = session()->get('response');
-        if(isset($response)):
+if(isset($response)):
     ?>
         <script type="module">
             Swal.fire({
@@ -286,7 +285,7 @@
                 confirmButtonColor: '#0174F6'
             })
         </script>
-    <?php endif;?>
+    <?php endif; ?>
 
     <form class="container-sm form" action="/email/contacto" method="POST">
         <div class="form__icon">
@@ -296,32 +295,32 @@
         </div>
 
         <legend class="form__legend">Contáctanos</legend>
-        
+
         <div class="form__field">
             <label for="product-name" class="form__label">Nombre del Producto</label>
-            <?= isset($errors['product-name']) ? '<p class="form__error">'.$errors['product-name'].'</p>' : '' ?>
-            <input id="product-name" name="product-name" type="text" class="form__input" value="<?php echo old("product-name")?>" placeholder="Ingrese el nombre del producto">
+            <?= isset($errors['product-name']) ? '<p class="form__error">' . $errors['product-name'] . '</p>' : '' ?>
+            <input id="product-name" name="product-name" type="text" class="form__input" value="<?= old('product-name')?>" placeholder="Ingrese el nombre del producto">
         </div>
 
         <div class="form__field">
             <label for="inquirer-name" class="form__label">Nombre del Solicitante</label>
-            <?= isset($errors['inquirer-name']) ? '<p class="form__error">'.$errors['inquirer-name'].'</p>' : '' ?>
-            <input id="inquirer-name" name="inquirer-name" type="text" class="form__input" value="<?php echo old("inquirer-name")?>" placeholder="Ingrese su nombre">
+            <?= isset($errors['inquirer-name']) ? '<p class="form__error">' . $errors['inquirer-name'] . '</p>' : '' ?>
+            <input id="inquirer-name" name="inquirer-name" type="text" class="form__input" value="<?= old('inquirer-name')?>" placeholder="Ingrese su nombre">
         </div>
 
         <div class="form__field">
             <label for="inquirer-email" class="form__label">E-Mail</label>
-            <?= isset($errors['inquirer-email']) ? '<p class="form__error">'.$errors['inquirer-email'].'</p>' : '' ?>
-            <input id="inquirer-email" name="inquirer-email" type="email" class="form__input" value="<?php echo old("inquirer-email")?>" placeholder="Ingrese su correo">
+            <?= isset($errors['inquirer-email']) ? '<p class="form__error">' . $errors['inquirer-email'] . '</p>' : '' ?>
+            <input id="inquirer-email" name="inquirer-email" type="email" class="form__input" value="<?= old('inquirer-email')?>" placeholder="Ingrese su correo">
         </div>
 
         <div class="form__field">
             <label for="message" class="form__label">Mensaje</label>
-            <?= isset($errors['message']) ? '<p class="form__error">'.$errors['message'].'</p>' : '' ?>
-            <textarea id="message" name="message" rows="5" class="form__textarea" placeholder="Ingrese su mensaje"><?php echo old("message")?></textarea>
+            <?= isset($errors['message']) ? '<p class="form__error">' . $errors['message'] . '</p>' : '' ?>
+            <textarea id="message" name="message" rows="5" class="form__textarea" placeholder="Ingrese su mensaje"><?= old('message')?></textarea>
         </div>
 
         <input class="form__submit" type="submit" value="Enviar">
     </form>
 </section>
-<?php $this->endSection('content');?>
+<?php $this->endSection('content'); ?>
