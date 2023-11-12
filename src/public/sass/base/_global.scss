@@ -1,41 +1,43 @@
-@use 'base/variables' as v;
+@use "base/variables" as v;
 
 html {
     font-size: 62.5%;
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
-*,*:before,*:after {
-    box-sizing: inherit;
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 body {
-    font-size: 1.6rem;
-    background-color: v.$light-gray;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  font-size: 1.6rem;
+  background-color: v.$light-gray;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 p {
-    color: v.$black;
-    font-size: 1.6rem;
-    line-height: 2;
+  color: v.$black;
+  font-size: 1.6rem;
+  line-height: 2;
 }
 a {
-    text-decoration: none;
-    color: v.$black;
+  text-decoration: none;
+  color: v.$black;
 }
 img {
-    display: block;
-    height: auto;
-    width: 100%;
+  display: block;
+  height: auto;
+  width: 100%;
 }
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .container-sm {
-    max-width: 70rem;
-    width: 90%;
-    margin: 0 auto;
+  max-width: 70rem;
+  width: 90%;
+  margin: 0 auto;
 }
