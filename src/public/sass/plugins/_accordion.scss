@@ -1,17 +1,31 @@
-/* stylelint-disable no-duplicate-selectors */
-/* stylelint-disable no-descending-specificity */
 accordion-element {
   display: inline-block;
   width: 95%;
   height: unset;
+  padding-left: 3.5rem;
   border-radius: 0.5rem;
   margin-top: 0.1em;
 
   & > .ploiu-accordion-title {
-    padding: 1rem;
+    display: list-item;
+    padding: 1rem 0;
     border-radius: inherit;
+    margin-left: -1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     text-transform: capitalize;
   }
+
+  & > accordion-element {
+    margin-left: 1em;
+  }
+
+  accordion-fan > accordion-element {
+    width: 100%;
+    border-radius: 0;
+    margin-top: -1vh;
+  }
+
   &:hover {
     cursor: pointer;
   }
@@ -24,10 +38,6 @@ accordion-element {
     word-wrap: anywhere;
   }
 
-  & > accordion-element {
-    margin-left: 1em;
-  }
-
   &:not(.open) > .ploiu-accordion-body {
     height: 0 !important;
     border: 0;
@@ -37,23 +47,11 @@ accordion-element {
     height: -moz-max-content;
     height: max-content;
   }
-
-  & > .ploiu-accordion-title {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
 }
 
 accordion-fan {
   display: block;
   width: 95%;
-  padding-top: 1vh;
-
-  & > accordion-element {
-    width: 100%;
-    border-radius: 0;
-    margin-top: -1vh;
-  }
 
   & > .ploiu-accordion-title {
     width: auto;

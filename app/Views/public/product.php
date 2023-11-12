@@ -1,14 +1,11 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/plyr.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/product.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/accordion.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
-<script src="assets/public/js/product-page.min.js"></script>
+<script src="assets/public/js/product.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -103,7 +100,7 @@
 </section>
 
 <section class="product-info" id="tech-info">
-    <h2 class="product-info__heading product-info__heading--technical-spec">Especificaciones Técnicas</h2>
+    <h2 class="product-info__heading product-info__heading--tech-info">Especificaciones Técnicas</h2>
     <div class="product-info__text-container">
         <ul>
             <li class="product-info__text"><span class="product-info__text--title">Frecuencia:</span>Sit amet, consectetuer</li>
@@ -134,11 +131,11 @@
 
 <section class="product-info download-area" id="download-area">
 
-    <h2 class="download-area__heading">Área de descarga</h2>
+    <h2 class="product-info__heading product-info__heading--download-area">Área de descarga</h2>
 
-    <div class="download-area__accordion-container">
+    <div class="product-info__text-container product-info__text-container--download-area">
         <accordion-fan class="download-area__accordion-fan">
-            <accordion-element class="download-area__accordion" data-title="&#8226; Brochure">
+            <accordion-element class="download-area__accordion" data-title="Brochure">
                 <ul class="download-area__links-container">
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
@@ -154,7 +151,7 @@
                     </li>
                 </ul>
             </accordion-element>
-            <accordion-element class="download-area__accordion" data-title="&#8226; Datasheet">
+            <accordion-element class="download-area__accordion" data-title="Datasheet">
                 <ul class="download-area__links-container">
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>
@@ -171,9 +168,9 @@
                 </ul>
             </accordion-element>
 
-            <a href="#" class="download-area__link download-area__link--single">&#8226; Manual de Usuario</a>
+            <a href="#" class="download-area__link download-area__link--single">Manual de Usuario</a>
 
-            <accordion-element class="download-area__accordion" data-title="&#8226; Certificados">
+            <accordion-element class="download-area__accordion" data-title="Certificados">
                 <ul class="download-area__links-container">
                     <li>
                         <a class="download-area__link" href="#">Algún titulo para sus descargas</a>

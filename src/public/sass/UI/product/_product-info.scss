@@ -1,14 +1,16 @@
+@use 'sass:color';
 @use '../../base/variables' as v;
 @use '../../base/mixins' as m;
 
 .product-info {
   width: 90%;
   max-width: 120rem;
-  margin: 0 auto;
-  margin-bottom: 6rem;
+  margin: 1rem auto;
+  scroll-margin-top: 13rem;
 
   @include m.tablet {
     margin-bottom: 8rem;
+    scroll-margin-top: 15rem;
   }
   @include m.desktopXXL {
     max-width: 180rem;
@@ -19,9 +21,10 @@
   &__heading {
     margin: 0;
     margin-bottom: 2rem;
-    @include m.fluid-text(3rem, 5rem);
     text-align: left;
     text-transform: capitalize;
+    transition: color 1000ms ease-in-out;
+    @include m.fluid-text(3rem, 5rem);
 
     @include m.tablet {
       margin-bottom: 4rem;
@@ -29,20 +32,27 @@
     &--description {
       color: v.$sky-blue;
     }
-    &--technical-spec {
+    &--tech-info {
       color: v.$bright-blue;
+    }
+    &--download-area {
+      color: v.$blue;
     }
   }
   &__text-container {
     padding-top: 4rem;
-    border-top: 0.8rem solid v.$turquoise-blue;
-
+    border-top: 0.8rem solid v.$bluish-green;
+    transition: border-color 1000ms ease-in-out;
     @include m.tablet {
       padding-top: 0;
       padding-left: 3.5rem;
       border-top: none;
-      border-left: 0.8rem solid v.$turquoise-blue;
+      border-left: 0.8rem solid v.$bluish-green;
       margin-left: 0.2rem;
+    }
+
+    &--download-area {
+      padding-top: 0;
     }
   }
   &__text {

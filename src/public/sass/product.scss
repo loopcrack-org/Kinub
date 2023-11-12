@@ -1,15 +1,17 @@
-/* stylelint-disable scss/no-global-function-names */
-@use 'UI/product';
+@use 'sass:color';
+@use 'plugins/plyr';
+@use 'plugins/accordion';
+@use 'base';
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
+@use 'UI/product';
+@use 'UI/whatsapp';
+@use 'UI/header';
+@use 'UI/footer';
 
 .details {
-  padding-left: 2rem;
-  margin-right: 2rem;
-
-  @include m.tablet {
-    padding-left: 0;
-  }
+  width: 90%;
+  margin: 0 auto;
 
   &__grid {
     display: flex;
@@ -66,10 +68,10 @@
 
   &__data {
     margin: 0;
-    color: darken(v.$gray, 20%);
+    color: color.adjust($color: v.$gray, $lightness: -20%);
     font-size: 1.4rem;
     span {
-      color: darken(v.$gray, 10%);
+      color: color.adjust($color: v.$gray, $lightness: -10%);
       font-weight: 700;
     }
 
@@ -113,7 +115,7 @@
 .tag {
   padding: 0.5rem 1.5rem;
   border-radius: 0.5rem;
-  background-color: darken(v.$bright-blue, 20%);
+  background-color: color.adjust($color: v.$bright-blue, $lightness: -20%);
   &__content {
     margin: 0;
     color: v.$white;
@@ -136,13 +138,14 @@
 
 .product-navigation {
   position: sticky;
-  z-index: 0;
+  z-index: 1;
   top: v.$mobile-height;
   display: flex;
   width: 100%;
-  margin: 4rem 0;
+  max-width: 190rem;
+  margin: 4rem auto;
 
-  @include m.desktop {
+  @include m.tablet {
     top: v.$desktop-height;
   }
 
@@ -152,13 +155,11 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem 1rem;
+    background-color: color.adjust($color: v.$bright-blue, $lightness: -20%);
+    transition: background-color 500ms ease-in-out;
 
-    &:nth-child(odd) {
-      background-color: darken(v.$bright-blue, 20%);
-    }
-
-    &:nth-child(even) {
-      background-color: darken(v.$aqua-blue, 2%);
+    &--active {
+      background-color: v.$bright-blue;
     }
   }
 
@@ -186,7 +187,7 @@
   &__heading {
     margin: 0;
     margin-bottom: 2rem;
-    color: darken(v.$bright-blue, 10%);
+    color: color.adjust($color: v.$bright-blue, $lightness: -10%);
     text-align: left;
     text-transform: capitalize;
     @include m.fluid-text(3rem, 5rem);
@@ -198,13 +199,10 @@
 
   &__accordion-container {
     padding-top: 4rem;
-    border-top: 0.8rem solid v.$turquoise-blue;
 
     @include m.tablet {
       padding-top: 0;
       padding-left: 3.5rem;
-      border-top: none;
-      border-left: 0.8rem solid v.$turquoise-blue;
       margin-left: 0.2rem;
     }
   }
@@ -221,31 +219,30 @@
   }
 
   &__accordion {
-    color: darken(v.$light-gray, 35%);
+    color: color.adjust($color: v.$light-gray, $lightness: -35%);
     font-size: 2.4rem;
     transition: color 300ms ease-in-out;
 
     &:hover {
-      color: darken(v.$gray, 10%);
+      color: color.adjust($color: v.$gray, $lightness: -10%);
     }
   }
 
   &__links-container {
     display: flex;
     flex-direction: column;
-    padding-left: 2rem;
     margin-bottom: 1rem;
     row-gap: 1rem;
   }
 
   &__link {
-    color: darken(v.$light-gray, 35%);
+    color: color.adjust($color: v.$light-gray, $lightness: -35%);
     font-size: 1.8rem;
     text-decoration: underline;
     transition: color 300ms ease-in-out;
 
     &:hover {
-      color: darken(v.$gray, 10%);
+      color: color.adjust($color: v.$gray, $lightness: -10%);
     }
 
     span {
@@ -254,7 +251,9 @@
     }
 
     &--single {
-      padding: 0 0 1rem 1rem;
+      display: list-item;
+      padding: 1rem 0 1rem 0;
+      margin-left: 2.5rem;
       font-size: 2.4rem;
     }
   }
