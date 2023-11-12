@@ -1,14 +1,16 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
-<?= view('partials/title-meta', ['title' => 'Crear Usuario']); ?>
+
+<?= view('partials/title-meta', ['title' => 'Editar Usuario']); ?>
+
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?= view('partials/page-title', ['title' => 'Crear Usuario', 'titleUrl' => '/admin/usuarios', 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Crear Usuario']); ?>
-
+      
+        <?= view('partials/page-title', ['title' => 'Editar Usuario', 'titleUrl' => '/admin/usuarios', 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Editar Usuario']); ?>
 
         <div class="row justify-content-center">
             <div class="col-sm-11">
@@ -20,6 +22,7 @@
 
                 <?php $errors = session()->get('errors'); ?>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -31,7 +34,7 @@
                                 <!-- end card-header -->
                                 <div class="card-body">
                                     <div>
-                                        <input type="text" class="form-control <?= isset($errors['userFirstName']) ? 'is-invalid' : '' ?>" name="userFirstName" id="userFirstName" value="<?= old('userFirstName'); ?>" placeholder="Ingrese el nombre del usuario a registrar" required>
+                                        <input type="text" class="form-control <?= isset($errors['userFirstName']) ? 'is-invalid' : '' ?>" name="userFirstName" id="userFirstName" value="<?= old('userFirstName') ?? $user['userFirstName']; ?>" placeholder="Ingrese el nombre del usuario a registrar" required>
                                         <?php if (isset($errors['userFirstName'])) : ?>
                                             <div class="invalid-feedback">
                                                 <?= $errors['userFirstName'] ?>
@@ -52,7 +55,7 @@
                                 <!-- end card-header -->
                                 <div class="card-body">
                                     <div>
-                                        <input type="text" class="form-control <?= isset($errors['userLastName']) ? 'is-invalid' : '' ?>" name="userLastName" id="userLastName" value="<?= old('userLastName'); ?>" placeholder="Ingrese el apellido del usuario a registrar" required>
+                                        <input type="text" class="form-control <?= isset($errors['userLastName']) ? 'is-invalid' : '' ?>" name="userLastName" id="userLastName" value="<?= old('userLastName') ?? $user['userLastName']; ?>" placeholder="Ingrese el apellido del usuario a registrar" required>
                                         <?php if (isset($errors['userLastName'])) : ?>
                                             <div class="invalid-feedback">
                                                 <?= $errors['userLastName'] ?>
@@ -75,16 +78,22 @@
                                     <h5 class="card-title mb-0">Email</h5>
                                 </div>
                                 <div class="card-body">
-                                    <div>
-                                        <div class="flex-grow-1">
-                                            <input type="email" class="form-control <?= isset($errors['userEmail']) ? 'is-invalid' : '' ?>" name="userEmail" id="userEmail" value="<?= old('userEmail'); ?>" placeholder="Ingrese un correo electrónico" required>
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-7 mb-2">
+                                             <input type="email" class="form-control <?= isset($errors['userEmail']) ? 'is-invalid' : '' ?>" name="userEmail" id="userEmail" value="<?= old('userEmail') ?? $user['userEmail']; ?>" placeholder="Ingrese un correo electrónico" required>
                                             <?php if (isset($errors['userEmail'])) : ?>
                                                 <div class="invalid-feedback">
                                                     <?= $errors['userEmail'] ?>
                                                 </div>
                                             <?php endif ?>
                                         </div>
+                                        <div class="col-md-5 mb-2">
+                                            <div class="alert alert-<?= ($user['confirmed']) ? 'success' : 'warning'?> alert-dismissible alert-label-icon label-arrow fade show mb-0 text-wrap" style="min-height: 39px; padding: 8px 40px 8px 58px">
+                                                <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line label-icon"></i><strong><?= ($user['confirmed']) ? 'Cuenta confirmada' : 'Cuenta por confirmar'?></strong>
+                                            </div>
+                                        </div>
                                     </div>
+                                </div>
                                 <!-- end card body -->
                             </div>
                             <!-- end card -->
@@ -106,11 +115,4 @@
     <!-- container-fluid -->
 </div>
 <!-- End Page-content -->
-<?= $this->endSection() ?>
-
-<?= $this->section('js') ?>
-<!-- particles js -->
-<script src="/assets/admin/js/particles.min.js"></script>
-<!-- particles app js -->
-<script src="/assets/admin/js/particles.app.min.js"></script>
 <?= $this->endSection() ?>
