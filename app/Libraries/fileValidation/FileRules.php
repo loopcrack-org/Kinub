@@ -8,19 +8,42 @@ use Config\Mimes;
 class FileRules
 {
     /**
-     * Verifies if the file's size in Kilobytes is no larger than the parameter.
+     * Verifies if the file's size in given unit is no larger than the parameter.
      */
-    public function maxSize($file, $params)
+    public function maxSize(File $file, $params)
     {
         if($file === null) {
             return false;
         }
 
-        $size = $file->getSizeByUnit('kb');
+        $params = explode(',', $params);
 
-        $accepted = $params;
+
+        $size = $file->getSizeByUnit(strtolower($params[1]));
+
+        $accepted = $params[0];
 
         return $accepted > $size;
+    }
+
+    /**
+     * Verifies if the file's size in given unit is larger than the parameter.
+     */
+
+    public function minSize(File $file, $params)
+    {
+        if($file === null) {
+            return false;
+        }
+
+        $params = explode(',', $params);
+
+
+        $size = $file->getSizeByUnit(strtolower($params[1]));
+
+        $accepted = $params[0];
+
+        return $accepted < $size;
     }
     /**
      * Verifies that $name is the name of a valid uploaded file.
@@ -125,7 +148,7 @@ class FileRules
     {
         $minFiles = $params;
         $numFiles = count($files);
-        if($numFiles < $minFiles) {
+        if($numFiles < $minFiles || $files[0] === '') {
             return false;
         }
         return true;

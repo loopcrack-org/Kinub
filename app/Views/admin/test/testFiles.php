@@ -31,9 +31,9 @@
 
                     <?php
                         if (session()->has('response')) {
-                        $response = session()->get('response');
-                    ?>
-                        <div id="alert-deletedCategory" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                            $response = session()->get('response');
+                            ?>
+                    <div id="alert-deletedCategory" data-response="<?= esc(json_encode($response)) ?>"></div>
                     <?php }; ?>
 
                     <!-- card-header -->
@@ -49,28 +49,28 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($tests as $test) { ?>
-                                    <tr>
-                                        <td><?= $test["testId"] ?></td>
-                                        <td>
-                                            <div class="d-flex align-items-center fw-medium">
-                                                <p><?= $test["testName"] ?></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
+                                <tr>
+                                    <td><?= $test["testId"] ?></td>
+                                    <td>
+                                        <div class="d-flex align-items-center fw-medium">
+                                            <p><?= $test["testName"] ?></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-between">
 
-                                                <a href="/admin/testFiles/editar/<?= $test["testId"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="/admin/testFiles/editar/<?= $test["testId"] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
 
-                                                <!-- <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-id="<?=$test["testId"]?>" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a> -->
-                                                <form class="btn btn-danger btn-icon waves-effect waves-light" style="min-width: 48%;" action="/admin/testFiles/borrar" method="POST">
-                                                    <input type="hidden" name="testId" value="<?= $test["testId"] ?>">
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="ri-delete-bin-5-line ri-lg"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            <!-- <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-id="<?=$test["testId"]?>" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a> -->
+                                            <form class="btn btn-danger btn-icon waves-effect waves-light" style="min-width: 48%;" action="/admin/testFiles/borrar" method="POST">
+                                                <input type="hidden" name="testId" value="<?= $test["testId"] ?>">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="ri-delete-bin-5-line ri-lg"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <?php } ?>
                             </tbody>
                             <tfoot>

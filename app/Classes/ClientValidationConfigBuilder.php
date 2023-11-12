@@ -2,16 +2,27 @@
 
 namespace App\Classes;
 
-use App\Interfaces\FileBuilder;
+use App\Interfaces\Filepond;
+use App\Interfaces\ValidationConfigBuilder;
+use Config\Mimes;
 
-class FilepondConfigBuilder implements FileBuilder
+class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
 {
     private array $filepondConfig = [
         "labelFileTypeNotAllowed" => "Archivo no válido",
+        "acceptedFileTypes" => [],
+        "fileValidateTypeLabelExpectedTypes" => "Selecciona sólo archivos con la extensión",
         "allowMultiple" => false,
         "allowFileSizeValidation" => true,
         "chunkUploads" => true,
         "chunkSize" => 1000000,
+        'labelIdle'                          => 'Arrastra y suelta tus archivos o <span class="filepond--label-action"> Selecciona </span>',
+        'labelFileLoading'                   => 'Cargando',
+        'labelFileProcessing'                => 'Procesando',
+        'labelFileProcessingComplete'        => 'Carga completada',
+        'labelTapToUndo'                     => 'toque para deshacer',
+        'labelTapToCancel'                   => 'toque para cancelar',
+        'labelFileWaitingForSize'            => 'Esperando tamaño',
     ];
 
     public function __construct(String $inputName)
@@ -21,7 +32,7 @@ class FilepondConfigBuilder implements FileBuilder
 
     public function build()
     {
-        return new FilepondConfig($this);
+        return new ClientValidationConfig($this);
     }
 
     public function previewImage()
@@ -59,18 +70,49 @@ class FilepondConfigBuilder implements FileBuilder
     }
 
 
-    public function acceptTypesFile(array $mimeTypes, String $labelExpectedTypes)
+    public function acceptTypesFile(array $fileExtensions)
     {
-        $this->filepondConfig["acceptedFileTypes"] = $mimeTypes;
-        $this->filepondConfig["fileValidateTypeLabelExpectedTypes"] = $labelExpectedTypes;
+        foreach ($fileExtensions as $fileExtension) {
+            $this->filepondConfig["acceptedFileTypes"][] = Mimes::guessTypeFromExtension($fileExtension);
+            $this->filepondConfig["fileValidateTypeLabelExpectedTypes"] .= " .$fileExtension";
+        }
         return $this;
     }
 
-    public function maxSize(int $maxSize)
+    public function isImage()
     {
-        $this->filepondConfig["maxFileSize"] = ceil((float) $maxSize / 1000) . "MB";
+        $this->acceptTypesFile(["png", "jpg", "jpeg"]);
+        return $this;
+    }
+
+    public function isPDF()
+    {
+        $this->acceptTypesFile(["pdf"]);
+        return $this;
+    }
+    public function isVideo()
+    {
+        $this->acceptTypesFile(["mp4"]);
+        return $this;
+    }
+    public function isSVG()
+    {
+        $this->acceptTypesFile(["svg"]);
+        return $this;
+    }
+
+    public function maxSize(int $maxSize, String $unit)
+    {
+        $this->filepondConfig["maxFileSize"] = $maxSize . strtoupper($unit);
         $this->filepondConfig["labelMaxFileSizeExceeded"] = "El archivo es demasiado grande.";
         $this->filepondConfig["labelMaxFileSize"] = "El tamaño máximo permitido es de {filesize}";
+        return $this;
+    }
+    public function minSize(int $minSize, String $unit)
+    {
+        $this->filepondConfig["minFileSize"] = $minSize . strtoupper($unit);
+        $this->filepondConfig["labelMinFileSizeExceeded"] = "El archivo es demasiado pequeño.";
+        $this->filepondConfig["labelMinFileSize"] = "El tamaño mínimo permitido es de {filesize}";
         return $this;
     }
 
@@ -93,7 +135,7 @@ class FilepondConfigBuilder implements FileBuilder
         return $this;
     }
 
-    public function filepondConfig()
+    public function config()
     {
         return $this->filepondConfig;
     }

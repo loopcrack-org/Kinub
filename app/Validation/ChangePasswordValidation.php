@@ -24,8 +24,9 @@ class ChangePasswordValidation extends BaseValidation
 
     protected $errors = [];
 
-    public function existUserWithToken($user) {
-        if(!$user) {    
+    public function existUserWithToken($user)
+    {
+        if(!$user) {
             $this->errors = [
                 "connection" => "Algo ha salido mal, porfavor recarga la página e intenta nuevamente"
             ];
@@ -34,6 +35,4 @@ class ChangePasswordValidation extends BaseValidation
         }
         return true;
     }
-
-    
 }

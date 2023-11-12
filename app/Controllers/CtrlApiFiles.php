@@ -8,18 +8,11 @@ use App\Utils\FileManager;
 use CodeIgniter\Files\File;
 use App\Exceptions\FileValidationException;
 use Config\Services;
-use Kint\Zval\Value;
+use App\Classes\FileValidationConfig;
 
 class CtrlApiFiles extends BaseController
 {
-    private array $config = [];
-
-    public function __construct(array $inputConfig)
-    {
-        foreach ($inputConfig as $value) {
-            $this->config[$value->getInputName()] = $value;
-        }
-    }
+    protected FileValidationConfig $fileValidationConfig;
 
     public function getFileFromServer()
     {
@@ -58,11 +51,11 @@ class CtrlApiFiles extends BaseController
 
             if($file) {
                 // validación con codeigniter
-                $configValidation = $this->config[$inputName]->getFileValidation()->getValidation();
+                $configValidation = $this->fileValidationConfig->getFileValidationRulesByInput($inputName);
                 $validation = Services::validation();
                 $validation->setRules(
                     [
-                        $inputName => $configValidation["rules"],
+                        $inputName => $configValidation['rules'],
                     ],
                     [
                         $inputName => $configValidation["messages"],
@@ -73,16 +66,15 @@ class CtrlApiFiles extends BaseController
                     $error = $validation->getError($inputName);
                     throw new FileValidationException($error);
                 }
-                // validación con la clase FileValidation
-                // $this->config[$inputName]->getFileValidation()->validateFile($file);
-                // FileManager::moveClientFileToServer($file, $folder);
+
+                FileManager::moveClientFileToServer($file, $folder);
             }
 
             return $this->response->setStatusCode(201)->setJSON(["key" => $key]);
         } catch (FileValidationException $th) {
             return $this->response->setStatusCode(500, json_encode($th->getMessage()));
         } catch (\Throwable $th) {
-            return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
+            return $this->response->setStatusCode(500, json_encode($th->getMessage()));
         }
     }
 
@@ -103,12 +95,24 @@ class CtrlApiFiles extends BaseController
             if($temporalFileLength === $fileLength) {
                 $file = new File($fileTmp);
                 $inputName = $this->request->header("Input")->getValue();
-                $this->config[$inputName]->getValidation()->validateFile($file);
+                $configValidation = $this->fileValidationConfig->getFileValidationRulesByInput($inputName);
+                $validation = Services::validation();
+                $validation->setRules(
+                    [
+                        $inputName => $configValidation['rules'],
+                    ],
+                    [
+                        $inputName => $configValidation["messages"],
+                    ]
+                );
+                if($validation->run([$inputName => $file])) {
+                    $error = $validation->getError($inputName);
+                    throw new FileValidationException($error);
+                }
             }
 
             return $this->response->setStatusCode(204);
         } catch (FileValidationException $th) {
-            FileManager::deleteFolderWithContent($folder);
             return $this->response->setStatusCode(500)->setJSON(["error" => $th->getMessage()]);
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
@@ -124,10 +128,5 @@ class CtrlApiFiles extends BaseController
         } catch (\Throwable $th) {
             return $this->response->setStatusCode(500, $th->getMessage());
         }
-    }
-
-    public function getConfig()
-    {
-        return $this->config;
     }
 }

@@ -10,12 +10,13 @@ class BaseValidation
 
     protected $errors = [];
 
+
     public function validateInputs($data): bool
     {
         $validation = \Config\Services::validation();
         $validation->setRules($this->validationRules, $this->validationMessages);
 
-        if(!$validation->run($data)){
+        if(!$validation->run($data)) {
             $this->errors = $validation->getErrors();
             return false;
         }
@@ -27,4 +28,14 @@ class BaseValidation
         return $this->errors;
     }
 
+    public function getError(String $inputName): String
+    {
+        return $this->errors[$inputName];
+    }
+
+    public function addRules(array $rules, array $messages)
+    {
+        $this->validationRules = array_merge($this->validationRules, $rules);
+        $this->validationMessages = array_merge($this->validationMessages, $messages);
+    }
 }

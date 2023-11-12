@@ -96,4 +96,16 @@ class FileManager
             throw new Exception("Ha ocurrido un error al eliminar la carpeta con su contenido");
         }
     }
+
+    public static function deleteMultipleFoldersWhitContent(array $folders)
+    {
+        try {
+            foreach ($folders as $folder) {
+                $folderPath = FILES_UPLOAD_DIRECTORY . $folder;
+                static::deleteFolderWithContent($folderPath);
+            }
+        } catch (\Throwable $th) {
+            throw new Exception("Error al eliminar los archivos");
+        }
+    }
 }

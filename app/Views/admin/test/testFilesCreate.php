@@ -36,7 +36,8 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
-                                        <p class="card-text">Ingresa un nombre</p>
+                                        <?= validation_show_error('name', 'validationError') ?>
+                                        <label class="card-text" for="name">Ingresa un nombre</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" value="<?= old("name") ?? ''?>" required>
                                     </div>
                                     <!-- end card body -->
@@ -121,7 +122,7 @@
                     </div>
                 </div>
                 <div class="filepondConfig">
-                    <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($config)) ?? "" ?>">
+                    <input id="config" type="hidden" value="<?= esc(json_encode($config)) ?? "" ?>">
                 </div>
             </form>
         </div>

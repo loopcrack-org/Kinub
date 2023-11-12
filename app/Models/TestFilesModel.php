@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use App\Utils\FileUtils;
 
 class TestFilesModel extends Model
 {
@@ -12,21 +13,24 @@ class TestFilesModel extends Model
 
     public function saveFiles($files, $testId, $type)
     {
-        try {
-            $this->db->transStart();
-            foreach($files as $file) {
-                $fileModel = new FileModel();
-                $fileInsertedId = $fileModel->insert($file, true);
-                $this->insert(["fileId" => $fileInsertedId, 'testId' => $testId, "fileType" => $type]);
-            }
-            $this->db->transComplete();
-        } catch (\Throwable $th) {
-            $this->db->transRollback();
-            throw $th;
+
+        if (empty($files)) {
+            return;
         }
+
+        $fileModel = new FileModel();
+        $fileModel->insertBatch(FileUtils::getFileEntities($files));
+        $lastFilesIds = $fileModel->getLastIds();
+        $data = [];
+        foreach($lastFilesIds as $fileInsertedId) {
+            $data[] = ["fileId" => $fileInsertedId['fileId'], 'testId' => $testId, "fileType" => $type];
+        }
+
+        $this->insertBatch($data);
     }
 
-    public function deleteFiles($keyFiles) {
+    public function deleteFiles($keyFiles)
+    {
         try {
             $this->db->transStart();
             foreach($keyFiles as $keyFile) {

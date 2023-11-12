@@ -18,8 +18,19 @@ class TestModel extends Model
             ->join("files", "test_files.fileId=files.fileId")
             ->where("test.testId", $id)->where("test_files.fileType", $type)
             ->findAll();
-        return array_map(function($file) {
+        return array_map(function ($file) {
             return $file["uuid"];
         }, $result);
+    }
+
+    public function getKeyFiles($id)
+    {
+        $result = $this->select("uuid")
+                    ->join("test_files", "test.testId=test_files.testId")
+                    ->join("files", "test_files.fileId=files.fileId")
+                    ->where("test.testId", $id)
+                    ->groupBy('test_files.fileId')
+                    ->findAll();
+        return $result;
     }
 }
