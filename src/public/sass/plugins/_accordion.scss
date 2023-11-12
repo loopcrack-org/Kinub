@@ -1,0 +1,69 @@
+accordion-element {
+  display: inline-block;
+  width: 95%;
+  height: unset;
+  padding-left: 3.5rem;
+  border-radius: 0.5rem;
+  margin-top: 0.1em;
+
+  & > .ploiu-accordion-title {
+    display: list-item;
+    padding: 1rem 0;
+    border-radius: inherit;
+    margin-left: -1rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    text-transform: capitalize;
+  }
+
+  & > accordion-element {
+    margin-left: 1em;
+  }
+
+  accordion-fan > accordion-element {
+    width: 100%;
+    border-radius: 0;
+    margin-top: -1vh;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  & > .ploiu-accordion-body {
+    overflow: hidden;
+    width: 95%;
+    border: 1px solid transparent;
+    transition: height 300ms;
+    word-wrap: anywhere;
+  }
+
+  &:not(.open) > .ploiu-accordion-body {
+    height: 0 !important;
+    border: 0;
+  }
+
+  &.open {
+    height: -moz-max-content;
+    height: max-content;
+  }
+}
+
+accordion-fan {
+  display: block;
+  width: 95%;
+
+  & > .ploiu-accordion-title {
+    width: auto;
+  }
+
+  & > accordion-element:first-child {
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  & > accordion-element:last-child {
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+}

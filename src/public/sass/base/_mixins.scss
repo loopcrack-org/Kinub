@@ -31,6 +31,12 @@
         @content;
     }
 }
+
+@mixin desktopXXL {
+    @media (min-width: v.$desktopXXL){
+        @content;
+    }
+}
 @mixin grid($columns, $gap){
     display: grid;
     grid-template-columns: repeat($columns, 1fr);
