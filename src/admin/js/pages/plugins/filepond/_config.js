@@ -74,7 +74,6 @@ export function createPond(input, config, name, minFiles, baseUrl) {
   });
 
   pond.on('warning', (error, files) => {
-    validateMaxFilesInFilepond(pond, inputId);
     validateMaxFilesInFilepond(pond, inputId, files);
   });
 
