@@ -1,0 +1,109 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.modal-form {
+  display: flex;
+  width: 100%;
+  max-width: 70%;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem auto;
+
+  &__title {
+    color: v.$blue;
+    font-size: 1.5rem;
+    line-height: 1;
+    white-space: nowrap;
+
+    @include m.tablet {
+      font-size: 2.5rem;
+    }
+    &--big {
+      display: block;
+      font-size: 2.5rem;
+
+      @include m.tablet {
+        font-size: 4rem;
+      }
+    }
+  }
+  &__field {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+  &__label {
+    margin-bottom: 1rem;
+    color: v.$aqua-blue;
+    font-size: 2rem;
+
+    @include m.tablet {
+      font-size: 2.5rem;
+    }
+  }
+  &__input,
+  &__textarea {
+    padding: 0.5rem 0;
+    border: 0.2rem solid v.$aqua-blue;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    color: v.$blue;
+    font-size: 1.8rem;
+    font-weight: bold;
+    resize: none;
+    text-align: center;
+
+    @include m.tablet {
+      font-size: 2.5rem;
+    }
+    &:focus {
+      border-color: v.$sky-blue;
+      outline: none;
+    }
+    &::placeholder {
+      color: v.$gray;
+    }
+  }
+  &__product {
+    height: 5rem;
+    padding: 3rem 0;
+    border: 0.2rem solid v.$aqua-blue;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    color: v.$blue;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+
+    @include m.tablet {
+      font-size: 2.5rem;
+    }
+    &:focus {
+      border-color: v.$sky-blue;
+      outline: none;
+    }
+  }
+  &__submit {
+    padding: 0.5rem 3rem;
+    border: none;
+    border-radius: 1.5rem;
+    background-color: v.$aqua-blue;
+    color: v.$white;
+    cursor: pointer;
+    font-size: 2rem;
+
+    @include m.tablet {
+      font-size: 2.3rem;
+    }
+  }
+}
+.custom-modal-box-size {
+  .tingle-modal-box {
+    width: 100%;
+    max-width: 70rem;
+
+    &__footer {
+      text-align: right;
+    }
+  }
+}

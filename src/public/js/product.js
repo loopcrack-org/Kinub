@@ -1,5 +1,6 @@
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
+import Tingle from 'tingle.js';
 import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 
 new Plyr('#product-video');
@@ -45,4 +46,35 @@ sections.forEach((section, index) => {
       }
     })
     .addTo(scrollmagicController);
+});
+
+const modal = new Tingle.modal({
+  footer: true,
+  stickyFooter: false,
+  closeMethods: ['overlay', 'button', 'escape'],
+  closeLabel: 'Close',
+  cssClass: ['custom-modal-box-size'],
+  onOpen: function () {
+    console.log('modal open');
+  },
+  onClose: function () {
+    console.log('modal closed');
+  },
+  beforeClose: function () {
+    return true;
+  },
+});
+
+const modalFormContent = document.querySelector('#modal-form');
+modal.setContent(modalFormContent.innerHTML);
+
+const modalBtn = document.querySelector('#modal-form-btn');
+
+modalBtn.addEventListener('click', function () {
+  modal.open();
+});
+
+modal.addFooterBtn('Enviar', 'modal-form__submit', function () {
+  modalFormContent.submit();
+  modal.close();
 });
