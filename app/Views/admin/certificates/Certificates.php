@@ -50,9 +50,7 @@
                             <tbody>
                                 <?php foreach ($certificates as $certificate) { ?>
                                     <tr>
-                                        <td>
-                                            <p><?= $certificate['certificateId']; ?></p>
-                                        </td>
+                                        <td><?= $certificate['certificateId']; ?></td>
                                         <td>
                                             <div class="d-flex align-items-center fw-medium">
                                                 <p class="text-wrap"><?= $certificate['certificatefileName'] ?></p>
