@@ -34,7 +34,7 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
-                                    <?= view('admin/components/inputFilePond', ['config' => $config['image']]) ?>
+                                    <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['image']]) ?>
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div class="filepondConfig">
-                    <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($config)) ?? '' ?>">
+                    <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
                 </div>
             </form>
         </div>

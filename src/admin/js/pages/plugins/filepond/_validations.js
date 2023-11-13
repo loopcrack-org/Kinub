@@ -34,7 +34,9 @@ export function validateMaxFilesInFilepond(pond, inputId, files = []) {
       inputId,
       hasMaxFiles
         ? `Ha alcanzado el numero máximo de archivos permitidos. Por favor elimine uno si desea agregar otro`
-        : `Ha intentado ingresar más archivos de los permitidos. Por favor, intente con una menor cantidad de archivos`,
+        : `Ha intentado ingresar más archivos de los permitidos. El máximo de archivos permitidos es de ${
+            pond.maxFiles
+          }, puede ingresar hasta ${pond.maxFiles - numPondFiles} archivo/s más`,
       'primary',
       true,
       false,

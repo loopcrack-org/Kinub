@@ -48,6 +48,6 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function viewTestFilesCreate()
     {
-        return view('admin/test/testFilesCreate', ['config' => $this->filepondConfig]);
+        return view('admin/test/testFilesCreate', ['filepondConfig' => $this->filepondConfig]);
     }
 }
