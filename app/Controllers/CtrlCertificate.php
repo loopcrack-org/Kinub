@@ -38,6 +38,21 @@ class CtrlCertificate extends BaseController
 
     public function deleteCertificate()
     {
-        return 'delete certificate ...';
+        $isDeleted = true;
+        if ($isDeleted) {
+            $response = [
+                'title'   => 'Eliminación exitosa',
+                'message' => 'Se ha elimnado el certificado correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Eliminación fallida',
+                'message' => 'No se pudo realizar la elimiación del certificado',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->back()->with('response', $response);
     }
 }
