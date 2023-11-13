@@ -24,7 +24,7 @@
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Certificados</h5>
                         <div class="mt-2 mt-md-0 float-md-right">
                             <a href="/admin/certificados/crear" class="btn btn-success btn-label waves-effect waves-light rounded-pill">
-                                <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar certificado
+                                <i class="ri-add-circle-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Agregar Certificado
                             </a>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Vista previa de la imagen</th>
+                                    <th>Previsualización de la imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -74,7 +74,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Vista previa de la imagen</th>
+                                    <th>Previsualización de la imagen</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>
