@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Models\EmailModel;
 use App\Models\UserModel;
-use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
 use App\Utils\TokenGenerator;
 use App\Validation\ContactEmailValidation;
@@ -148,15 +147,7 @@ class CtrlEmail extends BaseController
 
             $userName = $user['userFirstName'] . ' ' . $user['userLastName'];
 
-            $tokenData = [
-                'userToken'       => TokenGenerator::generateToken(),
-                'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
-                'userId'          => $user['userId'],
-            ];
-            $userTokenModel = new UserTokenModel();
-            $userTokenModel->insert($tokenData);
-
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => $tokenData['userToken']]);
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => TokenGenerator::generateToken($user['userId'])]);
 
             if (! $isSend) {
                 throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');

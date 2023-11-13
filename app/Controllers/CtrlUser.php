@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
-use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
 use App\Utils\TokenGenerator;
 use App\Validation\UserValidation;
@@ -36,27 +35,27 @@ class CtrlUser extends BaseController
     public function createUser()
     {
         $validateUser = new UserValidation();
-        $POST         = $this->request->getPost();
+        $userData     = $this->request->getPost();
 
         try {
-            if (! $validateUser->validateInputs($POST)) {
+            if (! $validateUser->validateInputs($userData)) {
                 throw new Exception();
             }
 
             $userModel = new UserModel();
-            $user      = $userModel->where('userEmail', $POST['userEmail'])->first();
+            $user      = $userModel->where('userEmail', $userData['userEmail'])->first();
             $validateUser->existUserEmail($user);
-            $POST['confirmed'] = 0;
-            $POST['isAdmin']   = 0;
+            $userData['confirmed'] = 0;
+            $userData['isAdmin']   = 0;
 
-            $newUserToken = $this->newToken($userModel->insert($POST));
+            $userId = $userModel->insert($userData);
 
-            $POST['userToken'] = $newUserToken;
+            $userData['userToken'] = TokenGenerator::generateToken($userId);
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $userData['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $userData);
 
             if (! $isSend) {
-                $userModel->where('userEmail', $POST['userEmail'])->delete();
+                $userModel->where('userEmail', $userData['userEmail'])->delete();
 
                 throw new Exception('Algo salio mal al crear el usuario. Por favor, inténtalo de nuevo.');
             }
@@ -105,7 +104,7 @@ class CtrlUser extends BaseController
                 $user = $userModel->where('userEmail', $POST['userEmail'])->first();
                 $validateUser->existUserEmail($user);
 
-                $newUserToken = $this->newToken($id);
+                $newUserToken = TokenGenerator::generateToken($id);
 
                 $POST['confirmed']    = 0;
                 $POST['userPassword'] = null;
@@ -169,19 +168,5 @@ class CtrlUser extends BaseController
         }
 
         return redirect()->back()->with('response', $response);
-    }
-
-    private function newToken($userId)
-    {
-        $tokenData = [
-            'userToken'       => TokenGenerator::generateToken(),
-            'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
-            'userId'          => $userId,
-        ];
-
-        $userTokenModel = new UserTokenModel();
-        $userTokenModel->insert($tokenData);
-
-        return $tokenData['userToken'];
     }
 }
