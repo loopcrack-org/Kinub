@@ -55,13 +55,13 @@ class CtrlCertificate extends BaseController
         if ($isUpdated) {
             $response = [
                 'title'   => 'Edición exitosa',
-                'message' => 'Se ha creado el certificado correctamente',
+                'message' => 'Se ha editado el certificado correctamente',
                 'type'    => 'success',
             ];
         } else {
             $response = [
-                'title'   => 'Creación fallida',
-                'message' => 'No se pudo realizar crear el certificado',
+                'title'   => 'Edición fallida',
+                'message' => 'No se pudo realizar la edición del certificado',
                 'type'    => 'error',
             ];
         }
