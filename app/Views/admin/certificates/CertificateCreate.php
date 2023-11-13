@@ -19,7 +19,7 @@
         <div class="row justify-content-center">
             <div class="col-sm-11">
                 <div class="d-flex justify-content-start align-items-center mb-3">
-                    <a href="/admin/soluciones" class="btn btn-primary btn-label waves-effect waves-light rounded-pill">
+                    <a href="/admin/certificados" class="btn btn-primary btn-label waves-effect waves-light rounded-pill">
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
