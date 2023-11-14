@@ -58,7 +58,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-between">
-                                                <a href="#" class="btn btn-warning btn-icon waves-effect waves-light" style="width: 100%; margin-bottom:10px;"><i class="mdi mdi-email-search-outline ri-lg"></i></a>
+                                                <a href="/admin/emails/ver/<?= $email['emailId']; ?>" class="btn btn-warning btn-icon waves-effect waves-light" style="width: 100%; margin-bottom:10px;"><i class="mdi mdi-email-search-outline ri-lg"></i></a>
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" style="width: 100%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
