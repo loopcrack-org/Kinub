@@ -4,6 +4,7 @@ namespace App\Utils;
 
 use CodeIgniter\Files\File;
 use Exception;
+use InvalidArgumentException;
 use Throwable;
 
 /**
@@ -16,7 +17,7 @@ class FileManager
      *
      * @return string
      */
-    public static function getFolderId()
+    public static function generateFolderId()
     {
         return md5(uniqid(mt_rand(), true));
     }
@@ -85,7 +86,12 @@ class FileManager
     public static function changeDirectoryFolder(string $sourcePath, string $destPath)
     {
         try {
-            rename($sourcePath, $destPath);
+            self::verifyDirectory($sourcePath, 'directorio fuente');
+            self::verifyDirectory($destPath, 'directorio destino');
+
+            if (! rename($sourcePath, $destPath)) {
+                throw new Exception('Ocurrió un error al mover la carpeta');
+            }
         } catch (Throwable $th) {
             throw new Exception('La carpeta no existe o ha ocurrido un error al moverla');
         }
@@ -104,10 +110,16 @@ class FileManager
             foreach ($keys as $key) {
                 $outputFolder = FILES_UPLOAD_DIRECTORY . $key;
                 $sourceFolder = FILES_TEMP_DIRECTORY . $key;
-                rename($sourceFolder, $outputFolder);
+
+                self::verifyDirectory($sourceFolder, 'directorio fuente');
+                self::verifyDirectory($outputFolder, 'directorio destino');
+
+                if (! rename($sourceFolder, $outputFolder)) {
+                    throw new Exception('Ocurrió un error al mover la carpeta');
+                }
             }
         } catch (Throwable $th) {
-            throw new Exception('Error al mover los archivos');
+            throw new Exception($th->getMessage());
         }
     }
 
@@ -131,6 +143,19 @@ class FileManager
             }
         } catch (Throwable $th) {
             throw new Exception('Ha ocurrido un error al eliminar la carpeta con su contenido');
+        }
+    }
+
+    /**
+     * Verify if a path exists or not and manage an exception if it doesn´t exist
+     *
+     * @param mixed $path
+     * @param mixed $directoryType
+     */
+    public static function verifyDirectory(string $path, string $directoryType)
+    {
+        if (! is_dir($path)) {
+            throw new InvalidArgumentException("El {$directoryType} [{$path}] no existe o no es una carpeta.");
         }
     }
 }

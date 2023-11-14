@@ -7,6 +7,7 @@ use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlSolution;
+use App\Controllers\CtrlTestFiles;
 use App\Controllers\CtrlUser;
 use CodeIgniter\Router\RouteCollection;
 
@@ -99,6 +100,12 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlUser::class, 'viewUserEdit']);
         $routes->post('editar/(:num)', [CtrlUser::class, 'updateUser']);
         $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
+    });
+
+    $routes->group('testFiles', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('crear', [CtrlTestFiles::class, 'viewTestFilesCreate']);
+        generateFileApiRoutesByController($routes, CtrlTestFiles::class);
     });
 });
 /*

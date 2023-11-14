@@ -69,7 +69,7 @@ class CtrlApiFiles extends BaseController
         try {
             $inputName = $this->request->header('Input')->getValue();
             $file      = $this->request->getFiles()[$inputName][0] ?? null;
-            $key       = FileManager::getFolderId();
+            $key       = FileManager::generateFolderId();
             $folder    = FILES_TEMP_DIRECTORY . $key;
             FileManager::createFolder($folder);
 
