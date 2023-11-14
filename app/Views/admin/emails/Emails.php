@@ -24,6 +24,13 @@
                         <h5 class="card-title mb-2 mb-md-0">Tabla de Emails</h5>
                     </div>
 
+                    <?php
+                        if (session()->has('response')) {
+                            $response = session()->get('response');
+                            ?>
+                        <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                    <?php } ?>
+
                     <!-- card-header -->
                     <div class="card-body">
                         <table id="emails-table" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
@@ -58,8 +65,8 @@
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-between">
-                                                <a href="#" class="btn btn-warning btn-icon waves-effect waves-light" style="width: 100%; margin-bottom:10px;"><i class="mdi mdi-email-search-outline ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" style="width: 100%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                <a href="#" class="btn btn-warning btn-icon waves-effect waves-light w-100 mb-2"><i class="mdi mdi-email-search-outline ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light w-100" data-bs-toggle="modal" data-bs-target="#deleteEmailsModal" data-id=<?= $email['emailId']?>><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -80,6 +87,8 @@
                     <!-- card-body -->
                 </div>
                 <!-- card -->
+
+                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteEmailsModal', 'message' => 'Eliminar el email resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer.', 'action' => '/admin/emails/borrar', 'inputName' => 'emailId']); ?>
             </div>
             <!-- col -->
         </div>
@@ -99,4 +108,6 @@
 
 <script src="/assets/admin/js/datatables-general-config.min.js"></script>
 <script src="/assets/admin/js/email.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="/assets/admin/js/deleteElement.min.js"></script>
 <?= $this->endSection() ?>
