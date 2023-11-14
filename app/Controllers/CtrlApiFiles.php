@@ -83,6 +83,26 @@ class CtrlApiFiles extends BaseController
         }
     }
 
+    public function processTemporalFileByChunks()
+    {
+        try {
+            $key        = $this->request->getGet('patch');
+            $fileName   = $this->request->header('Upload-Name')->getValue();
+            $fileLength = $this->request->header('Upload-Length')->getValue();
+            $fileData   = $this->request->getBody();
+            $offset     = $this->request->header('Upload-Offset')->getValue();
+
+            $folder  = FILES_TEMP_DIRECTORY . $key;
+            $fileTmp = "{$folder}/{$fileName}";
+
+            $temporalFileLength = FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
+
+            return $this->response->setStatusCode(204);
+        } catch (Throwable $th) {
+            return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
+        }
+    }
+
     /**
      * Delete a file
      *

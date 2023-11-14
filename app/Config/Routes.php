@@ -129,6 +129,7 @@ if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
 function generateFileApiRoutesByController(RouteCollection $routes, string $controller)
 {
     $routes->post('process', [$controller, 'processTemporalFile']);
+    $routes->patch('process', [$controller, 'processTemporalFileByChunks']);
     $routes->get('restore', [$controller, 'restoreTemporalFile']);
     $routes->get('load', [$controller, 'getFileFromServer']);
     $routes->delete('delete', [$controller, 'deleteTemporalFile']);
