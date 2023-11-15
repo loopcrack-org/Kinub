@@ -58,7 +58,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img class="mw-100" src="<?= $certificate['fileRoute']; ?>" alt="Imagen del certificado " . <?= $certificate['certificateId']; ?> height="150">
+                                                <img class="mw-100 object-fit-contain" src="<?= $certificate['fileRoute']; ?>" alt="Imagen del certificado " . <?= $certificate['certificateId']; ?> height="150">
                                             </div>
                                         </td>
                                         <td>
