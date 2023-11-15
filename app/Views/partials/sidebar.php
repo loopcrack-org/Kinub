@@ -44,6 +44,11 @@
                     </a>
                 </li>
                 <li class="nav-item mt-2">
+                    <a class="nav-link menu-link" href="/admin/nosotros" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
+                        <i data-feather="users" class="icon-dual"></i> <span>Sobre Nosotros</span>
+                    </a>
+                </li>
+                <li class="nav-item mt-2">
                     <a class="nav-link menu-link" href="/admin/soluciones" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
                         <i data-feather="tool" class="icon-dual"></i> <span>Soluciones de Medición</span>
                     </a>
@@ -75,12 +80,12 @@
 
                 <?php
                 $user = session()->get('user');
-                if ($user['admin'] == 1) : ?>
-                    <li class="nav-item mt-2">
-                        <a class="nav-link menu-link" href="/admin/usuarios" role="button" aria-expanded="false" aria-controls="sidebarAuth">
-                            <i data-feather="user" class="icon-dual"></i> <span>Usuarios</span>
-                        </a>
-                    </li>
+                if ($user['admin'] === '1') : ?>
+                <li class="nav-item mt-2">
+                    <a class="nav-link menu-link" href="/admin/usuarios" role="button" aria-expanded="false" aria-controls="sidebarAuth">
+                        <i data-feather="user" class="icon-dual"></i> <span>Usuarios</span>
+                    </a>
+                </li>
                 <?php endif ?>
 
             </ul>
