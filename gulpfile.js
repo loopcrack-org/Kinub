@@ -2,6 +2,7 @@ const { src, dest, watch, parallel, task } = require("gulp");
 const rename = require("gulp-rename");
 const { basename, extname } = require("path");
 const plumber = require("gulp-plumber");
+const { exec } = require("child_process");
 
 //Css
 const sass = require("gulp-sass")(require("sass"));
@@ -19,6 +20,9 @@ const named = require("vinyl-named");
 const imagemin = require("gulp-imagemin");
 const webp = require("gulp-webp");
 const avif = require("gulp-avif");
+
+//Node cron
+const cron = require("node-cron");
 
 //BrowserSync
 const browserSync = require("browser-sync").create();
@@ -185,6 +189,19 @@ function runMode(mode, production = false) {
   };
 }
 
+function runCronJob() {
+  cron.schedule("0 3 * * *", () => {
+    const rutaScriptPhp = "./TemporaryFilesGarbageCollector.php"; // Reemplaza con la ruta correcta a tu script PHP
+
+    exec(`php ${rutaScriptPhp}`, (error, stdout, stderr) => {
+      if (error) {
+        console.error(`Error al ejecutar el script PHP: ${error.message}`);
+        return;
+      }
+    });
+  });
+}
+
 function compileImages() {
   const { input, output } = getPaths();
   return async function images() {
@@ -195,15 +212,22 @@ function compileImages() {
 }
 
 modes.forEach((mode) => {
-  task(`dev:${mode}`, parallel(serve, runMode(mode)));
+  task(`dev:${mode}`, parallel(serve, runCronJob, runMode(mode)));
 });
 
 task(
   "dev:all",
   parallel(
     serve,
+    runCronJob,
     modes.map((mode) => runMode(mode))
   )
 );
-task("build", parallel(modes.map((mode) => runMode(mode, true))));
+task(
+  "build",
+  parallel(
+    modes.map((mode) => runMode(mode, true)),
+    runCronJob
+  )
+);
 task("images", compileImages());

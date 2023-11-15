@@ -17,7 +17,7 @@ class CtrlTestFiles extends CtrlApiFiles
     public function __construct()
     {
         $configBuilder = new FileValidationConfigBuilder("/admin/testFiles");
-        $configBuilder->builder('image')->maxFiles(2)->minSize(500, "KB")->maxSize(1, "MB")->allowMultipleFiles()->isImage()->maxDims(200, 200)->build();
+        $configBuilder->builder('image')->maxFiles(2)->minSize(500, "KB")->maxSize(2, "MB")->allowMultipleFiles()->isImage()->maxDims(200, 200)->build();
         $configBuilder->builder('video')->maxFiles(2)->allowMultipleFiles()->isVideo()->build();
         $configBuilder->builder('icon')->maxFiles(2)->maxDims(200, 200)->isSVG()->allowMultipleFiles()->build();
         $configBuilder->builder('datasheet')->maxFiles(2)->allowMultipleFiles()->isPDF()->build();
