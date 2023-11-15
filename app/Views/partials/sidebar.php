@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="navbar-brand-box mt-2">
         <!-- Dark Logo-->
-        <a href="/admin" class="logo logo-dark">
+        <a href="/" class="logo logo-dark">
             <span class="logo-sm">
                 <img class="w-50" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="">
             </span>
@@ -15,7 +15,7 @@
             </span>
         </a>
         <!-- Light Logo-->
-        <a href="/admin" class="logo logo-light text-white">
+        <a href="/" class="logo logo-light text-white">
             <span class="logo-sm">
                 <img class="bg-white px-1 py-2 w-50 rounded-circle" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="">
             </span>
@@ -40,7 +40,7 @@
             <ul class="navbar-nav mt-3" id="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="/admin" role="button" aria-expanded="false" aria-controls="sidebarLayouts">
-                        <i data-feather="home" class="icon-dual"></i> <span>Página pública</span>
+                        <i data-feather="monitor" class="icon-dual"></i> <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item mt-2">
