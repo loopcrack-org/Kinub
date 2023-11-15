@@ -26,7 +26,7 @@ class CtrlAdminEmail extends BaseController
         } else {
             $response = [
                 'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la eliminación del email',
+                'message' => 'Algo salio mal al eliminar el email. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
         }
