@@ -25,8 +25,8 @@
                     </div>
 
                     <!-- card-header -->
-                    <div class="card-body d-flex overflow justify-content-center m-3 overflow-hidden">
-                        <iframe width="500" height="550" frameborder="0" srcdoc="<?= $email['emailContent']; ?>">
+                    <div class="card-body d-flex justify-content-center p-0">
+                        <iframe class="w-100" style="min-height:60dvh; max-height:100dvh" sandbox frameborder="0" srcdoc="<?= $email['emailContent']; ?>">
                         </iframe>
                     </div>
                     <!-- card-body -->
