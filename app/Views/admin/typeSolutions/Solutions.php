@@ -47,66 +47,23 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php foreach ($measurementSolutions as $measurementSolution) { ?>
                                 <tr>
-                                    <td>1</td>
+                                    <td><?= $measurementSolution['msId'] ?></td>
                                     <td>
                                         <div class="d-flex align-items-center fw-medium">
-                                            <p>Medidores Residenciales</p>
+                                            <p><?= $measurementSolution['msName'] ?></p>
                                         </div>
                                     </td>
-                                    <td>Icono.jpeg</td>
+                                    <td> <img class="mw-100 object-fit-contain" src="<?= $measurementSolution['fileRoute'] ?>" alt="Measurement Solution Icon"></td>
                                     <td>
                                         <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="/admin/soluciones/editar/<?= $measurementSolution['msId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
                                             <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteSolutionsModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Medidores Industriales</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteSolutionsModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Medición Remota</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteSolutionsModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>
-                                        <div class="d-flex align-items-center fw-medium">
-                                            <p>Calidad del agua</p>
-                                        </div>
-                                    </td>
-                                    <td>Icono.jpeg</td>
-                                    <td>
-                                        <div class="d-flex justify-content-between">
-                                            <a href="#" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteSolutionsModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <?php } ?>
                             </tbody>
                             <tfoot>
                                 <tr>
