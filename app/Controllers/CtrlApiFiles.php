@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Utils\FileManager;
+use CodeIgniter\HTTP\Response;
 use Throwable;
 
 class CtrlApiFiles extends BaseController
@@ -23,9 +24,9 @@ class CtrlApiFiles extends BaseController
             // here you get the file route on database with the fileKey;
             $fileRoute = FILES_UPLOAD_DIRECTORY . "/{$fileKey}/foto.png"; // example
 
-            return $this->response->setStatusCode(200)->download($fileRoute['fileRoute'], null, true);
+            return $this->response->setStatusCode(Response::HTTP_OK)->download($fileRoute['fileRoute'], null, true);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(404, 'No se ha podido encontrar el archivo');
+            return $this->response->setStatusCode(Response::HTTP_NOT_FOUND, 'No se ha podido encontrar el archivo');
         }
     }
 
@@ -45,9 +46,9 @@ class CtrlApiFiles extends BaseController
             $folder = FILES_TEMP_DIRECTORY . $key;
             $file   = FileManager::getFileFromFolder($folder)[0];
 
-            return $this->response->setStatusCode(200)->download($file, null, true);
+            return $this->response->setStatusCode(Response::HTTP_OK)->download($file, null, true);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(404, 'No se ha podido encontrar el archivo');
+            return $this->response->setStatusCode(Response::HTTP_NOT_FOUND, 'No se ha podido encontrar el archivo');
         }
     }
 
@@ -77,9 +78,9 @@ class CtrlApiFiles extends BaseController
                 FileManager::moveClientFileToServer($file, $folder);
             }
 
-            return $this->response->setStatusCode(201)->setJSON(['key' => $key]);
+            return $this->response->setStatusCode(Response::HTTP_OK)->setJSON(['key' => $key]);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
     }
 
@@ -97,9 +98,9 @@ class CtrlApiFiles extends BaseController
 
             $temporalFileLength = FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
 
-            return $this->response->setStatusCode(204);
+            return $this->response->setStatusCode(Response::HTTP_OK);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(500, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
     }
 
@@ -119,9 +120,9 @@ class CtrlApiFiles extends BaseController
             $folder = FILES_TEMP_DIRECTORY . $key;
             FileManager::deleteFolderWithContent($folder);
 
-            return $this->response->setStatusCode(201);
+            return $this->response->setStatusCode(Response::HTTP_OK);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(500, $th->getMessage());
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, $th->getMessage());
         }
     }
 }
