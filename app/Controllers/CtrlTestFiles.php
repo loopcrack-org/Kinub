@@ -15,6 +15,8 @@ class CtrlTestFiles extends CtrlApiFiles
             'acceptedFileTypes'                  => ['image/jpg', 'image/png', 'image/jpeg'],
             'fileValidateTypeLabelExpectedTypes' => 'Selecciona sólo archivos con la extensión .jpg, .jpeg o .png',
             'labelFileTypeNotAllowed'            => 'Archivo no válido',
+            'chunkUploads'                       => true,
+            'chunkSize'                          => 100000,
             'allowMultiple'                      => true,
             'maxFiles'                           => 3,
             'minFiles'                           => 2,

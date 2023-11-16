@@ -124,6 +124,33 @@ class FileManager
     }
 
     /**
+     * Merge data into a file
+     *
+     * @param string $filePath   the path to the file
+     * @param string $fileData   the binary data
+     * @param string $fileOffset The position in bytes, from where the data will be added
+     *
+     * @throws Exception If an error occurs while adding the data to the file
+     */
+    public static function mergeChunckFiles(string $filePath, string $fileData, string $fileOffset)
+    {
+        try {
+            if (! file_exists($filePath)) {
+                file_put_contents($filePath, '');
+            }
+
+            $fileOpen = fopen($filePath, 'r+b');
+            fseek($fileOpen, $fileOffset);
+            fwrite($fileOpen, $fileData);
+            fclose($fileOpen);
+
+            return filesize($filePath);
+        } catch (Throwable $th) {
+            throw new Exception('Ha ocurrido un error al procesar el archivo por partes');
+        }
+    }
+
+    /**
      * Delete a folder and its content.
      *
      * @param string $folderPath Path of the folder to delete.
