@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\CtrlAdminEmail;
 use App\Controllers\CtrlCategory;
+use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlLogin;
@@ -90,6 +91,16 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
+    });
+
+    $routes->group('certificados', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlCertificate::class, 'viewCertificates']);
+        $routes->get('crear', [CtrlCertificate::class, 'viewCertificateCreate']);
+        $routes->post('crear', [CtrlCertificate::class, 'createCertificate']);
+        $routes->get('editar/(:num)', [CtrlCertificate::class, 'viewCertificateEdit']);
+        $routes->post('editar/(:num)', [CtrlCertificate::class, 'updateCertificate']);
+        $routes->post('borrar', [CtrlCertificate::class, 'deleteCertificate']);
     });
 
     $routes->group('emails', static function ($routes) {
