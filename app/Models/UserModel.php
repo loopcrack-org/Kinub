@@ -6,24 +6,23 @@ use CodeIgniter\Model;
 
 class UserModel extends Model
 {
-    protected $table = 'users';
-    protected $primaryKey = 'userId';
+    protected $table         = 'users';
+    protected $primaryKey    = 'userId';
     protected $allowedFields = [
-        "userFirstName",
-        "userLastName",
-        "userEmail",
-        "userPassword",
-        "userToken",
-        "confirmed",
-        "isAdmin"
+        'userFirstName',
+        'userLastName',
+        'userEmail',
+        'userPassword',
+        'confirmed',
+        'isAdmin',
     ];
 
     // Callbacks
-    protected $beforeUpdate = ["hashPassword"];
+    protected $beforeUpdate = ['hashPassword'];
 
     protected function hashPassword(array $data)
     {
-        if (!isset($data['data']['userPassword'])) {
+        if (! isset($data['data']['userPassword'])) {
             return $data;
         }
 
