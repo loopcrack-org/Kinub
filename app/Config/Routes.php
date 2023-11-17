@@ -106,6 +106,7 @@ $routes->group('admin', static function ($routes) {
     $routes->group('emails', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlAdminEmail::class, 'viewEmails']);
+        $routes->get('ver/(:num)', [CtrlAdminEmail::class, 'viewSpecificEmails']);
         $routes->post('borrar', [CtrlAdminEmail::class, 'deleteEmail']);
     });
 

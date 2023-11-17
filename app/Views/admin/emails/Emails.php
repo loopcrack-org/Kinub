@@ -65,7 +65,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-between">
-                                                <a href="#" class="btn btn-warning btn-icon waves-effect waves-light w-100 mb-2"><i class="mdi mdi-email-search-outline ri-lg"></i></a>
+                                                <a href="/admin/emails/ver/<?= $email['emailId']; ?>" class="btn btn-warning btn-icon waves-effect waves-light w-100 mb-2"><i class="mdi mdi-email-search-outline ri-lg"></i></a>
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light w-100" data-bs-toggle="modal" data-bs-target="#deleteEmailsModal" data-id=<?= $email['emailId']?>><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
