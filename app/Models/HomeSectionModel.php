@@ -22,11 +22,11 @@ class HomeSectionModel extends Model
             $this->save($homeSectionData);
 
             if (isset($homeSectionData['delete-aboutUsImage'])) {
-                $fileModel->where('uuid', $homeSectionData['delete-aboutUsImage']);
+                $fileModel->where('uuid', $homeSectionData['delete-aboutUsImage'])->delete();
             }
 
             if (isset($homeSectionData['delete-aboutUsVideo'])) {
-                $fileModel->where('uuid', $homeSectionData['delete-aboutUsImage']);
+                $fileModel->where('uuid', $homeSectionData['delete-aboutUsImage'])->delete();
             }
 
             $this->db->transComplete();
