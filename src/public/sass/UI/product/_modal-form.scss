@@ -4,26 +4,28 @@
 .modal-form {
   display: flex;
   width: 100%;
-  max-width: 70%;
   flex-direction: column;
-  align-items: center;
-  margin: 3rem auto;
+  align-items: flex-end;
+  margin: 0 auto;
 
   &__title {
+    margin: 0 auto;
+    margin-bottom: 2rem;
     color: v.$blue;
     font-size: 1.5rem;
     line-height: 1;
     white-space: nowrap;
 
-    @include m.tablet {
-      font-size: 2.5rem;
+    @include m.phoneXL {
+      font-size: 1.9rem;
     }
     &--big {
       display: block;
       font-size: 2.5rem;
+      font-weight: bold;
 
-      @include m.tablet {
-        font-size: 4rem;
+      @include m.phoneXL {
+        font-size: 3rem;
       }
     }
   }
@@ -33,29 +35,22 @@
     flex-direction: column;
   }
   &__label {
-    margin-bottom: 1rem;
-    color: v.$aqua-blue;
-    font-size: 2rem;
-
-    @include m.tablet {
-      font-size: 2.5rem;
-    }
+    margin-bottom: 0.5rem;
+    color: v.$teal-blue;
+    font-size: 1.8rem;
+    font-weight: bold;
   }
   &__input,
   &__textarea {
-    padding: 0.5rem 0;
-    border: 0.2rem solid v.$aqua-blue;
+    padding: 1rem;
+    border: 0.1rem solid v.$teal-blue;
     border-radius: 1rem;
     margin-bottom: 2rem;
-    color: v.$blue;
-    font-size: 1.8rem;
-    font-weight: bold;
+    background-color: v.$white;
+    font-size: 1.6rem;
     resize: none;
-    text-align: center;
+    transition: border-color 300ms ease;
 
-    @include m.tablet {
-      font-size: 2.5rem;
-    }
     &:focus {
       border-color: v.$sky-blue;
       outline: none;
@@ -63,47 +58,71 @@
     &::placeholder {
       color: v.$gray;
     }
-  }
-  &__product {
-    height: 5rem;
-    padding: 3rem 0;
-    border: 0.2rem solid v.$aqua-blue;
-    border-radius: 1rem;
-    margin-bottom: 2rem;
-    color: v.$blue;
-    font-size: 1.8rem;
-    font-weight: bold;
-    text-align: center;
+    &--product {
+      padding: 0.8rem 1rem;
+      color: v.$blue;
+      cursor: not-allowed;
+      font-weight: bold;
+      text-align: center;
 
-    @include m.tablet {
-      font-size: 2.5rem;
-    }
-    &:focus {
-      border-color: v.$sky-blue;
-      outline: none;
+      @include m.phoneXL {
+        font-size: 2rem;
+      }
     }
   }
   &__submit {
-    padding: 0.5rem 3rem;
+    padding: 0.5rem 3.5rem;
     border: none;
-    border-radius: 1.5rem;
-    background-color: v.$aqua-blue;
+    border-radius: 10rem;
+    background-color: v.$teal-blue;
     color: v.$white;
-    cursor: pointer;
     font-size: 2rem;
+    font-style: italic;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: background-color 300ms ease;
 
-    @include m.tablet {
-      font-size: 2.3rem;
+    &:hover {
+      cursor: pointer;
     }
   }
 }
-.custom-modal-box-size {
+.custom-modal-form {
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  background-color: rgb(1 1 1 / 0.3);
+  cursor: auto;
+
+  .tingle-modal {
+    &__close {
+      visibility: hidden;
+
+      @media (max-width: 540px) {
+        background-color: v.$teal-blue;
+        visibility: visible;
+      }
+    }
+  }
   .tingle-modal-box {
     width: 100%;
-    max-width: 70rem;
+    max-width: 50rem;
+    border: 0.1rem solid v.$teal-blue;
+    border-radius: 2.5rem;
+    -webkit-box-shadow: 0px 0px 25px 8px rgba(0, 0, 0, 0.51);
+    -moz-box-shadow: 0px 0px 25px 8px rgba(0, 0, 0, 0.51);
+    box-shadow: 0px 0px 25px 8px rgba(0, 0, 0, 0.51);
 
-    &__footer {
-      text-align: right;
+    @media (max-width: 540px) {
+      max-width: 100%;
+      border-radius: 0;
+    }
+    &__content {
+      overflow: hidden;
+      padding: 2rem;
+
+      @media (max-width: 540px) {
+        padding: 2rem 1rem;
+      }
     }
   }
 }

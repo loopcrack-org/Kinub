@@ -49,32 +49,26 @@ sections.forEach((section, index) => {
 });
 
 const modal = new Tingle.modal({
-  footer: true,
+  footer: false,
   stickyFooter: false,
   closeMethods: ['overlay', 'button', 'escape'],
-  closeLabel: 'Close',
-  cssClass: ['custom-modal-box-size'],
-  onOpen: function () {
-    console.log('modal open');
-  },
-  onClose: function () {
-    console.log('modal closed');
-  },
+  closeLabel: 'Cerrar',
+  cssClass: ['custom-modal-form'],
   beforeClose: function () {
     return true;
   },
 });
 
-const modalFormContent = document.querySelector('#modal-form');
-modal.setContent(modalFormContent.innerHTML);
-
+const modalForm = document.querySelector('#modal-form');
+const clonedForm = modalForm.cloneNode(true);
 const modalBtn = document.querySelector('#modal-form-btn');
+
+modal.setContent(clonedForm);
 
 modalBtn.addEventListener('click', function () {
   modal.open();
 });
 
-modal.addFooterBtn('Enviar', 'modal-form__submit', function () {
-  modalFormContent.submit();
+clonedForm.addEventListener('submit', function () {
   modal.close();
 });

@@ -57,12 +57,16 @@
     </div>
 </main>
 
-<div style="display: none;">
+<div hidden>
     <form class="modal-form" id="modal-form" method="POST">
         <h2 class="modal-form__title"><span class="modal-form__title--big">Contáctanos</span> para más información</h2>
 
         <div class="modal-form__field">
-            <input class="modal-form__product" type="text" name="product" value="Medidor de nivel de radar 80G">
+            <input class="modal-form__input modal-form__input--product" type="text" name="product" value="Medidor de nivel de radar 80G" disabled>
+        </div>
+
+        <div class="modal-form__field">
+            <input class="modal-form__input" type="text" id="model" name="model" value="" hidden>
         </div>
 
         <div class="modal-form__field">
@@ -84,6 +88,8 @@
             <label class="modal-form__label" for="name">Mensaje</label>
             <textarea class="modal-form__textarea" id="message" name="message" rows="5"></textarea>
         </div>
+
+        <input type="submit" class="modal-form__submit" id="modal-form-submit" value="Enviar">
     </form>
 </div>
 
