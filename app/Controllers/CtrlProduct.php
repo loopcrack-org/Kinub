@@ -38,6 +38,21 @@ class CtrlProduct extends BaseController
 
     public function deleteProduct()
     {
-        return 'delete product ...';
+        $isDeleted = true;
+        if ($isDeleted) {
+            $response = [
+                'title'   => 'Eliminación exitosa',
+                'message' => 'Se ha elimnado el producto correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Eliminación fallida',
+                'message' => 'Algo salio mal al eliminar el producto. Por favor, inténtalo de nuevo.',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->back()->with('response', $response);
     }
 }
