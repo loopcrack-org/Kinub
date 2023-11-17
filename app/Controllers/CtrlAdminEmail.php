@@ -20,7 +20,7 @@ class CtrlAdminEmail extends BaseController
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',
-                'message' => 'Se ha elimnado el email correctamente',
+                'message' => 'Se ha eliminado el email correctamente',
                 'type'    => 'success',
             ];
         } else {
