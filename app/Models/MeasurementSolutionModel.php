@@ -6,8 +6,8 @@ use CodeIgniter\Model;
 
 class MeasurementSolutionModel extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'type_solutions';
-    protected $primaryKey       = 'msId';
-    protected $allowedFields    = ["msName", "msDescription", "msImageId", "msIconId"];
+    protected $DBGroup       = 'default';
+    protected $table         = 'measurement_solutions';
+    protected $primaryKey    = 'msId';
+    protected $allowedFields = ['msName', 'msDescription', 'msImageId', 'msIconId'];
 }
