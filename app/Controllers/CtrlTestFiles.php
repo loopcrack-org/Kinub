@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Classes\FileValidationConfig;
 use App\Classes\FileValidationConfigBuilder;
+use App\Libraries\tinify\Tinify;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
@@ -17,7 +18,7 @@ class CtrlTestFiles extends CtrlApiFiles
     public function __construct()
     {
         $configBuilder = new FileValidationConfigBuilder("/admin/testFiles");
-        $configBuilder->builder('image')->maxFiles(2)->minSize(500, "KB")->maxSize(2, "MB")->allowMultipleFiles()->isImage()->maxDims(200, 200)->build();
+        $configBuilder->builder('image')->maxFiles(3)->minSize(10, "KB")->maxSize(2, "MB")->allowMultipleFiles()->isImage()->build();
         $configBuilder->builder('video')->maxFiles(2)->allowMultipleFiles()->isVideo()->build();
         $configBuilder->builder('icon')->maxFiles(2)->maxDims(200, 200)->isSVG()->allowMultipleFiles()->build();
         $configBuilder->builder('datasheet')->maxFiles(2)->allowMultipleFiles()->isPDF()->build();
@@ -58,6 +59,9 @@ class CtrlTestFiles extends CtrlApiFiles
                 if (!empty($files)) {
                     $testFileModel->saveFiles($files, $testId, $inputName);
                     FileManager::changeDirectoryCollectionFolder($files);
+                    if($inputName === "image") {
+                        $result = Tinify::convertImages($files);
+                    }
                 }
             }
 
