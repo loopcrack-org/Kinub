@@ -3,7 +3,6 @@
 namespace App\Libraries\fileValidation;
 
 use CodeIgniter\Files\File;
-use Config\Mimes;
 
 class FileRules
 {
@@ -50,28 +49,6 @@ class FileRules
     }
 
     /**
-     * Uses the mime config file to determine if a file is considered an "image",
-     * which for our purposes basically means that it's a raster image or svg.
-     *
-     * @param File  $file   the instance of file
-     * @param mixed $params params passed through validation rules
-     */
-    public function isImage(File $file, $params)
-    {
-        $params = explode(',', $params);
-
-        if ($file === null) {
-            return false;
-        }
-
-        // We know that our mimes list always has the first mime
-        // start with `image` even when then are multiple accepted types.
-        $type = Mimes::guessTypeFromExtension($file->getExtension()) ?? '';
-
-        return ! (mb_strpos($type, 'image') !== 0);
-    }
-
-    /**
      * Checks to see if an uploaded file's mime type matches one in the parameter.
      *
      * @param File  $file   the instance of file
@@ -86,23 +63,6 @@ class FileRules
         }
 
         return ! (! in_array($file->getMimeType(), $params, true));
-    }
-
-    /**
-     * Checks to see if an uploaded file's extension matches one in the parameter.
-     *
-     * @param File  $file   the instance of file
-     * @param mixed $params params passed through validation rules
-     */
-    public function extIn(File $file, $params)
-    {
-        $params = explode(',', $params);
-
-        if ($file === null) {
-            return false;
-        }
-
-        return ! (! in_array($file->guessExtension(), $params, true));
     }
 
     /**

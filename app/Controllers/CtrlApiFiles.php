@@ -91,7 +91,7 @@ class CtrlApiFiles extends BaseController
                     ]
                 );
                 $validation->run([$inputName => $file]);
-                if ($validation->hasError($inputName)) {
+                if (! $validation->hasError($inputName)) {
                     $error = $validation->getError($inputName);
 
                     throw new FileValidationException($error);
