@@ -42,7 +42,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Icono</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -55,7 +54,6 @@
                                             <p><?= $measurementSolution['msName'] ?></p>
                                         </div>
                                     </td>
-                                    <td> <img class="mw-100 object-fit-contain" src="<?= $measurementSolution['fileRoute'] ?>" alt="Measurement Solution Icon"></td>
                                     <td>
                                         <div class="d-flex justify-content-between">
                                             <a href="/admin/soluciones/editar/<?= $measurementSolution['msId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
@@ -69,7 +67,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Icono</th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

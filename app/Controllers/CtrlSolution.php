@@ -9,7 +9,7 @@ class CtrlSolution extends BaseController
     public function viewSolutions()
     {
         $measurementSolutionModel = new MeasurementSolutionModel();
-        $measurementSolutions     = $measurementSolutionModel->select('msId, msName, fileRoute')->join('files', 'files.fileId = measurement_solutions.msIconId')->findAll();
+        $measurementSolutions     = $measurementSolutionModel->findAll();
 
         return view('admin/typeSolutions/Solutions', ['measurementSolutions' => $measurementSolutions]);
     }
