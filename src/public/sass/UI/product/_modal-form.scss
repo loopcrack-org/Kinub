@@ -80,7 +80,6 @@
     font-style: italic;
     font-weight: bold;
     text-transform: capitalize;
-    transition: background-color 300ms ease;
 
     &:hover {
       cursor: pointer;
@@ -88,9 +87,8 @@
   }
 }
 .custom-modal-form {
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  background-color: rgb(1 1 1 / 0.3);
+  backdrop-filter: blur(1.5px);
+  background-color: transparent;
   cursor: auto;
 
   .tingle-modal {
@@ -108,9 +106,7 @@
     max-width: 50rem;
     border: 0.1rem solid v.$teal-blue;
     border-radius: 2.5rem;
-    -webkit-box-shadow: 0px 0px 25px 8px rgba(0, 0, 0, 0.51);
-    -moz-box-shadow: 0px 0px 25px 8px rgba(0, 0, 0, 0.51);
-    box-shadow: 0px 0px 25px 8px rgba(0, 0, 0, 0.51);
+    box-shadow: 5px 5px 12px 5px #00000082;
 
     @media (max-width: 540px) {
       max-width: 100%;
@@ -118,7 +114,7 @@
     }
     &__content {
       overflow: hidden;
-      padding: 2rem;
+      padding: 2rem 3rem;
 
       @media (max-width: 540px) {
         padding: 2rem 1rem;
