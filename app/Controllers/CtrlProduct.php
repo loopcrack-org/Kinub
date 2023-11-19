@@ -2,14 +2,14 @@
 
 namespace App\Controllers;
 
-use App\Models\ProductFilesModel;
+use App\Models\ProductModel;
 
 class CtrlProduct extends BaseController
 {
     public function viewProducts()
     {
-        $productFilesModel = new ProductFilesModel();
-        $products          = $productFilesModel->select('productId, productName, productModel, categoryName, fileRoute')->join('products', 'products.productId = product_files.pfProductId')->join('files', 'files.fileId = product_files.pfFileId')->join('categories', 'categories.categoryId = products.productCategoryId')->where('pfFileType', 'main image')->findAll();
+        $productModel = new ProductModel();
+        $products     = $productModel->getAllProducts();
 
         return view('admin/products/Products', [
             'products' => $products,
