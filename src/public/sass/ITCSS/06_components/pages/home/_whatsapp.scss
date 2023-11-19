@@ -1,0 +1,22 @@
+.btn-whatsapp {
+  position: fixed;
+  z-index: 1;
+  right: 2svw;
+  bottom: 4svh;
+  display: flex;
+  width: clamp(3rem, 9svmin, 10rem);
+  height: clamp(3rem, 9svmin, 10rem);
+
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 50%;
+  background-color: #25d366;
+  svg {
+    width: 58%;
+    aspect-ratio: 1 / 1;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

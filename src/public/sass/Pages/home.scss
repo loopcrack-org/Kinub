@@ -1,0 +1,57 @@
+/* ==========================================================================
+   #MAIN
+   ========================================================================== */
+
+/**
+ * TABLE OF CONTENTS
+ *
+ * 01. SETTINGS
+ * used with preprocessors and contain font, colors definitions, etc.
+ *
+ * 02. TOOLS
+ * globally used mixins and functions. It’s important not to output any CSS in the first 2 layers.
+ *
+ * 03. GENERIC
+ * reset and/or normalize styles, box-sizing definition, etc. This is the first layer which generates actual CSS.
+ *
+ * 04. ELEMENTS
+ * styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+ *
+ * 05. OBJECTS
+ * class-based selectors which define undecorated design patterns, for example media object known from OOCSS
+ *
+ * 06. COMPONENTS
+ * specific UI components. This is where majority of our work takes place and our UI components are often composed of Objects and Components
+ *
+ * 07. UTILITIES
+ * utilities and helper classes with ability to override anything which goes before in the triangle, eg. hide helper class
+ */
+
+/* #SETTINGS
+   ========================================================================== */
+@use '../ITCSS/01_settings/INDEX' as *;
+
+/* #TOOLS
+   ========================================================================== */
+@use '../ITCSS/02_tools/INDEX' as *;
+
+/* #GENERIC
+   ========================================================================== */
+@use '../ITCSS/03_generic/INDEX' as *;
+
+/* #ELEMENTS
+   ========================================================================== */
+@use '../ITCSS/04_elements/INDEX' as *;
+
+@use 'node_modules/plyr/dist/plyr.css';
+
+/* #OBJECTS
+   ========================================================================== */
+@use '../ITCSS/05_objects/INDEX' as *;
+
+/* #COMPONENTS
+   ========================================================================== */
+
+@use '../ITCSS/06_components/header/index' as *;
+@use '../ITCSS/06_components/pages/home/index' as *;
+@use '../ITCSS/06_components/footer' as *;

@@ -1,0 +1,43 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+/* ==========================================================================
+   #QUOTES
+   ========================================================================== */
+
+/* Inline */
+
+q {
+  font-style: italic;
+  quotes: '‘' '’' '“' '”';
+
+  &::after {
+    content: close-quote;
+  }
+
+  &::before {
+    content: open-quote;
+  }
+}
+
+/* Block */
+
+blockquote {
+  padding-left: $base-spacing-unit;
+  border-left: $base-border-width solid $color-brand;
+
+  q {
+    quotes: '‘' '’';
+  }
+
+  q::after {
+    content: close-quote;
+  }
+
+  q::before {
+    content: open-quote;
+  }
+
+  cite {
+    display: block;
+  }
+}

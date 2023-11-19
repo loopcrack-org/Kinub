@@ -1,0 +1,108 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../02_tools/mixins' as *;
+
+/* ==========================================================================
+   #PAGINATION
+   ========================================================================== */
+
+.c-pagination {
+  @include clearfix;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: $base-spacing-unit;
+
+  /* Meta */
+
+  .c-pagination__meta {
+    margin-right: $base-spacing-unit-small;
+    font-size: 0.875em;
+    vertical-align: middle;
+  }
+}
+
+/* Control */
+
+.c-pagination__control {
+  position: relative;
+  padding: $base-spacing-unit-xs $base-spacing-unit-small;
+  border: $base-border-width-small solid $color-gray-20;
+  background-color: $color-white;
+  color: $color-brand-secondary;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color 0.25s,
+    transform 0.25s;
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: $base-border-radius;
+    box-shadow: $base-box-shadow;
+    content: '';
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  &:focus,
+  &:hover {
+    color: $color-brand;
+    transform: translateY(-0.0625em);
+  }
+
+  &:focus::after,
+  &:hover::after {
+    opacity: 1;
+  }
+
+  /**
+   * Previous
+   */
+
+  &.c-pagination__control--prev {
+    border-bottom-left-radius: $base-border-radius;
+    border-top-left-radius: $base-border-radius;
+  }
+
+  /**
+   * Next
+   */
+
+  &.c-pagination__control--next {
+    border-left-width: 0;
+    border-bottom-right-radius: $base-border-radius;
+    border-top-right-radius: $base-border-radius;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  &:active::after {
+    opacity: 0;
+  }
+
+  /**
+   * Disabled
+   */
+
+  &.is-disabled {
+    color: $color-gray-20;
+  }
+
+  &.is-disabled:focus,
+  &.is-disabled:hover {
+    color: $color-gray-20;
+    transform: none;
+  }
+
+  &.is-disabled:focus::after {
+    opacity: 0;
+  }
+}

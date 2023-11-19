@@ -1,0 +1,115 @@
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.form {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  padding: 3rem;
+  border-radius: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  background-color: $color-white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: $color-black;
+  gap: 1.5rem;
+
+  &::before {
+    position: absolute;
+    top: -88rem;
+    left: 50%;
+    width: 100rem;
+    height: 100rem;
+    border-radius: 50%;
+    background-color: $color-bright-blue;
+    content: '';
+    translate: -50% 0;
+
+    @include tablet {
+      width: 150rem;
+    }
+  }
+
+  &__icon {
+    z-index: 10;
+    margin: 0 auto;
+  }
+
+  &__legend {
+    margin-top: 5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: capitalize;
+    @include fluid-text(3rem, 4rem);
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  &__label {
+    margin-left: 1rem;
+    @include fluid-text(1.7rem, 2rem);
+  }
+
+  &__input {
+    border-radius: 2.8rem;
+  }
+
+  &__textarea {
+    border-radius: 1.5rem;
+  }
+
+  &__input,
+  &__textarea {
+    padding: 1.5rem;
+    border: 0.2rem solid $color-gray-10;
+    background: transparent;
+    color: $color-black;
+    resize: none;
+    transition: border-color 200ms;
+
+    &:focus {
+      border-color: $color-bright-blue;
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $color-gray-80;
+    }
+  }
+
+  &__error {
+    margin-left: 1rem;
+    color: $color-error;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 0;
+  }
+
+  &__submit {
+    @include btn($color-white, $color-bright-blue, $color-white, $color-aqua-blue);
+    margin-top: 2rem;
+
+    @include tablet {
+      width: 40rem;
+      margin: 0 auto;
+    }
+  }
+}
+
+.swal2 {
+  &-popup {
+    zoom: 150%;
+  }
+  &-html-container {
+    zoom: 1.3;
+  }
+}

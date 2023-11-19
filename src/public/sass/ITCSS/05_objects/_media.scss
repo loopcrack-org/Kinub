@@ -1,0 +1,33 @@
+@use '../01_settings/global' as *;
+/* ==========================================================================
+   #MEDIA
+   ========================================================================== */
+
+/**
+ * The media object is an image to the left, with descriptive content to the right:
+ * http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code
+ */
+
+.o-media {
+  display: flex;
+}
+
+/* Body */
+
+.o-media__body {
+  flex: 1;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Image */
+
+.o-media__img {
+  margin-right: $base-spacing-unit;
+
+  > img {
+    display: block;
+  }
+}

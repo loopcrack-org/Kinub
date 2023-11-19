@@ -1,0 +1,116 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../01_settings/fonts' as *;
+
+/* ==========================================================================
+   #BUTTONS
+   ========================================================================== */
+
+.c-btn {
+  display: inline-block;
+  padding: $base-spacing-unit-small $base-spacing-unit;
+  border: $base-border-width-small solid $color-brand-secondary-light;
+  border-radius: $base-border-radius-large;
+  margin: 0;
+  background-color: $color-white;
+  color: $color-brand-secondary;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: $weight-bold;
+  line-height: $base-line-height;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:focus,
+  &:hover {
+    border-color: $color-brand-secondary;
+    box-shadow: $base-box-shadow;
+    color: $color-brand-secondary;
+    outline: 0;
+    transform: translateY(-0.0625em);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  /* Icon */
+
+  .c-btn__icon {
+    margin-right: $base-spacing-unit-xs;
+  }
+
+  /**
+   * Disabled
+   */
+
+  &[disabled] {
+    border-color: $color-gray-10;
+    background-color: $color-gray-10;
+    color: $color-gray-50;
+    cursor: default;
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    cursor: not-allowed;
+  }
+
+  &[disabled]:focus,
+  &[disabled]:hover {
+    background-color: $color-gray-10;
+    box-shadow: none;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Primary
+ */
+
+.c-btn--primary {
+  border-color: $color-brand;
+  background-color: $color-brand;
+  color: $color-white;
+
+  &:focus,
+  &:hover {
+    background-color: $color-brand-light;
+  }
+}
+
+/**
+ * Secondary
+ */
+
+.c-btn--secondary {
+  border-color: $color-brand-secondary;
+  background-color: $color-brand-secondary;
+  color: $color-white;
+
+  &:focus,
+  &:hover {
+    background-color: $color-brand-secondary-light;
+  }
+}
+
+/**
+ * Block
+ */
+
+.c-btn--block {
+  display: block;
+  width: 100%;
+}
+
+/**
+ * Small
+ */
+
+.c-btn--small {
+  padding: $base-spacing-unit-xs $base-spacing-unit-small;
+}

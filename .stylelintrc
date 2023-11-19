@@ -11,7 +11,7 @@
       true,
       {
         "severity": "warning",
-        "ignore": ["css-nesting"]
+        "ignore": ["css-nesting", "css-when-else", "css-resize"]
       }
     ],
     "plugin/selector-bem-pattern": {

@@ -1,0 +1,34 @@
+@use '../01_settings/global' as *;
+
+/* ==========================================================================
+   #GRID
+   ========================================================================== */
+
+.o-grid {
+  width: 100%;
+  clear: both;
+
+  + .o-grid {
+    margin-top: $base-spacing-unit;
+  }
+}
+
+/* Row */
+
+.o-grid__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -$base-spacing-unit;
+  margin-left: -$base-spacing-unit;
+
+  + .o-grid__row {
+    margin-top: 0;
+  }
+}
+
+/* Column */
+
+.o-grid__col {
+  padding-top: $base-spacing-unit;
+  padding-left: $base-spacing-unit;
+}

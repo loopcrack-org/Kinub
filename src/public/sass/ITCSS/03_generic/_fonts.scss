@@ -1,0 +1,15 @@
+/* ==========================================================================
+   #Create or import font files here
+   ========================================================================== */
+// EXAMPLE
+// @font-face {
+//   font-family: 'MyCustomFont';
+//   src: url('/path/to/fonts/MyCustomFont.woff2') format('woff2'),
+//        url('/path/to/fonts/MyCustomFont.woff') format('woff');
+//   font-weight: normal;
+//   font-style: normal;
+// }
+
+// stylelint-disable-next-line property-no-unknown
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&family=Nunito+Sans:opsz,wght@6..12,200;6..12,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

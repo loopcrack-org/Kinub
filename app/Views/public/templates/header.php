@@ -2,11 +2,9 @@
 <script src="assets/public/js/menuMobile.min.js"></script>
 <?php $this->endSection(); ?>
 <header class="header" id="header-nav">
-    <div class="header__logo">
-        <a href="/">
-            <img src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="Logo Kinub">
-        </a>
-    </div>
+    <a href="/" class="header__logo">
+        <img src="assets/images/imagotipo.svg" height="60px" alt="Logo Kinub">
+    </a>
 
     <div class="header__background" id="background"></div>
 
@@ -17,9 +15,9 @@
         <a href="/#form" class="navigation__link">Contacto</a>
     </nav>
 
-    <div class="menu menu--collapse" id="menu-mobile">
-        <div class="menu-box">
-            <div class="menu-inner"></div>
+    <div class="hamburger hamburger--collapse" id="menu-mobile">
+        <div class="hamburger__box">
+            <div class="hamburger__inner"></div>
         </div>
     </div>
 </header>

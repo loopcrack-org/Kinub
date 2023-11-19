@@ -1,0 +1,210 @@
+@use 'sass:color';
+@use 'sass:list';
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+
+.measurement-solution {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  height: 60svh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2vw;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: transparent;
+  gap: 5svh;
+  text-align: center;
+}
+
+.measurement-solution__icon {
+  z-index: 1;
+  width: 10rem;
+  transition: all 900ms ease;
+  svg {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    transition: all 900ms ease;
+  }
+}
+
+.measurement-solution__content {
+  z-index: 1;
+  font-size: 1.4rem;
+}
+
+.measurement-solution__title,
+.measurement-solution__description {
+  color: $color-gray-60;
+}
+
+.measurement-solution__title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  transition: all 1000ms ease;
+  &--strong {
+    order: -1;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+}
+
+.measurement-solution__description {
+  display: block;
+  max-height: 0;
+  font-size: 0.8em;
+  font-style: italic;
+  font-weight: lighter;
+  line-height: 1;
+  opacity: 0;
+  transition:
+    opacity 400ms ease-in-out,
+    visibility 400ms step-end,
+    max-height 400ms ease;
+  visibility: hidden;
+}
+
+.measurement-solution__mask {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    color.adjust($color-white, $alpha: -0.1) 0%,
+    color.adjust($color-white, $alpha: -0.1) 100%
+  );
+  opacity: 1;
+  visibility: visible;
+}
+
+.measurement-solution__mask--hover {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    color.adjust($color-black, $alpha: -0.2) 0%,
+    color.adjust($brand-color, $alpha: -0.2) 20%,
+    color.adjust($color-green-blue, $alpha: -0.2) 40%,
+    color.adjust($color-green-blue, $alpha: -0.2) 60%,
+    color.adjust($brand-color, $alpha: -0.2) 80%,
+    color.adjust($color-black, $alpha: -0.2) 100%
+  );
+  opacity: 0;
+  visibility: hidden;
+}
+
+.measurement-solution:hover {
+  color: $color-white;
+
+  & .measurement-solution__title,
+  & .measurement-solution__description {
+    color: $color-white;
+  }
+
+  & .measurement-solution__description {
+    max-height: 100vh;
+    opacity: 1;
+    transition:
+      opacity 500ms ease-in-out,
+      visibility 500ms step-start,
+      max-height 500ms ease;
+    visibility: visible;
+  }
+
+  & .measurement-solution__icon {
+    svg {
+      width: 70%;
+    }
+    * {
+      fill: $color-white !important;
+    }
+  }
+
+  & .measurement-solution__mask {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  & .measurement-solution__mask--hover {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@include phone() {
+  .measurement-solution {
+    height: 40svh;
+  }
+  .measurement-solution__icon {
+    width: 7.5rem;
+  }
+  .measurement-solution__content {
+    font-size: 1rem;
+  }
+}
+
+@include phoneXL() {
+  .measurement-solution__icon {
+    width: 8rem;
+  }
+}
+
+@include tablet() {
+  .measurement-solution {
+    height: 55svh;
+  }
+  .measurement-solution__content {
+    font-size: 1.6rem;
+  }
+  .measurement-solution__icon {
+    width: 40%;
+  }
+  .measurement-solution::after {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
+    content: '';
+  }
+}
+
+@include desktop {
+  .measurement-solution {
+    height: 55svh;
+  }
+  .measurement-solution__icon {
+    width: 60%;
+  }
+}
+
+@include desktopXL {
+  .measurement-solution {
+    height: 68svh;
+    gap: 7svh;
+  }
+  .measurement-solution__icon {
+    width: 75%;
+  }
+}
+
+// Define the background color sequence for ::after pseudo-elements
+$color-sequence: $brand-color $color-aqua-blue color.adjust($color-aqua-blue, $lightness: -5%)
+  $color-bright-blue;
+
+// Apply the background colors to ::after pseudo-elements based on nth-child
+@for $i from 1 through list.length($color-sequence) {
+  .measurement-solution:nth-child(4n + #{$i})::after {
+    background-color: list.nth($color-sequence, $i);
+  }
+}

@@ -1,0 +1,44 @@
+@use '../01_settings/fonts' as *;
+@use '../01_settings/colors' as *;
+@use '../02_tools/mixins' as *;
+/* ==========================================================================
+   #Titles
+   ========================================================================== */
+%title-common {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.title {
+  &--level-1 {
+    @extend %title-common;
+    @include fluid-text(3.6rem, 9.8rem, 9vw);
+    color: $color-headings;
+  }
+
+  &--level-2 {
+    @extend %title-common;
+    @include fluid-text(2.4rem, 7.2rem);
+    color: $color-headings;
+  }
+
+  &--level-3 {
+    @extend %title-common;
+    @include fluid-text(1.8rem, 6rem);
+    position: relative;
+    color: $brand-color;
+    text-align: center;
+
+    &::after {
+      position: absolute;
+      bottom: -1rem;
+      left: 50%;
+      width: 100%;
+      max-width: 70rem;
+      height: 0.3rem;
+      background-color: $color-light-blue;
+      content: '';
+      transform: translateX(-50%);
+    }
+  }
+}

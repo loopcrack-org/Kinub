@@ -1,0 +1,72 @@
+@use '../../../02_tools/breakpoints' as *;
+
+.kinub-video {
+  padding: 0 1rem;
+  margin: 5rem 0;
+  &__container {
+    width: 100%;
+    margin: 0 auto;
+    box-shadow:
+      rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  }
+  @include tablet() {
+    margin: 7rem 0;
+    &__container {
+      max-width: 80vw;
+    }
+  }
+  @include desktop() {
+    margin: 10rem 0;
+    &__container {
+      max-width: 60vw;
+    }
+  }
+}
+
+.plyr__controls {
+  display: grid;
+  min-width: 100%;
+  justify-content: unset;
+  grid-template-areas:
+    'playback playback playback playback time'
+    'play-btn volume-btn settings pip screen-btn';
+
+  @include phone() {
+    grid-template-areas:
+      'playback playback playback playback playback playback'
+      'play-btn time volume-btn settings pip screen-btn';
+  }
+
+  @include device(400px) {
+    display: flex;
+  }
+}
+
+.plyr__controls__item:nth-child(1) {
+  grid-area: play-btn;
+}
+
+.plyr__controls__item:nth-child(2) {
+  grid-area: playback;
+}
+
+.plyr__controls__item:nth-child(3) {
+  grid-area: time;
+}
+
+.plyr__controls__item:nth-child(4) {
+  grid-area: volume-btn;
+}
+
+.plyr__controls__item:nth-child(5) {
+  grid-area: screen-btn;
+}
+
+.plyr__controls__item:nth-child(6) {
+  grid-area: settings;
+}
+
+.plyr__controls__item:nth-child(7) {
+  grid-area: pip;
+}

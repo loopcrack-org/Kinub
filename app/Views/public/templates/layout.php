@@ -16,11 +16,11 @@
 </head>
 <body>
 
-<?= $this->include('public/templates/header');?>
-<?= $this->include("public/templates/whatsapp");?>
+<?= $this->include('public/templates/header'); ?>
+<?= $this->include('public/templates/whatsapp'); ?>
 <?php $this->renderSection('content'); ?>
 
-<?= $this->include("public/templates/footer"); ?>
+<?= $this->include('public/templates/footer'); ?>
 
 <?php $this->renderSection('js'); ?>
 </body>
