@@ -46,7 +46,7 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     protected $validationConfig = [
         'image' => [
-            'rules'    => 'maxSize[200,kb]|minSize[1,kb]|maxDims[3000,3000]|mimeIn[image/png,image/jpeg,image/jpg]',
+            'rules'    => 'maxSize[200,kb]|minSize[1,b]|mimeIn[image/png,image/jpeg,image/jpg]|maxDims[3000,3000]',
             'messages' => [
                 'maxSize' => 'La imagen debe ser menor a 100 kilobytes',
                 'minSize' => 'La imagen debe ser mayor a 1 kilobytes',

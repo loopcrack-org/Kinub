@@ -90,13 +90,11 @@ class CtrlApiFiles extends BaseController
                         $inputName => $configValidation['messages'],
                     ]
                 );
-                $validation->run([$inputName => $file]);
-                if (! $validation->hasError($inputName)) {
+                if (! $validation->run([$inputName => $file])) {
                     $error = $validation->getError($inputName);
 
                     throw new FileValidationException($error);
                 }
-
                 FileManager::moveClientFileToServer($file, $folder);
             }
 

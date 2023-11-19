@@ -95,7 +95,7 @@ class FileRules
     /**
      * Check if the array has the maximum items according to the max number passed on param
      *
-     * @param File  $file   the instance of file
+     * @param array $files  the files to validate
      * @param mixed $params params passed through validation rules
      */
     public function maxFiles(array $files, $params)
@@ -109,7 +109,7 @@ class FileRules
     /**
      * Check if the array has the minimum items according to the min number passed on param
      *
-     * @param File  $file   the instance of file
+     * @param array $files  the files to validate
      * @param mixed $params params passed through validation rules
      */
     public function minFiles(array $files, $params)
