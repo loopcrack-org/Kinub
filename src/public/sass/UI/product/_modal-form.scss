@@ -16,15 +16,15 @@
     line-height: 1;
     white-space: nowrap;
 
-    @include m.phoneXL {
-      font-size: 1.9rem;
-    }
     &--big {
       display: block;
       font-size: 2.5rem;
       font-weight: bold;
+    }
+    @include m.phoneXL {
+      font-size: 1.9rem;
 
-      @include m.phoneXL {
+      &--big {
         font-size: 3rem;
       }
     }
@@ -87,37 +87,41 @@
   }
 }
 .custom-modal-form {
+  display: block;
   backdrop-filter: blur(1.5px);
   background-color: transparent;
   cursor: auto;
 
   .tingle-modal {
     &__close {
-      visibility: hidden;
-
-      @media (max-width: 540px) {
-        background-color: v.$teal-blue;
-        visibility: visible;
-      }
+      background-color: v.$teal-blue;
     }
   }
   .tingle-modal-box {
     width: 100%;
-    max-width: 50rem;
     border: 0.1rem solid v.$teal-blue;
-    border-radius: 2.5rem;
     box-shadow: 5px 5px 12px 5px #00000082;
 
-    @media (max-width: 540px) {
-      max-width: 100%;
-      border-radius: 0;
-    }
     &__content {
       overflow: hidden;
-      padding: 2rem 3rem;
+      padding: 2rem 1rem;
+    }
+  }
+  @include m.phoneXL {
+    display: flex;
+    padding-top: 0;
 
-      @media (max-width: 540px) {
-        padding: 2rem 1rem;
+    .tingle-modal {
+      &__close {
+        visibility: hidden;
+      }
+    }
+    .tingle-modal-box {
+      max-width: 50rem;
+      border-radius: 2.5rem;
+
+      &__content {
+        padding: 2rem 3rem;
       }
     }
   }
