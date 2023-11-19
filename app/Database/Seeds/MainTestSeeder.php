@@ -31,5 +31,7 @@ class MainTestSeeder extends Seeder
         $this->call('EmailTypeSeeder');
 
         $this->call('UserSeeder');
+
+        $this->call('UserTokensSeeder');
     }
 }

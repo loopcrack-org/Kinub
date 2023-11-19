@@ -9,7 +9,7 @@
 <?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-      
+
         <?= view('partials/page-title', ['title' => 'Editar Usuario', 'titleUrl' => '/admin/usuarios', 'pagetitle' => 'Usuarios', 'pagetitleInner' => 'Editar Usuario']); ?>
 
         <div class="row justify-content-center">
@@ -80,7 +80,7 @@
                                 <div class="card-body">
                                     <div class="row d-flex align-items-center">
                                         <div class="col-md-7 mb-2">
-                                             <input type="email" class="form-control <?= isset($errors['userEmail']) ? 'is-invalid' : '' ?>" name="userEmail" id="userEmail" value="<?= old('userEmail') ?? $user['userEmail']; ?>" placeholder="Ingrese un correo electrónico" required>
+                                            <input type="email" class="form-control <?= isset($errors['userEmail']) ? 'is-invalid' : '' ?>" name="userEmail" id="userEmail" value="<?= old('userEmail') ?? $user['userEmail']; ?>" placeholder="Ingrese un correo electrónico" required>
                                             <?php if (isset($errors['userEmail'])) : ?>
                                                 <div class="invalid-feedback">
                                                     <?= $errors['userEmail'] ?>
@@ -88,8 +88,8 @@
                                             <?php endif ?>
                                         </div>
                                         <div class="col-md-5 mb-2">
-                                            <div class="alert alert-<?= ($user['confirmed']) ? 'success' : 'warning'?> alert-dismissible alert-label-icon label-arrow fade show mb-0 text-wrap" style="min-height: 39px; padding: 8px 40px 8px 58px">
-                                                <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line label-icon"></i><strong><?= ($user['confirmed']) ? 'Cuenta confirmada' : 'Cuenta por confirmar'?></strong>
+                                            <div class="alert alert-<?= ($user['confirmed']) ? 'success' : 'warning' ?> alert-dismissible alert-label-icon label-arrow fade show mb-0 text-wrap" style="min-height: 39px; padding: 8px 40px 8px 58px">
+                                                <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning' ?>-line label-icon"></i><strong><?= ($user['confirmed']) ? 'Cuenta confirmada' : 'Cuenta por confirmar' ?></strong>
                                             </div>
                                         </div>
                                     </div>
