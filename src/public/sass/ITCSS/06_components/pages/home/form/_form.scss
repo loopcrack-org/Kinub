@@ -23,20 +23,21 @@
   &__icon {
     position: absolute;
     z-index: 1;
-    top: -3.4rem;
-    right: -2.3rem;
-    @media (max-width: 991.98px) {
-      top: -1.5rem;
-      right: -1.1rem;
+    top: -1.5rem;
+    right: -1.1rem;
+    @include tablet {
+      top: -3.4rem;
+      right: -2.3rem;
     }
   }
   &__svg {
     overflow: visible;
-    width: 9rem;
-    height: 9rem;
-    @media (max-width: 991.98px) {
-      width: 6.2rem;
-      height: 6.2rem;
+    width: 6.2rem;
+    height: 6.2rem;
+
+    @include tablet {
+      width: 9rem;
+      height: 9rem;
     }
   }
   &__legend {

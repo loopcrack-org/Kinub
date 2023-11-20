@@ -10,16 +10,16 @@
   border: 0.125rem solid $color-white;
   border-radius: 1.7rem;
   font-style: italic;
+
   .custom-select-opener {
     padding: 1.5rem;
     border-radius: 1.7rem;
     background: transparent;
     font-style: normal;
     white-space: wrap;
-  }
-
-  .custom-select-opener:focus {
-    border-color: $color-light-blue;
+    &:focus {
+      border-color: $color-light-blue;
+    }
   }
 
   .custom-select-opener span {
@@ -37,10 +37,16 @@
     padding-left: 1.5rem;
     background: transparent;
     cursor: pointer;
+
     &:hover {
       background: transparent;
       font-style: normal;
       font-weight: $weight-bold;
     }
+  }
+}
+.is-selected {
+  &:before {
+    content: none;
   }
 }
