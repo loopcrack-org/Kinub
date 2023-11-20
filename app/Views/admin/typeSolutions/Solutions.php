@@ -41,7 +41,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nombre</th>
+                                    <th>Titulo</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
