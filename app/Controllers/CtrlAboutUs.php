@@ -40,7 +40,7 @@ class CtrlAboutUs extends BaseController
 
             return redirect()->to('/admin/nosotros')->with('response', $response);
         } catch (InvalidInputException $th) {
-            return redirect()->to('/admin/nosotros')->withInput()->with('errors', $th->getErros());
+            return redirect()->to('/admin/nosotros')->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error.',
