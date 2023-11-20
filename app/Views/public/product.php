@@ -18,41 +18,48 @@
     <div class="details__grid">
 
     <div class="carousel">
-        <div class="image-container">
-            <img class="main-image" id="main-image" src="https://tse1.mm.bing.net/th?id=OIF.%2bqEV7L45ecgTwypI8taaXQ&pid=Api&P=0&h=180" alt="">
+        <div class="image-container magnify-wrapper" id="zoom">
+
+            <img class="main-image" id="main-image" src="assets/images/auth-one-bg.jpg" alt="Imagen Principal">
+            <div id="large-img"></div>
         </div>
 
-        <div class="glide">
+        <div class="glide" id="glide">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides">
-                    <li class="glide__slide">
-                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                        <img class="slide-media" class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide">
-                        <img src="https://tse1.mm.bing.net/th?id=OIF.%2bqEV7L45ecgTwypI8taaXQ&pid=Api&P=0&h=180" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="assets/images/auth-one-bg.jpg">
+                        <img class="slide-media" src="assets/images/auth-one-bg.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide">
-                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
+                        <img class="slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide">
-                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide">
-                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide">
-                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide">
-                        <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                 </ul>
             </div>
 
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><</button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">></button>
-        </div>
+            <div class="glide__bullets" data-glide-el="controls[nav]">
+                <button class="glide__bullet" data-glide-dir="=0"></button>
+                <button class="glide__bullet" data-glide-dir="=1"></button>
+                <button class="glide__bullet" data-glide-dir="=2"></button>
+                <button class="glide__bullet" data-glide-dir="=3"></button>
+                <button class="glide__bullet" data-glide-dir="=4"></button>
+                <button class="glide__bullet" data-glide-dir="=5"></button>
+                <button class="glide__bullet" data-glide-dir="=6"></button>
+            </div>
         </div>
     </div>
 
