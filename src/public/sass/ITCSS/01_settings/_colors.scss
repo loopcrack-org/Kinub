@@ -64,3 +64,7 @@ $color-success-light: color.adjust($color-success, $lightness: 20%);
 $color-information: #0074d9;
 $color-information-dark: color.adjust($color-information, $lightness: -5%);
 $color-information-light: color.adjust($color-information, $lightness: 20%);
+
+// Define the background color sequence for ::after pseudo-elements
+$color-sequence-measurement-solution: $brand-color $color-aqua-blue
+  color.adjust($color-aqua-blue, $lightness: -5%) $color-bright-blue;

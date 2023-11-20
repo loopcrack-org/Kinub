@@ -2,6 +2,8 @@
    #MIXINS
    ========================================================================== */
 @use 'sass:math';
+@use 'sass:color';
+@use '../01_settings/fonts' as *;
 /**
  * Clearfix: contain floats.
  *
@@ -34,11 +36,13 @@
  */
 
 @mixin font-size($font-size, $line-height: auto, $important: false) {
+  /* stylelint-disable-next-line itcss/no-variable-declaration */
   $important-suffix: if($important, '!important', null);
 
   font-size: $font-size #{$important-suffix};
 
   @if ($line-height == 'auto') {
+    /* stylelint-disable-next-line scss/operator-no-newline-after */
     line-height: mat.ceil($font-size / $base-line-height) *
       ($base-line-height / $font-size)
       #{$important-suffix};
@@ -91,8 +95,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: darken(v.$bright-blue, 20%); //TODO remove this and use the global colors
-  font-weight: 900;
+  color: color.adjust(v.$bright-blue, $lightness: -20%);
+  font-weight: $weight-boldest;
 
   &::after {
     display: inline-block;
@@ -116,7 +120,7 @@
   background-color: $bgColor;
   color: $textColor;
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: $weight-bold;
   text-align: center;
   transition: background-color 300ms;
 
@@ -125,4 +129,14 @@
     color: $textHover;
     cursor: pointer;
   }
+}
+
+// Mixin para iconos de redes sociales
+@mixin social-icon($image: null, $width: 55%) {
+  display: block;
+  width: $width;
+  aspect-ratio: 1 / 1;
+  background-image: url($image);
+  background-size: cover;
+  content: '';
 }

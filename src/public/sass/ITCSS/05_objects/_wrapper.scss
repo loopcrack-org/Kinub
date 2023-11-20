@@ -4,7 +4,7 @@
 
 /* Center the content within a reasonably wide container. */
 
-.o-wrapper {
+.wrapper {
   max-width: 75em; /* 1200 / 16 */
   margin-right: auto;
   margin-left: auto;
@@ -14,7 +14,7 @@
  * Small
  */
 
-.o-wrapper--small {
+.wrapper--small {
   max-width: 30em; /* 480 / 16 */
 }
 
@@ -22,13 +22,6 @@
  * Medium
  */
 
-.o-wrapper--medium {
+.wrapper--medium {
   max-width: 40em; /* 640 / 16 */
-}
-
-//TODO Remove this progressivly
-.container-sm {
-  width: 90%;
-  max-width: 70rem;
-  margin: 0 auto;
 }

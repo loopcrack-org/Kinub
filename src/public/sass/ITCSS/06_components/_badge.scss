@@ -5,7 +5,7 @@
    #BADGES
    ========================================================================== */
 
-.c-badge {
+.badge {
   display: inline-block;
   padding: 0.125em 0.5em;
   border-radius: $base-border-radius-large;
@@ -20,7 +20,7 @@
 
 /* Link */
 
-.c-badge__link {
+.badge__link {
   color: $color-white;
   text-decoration: none;
 }
@@ -29,7 +29,7 @@
  * Success
  */
 
-.c-badge--success {
+.badge--success {
   background-color: $color-success;
 }
 
@@ -37,7 +37,7 @@
  * Warning
  */
 
-.c-badge--warning {
+.badge--warning {
   background-color: $color-warning;
 }
 
@@ -45,6 +45,6 @@
  * Error
  */
 
-.c-badge--error {
+.badge--error {
   background-color: $color-error;
 }

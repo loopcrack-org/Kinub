@@ -9,6 +9,7 @@
  * Reset...............A tiny reset.
  * Box Sizing..........Default box sizing of all elements.
  * Shared..............Rules that apply to multiple selectors.
+ * Root Variables......Global css variables.
  **/
 
 @forward '../../../../../node_modules/normalize.css/normalize.css';
@@ -16,3 +17,4 @@
 @forward './box-sizing';
 @forward './shared';
 @forward './fonts';
+@forward './root-variables';

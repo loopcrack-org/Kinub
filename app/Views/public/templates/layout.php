@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kinub | <?= isset($metaTitle) ? $metaTitle : 'Inicio' ?></title>
+    <title>Kinub | <?= $metaTitle ?? 'Inicio' ?></title>
     <meta property="og:site_name" content="Kinub">
-    <meta property="og:title" content="Kinub | <?= isset($metaTitle) ? $metaTitle : 'Inicio' ?>">
+    <meta property="og:title" content="Kinub | <?= $metaTitle ?? 'Inicio' ?>">
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="<?= isset($metaImage) ? $metaImage : base_url().'assets/images/kinub-logo-meta.png' ?>">
-    <meta property="og:description" content="<?= isset($metaDescription) ? $metaDescription : 'Bienvenido a Kinub' ?>">
+    <meta property="og:image" content="<?= $metaImage ?? base_url() . 'assets/images/kinub-logo-meta.png' ?>">
+    <meta property="og:description" content="<?= $metaDescription ?? 'Bienvenido a Kinub' ?>">
     <meta property="og:url" content="<?= current_url() ?>">
     <meta name="twitter:card" content="summary_large_image">
     <?php $this->renderSection('fonts'); ?>

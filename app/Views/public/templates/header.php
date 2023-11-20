@@ -3,7 +3,7 @@
 <?php $this->endSection(); ?>
 <header class="header" id="header-nav">
     <a href="/" class="header__logo">
-        <img src="assets/images/imagotipo.svg" height="60px" alt="Logo Kinub">
+        <img class="header__logo-img" src="assets/images/imagotipo.svg" height="60px" alt="Logo Kinub">
     </a>
 
     <div class="header__background" id="background"></div>

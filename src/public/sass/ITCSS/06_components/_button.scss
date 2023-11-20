@@ -3,10 +3,10 @@
 @use '../01_settings/fonts' as *;
 
 /* ==========================================================================
-   #BUTTONS
+   #BUTTON
    ========================================================================== */
 
-.c-btn {
+.button {
   display: inline-block;
   padding: $base-spacing-unit-small $base-spacing-unit;
   border: $base-border-width-small solid $color-brand-secondary-light;
@@ -43,7 +43,7 @@
 
   /* Icon */
 
-  .c-btn__icon {
+  .button__icon {
     margin-right: $base-spacing-unit-xs;
   }
 
@@ -51,6 +51,7 @@
    * Disabled
    */
 
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
   &[disabled] {
     border-color: $color-gray-10;
     background-color: $color-gray-10;
@@ -60,6 +61,7 @@
     cursor: not-allowed;
   }
 
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
   &[disabled]:focus,
   &[disabled]:hover {
     background-color: $color-gray-10;
@@ -72,7 +74,7 @@
  * Primary
  */
 
-.c-btn--primary {
+.button--primary {
   border-color: $color-brand;
   background-color: $color-brand;
   color: $color-white;
@@ -87,7 +89,7 @@
  * Secondary
  */
 
-.c-btn--secondary {
+.button--secondary {
   border-color: $color-brand-secondary;
   background-color: $color-brand-secondary;
   color: $color-white;
@@ -102,7 +104,7 @@
  * Block
  */
 
-.c-btn--block {
+.button--block {
   display: block;
   width: 100%;
 }
@@ -111,6 +113,6 @@
  * Small
  */
 
-.c-btn--small {
+.button--small {
   padding: $base-spacing-unit-xs $base-spacing-unit-small;
 }

@@ -4,6 +4,8 @@
     "stylelint-scss",
     "stylelint-order",
     "stylelint-no-unsupported-browser-features",
+    "stylelint-rem-over-px",
+    "stylelint-itcss",
     "stylelint-selector-bem-pattern"
   ],
   "rules": {
@@ -16,13 +18,16 @@
     ],
     "plugin/selector-bem-pattern": {
       "preset": "bem",
-      "presetOptions": {
-        "namespace": ""
-      },
+      "componentName": "[A-Za-z0-9-]+|INDEX",
       "componentSelectors": {
-        "initial": "^\\.{namespace}[A-Z]",
-        "combined": "^\\.{namespace}([a-z0-9]+)(-[a-z0-9]+)?$"
-      }
+        "initial": "^\\.{componentName}(?:__[a-z0-9-]+)?(?:--[a-z0-9-]+)?$",
+        "combined": "^\\.{componentName}(?:__[a-z0-9-]+)?(?:--[a-z0-9-]+)?$"
+      },
+      "ignoreSelectors": [".*\\.no-BEM-.*"],
+      "implicitComponents": [
+        "src/public/sass/ITCSS/05_objects/**/*.scss",
+        "src/public/sass/ITCSS/06_components/**/*.scss"
+      ]
     },
     "scss/at-rule-no-unknown": true,
     "at-rule-no-unknown": null,

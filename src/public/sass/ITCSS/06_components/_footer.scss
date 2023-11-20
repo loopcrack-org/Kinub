@@ -1,25 +1,14 @@
 @use 'sass:color';
 @use '../01_settings/global' as *;
 @use '../01_settings/colors' as *;
-@use '../01_settings/fonts' as *;
 @use '../02_tools/breakpoints' as *;
 @use '../02_tools/mixins' as *;
-
-// Mixin para iconos de redes sociales
-@mixin social-icon($image: null, $width: 55%) {
-  display: block;
-  width: $width;
-  aspect-ratio: 1 / 1;
-  background-image: url($image);
-  background-size: cover;
-  content: '';
-}
 
 .footer {
   padding: 1rem 5vw;
   margin-top: auto;
   background-color: $color-footer;
-  box-shadow: 0px -10px 30px color.adjust($color-black, $alpha: -0.75);
+  box-shadow: 0rem -0.625rem 1.875rem color.adjust($color-black, $alpha: -0.75);
   @include desktop() {
     padding: 1.5rem 5vw;
   }

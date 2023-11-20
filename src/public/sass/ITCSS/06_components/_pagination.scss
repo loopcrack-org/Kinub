@@ -6,7 +6,7 @@
    #PAGINATION
    ========================================================================== */
 
-.c-pagination {
+.pagination {
   @include clearfix;
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@
 
   /* Meta */
 
-  .c-pagination__meta {
+  .pagination__meta {
     margin-right: $base-spacing-unit-small;
     font-size: 0.875em;
     vertical-align: middle;
@@ -24,7 +24,7 @@
 
 /* Control */
 
-.c-pagination__control {
+.pagination__control {
   position: relative;
   padding: $base-spacing-unit-xs $base-spacing-unit-small;
   border: $base-border-width-small solid $color-gray-20;
@@ -65,7 +65,7 @@
    * Previous
    */
 
-  &.c-pagination__control--prev {
+  &--prev {
     border-bottom-left-radius: $base-border-radius;
     border-top-left-radius: $base-border-radius;
   }
@@ -74,7 +74,7 @@
    * Next
    */
 
-  &.c-pagination__control--next {
+  &--next {
     border-left-width: 0;
     border-bottom-right-radius: $base-border-radius;
     border-top-right-radius: $base-border-radius;
@@ -92,17 +92,17 @@
    * Disabled
    */
 
-  &.is-disabled {
+  &--is-disabled {
     color: $color-gray-20;
   }
 
-  &.is-disabled:focus,
-  &.is-disabled:hover {
+  &--is-disabled:focus,
+  &--is-disabled:hover {
     color: $color-gray-20;
     transform: none;
   }
 
-  &.is-disabled:focus::after {
+  &--is-disabled:focus::after {
     opacity: 0;
   }
 }

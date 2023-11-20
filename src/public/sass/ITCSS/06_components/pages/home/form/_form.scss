@@ -1,8 +1,8 @@
-@use '../../../01_settings/global' as *;
-@use '../../../01_settings/colors' as *;
-@use '../../../01_settings/fonts' as *;
-@use '../../../02_tools/breakpoints' as *;
-@use '../../../02_tools/mixins' as *;
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
 
 .form {
   position: relative;
@@ -15,7 +15,7 @@
   margin-top: 2rem;
   margin-bottom: 5rem;
   background-color: $color-white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0rem 0.1875rem 0.5rem;
   color: $color-black;
   gap: 1.5rem;
 
@@ -90,7 +90,7 @@
     margin-left: 1rem;
     color: $color-error;
     font-size: 1.7rem;
-    font-weight: 700;
+    font-weight: $weight-bold;
     line-height: 0;
   }
 
@@ -102,14 +102,5 @@
       width: 40rem;
       margin: 0 auto;
     }
-  }
-}
-
-.swal2 {
-  &-popup {
-    zoom: 150%;
-  }
-  &-html-container {
-    zoom: 1.3;
   }
 }

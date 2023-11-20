@@ -4,13 +4,13 @@
  * 05. OBJECTS
  * Wrapper.............Content width constraints.
  * Grid................Basic grid layout.
- * Lists...............Custom list styles.
+ * List...............Custom list styles.
  * Media...............An image with descriptive contents.
- * Titles..............Titles and subtitles.
+ * Title..............Titles and subtitles.
  **/
 
-@forward './wrappers';
+@forward './wrapper';
 @forward './grid';
-@forward './lists';
+@forward './list';
 @forward './media';
-@forward './titles';
+@forward './title';

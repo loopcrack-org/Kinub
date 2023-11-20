@@ -1,10 +1,8 @@
 @use 'sass:color';
 @use 'sass:list';
-@use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../01_settings/fonts' as *;
 @use '../../../../02_tools/breakpoints' as *;
-@use '../../../../02_tools/mixins' as *;
 
 .measurement-solution {
   position: relative;
@@ -27,6 +25,7 @@
   z-index: 1;
   width: 10rem;
   transition: all 900ms ease;
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
   svg {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -52,7 +51,7 @@
   &--strong {
     order: -1;
     font-size: 1.5em;
-    font-weight: 700;
+    font-weight: $weight-bold;
     text-transform: capitalize;
   }
 }
@@ -62,7 +61,7 @@
   max-height: 0;
   font-size: 0.8em;
   font-style: italic;
-  font-weight: lighter;
+  font-weight: $weight-lighter;
   line-height: 1;
   opacity: 0;
   transition:
@@ -127,7 +126,8 @@
       width: 70%;
     }
     * {
-      fill: $color-white !important;
+      /* stylelint-disable-next-line itcss/no-at-important */
+      fill: $color-white !important; //The reason for this is that the svgs imported already have a fill property
     }
   }
 
@@ -198,13 +198,9 @@
   }
 }
 
-// Define the background color sequence for ::after pseudo-elements
-$color-sequence: $brand-color $color-aqua-blue color.adjust($color-aqua-blue, $lightness: -5%)
-  $color-bright-blue;
-
 // Apply the background colors to ::after pseudo-elements based on nth-child
-@for $i from 1 through list.length($color-sequence) {
+@for $i from 1 through list.length($color-sequence-measurement-solution) {
   .measurement-solution:nth-child(4n + #{$i})::after {
-    background-color: list.nth($color-sequence, $i);
+    background-color: list.nth($color-sequence-measurement-solution, $i);
   }
 }

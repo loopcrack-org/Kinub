@@ -1,19 +1,18 @@
 @use '../01_settings/global' as *;
 @use '../01_settings/colors' as *;
-@use '../01_settings/fonts' as *;
 
 /* ==========================================================================
    #BREADCRUMBS
    ========================================================================== */
 
-.c-breadcrumbs {
+.breadcrumbs {
   display: flex;
   overflow-x: auto;
 }
 
 /* Item */
 
-.c-breadcrumbs__item {
+.breadcrumbs__item {
   display: flex;
   flex: 0 1 auto;
   color: $color-brand;
@@ -31,7 +30,7 @@
 
 /* Link */
 
-.c-breadcrumbs__link {
+.breadcrumbs__link {
   flex: 0 1 auto;
   border-bottom: 0.0625em solid transparent;
   color: $color-brand-secondary;
