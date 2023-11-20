@@ -2,12 +2,17 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\FileValidationException;
 use App\Utils\FileManager;
+use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Response;
+use Config\Services;
 use Throwable;
 
 class CtrlApiFiles extends BaseController
 {
+    protected $validationConfig;
+
     /**
      * Get a file
      *
@@ -75,10 +80,27 @@ class CtrlApiFiles extends BaseController
             FileManager::createFolder($folder);
 
             if ($file) {
+                $configValidation = $this->validationConfig[$inputName];
+                $validation       = Services::validation();
+                $validation->setRules(
+                    [
+                        $inputName => $configValidation['rules'],
+                    ],
+                    [
+                        $inputName => $configValidation['messages'],
+                    ]
+                );
+                if (! $validation->run([$inputName => $file])) {
+                    $error = $validation->getError($inputName);
+
+                    throw new FileValidationException($error);
+                }
                 FileManager::moveClientFileToServer($file, $folder);
             }
 
             return $this->response->setStatusCode(Response::HTTP_OK)->setJSON(['key' => $key]);
+        } catch (FileValidationException $th) {
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode($th->getMessage()));
         } catch (Throwable $th) {
             return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
@@ -98,7 +120,29 @@ class CtrlApiFiles extends BaseController
 
             $temporalFileLength = FileManager::mergeChunckFiles($fileTmp, $fileData, $offset);
 
+            if ((string) $temporalFileLength === $fileLength) {
+                $file             = new File($fileTmp);
+                $inputName        = $this->request->header('Input')->getValue();
+                $configValidation = $this->validationConfig[$inputName];
+                $validation       = Services::validation();
+                $validation->setRules(
+                    [
+                        $inputName => $configValidation['rules'],
+                    ],
+                    [
+                        $inputName => $configValidation['messages'],
+                    ]
+                );
+                if (! $validation->run([$inputName => $file])) {
+                    $error = $validation->getError($inputName);
+
+                    throw new FileValidationException($error);
+                }
+            }
+
             return $this->response->setStatusCode(Response::HTTP_OK);
+        } catch (FileValidationException $th) {
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode($th->getMessage()));
         } catch (Throwable $th) {
             return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode('Ha ocurrido un error mientras se cargaba el archivo'));
         }
