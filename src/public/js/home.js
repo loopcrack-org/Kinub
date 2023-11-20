@@ -1,2 +1,5 @@
-import Plyr from "plyr";
-const player = new Plyr("#kinub-video");
+import customSelect from 'custom-select';
+import Plyr from 'plyr';
+
+customSelect('select');
+new Plyr('#kinub-video');

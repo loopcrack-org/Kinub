@@ -1,0 +1,46 @@
+/* stylelint-disable plugin/no-unsupported-browser-features */
+/* stylelint-disable plugin/selector-bem-pattern */
+
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+
+.custom-select-container {
+  position: relative;
+  overflow: hidden;
+  border: 0.125rem solid $color-white;
+  border-radius: 1.7rem;
+  font-style: italic;
+  .custom-select-opener {
+    padding: 1.5rem;
+    border-radius: 1.7rem;
+    background: transparent;
+    font-style: normal;
+    white-space: wrap;
+  }
+
+  .custom-select-opener:focus {
+    border-color: $color-light-blue;
+  }
+
+  .custom-select-opener span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .custom-select-panel {
+    position: relative;
+    border-radius: 0.3125rem;
+    background: transparent;
+  }
+
+  .custom-select-option {
+    padding-left: 1.5rem;
+    background: transparent;
+    cursor: pointer;
+    &:hover {
+      background: transparent;
+      font-style: normal;
+      font-weight: $weight-bold;
+    }
+  }
+}

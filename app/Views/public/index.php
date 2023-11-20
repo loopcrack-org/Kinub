@@ -221,37 +221,42 @@ if(isset($response)):
         </script>
     <?php endif; ?>
 
-    <form class="form" action="/email/contacto" method="POST">
+    <form class="form wrapper--large" action="/email/contacto" method="POST">
         <div class="form__icon">
-            <svg xmlns="http://www.w3.org/2000/svg" height="60" fill="#ffffff" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+            <svg class="form__svg" xmlns="http://www.w3.org/2000/svg" width="224" height="203" viewBox="0 0 224 203" fill="none">
+            <path d="M219.146 0C219.396 0.08 219.656 0.17 219.906 0.25C222.236 0.93 223.766 2.91 223.836 5.33C223.846 5.63 223.836 5.94 223.836 6.24C223.836 62.59 223.836 118.94 223.826 175.29C223.826 175.96 223.836 176.66 223.686 177.3C222.946 180.49 219.596 182.22 216.486 181.01C212.876 179.6 209.286 178.13 205.676 176.69C185.946 168.79 166.226 160.89 146.496 153C146.186 152.88 145.876 152.76 145.536 152.63C145.296 152.91 145.066 153.15 144.846 153.41C131.946 168.9 119.036 184.39 106.166 199.9C105.126 201.15 103.976 202.15 102.456 202.73C101.716 202.73 100.966 202.73 100.226 202.73C97.746 202 96.496 200.27 95.806 197.82C89.336 174.99 82.816 152.19 76.306 129.38C76.276 129.28 76.226 129.19 76.216 129.09C76.146 128.38 75.736 128.09 75.066 127.9C72.376 127.13 69.706 126.3 67.016 125.5C46.056 119.21 25.096 112.91 4.12597 106.63C1.91597 105.97 0.515973 104.6 0.0859727 102.31C-0.304027 100.19 0.655973 98.04 2.49597 96.93C3.01597 96.62 3.57597 96.37 4.12597 96.12C47.616 76.53 91.116 56.94 134.616 37.36C161.626 25.2 188.626 13.03 215.646 0.88C216.376 0.55 217.156 0.3 217.906 0.02C218.336 0 218.736 0 219.146 0ZM120.716 131.2C151.616 143.57 182.316 155.86 212.996 168.15C213.106 167.98 213.166 167.93 213.176 167.87C213.196 167.6 213.206 167.33 213.206 167.06C213.196 118.14 213.186 69.21 213.176 20.29C213.176 20.27 213.146 20.24 213.116 20.22C213.096 20.2 213.066 20.18 212.956 20.11C182.256 57.08 151.546 94.07 120.716 131.2ZM184.706 26.71C184.656 26.66 184.606 26.61 184.556 26.56C129.986 51.14 75.416 75.72 20.616 100.41C21.186 100.6 21.496 100.71 21.806 100.8C39.956 106.25 58.106 111.71 76.256 117.16C77.796 117.62 77.796 117.62 79.076 116.53C113.986 86.86 148.896 57.18 183.806 27.51C184.106 27.24 184.406 26.97 184.706 26.71ZM135.096 148.49C134.706 148.31 134.416 148.17 134.116 148.05C131.206 146.88 128.296 145.72 125.376 144.55C120.336 142.53 115.296 140.5 110.246 138.49C109.216 138.08 108.336 137.5 107.666 136.61C106.306 134.79 106.136 132.01 108.126 129.63C119.116 116.46 130.056 103.24 141.016 90.04C151.976 76.84 162.936 63.64 173.896 50.44C174.076 50.23 174.226 49.99 174.386 49.76C174.336 49.71 174.276 49.67 174.226 49.62C144.836 74.61 115.456 99.59 86.096 124.55C86.446 126.6 103.346 185.45 103.786 186.08C114.216 173.57 124.626 161.06 135.096 148.49Z" fill="#2EC7D5"/>
             </svg>
         </div>
 
-        <legend class="form__legend">Contáctanos</legend>
+        <legend class="form__legend">CONTÁCTANOS</legend>
 
         <div class="form__field">
-            <label for="product-name" class="form__label">Nombre del Producto</label>
+            <label for="product-name" class="form__label">Equipo de mi interés</label>
             <?= isset($errors['product-name']) ? '<p class="form__error">' . $errors['product-name'] . '</p>' : '' ?>
-            <input id="product-name" name="product-name" type="text" class="form__input" value="<?= old('product-name')?>" placeholder="Ingrese el nombre del producto">
+            <select id="mySelect2" class="form__select">
+                <option value="feline">Equipos X</option>
+                <option value="feline">Necesito Asesoria</option>
+
+
+            </select>
         </div>
 
         <div class="form__field">
-            <label for="inquirer-name" class="form__label">Nombre del Solicitante</label>
+            <label for="inquirer-name" class="form__label">Nombre </label>
             <?= isset($errors['inquirer-name']) ? '<p class="form__error">' . $errors['inquirer-name'] . '</p>' : '' ?>
-            <input id="inquirer-name" name="inquirer-name" type="text" class="form__input" value="<?= old('inquirer-name')?>" placeholder="Ingrese su nombre">
+            <input id="inquirer-name" name="inquirer-name" type="text" class="form__input" value="<?= old('inquirer-name')?>">
         </div>
 
         <div class="form__field">
             <label for="inquirer-email" class="form__label">E-Mail</label>
             <?= isset($errors['inquirer-email']) ? '<p class="form__error">' . $errors['inquirer-email'] . '</p>' : '' ?>
-            <input id="inquirer-email" name="inquirer-email" type="email" class="form__input" value="<?= old('inquirer-email')?>" placeholder="Ingrese su correo">
+            <input id="inquirer-email" name="inquirer-email" type="email" class="form__input" value="<?= old('inquirer-email')?>" >
         </div>
 
         <div class="form__field">
             <label for="message" class="form__label">Mensaje</label>
             <?= isset($errors['message']) ? '<p class="form__error">' . $errors['message'] . '</p>' : '' ?>
-            <textarea id="message" name="message" rows="5" class="form__textarea" placeholder="Ingrese su mensaje"><?= old('message')?></textarea>
+            <textarea id="message" name="message" rows="5" class="form__textarea" ><?= old('message')?></textarea>
         </div>
 
         <input class="form__submit" type="submit" value="Enviar">

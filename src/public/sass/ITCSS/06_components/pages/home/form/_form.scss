@@ -8,44 +8,43 @@
   position: relative;
   z-index: 0;
   display: flex;
-  overflow: hidden;
+  overflow: visible;
   flex-direction: column;
-  padding: 3rem;
-  border-radius: 1.25rem;
+  padding: 3.5rem;
+  border-radius: 3.5rem;
+  margin: 0 auto;
   margin-top: 2rem;
   margin-bottom: 5rem;
-  background-color: $color-white;
-  box-shadow: rgba(0, 0, 0, 0.24) 0rem 0.1875rem 0.5rem;
-  color: $color-black;
+  background: linear-gradient(to bottom right, $brand-color, #6ccfe6);
+  box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
+  color: $color-white;
   gap: 1.5rem;
 
-  &::before {
+  &__icon {
     position: absolute;
-    top: -88rem;
-    left: 50%;
-    width: 100rem;
-    height: 100rem;
-    border-radius: 50%;
-    background-color: $color-bright-blue;
-    content: '';
-    translate: -50% 0;
-
-    @include tablet {
-      width: 150rem;
+    z-index: 1;
+    top: -3.4rem;
+    right: -2.3rem;
+    @media (max-width: 991.98px) {
+      top: -1.5rem;
+      right: -1.1rem;
     }
   }
-
-  &__icon {
-    z-index: 10;
-    margin: 0 auto;
+  &__svg {
+    overflow: visible;
+    width: 9rem;
+    height: 9rem;
+    @media (max-width: 991.98px) {
+      width: 6.2rem;
+      height: 6.2rem;
+    }
   }
-
   &__legend {
-    margin-top: 5rem;
+    margin-top: 3rem;
     margin-bottom: 1.5rem;
-    text-align: center;
+
     text-transform: capitalize;
-    @include fluid-text(3rem, 4rem);
+    @include fluid-text(2.5rem, 4.5rem, 9vw);
   }
 
   &__field {
@@ -56,11 +55,12 @@
 
   &__label {
     margin-left: 1rem;
-    @include fluid-text(1.7rem, 2rem);
+    @include fluid-text(1.4rem, 2rem, 2vw);
+    font-weight: $weight-light;
   }
 
   &__input {
-    border-radius: 2.8rem;
+    border-radius: 1.7rem;
   }
 
   &__textarea {
@@ -70,9 +70,9 @@
   &__input,
   &__textarea {
     padding: 1.5rem;
-    border: 0.2rem solid $color-gray-10;
+    border: 0.15rem solid $color-gray-10;
     background: transparent;
-    color: $color-black;
+    color: $color-white;
     resize: none;
     transition: border-color 200ms;
 
@@ -82,7 +82,7 @@
     }
 
     &::placeholder {
-      color: $color-gray-80;
+      color: $color-white;
     }
   }
 
@@ -95,12 +95,17 @@
   }
 
   &__submit {
-    @include btn($color-white, $color-bright-blue, $color-white, $color-aqua-blue);
-    margin-top: 2rem;
+    @include btn($color-white, $color-light-blue, $color-white, $color-aqua-blue);
+    align-self: flex-end;
+    padding: 1.2rem;
+    border-radius: 1.5rem;
 
+    font-size: 1.5rem;
+    font-style: italic;
     @include tablet {
-      width: 40rem;
-      margin: 0 auto;
+      width: 15rem;
+      padding: 0.7rem;
+      font-size: 2rem;
     }
   }
 }
