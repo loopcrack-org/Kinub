@@ -14,6 +14,14 @@ class CtrlAdminEmail extends BaseController
         return view('admin/emails/Emails', ['emails' => $emails]);
     }
 
+    public function viewSpecificEmails($id)
+    {
+        $emailModel = new EmailModel();
+        $email      = $emailModel->find($id);
+
+        return view('admin/emails/SpecificEmails', ['email' => $email]);
+    }
+
     public function deleteEmail()
     {
         $POST       = $this->request->getPost();
@@ -29,7 +37,7 @@ class CtrlAdminEmail extends BaseController
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',
-                'message' => 'Se ha elimnado el email correctamente',
+                'message' => 'Se ha eliminado el email correctamente',
                 'type'    => 'success',
             ];
         } else {

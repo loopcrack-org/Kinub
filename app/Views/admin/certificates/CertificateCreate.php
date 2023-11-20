@@ -1,7 +1,7 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
-<?= view('partials/title-meta', ['title' => 'Crear Solución']); ?>
+<?= view('partials/title-meta', ['title' => 'Crear Certificado']); ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('css') ?>
@@ -13,19 +13,19 @@
 <?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?= view('partials/page-title', ['title' => 'Crear Solución', 'titleUrl' => '/admin/soluciones', 'pagetitle' => 'Soluciones de Medición', 'pagetitleInner' => 'Crear Solución']); ?>
+        <?= view('partials/page-title', ['title' => 'Crear Certificado', 'titleUrl' => '/admin/certificados', 'pagetitle' => 'Certificados', 'pagetitleInner' => 'Crear Certificado']); ?>
 
 
         <div class="row justify-content-center">
             <div class="col-sm-11">
                 <div class="d-flex justify-content-start align-items-center mb-3">
-                    <a href="/admin/soluciones" class="btn btn-primary btn-label waves-effect waves-light rounded-pill">
+                    <a href="/admin/certificados" class="btn btn-primary btn-label waves-effect waves-light rounded-pill">
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
 
-                    <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
+                    <?= $this->include('admin/certificates/certificatesFormTemplate') ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
@@ -45,5 +45,5 @@
 
 <?= $this->section('js') ?>
 <!-- filepond js -->
-<script src="/assets/admin/js/form-file-upload-measurementSolution.init.min.js"></script>
+<script src="/assets/admin/js/form-file-upload-certificate.init.min.js"></script>
 <?= $this->endSection() ?>
