@@ -44,7 +44,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Modelo</th>
-                                    <th>Categorías</th>
+                                    <th>Categoría</th>
                                     <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -87,7 +87,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Modelo</th>
-                                    <th>Categorías</th>
+                                    <th>Categoría</th>
                                     <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
