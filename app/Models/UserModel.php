@@ -30,4 +30,8 @@ class UserModel extends Model
 
         return $data;
     }
+
+    public function resetPassword()
+    {
+    }
 }

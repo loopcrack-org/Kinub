@@ -34,4 +34,13 @@ class ChangePasswordValidation extends BaseValidation
 
         return true;
     }
+
+    public function accessValidation($isConfirmed, $isAuthorized)
+    {
+        if ($isConfirmed !== $isAuthorized) {
+            throw new Exception();
+        }
+
+        return true;
+    }
 }

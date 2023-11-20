@@ -2,7 +2,7 @@
 
 <head>
 
-    <?= view('partials/title-meta', ['title' => 'Restablecer Contraseña']); ?>
+    <?= view('partials/title-meta', ['title' => 'Establecer Contraseña']); ?>
 
     <?= $this->include('partials/head-css') ?>
 
@@ -49,8 +49,8 @@
                             <?php else : ?>
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
-                                        <h5 class="text-primary">Restablece tu contraseña</h5>
-                                        <p class="text-muted">Tu nueva contraseña debe de ser diferente a la anterior</p>
+                                        <h5 class="text-primary">Establece tu contraseña</h5>
+                                        <p class="text-muted">Escriba una contraseña para poder confirmar su cuenta</p>
                                     </div>
 
                                     <div class="p-2">
@@ -61,7 +61,7 @@
                                                 <?php $errors = session()->get('errors') ?>
 
                                                 <div class="position-relative auth-pass-inputgroup">
-                                                    <input name="password" required type="password" class="form-control pe-5 password-input <?= isset($errors['password']) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Ingresa tu nueva contraseña" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                                    <input name="password" required type="password" class="form-control pe-5 password-input <?= isset($errors['password']) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Ingrese su contraseña" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
                                                     <?php if (isset($errors['password'])) : ?>
                                                         <div class="invalid-feedback">
                                                             <?= $errors['password'] ?>
@@ -92,10 +92,7 @@
                                             </div>
 
                                             <div class="mt-4">
-                                                <button class="btn btn-success w-100" type="submit">Restablecer Contraseña</button>
-                                            </div>
-                                            <div class="mt-4 text-center">
-                                                <p class="mb-0">He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz Click Aquí</a> </p>
+                                                <button class="btn btn-success w-100" type="submit">Establecer Contraseña</button>
                                             </div>
                                         </form>
                                     </div>

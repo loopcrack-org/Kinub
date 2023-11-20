@@ -21,22 +21,20 @@ class CtrlLogin extends BaseController
         return view('login/PasswordEmail');
     }
 
+    public function viewPasswordResponse(): string
+    {
+        return view('login/PasswordResponse');
+    }
+
     public function viewPasswordReset($token): string
     {
         try {
             $changePasswordValidation = new ChangePasswordValidation();
-
-            $userTokenModel = new UserTokenModel();
-            $userToken      = $userTokenModel->where('userToken', $token)->first();
-            $changePasswordValidation->existUserWithToken($userToken);
-
-            $userModel = new UserModel();
-
-            $user = $userModel->find($userToken['userId']);
+            $userModel                = new UserModel();
+            $user                     = $userModel->join('user_tokens', 'user_tokens.userId = users.userId')->where('userToken', $token)->first();
 
             $changePasswordValidation->existUserWithToken($user);
-
-            $isAccountConfirmed = $user['confirmed'];
+            $changePasswordValidation->accessValidation($user['confirmed'], '1');
         } catch (Throwable $th) {
             $response = [
                 'type'    => 'danger',
@@ -46,9 +44,33 @@ class CtrlLogin extends BaseController
         }
 
         return view('login/PasswordReset', [
-            'token'              => $token,
-            'isAccountConfirmed' => $isAccountConfirmed ?? false,
-            'response'           => $response ?? null,
+            'token'    => $token,
+            'response' => $response ?? null,
+        ]);
+    }
+
+    public function viewPasswordSet($token): string
+    {
+        try {
+            $changePasswordValidation = new ChangePasswordValidation();
+
+            $userModel = new UserModel();
+
+            $user = $userModel->join('user_tokens', 'user_tokens.userId = users.userId')->where('userToken', $token)->first();
+
+            $changePasswordValidation->existUserWithToken($user);
+            $changePasswordValidation->accessValidation($user['confirmed'], '0');
+        } catch (Throwable $th) {
+            $response = [
+                'type'    => 'danger',
+                'title'   => '¡Oops!',
+                'message' => 'Parece que no cuenta con el permiso para establecer su contraseña o el token es invalido',
+            ];
+        }
+
+        return view('login/PasswordSet', [
+            'token'    => $token,
+            'response' => $response ?? null,
         ]);
     }
 
@@ -64,35 +86,23 @@ class CtrlLogin extends BaseController
             }
 
             $userTokenModel = new UserTokenModel();
-            $userToken      = $userTokenModel->where('userToken', $token)->first();
-
-            $userModel = new UserModel();
-            $user      = $userModel->find($userToken['userId']);
+            $user           = $userTokenModel->join('users', 'users.userId = user_tokens.userId')->where('userToken', $token)->first();
 
             $changePasswordValidation->existUserWithToken($user);
-            $isAccountConfirmed = $user['confirmed'];
 
-            if ($isAccountConfirmed) {
-                $result = $userModel->update($user['userId'], [
-                    'userPassword' => $data['password'],
-                ]) && $userTokenModel->delete($userToken['userTokenId']);
-            } else {
-                $result = $userModel->update($user['userId'], [
-                    'userPassword' => $data['password'],
-                    'confirmed'    => 1,
-                ]) && $userTokenModel->delete($userToken['userTokenId']);
-            }
+            $userModel = new UserModel();
+            $userModel->update($user['userId'], [
+                'userPassword' => $data['password'],
+            ]);
+            $userTokenModel->where('userId', $user['userId'])->delete();
 
-            if ($result) {
-                $response = [
-                    'type'    => 'success',
-                    'title'   => 'Contraseña actualizada correctamente',
-                    'message' => 'Porfavor, inicia sesión para comenzar',
-                ];
-            }
+            $response = [
+                'type'    => 'success',
+                'title'   => 'Contraseña actualizada correctamente',
+                'message' => 'Porfavor, inicia sesión para comenzar',
+            ];
         } catch (Exception $e) {
             $errors = $changePasswordValidation->getErrors();
-
             if (isset($errors['connection'])) {
                 $response = [
                     'type'    => 'danger',
@@ -105,6 +115,53 @@ class CtrlLogin extends BaseController
         }
 
         return redirect()->to('/password_reset')->with('response', $response);
+    }
+
+    public function passwordSet($token)
+    {
+        $changePasswordValidation = new ChangePasswordValidation();
+
+        $data = $this->request->getPost();
+
+        try {
+            if (! $changePasswordValidation->validateInputs($data)) {
+                throw new Exception();
+            }
+
+            $userTokenModel = new UserTokenModel();
+            $user           = $userTokenModel->join('users', 'users.userId = user_tokens.userId')->where('userToken', $token)->first();
+
+            $changePasswordValidation->existUserWithToken($user);
+
+            $userModel = new UserModel();
+            $result    = $userModel->update($user['userId'], [
+                'userToken'    => null,
+                'userPassword' => $data['password'],
+                'confirmed'    => 1,
+            ]);
+            $userTokenModel->where('userId', $user['userId'])->delete();
+
+            if ($result) {
+                $response = [
+                    'type'    => 'success',
+                    'title'   => 'Contraseña establecida correctamente',
+                    'message' => 'Porfavor, inicia sesión para comenzar',
+                ];
+            }
+        } catch (Exception $e) {
+            $errors = $changePasswordValidation->getErrors();
+            if (isset($errors['connection'])) {
+                $response = [
+                    'type'    => 'danger',
+                    'title'   => '¡Oops!',
+                    'message' => $errors['connection'],
+                ];
+            } else {
+                return redirect()->back()->with('errors', $errors);
+            }
+        }
+
+        return redirect()->to('/password_set')->with('response', $response);
     }
 
     public function login()
