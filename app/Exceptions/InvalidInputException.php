@@ -14,7 +14,7 @@ class InvalidInputException extends Exception
         parent::__construct($message);
     }
 
-    public function getErros()
+    public function getErrors()
     {
         return $this->errors;
     }
