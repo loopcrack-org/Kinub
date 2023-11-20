@@ -28,7 +28,22 @@ class CtrlCertificate extends BaseController
 
     public function createCertificate()
     {
-        return 'creating certificate...';
+        $isCreated = true;
+        if ($isCreated) {
+            $response = [
+                'title'   => 'Creación exitosa',
+                'message' => 'Se ha creado el certificado correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Creación fallida',
+                'message' => 'No se pudo realizar crear el certificado',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->to('/admin/certificados')->with('response', $response);
     }
 
     public function updateCertificate($id)
