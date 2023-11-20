@@ -63,7 +63,7 @@ class CtrlCategory extends BaseController
 
             return redirect()->to('/admin/categorias')->with('response', $response);
         } catch (InvalidInputException $th) {
-            return redirect()->to('/admin/categorias/crear')->withInput()->with('errors', $th->getErros());
+            return redirect()->to('/admin/categorias/crear')->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error.',
