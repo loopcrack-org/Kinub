@@ -64,8 +64,10 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="hstack gap-3 align-items-start">
+                                        <?php $errors = session()->get('errors') ?>
                                         <div class="flex-grow-1">
-                                            <textarea class="form-control" rows="3" name="aboutUsText" required><?= old('aboutUsText') ?? ''?></textarea>
+                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" rows="3" name="aboutUsText"><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
+                                            <?= view('admin/templates/invalidInputError', ['error' => $errors['aboutUsText'] ?? null])?>
                                         </div>
                                     </div>
                                 </div>
@@ -76,6 +78,8 @@
                         <!-- end col -->
                     </div>
                     <!-- end row -->
+
+                    <input type="hidden" name="homePageId" value="<?= old('homePageId') ?? $aboutUsData['homePageId'] ?? ''?>">
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
