@@ -9,7 +9,7 @@
   clear: both;
 
   + .grid {
-    margin-top: $base-spacing-unit;
+    margin-top: $spacing-lg;
   }
 }
 
@@ -18,8 +18,8 @@
 .grid__row {
   display: flex;
   flex-wrap: wrap;
-  margin-top: -$base-spacing-unit;
-  margin-left: -$base-spacing-unit;
+  margin-top: -$spacing-lg;
+  margin-left: -$spacing-lg;
 
   + .grid__row {
     margin-top: 0;
@@ -29,6 +29,6 @@
 /* Column */
 
 .grid__col {
-  padding-top: $base-spacing-unit;
-  padding-left: $base-spacing-unit;
+  padding-top: $spacing-lg;
+  padding-left: $spacing-lg;
 }

@@ -8,14 +8,14 @@
 
 label {
   display: inline-block;
-  margin-bottom: $base-spacing-unit-xs;
+  margin-bottom: $spacing-xs;
   font-weight: $weight-bold;
 
   /* Checkbox or Radio Button */
 
   [type='checkbox'],
   [type='radio'] {
-    margin-right: $base-spacing-unit-xs;
+    margin-right: $spacing-xs;
   }
 }
 

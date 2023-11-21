@@ -1,7 +1,7 @@
-const hamburgerBtn = document.querySelector('#menu-mobile');
-const header = document.querySelector('#header-nav');
-const navigation = document.querySelector('#navigation');
-const MOBILE_MEDIA_QUERY = '(min-width: 768px)';
+const hamburgerBtn = document.querySelector('#header-hamburger-btn');
+const header = document.querySelector('#header');
+const navigation = document.querySelector('#header-navigation');
+const MOBILE_MEDIA_QUERY = '(min-width: 48rem)';
 const mediaQuery = window.matchMedia(MOBILE_MEDIA_QUERY);
 
 // UI-Related Functions

@@ -11,12 +11,12 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: $base-spacing-unit;
+  margin-top: $spacing-lg;
 
   /* Meta */
 
   .pagination__meta {
-    margin-right: $base-spacing-unit-small;
+    margin-right: $spacing-sm;
     font-size: 0.875em;
     vertical-align: middle;
   }
@@ -26,7 +26,7 @@
 
 .pagination__control {
   position: relative;
-  padding: $base-spacing-unit-xs $base-spacing-unit-small;
+  padding: $spacing-xs $spacing-sm;
   border: $base-border-width-small solid $color-gray-20;
   background-color: $color-white;
   color: $color-brand-secondary;

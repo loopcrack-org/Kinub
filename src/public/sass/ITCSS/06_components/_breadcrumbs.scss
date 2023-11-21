@@ -21,8 +21,8 @@
 
   &:not(:last-child)::after {
     flex: 0 1 auto;
-    padding-right: $base-spacing-unit-small;
-    padding-left: $base-spacing-unit-small;
+    padding-right: $spacing-sm;
+    padding-left: $spacing-sm;
     color: $color-brand-secondary;
     content: '/';
   }

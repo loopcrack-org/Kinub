@@ -1,3 +1,4 @@
+@use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../02_tools/breakpoints' as *;
 @use '../../../../02_tools/mixins' as *;
@@ -6,8 +7,8 @@
   margin-bottom: 12rem;
 
   &__heading {
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: $spacing-md;
+    padding-left: $spacing-md;
     margin-bottom: 3rem;
     @include tablet() {
       margin-bottom: 5rem;

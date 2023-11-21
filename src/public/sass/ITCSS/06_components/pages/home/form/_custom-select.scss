@@ -1,6 +1,6 @@
 /* stylelint-disable plugin/no-unsupported-browser-features */
 /* stylelint-disable plugin/selector-bem-pattern */
-
+@use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../01_settings/fonts' as *;
 @use '../../../../02_tools/breakpoints' as *;
@@ -26,7 +26,7 @@
     }
 
     @include tablet {
-      padding: 1.5rem;
+      padding: $spacing-lg;
       font-size: 1rem;
     }
   }
@@ -43,7 +43,7 @@
   }
 
   .custom-select-option {
-    padding-left: 1.5rem;
+    padding-left: $spacing-lg;
     background: transparent;
     cursor: pointer;
     &.is-selected {
@@ -55,6 +55,12 @@
       background: transparent;
       font-style: normal;
       font-weight: $weight-bold;
+    }
+  }
+
+  &.is-open {
+    .custom-select-panel {
+      overflow-y: hidden;
     }
   }
 }

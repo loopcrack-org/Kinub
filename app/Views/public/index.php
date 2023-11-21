@@ -7,7 +7,6 @@
 
 <!-- JS -->
 <?php $this->section('js'); ?>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/public/js/home.min.js"></script>
 <?php $this->endSection(); ?>
 
@@ -212,12 +211,12 @@
 if(isset($response)):
     ?>
         <script type="module">
-            Swal.fire({
+            showAlert({
                 title: "<?= $response['title']; ?>",
                 text: "<?= $response['message']; ?>",
                 icon: "<?= $response['type']; ?>",
                 confirmButtonColor: '#0174F6'
-            })
+            });
         </script>
     <?php endif; ?>
 

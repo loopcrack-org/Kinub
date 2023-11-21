@@ -8,7 +8,7 @@
 
 .button {
   display: inline-block;
-  padding: $base-spacing-unit-small $base-spacing-unit;
+  padding: $spacing-sm $spacing-lg;
   border: $base-border-width-small solid $color-brand-secondary-light;
   border-radius: $base-border-radius-large;
   margin: 0;
@@ -44,7 +44,7 @@
   /* Icon */
 
   .button__icon {
-    margin-right: $base-spacing-unit-xs;
+    margin-right: $spacing-xs;
   }
 
   /**
@@ -114,5 +114,5 @@
  */
 
 .button--small {
-  padding: $base-spacing-unit-xs $base-spacing-unit-small;
+  padding: $spacing-xs $spacing-sm;
 }

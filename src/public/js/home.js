@@ -1,5 +1,14 @@
-import customSelect from 'custom-select';
 import Plyr from 'plyr';
+import Swal from 'sweetalert2';
+import customSelect from 'custom-select';
 
-customSelect('select');
 new Plyr('#kinub-video');
+customSelect('select');
+
+const showAlert = (props) => {
+  Swal.fire({
+    ...props,
+  });
+};
+
+window.showAlert = showAlert;

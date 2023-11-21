@@ -19,12 +19,12 @@ ul,
 figure,
 hr,
 table {
-  margin-bottom: $base-spacing-unit;
+  margin-bottom: $spacing-lg;
 }
 
 fieldset,
 legend {
-  margin-bottom: $base-spacing-unit-small;
+  margin-bottom: $spacing-sm;
 }
 
 caption,
@@ -34,5 +34,5 @@ th {
 
 th,
 td {
-  padding: $base-spacing-unit-small $base-spacing-unit;
+  padding: $spacing-sm $spacing-lg;
 }
