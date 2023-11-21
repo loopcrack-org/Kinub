@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\MeasurementSolutionModel;
 use App\Validation\SolutionValidation;
-use Exception;
 use Throwable;
 
 class CtrlSolution extends BaseController
@@ -32,45 +32,38 @@ class CtrlSolution extends BaseController
 
     public function createSolution()
     {
-        $validateMeasurementSolution = new SolutionValidation();
-        $measurementSolutionData     = $this->request->getPost(['msName', 'msDescription']);
-
         try {
-            if (! $validateMeasurementSolution->validateInputs($measurementSolutionData)) {
-                throw new Exception();
+            $newMeasurementSolutionData       = $this->request->getPost();
+            $measurementSolutionDataValidator = new SolutionValidation();
+
+            if (! $measurementSolutionDataValidator->validateInputs($newMeasurementSolutionData)) {
+                throw new InvalidInputException($measurementSolutionDataValidator->getErrors(), '');
             }
 
-            $measurementSolutionModel             = new MeasurementSolutionModel();
-            $measurementSolutionData['msImageId'] = 1;
-            $measurementSolutionData['msIconId']  = 2;
+            $newMeasurementSolutionData['msImageId'] = 1;
+            $newMeasurementSolutionData['msIconId']  = 2;
 
-            $isCreated = $measurementSolutionModel->insert($measurementSolutionData);
-
-            if (! $isCreated) {
-                throw new Exception('Algo salio mal al registrar la solución de medición. Por favor, inténtalo de nuevo.');
-            }
+            $measurementSolutionModel = new MeasurementSolutionModel();
+            $measurementSolutionModel->insert($newMeasurementSolutionData);
 
             $response = [
                 'title'   => 'Solución de medición registrada con éxito',
                 'message' => 'La solución de medición se ha registrado exitosamente',
                 'type'    => 'success',
             ];
+
+            return redirect()->to('admin/soluciones')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->to('admin/soluciones/crear')->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
-            dd($th);
-            $errors = $validateMeasurementSolution->getErrors();
+            $response = [
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al registrar los datos, por favor intente nuevamente.',
+                'type'    => 'error',
+            ];
 
-            if (empty($errors)) {
-                $response = [
-                    'title'   => '¡Oops!',
-                    'message' => $th->getMessage(),
-                    'type'    => 'error',
-                ];
-            } else {
-                return redirect()->back()->withInput()->with('errors', $errors);
-            }
+            return redirect()->to('/admin/soluciones')->with('response', $response)->withInput();
         }
-
-        return redirect()->to('/admin/soluciones')->with('response', $response);
     }
 
     public function updateSolution($id)

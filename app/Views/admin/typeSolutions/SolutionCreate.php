@@ -23,9 +23,10 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
+                <?php $errors = session()->get('errors'); ?>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
 
-                    <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
+                    <?= view('admin/typeSolutions/solutionsFormTemplate', ['errors' => $errors]) ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>

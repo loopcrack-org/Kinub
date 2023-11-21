@@ -26,7 +26,7 @@ FilePond.registerPlugin(
 FilePond.setOptions({
   labelIdle:
     'Arrastra y suelta tu imagen o <span class="filepond--label-action"> Selecciona </span>',
-  labelFileTypeNotAllowed: 'Archivo no valido',
+  labelFileTypeNotAllowed: 'Archivo no válido',
   fileValidateTypeLabelExpectedTypes: `Se espera {allTypes}`,
   allowReorder: true,
   maxFiles: 1,
@@ -36,7 +36,7 @@ FilePond.setOptions({
 //Since the input names should be unique, instances are created for each input that filepond will use.
 FilePond.create(document.querySelector('input#icon'), {
   labelIdle:
-    'Arrastra y suelta tu icono o <span class="filepond--label-action"> Selecciona </span>',
+    'Arrastra y suelta tu ícono o <span class="filepond--label-action"> Selecciona </span>',
   acceptedFileTypes: 'image/svg+xml',
 });
 
