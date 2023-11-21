@@ -54,7 +54,16 @@ class CtrlSolution extends BaseController
 
     public function deleteSolution()
     {
-        $isDeleted = true;
+        $POST                     = $this->request->getPost();
+        $msId                     = $POST['msId'];
+        $measurementSolutionModel = new MeasurementSolutionModel();
+        $measurementSolution      = $measurementSolutionModel->find($msId);
+
+        $isDeleted = false;
+        if (! empty($measurementSolution)) {
+            $isDeleted = $measurementSolutionModel->delete($msId);
+        }
+
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',
