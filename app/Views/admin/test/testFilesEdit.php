@@ -36,7 +36,7 @@
 
                                     <div class="card-body">
                                         <p class="card-text">Ingresa un nombre</p>
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" required value="<?= old('name') ?? '' ?>">
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" required value="<?= $name ?? '' ?>">
                                     </div>
                                     <!-- end card body -->
                                 </div>
@@ -46,14 +46,16 @@
                         </div>
                         <!-- end row -->
 
-                        <!-- Images input -->
                         <div class="row">
+                            <!-- Images -->
                             <div class="col-md-12">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Imagenes</h4>
                                     </div><!-- end card header -->
+
                                     <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['image']]) ?>
+
                                 </div>
                                 <!-- end card -->
                             </div>
@@ -61,7 +63,6 @@
                         </div>
                         <!-- end row -->
 
-                        <!-- Video input -->
                         <div class="row">
                             <!-- Videos -->
                             <div class="col-md-12">
@@ -70,9 +71,7 @@
                                         <h4 class="card-title mb-0">Video</h4>
                                     </div><!-- end card header -->
 
-                                    <?= view('admin/components/inputFilePond', [
-                                        'config' => $filepondConfig['video'],
-                                    ]) ?>
+                                    <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['video']]) ?>
 
                                     <!-- end card body -->
                                 </div>
@@ -82,7 +81,6 @@
                         </div>
                         <!-- end row -->
 
-                        <!-- datasheet input -->
                         <div class="row">
                             <!-- Documents -->
                             <div class="col-md-12">
@@ -90,9 +88,9 @@
                                     <div class="card-header">
                                         <h4 class="card-title mb-0">Documents (PDF)</h4>
                                     </div><!-- end card header -->
-                                    <?= view('admin/components/inputFilePond', [
-                                        'config' => $filepondConfig['datasheet'],
-                                    ]) ?>
+
+                                    <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['datasheet']]) ?>
+
                                 </div>
                                 <!-- end card -->
                             </div>

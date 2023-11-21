@@ -104,7 +104,12 @@ $routes->group('admin', static function ($routes) {
 
     $routes->group('testFiles', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlTestFiles::class, 'viewTestFiles']);
         $routes->get('crear', [CtrlTestFiles::class, 'viewTestFilesCreate']);
+        $routes->post('crear', [CtrlTestFiles::class, 'createTestFiles']);
+        $routes->get('editar/(:num)', [CtrlTestFiles::class, 'viewTestFilesEdit']);
+        $routes->post('editar/(:num)', [CtrlTestFiles::class, 'updateTestFiles']);
+        $routes->post('borrar', [CtrlTestFiles::class, 'deleteTestFiles']);
         generateFileApiRoutesByController($routes, CtrlTestFiles::class);
     });
 });
