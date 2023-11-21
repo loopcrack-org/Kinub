@@ -233,12 +233,12 @@ if(isset($response)):
         <div class="form__field">
             <label for="product-name" class="form__label">Equipo de mi interés</label>
             <?= isset($errors['product-name']) ? '<p class="form__error">' . $errors['product-name'] . '</p>' : '' ?>
-            <select id="mySelect2" class="form__select">
+            <select id="mySelect2" >
+                <option value>Select...</option>
                 <option value="feline">Equipos X</option>
                 <option value="feline">Necesito Asesoria</option>
-
-
             </select>
+
         </div>
 
         <div class="form__field">

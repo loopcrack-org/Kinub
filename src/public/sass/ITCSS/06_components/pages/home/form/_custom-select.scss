@@ -3,22 +3,31 @@
 
 @use '../../../../01_settings/colors' as *;
 @use '../../../../01_settings/fonts' as *;
+@use '../../../../02_tools/breakpoints' as *;
 
+@import 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.min.css';
 .custom-select-container {
   position: relative;
   overflow: hidden;
-  border: 0.125rem solid $color-white;
+  border: 0.115rem solid $color-white;
   border-radius: 1.7rem;
   font-style: italic;
 
   .custom-select-opener {
-    padding: 1.5rem;
+    padding: 0.7rem;
     border-radius: 1.7rem;
     background: transparent;
+    font-size: 0.7rem;
     font-style: normal;
     white-space: wrap;
+
     &:focus {
       border-color: $color-light-blue;
+    }
+
+    @include tablet {
+      padding: 1.5rem;
+      font-size: 1rem;
     }
   }
 
