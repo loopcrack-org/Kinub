@@ -106,6 +106,35 @@ The main Index file in each ITCSS folder contains a double underscore so it is a
 - **Preference for Rem/Em**: Avoid using pixels (`px`). Prefer `rem` or `em` units as they offer responsive and scalable styling.
 - **Advantages**: Thinking of 1rem as 16px provides a simple baseline for scaling. This approach enhances accessibility and ease of maintaining responsive designs.\*\*
 
+### Try to use the new Container Query Length Units
+
+#### Container Query Units (CQ Units)
+
+- **cqw**: 1% of the container's width
+- **cqh**: 1% of the container's height
+- **cqi**: 1% of the container's inline size
+- **cqb**: 1% of the container's block size
+- **cqmin**: Smaller of cqi and cqb
+- **cqmax**: Larger of cqi and cqb
+
+#### Viewport Units
+
+- **vw (viewport width)**: 1vw = 1% of the browser's width
+- **vh (viewport height)**: 1vh = 1% of the browser's height
+- **vmin (viewport minimum)**: 1vmin = 1% of the smaller viewport dimension (width or height)
+- **vmax (viewport maximum)**: 1vmax = 1% of the larger viewport dimension (width or height)
+- **vi (viewport inline)**: Logical inline version of vw/vh ([More on logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/logical_properties))
+- **vb (viewport block)**: Logical block version of vw/vh ([More on logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/logical_properties))
+
+#### Variable Viewport Units
+
+- **svw/lvw/dvw (scaled/limited/dynamic viewport width)**: Relative to browser width
+- **svh/lvh/dvh (scaled/limited/dynamic viewport height)**: Relative to browser height
+- **svmin/lvmin/dvmin (scaled/limited/dynamic viewport minimum)**: Relative to the smaller viewport dimension
+- **svmax/lvmax/dvmax (scaled/limited/dynamic viewport maximum)**: Relative to the larger viewport dimension
+- **svi/lvi/dvi (scaled/limited/dynamic viewport inline)**: Logical inline version of *vw/*vh
+- **svb/lvb/dvb (scaled/limited/dynamic viewport block)**: Logical block version of *vw/*vh
+
 ### Media Queries Strategies
 
 #### Nested Approach
@@ -186,3 +215,5 @@ Each page of the site should have its own `.scss` file without an underscore in 
 - [CSS Methodologies and Architectures: OOCSS, BEM, SMACSS, ITCSS, Atomic Design](https://medium.com/williambastidasblog/metodologías-o-arquitecturas-css-oocss-bem-smacss-itcss-atomic-design-a1a3cfbfa6c9)
 - [Atomic Web Design by Brad Frost](https://bradfrost.com/blog/post/atomic-web-design/)
 - [ITCSS: What is it and its foundations](https://desarrolloweb.com/articulos/itcss-que-es-bases.html)
+- [CSS Container Queries](https://developer.mozilla.org/es/docs/Web/CSS/CSS_container_queries)
+- [CSS Length Units: Relative to the Viewport](https://lenguajecss.com/css/unidades-css/relativas-viewport/)
