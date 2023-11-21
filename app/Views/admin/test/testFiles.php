@@ -43,7 +43,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Icono</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
