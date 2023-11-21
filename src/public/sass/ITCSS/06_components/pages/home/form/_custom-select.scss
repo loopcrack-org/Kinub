@@ -5,7 +5,6 @@
 @use '../../../../01_settings/fonts' as *;
 @use '../../../../02_tools/breakpoints' as *;
 
-@import 'https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.3.2/css/simple-line-icons.min.css';
 .custom-select-container {
   position: relative;
   overflow: hidden;
@@ -20,9 +19,23 @@
     font-size: 0.7rem;
     font-style: normal;
     white-space: wrap;
+    ::after {
+      position: absolute;
+      top: 0.5rem;
+      right: 1rem;
+      content: url(/assets/images/down-arrow.svg);
+      transform: scale(0.7);
+      @include tablet {
+        top: 1.7rem;
+        right: 2rem;
+        transform: scale(1);
+      }
+    }
 
     &:focus {
-      border-color: $color-light-blue;
+      ::after {
+        transform: rotate(180deg);
+      }
     }
 
     @include tablet {

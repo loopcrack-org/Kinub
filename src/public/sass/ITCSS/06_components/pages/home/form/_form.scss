@@ -10,15 +10,15 @@
   display: flex;
   overflow: visible;
   flex-direction: column;
-  padding: $spacing-lg;
+  padding: 1.5rem;
   border-radius: 3.5rem;
 
-  margin: $spacing-md;
+  margin: 1rem;
   margin-bottom: 3rem;
   background: linear-gradient(to bottom right, $brand-color, #6ccfe6);
-  box-shadow: $color-gray-80 0rem 0.2rem $spacing-sm;
+  box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
   color: $color-white;
-  gap: $spacing-lg;
+  gap: 1.5rem;
   @include tablet {
     padding: 3.5rem;
     margin-right: auto;
@@ -29,7 +29,7 @@
   &__icon {
     position: absolute;
     z-index: 1;
-    top: -$spacing-lg;
+    top: -1.5rem;
     right: -0.9rem;
     @include tablet {
       top: -3.4rem;
@@ -52,9 +52,9 @@
     margin-bottom: 0.7rem;
 
     text-transform: capitalize;
-    @include fluid-text($spacing-lg, 4.5rem, 9vw);
+    @include fluid-text(1.5rem, 4.5rem, 9vw);
     @include tablet {
-      margin-bottom: $spacing-lg;
+      margin-bottom: 1.5rem;
     }
   }
 
@@ -66,8 +66,8 @@
   }
 
   &__label {
-    margin-left: $spacing-md;
-    @include fluid-text($spacing-md, $spacing-xl, 2vw);
+    margin-left: 1rem;
+    @include fluid-text(1rem, 2rem, 2vw);
     font-weight: $weight-light;
   }
 
@@ -76,12 +76,12 @@
   }
 
   &__textarea {
-    border-radius: $spacing-lg;
+    border-radius: 1.5rem;
   }
 
   &__input,
   &__textarea {
-    padding: $spacing-md;
+    padding: 1rem;
     border: 0.13rem solid $color-white;
     background: transparent;
     color: $color-white;
@@ -97,13 +97,13 @@
       color: $color-white;
     }
     @include tablet {
-      padding: $spacing-lg;
+      padding: 1.5rem;
       font-size: 1em;
     }
   }
 
   &__error {
-    margin-left: $spacing-md;
+    margin-left: 1rem;
     color: $color-error;
     font-size: 1.7rem;
     font-weight: $weight-bold;
@@ -113,15 +113,15 @@
   &__submit {
     @include btn($color-white, $color-light-blue, $color-white, $color-aqua-blue);
     align-self: flex-end;
-    padding: 0.7rem $spacing-xl 0.7rem $spacing-xl;
-    border-radius: $spacing-lg;
+    padding: 0.7rem 2rem 0.7rem 2rem;
+    border-radius: 1.5rem;
 
     font-size: 1rem;
     font-style: italic;
     @include tablet {
       width: 15rem;
       padding: 0.7rem;
-      font-size: $spacing-xl;
+      font-size: 2rem;
     }
   }
 }
