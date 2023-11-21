@@ -1,0 +1,84 @@
+name: Deploy website
+
+# Deploy only on push events to main branch or manually dispatch the deployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to sync'
+        required: true
+        default: 'main'
+
+# Cancel any previous workflow that's still running
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+      # Setting up PHP for deployment.
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+      # Setting up node.js for deployment.
+
+    - name: Build project
+      run: |
+        composer install
+        npm install
+        npm run build
+      # Installing dependencies and building project.
+
+    - name: Install lftp
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y lftp
+      # Install lftp on the runner.
+
+    - name: Identify changes
+      run: |
+        ADDED=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }})
+        MODIFIED=$(git diff --name-only --diff-filter=M ${{ github.event.before }} ${{ github.sha }})
+        DELETED=$(git diff --name-only --diff-filter=D ${{ github.event.before }} ${{ github.sha }})
+        RENAMED=$(git diff --name-only --diff-filter=R ${{ github.event.before }} ${{ github.sha }})
+        echo "ADDED=$ADDED" >> $GITHUB_ENV
+        echo "MODIFIED=$MODIFIED" >> $GITHUB_ENV
+        echo "DELETED=$DELETED" >> $GITHUB_ENV
+        echo "RENAMED=$RENAMED" >> $GITHUB_ENV
+      # Get the list of added, modified, deleted, and renamed files.
+
+    - name: Sync files
+      run: |
+        FTP_SERVER="${{ secrets.ftp-server-host }}"
+        FTP_USERNAME="${{ secrets.ftp-username }}"
+        FTP_PASSWORD="${{ secrets.ftp-password }}"
+        SERVER_DIR=""
+
+        lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && mirror --reverse --continue --verbose $MODIFIED $ADDED node_modules vendor $SERVER_DIR"
+
+        for file in $DELETED; do
+          lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && rm -f $SERVER_DIR/$file"
+        done
+
+        for rename in $RENAMED; do
+          old_file=$(echo $rename | cut -d' ' -f1)
+          new_file=$(echo $rename | cut -d' ' -f2)
+          lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && mv $SERVER_DIR/$old_file $SERVER_DIR/$new_file"
+        done
+      # Sync changed files to server via FTP.
