@@ -15,10 +15,11 @@
 
   margin: 1rem;
   margin-bottom: 3rem;
-  background: linear-gradient(to bottom right, $brand-color, #6ccfe6);
+  background: linear-gradient(to bottom right, $brand-color, $color-cyan-blue);
+
   box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
   color: $color-white;
-  gap: 1.5rem;
+  gap: 2.5svh;
   @include tablet {
     padding: 3.5rem;
     margin-right: auto;
@@ -30,8 +31,13 @@
     position: absolute;
     z-index: 1;
     top: -1.5rem;
-    right: -0.9rem;
+    right: -0.1rem;
+
     @include tablet {
+      top: -3.4rem;
+      right: 0.1rem;
+    }
+    @include desktop {
       top: -3.4rem;
       right: -2.3rem;
     }
@@ -72,7 +78,7 @@
   }
 
   &__input {
-    border-radius: 1.7rem;
+    border-radius: 2cqmax;
   }
 
   &__textarea {
@@ -81,7 +87,7 @@
 
   &__input,
   &__textarea {
-    padding: 1rem;
+    padding: 0.7rem;
     border: 0.13rem solid $color-white;
     background: transparent;
     color: $color-white;

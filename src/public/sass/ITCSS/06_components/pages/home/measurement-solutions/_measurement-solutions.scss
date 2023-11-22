@@ -4,7 +4,7 @@
 @use '../../../../02_tools/mixins' as *;
 
 .measurement-solutions {
-  margin-bottom: 12rem;
+  margin-bottom: 6rem;
 
   &__heading {
     padding-right: $spacing-md;
@@ -30,5 +30,8 @@
     @include desktopXL() {
       @include flex-columns(4, 0rem, 0rem);
     }
+  }
+  @include tablet {
+    margin-bottom: 12rem;
   }
 }
