@@ -2,11 +2,16 @@
 
 namespace App\Controllers;
 
+use App\Models\MeasurementSolutionModel;
+
 class CtrlSolution extends BaseController
 {
     public function viewSolutions()
     {
-        return view('admin/typeSolutions/Solutions');
+        $measurementSolutionModel = new MeasurementSolutionModel();
+        $measurementSolutions     = $measurementSolutionModel->findAll();
+
+        return view('admin/typeSolutions/Solutions', ['measurementSolutions' => $measurementSolutions]);
     }
 
     public function viewSolutionCreate()
@@ -16,7 +21,10 @@ class CtrlSolution extends BaseController
 
     public function viewSolutionEdit($id)
     {
-        return view('admin/typeSolutions/SolutionEdit', ['id' => $id]);
+        $measurementSolutionModel = new MeasurementSolutionModel();
+        $measurementSolution      = $measurementSolutionModel->find($id);
+
+        return view('admin/typeSolutions/SolutionEdit', ['solution' => $measurementSolution]);
     }
 
     public function createSolution()
@@ -26,7 +34,22 @@ class CtrlSolution extends BaseController
 
     public function updateSolution($id)
     {
-        return "updating solution... {$id}";
+        $isUpdated = true;
+        if ($isUpdated) {
+            $response = [
+                'title'   => 'Edición exitosa',
+                'message' => 'Se ha actualizado la solución de medición correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Edición fallida',
+                'message' => 'No se pudo realizar la edición de la solución de medición',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->to('/admin/soluciones')->with('response', $response);
     }
 
     public function deleteSolution()

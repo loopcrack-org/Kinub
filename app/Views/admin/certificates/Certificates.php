@@ -38,12 +38,12 @@
 
                     <!-- card-header -->
                     <div class="card-body">
-                        <table id="certificates-table" class="table nowrap dt-responsive align-middle table-hover table-bordered" style="width:100%">
+                        <table id="certificates-table" class="table nowrap dt-responsive align-middle table-hover table-bordered w-100">
                             <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Previsualización de la imagen</th>
+                                    <th><p class="text-wrap">Previsualización de la imagen</p></th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -58,13 +58,13 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img src="<?= $certificate['fileRoute']; ?>" alt="Imagen del certificado " . <?= $certificate['certificateId']; ?> width="200" height="100">
+                                                <img class="mw-100 object-fit-contain" src="<?= $certificate['fileRoute']; ?>" alt="Imagen del certificado " . <?= $certificate['certificateId']; ?> height="150">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-between">
-                                                <a href="/admin/certificados/editar/<?= $certificate['certificateId']; ?>" class="btn btn-primary btn-icon waves-effect waves-light mb-2" style="width: 100%"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCertificatesModal" data-id=<?= $certificate['certificateId']; ?> style="width: 100%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                <a href="/admin/certificados/editar/<?= $certificate['certificateId']; ?>" class="btn btn-primary btn-icon waves-effect waves-light mb-2 w-100"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light w-100" data-bs-toggle="modal" data-bs-target="#deleteCertificatesModal" data-id=<?= $certificate['certificateId']; ?> ><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -74,7 +74,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Previsualización de la imagen</th>
+                                    <th><p class="text-wrap">Previsualización de la imagen</p></th>
                                     <th>Acciones</th>
                                 </tr>
                             </tfoot>

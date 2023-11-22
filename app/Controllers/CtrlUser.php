@@ -35,27 +35,27 @@ class CtrlUser extends BaseController
     public function createUser()
     {
         $validateUser = new UserValidation();
-        $POST         = $this->request->getPost();
+        $userData     = $this->request->getPost();
 
         try {
-            if (! $validateUser->validateInputs($POST)) {
+            if (! $validateUser->validateInputs($userData)) {
                 throw new Exception();
             }
 
             $userModel = new UserModel();
-            $user      = $userModel->where('userEmail', $POST['userEmail'])->first();
+            $user      = $userModel->where('userEmail', $userData['userEmail'])->first();
             $validateUser->existUserEmail($user);
+            $userData['confirmed'] = 0;
+            $userData['isAdmin']   = 0;
 
-            $token             = TokenGenerator::generateToken();
-            $POST['userToken'] = $token;
-            $POST['confirmed'] = 0;
-            $POST['isAdmin']   = 0;
-            $userModel->insert($POST);
+            $userId = $userModel->insert($userData);
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
+            $userData['userToken'] = TokenGenerator::generateToken($userId);
+
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $userData['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $userData);
 
             if (! $isSend) {
-                $userModel->where('userEmail', $POST['userEmail'])->delete();
+                $userModel->where('userEmail', $userData['userEmail'])->delete();
 
                 throw new Exception('Algo salio mal al crear el usuario. Por favor, inténtalo de nuevo.');
             }
@@ -103,13 +103,14 @@ class CtrlUser extends BaseController
             } else {
                 $user = $userModel->where('userEmail', $POST['userEmail'])->first();
                 $validateUser->existUserEmail($user);
-                $token = TokenGenerator::generateToken();
 
-                $POST['userToken']    = $token;
+                $newUserToken = TokenGenerator::generateToken($id);
+
                 $POST['confirmed']    = 0;
                 $POST['userPassword'] = null;
+                $emailInfo            = [...$POST, 'userToken' => $newUserToken];
 
-                $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
+                $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $emailInfo);
 
                 if (! $isSend) {
                     throw new Exception('Algo salio mal al editar el usuario. Por favor, inténtalo de nuevo.');

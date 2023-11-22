@@ -30,11 +30,6 @@ class Users extends Migration
                 'constraint' => 60,
                 'null'       => true,
             ],
-            'userToken' => [
-                'type'       => 'varchar',
-                'constraint' => 13,
-                'null'       => true,
-            ],
             'confirmed' => [
                 'type' => 'tinyint',
                 'null' => true,
