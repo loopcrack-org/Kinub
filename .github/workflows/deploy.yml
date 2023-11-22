@@ -65,9 +65,9 @@ jobs:
 
     - name: Sync files
       run: |
-        FTP_SERVER="${{ secrets.ftp-server-host }}"
-        FTP_USERNAME="${{ secrets.ftp-username }}"
-        FTP_PASSWORD="${{ secrets.ftp-password }}"
+        FTP_SERVER="${{ secrets.ftp_server_host }}"
+        FTP_USERNAME="${{ secrets.ftp_username }}"
+        FTP_PASSWORD="${{ secrets.ftp_password }}"
         SERVER_DIR=""
 
         lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && mirror --reverse --continue --verbose $MODIFIED $ADDED node_modules vendor $SERVER_DIR"
