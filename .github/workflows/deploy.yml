@@ -51,6 +51,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y lftp
+        mkdir ~/.lftp && echo "set ssl:verify-certificate false;" >> ~/.lftp/rc
       # Install lftp on the runner.
 
     - name: Identify changes
