@@ -7,7 +7,7 @@
 <?= $this->section('css') ?>
 <!-- Filepond css -->
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-
+<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -23,6 +23,12 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
+                <?php
+                    if (session()->has('response')) {
+                        $response = session()->get('response');
+                        ?>
+                    <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                <?php } ?>
                 <?php $errors = session()->get('errors'); ?>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
 
@@ -47,4 +53,5 @@
 <?= $this->section('js') ?>
 <!-- filepond js -->
 <script src="/assets/admin/js/form-file-upload-measurementSolution.init.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>

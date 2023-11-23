@@ -37,7 +37,7 @@ class CtrlSolution extends BaseController
             $measurementSolutionDataValidator = new SolutionValidation();
 
             if (! $measurementSolutionDataValidator->validateInputs($newMeasurementSolutionData)) {
-                throw new InvalidInputException($measurementSolutionDataValidator->getErrors(), '');
+                throw new InvalidInputException($measurementSolutionDataValidator->getErrors());
             }
 
             $newMeasurementSolutionData['msImageId'] = 1;
@@ -62,7 +62,7 @@ class CtrlSolution extends BaseController
                 'type'    => 'error',
             ];
 
-            return redirect()->to('/admin/soluciones')->with('response', $response)->withInput();
+            return redirect()->to('/admin/soluciones/crear')->with('response', $response)->withInput();
         }
     }
 
