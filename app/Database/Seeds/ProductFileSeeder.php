@@ -8,7 +8,7 @@ class ProductFileSeeder extends Seeder
 {
     public function run()
     {
-        $productFileTypes = ['image', 'image', 'video', 'product certificate', 'product certificate', 'product certificate', 'datasheet', 'brochure', 'user manual'];
+        $productFileTypes = ['image', 'image', 'video', 'product certificate', 'product certificate', 'product certificate', 'datasheet', 'brochure', 'user manual', 'video demo', 'main image'];
 
         $productFiles = [];
 
