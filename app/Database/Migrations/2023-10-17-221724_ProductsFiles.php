@@ -20,7 +20,7 @@ class ProductsFiles extends Migration
                 'type' => 'int',
             ],
             'pfFileType' => [
-                'type' => "enum('image','video','product certificate','datasheet','brochure','user manual')",
+                'type' => "enum('image','video','product certificate','datasheet','brochure','user manual', 'video demo', 'main image')",
             ],
         ]);
 
