@@ -237,11 +237,6 @@ if(isset($response)):
                 <option value="feline">Equipos X</option>
                 <option value="feline">Necesito Asesoria</option>
             </select>
-            <!-- <div class="form__select-arrow">
-                <svg class="form__svg-arrow" xmlns="http://www.w3.org/2000/svg" width="47" height="23" viewBox="0 0 47 23" fill="none">
-                    <path d="M46.27 1L27.99 19.28C25.58 21.69 21.68 21.69 19.27 19.28L1 1" stroke="white" stroke-width="2" stroke-miterlimit="10"/>
-                </svg>
-            </div> -->
         </div>
 
         <div class="form__field">

@@ -8,15 +8,19 @@
 .custom-select-container {
   position: relative;
   overflow: hidden;
+
   border: 0.115rem solid $color-white;
   border-radius: 2cqmax;
   font-style: italic;
+  font-weight: $weight-light;
 
   .custom-select-opener {
-    padding: 0.5rem;
+    padding: 0.65rem;
+    padding-left: 0.8rem;
     background: transparent;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-style: normal;
+    font-weight: $weight-light;
     white-space: wrap;
     ::after {
       position: absolute;
@@ -32,7 +36,8 @@
     }
 
     @include tablet {
-      padding: $spacing-lg;
+      padding: 1.4rem;
+      padding-left: 1.5rem;
       font-size: 1rem;
     }
   }
@@ -44,7 +49,7 @@
   }
   .custom-select-panel {
     position: relative;
-    border-radius: 0.3125rem;
+
     background: transparent;
   }
 
