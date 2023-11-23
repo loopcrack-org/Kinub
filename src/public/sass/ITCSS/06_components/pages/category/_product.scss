@@ -1,0 +1,78 @@
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+@use 'sass:color';
+
+.product {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.875rem 0;
+  border: 0.0625rem solid color.adjust($color-aqua-blue, $lightness: 40%);
+  transition: border 100ms ease-in-out;
+  transition: box-shadow 500ms ease-in-out;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__image-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__image {
+    max-width: 70%;
+    max-height: 17.5rem;
+    margin: 0 auto;
+    object-fit: cover;
+    transition: transform 300ms ease;
+
+    @include desktop {
+      max-width: 80%;
+    }
+  }
+
+  &__name {
+    margin: 0;
+    color: $color-gray-60;
+    font-size: 1.5625rem;
+    font-weight: $weight-bolder;
+    line-height: 1.5;
+    text-transform: uppercase;
+    transition: transform 300ms ease;
+    @include fluid-text(1.5625rem, 2.125rem);
+  }
+
+  &__button {
+    @include btn(
+      $color-white,
+      color.adjust($color-bright-blue, $lightness: -5%),
+      $color-white,
+      $color-aqua-blue
+    );
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+    @include tablet {
+      font-size: 1.4rem;
+    }
+    font-weight: $weight-medium;
+    transition-duration: 300ms;
+    transition-property: background-color, transform;
+  }
+
+  &:hover {
+    box-shadow:
+      0.1875rem 0.1875rem 0 0 color.adjust($color-aqua-blue, $lightness: 5%),
+      0.1875rem (-0.1875rem) 0 0 color.adjust($color-aqua-blue, $lightness: 5%),
+      (-0.1875rem) 0.1875rem 0 0 color.adjust($color-aqua-blue, $lightness: 5%),
+      (-0.1875rem) (-0.1875rem) 0 0 color.adjust($color-aqua-blue, $lightness: 5%);
+  }
+}

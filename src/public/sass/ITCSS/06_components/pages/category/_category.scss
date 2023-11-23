@@ -1,0 +1,35 @@
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+@use 'sass:color';
+
+.category {
+  &__grid {
+    max-width: 90%;
+    margin: 3.125rem auto 3.125rem auto;
+    @include grid(1, 0.9375rem);
+
+    @include phoneXL {
+      @include grid(2, 2.5rem 1.25rem);
+    }
+
+    @include tablet {
+      padding: 1.25rem 1.25rem 0 1.25rem;
+      row-gap: 1.25rem;
+    }
+
+    @include desktop {
+      @include flex-columns(3, 1.25rem, 1.5625rem);
+    }
+  }
+
+  &__heading {
+    margin: 0;
+    color: $color-white;
+    font-size: 3.75rem;
+    font-weight: $weight-boldest;
+    text-align: center;
+  }
+}
