@@ -10,6 +10,7 @@
   display: flex;
   overflow: hidden;
   height: 60svh;
+  min-height: 19rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -146,6 +147,7 @@
 @include phone() {
   .measurement-solution {
     height: 40svh;
+    min-height: 14rem;
   }
   .measurement-solution__icon {
     width: 7.5rem;
@@ -163,7 +165,8 @@
 
 @include tablet() {
   .measurement-solution {
-    height: 55svh;
+    height: 56svh;
+    min-height: 24rem;
   }
   .measurement-solution__content {
     font-size: 1.6rem;
@@ -181,9 +184,6 @@
 }
 
 @include desktop {
-  .measurement-solution {
-    height: 55svh;
-  }
   .measurement-solution__icon {
     width: 60%;
   }
@@ -192,6 +192,7 @@
 @include desktopXL {
   .measurement-solution {
     height: 68svh;
+    min-height: 34svmax;
     gap: 7svh;
   }
   .measurement-solution__icon {
