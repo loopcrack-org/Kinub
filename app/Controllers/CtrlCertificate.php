@@ -95,7 +95,14 @@ class CtrlCertificate extends BaseController
 
     public function deleteCertificate()
     {
-        $isDeleted = true;
+        $certificateId    = $this->request->getPost('certificateId');
+        $certificateModel = new CertificateModel();
+        $certificate      = $certificateModel->find($certificateId);
+        $isDeleted        = false;
+        if (! empty($certificate)) {
+            $isDeleted = $certificateModel->delete($certificateId);
+        }
+
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',
@@ -105,7 +112,7 @@ class CtrlCertificate extends BaseController
         } else {
             $response = [
                 'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la elimiación del certificado',
+                'message' => 'Algo salió mal al eliminar el certificado. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
         }
