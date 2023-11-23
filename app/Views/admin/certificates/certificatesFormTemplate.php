@@ -1,3 +1,4 @@
+<?php $errors = session()->get('errors'); ?>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -7,8 +8,13 @@
                 </label>
             </div>
             <div class="card-body">
-                <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="certificatefileName" id="name" value="<?= old('certificatefileName') ?? $certificate['certificatefileName'] ?? ''; ?>" placeholder="Ingrese el nombre" required>
+                <div>
+                    <input type="text"  class="form-control <?= isset($errors['certificatefileName']) ? 'is-invalid' : '' ?>" name="certificatefileName" id="certificatefileName" value="<?= old('certificatefileName') ?>" placeholder="Ingrese el nombre" required>
+                    <?php if (isset($errors['certificatefileName'])) : ?>
+                        <div class="invalid-feedback">
+                            <?= $errors['certificatefileName'] ?>
+                        </div>
+                    <?php endif ?>
                 </div>
             </div>
         </div>
@@ -25,7 +31,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="certificatePreviewId" required>
+                <input type="file" class="filepond" name="certificatePreviewId">
             </div>
             <!-- end card body -->
         </div>
@@ -40,7 +46,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="certificatefileId" required>
+                <input type="file" class="filepond" name="certificatefileId">
             </div>
             <!-- end card body -->
         </div>
