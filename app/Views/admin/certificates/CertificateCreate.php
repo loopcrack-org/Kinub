@@ -7,7 +7,7 @@
 <?= $this->section('css') ?>
 <!-- Filepond css -->
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-
+<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -46,4 +46,5 @@
 <?= $this->section('js') ?>
 <!-- filepond js -->
 <script src="/assets/admin/js/form-file-upload-certificate.init.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>

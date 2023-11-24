@@ -2,9 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\CertificateModel;
 use App\Validation\CertificateValidation;
-use Exception;
 use Throwable;
 
 class CtrlCertificate extends BaseController
@@ -34,43 +34,35 @@ class CtrlCertificate extends BaseController
 
     public function createCertificate()
     {
-        $validateCertificate = new CertificateValidation();
-        $certificateData     = $this->request->getPost(['certificatefileName']);
-
         try {
+            $validateCertificate = new CertificateValidation();
+            $certificateData     = $this->request->getPost();
             if (! $validateCertificate->validateInputs($certificateData)) {
-                throw new Exception();
+                throw new InvalidInputException($validateCertificate->getErrors());
             }
 
-            $certificateData['certificatePreviewId'] = 1;
-            $certificateData['certificatefileId']    = 1;
+            $certificateData['certificatePreviewId'] = '4fe307c224811d55048d72b5696895eb';
+            $certificateData['certificatefileId']    = '4fe307c224811d55048d72b5696895eb';
 
-            $certificateModel = new CertificateModel();
-            $isCreated        = $certificateModel->insert($certificateData);
-            if ($isCreated) {
-                $response = [
-                    'title'   => 'Creación exitosa',
-                    'message' => 'Se ha creado el certificado correctamente',
-                    'type'    => 'success',
-                ];
-            } else {
-                throw new Exception('Algo salió mal al registrar el certificado. Por favor, inténtalo de nuevo.');
-            }
+            (new CertificateModel())->createCertificate($certificateData);
+            $response = [
+                'title'   => 'Creación exitosa',
+                'message' => 'Se ha creado el certificado correctamente',
+                'type'    => 'success',
+            ];
+
+            return redirect()->to('/admin/certificados')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
-            $errors = $validateCertificate->getErrors();
+            $response = [
+                'title'   => '¡Oops! Ha ocurrido un error.',
+                'message' => 'Algo salio mal al crear el certificado. Por favor, inténtalo de nuevo.',
+                'type'    => 'error',
+            ];
 
-            if (empty($errors)) {
-                $response = [
-                    'title'   => '¡Oops!',
-                    'message' => $th->getMessage(),
-                    'type'    => 'error',
-                ];
-            } else {
-                return redirect()->back()->withInput()->with('errors', $errors);
-            }
+            return redirect()->back()->withInput()->with('response', $response);
         }
-
-        return redirect()->to('/admin/certificados')->with('response', $response);
     }
 
     public function updateCertificate($id)
