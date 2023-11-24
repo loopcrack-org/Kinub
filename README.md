@@ -114,13 +114,13 @@ This Project use Velzon as and admin panel. Velzon is built with Bootstrap v5.3.
 
 ### Run Local
 
-| Command              | Description                                                                                                                                                                                                          |
-| -------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- |
-| `npm run images`     | Minimizes the size of png/jpg/jpeg images as well as converts them to lightweight formats such as webp and avif and saves all image formats for production.                                                          |
-| `npm run dev:public` | Build all the necessary assets for the project such as Css, Js on public area                                                                                                                                        |
-| `npm run dev:admin`  | Build all the necessary assets for the project such as Css, Js on admin area                                                                                                                                         |
-| `npm run dev:common` | Build all the necessary assets for the project such as Css, Js on common area                                                                                                                                        |     |
-| `npm run dev`        | Build all the necessary assets for the project such as Css, Js from all areas (admin, public and common) and the same time, runs the project locally. The development server is accessible at http://localhost:8080. |
+| Command              | Description                                                                                                                                                                                                              |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `npm run images`     | Minimizes the size of png/jpg/jpeg images as well as converts them to lightweight formats such as webp and avif and saves all image formats for production.                                                              |
+| `npm run dev:public` | Build all the necessary assets for the project such as Css, Js on public area.                                                                                                                                           |
+| `npm run dev:admin`  | Build all the necessary assets for the project such as Css, Js on admin area.                                                                                                                                            |
+| `npm run dev:common` | Build all the necessary assets for the project such as Css, Js on common area.                                                                                                                                           |
+| `npm run dev`        | Build all the necessary assets for the project such as Css, Js from all areas (admin, public, and common) and at the same time, runs the project locally. The development server is accessible at http://localhost:8080. |
 
 ### Test
 

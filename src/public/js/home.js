@@ -4,27 +4,15 @@ import Swal from 'sweetalert2';
 
 new Plyr('#kinub-video');
 
-const cstSel = customSelect('select')[0];
-console.log;
+const cstSel = customSelect('#product-name')[0];
 
-cstSel.container.addEventListener('click', function name() {
-  if (!cstSel.container.classList.contains('is-open')) {
-    cstSel.container.classList.add('turn-arrow');
-  } else {
-    cstSel.container.classList.remove('turn-arrow');
-  }
+cstSel.container.addEventListener('custom-select:open', () => {
+  cstSel.container.classList.add('turn-arrow');
 });
 
-function detectarSelect(e) {
-  e.preventDefault();
-  if (cstSel.container.classList.contains('is-open')) {
-    return;
-  } else {
-    cstSel.container.classList.remove('turn-arrow');
-  }
-}
-
-document.addEventListener('click', detectarSelect);
+cstSel.container.addEventListener('custom-select:close', () => {
+  cstSel.container.classList.remove('turn-arrow');
+});
 
 const showAlert = (props) => {
   Swal.fire({
