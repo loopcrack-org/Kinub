@@ -1,0 +1,15 @@
+@use '../../../02_tools/mixins' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../02_tools/breakpoints' as *;
+.equipments {
+  text-align: center;
+  &__heading {
+    margin: 3rem;
+    margin-top: 1rem;
+    @include tablet {
+      margin: 2rem;
+      margin-bottom: 4rem;
+      font-size: 6rem;
+    }
+  }
+}

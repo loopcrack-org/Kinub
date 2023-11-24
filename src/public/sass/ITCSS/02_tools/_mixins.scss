@@ -4,6 +4,7 @@
 @use 'sass:math';
 @use 'sass:color';
 @use '../01_settings/fonts' as *;
+@use '../01_settings/colors' as *;
 /**
  * Clearfix: contain floats.
  *
@@ -95,15 +96,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: color.adjust(v.$bright-blue, $lightness: -20%);
+  color: color.adjust($color-bright-blue, $lightness: -20%);
   font-weight: $weight-boldest;
 
   &::after {
     display: inline-block;
-    width: calc(50%);
-    height: 0.2rem;
+    width: calc(60%);
+    height: 0.3rem;
     margin: 0.6rem 0 0 0;
-    background-color: v.$aqua-blue;
+    background-color: $color-light-blue;
     content: '';
   }
 }
