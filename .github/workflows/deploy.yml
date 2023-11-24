@@ -1,0 +1,73 @@
+name: Deploy website
+
+# Deploy only on push events to main branch or manually dispatch the deployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to sync'
+        required: true
+        default: 'main'
+
+# Cancel any previous workflow that's still running
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 2
+
+    - name: Check Secrets
+      run: |
+        [ -z "${{ secrets.ftp_server_host }}" ] && echo "FTP Server Host is missing" || echo "FTP Server Host is present"
+        [ -z "${{ secrets.ftp_username }}" ] && echo "FTP Username is missing" || echo "FTP Username is present"
+        [ -z "${{ secrets.ftp_password }}" ] && echo "FTP Password is missing" || echo "FTP Password is present"
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+      # Setting up PHP for deployment.
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+      # Setting up node.js for deployment.
+
+    - name: Build project
+      run: |
+        composer install
+        npm install
+        npm run build
+      # Installing dependencies and building project.
+
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.well-known/**
+          **/cgi-bin/**
+          .env
+          .env.example
+          .ftpquota
+          .user.ini
+          php.ini
+        local-dir: ./ 
