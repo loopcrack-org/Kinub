@@ -50,7 +50,7 @@
 /* #COMPONENTS
    ========================================================================== */
 @use '../ITCSS/06_components/header/__index.scss' as *;
+@use '../ITCSS/06_components/_jumbotron.scss' as *;
 @use '../ITCSS/06_components/pages/category/__index.scss' as *;
-@use '../ITCSS/06_components/_pagination.scss' as *;
 @use '../ITCSS/06_components/_btn-whatsapp.scss' as *;
 @use '../ITCSS/06_components/footer' as *;

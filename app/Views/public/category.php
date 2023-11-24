@@ -1,12 +1,7 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<!-- <link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/filter.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/category.min.css" type="text/css"> -->
-
 <link rel="stylesheet" href="assets/public/css/category.min.css" type="text/css">
-
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
@@ -14,8 +9,9 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
-<header class="category-header" style="background-image: url(/assets/images/Telemetria.jpeg);">
-    <h1 class="category-header__title">Telemetría</h1>
+
+<header class="jumbotron" style="background-image: url(/assets/images/Telemetria.jpeg);">
+    <h1 class="jumbotron__title">Telemetría</h1>
 </header>
 
 <main class="category">
