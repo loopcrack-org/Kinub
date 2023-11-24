@@ -1,8 +1,11 @@
 import lightGallery from 'lightgallery';
+import lgThumb from 'lightgallery/plugins/thumbnail/lg-thumbnail.min.js';
 
 export function initLightGallery() {
   const light = lightGallery(document.querySelector('.glide__slides'), {
-    licenseKey: '',
+    licenseKey: '927D6AF3-9D4E-4315-A976-33AFB1C334EF',
+    plugins: [lgThumb],
+    thumbnail: true,
     selector: '.glide__slide',
     controls: false,
   });
