@@ -1,0 +1,63 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.product-nav {
+  position: sticky;
+  z-index: 1;
+  top: $navbar-mobile-height;
+  display: flex;
+  width: 100%;
+  max-width: 120rem;
+  margin: 2.5rem auto 0 auto;
+  background-color: color.adjust($color-bright-blue, $lightness: -20%);
+
+  &__link-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9375rem 0.3125rem;
+    text-decoration: none;
+    transition: background-color 500ms ease-in-out;
+
+    &--active {
+      background-color: $color-bright-blue;
+    }
+  }
+
+  &__link {
+    color: $color-white;
+    font-size: 0.625rem;
+    font-weight: 300;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include phoneXL() {
+      font-size: 0.9375rem;
+    }
+
+    @include desktopXL() {
+      font-size: 1.875rem;
+    }
+
+    @include desktopXXL() {
+      font-size: 2.25rem;
+    }
+  }
+
+  @include tablet() {
+    top: $navbar-desktop-height;
+
+    &__link-container {
+      padding: 1.875rem 0.625rem;
+    }
+
+    &__link {
+      font-size: 1.25rem;
+    }
+  }
+}

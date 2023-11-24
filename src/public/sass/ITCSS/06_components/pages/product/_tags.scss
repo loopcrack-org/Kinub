@@ -1,0 +1,68 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.tags {
+  display: flex;
+  margin-top: 1.25rem;
+  gap: 0.625rem;
+
+  &__tag {
+    display: flex;
+    height: 1.875rem;
+    align-items: center;
+    padding: 0 0.625rem;
+    border-radius: 0.3125rem;
+    background-color: $brand-color;
+    text-decoration: none;
+  }
+
+  &__tag-content {
+    margin: 0;
+    color: $color-white;
+    font-size: 0.625rem;
+    font-weight: 200;
+
+    @include tablet() {
+      font-size: 1.5625rem;
+    }
+
+    @include desktopXL() {
+      font-size: 1.2rem;
+    }
+
+    @include desktopXXL() {
+      font-size: 1.5625rem;
+    }
+  }
+
+  @include tablet() {
+    margin-top: 2.5rem;
+
+    &__tag {
+      height: 3.75rem;
+      padding: 0 1.875rem;
+      border-radius: 0.9375rem;
+    }
+
+    &__tag-content {
+      font-size: 1.5625rem;
+    }
+  }
+
+  @include desktop() {
+    margin-top: 5rem;
+
+    &__tag-content {
+      font-size: 1.125rem;
+    }
+  }
+
+  @include desktopXXL() {
+    &__tag-content {
+      font-size: 1.25rem;
+    }
+  }
+}

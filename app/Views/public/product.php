@@ -1,84 +1,70 @@
 <?php $this->extend('public/templates/layout'); ?>
 
+<!-- CSS -->
 <?php $this->section('css'); ?>
 <link rel="stylesheet" href="assets/public/css/product.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
+<!-- JS -->
 <?php $this->section('js'); ?>
 <script src="assets/public/js/product.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
-<header class="header-product" style="background-image: url('assets/images/auth-one-bg.jpg');">
-    <div class="header-product__mask"></div>
-    <h1 class="header-product__title">TELEMETRÍA</h1>
+<header class="jumbotron" style="background-image: url(/assets/images/Telemetria.jpeg);">
+    <h1 class="jumbotron__title">Telemetría</h1>
 </header>
 
 <main class="details">
     <div class="details__grid">
-        <div class="carousel">
-            <div class="carousel__big-image">
-                <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-            </div>
-            <div class="carousel__under-image">
-                <div class="carousel__image">
-                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen pequeña">
-                </div>
-                <div class="carousel__image">
-                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen pequeña">
-                </div>
-                <div class="carousel__image">
-                    <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen pequeña">
-                </div>
-            </div>
-        </div>
+        <!-- <div class="carousel"></div> -->
 
-        <div class="details__information">
+        <div class="details__info">
             <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
 
             <div class="tags">
-                <a href="#" class="tag">
-                    <p class="tag__content">Dialog 3Gtm 9xx Mhz</p>
+                <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
                 </a>
-                <a href="#" class="tag">
-                    <p class="tag__content">LoRaWAN OMS</p>
+                <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">LoRaWAN OMS</p>
                 </a>
             </div>
 
             <div class="details__data-container">
-            <p class="details__data"><span>Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span>Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
-            <a href="#" class="details__button">Más información acerca de este equipo</a>
+            <a href="#" class="details__btn">Más información acerca de este equipo</a>
         </div>
     </div>
 </main>
 
-<nav class="product-navigation">
-    <a href="#description" class="product-navigation__link-container">
-        <p class="product-navigation__link">Descripción</p>
+<nav class="product-nav">
+    <a href="#description" class="product-nav__link-container">
+        <p class="product-nav__link">Descripción</p>
     </a>
-    <a href="#tech-info" class="product-navigation__link-container">
-        <p class="product-navigation__link">Especificaciones técnicas</p>
+    <a href="#tech-info" class="product-nav__link-container">
+        <p class="product-nav__link">Especificaciones técnicas</p>
     </a>
-    <a href="#download-area" class="product-navigation__link-container">
-        <p class="product-navigation__link">Área de descarga</p>
+    <a href="#download-area" class="product-nav__link-container">
+        <p class="product-nav__link">Área de descarga</p>
     </a>
 </nav>
 
 <section class="product-info" id="description">
     <h2 class="product-info__heading product-info__heading--description">Descripción</h2>
-    <div class="product-info__text-container">
+    <div class="product-info__text-container product-info__text-container--description">
         <p class="product-info__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magni pariatur vero doloremque, id ipsa praesentium a nesciunt! Ullam, porro laudantium. Voluptas fugit possimus vero explicabo rerum id omnis nesciunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum alias praesentium explicabo, nesciunt expedita ducimus dolor a, id maxime quasi, cum culpa tempora quibusdam et. Rerum itaque soluta quo suscipit.</p>
     </div>
 </section>
 
 <section class="product-info" id="tech-info">
     <h2 class="product-info__heading product-info__heading--tech-info">Especificaciones Técnicas</h2>
-    <div class="product-info__text-container">
+    <div class="product-info__text-container product-info__text-container--tech-info">
         <ul>
             <li class="product-info__text"><span class="product-info__text--title">Frecuencia:</span>Sit amet, consectetuer</li>
             <li class="product-info__text"><span class="product-info__text--title">Rango de medición:</span>Euismod tincidunt ut laore</li>
@@ -166,5 +152,4 @@
         </accordion-fan>
     </div>
 </section>
-
 <?php $this->endSection('content'); ?>

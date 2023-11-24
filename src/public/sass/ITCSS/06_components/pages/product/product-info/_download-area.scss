@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+
+.download-area {
+  &__accordion-container {
+    padding-top: 4rem;
+
+    @include tablet() {
+      padding-top: 0;
+      padding-left: 3.5rem;
+      margin-left: 0.2rem;
+    }
+  }
+
+  &__accordion-fan {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.625rem;
+    gap: 0rem;
+    line-height: 0;
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    span {
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
+
+    @include desktop() {
+      line-height: 0.2;
+    }
+  }
+
+  &__accordion {
+    color: color.adjust($color-gray-60, $lightness: 5%);
+    font-size: 1.25rem; //2.4
+    transition: color 300ms ease-in-out;
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    .ploiu-accordion-body {
+      line-height: 1;
+    }
+
+    &:hover {
+      color: color.adjust($color-gray, $lightness: -10%);
+    }
+
+    @include tablet() {
+      font-size: 1.5625rem;
+    }
+
+    @include desktop() {
+      font-size: 2.2rem;
+    }
+  }
+
+  &__links-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    row-gap: 1rem;
+  }
+
+  &__link {
+    color: color.adjust($color-gray-60, $lightness: 5%);
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+      color: color.adjust($color-gray, $lightness: -10%);
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    span {
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
+
+    &--single {
+      display: list-item;
+      padding: 0.625rem 0;
+      margin-left: 2.5rem;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    @include tablet() {
+      font-size: 1.25rem;
+
+      &--single {
+        font-size: 1.5625rem;
+      }
+    }
+
+    @include desktop() {
+      font-size: 1.5625rem;
+
+      &--single {
+        font-size: 2.2rem;
+      }
+    }
+
+    @include desktopXL() {
+      &--single {
+        padding: 0;
+      }
+    }
+  }
+}

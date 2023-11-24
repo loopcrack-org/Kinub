@@ -6,14 +6,14 @@ new Plyr('#product-video');
 
 const scrollmagicController = new ScrollMagic.Controller();
 const sections = document.querySelectorAll('.product-info');
-const navLinks = document.querySelectorAll('.product-navigation__link-container');
+const navLinks = document.querySelectorAll('.product-nav__link-container');
 
 const updateActiveLink = (sectionId) => {
   navLinks.forEach((link) => {
-    link.classList.remove('product-navigation__link-container--active');
+    link.classList.remove('product-nav__link-container--active');
     const href = link.getAttribute('href');
     if (href === `#${sectionId}`) {
-      link.classList.add('product-navigation__link-container--active');
+      link.classList.add('product-nav__link-container--active');
     }
   });
 };
