@@ -44,7 +44,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Modelo</th>
-                                    <th>Categorías</th>
+                                    <th>Categoría</th>
                                     <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
@@ -70,7 +70,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img class="mw-100 object-fit-contain" src="<?= $product['fileRoute']; ?>" alt="Imagen del certificado " . <?= $product['productId']; ?> height="150">
+                                                <img class="mw-100 object-fit-contain" src="<?= $product['fileRoute']; ?>" alt="<?= 'Imagen del certificado' . $product['productId']; ?>" height="90">
                                             </div>
                                         </td>
                                         <td>
@@ -87,7 +87,7 @@
                                     <th>ID</th>
                                     <th>Nombre</th>
                                     <th>Modelo</th>
-                                    <th>Categorías</th>
+                                    <th>Categoría</th>
                                     <th>Imagen</th>
                                     <th>Acciones</th>
                                 </tr>
