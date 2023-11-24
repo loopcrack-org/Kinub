@@ -63,11 +63,15 @@ File: Main Js File
       if (isChoicesVal['data-choices-text-disabled-true']) {
         choiceData.addItems = false;
       }
+      choiceData.addItems = true;
       const choices = isChoicesVal['data-choices-text-disabled-true']
         ? new Choices(item, choiceData).disable()
         : new Choices(item, choiceData);
       choices.containerInner.element.classList.add(...item.classList);
       choices.containerInner.element.classList.remove('choices__input');
+      item.addEventListener('invalid', () => {
+        choices.containerOuter.element.classList.add('is-focused');
+      });
     });
 
     /**
