@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="certificatefileName" id="name" value="" placeholder="Ingrese el nombre" required>
+                    <input type="text" class="form-control" name="certificatefileName" id="name" value="<?= old('certificatefileName') ?? $certificate['certificatefileName'] ?? ''; ?>" placeholder="Ingrese el nombre" required>
                 </div>
             </div>
         </div>
