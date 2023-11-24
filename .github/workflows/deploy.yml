@@ -28,6 +28,12 @@ jobs:
       with:
         fetch-depth: 2
 
+    - name: Check Secrets
+      run: |
+        [ -z "${{ secrets.ftp_server_host }}" ] && echo "FTP Server Host is missing" || echo "FTP Server Host is present"
+        [ -z "${{ secrets.ftp_username }}" ] && echo "FTP Username is missing" || echo "FTP Username is present"
+        [ -z "${{ secrets.ftp_password }}" ] && echo "FTP Password is missing" || echo "FTP Password is present"
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
@@ -47,41 +53,21 @@ jobs:
         npm run build
       # Installing dependencies and building project.
 
-    - name: Install lftp
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y lftp
-        mkdir ~/.lftp && echo "set ssl:verify-certificate false;" >> ~/.lftp/rc
-      # Install lftp on the runner.
-
-    - name: Identify changes
-      run: |
-        ADDED=$(git diff --name-only --diff-filter=A ${{ github.event.before }} ${{ github.sha }})
-        MODIFIED=$(git diff --name-only --diff-filter=M ${{ github.event.before }} ${{ github.sha }})
-        DELETED=$(git diff --name-only --diff-filter=D ${{ github.event.before }} ${{ github.sha }})
-        RENAMED=$(git diff --name-only --diff-filter=R ${{ github.event.before }} ${{ github.sha }})
-        echo "ADDED=$ADDED" >> $GITHUB_ENV
-        echo "MODIFIED=$MODIFIED" >> $GITHUB_ENV
-        echo "DELETED=$DELETED" >> $GITHUB_ENV
-        echo "RENAMED=$RENAMED" >> $GITHUB_ENV
-      # Get the list of added, modified, deleted, and renamed files.
-
-    - name: Sync files
-      run: |
-        FTP_SERVER="${{ secrets.ftp_server_host }}"
-        FTP_USERNAME="${{ secrets.ftp_username }}"
-        FTP_PASSWORD="${{ secrets.ftp_password }}"
-        SERVER_DIR=""
-
-        lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && mirror --reverse --continue --verbose $MODIFIED $ADDED node_modules vendor $SERVER_DIR"
-
-        for file in $DELETED; do
-          lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && rm -f $SERVER_DIR/$file"
-        done
-
-        for rename in $RENAMED; do
-          old_file=$(echo $rename | cut -d' ' -f1)
-          new_file=$(echo $rename | cut -d' ' -f2)
-          lftp -c "open -u $FTP_USERNAME,$FTP_PASSWORD $FTP_SERVER && mv $SERVER_DIR/$old_file $SERVER_DIR/$new_file"
-        done
-      # Sync changed files to server via FTP.
+    - name: FTP Deploy
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER_HOST }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.well-known/**
+          **/cgi-bin/**
+          .env
+          .env.example
+          .ftpquota
+          .user.ini
+          php.ini
+        local-dir: ./ 
