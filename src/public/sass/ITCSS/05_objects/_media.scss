@@ -1,0 +1,34 @@
+@use '../01_settings/global' as *;
+/* ==========================================================================
+   #MEDIA
+   ========================================================================== */
+
+/**
+ * The media object is an image to the left, with descriptive content to the right:
+ * http://www.stubbornella.org/content/2010/06/25/the-media-object-saves-hundreds-of-lines-of-code
+ */
+
+.media {
+  display: flex;
+}
+
+/* Body */
+
+.media__body {
+  flex: 1;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* Image */
+
+.media__img {
+  margin-right: $spacing-lg;
+
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  > img {
+    display: block;
+  }
+}

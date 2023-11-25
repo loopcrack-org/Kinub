@@ -44,7 +44,7 @@ accordion-element {
   }
 
   &.open {
-    height: -moz-max-content;
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
     height: max-content;
   }
 }

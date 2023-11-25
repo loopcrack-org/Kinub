@@ -8,7 +8,8 @@
             </div>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="name" id="name" value="<?= $solution['msName'] ?? ''; ?>" placeholder="Ingrese el título" required>
+                    <input type="text" class="form-control  <?= isset($errors['msName']) ? 'isInvalid' : '' ?>" name="msName" id="name" value="<?= old('msName') ?? $solution['msName'] ?? ''; ?>" placeholder="Ingrese el título" required>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['msName'] ?? null])?>
                 </div>
             </div>
         </div>
@@ -26,7 +27,8 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <textarea class="form-control" rows="3" name="description" required><?= $solution['msDescription'] ?? ''; ?></textarea>
+                        <textarea class="form-control <?= isset($errors['msDescription']) ? 'isInvalid' : '' ?>" rows="3" name="msDescription" required><?= old('msDescription') ?? $solution['msDescription'] ?? ''; ?></textarea>
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['msDescription'] ?? null])?>
                     </div>
                 </div>
             </div>
@@ -45,7 +47,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="icon" required>
+                <input type="file" class="filepond" id="icon" name="msIcon" >
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +62,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="image" required>
+                <input type="file" class="filepond" id="image" name="msImage" >
             </div>
             <!-- end card body -->
         </div>
