@@ -68,8 +68,6 @@ class CtrlTestFiles extends CtrlApiFiles
             $validator            = new TestValidation();
             $validator->addRules($filesValidationRules['rules'], $filesValidationRules['messages']);
             if (! $validator->validateInputs($data)) {
-                $error = $validator->getErrors();
-
                 throw new Exception();
             }
             $testModel     = new TestModel();
