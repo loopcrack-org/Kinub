@@ -24,7 +24,15 @@ class CtrlAdminEmail extends BaseController
 
     public function deleteEmail()
     {
-        $isDeleted = true;
+        $emailId    = $this->request->getPost('emailId');
+        $emailModel = new EmailModel();
+        $email      = $emailModel->find($emailId);
+
+        $isDeleted = false;
+        if (! empty($email)) {
+            $isDeleted = $emailModel->delete($emailId);
+        }
+
         if ($isDeleted) {
             $response = [
                 'title'   => 'Eliminación exitosa',
