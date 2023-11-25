@@ -35,7 +35,8 @@
                                     </div><!-- end card header -->
 
                                     <div class="card-body">
-                                        <p class="card-text">Ingresa un nombre</p>
+                                        <?= validation_show_error('name', 'validationError') ?>
+                                        <label class="card-text" for="name">Ingresa un nombre</label>
                                         <input type="text" class="form-control" name="name" id="name" placeholder="Ingrese el título" required value="<?= old('name') ?? '' ?>">
                                     </div>
                                     <!-- end card body -->

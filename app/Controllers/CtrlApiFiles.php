@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Classes\FileValidationConfig;
 use App\Exceptions\FileValidationException;
+use App\Models\FileModel;
 use App\Utils\FileManager;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\Response;
@@ -11,7 +13,7 @@ use Throwable;
 
 class CtrlApiFiles extends BaseController
 {
-    protected $validationConfig;
+    protected FileValidationConfig $fileConfig;
 
     /**
      * Get a file
@@ -26,8 +28,9 @@ class CtrlApiFiles extends BaseController
     {
         try {
             $fileKey = $this->request->getGet()['file'];
-            // here you get the file route on database with the fileKey;
-            $fileRoute = FILES_UPLOAD_DIRECTORY . "/{$fileKey}/foto.png"; // example
+
+            $fileModel = new FileModel();
+            $fileRoute = $fileModel->select('fileRoute')->where('uuid', $fileKey)->first();
 
             return $this->response->setStatusCode(Response::HTTP_OK)->download($fileRoute['fileRoute'], null, true);
         } catch (Throwable $th) {
@@ -80,7 +83,7 @@ class CtrlApiFiles extends BaseController
             FileManager::createFolder($folder);
 
             if ($file) {
-                $configValidation = $this->validationConfig[$inputName];
+                $configValidation = $this->fileConfig->getFileValidationRulesByInput($inputName);
                 $validation       = Services::validation();
                 $validation->setRules(
                     [
@@ -123,7 +126,7 @@ class CtrlApiFiles extends BaseController
             if ((string) $temporalFileLength === $fileLength) {
                 $file             = new File($fileTmp);
                 $inputName        = $this->request->header('Input')->getValue();
-                $configValidation = $this->validationConfig[$inputName];
+                $configValidation = $this->fileConfig->getFileValidationRulesByInput($inputName);
                 $validation       = Services::validation();
                 $validation->setRules(
                     [

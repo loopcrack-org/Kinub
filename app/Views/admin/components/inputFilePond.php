@@ -6,10 +6,8 @@
     deleteFiles:                            Save the files the user wants to delete
  -->
 <div class="card-body" data-name="<?= $config['name']?>">
-    <?php if(isset($config['error'])): ?>
-        <!-- show an alert if validation failed -->
-        <p class="card-text alert alert-danger"><?=$config['error']?></p>
-    <?php endif; ?>
+    <!-- show an alert if validation failed -->
+    <?= validation_show_error($config['name'], 'validationError') ?>
     <!-- show expected types -->
     <p class="card-text"><?=$config['fileValidateTypeLabelExpectedTypes']?></p>
     <!-- input filepond -->

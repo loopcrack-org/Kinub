@@ -87,10 +87,9 @@ class FileManager
     {
         try {
             self::verifyDirectory($sourcePath, 'directorio fuente');
-            self::verifyDirectory($destPath, 'directorio destino');
 
             if (! rename($sourcePath, $destPath)) {
-                throw new Exception('Ocurrió un error al mover la carpeta');
+                throw new Exception();
             }
         } catch (Throwable $th) {
             throw new Exception('La carpeta no existe o ha ocurrido un error al moverla');
@@ -111,12 +110,7 @@ class FileManager
                 $outputFolder = FILES_UPLOAD_DIRECTORY . $key;
                 $sourceFolder = FILES_TEMP_DIRECTORY . $key;
 
-                self::verifyDirectory($sourceFolder, 'directorio fuente');
-                self::verifyDirectory($outputFolder, 'directorio destino');
-
-                if (! rename($sourceFolder, $outputFolder)) {
-                    throw new Exception('Ocurrió un error al mover la carpeta');
-                }
+                self::changeDirectoryFolder($sourceFolder, $outputFolder);
             }
         } catch (Throwable $th) {
             throw new Exception($th->getMessage());
@@ -170,6 +164,25 @@ class FileManager
             }
         } catch (Throwable $th) {
             throw new Exception('Ha ocurrido un error al eliminar la carpeta con su contenido');
+        }
+    }
+
+    /**
+     * Delete a folder collection and its contents
+     *
+     * @param array $folders Path of the folder to delete.
+     *
+     * @throws Exception If an error occurs while deleting the folder and its content.
+     */
+    public static function deleteMultipleFoldersWhitContent(array $folders)
+    {
+        try {
+            foreach ($folders as $folder) {
+                $folderPath = FILES_UPLOAD_DIRECTORY . $folder;
+                static::deleteFolderWithContent($folderPath);
+            }
+        } catch (Throwable $th) {
+            throw new Exception('Error al eliminar los archivos');
         }
     }
 
