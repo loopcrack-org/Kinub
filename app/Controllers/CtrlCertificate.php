@@ -23,7 +23,10 @@ class CtrlCertificate extends BaseController
 
     public function viewCertificateEdit($id)
     {
-        return view('admin/certificates/CertificateEdit', ['id' => $id]);
+        $certificateModel = new CertificateModel();
+        $certificate      = $certificateModel->select('certificateId, certificatefileName, fileRoute')->join('files', 'files.fileId = certificates.certificatePreviewId')->find($id);
+
+        return view('admin/certificates/CertificateEdit', ['certificate' => $certificate]);
     }
 
     public function createCertificate()
@@ -48,11 +51,41 @@ class CtrlCertificate extends BaseController
 
     public function updateCertificate($id)
     {
-        return "updating certificate... {$id}";
+        $isUpdated = true;
+        if ($isUpdated) {
+            $response = [
+                'title'   => 'Edición exitosa',
+                'message' => 'Se ha editado el certificado correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Edición fallida',
+                'message' => 'No se pudo realizar la edición del certificado',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->to('/admin/certificados')->with('response', $response);
     }
 
     public function deleteCertificate()
     {
-        return 'delete certificate ...';
+        $isDeleted = true;
+        if ($isDeleted) {
+            $response = [
+                'title'   => 'Eliminación exitosa',
+                'message' => 'Se ha elimnado el certificado correctamente',
+                'type'    => 'success',
+            ];
+        } else {
+            $response = [
+                'title'   => 'Eliminación fallida',
+                'message' => 'No se pudo realizar la elimiación del certificado',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->back()->with('response', $response);
     }
 }

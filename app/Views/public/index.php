@@ -85,7 +85,7 @@
             <div class="measurement-solution__content">
                 <p class="measurement-solution__title"><span class="measurement-solution__title--strong">Medidores</span> Residenciales</p>
                 <p class="measurement-solution__description">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio. Lorem ipsum dolor sit amet, consectetur adipisicing elit, morbi quis tempor odio.
                 </p>
             </div>
 
@@ -232,7 +232,7 @@ if(isset($response)):
         <div class="form__field">
             <label for="product-name" class="form__label">Equipo de mi interés</label>
             <?= isset($errors['product-name']) ? '<p class="form__error">' . $errors['product-name'] . '</p>' : '' ?>
-            <select id="mySelect" >
+            <select id="product-name" >
                 <option value>Seleccionar...</option>
                 <option value="feline">Equipos X</option>
                 <option value="feline">Necesito Asesoria</option>

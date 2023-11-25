@@ -13,6 +13,7 @@
   border-radius: 2cqmax;
   font-style: italic;
   font-weight: $weight-light;
+  transition: transform 0.3s ease-in-out;
 
   .custom-select-opener {
     padding: 0.65rem;
@@ -22,19 +23,6 @@
     font-style: normal;
     font-weight: $weight-light;
     white-space: wrap;
-    ::after {
-      position: absolute;
-      top: 0.45rem;
-      right: 0.5rem;
-      width: 2rem;
-      content: url(/assets/images/down-arrow-sm.svg);
-      @include tablet {
-        top: 1.4rem;
-        right: 1rem;
-        width: 3.75rem;
-      }
-    }
-
     @include tablet {
       padding: 1.4rem;
       padding-left: 1.5rem;
@@ -44,8 +32,19 @@
 
   .custom-select-opener span {
     display: block;
+    display: flex;
     overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
     text-overflow: ellipsis;
+    &::after {
+      display: block;
+      width: 2.8em;
+      height: 1.4em;
+      content: url('/assets/images/down-arrow-sm.svg');
+      transform-origin: center center;
+      transition: rotate 0.3s ease-in-out;
+    }
   }
   .custom-select-panel {
     position: relative;
@@ -77,17 +76,10 @@
     .custom-select-panel {
       overflow-y: hidden;
     }
-  }
-  &.turn-arrow {
-    ::after {
-      top: 0.15rem;
-      right: 0.5rem;
-      width: 2rem;
-      transform: rotate(180deg);
-      @include tablet {
-        top: 0.9rem;
-        right: 1rem;
-        width: 3.75rem;
+    .custom-select-opener span {
+      &::after {
+        rotate: 180deg;
+        transition: rotate 0.3s ease-in-out;
       }
     }
   }

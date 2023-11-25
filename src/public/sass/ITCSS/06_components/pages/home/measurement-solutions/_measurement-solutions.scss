@@ -16,6 +16,7 @@
   }
 
   &__grid {
+    overflow: hidden;
     width: 100%;
     margin: 0 auto;
 
@@ -28,7 +29,7 @@
     }
 
     @include desktopXL() {
-      @include flex-columns(4, 0rem, 0rem);
+      @include grid(4, 0);
     }
   }
   @include tablet {
