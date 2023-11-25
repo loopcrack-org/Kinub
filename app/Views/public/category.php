@@ -19,7 +19,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -29,7 +29,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -49,7 +49,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -59,7 +59,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -69,7 +69,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -78,7 +78,7 @@
         </div> <!--product-->
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -87,7 +87,7 @@
         </div> <!--product-->
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -96,7 +96,7 @@
         </div> <!--product-->
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/grifo.png" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
