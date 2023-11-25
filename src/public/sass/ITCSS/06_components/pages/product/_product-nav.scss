@@ -12,7 +12,7 @@
   width: 100%;
   max-width: 120rem;
   margin: 2.5rem auto 0 auto;
-  background-color: color.adjust($color-bright-blue, $lightness: -20%);
+  background-color: $brand-color;
 
   &__link-container {
     display: flex;
