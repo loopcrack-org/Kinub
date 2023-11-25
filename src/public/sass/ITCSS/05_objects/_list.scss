@@ -1,0 +1,20 @@
+@use '../02_tools/mixins' as *;
+
+/* ==========================================================================
+   #LIST
+   ========================================================================== */
+
+.list {
+  @include list-reset;
+}
+
+/**
+ * Inline
+ */
+
+.list--inline {
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  li {
+    display: inline-block;
+  }
+}
