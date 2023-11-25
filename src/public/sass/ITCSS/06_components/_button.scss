@@ -1,0 +1,118 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../01_settings/fonts' as *;
+
+/* ==========================================================================
+   #BUTTON
+   ========================================================================== */
+
+.button {
+  display: inline-block;
+  padding: $spacing-sm $spacing-lg;
+  border: $base-border-width-small solid $color-brand-secondary-light;
+  border-radius: $base-border-radius-large;
+  margin: 0;
+  background-color: $color-white;
+  color: $color-brand-secondary;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: $weight-bold;
+  line-height: $base-line-height;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 0.25s,
+    box-shadow 0.25s,
+    transform 0.25s;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:focus,
+  &:hover {
+    border-color: $color-brand-secondary;
+    box-shadow: $base-box-shadow;
+    color: $color-brand-secondary;
+    outline: 0;
+    transform: translateY(-0.0625em);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  /* Icon */
+
+  .button__icon {
+    margin-right: $spacing-xs;
+  }
+
+  /**
+   * Disabled
+   */
+
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  &[disabled] {
+    border-color: $color-gray-10;
+    background-color: $color-gray-10;
+    color: $color-gray-50;
+    cursor: default;
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    cursor: not-allowed;
+  }
+
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  &[disabled]:focus,
+  &[disabled]:hover {
+    background-color: $color-gray-10;
+    box-shadow: none;
+    transform: translateY(0);
+  }
+}
+
+/**
+ * Primary
+ */
+
+.button--primary {
+  border-color: $color-brand;
+  background-color: $color-brand;
+  color: $color-white;
+
+  &:focus,
+  &:hover {
+    background-color: $color-brand-light;
+  }
+}
+
+/**
+ * Secondary
+ */
+
+.button--secondary {
+  border-color: $color-brand-secondary;
+  background-color: $color-brand-secondary;
+  color: $color-white;
+
+  &:focus,
+  &:hover {
+    background-color: $color-brand-secondary-light;
+  }
+}
+
+/**
+ * Block
+ */
+
+.button--block {
+  display: block;
+  width: 100%;
+}
+
+/**
+ * Small
+ */
+
+.button--small {
+  padding: $spacing-xs $spacing-sm;
+}

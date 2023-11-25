@@ -12,5 +12,8 @@
     "source.organizeImports": true
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "stylelint.validate": ["css", "scss"]
+  "stylelint.validate": ["css", "scss"],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false
 }
