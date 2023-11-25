@@ -9,7 +9,7 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  height: 60svh;
+  height: 50svh;
   min-height: 19rem;
   flex-direction: column;
   align-items: center;
@@ -26,18 +26,19 @@
 .measurement-solution__icon {
   z-index: 1;
   width: 10rem;
-  transition: all 900ms ease;
+  transition: all 600ms ease;
   /* stylelint-disable-next-line plugin/selector-bem-pattern */
   svg {
     width: 100%;
     aspect-ratio: 1 / 1;
-    transition: all 900ms ease;
+    transition: all 600ms ease;
   }
 }
 
 .measurement-solution__content {
   z-index: 1;
   font-size: 1.4rem;
+  transition: 600ms ease all;
 }
 
 .measurement-solution__title,
@@ -60,16 +61,16 @@
 
 .measurement-solution__description {
   display: block;
-  max-height: 0;
+  height: 0;
   font-size: 0.8em;
   font-style: italic;
   font-weight: $weight-lighter;
   line-height: 1;
   opacity: 0;
   transition:
-    opacity 400ms ease-in-out,
-    visibility 400ms step-end,
-    max-height 400ms ease;
+    opacity 200ms ease-in-out,
+    visibility 200ms step-end,
+    height 200ms ease-in-out;
   visibility: hidden;
 }
 
@@ -108,24 +109,34 @@
 .measurement-solution:hover {
   color: $color-white;
 
+  & .measurement-solution__content {
+    transition: 600ms ease all;
+    translate: 0 -35%;
+  }
+
   & .measurement-solution__title,
   & .measurement-solution__description {
     color: $color-white;
   }
 
   & .measurement-solution__description {
-    max-height: 100vh;
+    display: -webkit-box;
+    overflow: hidden;
+    height: 4em;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
     opacity: 1;
+    text-overflow: ellipsis;
     transition:
-      opacity 500ms ease-in-out,
-      visibility 500ms step-start,
-      max-height 500ms ease;
+      opacity 400ms ease-in-out,
+      visibility 400ms step-start,
+      height 400ms ease-in-out;
     visibility: visible;
   }
 
   & .measurement-solution__icon {
     svg {
-      width: 70%;
+      scale: 0.7;
     }
     * {
       /* stylelint-disable-next-line itcss/no-at-important */
@@ -165,7 +176,7 @@
 
 @include tablet() {
   .measurement-solution {
-    height: 56svh;
+    height: 45svmin;
     min-height: 24rem;
   }
   .measurement-solution__content {

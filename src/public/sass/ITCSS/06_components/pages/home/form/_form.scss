@@ -11,15 +11,16 @@
   overflow: visible;
   flex-direction: column;
   padding: 1.2rem;
-  border-radius: 3.5rem;
+  border-radius: 10svmin;
   margin: 1rem;
   margin-bottom: 3rem;
   background: linear-gradient(to bottom right, $brand-color, $color-cyan-blue);
-
   box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
   color: $color-white;
   gap: 2svh;
+
   @include tablet {
+    padding: 1.2rem 2.5rem 2.5rem;
     margin: 5.5rem;
   }
   @include desktop {
@@ -33,39 +34,27 @@
   &__icon {
     position: absolute;
     z-index: 1;
-    top: -2.1rem;
-    right: -0.1rem;
+    top: -6svmin;
+    right: 0;
+    width: 16svmin;
+    height: 16svmin;
 
-    @include tablet {
-      top: -3.7rem;
-      right: 0.1rem;
-    }
     @include desktop {
-      top: -3.4rem;
-      right: -2.3rem;
+      top: -5svmin;
+      right: -2.5svmin;
     }
   }
   &__svg {
-    overflow: visible;
-    width: 5rem;
-    height: 5rem;
-
-    @include tablet {
-      width: 9rem;
-      height: 9rem;
-    }
+    width: 100%;
+    height: 100%;
   }
 
   &__legend {
-    margin-top: 2rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
 
     text-transform: capitalize;
     @include fluid-text(1.5rem, 4.5rem, 9vw);
-    @include tablet {
-      margin-top: 3rem;
-      margin-bottom: 1.5rem;
-    }
   }
 
   &__field {
