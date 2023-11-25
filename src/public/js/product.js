@@ -4,7 +4,6 @@ import ScrollMagic from 'scrollmagic';
 import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 import { initLightGallery } from './light.js';
 import { magnifyImage } from './magnify.js';
-
 new Plyr('#product-video');
 
 const scrollmagicController = new ScrollMagic.Controller();

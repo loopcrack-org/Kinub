@@ -1,7 +1,11 @@
 @use 'sass:color';
 @use '../../base/mixins' as m;
 @use '../../base/variables' as v;
-@use 'node_modules/lightgallery/css/lightgallery-bundle.min.css';
+
+$lg-path-fonts: '../../fonts';
+$lg-path-images: '../../images';
+
+@import 'node_modules/lightgallery/scss/lightgallery-bundle';
 
 .image-container {
   display: none;
@@ -206,14 +210,5 @@
     cursor: grabbing;
     cursor: -moz-grabbing;
     cursor: -webkit-grabbing;
-  }
-}
-.lg-toolbar {
-  visibility: hidden;
-}
-.lg-backdrop,
-.lg-outer {
-  @include m.desktop {
-    display: none;
   }
 }

@@ -1,24 +1,46 @@
 import lightGallery from 'lightgallery';
-import lgThumb from 'lightgallery/plugins/thumbnail/lg-thumbnail.min.js';
+import lgFullscreen from 'lightgallery/plugins/fullscreen/lg-fullscreen.min.js';
+import lgThumbnail from 'lightgallery/plugins/thumbnail/lg-thumbnail.min.js';
+import lgVideo from 'lightgallery/plugins/video/lg-video.min.js';
+import lgZoom from 'lightgallery/plugins/zoom/lg-zoom.min.js';
 
 export function initLightGallery() {
-  const light = lightGallery(document.querySelector('.glide__slides'), {
-    licenseKey: '',
-    plugins: [lgThumb],
-    thumbnail: true,
-    selector: '.glide__slide',
-    controls: false,
-  });
+  const lightgalleryProductContainer = document.getElementById('lightgallery-product');
+  let lightInstance = initLightGalleryInstance(lightgalleryProductContainer);
 
-  const lg = document.querySelector('.glide__slides');
-
-  lg.addEventListener('lgContainerResize', () => {
-    if (isDesktop) {
-      light.closeGallery();
+  function handleResize() {
+    const isDesktopView = isDesktop();
+    if (isDesktopView && lightInstance) {
+      lightInstance.destroy();
+      lightInstance = null;
+    } else if (!isDesktopView && !lightInstance) {
+      lightInstance = initLightGalleryInstance(lightgalleryProductContainer);
     }
-  });
+  }
+
+  window.addEventListener('resize', handleResize);
+
+  function initLightGalleryInstance(container) {
+    const light = lightGallery(container, {
+      licenseKey: '927D6AF3-9D4E-4315-A976-33AFB1C334EF',
+      plugins: [lgThumbnail, lgZoom, lgFullscreen, lgVideo],
+      thumbnail: true,
+      showMaximizeIcon: true,
+      download: false,
+      selector: '.glide__slide',
+    });
+
+    container.addEventListener('lgBeforeOpen', () => {
+      document.body.style.overflow = 'hidden';
+    });
+    container.addEventListener('lgBeforeClose', () => {
+      document.body.style.overflow = 'auto';
+    });
+
+    return light;
+  }
 }
 
 function isDesktop() {
-  return window.innerWidth > 1024;
+  return window.innerWidth >= 1024;
 }

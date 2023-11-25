@@ -26,7 +26,7 @@
 
         <div class="glide" id="glide">
             <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides">
+                <ul class="glide__slides" id="lightgallery-product">
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
                         <img class="slide-media" class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
