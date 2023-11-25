@@ -19,9 +19,8 @@
     <div class="details__grid">
 
     <div class="carousel">
-        <div class="image-container magnify-wrapper" id="zoom">
-
-            <img class="main-image" id="main-image" src="assets/images/auth-one-bg.jpg" alt="Imagen Principal">
+        <div class="carousel__img-container magnify-wrapper" id="zoom">
+            <img class="carousel__main-img" id="main-image" src="assets/images/auth-one-bg.jpg" alt="Imagen Principal">
             <div id="large-img"></div>
         </div>
 
@@ -96,7 +95,7 @@
             <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
-            <span id="modal-form-btn" class="details__button">Más información acerca de este equipo</span>
+            <span id="modal-form-btn" class="details__btn">Más información acerca de este equipo</span>
         </div>
     </div>
 </main>
@@ -137,9 +136,9 @@
     </form>
 </div>
 
-<nav class="product-navigation">
-    <a href="#description" class="product-navigation__link-container">
-        <p class="product-navigation__link">Descripción</p>
+<nav class="product-nav">
+    <a href="#description" class="product-nav__link-container">
+        <p class="product-nav__link">Descripción</p>
     </a>
     <a href="#tech-info" class="product-nav__link-container">
         <p class="product-nav__link">Especificaciones técnicas</p>

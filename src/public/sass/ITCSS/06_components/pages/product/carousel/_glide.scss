@@ -1,0 +1,170 @@
+@use 'sass:color';
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+
+.glide {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 0;
+
+  &__track {
+    overflow: hidden;
+  }
+
+  &__slides {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding: 0;
+    margin: 0;
+    backface-visibility: hidden;
+    list-style: none;
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    touch-action: pan-Y;
+    transform-style: preserve-3d;
+    white-space: nowrap;
+    will-change: transform;
+
+    &--dragging {
+      user-select: none;
+    }
+  }
+
+  &__slide {
+    display: flex;
+    width: 100%;
+    max-height: 40rem;
+    flex-shrink: 0;
+    border: 1px solid $color-aqua-blue;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+    white-space: normal;
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    img {
+      object-fit: cover;
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    a {
+      -webkit-user-drag: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+  }
+
+  &__arrow {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    display: none;
+    padding: 0.1875rem 0.1875rem 0.125rem;
+    border: 0.125rem solid color.adjust($color-white, $lightness: -15%);
+    border-radius: 25%;
+    background-color: transparent;
+    color: $color-white;
+    cursor: pointer;
+    fill: color.adjust($color-white, $lightness: -15%);
+    line-height: 1;
+    opacity: 1;
+    text-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    transition:
+      opacity 150ms ease,
+      border 300ms ease-in-out,
+      fill 300ms ease;
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &.glide__arrow--left {
+      left: 0.5rem;
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &.glide__arrow--right {
+      right: 0.5rem;
+    }
+
+    &:hover {
+      border-color: $color-white;
+      fill: $color-white;
+    }
+  }
+
+  &__bullets {
+    position: absolute;
+    z-index: 2;
+    bottom: 2em;
+    left: 50%;
+    display: inline-flex;
+    list-style: none;
+    transform: translateX(-50%);
+    user-select: none;
+  }
+
+  &__bullet {
+    width: 0.5625rem;
+    height: 0.5625rem;
+    padding: 0;
+    border: 0.125rem solid transparent;
+    border-radius: 50%;
+    margin: 0 0.25em;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    line-height: 0;
+    transition: all 300ms ease-in-out;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover,
+    &:focus {
+      border: 0.125rem solid $color-white;
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    &.glide__bullet--active {
+      background-color: $color-white;
+    }
+  }
+
+  &--swipeable {
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    cursor: grab;
+  }
+
+  &--dragging {
+    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+    cursor: grabbing;
+  }
+
+  @include desktop() {
+    width: 90%;
+    margin: 0 auto;
+
+    &__slide {
+      max-height: 10rem;
+    }
+
+    &__arrow {
+      display: block;
+    }
+
+    &__bullets {
+      bottom: -10%;
+    }
+
+    &__bullet {
+      background-color: $color-aqua-blue;
+    }
+  }
+}

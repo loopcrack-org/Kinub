@@ -1,0 +1,49 @@
+@use 'sass:color';
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+
+.carousel {
+  width: 100%;
+  margin: 0;
+
+  &__img-container {
+    display: none;
+    overflow: hidden;
+    width: 100%;
+    border: 0.0625rem solid $color-aqua-blue;
+    margin: 0 auto;
+    transition: height 300ms ease;
+
+    @include phoneXL() {
+      height: 35rem;
+    }
+
+    @media (min-width: 600px) {
+      height: 40rem;
+    }
+
+    @include tablet() {
+      width: 90%;
+    }
+
+    @include desktop() {
+      display: flex;
+      max-height: 75rem;
+    }
+  }
+
+  &__main-img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  @include tablet() {
+    width: 80%;
+  }
+
+  @include desktop() {
+    width: 40%;
+  }
+}
