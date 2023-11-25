@@ -10,58 +10,51 @@
   display: flex;
   overflow: visible;
   flex-direction: column;
-  padding: 1.5rem;
-  border-radius: 3.5rem;
-
+  padding: 1.2rem;
+  border-radius: 10svmin;
   margin: 1rem;
   margin-bottom: 3rem;
   background: linear-gradient(to bottom right, $brand-color, $color-cyan-blue);
-
   box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
   color: $color-white;
-  gap: 2.5svh;
+  gap: 2svh;
+
   @include tablet {
+    padding: 1.2rem 2.5rem 2.5rem;
+    margin: 5.5rem;
+  }
+  @include desktop {
     padding: 3.5rem;
     margin-right: auto;
     margin-bottom: 5rem;
     margin-left: auto;
+    gap: 2.5svh;
   }
 
   &__icon {
     position: absolute;
     z-index: 1;
-    top: -1.5rem;
-    right: -0.1rem;
+    top: -6svmin;
+    right: 0;
+    width: 16svmin;
+    height: 16svmin;
 
-    @include tablet {
-      top: -3.4rem;
-      right: 0.1rem;
-    }
     @include desktop {
-      top: -3.4rem;
-      right: -2.3rem;
+      top: -5svmin;
+      right: -2.5svmin;
     }
   }
   &__svg {
-    overflow: visible;
-    width: 5rem;
-    height: 5rem;
-
-    @include tablet {
-      width: 9rem;
-      height: 9rem;
-    }
+    width: 100%;
+    height: 100%;
   }
 
   &__legend {
-    margin-top: 3rem;
-    margin-bottom: 0.7rem;
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
 
     text-transform: capitalize;
     @include fluid-text(1.5rem, 4.5rem, 9vw);
-    @include tablet {
-      margin-bottom: 1.5rem;
-    }
   }
 
   &__field {
@@ -82,16 +75,17 @@
   }
 
   &__textarea {
-    border-radius: 1.5rem;
+    border-radius: 2cqmax;
   }
 
   &__input,
   &__textarea {
     padding: 0.7rem;
-    border: 0.13rem solid $color-white;
+    border: 0.115rem solid $color-white;
     background: transparent;
     color: $color-white;
     font-size: 0.7em;
+    font-weight: $weight-light;
     resize: none;
     transition: border-color 200ms;
     &:focus {
