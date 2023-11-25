@@ -1,6 +1,7 @@
 import Glide from '@glidejs/glide';
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
+import Tingle from 'tingle.js';
 import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 import { initLightGallery } from './light.js';
 import { magnifyImage } from './magnify.js';
@@ -90,3 +91,28 @@ document.querySelectorAll('.glide__slide').forEach((slide) => {
 initLightGallery();
 
 document.getElementById('zoom').addEventListener('mousemove', magnifyImage, false);
+
+const modal = new Tingle.modal({
+  footer: false,
+  stickyFooter: false,
+  closeMethods: ['overlay', 'button', 'escape'],
+  closeLabel: 'Cerrar',
+  cssClass: ['custom-modal-form'],
+  beforeClose: function () {
+    return true;
+  },
+});
+
+const modalForm = document.querySelector('#modal-form');
+const clonedForm = modalForm.cloneNode(true);
+const modalBtn = document.querySelector('#modal-form-btn');
+
+modal.setContent(clonedForm);
+
+modalBtn.addEventListener('click', function () {
+  modal.open();
+});
+
+clonedForm.addEventListener('submit', function () {
+  modal.close();
+});

@@ -95,10 +95,46 @@
             <p class="details__data"><span>Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span>Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
-            <a href="#" class="details__button">Más información acerca de este equipo</a>
+            <span id="modal-form-btn" class="details__button">Más información acerca de este equipo</span>
         </div>
     </div>
 </main>
+
+<div hidden>
+    <form class="modal-form" id="modal-form" method="POST">
+        <h2 class="modal-form__title"><span class="modal-form__title--big">Contáctanos</span> para más información</h2>
+
+        <div class="modal-form__field">
+            <input class="modal-form__input modal-form__input--product" type="text" name="product" value="Medidor de nivel de radar 80G" disabled>
+        </div>
+
+        <div class="modal-form__field">
+            <input class="modal-form__input" type="text" id="model" name="model" value="" hidden>
+        </div>
+
+        <div class="modal-form__field">
+            <label class="modal-form__label" for="name">Nombre</label>
+            <input class="modal-form__input" type="text" id="name" name="name" value="">
+        </div>
+
+        <div class="modal-form__field">
+            <label class="modal-form__label" for="phone">Teléfono</label>
+            <input class="modal-form__input" type="tel" id="phone" name="phone" value="">
+        </div>
+
+        <div class="modal-form__field">
+            <label class="modal-form__label" for="email">E-Mail</label>
+            <input class="modal-form__input" type="email" id="email" name="email" value="">
+        </div>
+
+        <div class="modal-form__field">
+            <label class="modal-form__label" for="name">Mensaje</label>
+            <textarea class="modal-form__textarea" id="message" name="message" rows="5"></textarea>
+        </div>
+
+        <input type="submit" class="modal-form__submit" id="modal-form-submit" value="Enviar">
+    </form>
+</div>
 
 <nav class="product-navigation">
     <a href="#description" class="product-navigation__link-container">
