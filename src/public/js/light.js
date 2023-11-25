@@ -25,20 +25,18 @@ export function initLightGallery() {
       licenseKey: '927D6AF3-9D4E-4315-A976-33AFB1C334EF',
       plugins: [lgThumbnail, lgZoom, lgFullscreen, lgVideo],
       thumbnail: true,
-      showMaximizeIcon: true,
       download: false,
       selector: '.glide__slide',
-    });
-
-    container.addEventListener('lgBeforeOpen', () => {
-      document.body.style.overflow = 'hidden';
-    });
-    container.addEventListener('lgBeforeClose', () => {
-      document.body.style.overflow = 'auto';
+      hideScrollbar: true,
+      mobileSettings: {
+        howCloseIcon: true,
+      },
     });
 
     return light;
   }
+
+  handleResize();
 }
 
 function isDesktop() {
