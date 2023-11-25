@@ -25,8 +25,7 @@ class ProductSeeder extends Seeder
                     'Potencia'              => $faker->randomNumber('3', true) . ' MW',
                     'Comunicación'          => $faker->randomElements(['5G Ipv6', '3G', 'WPAN', 'WPA2']),
                 ]),
-                'productDemoVideoId' => 3,
-                'productCategoryId'  => $faker->numberBetween(1, 2),
+                'productCategoryId' => $faker->numberBetween(1, 2),
             ];
         }
 
