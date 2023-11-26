@@ -3,10 +3,7 @@
 .content {
   position: relative;
   overflow: hidden;
-  margin: -1rem 0 5rem 0;
-  @include phoneXL {
-    margin: 0 0 12rem 0;
-  }
+  margin: -1rem 0 3rem 0;
   &__video {
     position: absolute;
     z-index: -1;
@@ -41,5 +38,11 @@
       padding: 3rem 4rem;
       @include flex-columns(3, 2rem, 4rem);
     }
+  }
+  @include phoneXL {
+    margin: 0 0 4rem 0;
+  }
+  @include desktop {
+    margin: 0 0 8rem 0;
   }
 }

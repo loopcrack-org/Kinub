@@ -6,45 +6,24 @@
   height: auto;
   padding: 1.5rem;
   border: 0.125rem solid $color-white;
+  cursor: pointer;
   padding-inline: 0.5rem;
   text-decoration: none;
   transition:
     backdrop-filter 200ms ease-in-out,
     border ease 500ms;
 
-  &--center {
-    grid-column: 2 / 3;
-  }
-
   &__icon {
     width: 4rem;
-    height: 4rem;
     margin: 0 auto;
     margin-bottom: 1rem;
-
+    aspect-ratio: 5 / 4;
     @include phoneXL {
       width: 11rem;
-      height: 9rem;
     }
-
-    @include tablet {
-      width: 11rem;
-      height: 9rem;
-    }
-
     @include desktop {
       width: 24svh;
-      height: 15svh;
     }
-
-    @include desktopXL {
-      width: 24svh;
-      height: 24svh;
-    }
-  }
-
-  @include phoneXL {
-    padding: 2rem;
   }
 
   &__name,
@@ -84,6 +63,8 @@
     .equipment__text {
       opacity: 0;
     }
-    cursor: pointer;
+  }
+  @include phoneXL {
+    padding: 2rem;
   }
 }
