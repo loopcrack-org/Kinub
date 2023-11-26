@@ -18,11 +18,9 @@ class FileRules
             return false;
         }
 
-        $params = explode(',', $params);
-
-        $size = $file->getSizeByUnit(strtolower($params[1]));
-
-        $accepted = $params[0];
+        $params   = explode(',', $params);
+        $size     = (float) str_replace(',', '', $file->getSizeByUnit(strtolower($params[1])));
+        $accepted = (float) $params[0];
 
         return $accepted > $size;
     }
@@ -39,11 +37,9 @@ class FileRules
             return false;
         }
 
-        $params = explode(',', $params);
-
-        $size = $file->getSizeByUnit(strtolower($params[1]));
-
-        $accepted = $params[0];
+        $params   = explode(',', $params);
+        $size     = (float) str_replace(',', '', $file->getSizeByUnit(strtolower($params[1])));
+        $accepted = (float) $params[0];
 
         return $accepted < $size;
     }
