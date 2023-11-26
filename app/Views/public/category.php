@@ -29,7 +29,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+                <img src="https://tse3.mm.bing.net/th?id=OIP.ZTQLS9hW-oRg1SxK6at9TQHaFj&pid=Api&P=0&h=180" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -49,7 +49,7 @@
 
         <div class="product">
             <div class="product__image-container">
-                <img src="https://tse3.mm.bing.net/th?id=OIP.ZTQLS9hW-oRg1SxK6at9TQHaFj&pid=Api&P=0&h=180" alt="" class="product__image">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>

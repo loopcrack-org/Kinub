@@ -24,19 +24,15 @@
 
   &__image-container {
     display: flex;
+    max-height: 13rem;
     justify-content: center;
   }
 
   &__image {
-    max-width: 70%;
-    max-height: 17.5rem;
-    margin: 0 auto;
-    object-fit: cover;
+    width: 70%;
+    aspect-ratio: 10 / 12;
+    object-fit: contain;
     transition: transform 300ms ease;
-
-    @include desktop {
-      max-width: 80%;
-    }
   }
 
   &__name {
