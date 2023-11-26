@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Classes\FileValidationConfig;
 use App\Classes\FileValidationConfigBuilder;
+use App\Libraries\tinify\Tinify;
 use App\Models\TestFilesModel;
 use App\Models\TestModel;
 use App\Utils\FileManager;
@@ -80,6 +81,10 @@ class CtrlTestFiles extends CtrlApiFiles
                 if (! empty($files)) {
                     $testFileModel->saveFiles($files, $testId, $inputName);
                     FileManager::changeDirectoryCollectionFolder($files);
+
+                    if ($inputName === 'image') {
+                        Tinify::convertImages($files);
+                    }
                 }
             }
 
@@ -146,6 +151,10 @@ class CtrlTestFiles extends CtrlApiFiles
                 foreach ($newFiles as $type => $files) {
                     $testFileModel->saveFiles($files, $testId, $type);
                     FileManager::changeDirectoryCollectionFolder($files);
+
+                    if ($type === 'image') {
+                        Tinify::convertImages($files);
+                    }
                 }
             }
 
