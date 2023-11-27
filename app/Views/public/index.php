@@ -20,7 +20,7 @@
             <picture>
                 <source srcset="assets/images/home-about-us.avif" type="image/avif">
                 <source srcset="assets/images/home-about-us.webp" type="image/webp">
-                <img class="about-us__image" loading="lazy" src="assets/images/home-about-us.jpg" alt="About us image">
+                <img class="about-us__image" src="assets/images/home-about-us.jpg" alt="About us image">
             </picture>
         </div>
 
