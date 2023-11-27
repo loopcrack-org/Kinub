@@ -1,0 +1,49 @@
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+
+.plyr__controls {
+  display: grid;
+  min-width: 100%;
+  justify-content: unset;
+  grid-template-areas:
+    'playback playback playback playback time'
+    'play-btn volume-btn settings pip screen-btn';
+
+  @include phone() {
+    grid-template-areas:
+      'playback playback playback playback playback playback'
+      'play-btn time volume-btn settings pip screen-btn';
+  }
+
+  @include device(25rem) {
+    display: flex;
+  }
+}
+
+.plyr__controls__item:nth-child(1) {
+  grid-area: play-btn;
+}
+
+.plyr__controls__item:nth-child(2) {
+  grid-area: playback;
+}
+
+.plyr__controls__item:nth-child(3) {
+  grid-area: time;
+}
+
+.plyr__controls__item:nth-child(4) {
+  grid-area: volume-btn;
+}
+
+.plyr__controls__item:nth-child(5) {
+  grid-area: screen-btn;
+}
+
+.plyr__controls__item:nth-child(6) {
+  grid-area: settings;
+}
+
+.plyr__controls__item:nth-child(7) {
+  grid-area: pip;
+}

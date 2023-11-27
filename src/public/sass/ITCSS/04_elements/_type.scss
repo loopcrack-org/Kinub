@@ -1,0 +1,28 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+
+/* ==========================================================================
+   #TYPE
+   ========================================================================== */
+
+/* Horizontal Rule */
+
+hr {
+  display: block;
+  border: 0;
+  border-top: $base-border-width solid $color-brand;
+}
+
+/* Mark */
+
+mark {
+  background-color: $color-highlight;
+}
+
+/* Paragraph */
+
+p {
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

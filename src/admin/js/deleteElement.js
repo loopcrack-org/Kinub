@@ -1,11 +1,17 @@
-function setIdInModal() {
+(() => {
   const deleteButtons = document.querySelectorAll('[data-id]');
-  deleteButtons.forEach(function (deleteButton) {
-    deleteButton.addEventListener('click', function () {
-      const elementId = this.getAttribute('data-id');
-      const deleteButtonModal = document.getElementById('elementId');
-      deleteButtonModal.value = elementId;
+  deleteButtons.forEach((deleteButton) => {
+    deleteButton.addEventListener('click', () => {
+      const elementId = deleteButton.getAttribute('data-id');
+      const modalInput = document.getElementById('elementId');
+      modalInput.value = elementId;
     });
   });
-}
-setIdInModal();
+
+  const modalForm = document.querySelector('.modal-delete-form');
+  const modalDeleteButton = document.getElementById('delete-record');
+
+  modalForm.addEventListener('submit', function () {
+    modalDeleteButton.disabled = true;
+  });
+})();
