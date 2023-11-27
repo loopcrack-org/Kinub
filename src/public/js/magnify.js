@@ -1,5 +1,5 @@
 export function magnifyImage(e) {
-  let original = document.querySelector('.main-image'),
+  let original = document.querySelector('#main-image'),
     magnified = document.getElementById('large-img'),
     style = magnified.style,
     xAxis = e.pageX - this.offsetLeft,
