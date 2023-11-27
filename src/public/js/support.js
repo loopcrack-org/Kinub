@@ -1,4 +1,4 @@
-import { intlTelInput, intlTelInputUtils } from 'intl-tel-input';
+import intlTelInput from 'intl-tel-input';
 import { VanillaValidator } from '../libs/vanilla-validator/vanilla-validator-concat.js';
 document.addEventListener('DOMContentLoaded', function () {
   const supportForm = document.querySelector('#support-form');
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
     onContainerSuccess: function () {
       currentStep++;
       if (currentStep == 4) {
+        // eslint-disable-next-line no-undef
         const phoneNumber = phoneInput.getNumber(intlTelInputUtils.numberFormat.E164);
         phoneInputField.value = phoneNumber;
         document.querySelector('#support-form').submit();
