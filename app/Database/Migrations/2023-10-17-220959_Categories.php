@@ -28,8 +28,8 @@ class Categories extends Migration
 
         $this->forge->addKey('categoryId', true);
 
-        $this->forge->addForeignKey('categoryImageId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'category_image_FK');
-        $this->forge->addForeignKey('categoryIconId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'category_icon_FK');
+        $this->forge->addForeignKey('categoryImageId', 'files', 'fileId', 'NO ACTION', 'NO ACTION', 'category_image_FK');
+        $this->forge->addForeignKey('categoryIconId', 'files', 'fileId', 'NO ACTION', 'NO ACTION', 'category_icon_FK');
 
         $this->forge->createTable('categories');
     }
