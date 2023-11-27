@@ -1,0 +1,66 @@
+@use '../../../02_tools/mixins' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+.certificate {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 2rem 0 2rem;
+  border: 1px solid $color-light-blue;
+  text-decoration: none;
+  transition: border 100ms ease-in-out;
+  transition: box-shadow 500ms ease-in-out;
+
+  &__information {
+    margin: 1rem 0 2rem 0 auto;
+    font-weight: $weight-bold;
+    text-align: center;
+    @include desktop {
+      margin: 3rem 0 2rem 0 auto;
+    }
+  }
+
+  &__name {
+    padding: 0 0.5rem;
+    color: $color-gray;
+    @include fluid-text(1.2rem, 1.8rem, 3vw);
+    @include tablet {
+      width: auto;
+    }
+  }
+
+  &__image-container {
+    margin: auto 0;
+    transition: box-shadow 500ms ease-in-out;
+  }
+  &__image {
+    object-fit: cover;
+    @include tablet {
+      width: auto;
+    }
+    @include desktop {
+      max-width: 30rem;
+      max-height: 28rem;
+    }
+  }
+
+  &:hover {
+    box-shadow:
+      $base-border-medium $base-border-medium $base-border-blur-certificate
+        $base-border-spread-certificate $color-light-blue,
+      $base-border-medium (-$base-border-medium) $base-border-blur-certificate
+        $base-border-spread-certificate $color-light-blue,
+      (-$base-border-medium) $base-border-medium $base-border-blur-certificate
+        $base-border-spread-certificate $color-light-blue,
+      (-$base-border-medium) (-$base-border-medium) $base-border-blur-certificate
+        $base-border-spread-certificate $color-light-blue;
+  }
+
+  &:hover &__image {
+    box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
+  }
+}
