@@ -42,9 +42,9 @@
 /* #ELEMENTS
       ========================================================================== */
 @use '../ITCSS/04_elements/__index' as *;
-@use 'node_modules/lightgallery/css/lightgallery-bundle.css';
 @use 'node_modules/tingle.js/dist/tingle.css';
 @use 'node_modules/plyr/dist/plyr.css';
+@use '../plugins/lightgallery';
 @use '../plugins/accordion';
 
 /* #OBJECTS
