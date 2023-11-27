@@ -138,9 +138,8 @@
     padding: 0;
     border: 0.125rem solid transparent;
     border-radius: 50%;
-    margin: 0 0.25em;
+    margin: 0 0.15625rem;
     background-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 0.25em 0.5em 0 rgba(0, 0, 0, 0.1);
     cursor: pointer;
     line-height: 0;
     transition: all 300ms ease-in-out;
@@ -151,13 +150,26 @@
 
     &:hover,
     &:focus {
-      border: 0.125rem solid $color-white;
       background-color: rgba(255, 255, 255, 0.5);
+
+      @include desktop() {
+        border: 0.125rem solid $color-white;
+
+        background-color: $color-aqua-blue;
+        box-shadow: rgba(149, 157, 165, 0.45) 0 0 0.34375rem 0.1375rem;
+      }
     }
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     &.glide__bullet--active {
       background-color: $color-white;
+
+      @include desktop() {
+        border: 0.125rem solid $color-white;
+
+        background-color: $color-aqua-blue;
+        box-shadow: rgba(149, 157, 165, 0.45) 0 0 0.34375rem 0.1375rem;
+      }
     }
   }
 
@@ -188,7 +200,7 @@
     }
 
     &__bullet {
-      background-color: $color-aqua-blue;
+      background-color: color.adjust($color-gray, $lightness: 10%);
     }
   }
 }
