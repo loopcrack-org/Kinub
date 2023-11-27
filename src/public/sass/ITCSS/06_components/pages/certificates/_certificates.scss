@@ -8,24 +8,27 @@
     @include tablet {
       margin: 2rem;
       margin-bottom: 4rem;
-      font-size: 6rem;
     }
   }
 
   &__grid {
-    max-width: 90%;
-    margin: 2rem;
+    margin: 3.5rem;
+    margin-top: 0;
+
     @include grid(1, 1.5rem);
-    @include fold {
-      @include flex-columns(2, 2rem, 4rem);
-    }
-    @include tablet {
-      padding: 2rem 2rem 0 2rem;
-      margin: 5rem;
+    @include phone {
+      margin: 0 1rem 4rem 1rem;
+
       row-gap: 3rem;
+      @include flex-columns(2, 1rem, 2rem);
+    }
+
+    @include tablet {
+      @include flex-columns(3, 1rem, 2rem);
     }
     @include desktop {
-      @include flex-columns(3, 3rem, 2rem);
+      @include flex-columns(3, 3rem, 3rem);
+      margin: 5rem;
     }
   }
 }

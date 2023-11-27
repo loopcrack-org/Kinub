@@ -5,11 +5,13 @@
 @use '../../../02_tools/breakpoints' as *;
 .certificate {
   display: flex;
+  max-width: 9rem;
+
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 2rem 0 2rem;
+  padding: 2rem 0.7rem 0 0.7rem;
   border: 1px solid $color-light-blue;
   text-decoration: none;
   transition: border 100ms ease-in-out;
@@ -17,7 +19,7 @@
 
   &__information {
     margin: 1rem 0 2rem 0 auto;
-    font-weight: $weight-bold;
+    font-weight: $weight-semi-bold;
     text-align: center;
     @include desktop {
       margin: 3rem 0 2rem 0 auto;
@@ -25,12 +27,10 @@
   }
 
   &__name {
+    max-width: 24rem;
     padding: 0 0.5rem;
     color: $color-gray;
-    @include fluid-text(1.2rem, 1.8rem, 3vw);
-    @include tablet {
-      width: auto;
-    }
+    @include fluid-text(0.7rem, 1.8rem, 2vw);
   }
 
   &__image-container {
@@ -38,11 +38,25 @@
     transition: box-shadow 500ms ease-in-out;
   }
   &__image {
+    max-width: 9rem;
     object-fit: cover;
-    @include tablet {
-      width: auto;
+    @include phone {
+      max-width: 7rem;
+      max-height: 12rem;
     }
+    @include phoneXL {
+      max-width: 10rem;
+    }
+
     @include desktop {
+      max-width: 10rem;
+      max-height: 27rem;
+    }
+    @include desktopXL {
+      max-width: 17rem;
+      max-height: 25rem;
+    }
+    @include desktopXXL {
       max-width: 30rem;
       max-height: 28rem;
     }
@@ -62,5 +76,16 @@
 
   &:hover &__image {
     box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
+  }
+  @include fold {
+    max-width: 17rem;
+    padding: 1rem 0.5rem 0 0.5rem;
+  }
+  @include phone {
+    max-width: 13rem;
+  }
+  @include tablet {
+    max-width: none;
+    padding: 2rem 2rem 0 2rem;
   }
 }
