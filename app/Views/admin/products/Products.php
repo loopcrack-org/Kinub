@@ -75,7 +75,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-between">
-                                                <a href="/admin/certificados/editar/<?= $product['productId']; ?>" class="btn btn-primary btn-icon waves-effect waves-light mb-2 w-100"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="/admin/productos/editar/<?= $product['productId']; ?>" class="btn btn-primary btn-icon waves-effect waves-light mb-2 w-100"><i class="ri-edit-2-fill ri-lg"></i></a>
                                                 <a href="#" class="btn btn-danger btn-icon waves-effect waves-light w-100" data-bs-toggle="modal" data-bs-target="#deleteProductsModal" data-id=<?= $product['productId']?>><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
@@ -98,7 +98,7 @@
                     <!-- card-body -->
                 </div>
                 <!-- card -->
-                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteProductsModal', 'message' => 'Eliminar el producto resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer.', 'action' => '/admin/productos/borrar', 'inputName' => 'productId']); ?>
+                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteProductsModal', 'message' => 'Eliminar el producto resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer y conlleva la eliminación de los archivos relacionados y los tags asociadas al producto.', 'action' => '/admin/productos/borrar', 'inputName' => 'productId']); ?>
             </div>
             <!-- col -->
         </div>

@@ -23,7 +23,7 @@ class CtrlProduct extends BaseController
 
     public function viewProductEdit($id)
     {
-        return view('admin/products/ProductsEdit', ['id' => $id]);
+        return view('admin/products/ProductEdit', ['id' => $id]);
     }
 
     public function createProduct()
