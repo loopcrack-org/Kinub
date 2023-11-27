@@ -82,36 +82,26 @@
 
     &__grid {
       flex-direction: row;
-      justify-content: space-between;
-    }
-
-    &__info {
-      width: 70%;
-      margin-left: 0.625rem;
+      justify-content: center;
     }
 
     &__btn {
-      padding: 0.9375rem 0;
-      border-radius: 0.625rem;
+      padding: 0.5rem 1rem;
+      margin-top: 2rem;
     }
   }
 
   @include desktopXL() {
     &__btn {
-      margin-top: 6rem;
-      font-size: 2rem;
+      font-size: 1.875rem;
     }
 
     &__heading {
-      @include fluid-text(2rem, 5rem);
+      @include fluid-text(2rem, 4rem);
     }
 
     &__data-container {
       margin: 3rem 0;
-    }
-
-    &__data {
-      font-size: 2.25rem;
     }
   }
 }

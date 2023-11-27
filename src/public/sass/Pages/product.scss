@@ -54,7 +54,7 @@
 /* #COMPONENTS
       ========================================================================== */
 @use '../ITCSS/06_components/header/__index' as *;
-//@use '../ITCSS/06_components/_jumbotron' as *;
+@use '../ITCSS/06_components/_jumbotron' as *;
 @use '../ITCSS/06_components/_btn-whatsapp' as *;
 @use '../ITCSS/06_components/pages/product/__index' as *;
 @use '../ITCSS/06_components/footer' as *;

@@ -5,6 +5,9 @@
 
 .custom-modal-form {
   display: block;
+  overflow: hidden;
+  padding-top: 0;
+
   backdrop-filter: blur(0.09375rem);
   background-color: transparent;
   cursor: auto;
@@ -13,11 +16,13 @@
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     &__close {
       background-color: color.adjust($color-green-blue, $lightness: 12%);
+      visibility: hidden;
     }
   }
   /* stylelint-disable-next-line plugin/selector-bem-pattern */
   .tingle-modal-box {
     width: 100%;
+    height: 100%;
     border: 0.0625rem solid color.adjust($color-green-blue, $lightness: 12%);
     box-shadow: 0.3125rem 0.3125rem 0.75rem 0.3125rem #00000082;
 
@@ -29,17 +34,11 @@
   }
   @include phoneXL() {
     display: flex;
-    padding-top: 0;
 
-    .tingle-modal {
-      /* stylelint-disable-next-line plugin/selector-bem-pattern */
-      &__close {
-        visibility: hidden;
-      }
-    }
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
     .tingle-modal-box {
       max-width: 31.25rem;
+      height: auto;
       border-radius: 1.5625rem;
 
       /* stylelint-disable-next-line plugin/selector-bem-pattern */

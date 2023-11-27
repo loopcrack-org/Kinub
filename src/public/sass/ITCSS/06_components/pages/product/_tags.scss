@@ -24,27 +24,14 @@
     color: $color-white;
     font-size: 0.625rem;
     font-weight: 200;
-
-    @include tablet() {
-      font-size: 1.5625rem;
-    }
-
-    @include desktopXL() {
-      font-size: 1.2rem;
-    }
-
-    @include desktopXXL() {
-      font-size: 1.5625rem;
-    }
   }
 
   @include tablet() {
     margin-top: 2.5rem;
 
     &__tag {
-      height: 3.75rem;
-      padding: 0 1.875rem;
-      border-radius: 0.9375rem;
+      padding: 1.5625rem;
+      border-radius: 0.625rem;
     }
 
     &__tag-content {
@@ -53,8 +40,6 @@
   }
 
   @include desktop() {
-    margin-top: 5rem;
-
     &__tag-content {
       font-size: 1.125rem;
     }

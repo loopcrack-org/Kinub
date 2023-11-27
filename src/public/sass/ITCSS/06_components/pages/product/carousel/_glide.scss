@@ -11,6 +11,30 @@
 
   &__track {
     overflow: hidden;
+
+    @include fold() {
+      height: 18rem;
+    }
+
+    @include phone() {
+      height: 25rem;
+    }
+
+    @include phoneXL() {
+      height: 34.375rem;
+    }
+
+    @include tablet() {
+      max-height: 100%;
+    }
+
+    @include desktop() {
+      max-height: 7rem;
+    }
+
+    @include desktopXL() {
+      max-height: 10rem;
+    }
   }
 
   &__slides {

@@ -163,12 +163,17 @@ const modal = new Tingle.modal({
 
 const modalForm = document.querySelector('#modal-form');
 const clonedForm = modalForm.cloneNode(true);
-const modalBtn = document.querySelector('#modal-form-btn');
+const modalOpen = document.querySelector('#modal-form-btn');
+const modalClose = clonedForm.querySelector('#modal-form-close');
 
 modal.setContent(clonedForm);
 
-modalBtn.addEventListener('click', function () {
+modalOpen.addEventListener('click', function () {
   modal.open();
+});
+
+modalClose.addEventListener('click', function () {
+  modal.close();
 });
 
 clonedForm.addEventListener('submit', function () {
