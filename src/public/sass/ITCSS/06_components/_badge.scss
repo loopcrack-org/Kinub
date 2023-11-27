@@ -1,0 +1,50 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../01_settings/fonts' as *;
+/* ==========================================================================
+   #BADGES
+   ========================================================================== */
+
+.badge {
+  display: inline-block;
+  padding: 0.125em 0.5em;
+  border-radius: $base-border-radius-large;
+  background-color: $color-information;
+  color: $color-white;
+  font-size: 0.625rem; /* 10 / 16 */
+  font-weight: $weight-bold;
+  text-align: center;
+  text-transform: uppercase;
+  transition: background-color 0.25s;
+}
+
+/* Link */
+
+.badge__link {
+  color: $color-white;
+  text-decoration: none;
+}
+
+/**
+ * Success
+ */
+
+.badge--success {
+  background-color: $color-success;
+}
+
+/**
+ * Warning
+ */
+
+.badge--warning {
+  background-color: $color-warning;
+}
+
+/**
+ * Error
+ */
+
+.badge--error {
+  background-color: $color-error;
+}

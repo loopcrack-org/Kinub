@@ -1,0 +1,29 @@
+/**
+ * TABLE OF CONTENTS.
+ *
+ * 04. ELEMENTS
+ *
+ * styling for bare HTML elements (like H1, A, etc.). These come with default styling from the browser so we can redefine them here.
+ *
+ * Page................The defaults of the document.
+ * Headings............Setup of h1 to h6.
+ * Type................Basic typographic elements.
+ * Links...............The default anchor style.
+ * Lists...............Styles for lists.
+ * Forms...............Basic form elements.
+ * Figures.............Represent self-contained content.
+ * Images..............Ensure images are fluid.
+ * Quotes..............Cater for block and inline quotes.
+ * Tables..............Tabular data styles.
+ **/
+
+@forward './page';
+@forward './headings';
+@forward './type';
+@forward './links';
+@forward './lists';
+@forward './forms';
+@forward './figures';
+@forward './images';
+@forward './quotes';
+@forward './tables';

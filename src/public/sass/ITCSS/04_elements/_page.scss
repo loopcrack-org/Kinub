@@ -1,0 +1,24 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../01_settings/fonts' as *;
+/* ==========================================================================
+   #PAGE
+   ========================================================================== */
+
+/**
+ * The page-level setup.
+ */
+
+html {
+  color: $color-brand-secondary;
+  font-family: $font;
+  font-size: $base-font-size;
+  font-size: 1rem;
+  line-height: $base-line-height;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background-color: $color-white;
+}
