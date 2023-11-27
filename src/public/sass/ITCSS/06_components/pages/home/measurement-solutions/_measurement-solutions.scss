@@ -1,0 +1,38 @@
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+
+.measurement-solutions {
+  margin-bottom: 3.5rem;
+
+  &__heading {
+    padding-right: $spacing-md;
+    padding-left: $spacing-md;
+    margin-bottom: 3rem;
+    @include tablet() {
+      margin-bottom: 5rem;
+    }
+  }
+
+  &__grid {
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+
+    @include phone() {
+      @include grid(2, 0);
+    }
+
+    @include desktop() {
+      @include flex-columns(3, 0rem, 0rem);
+    }
+
+    @include desktopXL() {
+      @include grid(4, 0);
+    }
+  }
+  @include tablet {
+    margin-bottom: 12rem;
+  }
+}

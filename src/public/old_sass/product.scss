@@ -1,0 +1,304 @@
+@use 'sass:color';
+@use 'plugins/plyr';
+@use 'plugins/accordion';
+@use 'plugins/tingle';
+@use 'base';
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'UI/product';
+@use 'UI/whatsapp';
+@use 'UI/header';
+@use 'UI/footer';
+
+.details {
+  width: 90%;
+  max-width: 190rem;
+  margin: 0 auto;
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include m.desktop {
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  &__information {
+    max-width: 70rem;
+    margin-top: 2rem;
+  }
+
+  &__heading {
+    margin: 0;
+    color: v.$gray;
+    font-size: 3rem;
+    font-weight: 900;
+    line-height: 1;
+    text-align: left;
+    text-transform: none;
+
+    @include m.phoneXL {
+      @include m.fluid-text(2rem, 5rem);
+    }
+
+    @include m.tablet {
+      @include m.fluid-text(1.5rem, 3.6rem);
+    }
+
+    @include m.desktop {
+      @include m.fluid-text(2rem, 4.1rem);
+      margin-top: -4.5rem;
+    }
+
+    @include m.desktopXL {
+      @include m.fluid-text(2.5rem, 4.5rem);
+      margin-top: -3rem;
+    }
+  }
+
+  &__data-container {
+    margin: 3rem 0;
+
+    @include m.desktopXL {
+      margin: 5rem 0;
+    }
+  }
+
+  &__data {
+    margin: 0;
+    color: color.adjust($color: v.$gray, $lightness: -20%);
+    font-size: 1.4rem;
+    span {
+      color: color.adjust($color: v.$gray, $lightness: -10%);
+      font-weight: 700;
+    }
+
+    @include m.phoneXL {
+      font-size: 1.8rem;
+    }
+
+    @include m.tablet {
+      font-size: 1.9rem;
+      line-height: 1.4;
+    }
+
+    @include m.desktop {
+      font-size: 2rem;
+    }
+
+    @include m.desktopXL {
+      font-size: 2.15rem;
+    }
+
+    @include m.desktopXXL {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__button {
+    @include m.btn(v.$white, #0497b4, v.$white, v.$aqua-blue);
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 400;
+
+    @include m.desktop {
+      margin-top: -2rem;
+    }
+
+    @include m.desktopXL {
+      margin-top: -3rem;
+      font-size: 2rem;
+    }
+  }
+}
+
+.tags {
+  display: flex;
+  margin-top: 2rem;
+  gap: 1.5rem;
+}
+
+.tag {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: color.adjust($color: v.$bright-blue, $lightness: -20%);
+  &__content {
+    margin: 0;
+    color: v.$white;
+    font-size: 1rem;
+
+    @include m.desktopXL {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.carousel {
+  width: 100%;
+  margin: 0;
+
+  @include m.tablet {
+    width: 80%;
+  }
+
+  @include m.desktop {
+    width: 50%;
+  }
+}
+
+.product-navigation {
+  position: sticky;
+  z-index: 1;
+  top: v.$mobile-height;
+  display: flex;
+  width: 100%;
+  max-width: 190rem;
+  margin: 4rem auto;
+
+  @include m.tablet {
+    top: v.$desktop-height;
+  }
+
+  &__link-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background-color: color.adjust($color: v.$bright-blue, $lightness: -20%);
+    transition: background-color 500ms ease-in-out;
+
+    &--active {
+      background-color: v.$bright-blue;
+    }
+  }
+
+  &__link {
+    color: v.$white;
+    font-size: 1.2rem;
+    line-height: 1.2;
+    text-align: center;
+
+    @include m.phoneXL {
+      font-size: 1.4rem;
+    }
+
+    @include m.tablet {
+      font-size: 1.8rem;
+    }
+
+    @include m.desktop {
+      font-size: 2rem;
+    }
+  }
+}
+
+.download-area {
+  &__heading {
+    margin: 0;
+    margin-bottom: 2rem;
+    color: color.adjust($color: v.$bright-blue, $lightness: -10%);
+    text-align: left;
+    text-transform: capitalize;
+    @include m.fluid-text(3rem, 5rem);
+
+    @include m.tablet {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__accordion-container {
+    padding-top: 4rem;
+
+    @include m.tablet {
+      padding-top: 0;
+      padding-left: 3.5rem;
+      margin-left: 0.2rem;
+    }
+  }
+
+  &__accordion-fan {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+
+    span {
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
+  }
+
+  &__accordion {
+    color: color.adjust($color: v.$light-gray, $lightness: -35%);
+    font-size: 2.4rem;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+      color: color.adjust($color: v.$gray, $lightness: -10%);
+    }
+  }
+
+  &__links-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    row-gap: 1rem;
+  }
+
+  &__link {
+    color: color.adjust($color: v.$light-gray, $lightness: -35%);
+    font-size: 1.8rem;
+    text-decoration: underline;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+      color: color.adjust($color: v.$gray, $lightness: -10%);
+    }
+
+    span {
+      font-size: 1.4rem;
+      vertical-align: middle;
+    }
+
+    &--single {
+      display: list-item;
+      padding: 1rem 0 1rem 0;
+      margin-left: 2.5rem;
+      font-size: 2.4rem;
+    }
+  }
+}
+
+.magnify-wrapper {
+  position: relative;
+  img {
+    max-height: inherit;
+    background-size: cover;
+  }
+  #large-img {
+    position: absolute;
+    z-index: 99;
+    display: block;
+    width: 30rem;
+    height: 20rem;
+    border: 2px solid #efefef;
+    background: no-repeat #fff;
+    box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  &:hover,
+  &:active {
+    #large-img {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    cursor: none;
+  }
+}

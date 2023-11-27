@@ -1,21 +1,21 @@
-@use "node_modules/intl-tel-input/build/css/intlTelInput.css";
+/* stylelint-disable plugin/no-unsupported-browser-features */
+@use 'node_modules/intl-tel-input/build/css/intlTelInput.css';
 
 // Utiliza la función url() para importar las imágenes de banderas
 .iti__flag {
   background-image: image-set(
-    url("../../images/flags.avif") type("image/avif"),
-    url("../../images/flags.webp") type("image/webp"),
-    url("../../images/flags.png") type("image/png"),
+    url('../../images/flags.avif') type('image/avif'),
+    url('../../images/flags.webp') type('image/webp'),
+    url('../../images/flags.png') type('image/png')
   );
 }
-
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .iti__flag {
     background-image: image-set(
-      url("../../images/flags@2x.avif") type("image/avif"),
-      url("../../images/flags@2x.webp") type("image/webp"),
-      url("../../images/flags@2x.png") type("image/png"),
+      url('../../images/flags@2x.avif') type('image/avif'),
+      url('../../images/flags@2x.webp') type('image/webp'),
+      url('../../images/flags@2x.png') type('image/png')
     );
   }
 }
