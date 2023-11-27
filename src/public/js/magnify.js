@@ -1,5 +1,5 @@
 export function magnifyImage(e) {
-  let original = document.getElementById('main-image'),
+  let original = document.querySelector('.main-image'),
     magnified = document.getElementById('large-img'),
     style = magnified.style,
     xAxis = e.pageX - this.offsetLeft,
@@ -25,6 +25,6 @@ export function magnifyImage(e) {
   style.backgroundPositionY = yperc - 9 + '%';
 
   // Move the magnifying glass with the mouse movement.
-  style.left = xAxis - 150 + 'px';
-  style.top = yAxis - 100 + 'px';
+  style.left = xAxis - 240 + 'px';
+  style.top = yAxis - 160 + 'px';
 }

@@ -5,6 +5,7 @@ import Tingle from 'tingle.js';
 import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
 import { initLightGallery } from './light.js';
 import { magnifyImage } from './magnify.js';
+
 new Plyr('#product-video');
 
 const scrollmagicController = new ScrollMagic.Controller();
@@ -73,24 +74,81 @@ new Glide('.glide', {
 }).mount();
 
 const magnified = document.querySelector('#large-img');
-const mainImage = document.getElementById('main-image');
-magnified.style.backgroundImage = `url('${mainImage.src}')`;
+const mainImage = document.querySelector('#main-image');
+const mainVideo = document.querySelector('#main-video');
+const videoContainer = document.querySelector('#video-container');
+const imageContainer = document.querySelector('#main-image-container');
 
-document.querySelectorAll('.glide__slide').forEach((slide) => {
-  const sliderImage = slide.querySelector('img');
+function updateContainersDisplay(videoDisplay, imageDisplay) {
+  videoContainer.style.display = videoDisplay;
+  imageContainer.style.display = imageDisplay;
+}
 
-  slide.addEventListener('click', () => {
-    if (mainImage.src !== sliderImage.src) {
-      mainImage.src = sliderImage.src;
-      mainImage.alt = sliderImage.alt;
-      magnified.style.backgroundImage = `url('${sliderImage.src}')`;
-    }
-  });
+handleCarouselResize();
+
+window.addEventListener('resize', () => {
+  handleCarouselResize();
 });
+
+function handleCarouselResize() {
+  if (isMobile()) {
+    updateContainersDisplay('none', 'none');
+  } else {
+    const firstSlide = document.querySelector('.glide__slide');
+    const dataVideoAttributeFirstSlide = firstSlide.getAttribute('data-video');
+    const videoFirstSlide = dataVideoAttributeFirstSlide !== null;
+
+    if (videoFirstSlide) {
+      updateContainersDisplay('flex', 'none');
+      const dataVideoAttribute = firstSlide.getAttribute('data-video');
+      let videoData = JSON.parse(dataVideoAttribute);
+      let videoSource = videoData.source[0].src;
+      mainVideo.src = videoSource;
+    } else {
+      updateContainersDisplay('none', 'flex');
+      let imageFirstSlide = firstSlide.querySelector('img');
+      mainImage.src = imageFirstSlide.src;
+      mainImage.alt = imageFirstSlide.alt;
+      magnified.style.backgroundImage = `url('${imageFirstSlide.src}')`;
+    }
+
+    if (magnified) magnified.style.backgroundImage = `url('${mainImage.src}')`;
+
+    document.querySelectorAll('.glide__slide').forEach((slide) => {
+      const sliderImage = slide.querySelector('img');
+      const dataVideoAttribute = slide.getAttribute('data-video');
+
+      slide.addEventListener('click', () => {
+        if (dataVideoAttribute === null) {
+          if (mainImage.src !== sliderImage.src) {
+            mainImage.src = sliderImage.src;
+            mainImage.alt = sliderImage.alt;
+            magnified.style.backgroundImage = `url('${sliderImage.src}')`;
+            if (imageContainer.style.display == 'none' && !isMobile()) {
+              updateContainersDisplay('none', 'flex');
+            }
+          }
+        } else {
+          let videoData = JSON.parse(dataVideoAttribute);
+          let videoSource = videoData.source[0].src;
+          if (mainVideo.src !== videoSource) {
+            mainVideo.src = videoSource;
+            if (videoContainer.style.display == 'none' && !isMobile()) {
+              updateContainersDisplay('flex', 'none');
+            }
+          }
+        }
+      });
+    });
+  }
+}
 
 initLightGallery();
 
-document.getElementById('zoom').addEventListener('mousemove', magnifyImage, false);
+const zoom = document.getElementById('main-image-container');
+if (zoom) {
+  zoom.addEventListener('mousemove', magnifyImage, false);
+}
 
 const modal = new Tingle.modal({
   footer: false,
@@ -116,3 +174,7 @@ modalBtn.addEventListener('click', function () {
 clonedForm.addEventListener('submit', function () {
   modal.close();
 });
+
+function isMobile() {
+  return window.innerWidth < 1024;
+}
