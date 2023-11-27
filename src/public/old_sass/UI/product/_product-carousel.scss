@@ -7,39 +7,3 @@ $lg-path-images: '../../images';
 $lg-theme-highlight: v.$aqua-blue;
 
 @import 'node_modules/lightgallery/scss/lightgallery-bundle';
-
-.image-container {
-  display: none;
-  @include m.desktop {
-    display: flex;
-  }
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
-  transition: height 300ms ease;
-
-  @include m.phoneXL {
-    height: 35rem;
-  }
-
-  @media (min-width: 600px) {
-    height: 40rem;
-  }
-
-  @include m.tablet {
-    width: 90%;
-  }
-
-  @include m.desktop {
-    max-height: 120rem;
-  }
-}
-
-.main-image {
-  object-fit: cover;
-}
-
-.image-container,
-.glide__slide {
-  border: 1px solid v.$aqua-blue;
-}
