@@ -41,8 +41,8 @@ class CtrlCertificate extends BaseController
                 throw new InvalidInputException($validateCertificate->getErrors());
             }
 
-            $certificateData['certificatePreviewId'] = '4fe307c224811d55048d72b5696895eb';
-            $certificateData['certificatefileId']    = '4fe307c224811d55048d72b5696895eb';
+            $certificateData['certificatePreviewId'] = '3ea307c224811d55048d72b5696895eb';
+            $certificateData['certificatefileId']    = '3ea307c224811d55048d72b5696895eb';
 
             (new CertificateModel())->createCertificate($certificateData);
             $response = [
