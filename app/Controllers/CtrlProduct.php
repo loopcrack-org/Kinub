@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\ProductModel;
+use Exception;
+use Throwable;
 
 class CtrlProduct extends BaseController
 {
@@ -38,21 +40,32 @@ class CtrlProduct extends BaseController
 
     public function deleteProduct()
     {
-        $isDeleted = true;
-        if ($isDeleted) {
+        try {
+            $productId    = $this->request->getPost('productId');
+            $productModel = new ProductModel();
+            $product      = $productModel->find($productId);
+
+            if (empty($product)) {
+                throw new Exception();
+            }
+
+            $productModel->deleteProduct($productId);
+
             $response = [
                 'title'   => 'Eliminación exitosa',
-                'message' => 'Se ha elimnado el producto correctamente',
+                'message' => 'Se ha elimnado el certificado correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->back()->with('response', $response);
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Eliminación fallida',
-                'message' => 'Algo salio mal al eliminar el producto. Por favor, inténtalo de nuevo.',
+                'title'   => '¡Oops! Ha ocurrido un error.',
+                'message' => 'Algo salio mal al eliminar el certificado. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->back()->with('response', $response);
+            return redirect()->back()->with('response', $response);
+        }
     }
 }

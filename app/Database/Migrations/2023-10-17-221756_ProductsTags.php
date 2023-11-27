@@ -23,7 +23,7 @@ class ProductsTags extends Migration
         ]);
         $this->forge->addKey('ptId', true);
 
-        $this->forge->addForeignKey('ptProductId', 'products', 'productId', 'CASCADE', 'CASCADE', 'pt_product_FK');
+        $this->forge->addForeignKey('ptProductId', 'products', 'productId', 'NO ACTION', 'NO ACTION', 'pt_product_FK');
 
         $this->forge->createTable('product_tags');
     }
