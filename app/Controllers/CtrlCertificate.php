@@ -2,7 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\CertificateModel;
+use App\Validation\CertificateValidation;
+use Throwable;
 
 class CtrlCertificate extends BaseController
 {
@@ -31,22 +34,35 @@ class CtrlCertificate extends BaseController
 
     public function createCertificate()
     {
-        $isCreated = true;
-        if ($isCreated) {
+        try {
+            $validateCertificate = new CertificateValidation();
+            $certificateData     = $this->request->getPost();
+            if (! $validateCertificate->validateInputs($certificateData)) {
+                throw new InvalidInputException($validateCertificate->getErrors());
+            }
+
+            $certificateData['certificatePreviewId'] = '3ea307c224811d55048d72b5696895eb';
+            $certificateData['certificatefileId']    = '3ea307c224811d55048d72b5696895eb';
+
+            (new CertificateModel())->createCertificate($certificateData);
             $response = [
                 'title'   => 'Creación exitosa',
                 'message' => 'Se ha creado el certificado correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('/admin/certificados')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Creación fallida',
-                'message' => 'No se pudo realizar crear el certificado',
+                'title'   => '¡Oops! Ha ocurrido un error.',
+                'message' => 'Algo salio mal al crear el certificado. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->to('/admin/certificados')->with('response', $response);
+            return redirect()->back()->withInput()->with('response', $response);
+        }
     }
 
     public function updateCertificate($id)
