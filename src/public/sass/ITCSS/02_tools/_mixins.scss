@@ -4,6 +4,7 @@
 @use 'sass:math';
 @use 'sass:color';
 @use '../01_settings/fonts' as *;
+@use '../01_settings/colors' as *;
 /**
  * Clearfix: contain floats.
  *
@@ -91,22 +92,6 @@
   font-size: clamp($min, $wished-size, $max);
 }
 
-@mixin heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: color.adjust(v.$bright-blue, $lightness: -20%);
-  font-weight: $weight-boldest;
-
-  &::after {
-    display: inline-block;
-    width: calc(50%);
-    height: 0.2rem;
-    margin: 0.6rem 0 0 0;
-    background-color: v.$aqua-blue;
-    content: '';
-  }
-}
 @mixin bgImg($url) {
   background-image: url($url);
   background-repeat: no-repeat;

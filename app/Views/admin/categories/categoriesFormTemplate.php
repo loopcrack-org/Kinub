@@ -6,9 +6,13 @@
                     <h5 class="card-title mb-0">Titulo de la categoría</h5>
                 </label>
             </div>
+            <?php $errors = session()->get('errors') ?>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="name" id="name" value="<?= $category["categoryName"] ?? "";?>" placeholder="Ingrese el título" required>
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="name" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" required>
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryName'] ?? null])?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -22,7 +26,8 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <input class="form-control" name="tags" id="choices-text-remove-button" data-choices data-choices-multiple-remove="true" type="text" value="<?= $category["tags"] ?? "";?>"/>
+                        <input class="form-control <?= isset($errors['categoryTags']) ? 'is-invalid' : '' ?>" name="categoryTags" id="choices-text-remove-button" data-choices data-choices-multiple-remove="true" type="text" value="<?= old('categoryTags') ?? $category['categoryTags'] ?? ''; ?>" required />
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryTags'] ?? null])?>
                     </div>
                 </div>
             </div>
@@ -42,7 +47,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="icon" required>
+                <input type="file" class="filepond" name="icon">
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +65,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="image" required>
+                <input type="file" class="filepond" name="image">
             </div>
             <!-- end card body -->
         </div>
@@ -69,3 +74,10 @@
     <!-- end col -->
 </div>
 <!-- end row -->
+
+<?php
+    if (session()->has('response')) {
+        $response = session()->get('response');
+        ?>
+<div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+<?php } ?>
