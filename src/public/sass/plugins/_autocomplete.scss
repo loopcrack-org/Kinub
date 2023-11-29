@@ -1,0 +1,28 @@
+@use 'node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.02.css';
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+@use 'sass:color';
+
+.autoComplete_wrapper {
+  width: 100%;
+
+  & > input {
+    color: color.adjust(v.$gray, $lightness: -20%);
+  }
+
+  ul {
+    li {
+      color: v.$gray;
+      font-family: v.$primary-font;
+
+      mark {
+        color: v.$teal-blue;
+      }
+    }
+  }
+
+  .no_result {
+    padding: 1rem;
+    color: color.adjust(v.$gray, $lightness: 10%);
+  }
+}

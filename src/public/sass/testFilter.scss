@@ -1,0 +1,16 @@
+@use 'base';
+@use 'plugins/autocomplete';
+@use 'plugins/choices';
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+@use 'sass:color';
+
+body {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#autoComplete {
+  width: 100%;
+  margin: 2rem 0;
+}
