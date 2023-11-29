@@ -40,6 +40,7 @@
   &__image {
     max-width: 9rem;
     object-fit: cover;
+    transition: all 500ms ease;
     @include phone {
       max-width: 7rem;
       max-height: 12rem;
