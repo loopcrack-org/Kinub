@@ -82,21 +82,26 @@ class CtrlCategory extends BaseController
 
     public function deleteCategory()
     {
-        $isDeleted = true;
-        if ($isDeleted) {
+        $categoryId = $this->request->getPost('categoryId') ?? '';
+
+        (new CategoryModel())->deleteCategory($categoryId);
+        $response = [
+            'title'   => 'Eliminación exitosa',
+            'message' => 'La categoría ha sido eliminada correctamente',
+            'type'    => 'success',
+        ];
+
+        return redirect()->to('admin/categorias')->with('response', $response);
+
+        try {
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Eliminación exitosa',
-                'message' => 'Se ha elimnado la categoría correctamente',
-                'type'    => 'success',
-            ];
-        } else {
-            $response = [
-                'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la eliminación de la categoría',
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al eliminar los datos de la categoría, por favor intente nuevamente.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->back()->with('response', $response);
+            return redirect()->to('admin/categorias')->with('response', $response);
+        }
     }
 }

@@ -37,4 +37,23 @@ class CategoryModel extends Model
             throw $th;
         }
     }
+
+    public function deleteCategory(string $categoryId)
+    {
+        try {
+            $this->db->transStart();
+            $categoryData = $this->find($categoryId);
+            $this->delete($categoryId);
+
+            $fileModel = new FileModel();
+
+            $fileModel->delete($categoryData['categoryImageId']);
+            $fileModel->delete($categoryData['categoryIconId']);
+            $this->db->transComplete();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
 }

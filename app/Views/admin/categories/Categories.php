@@ -33,7 +33,7 @@
                         if (session()->has('response')) {
                             $response = session()->get('response');
                             ?>
-                        <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                    <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
                     <?php } ?>
 
                     <!-- card-header -->
@@ -49,23 +49,23 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($categories as $category) { ?>
-                                    <tr>
-                                        <td><?= $category['categoryId'] ?></td>
-                                        <td>
-                                            <div class="d-flex align-items-center fw-medium">
-                                                <p><?= $category['categoryName'] ?></p>
-                                            </div>
-                                        </td>
-                                        <td><?= $category['categoryIconId'] . '.jpeg' ?></td>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
+                                <tr>
+                                    <td><?= $category['categoryId'] ?></td>
+                                    <td>
+                                        <div class="d-flex align-items-center fw-medium">
+                                            <p><?= $category['categoryName'] ?></p>
+                                        </div>
+                                    </td>
+                                    <td><?= $category['categoryIconId'] . '.jpeg' ?></td>
+                                    <td>
+                                        <div class="d-flex justify-content-between">
 
-                                                <a href="/admin/categorias/editar/<?= $category['categoryId'] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="/admin/categorias/editar/<?= $category['categoryId'] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;" data-id=<?= $category['categoryId']?>><i class="ri-delete-bin-5-line ri-lg"></i></a>
 
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <?php } ?>
                             </tbody>
                             <tfoot>
@@ -82,35 +82,7 @@
                     <!-- card-body -->
                 </div>
                 <!-- card -->
-
-                <!-- Modal -->
-                <div class="modal fade flip" id="deleteCategoriesModal" tabindex="-1" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="mt-2 text-center">
-                                    <lord-icon src="https://cdn.lordicon.com/tdrtiskw.json" trigger="loop" colors="primary:#25a0e2,secondary:#00bd9d" style="width:130px;height:130px">
-                                    </lord-icon>
-                                    <div class="mt-4 pt-2 fs-15 mx-4 mx-sm-5">
-                                        <h4>¿Estás seguro?</h4>
-                                        <p class="text-muted mx-4 mb-0">
-                                            Eliminar la categoría resultará en la eliminación permanente de las etiquetas y productos relacionados. Esta acción no se puede deshacer.</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
-                                    <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                                    <form action="/admin/categorias/borrar" method="post">
-                                        <button type="submit" class="btn w-sm btn-primary" id="delete-record">¡Sí, bórralo!</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end modal -->
+                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteCategoriesModal', 'message' => 'Eliminar la categoría resultará en la eliminación permanente de las etiquetas y productos relacionados. Esta acción no se puede deshacer.', 'action' => '/admin/categorias/borrar', 'inputName' => 'categoryId']); ?>
 
             </div>
             <!-- col -->
@@ -132,4 +104,5 @@
 <script src="/assets/admin/js/datatables-general-config.min.js"></script>
 <script src="/assets/admin/js/category.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="/assets/admin/js/deleteElement.min.js"></script>
 <?= $this->endSection() ?>
