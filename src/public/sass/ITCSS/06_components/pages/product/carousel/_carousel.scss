@@ -2,7 +2,6 @@
 @use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../02_tools/breakpoints' as *;
-@use '../../../../02_tools/mixins' as *;
 
 .carousel {
   width: 100%;
@@ -20,7 +19,7 @@
       height: 35rem;
     }
 
-    @media (min-width: 600px) {
+    @include device(37.5rem) {
       height: 40rem;
     }
 
@@ -54,6 +53,7 @@
   @include desktop() {
     width: 50%;
   }
+
   @include desktopXXL() {
     max-width: 75rem;
   }

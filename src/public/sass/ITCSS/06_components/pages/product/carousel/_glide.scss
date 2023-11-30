@@ -11,30 +11,6 @@
 
   &__track {
     overflow: hidden;
-
-    @include fold() {
-      height: 18rem;
-    }
-
-    @include phone() {
-      height: 25rem;
-    }
-
-    @include phoneXL() {
-      height: 34.375rem;
-    }
-
-    @include tablet() {
-      max-height: 100%;
-    }
-
-    @include desktop() {
-      max-height: 7rem;
-    }
-
-    @include desktopXL() {
-      max-height: 10rem;
-    }
   }
 
   &__slides {
@@ -63,24 +39,15 @@
     width: 100%;
     max-height: 40rem;
     flex-shrink: 0;
-    border: 1px solid $color-aqua-blue;
+    border: 0.0625rem solid $color-aqua-blue;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     user-select: none;
     white-space: normal;
+  }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    img {
-      object-fit: cover;
-    }
-
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    a {
-      -webkit-user-drag: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+  &__slide-media {
+    object-fit: cover;
   }
 
   &__arrow {
@@ -97,7 +64,7 @@
     fill: color.adjust($color-white, $lightness: -15%);
     line-height: 1;
     opacity: 1;
-    text-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0.25em 0.5em rgba($color-black, 0.1);
     text-transform: uppercase;
     transform: translateY(-50%);
     transition:
@@ -105,13 +72,11 @@
       border 300ms ease-in-out,
       fill 300ms ease;
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    &.glide__arrow--left {
+    &--left {
       left: 0.5rem;
     }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    &.glide__arrow--right {
+    &--right {
       right: 0.5rem;
     }
 
@@ -139,7 +104,7 @@
     border: 0.125rem solid transparent;
     border-radius: 50%;
     margin: 0 0.15625rem;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba($color-white, 0.5);
     cursor: pointer;
     line-height: 0;
     transition: all 300ms ease-in-out;
@@ -150,26 +115,11 @@
 
     &:hover,
     &:focus {
-      background-color: rgba(255, 255, 255, 0.5);
-
-      @include desktop() {
-        border: 0.125rem solid $color-white;
-
-        background-color: $color-aqua-blue;
-        box-shadow: rgba(149, 157, 165, 0.45) 0 0 0.34375rem 0.1375rem;
-      }
+      background-color: rgba($color-white, 0.5);
     }
 
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    &.glide__bullet--active {
+    &--active {
       background-color: $color-white;
-
-      @include desktop() {
-        border: 0.125rem solid $color-white;
-
-        background-color: $color-aqua-blue;
-        box-shadow: rgba(149, 157, 165, 0.45) 0 0 0.34375rem 0.1375rem;
-      }
     }
   }
 
@@ -183,9 +133,37 @@
     cursor: grabbing;
   }
 
+  @include fold() {
+    &__track {
+      height: 18rem;
+    }
+  }
+
+  @include phone() {
+    &__track {
+      height: 25rem;
+    }
+  }
+
+  @include phoneXL() {
+    &__track {
+      height: 34.375rem;
+    }
+  }
+
+  @include tablet() {
+    &__track {
+      max-height: 100%;
+    }
+  }
+
   @include desktop() {
     width: 90%;
     margin: 0 auto;
+
+    &__track {
+      max-height: 7rem;
+    }
 
     &__slide {
       max-height: 10rem;
@@ -201,6 +179,20 @@
 
     &__bullet {
       background-color: color.adjust($color-gray, $lightness: 10%);
+
+      &:hover,
+      &:focus,
+      &--active {
+        border: 0.125rem solid $color-white;
+        background-color: $color-aqua-blue;
+        box-shadow: rgba($color-gray, 0.5) 0 0 0.34375rem 0.1375rem;
+      }
+    }
+  }
+
+  @include desktopXL() {
+    &__track {
+      max-height: 10rem;
     }
   }
 }

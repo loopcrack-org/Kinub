@@ -23,36 +23,36 @@
             <video id="main-video" autoplay muted></video>
         </div>
         <div class="carousel__img-container magnify-wrapper" id="main-image-container">
-            <img class="carousel__main-img" id="main-image" alt="Imagen Principal">
-            <div id="large-img"></div>
+            <img class="carousel__main-img magnify-wrapper__img" id="main-image" alt="Imagen Principal">
+            <div id="large-img" class="magnify-wrapper__large-img"></div>
         </div>
 
         <div class="glide" id="glide">
             <div class="glide__track" data-glide-el="track">
                 <ul class="glide__slides" id="lightgallery-product">
                     <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
-                        <img class="slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media" class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
-                        <img class="slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
-                        <img class="slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                 </ul>
             </div>
@@ -114,7 +114,7 @@
             </svg>
         </div>
 
-        <h2 class="modal-form__title"><span class="modal-form__title--big">Contáctanos</span> para más información</h2>
+        <h2 class="modal-form__title"><span class="modal-form__title--large">Contáctanos</span> para más información</h2>
 
         <div class="modal-form__field">
             <input class="modal-form__input modal-form__input--product" type="text" name="product" value="Medidor de nivel de radar 80G" disabled>

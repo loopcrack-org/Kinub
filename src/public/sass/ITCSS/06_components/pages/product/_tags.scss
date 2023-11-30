@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use '../../../01_settings/global' as *;
+@use '../../../01_settings/fonts' as *;
 @use '../../../01_settings/colors' as *;
 @use '../../../02_tools/breakpoints' as *;
 @use '../../../02_tools/mixins' as *;
@@ -17,37 +18,33 @@
     border-radius: 0.3125rem;
     background-color: $brand-color;
     text-decoration: none;
+
+    @include tablet() {
+      padding: 1.5625rem;
+      border-radius: 0.625rem;
+    }
   }
 
   &__tag-content {
     margin: 0;
     color: $color-white;
     font-size: 0.625rem;
-    font-weight: 200;
+    font-weight: $weight-lighter;
+
+    @include tablet() {
+      font-size: 1.5625rem;
+    }
+
+    @include desktop() {
+      font-size: 1.125rem;
+    }
+
+    @include desktopXXL() {
+      font-size: 1.25rem;
+    }
   }
 
   @include tablet() {
     margin-top: 2.5rem;
-
-    &__tag {
-      padding: 1.5625rem;
-      border-radius: 0.625rem;
-    }
-
-    &__tag-content {
-      font-size: 1.5625rem;
-    }
-  }
-
-  @include desktop() {
-    &__tag-content {
-      font-size: 1.125rem;
-    }
-  }
-
-  @include desktopXXL() {
-    &__tag-content {
-      font-size: 1.25rem;
-    }
   }
 }

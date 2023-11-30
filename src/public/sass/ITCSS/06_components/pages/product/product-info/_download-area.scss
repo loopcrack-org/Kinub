@@ -7,35 +7,20 @@
 .download-area {
   &__accordion-container {
     padding-top: 4rem;
-
-    @include tablet() {
-      padding-top: 0;
-      padding-left: 3.5rem;
-      margin-left: 0.2rem;
-    }
   }
 
   &__accordion-fan {
     display: flex;
     flex-direction: column;
     margin-top: 0.625rem;
-    gap: 0rem;
+    gap: 0;
     line-height: 0;
-
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    span {
-      font-size: 1.4rem;
-      vertical-align: middle;
-    }
-
-    @include desktop() {
-      line-height: 0.2;
-    }
   }
 
   &__accordion {
     color: color.adjust($color-gray-60, $lightness: 5%);
-    font-size: 1.25rem; //2.4
+    font-size: 1.25rem;
+    text-decoration: underline;
     transition: color 300ms ease-in-out;
 
     /* stylelint-disable-next-line plugin/selector-bem-pattern */
@@ -44,15 +29,7 @@
     }
 
     &:hover {
-      color: color.adjust($color-gray, $lightness: -10%);
-    }
-
-    @include tablet() {
-      font-size: 1.5625rem;
-    }
-
-    @include desktop() {
-      font-size: 2.2rem;
+      color: color.adjust($color-gray, $lightness: 7%);
     }
   }
 
@@ -70,13 +47,7 @@
     transition: color 300ms ease-in-out;
 
     &:hover {
-      color: color.adjust($color-gray, $lightness: -10%);
-    }
-
-    /* stylelint-disable-next-line plugin/selector-bem-pattern */
-    span {
-      font-size: 1.4rem;
-      vertical-align: middle;
+      color: color.adjust($color-gray, $lightness: 7%);
     }
 
     &--single {
@@ -86,24 +57,48 @@
       font-size: 1.25rem;
       line-height: 1;
     }
+  }
 
-    @include tablet() {
+  @include tablet() {
+    &__accordion-container {
+      padding-top: 0;
+      padding-left: 3.5rem;
+      margin-left: 0.2rem;
+    }
+
+    &__accordion {
+      font-size: 1.5625rem;
+    }
+
+    &__link {
       font-size: 1.25rem;
 
       &--single {
         font-size: 1.5625rem;
       }
     }
+  }
 
-    @include desktop() {
+  @include desktop() {
+    &__accordion-fan {
+      line-height: 0.2;
+    }
+
+    &__accordion {
+      font-size: 2.2rem;
+    }
+
+    &__link {
       font-size: 1.5625rem;
 
       &--single {
         font-size: 2.2rem;
       }
     }
+  }
 
-    @include desktopXL() {
+  @include desktopXL() {
+    &__link {
       &--single {
         padding: 0;
       }

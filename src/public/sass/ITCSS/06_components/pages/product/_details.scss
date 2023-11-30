@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use '../../../01_settings/global' as *;
+@use '../../../01_settings/fonts' as *;
 @use '../../../01_settings/colors' as *;
 @use '../../../02_tools/breakpoints' as *;
 @use '../../../02_tools/mixins' as *;
@@ -23,7 +24,7 @@
   &__heading {
     margin: 0;
     font-size: 1.5625rem;
-    font-weight: 800;
+    font-weight: $weight-bolder;
     line-height: 1;
     text-transform: capitalize;
   }
@@ -38,7 +39,7 @@
 
     &--title {
       margin: 0;
-      font-weight: 700;
+      font-weight: $weight-bold;
     }
   }
 
@@ -53,7 +54,7 @@
     padding: 0.625rem 0.3125rem;
     border-radius: 0.625rem;
     font-size: 0.9375rem;
-    font-weight: 300;
+    font-weight: $weight-light;
     text-decoration: none;
     text-transform: capitalize;
   }

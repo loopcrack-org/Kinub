@@ -1,5 +1,6 @@
 @use 'sass:color';
 @use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/fonts' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../02_tools/breakpoints' as *;
 @use '../../../../02_tools/mixins' as *;
@@ -36,20 +37,42 @@
 
     &--description {
       padding-top: 0;
-      border-top: 0.8rem solid $color-teal-blue;
+      border-top: 0.25rem solid $color-teal-blue;
     }
 
     &--tech-info {
       padding-top: 0;
-      border-top: 0.8rem solid $color-bright-blue;
+      border-top: 0.25rem solid $color-bright-blue;
     }
 
     &--download-area {
       padding-top: 0;
-      border-top: 0.8rem solid $color-sky-blue;
+      border-top: 0.25rem solid $color-sky-blue;
     }
+  }
 
-    @include tablet() {
+  &__text {
+    margin: 0.9375rem 0 -0.625rem 0;
+    color: color.adjust($color-gray-60, $lightness: 5%);
+    font-size: 1.25rem;
+    line-height: 1.4;
+
+    &--title {
+      margin-right: 0.5rem;
+      font-weight: $weight-bold;
+    }
+  }
+
+  &__video-container {
+    margin: 2.5rem auto 0 auto;
+  }
+
+  @include tablet() {
+    margin: 5.625rem auto;
+    margin-bottom: 5rem;
+    scroll-margin-top: 13.75rem;
+
+    &__text-container {
       padding-top: 0;
       padding-left: 3rem;
       border-top: none;
@@ -70,28 +93,6 @@
         border-left: 0.8rem solid $color-sky-blue;
       }
     }
-  }
-
-  &__text {
-    margin: 0.9375rem 0 -0.625rem 0;
-    color: color.adjust($color-gray-60, $lightness: 5%);
-    font-size: 1.25rem;
-    line-height: 1.4;
-
-    &--title {
-      margin-right: 0.5rem;
-      font-weight: 700;
-    }
-  }
-
-  &__video-container {
-    margin: 2.5rem auto 0 auto;
-  }
-
-  @include tablet() {
-    margin: 5.625rem auto;
-    margin-bottom: 5rem;
-    scroll-margin-top: 13.75rem;
 
     &__text {
       font-size: 1.5625rem;

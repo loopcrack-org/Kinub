@@ -155,7 +155,6 @@ const modal = new Tingle.modal({
   stickyFooter: false,
   closeMethods: ['overlay', 'button', 'escape'],
   closeLabel: 'Cerrar',
-  cssClass: ['custom-modal-form'],
   beforeClose: function () {
     return true;
   },

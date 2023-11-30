@@ -5,14 +5,12 @@
 .magnify-wrapper {
   position: relative;
 
-  /* stylelint-disable-next-line plugin/selector-bem-pattern */
-  img {
+  &__img {
     max-height: inherit;
     background-size: cover;
   }
 
-  /* stylelint-disable-next-line plugin/selector-bem-pattern */
-  #large-img {
+  &__large-img {
     position: absolute;
     z-index: 1;
     display: block;
@@ -20,21 +18,23 @@
     height: 20rem;
     border: 0.125rem solid color.adjust($color-white, $lightness: -1%);
     background: no-repeat $color-white;
-    box-shadow: 0 0.3125rem 0.625rem -0.125rem rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0.3125rem 0.625rem -0.125rem rgba($color-black, 0.9);
     opacity: 0;
     pointer-events: none;
     transition: opacity 200ms;
   }
 
-  &:hover,
-  &:active {
-    #large-img {
-      opacity: 1;
-    }
-  }
-
   &:hover {
     /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
     cursor: none;
+  }
+
+  &:hover,
+  &:active {
+    .magnify-wrapper {
+      &__large-img {
+        opacity: 1;
+      }
+    }
   }
 }
