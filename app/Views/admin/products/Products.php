@@ -98,7 +98,7 @@
                     <!-- card-body -->
                 </div>
                 <!-- card -->
-                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteProductsModal', 'message' => 'Eliminar el producto resultará en la eliminación permanente del elemento. Esta acción no se puede deshacer y conlleva la eliminación de los archivos relacionados y los tags asociadas al producto.', 'action' => '/admin/productos/borrar', 'inputName' => 'productId']); ?>
+                <?= view('templates/admin/deleteModalElement', ['idModal' => 'deleteProductsModal', 'message' => 'Eliminar el producto resultará en la eliminación permanente del elemento.', 'action' => '/admin/productos/borrar', 'inputName' => 'productId']); ?>
             </div>
             <!-- col -->
         </div>
