@@ -65,21 +65,36 @@ class CtrlCertificate extends BaseController
         }
     }
 
-    public function updateCertificate($id)
+    public function updateCertificate(string $certificateId)
     {
-        $isUpdated = true;
-        if ($isUpdated) {
+        try {
+            $validateCertificate = new CertificateValidation();
+            $certificateData     = $this->request->getPost();
+            if (! $validateCertificate->validateInputs($certificateData)) {
+                throw new InvalidInputException($validateCertificate->getErrors());
+            }
+
+            $certificateData['certificatePreviewId'] = '1';
+            $certificateData['certificatefileId']    = '1';
+
+            (new CertificateModel())->updateCertificate($certificateId, $certificateData);
             $response = [
                 'title'   => 'Edición exitosa',
                 'message' => 'Se ha editado el certificado correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('/admin/certificados')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Edición fallida',
-                'message' => 'No se pudo realizar la edición del certificado',
+                'title'   => '¡Oops! Ha ocurrido un error.',
+                'message' => 'Algo salio mal al editar el certificado. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
+
+            return redirect()->back()->withInput()->with('response', $response);
         }
 
         return redirect()->to('/admin/certificados')->with('response', $response);

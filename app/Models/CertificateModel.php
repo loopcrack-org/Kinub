@@ -29,4 +29,19 @@ class CertificateModel extends Model
             throw $th;
         }
     }
+
+    public function updateCertificate(string $certificateId, array $certificateData)
+    {
+        try {
+            $this->db->transStart();
+
+            $this->update($certificateId, $certificateData);
+
+            $this->db->transComplete();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
 }
