@@ -70,4 +70,6 @@
     </div>
     <!-- end col -->
 </div>
+
+<input type="hidden" name="msId" value="<?php old('msId') ?? $measurementSolution['msId'] ?? ''; ?>" >
 <!-- end row -->
