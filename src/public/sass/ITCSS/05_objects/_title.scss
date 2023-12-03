@@ -42,4 +42,12 @@
       transform: translateX(-50%);
     }
   }
+
+  &--level-4 {
+    @extend %title-common;
+    @include fluid-text(1.6rem, 3.2rem, 3vw);
+    color: $brand-color;
+    font-weight: $weight-semi-bold;
+    text-align: center;
+  }
 }
