@@ -1,5 +1,4 @@
 @use '../../../02_tools/mixins' as *;
-@use '../../../01_settings/colors' as *;
 @use '../../../02_tools/breakpoints' as *;
 .certificates {
   &__heading {
@@ -12,12 +11,13 @@
   }
 
   &__grid {
-    margin: 3.5rem;
+    margin: 2rem;
     margin-top: 0;
 
-    @include grid(1, 1.5rem);
+    @include flex-columns(2, 1rem, 1rem);
+
     @include phone {
-      margin: 0 1rem 4rem 1rem;
+      margin: 0 2.5rem 4rem 2.5rem;
 
       row-gap: 3rem;
       @include flex-columns(2, 1rem, 2rem);

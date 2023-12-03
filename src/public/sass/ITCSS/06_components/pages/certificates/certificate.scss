@@ -5,9 +5,7 @@
 @use '../../../02_tools/breakpoints' as *;
 .certificate {
   display: flex;
-  max-width: 9rem;
 
-  box-sizing: border-box;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -38,55 +36,35 @@
     transition: box-shadow 500ms ease-in-out;
   }
   &__image {
-    max-width: 9rem;
+    width: 100%;
+    aspect-ratio: 2/3;
     object-fit: cover;
     transition: all 500ms ease;
-    @include phone {
-      max-width: 7rem;
-      max-height: 12rem;
-    }
-    @include phoneXL {
-      max-width: 10rem;
-    }
-
-    @include desktop {
-      max-width: 10rem;
-      max-height: 27rem;
-    }
-    @include desktopXL {
-      max-width: 17rem;
-      max-height: 25rem;
-    }
-    @include desktopXXL {
-      max-width: 30rem;
-      max-height: 28rem;
-    }
   }
 
   &:hover {
     box-shadow:
-      $base-border-medium $base-border-medium $base-border-blur-certificate
-        $base-border-spread-certificate $color-light-blue,
-      $base-border-medium (-$base-border-medium) $base-border-blur-certificate
-        $base-border-spread-certificate $color-light-blue,
-      (-$base-border-medium) $base-border-medium $base-border-blur-certificate
-        $base-border-spread-certificate $color-light-blue,
-      (-$base-border-medium) (-$base-border-medium) $base-border-blur-certificate
-        $base-border-spread-certificate $color-light-blue;
+      $base-border-medium $base-border-medium $base-border-card-blur $base-border-card-spread
+        $color-light-blue,
+      $base-border-medium (-$base-border-medium) $base-border-card-blur $base-border-card-spread
+        $color-light-blue,
+      (-$base-border-medium) $base-border-medium $base-border-card-blur $base-border-card-spread
+        $color-light-blue,
+      (-$base-border-medium) (-$base-border-medium) $base-border-card-blur $base-border-card-spread
+        $color-light-blue;
   }
 
   &:hover &__image {
     box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
   }
   @include fold {
-    max-width: 17rem;
     padding: 1rem 0.5rem 1rem 0.5rem;
   }
+
   @include phone {
-    max-width: 13rem;
+    padding: 1.5rem;
   }
   @include tablet {
-    max-width: none;
     padding: 2rem;
   }
 }
