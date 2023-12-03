@@ -5,6 +5,10 @@
 @use '../02_tools/mixins' as *;
 
 .footer {
+  display: flex;
+  height: var(--footer-height);
+  align-items: center;
+  justify-content: center;
   padding: $spacing-md 5vw;
   margin-top: auto;
   background-color: $color-footer;
@@ -15,6 +19,7 @@
 }
 
 .footer__grid {
+  width: 100%;
   @include grid(1, $spacing-md);
   @include tablet() {
     @include grid(3, $spacing-xl);
@@ -42,6 +47,7 @@
 .footer__network {
   display: flex;
   height: 100%;
+  align-items: center;
   justify-content: center;
   gap: $spacing-md;
 
