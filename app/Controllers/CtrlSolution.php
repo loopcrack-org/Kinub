@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Exceptions\InvalidInputException;
 use App\Models\MeasurementSolutionModel;
 use App\Validation\SolutionValidation;
+use Exception;
 use Throwable;
 
 class CtrlSolution extends BaseController
@@ -88,21 +89,31 @@ class CtrlSolution extends BaseController
 
     public function deleteSolution()
     {
-        $isDeleted = true;
-        if ($isDeleted) {
+        try {
+            $msId                     = $this->request->getPost()['msId'];
+            $measurementSolutionModel = new MeasurementSolutionModel();
+
+            $isDeleted = $measurementSolutionModel->delete($msId);
+
+            if (! $isDeleted) {
+                throw new Exception();
+            }
+
             $response = [
                 'title'   => 'Eliminación exitosa',
                 'message' => 'Se ha elimnado la solución de medición correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('/admin/soluciones')->with('response', $response);
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la eliminación de la solución de medición',
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al tratar de eliminar la solución de medición, por favor intente nuevamente.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->back()->with('response', $response);
+            return redirect()->to('/admin/soluciones')->with('response', $response);
+        }
     }
 }
