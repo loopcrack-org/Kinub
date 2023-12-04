@@ -12,10 +12,6 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
         'labelFileTypeNotAllowed'            => 'Archivo no válido',
         'acceptedFileTypes'                  => [],
         'fileValidateTypeLabelExpectedTypes' => 'Selecciona sólo archivos con la extensión',
-        'allowMultiple'                      => false,
-        'allowFileSizeValidation'            => true,
-        'chunkUploads'                       => true,
-        'chunkSize'                          => 1000000,
         'labelIdle'                          => 'Arrastra y suelta tus archivos o <span class="filepond--label-action"> Selecciona </span>',
         'labelFileLoading'                   => 'Cargando',
         'labelFileProcessing'                => 'Procesando',
@@ -23,6 +19,14 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
         'labelTapToUndo'                     => 'toque para deshacer',
         'labelTapToCancel'                   => 'toque para cancelar',
         'labelFileWaitingForSize'            => 'Esperando tamaño',
+        'allowMultiple'                      => false,
+        'allowFileSizeValidation'            => true,
+        'chunkUploads'                       => true,
+        'chunkSize'                          => 1000000,
+        'allowImagePreview'                  => false,
+        'allowVideoPreview'                  => false,
+        'allowAudioPreview'                  => false,
+        'allowPdfPreview'                    => false,
     ];
 
     public function __construct(string $inputName)
@@ -37,6 +41,7 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
 
     public function previewImage()
     {
+        $this->filepondConfig['allowImagePreview']       = true;
         $this->filepondConfig['imagePreviewHeight']      = 170;
         $this->filepondConfig['imageCropAspectRatio']    = '1:1';
         $this->filepondConfig['imageResizeTargetWidth']  = 200;
@@ -87,6 +92,7 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
 
     public function isImage()
     {
+        $this->previewImage();
         $this->acceptTypesFile(['png', 'jpg', 'jpeg']);
 
         return $this;
@@ -94,6 +100,7 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
 
     public function isPDF()
     {
+        $this->previewPDF();
         $this->acceptTypesFile(['pdf']);
 
         return $this;
@@ -101,6 +108,7 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
 
     public function isVideo()
     {
+        $this->previewVideo();
         $this->acceptTypesFile(['mp4']);
 
         return $this;
