@@ -5,7 +5,6 @@
 @use '../../../02_tools/breakpoints' as *;
 .certificate {
   display: flex;
-
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
@@ -35,6 +34,7 @@
     margin: auto 0;
     transition: box-shadow 500ms ease-in-out;
   }
+
   &__image {
     width: 100%;
     aspect-ratio: 2/3;
@@ -58,13 +58,12 @@
     box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
   }
   @include fold {
-    padding: 1rem 0.5rem 1rem 0.5rem;
+    padding: $spacing-md $spacing-sm;
   }
-
   @include phone {
-    padding: 1.5rem;
+    padding: $spacing-lg;
   }
   @include tablet {
-    padding: 2rem;
+    padding: $spacing-xl;
   }
 }

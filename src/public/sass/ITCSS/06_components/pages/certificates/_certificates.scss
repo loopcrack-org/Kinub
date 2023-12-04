@@ -11,24 +11,18 @@
   }
 
   &__grid {
-    margin: 2rem;
-    margin-top: 0;
-
+    width: 90%;
+    margin: auto;
     @include flex-columns(2, 1rem, 1rem);
-
     @include phone {
-      margin: 0 2.5rem 4rem 2.5rem;
-
       row-gap: 3rem;
       @include flex-columns(2, 1rem, 2rem);
     }
-
     @include tablet {
       @include flex-columns(3, 1rem, 2rem);
     }
     @include desktop {
       @include flex-columns(3, 3rem, 3rem);
-      margin: 5rem;
     }
   }
 }
