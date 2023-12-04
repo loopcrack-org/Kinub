@@ -1,0 +1,89 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.support-progress {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto 4svh;
+
+  &__step {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  &__name {
+    display: none;
+    margin-bottom: 0.5em;
+    color: $color-aqua-blue;
+    font-size: 1rem;
+    font-weight: $weight-medium;
+    transition: color 300ms ease;
+
+    @include phone {
+      display: block;
+    }
+    &--active {
+      color: $color-aqua-blue;
+    }
+  }
+  &__bullet {
+    display: flex;
+    width: 2em;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2em;
+    border: 0.125rem solid color.adjust($color-aqua-blue, $lightness: 20%);
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    background-color: $color-white;
+    color: $color-aqua-blue;
+    font-size: 1.2rem;
+    font-weight: $weight-semi-bold;
+    line-height: 0.5;
+    transition: all 300ms ease;
+
+    &:before,
+    &:after {
+      position: absolute;
+      z-index: -1;
+      left: 50%;
+      width: 100%;
+      height: 0.125rem;
+      background-color: color.adjust($color-aqua-blue, $lightness: 20%);
+      content: '';
+    }
+    &::after {
+      height: 0.175rem;
+      background-color: $color-aqua-blue;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    &--active {
+      border-color: $color-aqua-blue;
+      background-color: $color-aqua-blue;
+      color: $color-white;
+
+      &::after {
+        animation: animateScaleX 400ms linear forwards;
+      }
+    }
+  }
+  &__step:last-child {
+    .support-progress__bullet {
+      &:after,
+      &::before {
+        display: none;
+      }
+    }
+  }
+  &__check {
+    visibility: hidden;
+  }
+}

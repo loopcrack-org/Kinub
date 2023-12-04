@@ -12,9 +12,9 @@ $color-brand-dark: color.adjust($brand-color, $lightness: -10%);
 $color-brand: $brand-color;
 $color-brand-light: color.adjust($brand-color, $lightness: 10%);
 
-$color-brand-secondary-dark: color.adjust($brand-color-secondary, $lightness: -5%);
+$color-brand-secondary-dark: color.adjust($brand-color-secondary, $lightness: -10%);
 $color-brand-secondary: $brand-color-secondary;
-$color-brand-secondary-light: color.adjust($brand-color-secondary, $lightness: 5%);
+$color-brand-secondary-light: color.adjust($brand-color-secondary, $lightness: 10%);
 
 //Kinub Color Palette
 $color-bright-blue: #0174f6;
@@ -24,13 +24,11 @@ $color-light-blue: #00a7de;
 $color-charcoal: #413d3e;
 $color-cyan-blue: #6ccfe6;
 
-$color-green-blue: #00535e;
-
+//Footer Color
 $color-footer: #c7d9e7;
 
 // Header colors
 $color-header-links: #003882;
-
 $color-headings: #0a94d5;
 
 /* Neutral */

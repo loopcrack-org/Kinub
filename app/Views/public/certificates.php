@@ -4,11 +4,6 @@
 <link rel="stylesheet" href="assets/public/css/certificates.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
-<?php $this->section('fonts'); ?>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Nunito+Sans:opsz,wght@6..12,200;6..12,400;6..12,500;6..12,700;6..12,900&display=swap" rel="stylesheet">
-<?php $this->endSection(); ?>
-
 <?php $this->section('content'); ?>
 
 <main class="certificates">
