@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Exception;
 use Throwable;
 
 class CategoryModel extends Model
@@ -42,13 +43,17 @@ class CategoryModel extends Model
     {
         try {
             $this->db->transStart();
-            $categoryData = $this->find($categoryId);
-            $this->delete($categoryId);
+            $categoryData    = $this->find($categoryId);
+            $categoryDeleted = $this->delete($categoryId);
 
-            $fileModel = new FileModel();
+            $fileModel    = new FileModel();
+            $imageDeleted = $fileModel->delete($categoryData['categoryImageId']);
+            $iconDeleted  = $fileModel->delete($categoryData['categoryIconId']);
 
-            $fileModel->delete($categoryData['categoryImageId']);
-            $fileModel->delete($categoryData['categoryIconId']);
+            if (! $iconDeleted || ! $imageDeleted || ! $categoryDeleted) {
+                throw new Exception('No se ha podido eliminar la categoría');
+            }
+
             $this->db->transComplete();
         } catch (Throwable $th) {
             $this->db->transRollback();
