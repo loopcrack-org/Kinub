@@ -70,8 +70,8 @@ class CtrlSolution extends BaseController
     public function updateSolution(string $msId)
     {
         try {
-            $msData          = $this->request->getPost();
-            $msData['msId']  = $msId;
+            $msData = $this->request->getPost();
+
             $msDataValidator = new SolutionValidation();
 
             if (! $msDataValidator->validateInputs($msData)) {
@@ -79,7 +79,7 @@ class CtrlSolution extends BaseController
             }
 
             $msModel = new MeasurementSolutionModel();
-            $msModel->updateMeasurementSolution($msData);
+            $msModel->updateMeasurementSolution($msId, $msData);
 
             $response = [
                 'title'   => 'Actualización exitosa',

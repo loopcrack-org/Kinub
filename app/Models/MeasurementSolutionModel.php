@@ -12,7 +12,7 @@ class MeasurementSolutionModel extends Model
     protected $primaryKey    = 'msId';
     protected $allowedFields = ['msName', 'msDescription', 'msImageId', 'msIconId'];
 
-    public function updateMeasurementSolution(array $msData)
+    public function updateMeasurementSolution(string $msId, array $msData)
     {
         try {
             $this->db->transStart();
@@ -20,7 +20,7 @@ class MeasurementSolutionModel extends Model
             $msData['msImageId'] = 1;
             $msData['msIconId']  = 2;
 
-            $this->update($msData['msId'], $msData);
+            $this->update($msId, $msData);
 
             $this->db->transComplete();
         } catch (Throwable $th) {
