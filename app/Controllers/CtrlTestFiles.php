@@ -2,53 +2,30 @@
 
 namespace App\Controllers;
 
-use App\Classes\ClientValidationConfig;
+use App\Classes\FileValidationConfig;
+use App\Classes\FileValidationConfigBuilder;
+use App\Models\TestFilesModel;
+use App\Models\TestModel;
+use App\Utils\FileManager;
+use App\Validation\TestValidation;
+use Exception;
+use Throwable;
 
 class CtrlTestFiles extends CtrlApiFiles
 {
     /**
      * This variable containes the filepond configuration
      */
-    protected $filepondConfig;
-
-    /**
-     * configuration for validation from server through the api
-     */
-    protected $validationConfig = [
-        'image' => [
-            'rules'    => 'maxSize[200,kb]|mimeIn[image/png,image/jpeg,image/jpg]|maxDims[3000,3000]',
-            'messages' => [
-                'maxSize' => 'La imagen debe ser menor a 100 kilobytes',
-                'maxDims' => 'Las dimensiones máximas de imagen son de 3000px por 3000px',
-                'mimeIn'  => 'Tipo de archivo inválido, selecciona image/png,image/jpeg,image/jpg',
-            ],
-        ],
-        'video' => [
-            'rules'    => 'maxSize[10,mb]|mimeIn[video/mp4]',
-            'messages' => [
-                'maxSize' => ' El video debe ser menor a 100 megabytes',
-                'mimeIn'  => 'Tipo de archivo inválido, selecciona video/mp4',
-            ],
-        ],
-        'datasheet' => [
-            'rules'    => 'maxSize[2,mb]|minSize[10,kb]|mimeIn[application/pdf]',
-            'messages' => [
-                'maxSize' => 'El archivo debe ser menor a 2 megabytes',
-                'minSize' => 'El archivo debe ser mayor a 10 kilobytes',
-                'mimeIn'  => 'Tipo de archivo inválido, selecciona application/pdf',
-            ],
-        ],
-    ];
+    protected FileValidationConfig $fileConfig;
 
     public function __construct()
     {
-        $this->filepondConfig = [
-            // this parameter is going to be passed through a general Builder, that combines filepond and validation server
-            'baseUrl'   => '/admin/testFiles',
-            'image'     => ClientValidationConfig::builder('image')->maxFiles(3)->maxSize(200, 'KB')->allowMultipleFiles()->isImage()->maxDims(3000, 3000)->build()->getConfig(),
-            'video'     => ClientValidationConfig::builder('video')->maxFiles(2)->maxSize(10, 'MB')->allowMultipleFiles()->isVideo()->build()->getConfig(),
-            'datasheet' => ClientValidationConfig::builder('datasheet')->maxFiles(2)->minSize(10, 'KB')->maxSize(2, 'MB')->allowMultipleFiles()->isPDF()->build()->getConfig(),
-        ];
+        $fileConfigBuilder = new FileValidationConfigBuilder('/admin/testFiles');
+        $fileConfigBuilder->builder('image')->minFiles(1)->maxFiles(2)->minSize(50, 'KB')->maxSize(2, 'MB')->allowMultipleFiles()->isImage()->maxDims(3000, 3000)->build();
+        $fileConfigBuilder->builder('video')->maxFiles(2)->allowMultipleFiles()->isVideo()->build();
+        $fileConfigBuilder->builder('datasheet')->maxFiles(2)->allowMultipleFiles()->isPDF()->build();
+
+        $this->fileConfig = $fileConfigBuilder->getConfig();
     }
 
     /**
@@ -60,12 +37,9 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function viewTestFiles()
     {
-        return view('admin/test/testFiles', ['tests' => [
-            [
-                'testId'   => 1,
-                'testName' => 'test 1',
-            ],
-        ]]);
+        $tests = (new TestModel())->findAll();
+
+        return view('admin/test/testFiles', ['tests' => $tests]);
     }
 
     /**
@@ -75,7 +49,11 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function viewTestFilesCreate()
     {
-        return view('admin/test/testFilesCreate', ['filepondConfig' => $this->filepondConfig]);
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        }
+
+        return view('admin/test/testFilesCreate', ['filepondConfig' => $this->fileConfig->getClientConfig()]);
     }
 
     /**
@@ -83,7 +61,38 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function createTestFiles()
     {
-        echo 'creando test';
+        $data = $this->request->getPost();
+
+        try {
+            $filesValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+            $validator            = new TestValidation();
+            $validator->addRules($filesValidationRules['rules'], $filesValidationRules['messages']);
+            if (! $validator->validateInputs($data)) {
+                throw new Exception();
+            }
+            $testModel     = new TestModel();
+            $testId        = $testModel->insert(['testName' => $data['name']], true);
+            $testFileModel = new TestFilesModel();
+
+            $dataFiles = $this->fileConfig->filterNewFilesInInputsFile($data);
+
+            foreach ($dataFiles as $inputName => $files) {
+                if (! empty($files)) {
+                    $testFileModel->saveFiles($files, $testId, $inputName);
+                    FileManager::changeDirectoryCollectionFolder($files);
+                }
+            }
+
+            return redirect('admin/testFiles')->with('response', [
+                'title'   => 'Creación exitosa',
+                'message' => 'Se ha creado el test correctamente',
+                'type'    => 'success',
+            ]);
+        } catch (Throwable $th) {
+            session()->setFlashdata('clientData', $data);
+
+            return redirect()->to('/admin/testFiles/crear')->withInput();
+        }
     }
 
     /**
@@ -93,9 +102,21 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function viewTestFilesEdit($id)
     {
+        $testModel = new TestModel();
+        $name      = $testModel->select('testName')->where('testId', $id)->first()['testName'];
+
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        } else {
+            $dataFiles['image']     = $testModel->getKeyFilesByType($id, 'image');
+            $dataFiles['video']     = $testModel->getKeyFilesByType($id, 'video');
+            $dataFiles['datasheet'] = $testModel->getKeyFilesByType($id, 'datasheet');
+            $this->fileConfig->setDataInClientConfig($dataFiles);
+        }
+
         return view('admin/test/testFilesEdit', [
-            'name'           => "file test name on id: {$id}",
-            'filepondConfig' => $this->filepondConfig,
+            'name'           => $name,
+            'filepondConfig' => $this->fileConfig->getClientConfig(),
         ]);
     }
 
@@ -106,7 +127,48 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function updateTestFiles($testId)
     {
-        echo 'actualizando test';
+        $data = $this->request->getPost();
+
+        try {
+            $filesValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+            $validator            = new TestValidation();
+            $validator->addRules($filesValidationRules['rules'], $filesValidationRules['messages']);
+            if (! $validator->validateInputs($data)) {
+                throw new Exception();
+            }
+
+            $testModel = new TestModel();
+            $testModel->update($testId, ['testName' => $data['name']]);
+            $newFiles = $this->fileConfig->filterNewFilesInInputsFile($data);
+            if ($newFiles) {
+                $testFileModel = new TestFilesModel();
+
+                foreach ($newFiles as $type => $files) {
+                    $testFileModel->saveFiles($files, $testId, $type);
+                    FileManager::changeDirectoryCollectionFolder($files);
+                }
+            }
+
+            $deleteFiles = $this->fileConfig->getKeysFolderToDelete($data);
+            if ($deleteFiles) {
+                $testFileModel = new TestFilesModel();
+
+                foreach ($deleteFiles as $keysFoldersToDelete) {
+                    $testFileModel->deleteFiles($keysFoldersToDelete);
+                    FileManager::deleteMultipleFoldersWithContent($keysFoldersToDelete);
+                }
+            }
+
+            return redirect('admin/testFiles')->with('response', [
+                'title'   => 'Edición exitosa',
+                'message' => 'Se ha editado el test correctamente',
+                'type'    => 'success',
+            ]);
+        } catch (Throwable $th) {
+            session()->setFlashdata('clientData', $data);
+
+            return redirect()->to("/admin/testFiles/editar/{$testId}")->withInput();
+        }
     }
 
     /**
@@ -114,6 +176,28 @@ class CtrlTestFiles extends CtrlApiFiles
      */
     public function deleteTestFiles()
     {
-        echo 'borrando test';
+        try {
+            $testModel     = new TestModel();
+            $testFileModel = new TestFilesModel();
+
+            $id       = $this->request->getPost('testId');
+            $keyFiles = $testModel->getKeyFiles($id);
+            $testFileModel->deleteFiles($keyFiles);
+            FileManager::deleteMultipleFoldersWithContent($keyFiles);
+
+            $testModel->delete($id);
+
+            return redirect()->to('/admin/testFiles')->with('response', [
+                'title'   => 'Eliminación exitosa',
+                'message' => 'Se ha eliminado el test correctamente',
+                'type'    => 'success',
+            ]);
+        } catch (Throwable $th) {
+            return redirect()->to('/admin/testFiles')->with('response', [
+                'title'   => 'Eliminación fallida',
+                'message' => 'Algo salio mal al eliminar el test. Por favor, inténtalo de nuevo.',
+                'type'    => 'error',
+            ]);
+        }
     }
 }

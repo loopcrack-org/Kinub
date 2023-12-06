@@ -33,7 +33,7 @@
                         if (session()->has('response')) {
                             $response = session()->get('response');
                             ?>
-                    <div id="alert-deletedCategory" data-response="<?= esc(json_encode($response)) ?>"></div>
+                        <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
                     <?php } ?>
 
                     <!-- card-header -->
