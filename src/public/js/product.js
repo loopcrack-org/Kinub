@@ -2,7 +2,7 @@ import Glide from '@glidejs/glide';
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
 import Tingle from 'tingle.js';
-import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
+import '../libs/vanilla-js-accordions/AccordionElement.min.js';
 import { initLightGallery } from './light.js';
 import { magnifyImage } from './magnify.js';
 new Plyr('#product-video');

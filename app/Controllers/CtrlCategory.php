@@ -75,28 +75,61 @@ class CtrlCategory extends BaseController
         }
     }
 
-    public function updateCategory($id)
+    public function updateCategory(string $categoryId)
     {
-        return "updating Category... {$id}";
-    }
+        try {
+            $categoryData = $this->request->getPost();
 
-    public function deleteCategory()
-    {
-        $isDeleted = true;
-        if ($isDeleted) {
+            $validator = new CategoryValidation();
+
+            if (! $validator->validateInputs($categoryData)) {
+                throw new InvalidInputException($validator->getErrors());
+            }
+
+            $categoryData['newIcon']  = '3ea307c224811d55048d72b5696895eb';
+            $categoryData['newImage'] = '3ea307c224811d55048d72b5696895eb';
+
+            $nameCategoryTags = (new CategoryTagModel())
+                ->select('categoryTagName')
+                ->where('categoryId', $categoryId)
+                ->findAll();
+
+            $nameCategoryTags  = array_column($nameCategoryTags, 'categoryTagName');
+            $inputCategoryTags = explode(',', $categoryData['categoryTags']);
+
+            $newCategoryTags = array_diff($inputCategoryTags, $nameCategoryTags);
+
+            $categoryTagsToDelete = (new CategoryTagModel())
+                ->select('categoryTagId')
+                ->where('categoryId', $categoryId)
+                ->whereNotIn('categoryTagName', $inputCategoryTags)
+                ->findAll();
+
+            $categoryDataToUpdate = [
+                'categoryName'         => $categoryData['categoryName'],
+                'newCategoryTags'      => $newCategoryTags,
+                'categoryTagsToDelete' => array_column($categoryTagsToDelete, 'categoryTagId'),
+            ];
+
+            (new CategoryModel())->updateCategory($categoryId, $categoryDataToUpdate);
+
             $response = [
-                'title'   => 'Eliminación exitosa',
-                'message' => 'Se ha elimnado la categoría correctamente',
+                'title'   => 'Categoría actualizada',
+                'message' => 'La categoría ha sido actualizada correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('/admin/categorias')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->to("/admin/categorias/editar/{$categoryId}")->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la eliminación de la categoría',
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al actualizar los datos de la categoría, por favor intente nuevamente.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->back()->with('response', $response);
+            return redirect()->to("/admin/categorias/editar/{$categoryId}")->withInput()->with('response', $response);
+        }
     }
 }
