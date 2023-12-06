@@ -164,7 +164,7 @@ class CtrlTestFiles extends CtrlApiFiles
 
                 foreach ($deleteFiles as $keysFoldersToDelete) {
                     $testFileModel->deleteFiles($keysFoldersToDelete);
-                    FileManager::deleteMultipleFoldersWhitContent($keysFoldersToDelete);
+                    FileManager::deleteMultipleFoldersWithContent($keysFoldersToDelete);
                 }
             }
 
@@ -192,7 +192,7 @@ class CtrlTestFiles extends CtrlApiFiles
             $id       = $this->request->getPost('testId');
             $keyFiles = $testModel->getKeyFiles($id);
             $testFileModel->deleteFiles($keyFiles);
-            FileManager::deleteMultipleFoldersWhitContent($keyFiles);
+            FileManager::deleteMultipleFoldersWithContent($keyFiles);
 
             $testModel->delete($id);
 

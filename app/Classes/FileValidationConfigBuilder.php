@@ -46,27 +46,6 @@ class FileValidationConfigBuilder implements ValidationConfigBuilder, Filepond
         return new FileValidationConfig($this->config, $this->baseUrl);
     }
 
-    public function previewImage()
-    {
-        $this->clientValidationConfigBuilder->previewImage();
-
-        return $this;
-    }
-
-    public function previewVideo()
-    {
-        $this->clientValidationConfigBuilder->previewVideo();
-
-        return $this;
-    }
-
-    public function previewPDF()
-    {
-        $this->clientValidationConfigBuilder->previewPDF();
-
-        return $this;
-    }
-
     public function chunkSize(int $chunkSize)
     {
         $this->clientValidationConfigBuilder->chunkSize($chunkSize);

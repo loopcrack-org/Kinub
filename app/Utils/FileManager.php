@@ -174,7 +174,7 @@ class FileManager
      *
      * @throws Exception If an error occurs while deleting the folder and its content.
      */
-    public static function deleteMultipleFoldersWhitContent(array $folders)
+    public static function deleteMultipleFoldersWithContent(array $folders)
     {
         try {
             foreach ($folders as $folder) {
