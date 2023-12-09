@@ -40,7 +40,7 @@ try {
         $converted->toFile("{$dirname}/{$filename}.{$newExt}");
     }
 
-    echo "converted file: {$filePath} on types " . implode(',', $types);
+    exit;
 } catch (\Throwable $th) {
-    echo $th->getMessage() . "\n";
+    exit;
 }

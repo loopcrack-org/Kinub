@@ -40,12 +40,11 @@ class Tinify
         unset($filePath);
 
         // Run the convertion on second plane
-        $execFile  = __DIR__ . '\tinifyConvertion.php';
-        $outFolder = __DIR__ . '\out.txt';
+        $execFile = __DIR__ . '\tinifyConvertion.php';
 
         foreach ($references as $filePath) {
             $types   = implode(',', self::$allowedTypes);
-            $command = "php \"{$execFile}\" \"{$filePath}\" \"{$types}\" > \"{$outFolder}\"";
+            $command = "php \"{$execFile}\" \"{$filePath}\" \"{$types}\"";
             self::execInBackground($command);
         }
 
