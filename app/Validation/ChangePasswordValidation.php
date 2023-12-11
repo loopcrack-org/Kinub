@@ -25,11 +25,7 @@ class ChangePasswordValidation extends BaseValidation
     public function existUserWithToken($user)
     {
         if (! $user) {
-            $this->errors = [
-                'connection' => 'Algo ha salido mal, porfavor recarga la página e intenta nuevamente',
-            ];
-
-            throw new Exception();
+            throw new Exception('Algo ha salido mal, porfavor recarga la página e intenta nuevamente');
         }
 
         return true;
