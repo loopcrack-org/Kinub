@@ -1,0 +1,14 @@
+@use '../01_settings/global' as *;
+@use '../02_tools/breakpoints' as *;
+
+:root {
+  --header-height: #{$navbar-mobile-height};
+  --footer-height: #{$footer-mobile-height};
+  @include tablet() {
+    --header-height: #{$navbar-desktop-height};
+    --footer-height: #{$footer-tablet-height};
+  }
+  @include desktop() {
+    --footer-height: #{$footer-desktop-height};
+  }
+}

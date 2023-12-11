@@ -9,6 +9,7 @@ use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlLogin;
+use App\Controllers\CtrlProduct;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlUser;
 
@@ -87,6 +88,15 @@ $routes->group('admin', static function ($routes) {
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
     });
 
+    $routes->group('productos', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlProduct::class, 'viewProducts']);
+        $routes->get('crear', [CtrlProduct::class, 'viewProductCreate']);
+        $routes->post('crear', [CtrlProduct::class, 'createProduct']);
+        $routes->get('editar/(:num)', [CtrlProduct::class, 'viewProductEdit']);
+        $routes->post('editar/(:num)', [CtrlProduct::class, 'updateProduct']);
+        $routes->post('borrar', [CtrlProduct::class, 'deleteProduct']);
+    });
     $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlCategory::class, 'viewCategories']);

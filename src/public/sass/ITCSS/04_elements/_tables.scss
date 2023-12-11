@@ -1,0 +1,27 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+/* ==========================================================================
+   #TABLES
+   ========================================================================== */
+
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+
+  caption {
+    margin-top: $spacing-sm;
+    caption-side: bottom;
+    color: $color-gray-50;
+    font-size: 0.875rem;
+  }
+
+  thead {
+    border-bottom: $base-border-width solid $color-brand-secondary;
+  }
+
+  td {
+    border-bottom: $base-border-width-small solid $color-gray-20;
+  }
+}

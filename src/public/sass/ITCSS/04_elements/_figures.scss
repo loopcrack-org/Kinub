@@ -1,0 +1,14 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+/* ==========================================================================
+   #FIGURES
+   ========================================================================== */
+
+figure {
+  figcaption {
+    display: block;
+    margin-top: $spacing-sm;
+    color: $color-gray-50;
+    font-size: 0.875rem;
+  }
+}
