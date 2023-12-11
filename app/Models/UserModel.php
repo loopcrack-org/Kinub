@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Throwable;
 
 class UserModel extends Model
 {
@@ -31,7 +32,29 @@ class UserModel extends Model
         return $data;
     }
 
-    public function resetPassword()
+    public function updatePassword($userId, $newPassword, $isConfirmed)
     {
+        try {
+            $this->db->transStart();
+            if ($isConfirmed) {
+                $this->update($userId, [
+                    'userPassword' => $newPassword,
+                ]);
+            } else {
+                $this->update($userId, [
+                    'userPassword' => $newPassword,
+                    'confirmed'    => 1,
+                ]);
+            }
+
+            $userTokenModel = new UserTokenModel();
+
+            $userTokenModel->where('userId', $userId)->delete();
+            $this->db->transComplete();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
     }
 }

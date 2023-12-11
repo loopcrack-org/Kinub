@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use App\Utils\EmailSender;
-use App\Utils\TokenGenerator;
+use App\Utils\TokenUtils;
 use App\Validation\UserValidation;
 use Exception;
 use Throwable;
@@ -50,7 +50,7 @@ class CtrlUser extends BaseController
 
             $userId = $userModel->insert($userData);
 
-            $userData['userToken'] = TokenGenerator::generateToken($userId);
+            $userData['userToken'] = TokenUtils::generateToken($userId);
 
             $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $userData['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $userData);
 
@@ -104,7 +104,7 @@ class CtrlUser extends BaseController
                 $user = $userModel->where('userEmail', $POST['userEmail'])->first();
                 $validateUser->existUserEmail($user);
 
-                $newUserToken = TokenGenerator::generateToken($id);
+                $newUserToken = TokenUtils::generateToken($id);
 
                 $POST['confirmed']    = 0;
                 $POST['userPassword'] = null;

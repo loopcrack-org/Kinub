@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Exceptions\InvalidInputException;
 use App\Models\UserModel;
-use App\Models\UserTokenModel;
+use App\Utils\TokenUtils;
 use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
 use Exception;
@@ -88,16 +88,12 @@ class CtrlLogin extends BaseController
                 throw new InvalidInputException($changePasswordValidation->getErrors());
             }
 
-            $userTokenModel = new UserTokenModel();
-            $user           = $userTokenModel->join('users', 'users.userId = user_tokens.userId')->where('userToken', $token)->first();
+            $user = TokenUtils::getUserWithToken($token);
 
             $changePasswordValidation->existUserWithToken($user);
 
             $userModel = new UserModel();
-            $userModel->update($user['userId'], [
-                'userPassword' => $data['password'],
-            ]);
-            $userTokenModel->where('userId', $user['userId'])->delete();
+            $userModel->updatePassword($user['userId'], $data['password'], 1);
 
             $response = [
                 'type'    => 'success',
@@ -128,26 +124,18 @@ class CtrlLogin extends BaseController
                 throw new InvalidInputException($changePasswordValidation->getErrors());
             }
 
-            $userTokenModel = new UserTokenModel();
-            $user           = $userTokenModel->join('users', 'users.userId = user_tokens.userId')->where('userToken', $token)->first();
+            $user = TokenUtils::getUserWithToken($token);
 
             $changePasswordValidation->existUserWithToken($user);
 
             $userModel = new UserModel();
-            $result    = $userModel->update($user['userId'], [
-                'userToken'    => null,
-                'userPassword' => $data['password'],
-                'confirmed'    => 1,
-            ]);
-            $userTokenModel->where('userId', $user['userId'])->delete();
+            $userModel->updatePassword($user['userId'], $data['password'], 0);
 
-            if ($result) {
-                $response = [
-                    'type'    => 'success',
-                    'title'   => 'Contraseña establecida correctamente',
-                    'message' => 'Porfavor, inicia sesión para comenzar',
-                ];
-            }
+            $response = [
+                'type'    => 'success',
+                'title'   => 'Contraseña establecida correctamente',
+                'message' => 'Porfavor, inicia sesión para comenzar',
+            ];
         } catch (InvalidInputException $th) {
             return redirect()->back()->with('errors', $changePasswordValidation->getErrors());
         } catch (Exception $e) {
