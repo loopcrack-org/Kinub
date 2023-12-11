@@ -2,10 +2,14 @@
 
 namespace Config;
 
+use App\Controllers\CtrlAboutUs;
+use App\Controllers\CtrlAdminEmail;
 use App\Controllers\CtrlCategory;
+use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
 use App\Controllers\CtrlHomeSection;
 use App\Controllers\CtrlLogin;
+use App\Controllers\CtrlProduct;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlTestFiles;
 use App\Controllers\CtrlUser;
@@ -45,6 +49,7 @@ $routes->post('/email/soporte', 'CtrlEmail::sendSupportEmail');
 $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
+$routes->get('/producto', 'CtrlPublicPages::viewProduct');
 
 /*
  * --------------------------------------------------------------------
@@ -82,6 +87,15 @@ $routes->group('admin', static function ($routes) {
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
     });
 
+    $routes->group('productos', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlProduct::class, 'viewProducts']);
+        $routes->get('crear', [CtrlProduct::class, 'viewProductCreate']);
+        $routes->post('crear', [CtrlProduct::class, 'createProduct']);
+        $routes->get('editar/(:num)', [CtrlProduct::class, 'viewProductEdit']);
+        $routes->post('editar/(:num)', [CtrlProduct::class, 'updateProduct']);
+        $routes->post('borrar', [CtrlProduct::class, 'deleteProduct']);
+    });
     $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlCategory::class, 'viewCategories']);
@@ -92,6 +106,23 @@ $routes->group('admin', static function ($routes) {
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
     });
 
+    $routes->group('certificados', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlCertificate::class, 'viewCertificates']);
+        $routes->get('crear', [CtrlCertificate::class, 'viewCertificateCreate']);
+        $routes->post('crear', [CtrlCertificate::class, 'createCertificate']);
+        $routes->get('editar/(:num)', [CtrlCertificate::class, 'viewCertificateEdit']);
+        $routes->post('editar/(:num)', [CtrlCertificate::class, 'updateCertificate']);
+        $routes->post('borrar', [CtrlCertificate::class, 'deleteCertificate']);
+    });
+
+    $routes->group('emails', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlAdminEmail::class, 'viewEmails']);
+        $routes->get('ver/(:num)', [CtrlAdminEmail::class, 'viewSpecificEmails']);
+        $routes->post('borrar', [CtrlAdminEmail::class, 'deleteEmail']);
+    });
+
     $routes->group('usuarios', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlUser::class, 'viewUsers']);
@@ -100,6 +131,11 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlUser::class, 'viewUserEdit']);
         $routes->post('editar/(:num)', [CtrlUser::class, 'updateUser']);
         $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
+    });
+    $routes->group('nosotros', static function ($routes) {
+        /** @var \CodeIgniter\Router\RouteCollection $routes */
+        $routes->get('', [CtrlAboutUs::class, 'viewAboutUsEdit']);
+        $routes->post('', [CtrlAboutUs::class, 'updateAboutUsSection']);
     });
 
     $routes->group('testFiles', static function ($routes) {

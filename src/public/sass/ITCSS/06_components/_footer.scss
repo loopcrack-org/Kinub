@@ -1,0 +1,99 @@
+@use 'sass:color';
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../02_tools/breakpoints' as *;
+@use '../02_tools/mixins' as *;
+
+.footer {
+  display: flex;
+  height: var(--footer-height);
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-md 5vw;
+  margin-top: auto;
+  background-color: $color-footer;
+  box-shadow: 0rem -0.625rem 1.875rem color.adjust($color-black, $alpha: -0.75);
+  @include desktop() {
+    padding: $spacing-lg 5vw;
+  }
+}
+
+.footer__grid {
+  width: 100%;
+  @include grid(1, $spacing-md);
+  @include tablet() {
+    @include grid(3, $spacing-xl);
+  }
+}
+
+.footer__advice-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer__advice {
+  font-size: 0.9rem;
+
+  @include tablet() {
+    font-size: 1.2rem;
+  }
+  @include desktop() {
+    font-size: 1.6rem;
+  }
+}
+
+.footer__network {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+
+  @include tablet() {
+    gap: $spacing-xl;
+  }
+}
+
+.footer__link {
+  display: flex;
+  height: 2.6rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  background-color: $color-brand;
+  transition: 300ms background-color ease-in-out;
+
+  &:hover {
+    background-color: $color-brand-secondary;
+  }
+
+  &[href*='facebook.com']::before {
+    @include social-icon('/assets/images/facebook-icon.svg', 55%);
+  }
+
+  &[href*='instagram.com']::before {
+    @include social-icon('/assets/images/instagram-icon.svg', 80%);
+  }
+
+  &[href*='youtube.com']::before {
+    @include social-icon('/assets/images/youtube-icon.svg', 65%);
+  }
+
+  &[href*='twitter.com']::before {
+    @include social-icon('/assets/images/twitter-icon.svg', 55%);
+  }
+
+  &[href*='linkedin.com']::before {
+    @include social-icon('/assets/images/linkedin-icon.svg', 55%);
+  }
+
+  @include tablet() {
+    height: 3rem;
+  }
+  @include desktop() {
+    height: 3.8rem;
+  }
+}

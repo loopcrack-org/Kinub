@@ -1,0 +1,17 @@
+@use '../01_settings/colors' as *;
+
+/* ==========================================================================
+   #LINKS
+   ========================================================================== */
+
+a {
+  color: $color-brand;
+  text-decoration: underline;
+  transition: color 0.25s;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: $color-brand-secondary;
+  }
+}

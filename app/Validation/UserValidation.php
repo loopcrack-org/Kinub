@@ -7,18 +7,18 @@ use Exception;
 class UserValidation extends BaseValidation
 {
     protected $validationRules = [
-        'userFirstName' => 'required|alpha_space',
-        'userLastName'  => 'required|alpha_space',
+        'userFirstName' => 'required|regex_match[^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s\']+$]',
+        'userLastName'  => 'required|regex_match[^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s\']+$]',
         'userEmail'     => 'required|valid_emails',
     ];
     protected $validationMessages = [
         'userFirstName' => [
             'required'    => 'El nombre es obligatorio',
-            'alpha_space' => 'El campo nombre solo debe contener carácteres alfabéticos y espacios',
+            'regex_match' => 'El campo nombre solo debe contener carácteres alfabéticos y espacios',
         ],
         'userLastName' => [
             'required'    => 'El apellido es obligatorio',
-            'alpha_space' => 'El campo nombre solo debe contener carácteres alfabéticos y espacios',
+            'regex_match' => 'El campo nombre solo debe contener carácteres alfabéticos y espacios',
         ],
         'userEmail' => [
             'required'     => 'El email es obligatorio',

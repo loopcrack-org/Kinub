@@ -1,0 +1,47 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+
+/* ==========================================================================
+   #BREADCRUMBS
+   ========================================================================== */
+
+.breadcrumbs {
+  display: flex;
+  overflow-x: auto;
+}
+
+/* Item */
+
+.breadcrumbs__item {
+  display: flex;
+  flex: 0 1 auto;
+  color: $color-brand;
+  font-size: 0.875rem; /* 14 / 16 */
+  white-space: nowrap;
+
+  &:not(:last-child)::after {
+    flex: 0 1 auto;
+    padding-right: $spacing-sm;
+    padding-left: $spacing-sm;
+    color: $color-brand-secondary;
+    content: '/';
+  }
+}
+
+/* Link */
+
+.breadcrumbs__link {
+  flex: 0 1 auto;
+  border-bottom: 0.0625em solid transparent;
+  color: $color-brand-secondary;
+  text-decoration: none;
+  transition:
+    border-bottom-color 0.25s,
+    color 0.25s;
+
+  &:focus,
+  &:hover {
+    border-bottom-color: $color-brand;
+    color: $color-brand;
+  }
+}

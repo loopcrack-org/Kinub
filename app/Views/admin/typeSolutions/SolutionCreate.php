@@ -1,19 +1,19 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
-<?= $this->section("title-meta") ?>
-<?php echo view('partials/title-meta', array('title' => 'Crear Solución')); ?>
+<?= $this->section('title-meta') ?>
+<?= view('partials/title-meta', ['title' => 'Crear Solución']); ?>
 <?= $this->endSection() ?>
 
-<?= $this->section("css") ?>
+<?= $this->section('css') ?>
 <!-- Filepond css -->
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-
+<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
-<?= $this->section("content") ?>
+<?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('title' => 'Crear Solución', "titleUrl" => "/admin/soluciones", 'pagetitle' => 'Soluciones de Medición', 'pagetitleInner' => 'Crear Solución',)); ?>
+        <?= view('partials/page-title', ['title' => 'Crear Solución', 'titleUrl' => '/admin/soluciones', 'pagetitle' => 'Soluciones de Medición', 'pagetitleInner' => 'Crear Solución']); ?>
 
 
         <div class="row justify-content-center">
@@ -23,9 +23,16 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
+                <?php
+                    if (session()->has('response')) {
+                        $response = session()->get('response');
+                        ?>
+                    <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                <?php } ?>
+                <?php $errors = session()->get('errors'); ?>
                 <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
 
-                    <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
+                    <?= view('admin/typeSolutions/solutionsFormTemplate', ['errors' => $errors]) ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
@@ -43,7 +50,8 @@
 <?= $this->endSection() ?>
 
 
-<?= $this->section("js") ?>
+<?= $this->section('js') ?>
 <!-- filepond js -->
 <script src="/assets/admin/js/form-file-upload-measurementSolution.init.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>
