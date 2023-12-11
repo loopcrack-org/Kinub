@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Models\UserTokenModel;
+use DateTime;
 
 class TokenUtils
 {
@@ -18,6 +19,14 @@ class TokenUtils
         $userTokenModel->insert($tokenData);
 
         return $tokenData['userToken'];
+    }
+
+    public static function getTokenDate($token)
+    {
+        $userTokenModel = new UserTokenModel();
+        $tokenDB        = $userTokenModel->where('userToken', $token)->first();
+
+        return new DateTime($tokenDB['tokenExpiryDate']);
     }
 
     public static function getUserWithToken($token)

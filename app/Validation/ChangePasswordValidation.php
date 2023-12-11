@@ -2,6 +2,8 @@
 
 namespace App\Validation;
 
+use App\Utils\TokenUtils;
+use DateTime;
 use Exception;
 
 class ChangePasswordValidation extends BaseValidation
@@ -42,6 +44,20 @@ class ChangePasswordValidation extends BaseValidation
             }
 
             throw new Exception($message);
+        }
+
+        return true;
+    }
+
+    public function validateTokenExpiration($token, $userId)
+    {
+        $tokenExpiryDate = TokenUtils::getTokenDate($token);
+        $today           = new DateTime();
+
+        if ($today >= $tokenExpiryDate) {
+            TokenUtils::deleteToken($userId);
+
+            throw new Exception('El token ha expirado. Por favor, solicita uno nuevo para continuar con la operación.');
         }
 
         return true;

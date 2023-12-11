@@ -33,6 +33,7 @@ class CtrlLogin extends BaseController
             $changePasswordValidation = new ChangePasswordValidation();
             $user                     = TokenUtils::getUserWithToken($token);
             $changePasswordValidation->existUserWithToken($user);
+            $changePasswordValidation->validateTokenExpiration($token, $user['userId']);
             $changePasswordValidation->accessValidation($user['confirmed'], '1');
         } catch (Throwable $th) {
             $response = [
@@ -55,6 +56,7 @@ class CtrlLogin extends BaseController
             $changePasswordValidation = new ChangePasswordValidation();
             $user                     = TokenUtils::getUserWithToken($token);
             $changePasswordValidation->existUserWithToken($user);
+            $changePasswordValidation->validateTokenExpiration($token, $user['userId']);
             $changePasswordValidation->accessValidation($user['confirmed'], '0');
         } catch (Throwable $th) {
             $response = [
