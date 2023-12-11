@@ -39,6 +39,7 @@ class CategoryModel extends Model
         }
     }
 
+<<<<<<< HEAD
     public function deleteCategory(string $categoryId)
     {
         try {
@@ -54,6 +55,30 @@ class CategoryModel extends Model
                 throw new Exception('No se ha podido eliminar la categoría');
             }
 
+=======
+    public function updateCategory(string $categoryId, array $categoryData)
+    {
+        try {
+            $this->db->transStart();
+
+            if ($categoryData['newCategoryTags']) {
+                $newCategortTags = array_map(static function ($categoryTag) use ($categoryId) {
+                    return [
+                        'categoryTagName' => $categoryTag,
+                        'categoryId'      => $categoryId,
+                    ];
+                }, $categoryData['newCategoryTags']);
+
+                (new CategoryTagModel())->insertBatch($newCategortTags);
+            }
+
+            if ($categoryData['categoryTagsToDelete']) {
+                $categoryTagModel = new CategoryTagModel();
+                $categoryTagModel->delete($categoryData['categoryTagsToDelete']);
+            }
+
+            (new CategoryModel())->update($categoryId, $categoryData);
+>>>>>>> 51ecbe590e18479386d7c3b8d914ab2236ef7dad
             $this->db->transComplete();
         } catch (Throwable $th) {
             $this->db->transRollback();
