@@ -31,9 +31,7 @@ class CtrlLogin extends BaseController
     {
         try {
             $changePasswordValidation = new ChangePasswordValidation();
-            $userModel                = new UserModel();
-            $user                     = $userModel->join('user_tokens', 'user_tokens.userId = users.userId')->where('userToken', $token)->first();
-
+            $user                     = TokenUtils::getUserWithToken($token);
             $changePasswordValidation->existUserWithToken($user);
             $changePasswordValidation->accessValidation($user['confirmed'], '1');
         } catch (Throwable $th) {
@@ -55,11 +53,7 @@ class CtrlLogin extends BaseController
     {
         try {
             $changePasswordValidation = new ChangePasswordValidation();
-
-            $userModel = new UserModel();
-
-            $user = $userModel->join('user_tokens', 'user_tokens.userId = users.userId')->where('userToken', $token)->first();
-
+            $user                     = TokenUtils::getUserWithToken($token);
             $changePasswordValidation->existUserWithToken($user);
             $changePasswordValidation->accessValidation($user['confirmed'], '0');
         } catch (Throwable $th) {
