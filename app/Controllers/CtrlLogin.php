@@ -40,7 +40,7 @@ class CtrlLogin extends BaseController
             $response = [
                 'type'    => 'danger',
                 'title'   => '¡Oops!',
-                'message' => 'Parece que no cuenta con el permiso para restablecer su contraseña o el token es invalido',
+                'message' => $th->getMessage(),
             ];
 
             return redirect()->to('/password_response')->with('response', $response);
@@ -66,7 +66,7 @@ class CtrlLogin extends BaseController
             $response = [
                 'type'    => 'danger',
                 'title'   => '¡Oops!',
-                'message' => 'Parece que no cuenta con el permiso para establecer su contraseña o el token es invalido',
+                'message' => $th->getMessage(),
             ];
 
             return redirect()->to('/password_response')->with('response', $response);

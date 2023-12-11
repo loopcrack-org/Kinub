@@ -25,7 +25,7 @@ class ChangePasswordValidation extends BaseValidation
     public function existUserWithToken($user)
     {
         if (! $user) {
-            throw new Exception('Algo ha salido mal, porfavor recarga la página e intenta nuevamente');
+            throw new Exception('Lo sentimos, el token proporcionado no es válido o no existe. Por favor, verifica la información e intenta nuevamente');
         }
 
         return true;
@@ -34,7 +34,14 @@ class ChangePasswordValidation extends BaseValidation
     public function accessValidation($isConfirmed, $isAuthorized)
     {
         if ($isConfirmed !== $isAuthorized) {
-            throw new Exception();
+            $message = '';
+            if ($isAuthorized) {
+                $message = 'Parece que no cuenta con el permiso para restablecer su contraseña';
+            } else {
+                $message = 'Parece que no cuenta con el permiso para establecer su contraseña';
+            }
+
+            throw new Exception($message);
         }
 
         return true;
