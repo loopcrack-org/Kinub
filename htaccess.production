@@ -24,6 +24,27 @@ Options -Indexes
 	ErrorDocument 404 public/index.php
 </IfModule>
 
+# Add headers for security
+<IfModule mod_headers.c>
+   # Strict-Transport-Security
+   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+   # Content-Security-Policy
+   Header always set Content-Security-Policy "upgrade-insecure-requests;"
+
+   # X-Frame-Options
+   Header always set X-Frame-Options "SAMEORIGIN"
+
+   # X-Content-Type-Options
+   Header always set X-Content-Type-Options "nosniff"
+
+   # Referrer-Policy
+   Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+   # Permissions-Policy
+   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
 # Disable server signature start
 	ServerSignature Off
 # Disable server signature end

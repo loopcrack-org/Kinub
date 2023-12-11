@@ -4,3 +4,4 @@
 **/coverage
 **/.github
 public/**
+src/public/libs/

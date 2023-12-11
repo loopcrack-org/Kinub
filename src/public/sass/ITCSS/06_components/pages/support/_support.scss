@@ -1,0 +1,16 @@
+@use '../../../01_settings/colors' as *;
+
+.support {
+  min-height: calc(100svh - var(--header-height) - var(--footer-height));
+  &__heading {
+    color: $color-aqua-blue;
+  }
+  &__wrapper {
+    width: 90%;
+    padding: max(0.5rem, 3svh) 0;
+    margin: auto;
+  }
+  &__content {
+    overflow: hidden;
+  }
+}
