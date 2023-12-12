@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Exception;
 use Throwable;
 
 class UserModel extends Model
@@ -49,7 +50,10 @@ class UserModel extends Model
 
             $userTokenModel = new UserTokenModel();
 
-            $userTokenModel->where('userId', $userId)->delete();
+            $responseDelete = $userTokenModel->where('userId', $userId)->delete();
+            if (! $responseDelete) {
+                throw new Exception();
+            }
             $this->db->transComplete();
         } catch (Throwable $th) {
             $this->db->transRollback();
