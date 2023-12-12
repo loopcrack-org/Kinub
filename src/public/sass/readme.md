@@ -201,7 +201,7 @@ The main Index file in each ITCSS folder contains a double underscore so it is a
 
 ### Global CSS Configurations for Plugins
 
-Place global CSS configurations of external plugins or libraries in the `src/public/sass/Plugins/` folder.
+Place global CSS configurations of external plugins or libraries in the `src/public/sass/plugins/` folder.
 
 ### Page Specific Styles
 
