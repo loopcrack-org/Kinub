@@ -202,12 +202,17 @@
 
 @include desktopXL {
   .measurement-solution {
-    height: 68svh;
-    min-height: 34svmax;
+    height: 50svh;
+    min-height: 22svmax;
     gap: 7svh;
   }
   .measurement-solution__icon {
-    width: 75%;
+    width: 55%;
+  }
+}
+@include desktopXXL {
+  .measurement-solution__icon {
+    width: 45%;
   }
 }
 

@@ -39,9 +39,6 @@
   @include tablet() {
     font-size: 1.2rem;
   }
-  @include desktop() {
-    font-size: 1.6rem;
-  }
 }
 
 .footer__network {
@@ -92,8 +89,5 @@
 
   @include tablet() {
     height: 3rem;
-  }
-  @include desktop() {
-    height: 3.8rem;
   }
 }

@@ -22,7 +22,7 @@
       @include flex-columns(3, 1rem, 2rem);
     }
     @include desktop {
-      @include flex-columns(3, 3rem, 3rem);
+      @include flex-columns(4, 2rem, 4rem);
     }
   }
 }

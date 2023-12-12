@@ -19,7 +19,7 @@
     font-weight: $weight-semi-bold;
     text-align: center;
     @include desktop {
-      margin-top: 3rem;
+      margin-top: 2.3rem;
     }
   }
 
@@ -27,7 +27,7 @@
     max-width: 24rem;
     padding: 0 0.5rem;
     color: $color-gray;
-    @include fluid-text(0.7rem, 1.8rem, 2vw);
+    @include fluid-text(0.7rem, 1.7rem, 2vw);
   }
 
   &__image-container {
@@ -37,7 +37,7 @@
 
   &__image {
     width: 100%;
-    aspect-ratio: 2/3;
+    aspect-ratio: 5/6;
     object-fit: cover;
     transition: all 500ms ease;
   }

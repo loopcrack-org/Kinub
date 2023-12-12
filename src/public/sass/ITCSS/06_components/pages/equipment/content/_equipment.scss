@@ -21,8 +21,11 @@
     @include phoneXL {
       width: 11rem;
     }
-    @include desktop {
-      width: 24svh;
+    @include desktopXL {
+      width: 18svh;
+    }
+    @include desktopXXL {
+      width: 22svh;
     }
   }
 
@@ -64,7 +67,11 @@
       opacity: 0;
     }
   }
-  @include phoneXL {
+
+  @include desktopXL {
+    padding: 1rem;
+  }
+  @include desktopXXL {
     padding: 2rem;
   }
 }

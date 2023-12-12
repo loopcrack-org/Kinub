@@ -38,6 +38,9 @@
       padding: 3rem 4rem;
       @include flex-columns(3, 2rem, 4rem);
     }
+    @include desktopXL {
+      @include flex-columns(4, 2rem, 4rem);
+    }
   }
   @include phoneXL {
     margin: 0 0 4rem 0;

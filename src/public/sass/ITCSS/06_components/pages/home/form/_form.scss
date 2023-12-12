@@ -10,38 +10,54 @@
   display: flex;
   overflow: visible;
   flex-direction: column;
-  padding: 1.2rem;
+  padding: 2.7rem;
   border-radius: 10svmin;
   margin: 1rem;
   margin-bottom: 3rem;
   background: linear-gradient(to bottom right, $brand-color, $color-cyan-blue);
   box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
   color: $color-white;
-  gap: 2svh;
+  gap: 1.6svh;
+  @include fold {
+    padding: 1.5rem;
+  }
+  @include phoneXL {
+    margin: 3rem;
+  }
 
   @include tablet {
-    padding: 1.2rem 2.5rem 2.5rem;
-    margin: 5.5rem;
+    padding: 2.2rem;
+    margin: 4rem;
   }
   @include desktop {
     padding: 3.5rem;
+    padding-top: 3rem;
     margin-right: auto;
     margin-bottom: 5rem;
     margin-left: auto;
-    gap: 2.5svh;
+  }
+  &__grid {
+    padding-bottom: 1rem;
+    @include grid(1, 1rem);
+    @include desktop {
+      @include grid(2, 1.3rem);
+    }
   }
 
   &__icon {
     position: absolute;
     z-index: 1;
-    top: -6svmin;
+    top: -4svmin;
     right: 0;
-    width: 16svmin;
-    height: 16svmin;
+    width: 12svmin;
+    height: 12svmin;
+    @include tablet {
+      top: -1svmin;
+    }
 
     @include desktop {
-      top: -5svmin;
-      right: -2.5svmin;
+      top: -3.5svmin;
+      right: -1.5svmin;
     }
   }
   &__svg {
@@ -50,23 +66,31 @@
   }
 
   &__legend {
-    margin-top: 0.6em;
-    margin-bottom: 0.2em;
-
     text-transform: capitalize;
-    @include fluid-text(1.5rem, 4.5rem, 9vw);
+    @include fluid-text(1.5rem, 3rem, 8vw);
   }
 
   &__field {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 0.6rem;
+    grid-column: auto;
+
+    @include desktop {
+      gap: 0.8rem;
+      &:nth-child(3) {
+        grid-column: span 2;
+      }
+      &:nth-child(4) {
+        grid-column: span 2;
+      }
+    }
   }
 
   &__label {
     margin-left: 1rem;
-    @include fluid-text(1rem, 2rem, 2vw);
+    @include fluid-text(1rem, 1.5rem, 2vw);
     font-weight: $weight-light;
   }
 
@@ -97,8 +121,8 @@
       color: $color-white;
     }
     @include tablet {
-      padding: 1.5rem;
-      font-size: 1em;
+      padding: 1rem;
+      font-size: 0.8em;
     }
   }
 
@@ -119,7 +143,8 @@
     font-size: 1rem;
     font-style: italic;
     @include tablet {
-      width: 15rem;
+      width: 21rem;
+      align-self: center;
       padding: 0.7rem;
       font-size: 2rem;
     }

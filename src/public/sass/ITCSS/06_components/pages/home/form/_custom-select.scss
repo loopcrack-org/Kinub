@@ -24,9 +24,8 @@
     font-weight: $weight-light;
     white-space: wrap;
     @include tablet {
-      padding: 1.4rem;
-      padding-left: 1.5rem;
-      font-size: 1rem;
+      padding: 0.9rem;
+      font-size: 0.8rem;
     }
   }
 
@@ -48,7 +47,7 @@
   }
   .custom-select-panel {
     position: relative;
-
+    top: auto;
     background: transparent;
   }
 
@@ -68,7 +67,7 @@
       font-weight: $weight-bold;
     }
     @include tablet {
-      font-size: 1rem;
+      font-size: 0.8rem;
     }
   }
 
