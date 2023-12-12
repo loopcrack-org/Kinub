@@ -1,2 +1,4 @@
-@use "node_modules/filepond/dist/filepond.css";
-@use "node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css"; 
+@use 'node_modules/filepond/dist/filepond.min.css';
+@use 'node_modules/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+@use 'node_modules/filepond-plugin-media-preview/dist/filepond-plugin-media-preview.min.css';
+@use 'node_modules/filepond-plugin-pdf-preview/dist/filepond-plugin-pdf-preview.min.css';

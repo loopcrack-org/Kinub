@@ -58,8 +58,10 @@ function serve() {
 
   browserSync
     .watch([
-      'public/assets/**/*.*',
+      'public/**/*.*',
       '!public/**/css/*.css', //Ignore CSS changes since we are using browserSync.stream() for CSS
+      '!public/files/tmp', //Ignore the tmp file folder
+      '!public/uploads', // Ignore the upload file folder
     ])
     .on('change', browserSync.reload);
 
