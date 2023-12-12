@@ -3,7 +3,6 @@
 @use '../../../01_settings/fonts' as *;
 @use '../../../01_settings/colors' as *;
 @use '../../../02_tools/breakpoints' as *;
-@use '../../../02_tools/mixins' as *;
 
 .product-nav {
   position: sticky;
@@ -12,7 +11,7 @@
   display: flex;
   width: 100%;
   max-width: 120rem;
-  margin: 2.5rem auto 0 auto;
+  margin: $spacing-xxl auto 0 auto;
   background-color: $brand-color;
 
   &__link-container {
@@ -20,7 +19,7 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding: 0.9375rem 0.3125rem;
+    padding: $spacing-md 0.3125rem;
     text-decoration: none;
     transition: background-color 500ms ease-in-out;
 

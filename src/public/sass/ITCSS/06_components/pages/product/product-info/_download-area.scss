@@ -2,7 +2,6 @@
 @use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../02_tools/breakpoints' as *;
-@use '../../../../02_tools/mixins' as *;
 
 .download-area {
   &__accordion-container {
@@ -36,8 +35,8 @@
   &__links-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1rem;
-    row-gap: 1rem;
+    margin-bottom: $spacing-md;
+    row-gap: $spacing-md;
   }
 
   &__link {
@@ -53,7 +52,7 @@
     &--single {
       display: list-item;
       padding: 0.625rem 0;
-      margin-left: 2.5rem;
+      margin-left: $spacing-xxl;
       font-size: 1.25rem;
       line-height: 1;
     }

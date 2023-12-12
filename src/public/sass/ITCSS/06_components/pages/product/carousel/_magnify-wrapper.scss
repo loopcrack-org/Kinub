@@ -16,7 +16,7 @@
     display: block;
     width: 30rem;
     height: 20rem;
-    border: 0.125rem solid color.adjust($color-white, $lightness: -1%);
+    border: $base-border-width solid color.adjust($color-white, $lightness: -1%);
     background: no-repeat $color-white;
     box-shadow: 0 0.3125rem 0.625rem -0.125rem rgba($color-black, 0.9);
     opacity: 0;

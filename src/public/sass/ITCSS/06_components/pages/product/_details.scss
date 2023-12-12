@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: $spacing-lg;
   }
 
   &__info {
@@ -30,7 +30,7 @@
   }
 
   &__data-container {
-    margin: 1.25rem 0;
+    margin: $spacing-md 0;
   }
 
   &__data {
@@ -70,7 +70,7 @@
 
     &__data {
       font-size: 1.875rem;
-      line-height: 1.4;
+      line-height: $base-line-height;
     }
 
     &__btn {
@@ -87,8 +87,8 @@
     }
 
     &__btn {
-      padding: 0.5rem 1rem;
-      margin-top: 2rem;
+      padding: $spacing-sm $spacing-md;
+      margin-top: $spacing-xl;
     }
   }
 

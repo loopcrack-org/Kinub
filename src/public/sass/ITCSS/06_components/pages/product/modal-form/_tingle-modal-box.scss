@@ -11,7 +11,7 @@
 
   &__content {
     overflow: hidden;
-    padding: 2rem 1rem;
+    padding: $spacing-xl $spacing-md;
   }
 
   @include phoneXL() {
@@ -20,7 +20,7 @@
     border-radius: 1.5625rem;
 
     &__content {
-      padding: 1.25rem 1.875rem;
+      padding: $spacing-lg 1.875rem;
     }
   }
 }

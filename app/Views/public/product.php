@@ -117,26 +117,26 @@
         <h2 class="modal-form__title"><span class="modal-form__title--large">Contáctanos</span> para más información</h2>
 
         <div class="modal-form__field">
-            <input class="modal-form__input modal-form__input--product" type="text" name="product" value="Medidor de nivel de radar 80G" disabled>
+            <input class="modal-form__input modal-form__input--product" type="text" name="product-name" value="Medidor de nivel de radar 80G" disabled>
         </div>
 
         <div class="modal-form__field">
-            <input class="modal-form__input" type="text" id="model" name="model" value="" hidden>
+            <input class="modal-form__input" type="text" id="model" name="product-model" value="" hidden>
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="name">Nombre</label>
-            <input class="modal-form__input" type="text" id="name" name="name" value="">
+            <input class="modal-form__input" type="text" id="name" name="inquirer-name" value="">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="phone">Teléfono</label>
-            <input class="modal-form__input" type="tel" id="phone" name="phone" value="">
+            <input class="modal-form__input" type="tel" id="phone" name="inquirer-phone" value="">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="email">E-Mail</label>
-            <input class="modal-form__input" type="email" id="email" name="email" value="">
+            <input class="modal-form__input" type="email" id="email" name="inquirer-email" value="">
         </div>
 
         <div class="modal-form__field">

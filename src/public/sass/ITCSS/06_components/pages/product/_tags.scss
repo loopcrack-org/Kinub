@@ -3,11 +3,10 @@
 @use '../../../01_settings/fonts' as *;
 @use '../../../01_settings/colors' as *;
 @use '../../../02_tools/breakpoints' as *;
-@use '../../../02_tools/mixins' as *;
 
 .tags {
   display: flex;
-  margin-top: 1.25rem;
+  margin-top: $spacing-lg;
   gap: 0.625rem;
 
   &__tag {
@@ -20,7 +19,7 @@
     text-decoration: none;
 
     @include tablet() {
-      padding: 1.5625rem;
+      padding: $spacing-lg;
       border-radius: 0.625rem;
     }
   }
@@ -45,6 +44,6 @@
   }
 
   @include tablet() {
-    margin-top: 2.5rem;
+    margin-top: $spacing-xxl;
   }
 }

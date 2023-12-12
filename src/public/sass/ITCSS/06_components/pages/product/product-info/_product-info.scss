@@ -8,7 +8,7 @@
 .product-info {
   width: 90%;
   max-width: 75rem;
-  margin: 1.25rem auto;
+  margin: $spacing-lg auto;
   scroll-margin-top: 8.125rem;
 
   &__heading {
@@ -58,13 +58,13 @@
     line-height: 1.4;
 
     &--title {
-      margin-right: 0.5rem;
+      margin-right: $spacing-sm;
       font-weight: $weight-bold;
     }
   }
 
   &__video-container {
-    margin: 2.5rem auto 0 auto;
+    margin: $spacing-xxl auto 0 auto;
   }
 
   @include tablet() {
