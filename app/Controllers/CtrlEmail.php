@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\EmailModel;
 use App\Models\UserModel;
 use App\Utils\EmailSender;
+use App\Utils\TokenGenerator;
 use App\Validation\ContactEmailValidation;
 use App\Validation\PasswordEmailValidation;
 use App\Validation\SupportEmailValidation;
@@ -49,8 +50,10 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'  => 1,
-                'emailContent' => EmailSender::getEmailBody($formData, 'mailDetail'),
+                'emailTypeId'   => 1,
+                'inquirerName'  => $POST['inquirer-name'],
+                'inquirerEmail' => $POST['inquirer-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
             ];
             $emailModel->insert($data);
         } else {
@@ -103,20 +106,22 @@ class CtrlEmail extends BaseController
 
         if ($successEmail) {
             $response = [
-                'title'   => 'Envío exitoso',
-                'message' => 'Se ha enviado correctamente',
+                'title'   => 'Mensaje enviado correctamente',
+                'message' => 'El Formulario se ha enviado a nuestro equipo de soporte técnico, trataremos de ponernos en contacto con usted lo más pronto posible.',
                 'type'    => 'success',
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'  => 2,
-                'emailContent' => EmailSender::getEmailBody($formData, 'mailDetail'),
+                'emailTypeId'   => 2,
+                'inquirerName'  => $POST['support-customer'],
+                'inquirerEmail' => $POST['support-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
             ];
             $emailModel->insert($data);
         } else {
             $response = [
                 'title'   => 'Envío fallido',
-                'message' => 'No se pudo realizar el envío del email',
+                'message' => 'No se pudo realizar el envío del formulario',
                 'type'    => 'error',
             ];
         }
@@ -140,10 +145,9 @@ class CtrlEmail extends BaseController
             $validateEmail->validateConfirmedAccount($user['confirmed']);
             $validateEmail->isNotSuperAdmin($user['isAdmin']);
 
-            $token    = uniqid();
             $userName = $user['userFirstName'] . ' ' . $user['userLastName'];
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => $token]);
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => TokenGenerator::generateToken($user['userId'])]);
 
             if (! $isSend) {
                 throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');
@@ -154,8 +158,6 @@ class CtrlEmail extends BaseController
                 'message' => 'Verifique su bandeja de entrada para poder restablecer su contraseña.',
                 'type'    => 'success',
             ];
-
-            $userModel->update($user['userId'], ['userToken' => $token]);
         } catch (Throwable $th) {
             $errors = $validateEmail->getErrors();
             if (! isset($errors['email'])) {

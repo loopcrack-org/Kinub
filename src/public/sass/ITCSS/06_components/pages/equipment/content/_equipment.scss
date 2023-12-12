@@ -1,0 +1,70 @@
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+.equipment {
+  height: auto;
+  padding: 1.5rem;
+  border: 0.125rem solid $color-white;
+  cursor: pointer;
+  padding-inline: 0.5rem;
+  text-decoration: none;
+  transition:
+    backdrop-filter 200ms ease-in-out,
+    border ease 500ms;
+
+  &__icon {
+    width: 4rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    aspect-ratio: 5 / 4;
+    @include phoneXL {
+      width: 11rem;
+    }
+    @include desktop {
+      width: 24svh;
+    }
+  }
+
+  &__name,
+  &__text {
+    color: $color-white;
+  }
+
+  &__name {
+    margin-bottom: 0.7rem;
+    font-weight: $weight-normal;
+    @include fluid-text(1.5rem, 2.3rem, 5vw);
+  }
+
+  &__text {
+    margin: -1rem 0 0 0;
+    font-weight: $weight-light;
+    transition: opacity 300ms ease-in-out;
+    @include fluid-text(1rem, 1.3rem, 1.7vw);
+  }
+
+  &__icon,
+  &__name {
+    transition: transform 300ms ease-in-out;
+  }
+
+  &:hover {
+    border: 0.125rem solid transparent;
+    backdrop-filter: blur(3.125rem) hue-rotate(15deg) saturate(1.8);
+    .equipment__icon {
+      transform: translateY(0.8rem) scale(1.2);
+    }
+
+    .equipment__name {
+      transform: translateY(1.1rem);
+    }
+
+    .equipment__text {
+      opacity: 0;
+    }
+  }
+  @include phoneXL {
+    padding: 2rem;
+  }
+}

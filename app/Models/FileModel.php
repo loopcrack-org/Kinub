@@ -39,4 +39,24 @@ class FileModel extends Model
     {
         return $this->lastIds;
     }
+
+    /**
+     * get the file like an entity
+     *
+     * @param array $data the files to convert to entities
+     *
+     * @return array
+     */
+    protected function getFileEntity(array $data)
+    {
+        $uuid                               = $data['data']['uuid'];
+        $outputFolder                       = FILES_UPLOAD_DIRECTORY . $uuid;
+        $sourceFolder                       = FILES_TEMP_DIRECTORY . $uuid;
+        $filePath                           = scandir($sourceFolder)[2];
+        $data['data']['fileRoute']          = "{$outputFolder}/{$filePath}";
+        $data['data']['fileDirectoryRoute'] = $outputFolder;
+        $data['data']['fileName']           = $filePath;
+
+        return $data;
+    }
 }
