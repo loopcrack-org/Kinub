@@ -2,12 +2,15 @@
 
 namespace App\Validation;
 
-use App\Utils\TokenUtils;
+use App\Models\UserTokenModel;
 use DateTime;
 use Exception;
 
 class ChangePasswordValidation extends BaseValidation
 {
+    public const USER_IS_NOT_CONFIRMED = '0';
+    public const USER_IS_CONFIRMED     = '1';
+
     protected $validationRules = [
         'password'         => 'required|min_length[8]|regex_match[(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}]',
         'confirm-password' => 'matches[password]',
@@ -23,41 +26,51 @@ class ChangePasswordValidation extends BaseValidation
         ],
     ];
     protected $errors = [];
+    private $userWithToken;
 
-    public function existUserWithToken($user)
+    public function __construct($userWithToken)
     {
-        if (! $user) {
+        $this->userWithToken = $userWithToken;
+    }
+
+    public function existUserWithToken()
+    {
+        if (! $this->userWithToken) {
             throw new Exception('Lo sentimos, el token proporcionado no es válido o no existe. Por favor, verifica la información e intenta nuevamente');
         }
 
         return true;
     }
 
-    public function accessValidation($isConfirmed, $isAuthorized)
+    public function validateTokenExpiration($token)
     {
-        if ($isConfirmed !== $isAuthorized) {
-            $message = '';
-            if ($isAuthorized) {
-                $message = 'Parece que no cuenta con el permiso para restablecer su contraseña';
-            } else {
-                $message = 'Parece que no cuenta con el permiso para establecer su contraseña';
-            }
+        $userTokenModelo = new UserTokenModel();
 
-            throw new Exception($message);
+        $tokenExpiryDate = $userTokenModelo->getTokenDate($token);
+        $today           = new DateTime();
+
+        if ($today >= $tokenExpiryDate) {
+            $userTokenModelo->deleteToken($this->userWithToken['userId']);
+
+            throw new Exception('El token ha expirado. Por favor, solicita uno nuevo para continuar con la operación.');
         }
 
         return true;
     }
 
-    public function validateTokenExpiration($token, $userId)
+    public function hasAccessToSetPassword()
     {
-        $tokenExpiryDate = TokenUtils::getTokenDate($token);
-        $today           = new DateTime();
+        if ($this->userWithToken['confirmed'] !== self::USER_IS_NOT_CONFIRMED) {
+            throw new Exception('Parece que no cuenta con el permiso para establecer su contraseña');
+        }
 
-        if ($today >= $tokenExpiryDate) {
-            TokenUtils::deleteToken($userId);
+        return true;
+    }
 
-            throw new Exception('El token ha expirado. Por favor, solicita uno nuevo para continuar con la operación.');
+    public function hasAccessToResetPassword()
+    {
+        if ($this->userWithToken['confirmed'] !== self::USER_IS_CONFIRMED) {
+            throw new Exception('Parece que no cuenta con el permiso para restablecer su contraseña');
         }
 
         return true;

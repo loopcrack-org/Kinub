@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Exceptions\InvalidInputException;
 use App\Models\UserModel;
-use App\Utils\TokenUtils;
+use App\Models\UserTokenModel;
 use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
 use Exception;
@@ -12,6 +12,9 @@ use Throwable;
 
 class CtrlLogin extends BaseController
 {
+    public const USER_IS_NOT_CONFIRMED = '0';
+    public const USER_IS_CONFIRMED     = '1';
+
     public function index(): string
     {
         return view('login/index');
@@ -30,11 +33,13 @@ class CtrlLogin extends BaseController
     public function viewPasswordReset($token)
     {
         try {
-            $changePasswordValidation = new ChangePasswordValidation();
-            $user                     = TokenUtils::getUserWithToken($token);
-            $changePasswordValidation->existUserWithToken($user);
-            $changePasswordValidation->validateTokenExpiration($token, $user['userId']);
-            $changePasswordValidation->accessValidation($user['confirmed'], '1');
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $changePasswordValidation->existUserWithToken();
+            $changePasswordValidation->validateTokenExpiration($token);
+            $changePasswordValidation->hasAccessToResetPassword();
         } catch (Throwable $th) {
             $response = [
                 'type'    => 'danger',
@@ -53,11 +58,13 @@ class CtrlLogin extends BaseController
     public function viewPasswordSet($token)
     {
         try {
-            $changePasswordValidation = new ChangePasswordValidation();
-            $user                     = TokenUtils::getUserWithToken($token);
-            $changePasswordValidation->existUserWithToken($user);
-            $changePasswordValidation->validateTokenExpiration($token, $user['userId']);
-            $changePasswordValidation->accessValidation($user['confirmed'], '0');
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $changePasswordValidation->existUserWithToken();
+            $changePasswordValidation->validateTokenExpiration($token);
+            $changePasswordValidation->hasAccessToSetPassword();
         } catch (Throwable $th) {
             $response = [
                 'type'    => 'danger',
@@ -75,21 +82,21 @@ class CtrlLogin extends BaseController
 
     public function passwordReset($token)
     {
-        $changePasswordValidation = new ChangePasswordValidation();
-
-        $data = $this->request->getPost();
-
         try {
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $data = $this->request->getPost();
+
             if (! $changePasswordValidation->validateInputs($data)) {
                 throw new InvalidInputException($changePasswordValidation->getErrors());
             }
 
-            $user = TokenUtils::getUserWithToken($token);
-
-            $changePasswordValidation->existUserWithToken($user);
+            $changePasswordValidation->existUserWithToken();
 
             $userModel = new UserModel();
-            $userModel->updatePassword($user['userId'], $data['password'], 1);
+            $userModel->updatePassword($userWithToken['userId'], $data['password'], self::USER_IS_CONFIRMED);
 
             $response = [
                 'type'    => 'success',
@@ -111,21 +118,21 @@ class CtrlLogin extends BaseController
 
     public function passwordSet($token)
     {
-        $changePasswordValidation = new ChangePasswordValidation();
-
-        $data = $this->request->getPost();
-
         try {
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $data = $this->request->getPost();
+
             if (! $changePasswordValidation->validateInputs($data)) {
                 throw new InvalidInputException($changePasswordValidation->getErrors());
             }
 
-            $user = TokenUtils::getUserWithToken($token);
-
-            $changePasswordValidation->existUserWithToken($user);
+            $changePasswordValidation->existUserWithToken();
 
             $userModel = new UserModel();
-            $userModel->updatePassword($user['userId'], $data['password'], 0);
+            $userModel->updatePassword($userWithToken['userId'], $data['password'], self::USER_IS_NOT_CONFIRMED);
 
             $response = [
                 'type'    => 'success',
