@@ -7,6 +7,8 @@ Contact: Themesbrand@gmail.com
 File: Main Js File
 */
 
+/* eslint-disable */
+
 (function () {
   ('use strict');
 
