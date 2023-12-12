@@ -25,7 +25,7 @@
 
   &--level-3 {
     @extend %title-common;
-    @include fluid-text(1.8rem, 6rem);
+    @include fluid-text(1.6rem, 6rem);
     position: relative;
     color: $brand-color;
     text-align: center;
@@ -41,5 +41,13 @@
       content: '';
       transform: translateX(-50%);
     }
+  }
+
+  &--level-4 {
+    @extend %title-common;
+    @include fluid-text(1.6rem, 3.2rem, 3vw);
+    color: $brand-color;
+    font-weight: $weight-semi-bold;
+    text-align: center;
   }
 }
