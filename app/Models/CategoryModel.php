@@ -39,23 +39,6 @@ class CategoryModel extends Model
         }
     }
 
-<<<<<<< HEAD
-    public function deleteCategory(string $categoryId)
-    {
-        try {
-            $this->db->transStart();
-            $categoryData    = $this->find($categoryId);
-            $categoryDeleted = $this->delete($categoryId);
-
-            $fileModel    = new FileModel();
-            $imageDeleted = $fileModel->delete($categoryData['categoryImageId']);
-            $iconDeleted  = $fileModel->delete($categoryData['categoryIconId']);
-
-            if (! $iconDeleted || ! $imageDeleted || ! $categoryDeleted) {
-                throw new Exception('No se ha podido eliminar la categoría');
-            }
-
-=======
     public function updateCategory(string $categoryId, array $categoryData)
     {
         try {
@@ -78,7 +61,29 @@ class CategoryModel extends Model
             }
 
             (new CategoryModel())->update($categoryId, $categoryData);
->>>>>>> 51ecbe590e18479386d7c3b8d914ab2236ef7dad
+            $this->db->transComplete();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
+
+    public function deleteCategory(string $categoryId)
+    {
+        try {
+            $this->db->transStart();
+            $categoryData    = $this->find($categoryId);
+            $categoryDeleted = $this->delete($categoryId);
+
+            $fileModel    = new FileModel();
+            $imageDeleted = $fileModel->delete($categoryData['categoryImageId']);
+            $iconDeleted  = $fileModel->delete($categoryData['categoryIconId']);
+
+            if (! $iconDeleted || ! $imageDeleted || ! $categoryDeleted) {
+                throw new Exception('No se ha podido eliminar la categoría');
+            }
+
             $this->db->transComplete();
         } catch (Throwable $th) {
             $this->db->transRollback();
