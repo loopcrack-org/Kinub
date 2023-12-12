@@ -50,7 +50,11 @@ class ChangePasswordValidation extends BaseValidation
         $today           = new DateTime();
 
         if ($today >= $tokenExpiryDate) {
-            $userTokenModelo->deleteToken($this->userWithToken['userId']);
+            $responseDelete = $userTokenModelo->deleteToken($this->userWithToken['userId']);
+
+            if (! $responseDelete) {
+                throw new Exception('Lo sentimos, ha ocurrido un error inesperado. Por favor, inténtalo de nuevo.');
+            }
 
             throw new Exception('El token ha expirado. Por favor, solicita uno nuevo para continuar con la operación.');
         }

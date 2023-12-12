@@ -34,6 +34,6 @@ class UserTokenModel extends Model
     {
         $userTokenModel = new UserTokenModel();
 
-        $userTokenModel->where('userId', $userId)->delete();
+        return $userTokenModel->where('userId', $userId)->delete();
     }
 }
