@@ -4,12 +4,12 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class CategoryTagModel extends Model
+class ProductTagModel extends Model
 {
     protected $DBGroup       = 'default';
-    protected $table         = 'category_tags';
-    protected $primaryKey    = 'categoryTagId';
-    protected $allowedFields = ['categoryTagName', 'categoryId'];
+    protected $table         = 'product_tags';
+    protected $primaryKey    = 'ptId';
+    protected $allowedFields = ['ptName', 'ptProductId'];
 
     /**
      * get all the category tags from all categories selected
@@ -18,7 +18,10 @@ class CategoryTagModel extends Model
      */
     public function getAllByCategories(array $categoriesIds = [])
     {
-        $builder = $this->select(['categoryTagId', 'categoryTagName']);
+        $builder = $this->select(['ptId', 'ptName'])
+            ->join('products', 'products.productId=product_tags.ptProductId')
+            ->join('categories', 'categories.categoryId=products.productCategoryId');
+
         if (empty($categoriesIds)) {
             return $builder->findAll();
         }

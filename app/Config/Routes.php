@@ -5,6 +5,7 @@ namespace Config;
 use App\Controllers\CtrlAboutUs;
 use App\Controllers\CtrlAdminEmail;
 use App\Controllers\CtrlApiProductos;
+use App\Controllers\CtrlApiSearchProduct;
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
@@ -68,6 +69,8 @@ $routes->get('/filtro/productos/test', [CtrlApiProductos::class, 'index']);
 
 $routes->get('/filtro/productos', [CtrlApiProductos::class, 'getProductos']);
 $routes->get('/filtro/productos/tags', [CtrlApiProductos::class, 'getTagsByCategoryId']);
+
+$routes->get('api/productos', [CtrlApiSearchProduct::class, 'getProducts']);
 
 /*
  * --------------------------------------------------------------------
