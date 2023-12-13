@@ -106,8 +106,8 @@ class CtrlEmail extends BaseController
 
         if ($successEmail) {
             $response = [
-                'title'   => 'Envío exitoso',
-                'message' => 'Se ha enviado correctamente',
+                'title'   => 'Mensaje enviado correctamente',
+                'message' => 'El Formulario se ha enviado a nuestro equipo de soporte técnico, trataremos de ponernos en contacto con usted lo más pronto posible.',
                 'type'    => 'success',
             ];
             $emailModel = new EmailModel();
@@ -121,7 +121,7 @@ class CtrlEmail extends BaseController
         } else {
             $response = [
                 'title'   => 'Envío fallido',
-                'message' => 'No se pudo realizar el envío del email',
+                'message' => 'No se pudo realizar el envío del formulario',
                 'type'    => 'error',
             ];
         }

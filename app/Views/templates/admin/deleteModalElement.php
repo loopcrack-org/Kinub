@@ -18,7 +18,7 @@
                 </div>
                 <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
                     <button type="button" class="btn w-sm btn-light" data-bs-dismiss="modal">Cerrar</button>
-                    <form action="<?= $action; ?>" method="post">
+                    <form class="modal-delete-form" action="<?= $action; ?>" method="post">
                         <input type="hidden" name="<?= $inputName; ?>" id="elementId" value="">
                         <button type="submit" class="btn w-sm btn-primary" id="delete-record">¡Sí, bórralo!</button>
                     </form>

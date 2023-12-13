@@ -13,6 +13,7 @@ use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlProduct;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlUser;
+use CodeIgniter\Router\RouteCollection;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -158,4 +159,14 @@ $routes->group('admin', static function ($routes) {
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+// generate routes dynamically
+function generateFileApiRoutesByController(RouteCollection $routes, string $controller)
+{
+    $routes->post('process', [$controller, 'processTemporalFile']);
+    $routes->patch('process', [$controller, 'processTemporalFileByChunks']);
+    $routes->get('restore', [$controller, 'restoreTemporalFile']);
+    $routes->get('load', [$controller, 'getFileFromServer']);
+    $routes->delete('delete', [$controller, 'deleteTemporalFile']);
 }

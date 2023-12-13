@@ -1,8 +1,10 @@
+import Glide from '@glidejs/glide';
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
 import Tingle from 'tingle.js';
-import '../../libs/vanilla-js-accordions/AccordionElement.min.js';
-
+import '../libs/vanilla-js-accordions/AccordionElement.min.js';
+import { initLightGallery } from './light.js';
+import { magnifyImage } from './magnify.js';
 new Plyr('#product-video');
 
 const scrollmagicController = new ScrollMagic.Controller();
@@ -47,6 +49,48 @@ sections.forEach((section, index) => {
     })
     .addTo(scrollmagicController);
 });
+
+new Glide('.glide', {
+  type: 'carousel',
+  startAt: 0,
+  perView: 4,
+  keyboard: true,
+  focusAt: 0,
+  peek: -13,
+
+  breakpoints: {
+    1023: {
+      startAt: 0,
+      perView: 1,
+      dragThreshold: 5,
+    },
+
+    1200: {
+      startAt: 0,
+      perView: 4,
+    },
+  },
+}).mount();
+
+const magnified = document.querySelector('#large-img');
+const mainImage = document.getElementById('main-image');
+magnified.style.backgroundImage = `url('${mainImage.src}')`;
+
+document.querySelectorAll('.glide__slide').forEach((slide) => {
+  const sliderImage = slide.querySelector('img');
+
+  slide.addEventListener('click', () => {
+    if (mainImage.src !== sliderImage.src) {
+      mainImage.src = sliderImage.src;
+      mainImage.alt = sliderImage.alt;
+      magnified.style.backgroundImage = `url('${sliderImage.src}')`;
+    }
+  });
+});
+
+initLightGallery();
+
+document.getElementById('zoom').addEventListener('mousemove', magnifyImage, false);
 
 const modal = new Tingle.modal({
   footer: false,
