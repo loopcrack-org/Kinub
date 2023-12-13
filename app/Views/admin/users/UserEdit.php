@@ -11,10 +11,19 @@
 <?= $this->endSection()?>
 
 <?= $this->section('js') ?>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <script src="/assets/admin/js/alertToResendConfirmAccountEmail.min.js"></script>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
+
+<?php
+if (session()->has('response')) {
+    $response = session()->get('response');
+    ?>
+<div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+<?php } ?>
+
 <div class="page-content">
     <div class="container-fluid">
 
