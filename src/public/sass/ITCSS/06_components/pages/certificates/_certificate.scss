@@ -44,14 +44,14 @@
 
   &:hover {
     box-shadow:
-      $base-border-medium $base-border-medium $base-border-card-blur $base-border-card-spread
-        $color-light-blue,
-      $base-border-medium (-$base-border-medium) $base-border-card-blur $base-border-card-spread
-        $color-light-blue,
-      (-$base-border-medium) $base-border-medium $base-border-card-blur $base-border-card-spread
-        $color-light-blue,
-      (-$base-border-medium) (-$base-border-medium) $base-border-card-blur $base-border-card-spread
-        $color-light-blue;
+      $base-border-width-medium $base-border-width-medium $base-border-card-blur
+        $base-border-card-spread $color-light-blue,
+      $base-border-width-medium (-$base-border-width-medium) $base-border-card-blur
+        $base-border-card-spread $color-light-blue,
+      (-$base-border-width-medium) $base-border-width-medium $base-border-card-blur
+        $base-border-card-spread $color-light-blue,
+      (-$base-border-width-medium) (-$base-border-width-medium) $base-border-card-blur
+        $base-border-card-spread $color-light-blue;
   }
 
   &:hover &__image {
