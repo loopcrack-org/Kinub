@@ -67,19 +67,33 @@ class CtrlSolution extends BaseController
         }
     }
 
-    public function updateSolution($id)
+    public function updateSolution(string $msId)
     {
-        $isUpdated = true;
-        if ($isUpdated) {
+        try {
+            $msData = $this->request->getPost();
+
+            $msDataValidator = new SolutionValidation();
+
+            if (! $msDataValidator->validateInputs($msData)) {
+                throw new InvalidInputException($msDataValidator->getErrors());
+            }
+
+            $msModel = new MeasurementSolutionModel();
+            $msModel->updateMeasurementSolution($msId, $msData);
+
             $response = [
-                'title'   => 'Edición exitosa',
-                'message' => 'Se ha actualizado la solución de medición correctamente',
+                'title'   => 'Actualización exitosa',
+                'message' => 'Los datos de la solución de medición han sido actualizados correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('/admin/soluciones')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Edición fallida',
-                'message' => 'No se pudo realizar la edición de la solución de medición',
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => $th->getMessage(),
                 'type'    => 'error',
             ];
         }
