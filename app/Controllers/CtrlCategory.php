@@ -144,16 +144,14 @@ class CtrlCategory extends BaseController
                 'message' => 'La categoría ha sido eliminada correctamente',
                 'type'    => 'success',
             ];
-
-            return redirect()->to('admin/categorias')->with('response', $response);
         } catch (Throwable $th) {
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error.',
                 'message' => 'Ha ocurrido un error al eliminar los datos de la categoría, por favor intente nuevamente.',
                 'type'    => 'error',
             ];
-
-            return redirect()->to('admin/categorias')->with('response', $response);
         }
+
+        return redirect()->to('admin/categorias')->with('response', $response);
     }
 }

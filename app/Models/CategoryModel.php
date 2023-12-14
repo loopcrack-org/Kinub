@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Model;
-use Exception;
 use Throwable;
 
 class CategoryModel extends Model
@@ -72,20 +72,16 @@ class CategoryModel extends Model
     public function deleteCategory(string $categoryId)
     {
         try {
-            $this->db->transStart();
-            $categoryData    = $this->find($categoryId);
-            $categoryDeleted = $this->delete($categoryId);
+            $this->db->transException(true)->transStart();
+            $categoryData = $this->find($categoryId);
+            $this->delete($categoryId);
 
-            $fileModel    = new FileModel();
-            $imageDeleted = $fileModel->delete($categoryData['categoryImageId']);
-            $iconDeleted  = $fileModel->delete($categoryData['categoryIconId']);
+            $fileModel = new FileModel();
+            $fileModel->delete($categoryData['categoryImageId']);
+            $fileModel->delete($categoryData['categoryIconId']);
 
-            if (! $iconDeleted || ! $imageDeleted || ! $categoryDeleted) {
-                throw new Exception('No se ha podido eliminar la categoría');
-            }
-
-            $this->db->transComplete();
-        } catch (Throwable $th) {
+            $this->db->transCommit();
+        } catch (DatabaseException $th) {
             $this->db->transRollback();
 
             throw $th;
