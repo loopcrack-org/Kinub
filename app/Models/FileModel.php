@@ -51,7 +51,7 @@ class FileModel extends Model
     protected function getFileEntity(array $data)
     {
         $uuid                               = $data['data']['uuid'];
-        $outputFolder                       = str_replace('./', '', FILES_UPLOAD_DIRECTORY . $uuid);
+        $outputFolder                       = str_replace('.', '', FILES_UPLOAD_DIRECTORY . $uuid);
         $sourceFolder                       = FILES_TEMP_DIRECTORY . $uuid;
         $filePath                           = scandir($sourceFolder)[2];
         $data['data']['fileRoute']          = "{$outputFolder}/{$filePath}";
