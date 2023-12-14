@@ -8,9 +8,6 @@ use Exception;
 
 class ChangePasswordValidation extends BaseValidation
 {
-    public const USER_IS_NOT_CONFIRMED = '0';
-    public const USER_IS_CONFIRMED     = '1';
-
     protected $validationRules = [
         'password'         => 'required|min_length[8]|regex_match[(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}]',
         'confirm-password' => 'matches[password]',
@@ -62,19 +59,19 @@ class ChangePasswordValidation extends BaseValidation
         return true;
     }
 
-    public function hasAccessToSetPassword()
+    public function hasAccessToResetPassword()
     {
-        if ($this->userWithToken['confirmed'] !== self::USER_IS_NOT_CONFIRMED) {
-            throw new Exception('Parece que no cuenta con el permiso para establecer su contraseña');
+        if ($this->userWithToken['confirmed'] === USER_IS_NOT_CONFIRMED) {
+            throw new Exception('Parece que no cuenta con el permiso para restablecer su contraseña');
         }
 
         return true;
     }
 
-    public function hasAccessToResetPassword()
+    public function hasAccessToSetPassword()
     {
-        if ($this->userWithToken['confirmed'] !== self::USER_IS_CONFIRMED) {
-            throw new Exception('Parece que no cuenta con el permiso para restablecer su contraseña');
+        if ($this->userWithToken['confirmed'] === USER_IS_CONFIRMED) {
+            throw new Exception('Parece que no cuenta con el permiso para establecer su contraseña');
         }
 
         return true;

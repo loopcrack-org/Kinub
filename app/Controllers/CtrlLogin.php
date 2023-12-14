@@ -12,9 +12,6 @@ use Throwable;
 
 class CtrlLogin extends BaseController
 {
-    public const USER_IS_NOT_CONFIRMED = '0';
-    public const USER_IS_CONFIRMED     = '1';
-
     public function index(): string
     {
         return view('login/index');
@@ -96,7 +93,7 @@ class CtrlLogin extends BaseController
             $changePasswordValidation->existUserWithToken();
 
             $userModel = new UserModel();
-            $userModel->updatePassword($userWithToken['userId'], $data['password'], self::USER_IS_CONFIRMED);
+            $userModel->updatePassword($userWithToken['userId'], $data['password'], USER_IS_CONFIRMED);
 
             $response = [
                 'type'    => 'success',
@@ -132,7 +129,7 @@ class CtrlLogin extends BaseController
             $changePasswordValidation->existUserWithToken();
 
             $userModel = new UserModel();
-            $userModel->updatePassword($userWithToken['userId'], $data['password'], self::USER_IS_NOT_CONFIRMED);
+            $userModel->updatePassword($userWithToken['userId'], $data['password'], USER_IS_NOT_CONFIRMED);
 
             $response = [
                 'type'    => 'success',

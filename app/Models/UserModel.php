@@ -36,7 +36,7 @@ class UserModel extends Model
     public function updatePassword($userId, $newPassword, $isConfirmed)
     {
         try {
-            $this->db->transStart();
+            $this->db->transException(true)->transStart();
             if ($isConfirmed) {
                 $this->update($userId, [
                     'userPassword' => $newPassword,
@@ -54,7 +54,7 @@ class UserModel extends Model
             if (! $responseDelete) {
                 throw new Exception();
             }
-            $this->db->transComplete();
+            $this->db->transCommit();
         } catch (Throwable $th) {
             $this->db->transRollback();
 
