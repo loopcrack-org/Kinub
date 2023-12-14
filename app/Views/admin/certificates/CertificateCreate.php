@@ -23,12 +23,16 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
-                <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
+                <form id="form" autocomplete="off" class="needs-validation" novalidate method="POST">
 
                     <?= $this->include('admin/certificates/certificatesFormTemplate') ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
+                    </div>
+
+                    <div class="filepondConfig">
+                        <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
                     </div>
                 </form>
                 <!-- end form -->
@@ -44,7 +48,7 @@
 
 
 <?= $this->section('js') ?>
-<!-- filepond js -->
-<script src="/assets/admin/js/form-file-upload-certificate.init.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
+<!-- filepond js -->
+<script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <?= $this->endSection() ?>

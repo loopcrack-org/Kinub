@@ -15,14 +15,16 @@ class CertificateModel extends Model
     public function createCertificate(array $certificateData)
     {
         try {
-            $this->db->transStart();
+            $this->db->transException(true)->transStart();
 
-            $fileModel                               = new FileModel();
-            $certificateData['certificatePreviewId'] = $fileModel->insert(['uuid' => $certificateData['certificatePreviewId']]);
-            $certificateData['certificatefileId']    = $fileModel->insert(['uuid' => $certificateData['certificatefileId']]);
+            $fileModel = new FileModel();
+
+            $certificateData['certificatePreviewId'] = $fileModel->insert(['uuid' => $certificateData['certificatePreviewId'][0]]);
+            $certificateData['certificatefileId']    = $fileModel->insert(['uuid' => $certificateData['certificatefileId'][0]]);
+
             $this->insert($certificateData);
 
-            $this->db->transComplete();
+            $this->db->transCommit();
         } catch (Throwable $th) {
             $this->db->transRollback();
 

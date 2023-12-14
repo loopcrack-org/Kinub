@@ -113,6 +113,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCertificate::class, 'viewCertificateEdit']);
         $routes->post('editar/(:num)', [CtrlCertificate::class, 'updateCertificate']);
         $routes->post('borrar', [CtrlCertificate::class, 'deleteCertificate']);
+        generateFileApiRoutesByController($routes, CtrlCertificate::class);
     });
 
     $routes->group('emails', static function ($routes) {
