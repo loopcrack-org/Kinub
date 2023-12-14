@@ -1,0 +1,63 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../02_tools/breakpoints' as *;
+
+.product-nav {
+  position: sticky;
+  z-index: 1;
+  top: $navbar-mobile-height;
+  display: flex;
+  width: 100%;
+  max-width: 120rem;
+  margin: $spacing-xxl auto 0 auto;
+  background-color: $brand-color;
+
+  &__link-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-md 0.3125rem;
+    text-decoration: none;
+    transition: background-color 500ms ease-in-out;
+
+    &--active {
+      background-color: $color-bright-blue;
+    }
+
+    @include tablet() {
+      padding: 1.875rem 0.625rem;
+    }
+  }
+
+  &__link {
+    color: $color-white;
+    font-size: 0.625rem;
+    font-weight: $weight-light;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+
+    @include phoneXL() {
+      font-size: 0.9375rem;
+    }
+
+    @include tablet() {
+      font-size: 1.25rem;
+    }
+
+    @include desktopXL() {
+      font-size: 1.875rem;
+    }
+
+    @include desktopXXL() {
+      font-size: 2.375rem;
+    }
+  }
+
+  @include tablet() {
+    top: $navbar-desktop-height;
+  }
+}

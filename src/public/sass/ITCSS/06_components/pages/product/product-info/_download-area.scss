@@ -1,0 +1,106 @@
+@use 'sass:color';
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+
+.download-area {
+  &__accordion-container {
+    padding-top: 4rem;
+  }
+
+  &__accordion-fan {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.625rem;
+    gap: 0;
+    line-height: 0;
+  }
+
+  &__accordion {
+    color: color.adjust($color-gray-60, $lightness: 5%);
+    font-size: 1.25rem;
+    text-decoration: underline;
+    transition: color 300ms ease-in-out;
+
+    /* stylelint-disable-next-line plugin/selector-bem-pattern */
+    .ploiu-accordion-body {
+      line-height: 1;
+    }
+
+    &:hover {
+      color: color.adjust($color-gray, $lightness: 7%);
+    }
+  }
+
+  &__links-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: $spacing-md;
+    row-gap: $spacing-md;
+  }
+
+  &__link {
+    color: color.adjust($color-gray-60, $lightness: 5%);
+    font-size: 0.9375rem;
+    text-decoration: underline;
+    transition: color 300ms ease-in-out;
+
+    &:hover {
+      color: color.adjust($color-gray, $lightness: 7%);
+    }
+
+    &--single {
+      display: list-item;
+      padding: 0.625rem 0;
+      margin-left: $spacing-xxl;
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+  }
+
+  @include tablet() {
+    &__accordion-container {
+      padding-top: 0;
+      padding-left: 3.5rem;
+      margin-left: 0.2rem;
+    }
+
+    &__accordion {
+      font-size: 1.5625rem;
+    }
+
+    &__link {
+      font-size: 1.25rem;
+
+      &--single {
+        font-size: 1.5625rem;
+      }
+    }
+  }
+
+  @include desktop() {
+    &__accordion-fan {
+      line-height: 0.2;
+    }
+
+    &__accordion {
+      font-size: 2.2rem;
+    }
+
+    &__link {
+      font-size: 1.5625rem;
+
+      &--single {
+        font-size: 2.2rem;
+      }
+    }
+  }
+
+  @include desktopXL() {
+    &__link {
+      &--single {
+        padding: 0;
+      }
+    }
+  }
+}
