@@ -4,11 +4,10 @@
 @use '../../../../01_settings/colors' as *;
 @use '../../../../01_settings/fonts' as *;
 @use '../../../../02_tools/breakpoints' as *;
-
+@use '../../../../02_tools/mixins' as *;
 .custom-select-container {
   position: relative;
   overflow: hidden;
-
   border: 0.115rem solid $color-white;
   border-radius: 2cqmax;
   font-style: italic;
@@ -19,13 +18,15 @@
     padding: 0.65rem;
     padding-left: 0.8rem;
     background: transparent;
-    font-size: 0.65rem;
+    @include fluid-text(0.9rem, 1rem, 0.9vw);
     font-style: normal;
     font-weight: $weight-light;
     white-space: wrap;
     @include tablet {
-      padding: 0.9rem;
-      font-size: 0.8rem;
+      padding: 1rem;
+    }
+    @include desktopXXL {
+      padding: 1.1rem;
     }
   }
 
@@ -81,5 +82,12 @@
         transition: rotate 0.3s ease-in-out;
       }
     }
+  }
+  select {
+    z-index: -999;
+    top: 1rem;
+    left: 8rem;
+    opacity: 0;
+    visibility: visible;
   }
 }

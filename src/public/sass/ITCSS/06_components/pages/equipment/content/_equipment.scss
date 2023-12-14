@@ -14,7 +14,7 @@
     border ease 500ms;
 
   &__icon {
-    width: 4rem;
+    width: 6rem;
     margin: 0 auto;
     margin-bottom: 1rem;
     aspect-ratio: 5 / 4;
@@ -23,9 +23,6 @@
     }
     @include desktopXL {
       width: 18svh;
-    }
-    @include desktopXXL {
-      width: 22svh;
     }
   }
 

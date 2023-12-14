@@ -11,7 +11,7 @@
   overflow: visible;
   flex-direction: column;
   padding: 2.7rem;
-  border-radius: 10svmin;
+  border-radius: 4svmin;
   margin: 1rem;
   margin-bottom: 3rem;
   background: linear-gradient(to bottom right, $brand-color, $color-cyan-blue);
@@ -30,8 +30,8 @@
     margin: 4rem;
   }
   @include desktop {
-    padding: 3.5rem;
-    padding-top: 3rem;
+    padding: 3rem;
+
     margin-right: auto;
     margin-bottom: 5rem;
     margin-left: auto;
@@ -40,7 +40,7 @@
     padding-bottom: 1rem;
     @include grid(1, 1rem);
     @include desktop {
-      @include grid(2, 1.3rem);
+      @include grid(2, 1.1rem);
     }
   }
 
@@ -78,7 +78,6 @@
     grid-column: auto;
 
     @include desktop {
-      gap: 0.8rem;
       &:nth-child(3) {
         grid-column: span 2;
       }
@@ -86,12 +85,16 @@
         grid-column: span 2;
       }
     }
+    @include desktopXL {
+      gap: 0.8rem;
+    }
   }
 
   &__label {
+    margin-bottom: 0;
     margin-left: 1rem;
-    @include fluid-text(1rem, 1.5rem, 2vw);
     font-weight: $weight-light;
+    @include fluid-text(1rem, 1.7rem, 1.8vw);
   }
 
   &__input {
@@ -99,7 +102,7 @@
   }
 
   &__textarea {
-    border-radius: 2cqmax;
+    border-radius: 1.8cqmax;
   }
 
   &__input,
@@ -121,17 +124,29 @@
       color: $color-white;
     }
     @include tablet {
-      padding: 1rem;
-      font-size: 0.8em;
+      padding: 1.12rem;
+      font-size: 0.9em;
+    }
+    @include desktopXXL {
+      padding: 1.5rem;
+      font-size: 1em;
     }
   }
 
   &__error {
+    margin-bottom: 0.3rem;
     margin-left: 1rem;
     color: $color-error;
-    font-size: 1.7rem;
     font-weight: $weight-bold;
-    line-height: 0;
+    @include fluid-text(0.8rem, 1.7rem, 1.45vw);
+    &--small {
+      margin-bottom: 0.3rem;
+      margin-left: 1rem;
+      color: $color-error;
+      @include fluid-text(0.8rem, 1.3rem, 1.4vw);
+      font-weight: $weight-bold;
+      line-height: 2rem;
+    }
   }
 
   &__submit {
@@ -141,7 +156,7 @@
     border-radius: 1.5rem;
 
     font-size: 1rem;
-    font-style: italic;
+
     @include tablet {
       width: 21rem;
       align-self: center;

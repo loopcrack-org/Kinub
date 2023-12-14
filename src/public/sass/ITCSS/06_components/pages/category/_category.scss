@@ -9,11 +9,12 @@
     max-width: 90%;
     margin: 3.125rem auto 3.125rem auto;
     @include grid(2, 0.9375rem);
-
-    @include tablet {
-      @include flex-columns(3, 1.25rem, 1.5625rem);
-      margin-top: 4.125rem;
-      row-gap: 1.25rem;
+    @include phone {
+      @include flex-columns(3, 1rem, 1rem);
+      margin-top: 2rem;
+    }
+    @include desktop {
+      @include flex-columns(4, 1.25rem, 1.5625rem);
     }
   }
 

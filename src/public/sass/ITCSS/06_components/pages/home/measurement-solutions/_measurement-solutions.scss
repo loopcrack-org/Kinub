@@ -20,7 +20,7 @@
     width: 100%;
     margin: 0 auto;
 
-    @include phone() {
+    @include fold() {
       @include grid(2, 0);
     }
 

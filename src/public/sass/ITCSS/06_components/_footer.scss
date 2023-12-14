@@ -12,7 +12,7 @@
   padding: $spacing-md 5vw;
   margin-top: auto;
   background-color: $color-footer;
-  box-shadow: 0rem -0.625rem 1.875rem color.adjust($color-black, $alpha: -0.75);
+  box-shadow: 0rem -0.4rem 1.4rem color.adjust($color-black, $alpha: -0.75);
   @include desktop() {
     padding: $spacing-lg 5vw;
   }

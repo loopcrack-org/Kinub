@@ -39,13 +39,16 @@
       @include flex-columns(3, 2rem, 4rem);
     }
     @include desktopXL {
-      @include flex-columns(4, 2rem, 4rem);
+      @include flex-columns(4, 2rem, 2rem);
     }
   }
-  @include phoneXL {
-    margin: 0 0 4rem 0;
+  @include fold {
+    margin: 0 0 1.5rem 0;
   }
-  @include desktop {
-    margin: 0 0 8rem 0;
+  @include phone {
+    margin: 0 0 2rem 0;
+  }
+  @include tablet {
+    margin: 0 0 2.5rem 0;
   }
 }
