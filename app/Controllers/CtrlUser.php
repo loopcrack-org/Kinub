@@ -157,17 +157,15 @@ class CtrlUser extends BaseController
                 'message' => 'El email ha sido enviado correctamente, notifique al usuario para que confirme su cuenta.',
                 'type'    => 'success',
             ];
-
-            return redirect()->back()->with('response', $response);
         } catch (Throwable $th) {
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error',
                 'message' => 'Algo ha salido mal mientras se enviaba el email, por favor intente nuevamente',
                 'type'    => 'error',
             ];
-
-            return redirect()->back()->with('response', $response);
         }
+
+        return redirect()->back()->with('response', $response);
     }
 
     public function deleteUser()

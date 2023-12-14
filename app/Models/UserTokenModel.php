@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
-use Exception;
 use Faker\Core\Uuid;
 use Throwable;
 
@@ -20,12 +19,8 @@ class UserTokenModel extends Model
     public function getNewUserToken(string $userId)
     {
         try {
-            $this->db->transStart();
-            $oldTokenDeleted = $this->where('userId', $userId)->delete();
-
-            if (! $oldTokenDeleted) {
-                throw new Exception('Ha ocurrido un error al eliminar el token del usuario');
-            }
+            $this->db->transException(true)->transStart();
+            $this->where('userId', $userId)->delete();
 
             $tokenData = [
                 'userToken'       => substr((new Uuid())->uuid3(), 0, 13),
@@ -33,11 +28,9 @@ class UserTokenModel extends Model
                 'userId'          => $userId,
             ];
 
-            if ($this->insert($tokenData) === false) {
-                throw new Exception('Ha ocurrido un error al generar el nuevo token');
-            }
+            $this->insert($tokenData);
 
-            $this->db->transComplete();
+            $this->db->transCommit();
 
             return $tokenData['userToken'];
         } catch (Throwable $th) {
