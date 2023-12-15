@@ -6,44 +6,30 @@
 
 .tags {
   display: flex;
-  margin-top: $spacing-lg;
   gap: 0.625rem;
 
   &__tag {
     display: flex;
-    height: 1.875rem;
+    height: 1.4rem;
     align-items: center;
-    padding: 0 0.625rem;
-    border-radius: 0.3125rem;
+    padding: $spacing-lg;
+    border-radius: 0.625rem;
     background-color: $brand-color;
     text-decoration: none;
-
-    @include tablet() {
-      padding: $spacing-lg;
-      border-radius: 0.625rem;
-    }
   }
 
   &__tag-content {
     margin: 0;
     color: $color-white;
-    font-size: 0.625rem;
+    font-size: 0.8rem;
     font-weight: $weight-lighter;
 
-    @include tablet() {
-      font-size: 1.5625rem;
-    }
-
-    @include desktop() {
-      font-size: 1.125rem;
-    }
-
-    @include desktopXXL() {
-      font-size: 1.25rem;
+    @include phoneXL() {
+      font-size: 1rem;
     }
   }
 
-  @include tablet() {
-    margin-top: $spacing-xxl;
+  @include desktop() {
+    margin-top: $spacing-lg;
   }
 }

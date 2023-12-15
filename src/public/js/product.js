@@ -1,10 +1,10 @@
 import Glide from '@glidejs/glide';
+import Drift from 'drift-zoom';
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
 import Tingle from 'tingle.js';
 import '../libs/vanilla-js-accordions/AccordionElement.min.js';
 import { initLightGallery } from './light.js';
-import { magnifyImage } from './magnify.js';
 
 new Plyr('#product-video');
 
@@ -73,8 +73,14 @@ new Glide('.glide', {
   },
 }).mount();
 
-const magnified = document.querySelector('#large-img');
 const mainImage = document.querySelector('#main-image');
+
+const drift = new Drift(mainImage, {
+  sourceAttribute: 'src',
+  paneContainer: document.querySelector('.details__grid'),
+  inlinePane: false,
+});
+
 const mainVideo = document.querySelector('#main-video');
 const videoContainer = document.querySelector('#video-container');
 const imageContainer = document.querySelector('#main-image-container');
@@ -93,10 +99,12 @@ window.addEventListener('resize', () => {
 function handleCarouselResize() {
   if (isMobile()) {
     updateContainersDisplay('none', 'none');
+    drift.disable();
   } else {
     const firstSlide = document.querySelector('.glide__slide');
     const dataVideoAttributeFirstSlide = firstSlide.getAttribute('data-video');
     const videoFirstSlide = dataVideoAttributeFirstSlide !== null;
+    drift.enable();
 
     if (videoFirstSlide) {
       updateContainersDisplay('flex', 'none');
@@ -109,10 +117,7 @@ function handleCarouselResize() {
       let imageFirstSlide = firstSlide.querySelector('img');
       mainImage.src = imageFirstSlide.src;
       mainImage.alt = imageFirstSlide.alt;
-      magnified.style.backgroundImage = `url('${imageFirstSlide.src}')`;
     }
-
-    if (magnified) magnified.style.backgroundImage = `url('${mainImage.src}')`;
 
     document.querySelectorAll('.glide__slide').forEach((slide) => {
       const sliderImage = slide.querySelector('img');
@@ -123,7 +128,6 @@ function handleCarouselResize() {
           if (mainImage.src !== sliderImage.src) {
             mainImage.src = sliderImage.src;
             mainImage.alt = sliderImage.alt;
-            magnified.style.backgroundImage = `url('${sliderImage.src}')`;
             if (imageContainer.style.display == 'none' && !isMobile()) {
               updateContainersDisplay('none', 'flex');
             }
@@ -144,11 +148,6 @@ function handleCarouselResize() {
 }
 
 initLightGallery();
-
-const zoom = document.getElementById('main-image-container');
-if (zoom) {
-  zoom.addEventListener('mousemove', magnifyImage, false);
-}
 
 const modal = new Tingle.modal({
   footer: false,

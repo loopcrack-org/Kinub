@@ -22,11 +22,21 @@
   }
 
   &__heading {
+    display: none;
     margin: 0;
-    font-size: 1.5625rem;
+    @include fluid-text(2rem, 3rem);
     font-weight: $weight-bolder;
     line-height: 1;
     text-transform: capitalize;
+
+    &--mobile {
+      display: block;
+      color: color.adjust($color-gray-60, $lightness: 5%);
+    }
+
+    &--desktop {
+      display: none;
+    }
   }
 
   &__data-container {
@@ -61,25 +71,36 @@
 
   @include tablet() {
     &__heading {
-      @include fluid-text(2rem, 3.5rem);
+      @include fluid-text(2rem, 2.5rem);
     }
 
     &__data-container {
-      margin: 3rem 0;
+      margin: 1rem 0;
     }
 
     &__data {
-      font-size: 1.875rem;
+      font-size: 1.3rem;
       line-height: $base-line-height;
     }
 
     &__btn {
-      font-size: 1.75rem;
+      font-size: 1.2rem;
     }
   }
 
   @include desktop() {
-    margin: 6.25rem auto;
+    height: 40rem;
+    margin: 3rem auto;
+
+    &__heading {
+      &--mobile {
+        display: none;
+      }
+
+      &--desktop {
+        display: block;
+      }
+    }
 
     &__grid {
       flex-direction: row;
@@ -88,21 +109,39 @@
 
     &__btn {
       padding: $spacing-sm $spacing-md;
-      margin-top: $spacing-xl;
-    }
-  }
-
-  @include desktopXL() {
-    &__btn {
-      font-size: 1.875rem;
-    }
-
-    &__heading {
-      @include fluid-text(2rem, 4rem);
+      margin-top: -1.5rem;
     }
 
     &__data-container {
       margin: 3rem 0;
+    }
+  }
+
+  @include desktopXL() {
+    width: 90%;
+    max-width: 120rem;
+    height: 39rem;
+
+    &__data {
+      font-size: 1.4rem;
+      line-height: $base-line-height;
+    }
+  }
+
+  @include desktopXXL() {
+    height: 44rem;
+
+    &__heading {
+      @include fluid-text(2rem, 3rem);
+    }
+
+    &__data {
+      font-size: 2rem;
+      line-height: $base-line-height;
+    }
+
+    &__btn {
+      font-size: 2rem;
     }
   }
 }

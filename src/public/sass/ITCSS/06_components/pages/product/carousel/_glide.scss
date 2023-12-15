@@ -37,17 +37,22 @@
   &__slide {
     display: flex;
     width: 100%;
-    max-height: 40rem;
+    max-height: 27rem;
     flex-shrink: 0;
-    border: 0.0625rem solid $color-aqua-blue;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     user-select: none;
     white-space: normal;
+
+    &:hover {
+      /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
+      cursor: grab;
+    }
   }
 
   &__slide-media {
-    object-fit: cover;
+    margin: 0 auto;
+    object-fit: contain;
   }
 
   &__arrow {
@@ -56,15 +61,15 @@
     top: 50%;
     display: none;
     padding: 0.1875rem 0.1875rem 0.125rem;
-    border: 0.125rem solid color.adjust($color-white, $lightness: -15%);
+    border: none;
     border-radius: 25%;
     background-color: transparent;
     color: $color-white;
     cursor: pointer;
-    fill: color.adjust($color-white, $lightness: -15%);
+    // fill: color.adjust($color-white, $lightness: -15%);
     line-height: 1;
     opacity: 1;
-    text-shadow: 0 0.25em 0.5em rgba($color-black, 0.1);
+    // text-shadow: 0 0.25em 0.5em rgba($color-black, 0.1);
     text-transform: uppercase;
     transform: translateY(-50%);
     transition:
@@ -89,7 +94,7 @@
   &__bullets {
     position: absolute;
     z-index: 2;
-    bottom: $spacing-xl;
+    bottom: 3rem;
     left: 50%;
     display: inline-flex;
     list-style: none;
@@ -104,7 +109,7 @@
     border: 0.125rem solid transparent;
     border-radius: 50%;
     margin: 0 0.15625rem;
-    background-color: rgba($color-white, 0.5);
+    background-color: color.adjust($color-gray, $lightness: 10%);
     cursor: pointer;
     line-height: 0;
     transition: all 300ms ease-in-out;
@@ -115,17 +120,13 @@
 
     &:hover,
     &:focus {
-      background-color: rgba($color-white, 0.5);
+      background-color: $color-aqua-blue;
+      box-shadow: rgba($color-gray, 0.5) 0 0 0.34375rem 0.1375rem;
     }
 
     &--active {
       background-color: $color-white;
     }
-  }
-
-  &--swipeable {
-    /* stylelint-disable-next-line plugin/no-unsupported-browser-features */
-    cursor: grab;
   }
 
   &--dragging {
@@ -135,25 +136,32 @@
 
   @include fold() {
     &__track {
-      height: 18rem;
+      max-height: 20rem;
+    }
+
+    &__slide {
+      max-height: 20rem;
     }
   }
 
   @include phone() {
     &__track {
-      height: 25rem;
+      max-height: 25rem;
     }
-  }
 
-  @include phoneXL() {
-    &__track {
-      height: 34.375rem;
+    &__slide {
+      max-height: 25rem;
     }
-  }
 
-  @include tablet() {
-    &__track {
-      max-height: 100%;
+    &__bullet {
+      background-color: color.adjust($color-gray, $lightness: 10%);
+
+      &:hover,
+      &:focus,
+      &--active {
+        background-color: $color-aqua-blue;
+        box-shadow: rgba($color-gray, 0.5) 0 0 0.34375rem 0.1375rem;
+      }
     }
   }
 
@@ -166,7 +174,12 @@
     }
 
     &__slide {
-      max-height: 10rem;
+      max-height: 7rem;
+      border: 0.0625rem solid $color-aqua-blue;
+    }
+
+    &__slide-media {
+      object-fit: cover;
     }
 
     &__arrow {
@@ -178,21 +191,32 @@
     }
 
     &__bullet {
-      background-color: color.adjust($color-gray, $lightness: 10%);
-
-      &:hover,
-      &:focus,
-      &--active {
-        border: 0.125rem solid $color-white;
-        background-color: $color-aqua-blue;
-        box-shadow: rgba($color-gray, 0.5) 0 0 0.34375rem 0.1375rem;
-      }
+      width: 0.6rem;
+      height: 0.6rem;
     }
   }
 
-  @include desktopXL() {
+  @include desktopXXL {
     &__track {
-      max-height: 10rem;
+      max-height: 12rem;
+    }
+
+    &__slide {
+      max-height: 12rem;
+      border: 0.0625rem solid $color-aqua-blue;
+    }
+
+    &__arrow {
+      display: block;
+    }
+
+    &__bullets {
+      bottom: -15%;
+    }
+
+    &__bullet {
+      width: 1rem;
+      height: 1rem;
     }
   }
 }

@@ -16,15 +16,15 @@
 </header>
 
 <main class="details">
-    <div class="details__grid">
+    <h2 class="details__heading details__heading--mobile">Medidor de nivel de radar 80G</h2>
 
+    <div class="details__grid">
     <div class="carousel">
         <div class="carousel__img-container" id="video-container">
-            <video id="main-video" autoplay muted></video>
+            <video class="carousel__main-video" id="main-video" autoplay muted></video>
         </div>
-        <div class="carousel__img-container magnify-wrapper" id="main-image-container">
-            <img class="carousel__main-img magnify-wrapper__img" id="main-image" alt="Imagen Principal">
-            <div id="large-img" class="magnify-wrapper__large-img"></div>
+        <div class="carousel__img-container" id="main-image-container">
+            <img class="carousel__main-img" id="main-image" alt="Imagen Principal">
         </div>
 
         <div class="glide" id="glide">
@@ -69,13 +69,17 @@
 
               <div class="glide__arrows" data-glide-el="controls">
                 <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z"></path>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-left" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M11 7l-5 5l5 5" />
+                        <path d="M17 7l-5 5l5 5" />
                     </svg>
                 </button>
                 <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"></path>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevrons-right" width="36" height="36" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFF" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M7 7l5 5l-5 5" />
+                        <path d="M13 7l5 5l-5 5" />
                     </svg>
                 </button>
             </div>
@@ -83,7 +87,7 @@
     </div>
 
         <div class="details__info">
-            <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
+            <h2 class="details__heading details__heading--desktop">Medidor de nivel de radar 80G</h2>
 
             <div class="tags">
                 <a href="#" class="tags__tag">
@@ -95,6 +99,7 @@
             </div>
 
             <div class="details__data-container">
+
             <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
