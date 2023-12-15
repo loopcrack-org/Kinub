@@ -14,7 +14,6 @@ class FileModel extends Model
     protected $allowedFields    = ['fileRoute', 'uuid', 'fileDirectoryRoute', 'fileName'];
     protected $lastIds          = [];
     protected $afterInsertBatch = ['setLastIds'];
-    protected $afterInsert      = ['setLastIds'];
     protected $beforeInsert     = ['getFileEntity'];
 
     /**
