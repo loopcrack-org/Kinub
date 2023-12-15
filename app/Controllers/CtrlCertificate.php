@@ -2,13 +2,27 @@
 
 namespace App\Controllers;
 
+use App\Classes\FileValidationConfig;
+use App\Classes\FileValidationConfigBuilder;
 use App\Exceptions\InvalidInputException;
 use App\Models\CertificateModel;
+use App\Utils\FileManager;
 use App\Validation\CertificateValidation;
 use Throwable;
 
-class CtrlCertificate extends BaseController
+class CtrlCertificate extends CtrlApiFiles
 {
+    protected FileValidationConfig $fileConfig;
+
+    public function __construct()
+    {
+        $fileConfigBuilder = new FileValidationConfigBuilder('/admin/certificados');
+        $fileConfigBuilder->builder('certificatePreviewId')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(1000, 1500)->build();
+        $fileConfigBuilder->builder('certificatefileId')->minFiles(1)->maxFiles(1)->maxSize(30, 'MB')->isPDF()->build();
+
+        $this->fileConfig = $fileConfigBuilder->getConfig();
+    }
+
     public function viewCertificates()
     {
         $certificateModel = new CertificateModel();
@@ -21,7 +35,11 @@ class CtrlCertificate extends BaseController
 
     public function viewCertificateCreate()
     {
-        return view('admin/certificates/CertificateCreate');
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        }
+
+        return view('admin/certificates/CertificateCreate', ['filepondConfig' => $this->fileConfig->getClientConfig()]);
     }
 
     public function viewCertificateEdit($id)
@@ -35,16 +53,20 @@ class CtrlCertificate extends BaseController
     public function createCertificate()
     {
         try {
-            $validateCertificate = new CertificateValidation();
-            $certificateData     = $this->request->getPost();
+            $certificateData = $this->request->getPost();
+
+            $validateCertificate  = new CertificateValidation();
+            $filesValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+            $validateCertificate->addRules($filesValidationRules['rules'], $filesValidationRules['messages']);
+
             if (! $validateCertificate->validateInputs($certificateData)) {
                 throw new InvalidInputException($validateCertificate->getErrors());
             }
 
-            $certificateData['certificatePreviewId'] = '3ea307c224811d55048d72b5696895eb';
-            $certificateData['certificatefileId']    = '3ea307c224811d55048d72b5696895eb';
-
             (new CertificateModel())->createCertificate($certificateData);
+            FileManager::changeDirectoryCollectionFolder($certificateData['certificatePreviewId']);
+            FileManager::changeDirectoryCollectionFolder($certificateData['certificatefileId']);
+
             $response = [
                 'title'   => 'Creación exitosa',
                 'message' => 'Se ha creado el certificado correctamente',
@@ -53,8 +75,12 @@ class CtrlCertificate extends BaseController
 
             return redirect()->to('/admin/certificados')->with('response', $response);
         } catch (InvalidInputException $th) {
+            session()->setFlashdata('clientData', $certificateData);
+
             return redirect()->back()->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
+            session()->setFlashdata('clientData', $certificateData);
+
             $response = [
                 'title'   => '¡Oops! Ha ocurrido un error.',
                 'message' => 'Algo salio mal al crear el certificado. Por favor, inténtalo de nuevo.',
