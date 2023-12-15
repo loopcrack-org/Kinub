@@ -7,7 +7,6 @@ use Throwable;
 
 class CategoryModel extends Model
 {
-    protected $DBGroup       = 'default';
     protected $table         = 'categories';
     protected $primaryKey    = 'categoryId';
     protected $allowedFields = ['categoryName', 'categoryImageId', 'categoryIconId'];
