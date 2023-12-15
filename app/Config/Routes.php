@@ -136,6 +136,7 @@ $routes->group('admin', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlAboutUs::class, 'viewAboutUsEdit']);
         $routes->post('', [CtrlAboutUs::class, 'updateAboutUsSection']);
+        generateFileApiRoutesByController($routes, CtrlAboutUs::class);
     });
 });
 /*
