@@ -45,21 +45,6 @@
     transition: all 500ms ease;
   }
 
-  &:hover {
-    box-shadow:
-      $base-border-width-medium $base-border-width-medium $base-border-card-blur
-        $base-border-card-spread $color-light-blue,
-      $base-border-width-medium (-$base-border-width-medium) $base-border-card-blur
-        $base-border-card-spread $color-light-blue,
-      (-$base-border-width-medium) $base-border-width-medium $base-border-card-blur
-        $base-border-card-spread $color-light-blue,
-      (-$base-border-width-medium) (-$base-border-width-medium) $base-border-card-blur
-        $base-border-card-spread $color-light-blue;
-  }
-
-  &:hover &__image {
-    box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
-  }
   @include fold {
     padding: $spacing-md $spacing-sm;
   }

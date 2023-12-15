@@ -22,18 +22,26 @@
 @include phone {
   .swiper {
     height: 28vh;
-    min-height: 19rem;
+    min-height: 18.5rem;
   }
   .swiper-button-prev {
     left: 0.5rem;
     &::after {
       font-size: 1.9rem;
     }
+    &:hover {
+      transform: scale(1.4);
+      transition: all 0.2s;
+    }
   }
   .swiper-button-next {
     right: 0.5rem;
     &::after {
       font-size: 1.9rem;
+    }
+    &:hover {
+      transform: scale(1.4);
+      transition: all 0.2s;
     }
   }
 }
@@ -47,19 +55,19 @@
 }
 @include tablet {
   .swiper {
-    height: 43vh;
-    min-height: 28rem;
+    height: 41.5vh;
+    min-height: 26rem;
   }
 }
 @include desktopXL {
   .swiper {
-    height: 45vh;
-    min-height: 28rem;
+    height: 47svh;
+    min-height: 26.5rem;
   }
 }
 @include desktopXXL {
   .swiper {
-    height: 50vh;
-    min-height: 32rem;
+    height: 45vh;
+    min-height: 28rem;
   }
 }
