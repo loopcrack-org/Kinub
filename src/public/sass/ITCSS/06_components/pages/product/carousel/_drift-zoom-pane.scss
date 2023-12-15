@@ -1,19 +1,14 @@
+@use '../../../../01_settings/global' as *;
 @use '../../../../02_tools/breakpoints' as *;
 
 .drift-zoom-pane {
-  top: 60%;
-  left: 48%;
+  position: absolute;
+  top: 0;
+  left: 50%;
   overflow: hidden;
   width: 50%;
-  height: 60%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.5);
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-
-  @include desktopXXL() {
-    top: 35%;
-    left: 50%;
-    width: 40%;
-    height: 40%;
-  }
 }
