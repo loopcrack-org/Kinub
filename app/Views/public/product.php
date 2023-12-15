@@ -18,69 +18,69 @@
 <main class="details">
     <div class="details__grid">
 
-    <div class="carousel">
-        <div class="carousel__img-container" id="video-container">
-            <video id="main-video" autoplay muted></video>
-        </div>
-        <div class="carousel__img-container magnify-wrapper" id="main-image-container">
-            <img class="carousel__main-img magnify-wrapper__img" id="main-image" alt="Imagen Principal">
-            <div id="large-img" class="magnify-wrapper__large-img"></div>
-        </div>
-
-        <div class="glide" id="glide">
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides" id="lightgallery-product">
-                    <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
-                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
-                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
-                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                </ul>
+        <div class="carousel">
+            <div class="carousel__img-container" id="video-container">
+                <video id="main-video" autoplay muted></video>
+            </div>
+            <div class="carousel__img-container magnify-wrapper" id="main-image-container">
+                <img class="carousel__main-img magnify-wrapper__img" id="main-image" alt="Imagen Principal">
+                <div id="large-img" class="magnify-wrapper__large-img"></div>
             </div>
 
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-                <button class="glide__bullet" data-glide-dir="=3"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
-                <button class="glide__bullet" data-glide-dir="=5"></button>
-                <button class="glide__bullet" data-glide-dir="=6"></button>
-            </div>
+            <div class="glide" id="glide">
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides" id="lightgallery-product">
+                        <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
+                            <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                            <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
+                            <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
+                            <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                            <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                            <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                            <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        </li>
+                        <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                            <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                        </li>
+                    </ul>
+                </div>
 
-              <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z"></path>
-                    </svg>
-                </button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"></path>
-                    </svg>
-                </button>
+                <div class="glide__bullets" data-glide-el="controls[nav]">
+                    <button class="glide__bullet" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                    <button class="glide__bullet" data-glide-dir="=3"></button>
+                    <button class="glide__bullet" data-glide-dir="=4"></button>
+                    <button class="glide__bullet" data-glide-dir="=5"></button>
+                    <button class="glide__bullet" data-glide-dir="=6"></button>
+                </div>
+
+                <div class="glide__arrows" data-glide-el="controls">
+                    <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z"></path>
+                        </svg>
+                    </button>
+                    <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
         <div class="details__info">
             <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
@@ -95,53 +95,72 @@
             </div>
 
             <div class="details__data-container">
-            <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             </div>
             <span id="modal-form-btn" class="details__btn">Más información acerca de este equipo</span>
         </div>
     </div>
 </main>
 
+<?php
+$errors   = session()->get('errors');
+$response = session()->get('response');
+if(isset($response)):
+    ?>
+<script type="module">
+showAlert({
+    title: "<?= $response['title']; ?>",
+    text: "<?= $response['message']; ?>",
+    icon: "<?= $response['type']; ?>",
+    confirmButtonColor: '#0174F6'
+});
+</script>
+<?php endif; ?>
+
 <div hidden>
-    <form class="modal-form" id="modal-form" method="POST">
+    <form class="modal-form" id="modal-form" method="POST" action="/email/producto">
         <div id="modal-form-close" class="modal-form__close">
             <svg class="modal-form__close-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00899b" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
             </svg>
         </div>
 
         <h2 class="modal-form__title"><span class="modal-form__title--large">Contáctanos</span> para más información</h2>
 
         <div class="modal-form__field">
-            <input class="modal-form__input modal-form__input--product" type="text" name="product-name" value="Medidor de nivel de radar 80G" disabled>
+            <input class="modal-form__input modal-form__input--product" type="text" name="product-name" value="Medidor de nivel de radar 80G" readonly>
         </div>
 
         <div class="modal-form__field">
-            <input class="modal-form__input" type="text" id="model" name="product-model" value="" hidden>
+            <input class="modal-form__input" type="text" id="model" name="product-model" value="1234" hidden>
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="name">Nombre</label>
-            <input class="modal-form__input" type="text" id="name" name="inquirer-name" value="">
+            <?= isset($errors['inquirer-name']) ? '<p class="modal-form__error">' . $errors['inquirer-name'] . '</p>' : '' ?>
+            <input class="modal-form__input" type="text" id="name" name="inquirer-name" value="<?=old('inquirer-name')?>">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="phone">Teléfono</label>
-            <input class="modal-form__input" type="tel" id="phone" name="inquirer-phone" value="">
+            <?= isset($errors['inquirer-phone']) ? '<p class="modal-form__error">' . $errors['inquirer-phone'] . '</p>' : '' ?>
+            <input class="modal-form__input" type="tel" id="phone" name="inquirer-phone" value="<?=old('inquirer-phone')?>">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="email">E-Mail</label>
-            <input class="modal-form__input" type="email" id="email" name="inquirer-email" value="">
+            <?= isset($errors['inquirer-email']) ? '<p class="modal-form__error">' . $errors['inquirer-email'] . '</p>' : '' ?>
+            <input class="modal-form__input" type="email" id="email" name="inquirer-email" value="<?=old('inquirer-email')?>">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="name">Mensaje</label>
-            <textarea class="modal-form__textarea" id="message" name="message" rows="5"></textarea>
+            <?= isset($errors['message']) ? '<p class="modal-form__error">' . $errors['message'] . '</p>' : '' ?>
+            <textarea class="modal-form__textarea" id="message" name="message" rows="5"><?=old('message')?></textarea>
         </div>
 
         <input type="submit" class="modal-form__submit" id="modal-form-submit" value="Enviar">
@@ -180,17 +199,7 @@
     </div>
 
     <div class="product-info__video-container">
-        <video
-        id="product-video"
-        class="product-video__video"
-        preload="auto"
-        width="500"
-        height="264"
-        muted
-        autoplay
-        playsinline
-        controls
-        >
+        <video id="product-video" class="product-video__video" preload="auto" width="500" height="264" muted autoplay playsinline controls>
             <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
             <source src="assets/video/kinub-video-example.webm" type="video/webm" />
         </video>

@@ -1,12 +1,21 @@
 import Glide from '@glidejs/glide';
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
+import Swal from 'sweetalert2';
 import Tingle from 'tingle.js';
 import '../libs/vanilla-js-accordions/AccordionElement.min.js';
 import { initLightGallery } from './light.js';
 import { magnifyImage } from './magnify.js';
 
 new Plyr('#product-video');
+
+const showAlert = (props) => {
+  Swal.fire({
+    ...props,
+  });
+};
+
+window.showAlert = showAlert;
 
 const scrollmagicController = new ScrollMagic.Controller();
 const sections = document.querySelectorAll('.product-info');

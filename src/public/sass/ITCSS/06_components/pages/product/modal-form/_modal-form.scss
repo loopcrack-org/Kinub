@@ -39,6 +39,11 @@
     font-weight: $weight-bold;
   }
 
+  &__error {
+    margin-bottom: 0.3125rem;
+    color: $color-error;
+  }
+
   &__input,
   &__textarea {
     padding: 0.625rem;
@@ -107,12 +112,14 @@
         font-size: 1.875rem;
       }
     }
+
     &__input {
       &--product {
         padding: 0.4814rem 0.625rem;
         font-size: 1.25rem;
       }
     }
+
     &__close {
       display: none;
     }
