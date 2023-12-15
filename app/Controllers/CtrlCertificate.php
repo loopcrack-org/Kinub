@@ -17,8 +17,8 @@ class CtrlCertificate extends CtrlApiFiles
     public function __construct()
     {
         $fileConfigBuilder = new FileValidationConfigBuilder('/admin/certificados');
-        $fileConfigBuilder->builder('certificatePreviewId')->minFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(1000, 1500)->build();
-        $fileConfigBuilder->builder('certificatefileId')->minFiles(1)->maxSize(30, 'MB')->isPDF()->build();
+        $fileConfigBuilder->builder('certificatePreviewId')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(1000, 1500)->build();
+        $fileConfigBuilder->builder('certificatefileId')->minFiles(1)->maxFiles(1)->maxSize(30, 'MB')->isPDF()->build();
 
         $this->fileConfig = $fileConfigBuilder->getConfig();
     }
