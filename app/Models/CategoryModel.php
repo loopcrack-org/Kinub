@@ -67,4 +67,19 @@ class CategoryModel extends Model
             throw $th;
         }
     }
+
+    /**
+     * get the image asociated with a category
+     *
+     * @param int|string $categoryId the category id to get the background image
+     *
+     * @return string
+     */
+    public function getBackgroundImage(int|string $categoryId)
+    {
+        $imageId   = $this->select('categoryImageId')->where('categoryId', $categoryId)->first()['categoryImageId'];
+        $fileModel = new FileModel();
+
+        return $fileModel->find($imageId);
+    }
 }

@@ -11,12 +11,12 @@ class ProductTagSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        $productTagsNames = ['Dialog 3G™ 9xx Mhz', 'LoRaWAN OMS', 'ISO 39001'];
+        $productTagsNames = ['Dialog 3G™ 9xx Mhz', 'LoRaWAN OMS', 'ISO 39001', 'Equipment 5G', 'ISO702', 'IoT'];
 
         $productTags = [];
 
         for ($i = 1; $i < 7; $i++) {
-            $productTagsNames = $faker->randomElements($productTagsNames, 2);
+            $productTagsNames = $faker->randomElements($productTagsNames, 5);
             $productTags[]    = [
                 'ptName'      => $productTagsNames[0],
                 'ptProductId' => $i,

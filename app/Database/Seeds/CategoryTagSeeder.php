@@ -8,25 +8,19 @@ class CategoryTagSeeder extends Seeder
 {
     public function run()
     {
-        $categoriesTags = [
-            [
-                'categoryTagName' => 'Tag1',
-                'categoryId'      => 1,
-            ],
-            [
-                'categoryTagName' => 'Tag2',
-                'categoryId'      => 1,
-            ],
-            [
-                'categoryTagName' => 'Tag3',
-                'categoryId'      => 2,
-            ],
-            [
-                'categoryTagName' => 'Tag4',
-                'categoryId'      => 2,
-            ],
-        ];
+        $categories = $this->db->query('SELECT * FROM categories')->getResultArray();
 
-        $this->db->table('category_tags')->insertBatch($categoriesTags);
+        $categoryTags = [];
+
+        foreach ($categories as $category) {
+            for ($i = 1; $i < 3; $i++) {
+                $categoryTags[] = [
+                    'categoryTagName' => 'Tag ' . $category['categoryName'] . $i,
+                    'categoryId'      => $category['categoryId'],
+                ];
+            }
+        }
+
+        $this->db->table('category_tags')->insertBatch($categoryTags);
     }
 }

@@ -13,7 +13,7 @@ class ProductSeeder extends Seeder
 
         $products = [];
 
-        for ($i = 0; $i < 6; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $products[] = [
                 'productName'          => 'Medidor de nivel de radar ' . $faker->randomNumber('2', true) . 'G',
                 'productModel'         => 'E-' . $faker->randomNumber('3', true),
@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
                     'Potencia'              => $faker->randomNumber('3', true) . ' MW',
                     'Comunicación'          => $faker->randomElements(['5G Ipv6', '3G', 'WPAN', 'WPA2']),
                 ]),
-                'productCategoryId' => $faker->numberBetween(1, 2),
+                'productCategoryId' => $faker->numberBetween(1, 6),
             ];
         }
 
