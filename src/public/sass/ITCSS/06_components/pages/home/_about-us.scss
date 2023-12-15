@@ -5,9 +5,6 @@
 @use '../../../02_tools/mixins' as *;
 
 .about-us {
-  &__grid {
-    height: calc(100svh - var(--header-height));
-  }
   &__content {
     padding: 0 $spacing-md;
     margin-top: 1.2rem;
@@ -33,9 +30,16 @@
   &__text {
     margin: 0;
     color: $color-gray-50;
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: $weight-normal;
     line-height: 1.4;
+  }
+  @include phone() {
+    &__text {
+      padding: 0;
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
   }
 
   @include tablet() {
@@ -75,8 +79,8 @@
 
   @include desktopXL() {
     &__grid {
-      height: calc(85svh - var(--header-height));
       @include grid(2, 4.5rem);
+      height: calc(100svh - var(--header-height));
     }
     &__content {
       padding-right: 8vw;
@@ -87,6 +91,7 @@
   }
   @include desktopXXL() {
     &__grid {
+      height: calc(85svh - var(--header-height));
       @include grid(2, 4.5rem);
     }
   }

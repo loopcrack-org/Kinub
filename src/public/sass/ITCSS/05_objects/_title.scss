@@ -19,7 +19,7 @@
 
   &--level-2 {
     @extend %title-common;
-    @include fluid-text(2.4rem, 6.5rem);
+    @include fluid-text(2.4rem, 5.5rem);
     color: $color-headings;
   }
 
