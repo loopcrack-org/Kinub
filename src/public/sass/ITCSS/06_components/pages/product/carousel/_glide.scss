@@ -119,13 +119,10 @@
     }
 
     &:hover,
-    &:focus {
+    &:focus,
+    &--active {
       background-color: $color-aqua-blue;
       box-shadow: rgba($color-gray, 0.5) 0 0 0.34375rem 0.1375rem;
-    }
-
-    &--active {
-      background-color: $color-white;
     }
   }
 
@@ -151,17 +148,6 @@
 
     &__slide {
       max-height: 25rem;
-    }
-
-    &__bullet {
-      background-color: color.adjust($color-gray, $lightness: 10%);
-
-      &:hover,
-      &:focus,
-      &--active {
-        background-color: $color-aqua-blue;
-        box-shadow: rgba($color-gray, 0.5) 0 0 0.34375rem 0.1375rem;
-      }
     }
   }
 
