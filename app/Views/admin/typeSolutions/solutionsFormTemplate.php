@@ -27,7 +27,7 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <textarea class="form-control <?= isset($errors['msDescription']) ? 'isInvalid' : '' ?>" rows="3" name="msDescription" required><?= old('msDescription') ?? $solution['msDescription'] ?? ''; ?></textarea>
+                        <textarea class="form-control <?= isset($errors['msDescription']) ? 'isInvalid' : '' ?>" rows="3" name="msDescription" placeholder="Ingrese la descripción de la solución de medición" required><?= old('msDescription') ?? $solution['msDescription'] ?? ''; ?></textarea>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['msDescription'] ?? null])?>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" id="icon" name="msIcon" >
+                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msIcon']]) ?>
             </div>
             <!-- end card body -->
         </div>
@@ -62,7 +62,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" id="image" name="msImage" >
+                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msImage']]) ?>
             </div>
             <!-- end card body -->
         </div>

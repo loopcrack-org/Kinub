@@ -88,6 +88,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlSolution::class, 'viewSolutionEdit']);
         $routes->post('editar/(:num)', [CtrlSolution::class, 'updateSolution']);
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
+        generateFileApiRoutesByController($routes, CtrlSolution::class);
     });
 
     $routes->group('productos', static function ($routes) {

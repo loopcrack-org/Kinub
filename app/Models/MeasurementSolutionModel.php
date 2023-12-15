@@ -12,20 +12,86 @@ class MeasurementSolutionModel extends Model
     protected $primaryKey    = 'msId';
     protected $allowedFields = ['msName', 'msDescription', 'msImageId', 'msIconId'];
 
-    public function updateMeasurementSolution(string $msId, array $msData)
+    public function createMeasurementSolution(array $msData)
     {
         try {
-            $this->db->transStart();
+            $this->db->transException(true)->transStart();
 
-            $msData['msImageId'] = 1;
-            $msData['msIconId']  = 2;
+            $fileModel = new FileModel();
 
-            $this->update($msId, $msData);
+            $msData['msIconId']  = $fileModel->insert(['uuid' => $msData['msIcon'][0]]);
+            $msData['msImageId'] = $fileModel->insert(['uuid' => $msData['msImage'][0]]);
 
-            $this->db->transComplete();
+            $this->insert($msData);
+            $this->db->transCommit();
         } catch (Throwable $th) {
             $this->db->transRollback();
 
+            throw $th;
+        }
+    }
+
+    public function getMeasurementSolutionDataWithFiles(string $msId)
+    {
+        try {
+            $msData = $this->find($msId);
+
+            $fileModel = new FileModel();
+
+            $msData['msIcon']  = $fileModel->select('uuid')->where('fileId', $msData['msIconId'] ?? '')->first()['uuid'] ?? '';
+            $msData['msImage'] = $fileModel->select('uuid')->where('fileId', $msData['msImageId'] ?? '')->first()['uuid'] ?? '';
+
+            return $msData;
+        } catch (Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function updateMeasurementSolution(string $msId, array $msData)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+
+            $fileModel = new FileModel();
+
+            if (! empty($msData['msIcon'])) {
+                $msData['msIconId'] = $fileModel->insert(['uuid' => $msData['msIcon'][0]]);
+            }
+
+            if (! empty($msData['msImage'])) {
+                $msData['msImageId'] = $fileModel->insert(['uuid' => $msData['msImage'][0]]);
+            }
+
+            $this->update($msId, $msData);
+
+            if (isset($msData['delete-msIcon'])) {
+                $fileModel->where('uuid', $msData['delete-msIcon'][0])->delete();
+            }
+
+            if (isset($msData['delete-msImage'])) {
+                $fileModel->where('uuid', $msData['delete-msImage'][0])->delete();
+            }
+
+            $this->db->transCommit();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
+
+    public function deleteMeasuremenSolution(array $msData)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+
+            $fileModel = new FileModel();
+
+            $fileModel->delete($msData['msIconId']);
+            $fileModel->delete($msData['msImageId']);
+
+            return $this->db->transCommit();
+        } catch (Throwable $th) {
             throw $th;
         }
     }
