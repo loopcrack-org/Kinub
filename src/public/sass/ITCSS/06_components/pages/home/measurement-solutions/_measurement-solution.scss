@@ -9,8 +9,8 @@
   position: relative;
   display: flex;
   overflow: hidden;
-  height: 50svh;
-  min-height: 19rem;
+  height: 29svh;
+  min-height: 12rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -25,7 +25,7 @@
 
 .measurement-solution__icon {
   z-index: 1;
-  width: 10rem;
+  width: 5rem;
   transition: all 600ms ease;
   /* stylelint-disable-next-line plugin/selector-bem-pattern */
   svg {
@@ -37,7 +37,7 @@
 
 .measurement-solution__content {
   z-index: 1;
-  font-size: 1.4rem;
+  font-size: 1rem;
   transition: 600ms ease all;
 }
 
@@ -49,6 +49,7 @@
 .measurement-solution__title {
   display: flex;
   flex-direction: column;
+  margin-bottom: 0;
   line-height: 1;
   transition: all 1000ms ease;
   &--strong {
@@ -106,6 +107,13 @@
   visibility: hidden;
 }
 
+.measurement-solution::after {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: $spacing-md;
+  content: '';
+}
 .measurement-solution:hover {
   color: $color-white;
 
@@ -157,11 +165,11 @@
 
 @include phone() {
   .measurement-solution {
-    height: 40svh;
-    min-height: 14rem;
+    height: 25svh;
+    min-height: 15rem;
   }
   .measurement-solution__icon {
-    width: 7.5rem;
+    width: 5rem;
   }
   .measurement-solution__content {
     font-size: 1rem;
@@ -170,14 +178,14 @@
 
 @include phoneXL() {
   .measurement-solution__icon {
-    width: 8rem;
+    width: 6.5rem;
   }
 }
 
 @include tablet() {
   .measurement-solution {
-    height: 45svmin;
-    min-height: 24rem;
+    height: 35svh;
+    min-height: 22rem;
   }
   .measurement-solution__content {
     font-size: 1.6rem;
@@ -202,18 +210,22 @@
 
 @include desktopXL {
   .measurement-solution {
-    height: 68svh;
-    min-height: 34svmax;
     gap: 7svh;
   }
   .measurement-solution__icon {
-    width: 75%;
+    width: 49%;
+  }
+}
+@include desktopXXL {
+  .measurement-solution__icon {
+    width: 39%;
   }
 }
 
 // Apply the background colors to ::after pseudo-elements based on nth-child
 @for $i from 1 through list.length($color-sequence-measurement-solution) {
-  .measurement-solution:nth-child(4n + #{$i})::after {
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  .swiper-slide:nth-child(4n + #{$i}) .measurement-solution::after {
     background-color: list.nth($color-sequence-measurement-solution, $i);
   }
 }

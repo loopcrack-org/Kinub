@@ -1,0 +1,65 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use '../../../../02_tools/breakpoints' as *;
+.swiper {
+  width: 100%;
+  height: 36vh;
+}
+.swiper-button-prev {
+  top: 40%;
+  left: 0.1rem;
+  &::after {
+    font-size: 1.3rem;
+  }
+}
+.swiper-button-next {
+  top: 40%;
+  right: 0.1rem;
+  &::after {
+    font-size: 1.3rem;
+  }
+}
+
+@include phone {
+  .swiper {
+    height: 28vh;
+    min-height: 19rem;
+  }
+  .swiper-button-prev {
+    left: 0.5rem;
+    &::after {
+      font-size: 1.9rem;
+    }
+  }
+  .swiper-button-next {
+    right: 0.5rem;
+    &::after {
+      font-size: 1.9rem;
+    }
+  }
+}
+@include desktop {
+  .swiper-button-prev::after {
+    font-size: 3rem;
+  }
+  .swiper-button-next::after {
+    font-size: 3rem;
+  }
+}
+@include tablet {
+  .swiper {
+    height: 43vh;
+    min-height: 28rem;
+  }
+}
+@include desktopXL {
+  .swiper {
+    height: 45vh;
+    min-height: 28rem;
+  }
+}
+@include desktopXXL {
+  .swiper {
+    height: 50vh;
+    min-height: 32rem;
+  }
+}
