@@ -86,8 +86,18 @@
   select {
     z-index: -999;
     top: 1rem;
-    left: 8rem;
+    left: 0rem;
     opacity: 0;
     visibility: visible;
+    @include phone {
+      top: 0.9rem;
+      left: 5rem;
+    }
+    @include phoneXL {
+      left: 10rem;
+    }
+    @include desktop {
+      top: 1.5rem;
+    }
   }
 }

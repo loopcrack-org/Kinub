@@ -17,8 +17,9 @@
   }
 
   &__accordion {
+    margin: 0;
     color: color.adjust($color-gray-60, $lightness: 5%);
-    font-size: 1.25rem;
+    font-size: 1rem;
     text-decoration: underline;
     transition: color 300ms ease-in-out;
 
@@ -51,9 +52,9 @@
 
     &--single {
       display: list-item;
-      padding: 0.625rem 0;
+      padding: 0.4rem 0;
       margin-left: $spacing-xxl;
-      font-size: 1.25rem;
+      font-size: 1rem;
       line-height: 1;
     }
   }
@@ -66,14 +67,15 @@
     }
 
     &__accordion {
-      font-size: 1.5625rem;
+      font-size: 1.2rem;
     }
 
     &__link {
-      font-size: 1.25rem;
+      font-size: 0.7rem;
 
       &--single {
-        font-size: 1.5625rem;
+        padding: 0.5rem 0;
+        font-size: 1.3em;
       }
     }
   }
@@ -84,22 +86,18 @@
     }
 
     &__accordion {
-      font-size: 2.2rem;
+      padding: 0.1rem;
+      padding-left: 1rem;
+      font-size: 1.4rem;
     }
 
     &__link {
-      font-size: 1.5625rem;
+      font-size: 1.2rem;
 
       &--single {
-        font-size: 2.2rem;
-      }
-    }
-  }
-
-  @include desktopXL() {
-    &__link {
-      &--single {
-        padding: 0;
+        padding: 0.7rem 0;
+        margin: 0;
+        font-size: 1.4rem;
       }
     }
   }

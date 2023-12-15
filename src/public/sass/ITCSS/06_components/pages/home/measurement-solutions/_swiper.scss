@@ -1,4 +1,51 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use '../../../../02_tools/breakpoints' as *;
 .swiper {
-  width: 70rem;
-  height: 30rem;
+  width: 100%;
+  height: 36vh;
+  @include phone {
+    height: 28vh;
+    min-height: 22rem;
+  }
+  @include tablet {
+    height: 43vh;
+    min-height: 27rem;
+  }
+  @include desktopXL {
+    height: 45vh;
+    min-height: 27rem;
+  }
+  @include desktopXXL {
+    height: 50vh;
+    min-height: 32rem;
+  }
+}
+.swiper-button-prev {
+  left: 0.5rem;
+  &::after {
+    font-size: 1.5rem;
+  }
+}
+.swiper-button-next {
+  right: 0.5rem;
+  &::after {
+    font-size: 1.5rem;
+  }
+}
+
+@include phone {
+  .swiper-button-prev::after {
+    font-size: 1.9rem;
+  }
+  .swiper-button-next::after {
+    font-size: 1.9rem;
+  }
+}
+@include desktop {
+  .swiper-button-prev::after {
+    font-size: 3rem;
+  }
+  .swiper-button-next::after {
+    font-size: 3rem;
+  }
 }

@@ -12,7 +12,17 @@ new Swiper('.swiper', {
   direction: 'horizontal',
   loop: true,
   slidesPerView: 4,
-
+  breakpoints: {
+    280: {
+      slidesPerView: 2,
+    },
+    490: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 4,
+    },
+  },
   // If we need pagination
   pagination: {
     el: '.swiper-pagination',
