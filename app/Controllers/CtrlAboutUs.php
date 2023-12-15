@@ -2,18 +2,40 @@
 
 namespace App\Controllers;
 
+use App\Classes\FileValidationConfig;
+use App\Classes\FileValidationConfigBuilder;
 use App\Exceptions\InvalidInputException;
 use App\Models\HomeSectionModel;
+use App\Utils\FileManager;
 use App\Validation\AboutUsValidation;
 use Throwable;
 
-class CtrlAboutUs extends BaseController
+class CtrlAboutUs extends CtrlApiFiles
 {
+    protected FileValidationConfig $fileConfig;
+
+    public function __construct()
+    {
+        $fileValidationConfigBuilder = new FileValidationConfigBuilder('/admin/nosotros');
+        $fileValidationConfigBuilder->builder('aboutUsImage')->isImage()->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->build();
+        $fileValidationConfigBuilder->builder('aboutUsVideo')->isVideo()->minFiles(1)->maxFiles(1)->maxSize(1000, 'MB')->build();
+
+        $this->fileConfig = $fileValidationConfigBuilder->getConfig();
+    }
+
     public function viewAboutUsEdit()
     {
-        $aboutUsData = (new HomeSectionModel())->first();
+        $aboutUsData = (new HomeSectionModel())->getData();
+        if (! session()->has('clientData')) {
+            $dataFiles['aboutUsImage'] = [$aboutUsData['aboutUsImage']];
+            $dataFiles['aboutUsVideo'] = [$aboutUsData['aboutUsVideo']];
+        } else {
+            $dataFiles = session()->get('clientData');
+        }
 
-        return view('/admin/aboutUs/AboutUsEdit', ['aboutUsData' => $aboutUsData]);
+        $this->fileConfig->setDataInClientConfig($dataFiles);
+
+        return view('/admin/aboutUs/AboutUsEdit', ['aboutUsData' => $aboutUsData, 'filepondConfig' => $this->fileConfig->getClientConfig()]);
     }
 
     public function updateAboutUsSection()
@@ -26,11 +48,23 @@ class CtrlAboutUs extends BaseController
                 throw new InvalidInputException($validator->getErrors(), '');
             }
 
-            $homeSectionModel            = new HomeSectionModel();
-            $aboutUsData['aboutUsImage'] = '3ea307c224811d55048d72b5696895eb';
-            $aboutUsData['aboutUsVideo'] = '3ea307c224811d55048d72b5696895eb';
+            $homeSectionModel = new HomeSectionModel();
+            $filesToSave      = $this->fileConfig->filterNewFilesInInputsFile($aboutUsData);
+
+            $aboutUsData['aboutUsImage'] = $filesToSave['aboutUsImage'];
+            $aboutUsData['aboutUsVideo'] = $filesToSave['aboutUsVideo'];
 
             $homeSectionModel->updateData($aboutUsData);
+
+            foreach ($filesToSave as $files) {
+                FileManager::changeDirectoryCollectionFolder($files);
+            }
+
+            $filesToDelete = $this->fileConfig->getKeysFolderToDelete($aboutUsData);
+
+            foreach ($filesToDelete as $files) {
+                FileManager::deleteMultipleFoldersWithContent($files);
+            }
 
             $response = [
                 'title'   => 'Actualización exitosa',
@@ -40,8 +74,11 @@ class CtrlAboutUs extends BaseController
 
             return redirect()->to('/admin/nosotros')->with('response', $response);
         } catch (InvalidInputException $th) {
+            session()->setFlashdata('clientData', $this->request->getPost());
+
             return redirect()->to('/admin/nosotros')->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
+            session()->setFlashdata('clientData', $this->request->getPost());
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error.',
                 'message' => 'Ha ocurrido un error al actualizar los datos, por favor intente nuevamente.',

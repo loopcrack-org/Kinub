@@ -4,6 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 use DateTime;
+use Faker\Core\Uuid;
+use Throwable;
+
 
 class UserTokenModel extends Model
 {
@@ -35,5 +38,28 @@ class UserTokenModel extends Model
         $userTokenModel = new UserTokenModel();
 
         return $userTokenModel->where('userId', $userId)->delete();
+
+    public function getNewUserToken(string $userId)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+            $this->where('userId', $userId)->delete();
+
+            $tokenData = [
+                'userToken'       => substr((new Uuid())->uuid3(), 0, 13),
+                'tokenExpiryDate' => date('y-m-d', strtotime(' +1 day')),
+                'userId'          => $userId,
+            ];
+
+            $this->insert($tokenData);
+
+            $this->db->transCommit();
+
+            return $tokenData['userToken'];
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
     }
 }

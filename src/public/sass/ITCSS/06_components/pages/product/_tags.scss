@@ -1,0 +1,49 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../02_tools/breakpoints' as *;
+
+.tags {
+  display: flex;
+  margin-top: $spacing-lg;
+  gap: 0.625rem;
+
+  &__tag {
+    display: flex;
+    height: 1.875rem;
+    align-items: center;
+    padding: 0 0.625rem;
+    border-radius: 0.3125rem;
+    background-color: $brand-color;
+    text-decoration: none;
+
+    @include tablet() {
+      padding: $spacing-lg;
+      border-radius: 0.625rem;
+    }
+  }
+
+  &__tag-content {
+    margin: 0;
+    color: $color-white;
+    font-size: 0.625rem;
+    font-weight: $weight-lighter;
+
+    @include tablet() {
+      font-size: 1.5625rem;
+    }
+
+    @include desktop() {
+      font-size: 1.125rem;
+    }
+
+    @include desktopXXL() {
+      font-size: 1.25rem;
+    }
+  }
+
+  @include tablet() {
+    margin-top: $spacing-xxl;
+  }
+}

@@ -14,6 +14,7 @@ class FileModel extends Model
     protected $allowedFields    = ['fileRoute', 'uuid', 'fileDirectoryRoute', 'fileName'];
     protected $lastIds          = [];
     protected $afterInsertBatch = ['setLastIds'];
+    protected $beforeInsert     = ['getFileEntity'];
 
     /**
      * Callback after saving files
@@ -50,7 +51,7 @@ class FileModel extends Model
     protected function getFileEntity(array $data)
     {
         $uuid                               = $data['data']['uuid'];
-        $outputFolder                       = FILES_UPLOAD_DIRECTORY . $uuid;
+        $outputFolder                       = str_replace('.', '', FILES_UPLOAD_DIRECTORY . $uuid);
         $sourceFolder                       = FILES_TEMP_DIRECTORY . $uuid;
         $filePath                           = scandir($sourceFolder)[2];
         $data['data']['fileRoute']          = "{$outputFolder}/{$filePath}";

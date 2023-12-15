@@ -32,7 +32,7 @@ class CtrlApiFiles extends BaseController
             $fileModel = new FileModel();
             $fileRoute = $fileModel->select('fileRoute')->where('uuid', $fileKey)->first();
 
-            return $this->response->setStatusCode(Response::HTTP_OK)->download($fileRoute['fileRoute'], null, true);
+            return $this->response->setStatusCode(Response::HTTP_OK)->download(".{$fileRoute['fileRoute']}", null, true);
         } catch (Throwable $th) {
             return $this->response->setStatusCode(Response::HTTP_NOT_FOUND, 'No se ha podido encontrar el archivo');
         }
