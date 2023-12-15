@@ -1,0 +1,16 @@
+/* stylelint-disable */
+@use '../02_tools/breakpoints' as *;
+
+/* ==========================================================================
+   #Form
+   ========================================================================== */
+
+/**
+ * changes scroll behavior margin top on form home
+ */
+.u-form-home {
+  scroll-margin-top: 5rem;
+  @include desktop {
+    scroll-margin-top: 8.5rem;
+  }
+}
