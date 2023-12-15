@@ -7,7 +7,6 @@ use DateTime;
 use Faker\Core\Uuid;
 use Throwable;
 
-
 class UserTokenModel extends Model
 {
     protected $table         = 'user_tokens';
@@ -38,6 +37,7 @@ class UserTokenModel extends Model
         $userTokenModel = new UserTokenModel();
 
         return $userTokenModel->where('userId', $userId)->delete();
+    }
 
     public function getNewUserToken(string $userId)
     {

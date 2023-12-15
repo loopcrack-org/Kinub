@@ -60,6 +60,11 @@ if ($response) { ?>
     <!-- end auth-page-wrapper -->
 
     <?= $this->include('partials/vendor-scripts') ?>
+
+    <!-- particles js -->
+    <script src="/assets/admin/js/particles.min.js"></script>
+    <!-- particles app js -->
+    <script src="/assets/admin/js/particles.app.min.js"></script>
 </body>
 
 </html>

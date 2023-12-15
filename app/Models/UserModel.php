@@ -60,6 +60,7 @@ class UserModel extends Model
 
             throw $th;
         }
+    }
 
     public function getUserDataToResendConfirmEmail(string $userId)
     {
