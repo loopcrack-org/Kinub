@@ -36,7 +36,7 @@ class ProductModel extends Model
      */
     public function filterProducts(array $categories = [], array $categoryTags = [], array $productTags = [], string $search = '')
     {
-        $builder = $this->select(['productId', 'productName', 'productModel'/* 'productDescription', 'productTechnicalInfo' */])
+        $builder = $this->select(['productId', 'productName', 'productModel', 'CONCAT("/producto/", productId) AS url'/* 'productDescription', 'productTechnicalInfo' */])
             ->join('categories', 'products.productCategoryId = categories.categoryId')
             ->join('`products-category_tags`', 'products.productId = `products-category_tags`.pctProductId', 'LEFT')
             ->join('category_tags', 'category_tags.categoryTagId = `products-category_tags`.pctCategoryTagId', 'LEFT')
