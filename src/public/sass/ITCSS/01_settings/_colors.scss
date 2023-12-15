@@ -1,0 +1,72 @@
+@use 'sass:color';
+/* ==========================================================================
+   #COLORS
+   ========================================================================== */
+
+/* Brand */
+
+$brand-color: #0032ab;
+$brand-color-secondary: #0174f6;
+
+$color-brand-dark: color.adjust($brand-color, $lightness: -10%);
+$color-brand: $brand-color;
+$color-brand-light: color.adjust($brand-color, $lightness: 10%);
+
+$color-brand-secondary-dark: color.adjust($brand-color-secondary, $lightness: -10%);
+$color-brand-secondary: $brand-color-secondary;
+$color-brand-secondary-light: color.adjust($brand-color-secondary, $lightness: 10%);
+
+//Kinub Color Palette
+$color-bright-blue: #0174f6;
+$color-aqua-blue: #1b90c7;
+$color-green-blue: #00535e;
+$color-light-blue: #00a7de;
+$color-charcoal: #413d3e;
+$color-cyan-blue: #6ccfe6;
+$color-royal-blue: #006ec7;
+$color-teal-blue: #0169a0;
+$color-sky-blue: #58b5e0;
+
+//Footer Color
+$color-footer: #c7d9e7;
+
+// Header colors
+$color-header-links: #003882;
+$color-headings: #0a94d5;
+
+/* Neutral */
+
+$color-black: #000000;
+$color-gray-90: color.adjust($color-black, $lightness: 10%);
+$color-gray-80: color.adjust($color-black, $lightness: 25%);
+$color-gray-70: color.adjust($color-black, $lightness: 30%);
+$color-gray-60: color.adjust($color-black, $lightness: 40%);
+$color-gray-50: color.adjust($color-black, $lightness: 50%);
+$color-gray-40: color.adjust($color-black, $lightness: 60%);
+$color-gray-20: color.adjust($color-black, $lightness: 80%);
+$color-gray-10: color.adjust($color-black, $lightness: 90%);
+$color-gray-05: color.adjust($color-black, $lightness: 95%);
+$color-white: #ffffff;
+
+// TODO We need to phase out these colors gradually and replace them with the ones above.
+$color-light-gray: #f3f3f3;
+$color-gray: #8a8a8a;
+
+/* Utility */
+$color-error: #f48080;
+$color-error-dark: color.adjust($color-error, $lightness: -20%);
+$color-error-light: color.adjust($color-error, $lightness: 20%);
+$color-warning: #ff851b;
+$color-warning-dark: color.adjust($color-warning, $lightness: -10%);
+$color-warning-light: color.adjust($color-warning, $lightness: 20%);
+$color-highlight: #ffdc00;
+$color-success: #2ecc40;
+$color-success-dark: color.adjust($color-success, $lightness: -5%);
+$color-success-light: color.adjust($color-success, $lightness: 20%);
+$color-information: #0074d9;
+$color-information-dark: color.adjust($color-information, $lightness: -5%);
+$color-information-light: color.adjust($color-information, $lightness: 20%);
+
+// Define the background color sequence for ::after pseudo-elements
+$color-sequence-measurement-solution: $brand-color $color-aqua-blue
+  color.adjust($color-aqua-blue, $lightness: -5%) $color-bright-blue;

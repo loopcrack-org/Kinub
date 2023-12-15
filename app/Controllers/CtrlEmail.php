@@ -4,8 +4,8 @@ namespace App\Controllers;
 
 use App\Models\EmailModel;
 use App\Models\UserModel;
+use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
-use App\Utils\TokenGenerator;
 use App\Validation\ContactEmailValidation;
 use App\Validation\PasswordEmailValidation;
 use App\Validation\SupportEmailValidation;
@@ -106,8 +106,8 @@ class CtrlEmail extends BaseController
 
         if ($successEmail) {
             $response = [
-                'title'   => 'Envío exitoso',
-                'message' => 'Se ha enviado correctamente',
+                'title'   => 'Mensaje enviado correctamente',
+                'message' => 'El Formulario se ha enviado a nuestro equipo de soporte técnico, trataremos de ponernos en contacto con usted lo más pronto posible.',
                 'type'    => 'success',
             ];
             $emailModel = new EmailModel();
@@ -121,7 +121,7 @@ class CtrlEmail extends BaseController
         } else {
             $response = [
                 'title'   => 'Envío fallido',
-                'message' => 'No se pudo realizar el envío del email',
+                'message' => 'No se pudo realizar el envío del formulario',
                 'type'    => 'error',
             ];
         }
@@ -147,7 +147,7 @@ class CtrlEmail extends BaseController
 
             $userName = $user['userFirstName'] . ' ' . $user['userLastName'];
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => TokenGenerator::generateToken($user['userId'])]);
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => (new UserTokenModel())->getNewUserToken($user['userId'])]);
 
             if (! $isSend) {
                 throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');

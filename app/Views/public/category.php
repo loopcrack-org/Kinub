@@ -1,8 +1,6 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/app.min.css" type="text/css">
-<link rel="stylesheet" href="assets/public/css/filter.min.css" type="text/css">
 <link rel="stylesheet" href="assets/public/css/category.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
@@ -11,165 +9,102 @@
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
-<header class="header-category" style="background-image: url('assets/images/auth-one-bg.jpg');">
-    <div class="header-category__mask"></div>
-    <h1 class="header-category__title">Categoría Seleccionada</h1>
 
-    <div class="filter header-category__filter">
-        <input 
-            class="filter__attribute"
-            type="text" 
-            placeholder="Escriba el nombre del producto"
-        >
-
-        <div class="multiple-options-select" data-placeholder="Seleccionar Categorías">
-            <div class="select-btn">
-                <span class="select-btn__btn-text"></span>
-                <span class="select-btn__icon">
-                    <img class="select-btn__icon-img" src="assets/images/arrow-down.svg" alt="select icon">
-                </span>
-            </div>
-
-            <ul class="select-list">
-                <li class="select-list__option">
-                    <input 
-                        class="select-list__checkbox"
-                        type="checkbox" 
-                        name=""
-                        value=""
-                    >
-                    <span class="select-list__text">Ejemplo de opción</span>
-                </li>
-                <li class="select-list__option">
-                    <input 
-                        class="select-list__checkbox"
-                        type="checkbox" 
-                        name=""
-                        value=""
-                    >
-                    <span class="select-list__text">Ejemplo de opción</span>
-                </li>
-                <li class="select-list__option">
-                    <input 
-                        class="select-list__checkbox"
-                        type="checkbox" 
-                        name=""
-                        value=""
-                    >
-                    <span class="select-list__text">Ejemplo de opción</span>
-                </li>
-            </ul>
-        </div>
-
-        <div class="multiple-options-select" data-placeholder="Seleccionar Tags">
-            <div class="select-btn">
-                <span class="select-btn__btn-text"></span>
-                <span class="select-btn__icon">
-                    <img class="select-btn__icon-img" src="assets/images/arrow-down.svg" alt="select icon">
-                </span>
-            </div>
-
-            <ul class="select-list">
-                <li class="select-list__option">
-                    <input 
-                        class="select-list__checkbox"
-                        type="checkbox" 
-                        name=""
-                        value=""
-                    >
-                    <span class="select-list__text">Ejemplo de opción</span>
-                </li>
-                <li class="select-list__option">
-                    <input 
-                        class="select-list__checkbox"
-                        type="checkbox" 
-                        name=""
-                        value=""
-                    >
-                    <span class="select-list__text">Ejemplo de opción</span>
-                </li>
-                <li class="select-list__option">
-                    <input 
-                        class="select-list__checkbox"
-                        type="checkbox" 
-                        name=""
-                        value=""
-                    >
-                    <span class="select-list__text">Ejemplo de opción</span>
-                </li>
-            </ul>
-        </div>
-
-        <input type="submit" class="filter__submit" value="Buscar">
-    </div>
+<header class="jumbotron" style="background-image: url(/assets/images/Telemetria.jpeg);">
+    <h1 class="jumbotron__title">Telemetría</h1>
 </header>
 
 <main class="category">
     <div class="category__grid">
 
         <div class="product">
-            <div class="product__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="product__image">
+            <div class="product__image-container">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>                
+                <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
         <div class="product">
-            <div class="product__image">
-                <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="" class="product__image">
+            <div class="product__image-container">
+                <img src="https://tse3.mm.bing.net/th?id=OIP.ZTQLS9hW-oRg1SxK6at9TQHaFj&pid=Api&P=0&h=180" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>                
+                <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
         <div class="product">
-            <div class="product__image">
+            <div class="product__image-container">
                 <img src="https://cdn-icons-png.flaticon.com/512/6152/6152273.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>                
+                <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
         <div class="product">
-            <div class="product__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="product__image">
+            <div class="product__image-container">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>                
+                <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
         <div class="product">
-            <div class="product__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="product__image">
+            <div class="product__image-container">
+                <img src="https://tse4.mm.bing.net/th?id=OIP.1rHJUkntpmgWWtdbuK79TAHaDd&pid=Api&P=0&h=180" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>                
+                <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
         <div class="product">
-            <div class="product__image">
-                <img src="assets/images/auth-one-bg.jpg" alt="" class="product__image">
+            <div class="product__image-container">
+                <img src="http://www.guiaspracticas.com/wp-content/uploads/image/2d-systems.jpg" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>                
+                <a href="/product.php" class="product__button">Ver más</a>
+            </div>
+        </div> <!--product-->
+        <div class="product">
+            <div class="product__image-container">
+                <img src="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png" alt="" class="product__image">
+            </div>
+            <div class="product__content">
+                <p class="product__name">E-101</p>
+                <a href="/product.php" class="product__button">Ver más</a>
+            </div>
+        </div> <!--product-->
+        <div class="product">
+            <div class="product__image-container">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+            </div>
+            <div class="product__content">
+                <p class="product__name">E-101</p>
+                <a href="/product.php" class="product__button">Ver más</a>
+            </div>
+        </div> <!--product-->
+        <div class="product">
+            <div class="product__image-container">
+                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+            </div>
+            <div class="product__content">
+                <p class="product__name">E-101</p>
+                <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
     </div>
 
 </main>
 
-<?= $this->include("public/templates/pagination");?>
-
-<?php $this->endSection('content');?>
+<?php $this->endSection('content'); ?>

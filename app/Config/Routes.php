@@ -12,6 +12,7 @@ use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlProduct;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlUser;
+use CodeIgniter\Router\RouteCollection;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -129,11 +130,13 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlUser::class, 'viewUserEdit']);
         $routes->post('editar/(:num)', [CtrlUser::class, 'updateUser']);
         $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
+        $routes->get('reenviarConfirmacionCuenta/(:num)', [CtrlUser::class, 'resendConfirmationEmail/$1']);
     });
     $routes->group('nosotros', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlAboutUs::class, 'viewAboutUsEdit']);
         $routes->post('', [CtrlAboutUs::class, 'updateAboutUsSection']);
+        generateFileApiRoutesByController($routes, CtrlAboutUs::class);
     });
 });
 /*
@@ -151,4 +154,14 @@ $routes->group('admin', static function ($routes) {
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+// generate routes dynamically
+function generateFileApiRoutesByController(RouteCollection $routes, string $controller)
+{
+    $routes->post('process', [$controller, 'processTemporalFile']);
+    $routes->patch('process', [$controller, 'processTemporalFileByChunks']);
+    $routes->get('restore', [$controller, 'restoreTemporalFile']);
+    $routes->get('load', [$controller, 'getFileFromServer']);
+    $routes->delete('delete', [$controller, 'deleteTemporalFile']);
 }

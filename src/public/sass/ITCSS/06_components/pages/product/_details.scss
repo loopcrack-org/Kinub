@@ -1,0 +1,108 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.details {
+  width: 100%;
+  max-width: 90%;
+  margin: 1.875rem auto;
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  &__info {
+    color: color.adjust($color-gray-60, $lightness: 5%);
+  }
+
+  &__heading {
+    margin: 0;
+    font-size: 1.5625rem;
+    font-weight: $weight-bolder;
+    line-height: 1;
+    text-transform: capitalize;
+  }
+
+  &__data-container {
+    margin: $spacing-md 0;
+  }
+
+  &__data {
+    margin: 0;
+    font-size: 1.25rem;
+
+    &--title {
+      margin: 0;
+      font-weight: $weight-bold;
+    }
+  }
+
+  &__btn {
+    @include btn(
+      $color-white,
+      color.adjust($color-green-blue, $lightness: 12%),
+      $color-white,
+      $color-bright-blue
+    );
+    display: block;
+    padding: 0.625rem 0.3125rem;
+    border-radius: 0.625rem;
+    font-size: 0.9375rem;
+    font-weight: $weight-light;
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+
+  @include tablet() {
+    &__heading {
+      @include fluid-text(2rem, 3.5rem);
+    }
+
+    &__data-container {
+      margin: 3rem 0;
+    }
+
+    &__data {
+      font-size: 1.875rem;
+      line-height: $base-line-height;
+    }
+
+    &__btn {
+      font-size: 1.75rem;
+    }
+  }
+
+  @include desktop() {
+    margin: 6.25rem auto;
+
+    &__grid {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    &__btn {
+      padding: $spacing-sm $spacing-md;
+      margin-top: $spacing-xl;
+    }
+  }
+
+  @include desktopXL() {
+    &__btn {
+      font-size: 1.875rem;
+    }
+
+    &__heading {
+      @include fluid-text(2rem, 4rem);
+    }
+
+    &__data-container {
+      margin: 3rem 0;
+    }
+  }
+}

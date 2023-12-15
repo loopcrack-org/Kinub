@@ -1,0 +1,28 @@
+@use '../../../02_tools/mixins' as *;
+@use '../../../02_tools/breakpoints' as *;
+.certificates {
+  &__heading {
+    margin: 3rem;
+    margin-top: 1rem;
+    @include tablet {
+      margin: 2rem;
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__grid {
+    width: 90%;
+    margin: auto;
+    @include flex-columns(2, 1rem, 1rem);
+    @include phone {
+      row-gap: 3rem;
+      @include flex-columns(2, 1rem, 2rem);
+    }
+    @include tablet {
+      @include flex-columns(3, 1rem, 2rem);
+    }
+    @include desktop {
+      @include flex-columns(3, 3rem, 3rem);
+    }
+  }
+}

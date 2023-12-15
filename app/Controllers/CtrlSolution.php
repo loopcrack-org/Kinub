@@ -2,7 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\MeasurementSolutionModel;
+use App\Validation\SolutionValidation;
+use Exception;
+use Throwable;
 
 class CtrlSolution extends BaseController
 {
@@ -29,22 +33,67 @@ class CtrlSolution extends BaseController
 
     public function createSolution()
     {
-        return 'creating solution...';
-    }
+        try {
+            $newMeasurementSolutionData       = $this->request->getPost();
+            $measurementSolutionDataValidator = new SolutionValidation();
 
-    public function updateSolution($id)
-    {
-        $isUpdated = true;
-        if ($isUpdated) {
+            if (! $measurementSolutionDataValidator->validateInputs($newMeasurementSolutionData)) {
+                throw new InvalidInputException($measurementSolutionDataValidator->getErrors());
+            }
+
+            $newMeasurementSolutionData['msImageId'] = 1;
+            $newMeasurementSolutionData['msIconId']  = 2;
+
+            $measurementSolutionModel = new MeasurementSolutionModel();
+            $measurementSolutionModel->insert($newMeasurementSolutionData);
+
             $response = [
-                'title'   => 'Edición exitosa',
-                'message' => 'Se ha actualizado la solución de medición correctamente',
+                'title'   => 'Solución de medición registrada con éxito',
+                'message' => 'La solución de medición se ha registrado exitosamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('admin/soluciones')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->to('admin/soluciones/crear')->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Edición fallida',
-                'message' => 'No se pudo realizar la edición de la solución de medición',
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al registrar los datos, por favor intente nuevamente.',
+                'type'    => 'error',
+            ];
+
+            return redirect()->to('/admin/soluciones/crear')->with('response', $response)->withInput();
+        }
+    }
+
+    public function updateSolution(string $msId)
+    {
+        try {
+            $msData = $this->request->getPost();
+
+            $msDataValidator = new SolutionValidation();
+
+            if (! $msDataValidator->validateInputs($msData)) {
+                throw new InvalidInputException($msDataValidator->getErrors());
+            }
+
+            $msModel = new MeasurementSolutionModel();
+            $msModel->updateMeasurementSolution($msId, $msData);
+
+            $response = [
+                'title'   => 'Actualización exitosa',
+                'message' => 'Los datos de la solución de medición han sido actualizados correctamente',
+                'type'    => 'success',
+            ];
+
+            return redirect()->to('/admin/soluciones')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
+            $response = [
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => $th->getMessage(),
                 'type'    => 'error',
             ];
         }
@@ -54,21 +103,31 @@ class CtrlSolution extends BaseController
 
     public function deleteSolution()
     {
-        $isDeleted = true;
-        if ($isDeleted) {
+        try {
+            $msId                     = $this->request->getPost()['msId'];
+            $measurementSolutionModel = new MeasurementSolutionModel();
+
+            $isDeleted = $measurementSolutionModel->delete($msId);
+
+            if (! $isDeleted) {
+                throw new Exception();
+            }
+
             $response = [
                 'title'   => 'Eliminación exitosa',
                 'message' => 'Se ha elimnado la solución de medición correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to('/admin/soluciones')->with('response', $response);
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la eliminación de la solución de medición',
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al tratar de eliminar la solución de medición, por favor intente nuevamente.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->back()->with('response', $response);
+            return redirect()->to('/admin/soluciones')->with('response', $response);
+        }
     }
 }

@@ -1,0 +1,35 @@
+@use '../01_settings/global' as *;
+@use '../01_settings/colors' as *;
+@use '../01_settings/fonts' as *;
+@use '../02_tools/breakpoints' as *;
+@use '../02_tools/mixins' as *;
+
+.jumbotron {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.25rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &__title {
+    z-index: 1;
+    margin: 0;
+    color: $color-white;
+    font-weight: $weight-bold;
+    text-align: center;
+    text-transform: uppercase;
+    @include fluid-text(2.4rem, 10.9375rem);
+  }
+
+  @include tablet {
+    padding: 7rem 1.25rem;
+  }
+
+  @include desktop {
+    padding: 10rem 1.25rem;
+  }
+}

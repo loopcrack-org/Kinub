@@ -30,4 +30,12 @@ class UserModel extends Model
 
         return $data;
     }
+
+    public function getUserDataToResendConfirmEmail(string $userId)
+    {
+        $userData              = $this->select('userEmail, userFirstName, userLastName')->find($userId);
+        $userData['userToken'] = (new UserTokenModel())->getNewUserToken($userId);
+
+        return $userData;
+    }
 }
