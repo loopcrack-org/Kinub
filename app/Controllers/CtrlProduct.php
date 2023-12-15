@@ -2,10 +2,28 @@
 
 namespace App\Controllers;
 
+use App\Classes\FileValidationConfig;
+use App\Classes\FileValidationConfigBuilder;
+use App\Models\CategoryModel;
 use App\Models\ProductModel;
 
-class CtrlProduct extends BaseController
+class CtrlProduct extends CtrlApiFiles
 {
+    protected FileValidationConfig $fileConfig;
+
+    public function __construct()
+    {
+        $configBuilder = new FileValidationConfigBuilder('/admin/products');
+        $configBuilder->builder('image')->isImage()->build();
+        // $configBuilder->builder('main image')->isImage()->build();
+        // $configBuilder->builder('video')->isVideo()->build();
+        // $configBuilder->builder('brochure')->isPDF()->build();
+        // $configBuilder->builder('product certificate')->isPDF()->build();
+        // $configBuilder->builder('user manual')->isPDF()->build();
+        // $configBuilder->builder('datasheet')->isPDF()->build();
+        $this->fileConfig = $configBuilder->getConfig();
+    }
+
     public function viewProducts()
     {
         $productModel = new ProductModel();
@@ -18,7 +36,16 @@ class CtrlProduct extends BaseController
 
     public function viewProductCreate()
     {
-        return view('admin/products/ProductCreate');
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        }
+
+        $categories = (new CategoryModel())->select(['categoryId', 'categoryName'])->findAll();
+
+        return view('admin/products/ProductCreate', [
+            'fileConfig' => $this->fileConfig->getClientConfig(),
+            'categories' => $categories,
+        ]);
     }
 
     public function viewProductEdit($id)
@@ -28,7 +55,9 @@ class CtrlProduct extends BaseController
 
     public function createProduct()
     {
-        return 'creating product...';
+        $data = $this->request->getPost()['product_description'];
+
+        return redirect()->back()->withInput();
     }
 
     public function updateProduct($id)
