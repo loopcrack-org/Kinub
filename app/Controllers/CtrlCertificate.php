@@ -45,9 +45,20 @@ class CtrlCertificate extends CtrlApiFiles
     public function viewCertificateEdit($id)
     {
         $certificateModel = new CertificateModel();
-        $certificate      = $certificateModel->select('certificateId, certificatefileName, fileRoute')->join('files', 'files.fileId = certificates.certificatePreviewId')->find($id);
+        $certificate      = $certificateModel->getCertificate($id);
 
-        return view('admin/certificates/CertificateEdit', ['certificate' => $certificate]);
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        } else {
+            $dataFiles['certificatePreviewId'] = [$certificate['previewUuid']];
+            $dataFiles['certificatefileId']    = [$certificate['certificateUuid']];
+            $this->fileConfig->setDataInClientConfig($dataFiles);
+        }
+
+        return view('admin/certificates/CertificateEdit', [
+            'certificate'    => $certificate,
+            'filepondConfig' => $this->fileConfig->getClientConfig(),
+        ]);
     }
 
     public function createCertificate()
@@ -94,16 +105,34 @@ class CtrlCertificate extends CtrlApiFiles
     public function updateCertificate(string $certificateId)
     {
         try {
-            $validateCertificate = new CertificateValidation();
-            $certificateData     = $this->request->getPost();
+            $certificateData = $this->request->getPost();
+
+            $validateCertificate  = new CertificateValidation();
+            $filesValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+            $validateCertificate->addRules($filesValidationRules['rules'], $filesValidationRules['messages']);
+
             if (! $validateCertificate->validateInputs($certificateData)) {
                 throw new InvalidInputException($validateCertificate->getErrors());
             }
 
-            $certificateData['certificatePreviewId'] = '1';
-            $certificateData['certificatefileId']    = '1';
+            $certificateModel = new CertificateModel();
+            $filesToSave      = $this->fileConfig->filterNewFilesInInputsFile($certificateData);
 
-            (new CertificateModel())->updateCertificate($certificateId, $certificateData);
+            $certificateData['certificatePreviewId'] = $filesToSave['certificatePreviewId'];
+            $certificateData['certificatefileId']    = $filesToSave['certificatefileId'];
+
+            $certificateModel->updateCertificate($certificateId, $certificateData);
+
+            foreach ($filesToSave as $files) {
+                FileManager::changeDirectoryCollectionFolder($files);
+            }
+
+            $filesToDelete = $this->fileConfig->getKeysFolderToDelete($certificateData);
+
+            foreach ($filesToDelete as $files) {
+                FileManager::deleteMultipleFoldersWithContent($files);
+            }
+
             $response = [
                 'title'   => 'Edición exitosa',
                 'message' => 'Se ha editado el certificado correctamente',
@@ -112,8 +141,12 @@ class CtrlCertificate extends CtrlApiFiles
 
             return redirect()->to('/admin/certificados')->with('response', $response);
         } catch (InvalidInputException $th) {
+            session()->setFlashdata('clientData', $this->request->getPost());
+
             return redirect()->back()->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
+            session()->setFlashdata('clientData', $this->request->getPost());
+
             $response = [
                 'title'   => '¡Oops! Ha ocurrido un error.',
                 'message' => 'Algo salio mal al editar el certificado. Por favor, inténtalo de nuevo.',
@@ -122,8 +155,6 @@ class CtrlCertificate extends CtrlApiFiles
 
             return redirect()->back()->withInput()->with('response', $response);
         }
-
-        return redirect()->to('/admin/certificados')->with('response', $response);
     }
 
     public function deleteCertificate()

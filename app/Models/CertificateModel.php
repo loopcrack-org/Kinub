@@ -35,15 +35,43 @@ class CertificateModel extends Model
     public function updateCertificate(string $certificateId, array $certificateData)
     {
         try {
-            $this->db->transStart();
+            $this->db->transException(true)->transStart();
+            $fileModel = new FileModel();
+
+            if (! empty($certificateData['certificatePreviewId'])) {
+                $certificateData['certificatePreviewId'] = $fileModel->insert(['uuid' => $certificateData['certificatePreviewId'][0]]);
+            } else {
+                unset($certificateData['certificatefileId']);
+            }
+
+            if (! empty($certificateData['certificatefileId'])) {
+                $certificateData['certificatefileId'] = $fileModel->insert(['uuid' => $certificateData['certificatefileId'][0]]);
+            } else {
+                unset($certificateData['certificatefileId']);
+            }
 
             $this->update($certificateId, $certificateData);
 
-            $this->db->transComplete();
+            if (isset($certificateData['delete-certificatePreviewId'])) {
+                $fileModel->where('uuid', $certificateData['delete-certificatePreviewId'][0])->delete();
+            }
+
+            if (isset($certificateData['delete-certificatefileId'])) {
+                $fileModel->where('uuid', $certificateData['delete-certificatefileId'][0])->delete();
+            }
+
+            $this->db->transCommit();
         } catch (Throwable $th) {
             $this->db->transRollback();
 
             throw $th;
         }
+    }
+
+    public function getCertificate($id)
+    {
+        return $this->select('certificates.certificateId, certificates.certificatefileName,
+                   preview.fileId AS previewFileId, preview.fileRoute AS previewFileRoute, preview.uuid AS previewUuid, preview.fileName AS previewFileName, preview.fileDirectoryRoute AS previewFileDirectoryRoute,
+                   certfile.fileId AS certificateFileId, certfile.fileRoute AS certificateFileRoute, certfile.uuid AS certificateUuid, certfile.fileName AS certificateFileName, certfile.fileDirectoryRoute AS certificateFileDirectoryRoute')->join('files as preview', 'certificates.certificatePreviewId = preview.fileId', 'left')->join('files as certfile', 'certificates.certificatefileId = certfile.fileId', 'left')->where('certificates.certificateId', $id)->first();
     }
 }
