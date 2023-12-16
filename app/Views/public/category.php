@@ -17,7 +17,7 @@
 <main class="category">
     <div class="category__grid">
 
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
@@ -27,7 +27,7 @@
             </div>
         </div> <!--product-->
 
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="https://tse3.mm.bing.net/th?id=OIP.ZTQLS9hW-oRg1SxK6at9TQHaFj&pid=Api&P=0&h=180" alt="" class="product__image">
             </div>
@@ -37,7 +37,7 @@
             </div>
         </div> <!--product-->
 
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="https://cdn-icons-png.flaticon.com/512/6152/6152273.png" alt="" class="product__image">
             </div>
@@ -47,7 +47,7 @@
             </div>
         </div> <!--product-->
 
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
@@ -57,7 +57,7 @@
             </div>
         </div> <!--product-->
 
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="https://tse4.mm.bing.net/th?id=OIP.1rHJUkntpmgWWtdbuK79TAHaDd&pid=Api&P=0&h=180" alt="" class="product__image">
             </div>
@@ -67,7 +67,7 @@
             </div>
         </div> <!--product-->
 
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="http://www.guiaspracticas.com/wp-content/uploads/image/2d-systems.jpg" alt="" class="product__image">
             </div>
@@ -76,7 +76,7 @@
                 <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png" alt="" class="product__image">
             </div>
@@ -85,7 +85,7 @@
                 <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
@@ -94,7 +94,7 @@
                 <a href="/product.php" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
-        <div class="product">
+        <div class="product box-shadow--blue">
             <div class="product__image-container">
                 <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>

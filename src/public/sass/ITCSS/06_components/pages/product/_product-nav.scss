@@ -11,7 +11,7 @@
   top: $navbar-mobile-height;
   display: flex;
   width: 100%;
-  max-width: 130rem;
+  max-width: 156rem;
   flex-direction: column;
   margin: $spacing-xxl 0 0 auto;
   background-color: $brand-color;
@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: center;
     padding: $spacing-sm 0.3125rem;
-    border-bottom: 0.125rem solid $color-white;
+    border-bottom: 0.09375rem solid $color-white;
     text-decoration: none;
     transition: background-color 500ms ease-in-out;
 

@@ -15,7 +15,7 @@
   transition: transform 0.3s ease-in-out;
 
   .custom-select-opener {
-    padding: 0.65rem;
+    padding: 0.6rem;
     padding-left: 0.8rem;
     background: transparent;
     @include fluid-text(0.9rem, 1rem, 0.9vw);
@@ -23,10 +23,10 @@
     font-weight: $weight-light;
     white-space: wrap;
     @include tablet {
-      padding: 1rem;
+      padding: 0.9rem;
     }
     @include desktopXXL {
-      padding: 1.1rem;
+      padding: 1.3rem;
     }
   }
 

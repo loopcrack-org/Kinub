@@ -60,7 +60,7 @@
       $color-white,
       $color-aqua-blue
     );
-    padding: 0.2rem 0.5rem;
+    padding: 0.37rem 0.5rem;
 
     font-weight: $weight-medium;
     transition-duration: 300ms;
@@ -74,13 +74,6 @@
     }
   }
 
-  &:hover {
-    box-shadow:
-      0.1875rem 0.1875rem 0 0 color.adjust($color-aqua-blue, $lightness: 5%),
-      0.1875rem (-0.1875rem) 0 0 color.adjust($color-aqua-blue, $lightness: 5%),
-      (-0.1875rem) 0.1875rem 0 0 color.adjust($color-aqua-blue, $lightness: 5%),
-      (-0.1875rem) (-0.1875rem) 0 0 color.adjust($color-aqua-blue, $lightness: 5%);
-  }
   @include desktop {
     padding: 1rem;
   }

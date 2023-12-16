@@ -17,7 +17,7 @@
   background: linear-gradient(to bottom right, $brand-color, $color-cyan-blue);
   box-shadow: $color-gray-80 0rem 0.2rem 0.5rem;
   color: $color-white;
-  gap: 1.6svh;
+  gap: 2.5svh;
   @include fold {
     padding: 1.5rem;
   }
@@ -28,6 +28,7 @@
   @include tablet {
     padding: 2.2rem;
     margin: 4rem;
+    margin-top: 0;
   }
   @include desktop {
     padding: 3rem;
@@ -37,7 +38,6 @@
     margin-left: auto;
   }
   &__grid {
-    padding-bottom: 1rem;
     @include grid(1, 1rem);
     @include desktop {
       @include grid(2, 1.1rem);
@@ -66,6 +66,7 @@
   }
 
   &__legend {
+    margin-bottom: 0;
     text-transform: capitalize;
     @include fluid-text(1.5rem, 3rem, 8vw);
   }
@@ -124,7 +125,7 @@
       color: $color-white;
     }
     @include tablet {
-      padding: 1.12rem;
+      padding: 1.13rem;
       font-size: 0.9em;
     }
     @include desktopXXL {
@@ -150,13 +151,21 @@
   }
 
   &__submit {
-    @include btn($color-white, $color-light-blue, $color-white, $color-aqua-blue);
     align-self: flex-end;
-    padding: 0.7rem 2rem 0.7rem 2rem;
+    padding: 0.4rem 1.7rem 0.4rem 1.7rem;
+    border: none;
     border-radius: 1.5rem;
-
+    background: radial-gradient(100% 100% at 100% 0, $color-cyan-blue 0, $color-bright-blue 100%);
+    color: $color-white;
+    cursor: pointer;
     font-size: 1rem;
-
+    font-weight: $weight-bold;
+    &:hover {
+      background: $color-brand-secondary-dark;
+    }
+    @include phoneXL {
+      padding: 0.5rem 2rem 0.5rem 2rem;
+    }
     @include tablet {
       width: 21rem;
       align-self: center;

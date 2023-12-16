@@ -237,7 +237,7 @@
 
 
 
-<section id="form">
+<section id="form" class="u-form-home">
     <?php
     $response = session()->get('response');
 if (isset($response)) :
