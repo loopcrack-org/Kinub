@@ -2,7 +2,7 @@
 
 <head>
 
-    <?php echo view('partials/title-meta', array('title' => 'Olvide mi contraseña')); ?>
+    <?= view('partials/title-meta', ['title' => 'Olvidé mi contraseña']); ?>
 
     <?= $this->include('partials/head-css') ?>
 
@@ -26,9 +26,11 @@
         <div class="auth-page-content">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center mb-4 text-white-50">
-                            <img class="d-inline-block auth-logo" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
+                    <div class="text-center mt-sm-5 mb-4 text-white-50">
+                        <div>
+                            <a href="login" class="d-inline-block auth-logo bg-white p-4 rounded-circle  ">
+                                <img class="d-inline-block auth-logo" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -38,8 +40,8 @@
                         <div class="card mt-4">
                             <?php
                             $response = session()->get('response');
-                            if ($response) { ?>
-                                <?= view("login/response", ['response' => $response]) ?>
+if ($response) { ?>
+                                <?= view('login/response', ['response' => $response]) ?>
                             <?php } else { ?>
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
@@ -60,11 +62,11 @@
                                         <form action="/password_reset" method="post">
                                             <div class="mb-4">
                                                 <label class="form-label">Correo</label>
-                                                <input type="email" class="form-control <?= isset($errors["email"]) ? 'is-invalid' : '' ?>" id="email" placeholder="Ej: johnson@gmail.com" name="email" required value=<?= old("email") ?>>
+                                                <input type="email" class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" id="email" placeholder="Ej: johnson@gmail.com" name="email" required value=<?= old('email') ?>>
 
-                                                <?php if (isset($errors["email"])) : ?>
+                                                <?php if (isset($errors['email'])) : ?>
                                                     <div class="invalid-feedback">
-                                                        <?= $errors["email"] ?>
+                                                        <?= $errors['email'] ?>
                                                     </div>
                                                 <?php endif ?>
                                             </div>
