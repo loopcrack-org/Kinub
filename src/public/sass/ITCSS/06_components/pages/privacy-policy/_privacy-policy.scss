@@ -1,0 +1,25 @@
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.privacy-policy {
+  &__heading {
+    color: $color-aqua-blue;
+  }
+
+  &__text {
+    color: $color-gray-50;
+    font-size: 1.2rem;
+    font-weight: $weight-normal;
+    line-height: 1.4;
+    text-align: justify;
+  }
+
+  &__wrapper {
+    max-width: 50%;
+    padding: max(0.5rem, 3svh) 0;
+    margin: auto;
+  }
+}
