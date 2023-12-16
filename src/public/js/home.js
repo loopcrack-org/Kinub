@@ -3,9 +3,6 @@ import Plyr from 'plyr';
 import Swal from 'sweetalert2';
 
 import Swiper from 'swiper/bundle';
-
-// import styles bundle
-
 // init Swiper:
 new Swiper('.swiper', {
   // Optional parameters

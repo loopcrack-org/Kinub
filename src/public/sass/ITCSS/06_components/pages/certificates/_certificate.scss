@@ -43,6 +43,9 @@
     box-shadow: color.adjust($color-gray, $alpha: -0.9) 0.4375rem 0.5rem 0.4375rem;
     object-fit: cover;
     transition: all 500ms ease;
+    &:hover {
+      box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
+    }
   }
 
   @include fold {
