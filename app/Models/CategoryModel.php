@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\Exceptions\DatabaseException;
 use CodeIgniter\Model;
 use Throwable;
 
@@ -62,6 +63,25 @@ class CategoryModel extends Model
             (new CategoryModel())->update($categoryId, $categoryData);
             $this->db->transComplete();
         } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
+
+    public function deleteCategory(string $categoryId)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+            $categoryData = $this->find($categoryId);
+            $this->delete($categoryId);
+
+            $fileModel = new FileModel();
+            $fileModel->delete($categoryData['categoryImageId']);
+            $fileModel->delete($categoryData['categoryIconId']);
+
+            $this->db->transCommit();
+        } catch (DatabaseException $th) {
             $this->db->transRollback();
 
             throw $th;
