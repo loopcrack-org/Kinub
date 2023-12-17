@@ -26,7 +26,7 @@
                         </a>
                     </div>
 
-                    <?= $this->include('admin/products/productsFormTemplate', ['fileConfig' => $fileConfig]) ?>
+                    <?= $this->include('admin/products/productsFormTemplate', ['fileConfig' => $fileConfig, 'categories' => $categories]) ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
@@ -50,4 +50,6 @@
 <script src="/assets/admin/js/alertElement.min.js"></script>
 <script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <script src="/assets/admin/js/wysiwyg-general-config.min.js"></script>
+<script src="/assets/admin/js/choices.min.js"></script>
+<script src="/assets/admin/js/keyValueInput.min.js"></script>
 <?= $this->endSection() ?>

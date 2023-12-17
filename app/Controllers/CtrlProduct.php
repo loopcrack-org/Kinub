@@ -14,13 +14,13 @@ class CtrlProduct extends CtrlApiFiles
     public function __construct()
     {
         $configBuilder = new FileValidationConfigBuilder('/admin/products');
+        $configBuilder->builder('main_image')->isImage()->build();
         $configBuilder->builder('image')->isImage()->build();
-        // $configBuilder->builder('main image')->isImage()->build();
-        // $configBuilder->builder('video')->isVideo()->build();
-        // $configBuilder->builder('brochure')->isPDF()->build();
-        // $configBuilder->builder('product certificate')->isPDF()->build();
-        // $configBuilder->builder('user manual')->isPDF()->build();
-        // $configBuilder->builder('datasheet')->isPDF()->build();
+        $configBuilder->builder('video')->isVideo()->build();
+        $configBuilder->builder('brochure')->isPDF()->build();
+        $configBuilder->builder('product_certificate')->isPDF()->build();
+        $configBuilder->builder('user_manual')->isPDF()->build();
+        $configBuilder->builder('datasheet')->isPDF()->build();
         $this->fileConfig = $configBuilder->getConfig();
     }
 
@@ -55,7 +55,7 @@ class CtrlProduct extends CtrlApiFiles
 
     public function createProduct()
     {
-        $data = $this->request->getPost()['product_description'];
+        $data = $this->request->getPost();
 
         return redirect()->back()->withInput();
     }
