@@ -17,8 +17,8 @@ class CtrlCertificate extends CtrlApiFiles
     public function __construct()
     {
         $fileConfigBuilder = new FileValidationConfigBuilder('/admin/certificados');
-        $fileConfigBuilder->builder('certificatePreviewId')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(1000, 1500)->build();
-        $fileConfigBuilder->builder('certificatefileId')->minFiles(1)->maxFiles(1)->maxSize(30, 'MB')->isPDF()->build();
+        $fileConfigBuilder->builder('certificatePreview')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(700, 700)->build();
+        $fileConfigBuilder->builder('certificatefile')->minFiles(1)->maxFiles(1)->maxSize(30, 'MB')->isPDF()->build();
 
         $this->fileConfig = $fileConfigBuilder->getConfig();
     }
@@ -64,8 +64,8 @@ class CtrlCertificate extends CtrlApiFiles
             }
 
             (new CertificateModel())->createCertificate($certificateData);
-            FileManager::changeDirectoryCollectionFolder($certificateData['certificatePreviewId']);
-            FileManager::changeDirectoryCollectionFolder($certificateData['certificatefileId']);
+            FileManager::changeDirectoryCollectionFolder($certificateData['certificatePreview']);
+            FileManager::changeDirectoryCollectionFolder($certificateData['certificatefile']);
 
             $response = [
                 'title'   => 'Creación exitosa',

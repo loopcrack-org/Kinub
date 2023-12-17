@@ -19,8 +19,8 @@ class CertificateModel extends Model
 
             $fileModel = new FileModel();
 
-            $certificateData['certificatePreviewId'] = $fileModel->insert(['uuid' => $certificateData['certificatePreviewId'][0]]);
-            $certificateData['certificatefileId']    = $fileModel->insert(['uuid' => $certificateData['certificatefileId'][0]]);
+            $certificateData['certificatePreviewId'] = $fileModel->insert(['uuid' => $certificateData['certificatePreview'][0]]);
+            $certificateData['certificatefileId']    = $fileModel->insert(['uuid' => $certificateData['certificatefile'][0]]);
 
             $this->insert($certificateData);
 
