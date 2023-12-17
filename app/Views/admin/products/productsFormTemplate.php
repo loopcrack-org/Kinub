@@ -36,29 +36,27 @@
                             <label class="card-text">Agrega aquí las especificaciones</label>
                         </div>
                         <div class="mx-auto col-12 col-sm-5 col-md-4 col-l-3 row gap-3 justify-content-end">
-                            <button id="keyValueButtonAdd" type="button" class="btn btn-sm btn-success col"
+                            <div id="keyValueButtonAdd" class="btn btn-sm btn-success col"
                                 data-bs-toggle="tooltip"
                                 data-bs-placement="top"
                                 data-bs-title="Agrega un fila Clave-Valor"
                                 data-bs-custom-class="custom-tooltip"
-                            >Agregar</button>
+                            >Agregar</div>
                         </div>
                     </div>
                     <div class="keyValue row justify-content-center px-1">
                         <?php foreach(old('technicalInfo') ?? [] as $key => $value):?>
                         <div class="keyValueRow row gap-3 align-items-center p-2">
                             <div class="col col-sm-auto p-0 mt-0">
-                                <button
-                                    id="keyValueButtonDelete"
-                                    type="button"
-                                    class="btn btn-danger col"
+                                <div
+                                    class="btn btn-danger col keyValueButtonDelete"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
                                     data-bs-title="Elimina esta fila Clave-Valor"
                                     data-bs-custom-class="custom-tooltip"
                                 >
                                     <i class="ri-delete-bin-2-line"></i>
-                                </button>
+                                </div>
                             </div>
                             <div class="col-12 col-sm input-group p-0 my-auto">
                                 <div class="input-group-text">Clave:</div>

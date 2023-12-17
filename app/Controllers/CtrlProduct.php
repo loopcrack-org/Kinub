@@ -55,7 +55,16 @@ class CtrlProduct extends CtrlApiFiles
 
     public function createProduct()
     {
-        $data = $this->request->getPost();
+        $passed = false;
+        if ($passed) {
+            $response = [
+                'title'   => 'Creación exitosa',
+                'message' => 'Se ha creado el producto correctamente',
+                'type'    => 'success',
+            ];
+
+            return redirect()->to('/admin/productos')->with('response', $response);
+        }
 
         return redirect()->back()->withInput();
     }

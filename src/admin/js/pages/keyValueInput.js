@@ -15,7 +15,7 @@ function addRow() {
   // create input check section
   const keyValueDeleteButtonContainer = document.createElement('DIV');
   keyValueDeleteButtonContainer.classList.add('col', 'col-sm-auto', 'p-0', 'mt-0');
-  const keyValueDeleteButton = document.createElement('BUTTON');
+  const keyValueDeleteButton = document.createElement('DIV');
   keyValueDeleteButton.classList.add(
     'btn',
     'btn-danger',
@@ -62,6 +62,7 @@ function addRow() {
 }
 
 function deleteRow(element) {
+  console.log('hey');
   element.remove();
 }
 
