@@ -46,10 +46,7 @@
                 <h4 class="card-title mb-0">Icono</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <input type="file" class="filepond" name="icon">
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['icon']]) ?>
         </div>
         <!-- end card -->
     </div>
@@ -64,10 +61,7 @@
                 <h4 class="card-title mb-0">Imagen de fondo</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <input type="file" class="filepond" name="image">
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['image']]) ?>
         </div>
         <!-- end card -->
     </div>
