@@ -50,8 +50,8 @@ class CtrlCertificate extends CtrlApiFiles
         if (session()->has('clientData')) {
             $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
         } else {
-            $dataFiles['certificatePreviewId'] = [$certificate['previewUuid']];
-            $dataFiles['certificatefileId']    = [$certificate['certificateUuid']];
+            $dataFiles['certificatePreview'] = [$certificate['previewUuid']];
+            $dataFiles['certificatefile']    = [$certificate['certificateUuid']];
             $this->fileConfig->setDataInClientConfig($dataFiles);
         }
 
@@ -118,8 +118,8 @@ class CtrlCertificate extends CtrlApiFiles
             $certificateModel = new CertificateModel();
             $filesToSave      = $this->fileConfig->filterNewFilesInInputsFile($certificateData);
 
-            $certificateData['certificatePreviewId'] = $filesToSave['certificatePreviewId'];
-            $certificateData['certificatefileId']    = $filesToSave['certificatefileId'];
+            $certificateData['certificatePreviewId'] = $filesToSave['certificatePreview'];
+            $certificateData['certificatefileId']    = $filesToSave['certificatefile'];
 
             $certificateModel->updateCertificate($certificateId, $certificateData);
 
