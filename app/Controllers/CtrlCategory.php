@@ -132,4 +132,26 @@ class CtrlCategory extends BaseController
             return redirect()->to("/admin/categorias/editar/{$categoryId}")->withInput()->with('response', $response);
         }
     }
+
+    public function deleteCategory()
+    {
+        try {
+            $categoryId = $this->request->getPost('categoryId') ?? '';
+
+            (new CategoryModel())->deleteCategory($categoryId);
+            $response = [
+                'title'   => 'Eliminación exitosa',
+                'message' => 'La categoría ha sido eliminada correctamente',
+                'type'    => 'success',
+            ];
+        } catch (Throwable $th) {
+            $response = [
+                'title'   => 'Oops! Ha ocurrido un error.',
+                'message' => 'Ha ocurrido un error al eliminar los datos de la categoría, por favor intente nuevamente.',
+                'type'    => 'error',
+            ];
+        }
+
+        return redirect()->to('admin/categorias')->with('response', $response);
+    }
 }

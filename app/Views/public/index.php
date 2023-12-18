@@ -82,6 +82,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
+                    <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #1b90c7;"></div>
                 </div>
             </div>
             <div class="swiper-slide">
@@ -110,6 +111,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
+                    <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #0174f6;"></div>
                 </div>
             </div>
             <div class="swiper-slide">
@@ -162,6 +164,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
+                     <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #186d96;" ></div>
                 </div>
             </div>
             <div class="swiper-slide">
@@ -196,6 +199,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
+                    <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #0032ab;"></div>
                 </div>
             </div>
               <div class="swiper-slide">
@@ -224,6 +228,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
+                     <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #58b5e0;"></div>
                 </div>
             </div>
 
