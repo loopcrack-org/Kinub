@@ -35,9 +35,6 @@
   &__main-video {
     width: 100%;
     object-fit: contain;
-    &:hover {
-      cursor: zoom-in;
-    }
   }
 
   @include tablet() {
