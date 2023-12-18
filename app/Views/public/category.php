@@ -23,7 +23,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
@@ -33,7 +33,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
@@ -43,7 +43,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
@@ -53,7 +53,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
@@ -63,7 +63,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
 
@@ -73,7 +73,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
         <div class="product kinub-card">
@@ -82,7 +82,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
         <div class="product kinub-card">
@@ -91,7 +91,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
         <div class="product kinub-card">
@@ -100,7 +100,7 @@
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
-                <a href="/product.php" class="product__button">Ver más</a>
+                <a href="/producto" class="product__button">Ver más</a>
             </div>
         </div> <!--product-->
     </div>
