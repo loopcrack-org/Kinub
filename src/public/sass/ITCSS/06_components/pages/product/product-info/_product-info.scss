@@ -8,15 +8,14 @@
 .product-info {
   width: 90%;
   max-width: 75rem;
-  margin: $spacing-lg auto;
-  scroll-margin-top: 8.125rem;
-
+  margin: 2.7rem auto 2.5rem;
+  scroll-margin-top: 11rem;
   &__heading {
     margin: 0 0 0.625rem 0;
     text-align: left;
     text-transform: capitalize;
     transition: color 1000ms ease-in-out;
-    @include fluid-text(1.8rem, 5rem);
+    @include fluid-text(1.8rem, 3rem);
 
     &--description {
       color: $color-sky-blue;
@@ -42,6 +41,7 @@
 
     &--tech-info {
       padding-top: 0;
+      padding-bottom: 1.5rem;
       border-top: 0.25rem solid $color-bright-blue;
     }
 
@@ -54,7 +54,7 @@
   &__text {
     margin: 0.9375rem 0 -0.625rem 0;
     color: color.adjust($color-gray-60, $lightness: 5%);
-    font-size: 1.25rem;
+    font-size: 0.8rem;
     line-height: 1.4;
 
     &--title {
@@ -65,6 +65,11 @@
 
   &__video-container {
     margin: $spacing-xxl auto 0 auto;
+  }
+
+  @include phone() {
+    font-size: 0.9rem;
+    scroll-margin-top: 8.125rem;
   }
 
   @include tablet() {
@@ -95,18 +100,18 @@
     }
 
     &__text {
-      font-size: 1.5625rem;
+      font-size: 1.2rem;
     }
 
     &__video-container {
-      max-width: 80%;
-      margin: 4rem auto 0 auto;
+      max-width: 60%;
+      margin: 6rem auto 0 auto;
     }
   }
 
   @include desktop() {
     &__text {
-      font-size: 2.2rem;
+      font-size: 1.4rem;
     }
   }
 
