@@ -103,6 +103,8 @@
   }
 
   &__textarea {
+    overflow: hidden;
+    min-height: 6.25rem;
     border-radius: 1.8cqmax;
   }
 
@@ -114,7 +116,7 @@
     color: $color-white;
     font-size: 0.7em;
     font-weight: $weight-light;
-    resize: none;
+    resize: vertical;
     transition: border-color 200ms;
     &:focus {
       border-color: $color-bright-blue;
