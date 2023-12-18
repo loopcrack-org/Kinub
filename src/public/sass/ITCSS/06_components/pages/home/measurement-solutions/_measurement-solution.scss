@@ -107,12 +107,12 @@
   visibility: hidden;
 }
 
-.measurement-solution::after {
+.measurement-solution__bottom-highlight {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: $spacing-md;
-  content: '';
+  background: var(--bottom-highlight-color);
 }
 .measurement-solution:hover {
   color: $color-white;
@@ -193,12 +193,12 @@
   .measurement-solution__icon {
     width: 40%;
   }
-  .measurement-solution::after {
+  .measurement-solution__bottom-highlight {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: $spacing-lg;
-    content: '';
+    background: var(--bottom-highlight-color);
   }
 }
 
@@ -219,13 +219,5 @@
 @include desktopXXL {
   .measurement-solution__icon {
     width: 39%;
-  }
-}
-
-// Apply the background colors to ::after pseudo-elements based on nth-child
-@for $i from 1 through list.length($color-sequence-measurement-solution) {
-  /* stylelint-disable-next-line plugin/selector-bem-pattern */
-  .swiper-slide:nth-child(4n + #{$i}) .measurement-solution::after {
-    background-color: list.nth($color-sequence-measurement-solution, $i);
   }
 }
