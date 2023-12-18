@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Exception;
 use Throwable;
 
 class CertificateModel extends Model
@@ -58,6 +59,32 @@ class CertificateModel extends Model
 
             if (isset($certificateData['delete-certificatefileId'])) {
                 $fileModel->where('uuid', $certificateData['delete-certificatefileId'][0])->delete();
+            }
+
+            $this->db->transCommit();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
+
+    public function deleteCertificate(array $certificate)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+            $isDeleted = $this->delete($certificate['certificateId']);
+            if (! $isDeleted) {
+                throw new Exception();
+            }
+
+            $fileModel = new FileModel();
+
+            $queryWhere = "uuid={$this->escape($certificate['previewUuid'])} OR uuid={$this->escape($certificate['certificateUuid'])}";
+            $isDeleted  = $fileModel->where($queryWhere)->delete();
+
+            if (! $isDeleted) {
+                throw new Exception();
             }
 
             $this->db->transCommit();

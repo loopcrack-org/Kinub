@@ -8,6 +8,7 @@ use App\Exceptions\InvalidInputException;
 use App\Models\CertificateModel;
 use App\Utils\FileManager;
 use App\Validation\CertificateValidation;
+use Exception;
 use Throwable;
 
 class CtrlCertificate extends CtrlApiFiles
@@ -159,21 +160,26 @@ class CtrlCertificate extends CtrlApiFiles
 
     public function deleteCertificate()
     {
-        $certificateId    = $this->request->getPost('certificateId');
-        $certificateModel = new CertificateModel();
-        $certificate      = $certificateModel->find($certificateId);
-        $isDeleted        = false;
-        if (! empty($certificate)) {
-            $isDeleted = $certificateModel->delete($certificateId);
-        }
+        try {
+            $certificateId    = $this->request->getPost('certificateId');
+            $certificateModel = new CertificateModel();
+            $certificate      = $certificateModel->getCertificate($certificateId);
 
-        if ($isDeleted) {
+            if (empty($certificate)) {
+                throw new Exception();
+            }
+
+            $certificateModel->deleteCertificate($certificate);
+
+            FileManager::deleteMultipleFoldersWithContent([$certificate['previewUuid']]);
+            FileManager::deleteMultipleFoldersWithContent([$certificate['certificateUuid']]);
+
             $response = [
                 'title'   => 'Eliminación exitosa',
                 'message' => 'Se ha elimnado el certificado correctamente',
                 'type'    => 'success',
             ];
-        } else {
+        } catch (Throwable $th) {
             $response = [
                 'title'   => 'Eliminación fallida',
                 'message' => 'Algo salió mal al eliminar el certificado. Por favor, inténtalo de nuevo.',
