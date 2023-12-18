@@ -15,7 +15,7 @@ class EmailModel extends Model
 
     protected function setCreatedAt(array $data)
     {
-        $data['data']['createdAt'] = date('y-m-d');
+        $data['data']['createdAt'] = date('y-m-d H:i:m');
 
         return $data;
     }
