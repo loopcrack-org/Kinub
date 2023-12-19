@@ -77,7 +77,7 @@ class CtrlCertificate extends CtrlApiFiles
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $certificateData);
 
-            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+            return redirect()->to('/admin/certificados/crear')->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $certificateData);
 
@@ -87,7 +87,7 @@ class CtrlCertificate extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->back()->withInput()->with('response', $response);
+            return redirect()->to('/admin/certificados/crear')->withInput()->with('response', $response);
         }
     }
 
