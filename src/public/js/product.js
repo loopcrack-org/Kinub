@@ -31,7 +31,7 @@ sections.forEach((section, index) => {
   }
 
   if (index === sections.length - 1) {
-    triggerHookValue = 0.7;
+    triggerHookValue = 0.72;
   }
 
   new ScrollMagic.Scene({
