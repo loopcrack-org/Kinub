@@ -5,6 +5,8 @@
 @use '../02_tools/mixins' as *;
 
 .footer {
+  position: relative;
+  z-index: 1;
   display: flex;
   height: var(--footer-height);
   align-items: center;
@@ -13,6 +15,7 @@
   margin-top: auto;
   background-color: $color-footer;
   box-shadow: 0rem -0.625rem 1.875rem color.adjust($color-black, $alpha: -0.75);
+
   @include desktop() {
     padding: $spacing-lg 5vw;
   }

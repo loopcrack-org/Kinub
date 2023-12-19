@@ -1,0 +1,77 @@
+@use 'sass:color';
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+@use '../../../../02_tools/breakpoints' as *;
+
+.sidebar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  min-width: 15.625rem;
+  height: 100%;
+  margin-top: $navbar-mobile-height;
+  background-color: color.adjust($color-gray, $lightness: 43%);
+  box-shadow: $base-box-shadow;
+  transform: translateX(-16rem);
+  transition:
+    transform 300ms ease-in-out,
+    visibility 300ms ease-in-out;
+  visibility: hidden;
+
+  &--active {
+    transform: translateX(0);
+    visibility: visible;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 15.625rem;
+    width: 150vh;
+    height: 100%;
+    background-color: rgb($color-black, 0.55);
+
+    @include desktop() {
+      all: unset;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 0.875rem;
+    margin-bottom: 1.5625rem;
+  }
+
+  &__title {
+    color: color.adjust($color-bright-blue, $lightness: -15%);
+    font-size: 1.875rem;
+    font-weight: $weight-bold;
+  }
+
+  &__close {
+    cursor: pointer;
+
+    @include desktop() {
+      display: none;
+    }
+  }
+
+  &__menu-bar {
+    width: 100%;
+  }
+
+  @include tablet() {
+    margin-top: $navbar-desktop-height;
+  }
+  @include desktop() {
+    position: static;
+    min-height: 132vh;
+    margin-top: 0;
+    transform: translateX(0);
+    visibility: visible;
+  }
+}

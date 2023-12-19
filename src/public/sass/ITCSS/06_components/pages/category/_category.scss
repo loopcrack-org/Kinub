@@ -4,6 +4,7 @@
 @use '../../../01_settings/fonts' as *;
 @use '../../../02_tools/breakpoints' as *;
 @use '../../../02_tools/mixins' as *;
+
 .category {
   &__grid {
     max-width: 90%;
@@ -15,6 +16,9 @@
       margin-top: 4.125rem;
       row-gap: 1.25rem;
     }
+    @include desktop() {
+      margin-right: 6.25rem;
+    }
   }
 
   &__heading {
@@ -23,5 +27,10 @@
     font-size: 3.75rem;
     font-weight: $weight-boldest;
     text-align: center;
+  }
+
+  @include desktop() {
+    display: flex;
+    gap: 6.25rem;
   }
 }
