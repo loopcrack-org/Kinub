@@ -8,13 +8,17 @@
 .category {
   &__grid {
     max-width: 90%;
-    margin: 3.125rem auto 3.125rem auto;
+    margin: 1.2rem auto 2rem auto;
     @include grid(2, 0.9375rem);
-
-    @include tablet {
-      @include flex-columns(3, 1.25rem, 1.5625rem);
-      margin-top: 4.125rem;
-      row-gap: 1.25rem;
+    @include phone {
+      @include flex-columns(3, 1rem, 1rem);
+    }
+    @include desktop {
+      margin-top: 1.4rem;
+      @include flex-columns(4, 1.25rem, 1.5625rem);
+    }
+    @include desktopXL {
+      @include flex-columns(5, 1.25rem, 1.5625rem);
     }
     @include desktop() {
       margin-right: 6.25rem;

@@ -1,13 +1,10 @@
 @use '../../../02_tools/mixins' as *;
 @use '../../../02_tools/breakpoints' as *;
 .certificates {
+  margin-bottom: 2rem;
   &__heading {
     margin: 3rem;
     margin-top: 1rem;
-    @include tablet {
-      margin: 2rem;
-      margin-bottom: 4rem;
-    }
   }
 
   &__grid {
@@ -21,8 +18,11 @@
     @include tablet {
       @include flex-columns(3, 1rem, 2rem);
     }
-    @include desktop {
-      @include flex-columns(3, 3rem, 3rem);
+    @include desktopXL {
+      @include flex-columns(4, 2rem, 4rem);
     }
+  }
+  @include tablet {
+    margin-bottom: 3rem;
   }
 }
