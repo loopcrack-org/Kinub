@@ -33,18 +33,14 @@ class MeasurementSolutionModel extends Model
 
     public function getMeasurementSolutionDataWithFiles(string $msId)
     {
-        try {
-            $msData = $this->find($msId);
+        $msData = $this->find($msId);
 
-            $fileModel = new FileModel();
+        $fileModel = new FileModel();
 
-            $msData['msIcon']  = $fileModel->select('uuid')->where('fileId', $msData['msIconId'] ?? '')->first()['uuid'] ?? '';
-            $msData['msImage'] = $fileModel->select('uuid')->where('fileId', $msData['msImageId'] ?? '')->first()['uuid'] ?? '';
+        $msData['msIcon']  = $fileModel->select('uuid')->where('fileId', $msData['msIconId'] ?? '')->first()['uuid'] ?? '';
+        $msData['msImage'] = $fileModel->select('uuid')->where('fileId', $msData['msImageId'] ?? '')->first()['uuid'] ?? '';
 
-            return $msData;
-        } catch (Throwable $th) {
-            throw $th;
-        }
+        return $msData;
     }
 
     public function updateMeasurementSolution(string $msId, array $msData)
@@ -92,6 +88,8 @@ class MeasurementSolutionModel extends Model
 
             return $this->db->transCommit();
         } catch (Throwable $th) {
+            $this->db->transRollback();
+
             throw $th;
         }
     }

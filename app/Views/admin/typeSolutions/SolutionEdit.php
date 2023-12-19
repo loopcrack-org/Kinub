@@ -24,7 +24,8 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
-                <form id="form" autocomplete="off" class="needs-validation" novalidate method="POST">
+
+                <form id="form" autocomplete="off" class="needs-validation" method="POST">
 
                     <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
 

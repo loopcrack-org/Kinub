@@ -29,10 +29,9 @@
                         ?>
                     <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
                 <?php } ?>
-                <?php $errors = session()->get('errors'); ?>
-                <form id="form" autocomplete="off" class="needs-validation" novalidate method="POST">
+                <form id="form" autocomplete="off" class="needs-validation" method="POST">
 
-                    <?= view('admin/typeSolutions/solutionsFormTemplate', ['errors' => $errors]) ?>
+                    <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
