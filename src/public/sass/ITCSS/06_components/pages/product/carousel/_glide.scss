@@ -7,7 +7,6 @@
   position: relative;
   width: 100%;
   box-sizing: border-box;
-  padding: $spacing-md 0;
 
   &__track {
     overflow: hidden;
@@ -133,6 +132,8 @@
   }
 
   @include fold() {
+    padding: $spacing-sm 0;
+
     &__track {
       max-height: 12rem;
       margin-bottom: 1rem;
@@ -148,6 +149,8 @@
   }
 
   @include phone() {
+    padding: $spacing-md 0;
+
     &__track {
       max-height: 15rem;
     }

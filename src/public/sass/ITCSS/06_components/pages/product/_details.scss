@@ -8,7 +8,6 @@
 .details {
   width: 100%;
   max-width: 90%;
-  margin: 1.5rem auto;
 
   &__grid {
     position: relative;
@@ -86,9 +85,17 @@
     }
   }
 
+  @include fold {
+    margin: 2rem auto;
+  }
+
+  @include phone {
+    margin: 2.8rem auto;
+  }
+
   @include desktop() {
     height: 20rem;
-    margin: 2rem auto;
+    margin: 3rem auto;
 
     &__heading {
       &--mobile {
