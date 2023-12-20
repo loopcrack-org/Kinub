@@ -50,7 +50,7 @@ particlesJS('auth-particles', {
       },
     },
     size: {
-      value: 10,
+      value: 6,
       random: false,
       anim: {
         enable: false,
