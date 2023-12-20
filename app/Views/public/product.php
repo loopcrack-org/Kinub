@@ -42,17 +42,14 @@
                     <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
                         <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://www.totalmentereflejante.com/wp-content/uploads/2021/03/Medidor-de-espesores.jpg">
+                        <img class="slide-media glide__slide-media" src="https://www.totalmentereflejante.com/wp-content/uploads/2021/03/Medidor-de-espesores.jpg" alt="Imagen Grande">
                     </li>
                     <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
                         <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                    <li class="glide__slide" data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCWQVS1EYceqxvr8rgCxm8Q1L9htUoZCRVnw&usqp=CAU">
+                        <img class="slide-media glide__slide-media" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCWQVS1EYceqxvr8rgCxm8Q1L9htUoZCRVnw&usqp=CAU" alt="Imagen Grande">
                     </li>
                 </ul>
             </div>

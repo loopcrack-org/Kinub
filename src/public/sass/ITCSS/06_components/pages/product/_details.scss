@@ -8,14 +8,14 @@
 .details {
   width: 100%;
   max-width: 90%;
-  margin: 1.875rem auto;
+  margin: 1.5rem auto;
 
   &__grid {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $spacing-lg;
+    gap: $spacing-sm;
   }
 
   &__info {
@@ -25,7 +25,7 @@
   &__heading {
     display: none;
     margin: 0;
-    @include fluid-text(2rem, 3rem);
+    @include fluid-text(1rem, 2rem);
     font-weight: $weight-bolder;
     line-height: 1;
     text-transform: capitalize;
@@ -46,7 +46,8 @@
 
   &__data {
     margin: 0;
-    font-size: 1.25rem;
+    font-size: 0.8rem;
+    line-height: $base-line-height;
 
     &--title {
       margin: 0;
@@ -71,16 +72,12 @@
   }
 
   @include tablet() {
-    &__heading {
-      @include fluid-text(2rem, 2.5rem);
-    }
-
     &__data-container {
       margin: 1rem 0;
     }
 
     &__data {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       line-height: $base-line-height;
     }
 
@@ -90,8 +87,8 @@
   }
 
   @include desktop() {
-    height: 40rem;
-    margin: 3rem auto;
+    height: 20rem;
+    margin: 2rem auto;
 
     &__heading {
       &--mobile {
@@ -103,6 +100,11 @@
       }
     }
 
+    &__data {
+      font-size: 0.9rem;
+      line-height: $base-line-height;
+    }
+
     &__grid {
       flex-direction: row;
       justify-content: center;
@@ -110,22 +112,21 @@
 
     &__btn {
       padding: $spacing-sm $spacing-md;
-      margin-top: -1.5rem;
+      font-size: 1rem;
     }
 
     &__data-container {
-      margin: 3rem 0;
+      margin: 1rem 0;
     }
   }
 
   @include desktopXL() {
     width: 90%;
     max-width: 120rem;
-    height: 39rem;
+    height: 24rem;
 
     &__data {
-      font-size: 1.4rem;
-      line-height: $base-line-height;
+      font-size: 1.2rem;
     }
   }
 
@@ -133,16 +134,14 @@
     height: 44rem;
 
     &__heading {
-      @include fluid-text(2rem, 3rem);
+      @include fluid-text(2rem, 3.5rem);
     }
 
     &__data {
-      font-size: 2rem;
-      line-height: $base-line-height;
+      font-size: 1.6rem;
     }
-
     &__btn {
-      font-size: 2rem;
+      font-size: 1.6rem;
     }
   }
 }

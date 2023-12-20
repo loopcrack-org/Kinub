@@ -54,7 +54,7 @@ sections.forEach((section, index) => {
 new Glide('.glide', {
   type: 'carousel',
   startAt: 0,
-  perView: 4,
+  perView: 6,
   keyboard: true,
   focusAt: 0,
   peek: -13,
@@ -79,6 +79,7 @@ const drift = new Drift(mainImage, {
   sourceAttribute: 'src',
   paneContainer: document.querySelector('.details__grid'),
   inlinePane: false,
+  zoomFactor: 2,
 });
 
 const mainVideo = document.querySelector('#main-video');

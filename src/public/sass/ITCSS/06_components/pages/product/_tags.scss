@@ -10,26 +10,39 @@
 
   &__tag {
     display: flex;
-    height: 1.4rem;
+    height: 1rem;
     align-items: center;
-    padding: $spacing-lg;
+    padding: $spacing-md;
     border-radius: 0.625rem;
     background-color: $brand-color;
     text-decoration: none;
+    transition: background-color 300ms ease;
+
+    @include desktopXXL {
+      padding: $spacing-lg;
+    }
+
+    &:hover {
+      background-color: $color-brand-light;
+    }
   }
 
   &__tag-content {
     margin: 0;
     color: $color-white;
-    font-size: 0.8rem;
+    font-size: 0.55rem;
     font-weight: $weight-lighter;
 
     @include phoneXL() {
-      font-size: 1rem;
+      font-size: 0.8rem;
+    }
+
+    @include desktopXXL {
+      font-size: 1.2rem;
     }
   }
 
   @include desktop() {
-    margin-top: $spacing-lg;
+    margin-top: $spacing-sm;
   }
 }

@@ -11,6 +11,7 @@
 
   &__track {
     overflow: hidden;
+    max-height: 12rem;
   }
 
   &__slides {
@@ -133,21 +134,36 @@
 
   @include fold() {
     &__track {
-      max-height: 20rem;
+      max-height: 12rem;
+      margin-bottom: 1rem;
     }
 
     &__slide {
-      max-height: 20rem;
+      max-height: 12rem;
+    }
+
+    &__bullets {
+      bottom: 0.5rem;
     }
   }
 
   @include phone() {
     &__track {
-      max-height: 25rem;
+      max-height: 15rem;
     }
 
     &__slide {
-      max-height: 25rem;
+      max-height: 15rem;
+    }
+  }
+
+  @include tablet() {
+    &__track {
+      max-height: 18rem;
+    }
+
+    &__slide {
+      max-height: 18rem;
     }
   }
 
@@ -156,11 +172,12 @@
     margin: 0 auto;
 
     &__track {
-      max-height: 7rem;
+      max-height: 4rem;
+      margin-bottom: 0;
     }
 
     &__slide {
-      max-height: 7rem;
+      max-height: 4rem;
       border: 0.0625rem solid $color-aqua-blue;
     }
 
@@ -184,11 +201,11 @@
 
   @include desktopXXL {
     &__track {
-      max-height: 12rem;
+      max-height: 8rem;
     }
 
     &__slide {
-      max-height: 12rem;
+      max-height: 8rem;
       border: 0.0625rem solid $color-aqua-blue;
     }
 
