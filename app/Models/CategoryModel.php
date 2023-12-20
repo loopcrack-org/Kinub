@@ -11,7 +11,7 @@ class CategoryModel extends Model
     protected $DBGroup       = 'default';
     protected $table         = 'categories';
     protected $primaryKey    = 'categoryId';
-    protected $allowedFields = ['categoryName', 'categoryImageId', 'categoryIconId'];
+    protected $allowedFields = ['categoryName', 'categorySubname', 'categoryImageId', 'categoryIconId'];
 
     public function getAllCategories()
     {

@@ -131,6 +131,7 @@ class CtrlCategory extends CtrlApiFiles
 
             $categoryDataToUpdate = [
                 'categoryName'         => $categoryData['categoryName'],
+                'categorySubname'      => $categoryData['categorySubname'],
                 'newCategoryTags'      => $newCategoryTags,
                 'categoryTagsToDelete' => array_column($categoryTagsToDelete, 'categoryTagId'),
                 'newIcon'              => $newFiles['icon'][0] ?? '',
