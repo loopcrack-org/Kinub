@@ -49,7 +49,7 @@ $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
-$routes->get('/aviso_privacidad', 'CtrlPublicPages::viewPrivacyPolicy');
+$routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
 
 /*
  * --------------------------------------------------------------------
