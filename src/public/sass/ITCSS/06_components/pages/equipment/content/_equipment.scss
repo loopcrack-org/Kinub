@@ -34,6 +34,7 @@
   &__name {
     margin-bottom: 0.7rem;
     font-weight: $weight-normal;
+    text-transform: uppercase;
     @include fluid-text(1.5rem, 2.3rem, 5vw);
   }
 
