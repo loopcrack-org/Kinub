@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="footer__grid">
         <div class="footer__advice-container">
-            <a href="#" class="footer__advice">Aviso de privacidad</a>
+            <a href="/aviso" class="footer__advice">Aviso de privacidad</a>
         </div>
 
         <div class="footer__network">
