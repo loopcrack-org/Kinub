@@ -100,3 +100,12 @@ define('EVENT_PRIORITY_HIGH', 10);
  */
 define('FILES_TEMP_DIRECTORY', './files/tmp/');
 define('FILES_UPLOAD_DIRECTORY', './uploads/');
+
+/*
+ | --------------------------------------------------------------------------
+ | User account status
+ | --------------------------------------------------------------------------
+ /
+ */
+define('USER_IS_NOT_CONFIRMED', '0');
+define('USER_IS_CONFIRMED', '1');
