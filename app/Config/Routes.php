@@ -49,6 +49,7 @@ $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
+$routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
 
 /*
  * --------------------------------------------------------------------
@@ -58,9 +59,12 @@ $routes->get('/producto', 'CtrlPublicPages::viewProduct');
 $routes->get('login', [CtrlLogin::class, 'index']);
 $routes->get('password_reset', [CtrlLogin::class, 'viewPasswordEmail']);
 $routes->get('password_reset/(:any)', [CtrlLogin::class, 'viewPasswordReset']);
+$routes->get('password_set/(:any)', [CtrlLogin::class, 'viewPasswordSet']);
+$routes->get('password_response', [CtrlLogin::class, 'viewPasswordResponse']);
 $routes->post('login', [CtrlLogin::class, 'login']);
 $routes->post('password_reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
 $routes->post('password_reset/(:any)', [CtrlLogin::class, 'passwordReset']);
+$routes->post('password_set/(:any)', [CtrlLogin::class, 'passwordSet']);
 $routes->post('logout', [CtrlLogin::class, 'logout']);
 /*
  * --------------------------------------------------------------------
