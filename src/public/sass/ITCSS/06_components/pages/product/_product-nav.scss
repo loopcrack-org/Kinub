@@ -3,6 +3,7 @@
 @use '../../../01_settings/fonts' as *;
 @use '../../../01_settings/colors' as *;
 @use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
 
 .product-nav {
   position: sticky;
@@ -10,7 +11,8 @@
   top: $navbar-mobile-height;
   display: flex;
   width: 100%;
-  max-width: 120rem;
+  max-width: 156rem;
+  flex-direction: column;
   margin: $spacing-xxl auto 0 auto;
   background-color: $brand-color;
 
@@ -19,44 +21,35 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    padding: $spacing-md 0.3125rem;
+    padding: $spacing-sm 0.3125rem;
+    border-bottom: 0.09375rem solid $color-white;
     text-decoration: none;
     transition: background-color 500ms ease-in-out;
 
     &--active {
       background-color: $color-bright-blue;
     }
-
-    @include tablet() {
-      padding: 1.875rem 0.625rem;
-    }
   }
 
   &__link {
     color: $color-white;
-    font-size: 0.625rem;
     font-weight: $weight-light;
     line-height: 1.2;
     text-align: center;
     text-transform: uppercase;
-
-    @include phoneXL() {
-      font-size: 0.9375rem;
-    }
-
-    @include tablet() {
-      font-size: 1.25rem;
-    }
-
-    @include desktopXL() {
-      font-size: 1.875rem;
-    }
-
-    @include desktopXXL() {
-      font-size: 2.375rem;
+    @include fluid-text(0.625rem, 1.2rem, 2vw);
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 0.2rem;
     }
   }
-
+  @include phone() {
+    flex-direction: row;
+    &__link-container {
+      padding: $spacing-md 0.3125rem;
+      border: none;
+    }
+  }
   @include tablet() {
     top: $navbar-desktop-height;
   }

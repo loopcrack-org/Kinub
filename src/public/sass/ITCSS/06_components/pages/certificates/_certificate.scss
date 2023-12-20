@@ -3,11 +3,11 @@
 @use '../../../01_settings/global' as *;
 @use '../../../01_settings/fonts' as *;
 @use '../../../02_tools/breakpoints' as *;
+@use 'sass:color';
 .certificate {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding: 2rem 0.7rem 2rem 0.7rem;
   border: 1px solid $color-light-blue;
   text-decoration: none;
@@ -15,55 +15,51 @@
   transition: box-shadow 500ms ease-in-out;
 
   &__information {
-    margin-top: 1rem;
-    font-weight: $weight-semi-bold;
+    margin-top: 2rem;
+    font-weight: $weight-medium;
     text-align: center;
     @include desktop {
-      margin-top: 3rem;
+      margin-top: 2.3rem;
+      margin-bottom: 1rem;
     }
   }
 
   &__name {
-    max-width: 24rem;
-    padding: 0 0.5rem;
+    max-width: 10rem;
     color: $color-gray;
-    @include fluid-text(0.7rem, 1.8rem, 2vw);
+    @include fluid-text(0.7rem, 1.2rem, 1.3vw);
+    @include desktop {
+      max-width: 24rem;
+    }
   }
 
   &__image-container {
-    margin: auto 0;
     transition: box-shadow 500ms ease-in-out;
   }
 
   &__image {
     width: 100%;
-    aspect-ratio: 2/3;
+    aspect-ratio: 6/7;
+    box-shadow: color.adjust($color-gray, $alpha: -0.9) 0.4375rem 0.5rem 0.4375rem;
     object-fit: cover;
     transition: all 500ms ease;
+    &:hover {
+      box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
+    }
   }
 
-  &:hover {
-    box-shadow:
-      $base-border-width-medium $base-border-width-medium $base-border-card-blur
-        $base-border-card-spread $color-light-blue,
-      $base-border-width-medium (-$base-border-width-medium) $base-border-card-blur
-        $base-border-card-spread $color-light-blue,
-      (-$base-border-width-medium) $base-border-width-medium $base-border-card-blur
-        $base-border-card-spread $color-light-blue,
-      (-$base-border-width-medium) (-$base-border-width-medium) $base-border-card-blur
-        $base-border-card-spread $color-light-blue;
-  }
-
-  &:hover &__image {
-    box-shadow: $color-gray 0.4375rem 0.5rem 0.4375rem;
-  }
   @include fold {
     padding: $spacing-md $spacing-sm;
   }
   @include phone {
-    padding: $spacing-lg;
+    padding: $spacing-lg $spacing-md;
+    padding-bottom: 0.5rem;
   }
-  @include tablet {
-    padding: $spacing-xl;
+  @include desktop {
+    padding: $spacing-xl $spacing-md;
+    padding-bottom: 0rem;
+  }
+  @include desktopXL {
+    padding-bottom: 1rem;
   }
 }

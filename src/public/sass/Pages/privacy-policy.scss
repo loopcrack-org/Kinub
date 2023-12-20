@@ -43,18 +43,13 @@
    ========================================================================== */
 @use '../ITCSS/04_elements/__index' as *;
 
-@use 'node_modules/plyr/dist/plyr.css';
-@use 'node_modules/custom-select/build/custom-select.css';
-@use 'node_modules/swiper/swiper-bundle.css';
-
 /* #OBJECTS
    ========================================================================== */
 @use '../ITCSS/05_objects/__index' as *;
 
 /* #COMPONENTS
    ========================================================================== */
-
 @use '../ITCSS/06_components/header/__index' as *;
 @use '../ITCSS/06_components/_btn-whatsapp' as *;
-@use '../ITCSS/06_components/pages/home/__index' as *;
+@use '../ITCSS/06_components/pages/privacy-policy/__index.scss' as *;
 @use '../ITCSS/06_components/footer' as *;

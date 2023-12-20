@@ -107,3 +107,12 @@ define('FILES_UPLOAD_DIRECTORY', './uploads/');
 define('CONTACT_EMAIL_ID', 1);
 define('SUPPORT_EMAIL_ID', 2);
 define('PRODUCT_EMAIL_ID', 3);
+
+/*
+ | --------------------------------------------------------------------------
+ | User account status
+ | --------------------------------------------------------------------------
+ /
+ */
+define('USER_IS_NOT_CONFIRMED', '0');
+define('USER_IS_CONFIRMED', '1');
