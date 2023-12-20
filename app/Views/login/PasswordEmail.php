@@ -25,26 +25,22 @@
         <!-- auth page content -->
         <div class="auth-page-content">
             <div class="container">
-                <div class="row">
-                    <div class="text-center mt-sm-5 mb-4 text-white-50">
-                        <div>
-                            <a href="login" class="d-inline-block auth-logo bg-white p-4 rounded-circle  ">
-                                <img class="d-inline-block auth-logo" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card mt-4">
+                        <div class="card mt-5 shadow-lg">
                             <?php
                             $response = session()->get('response');
-if ($response) { ?>
+if ($response) {
+    ?>
                                 <?= view('login/response', ['response' => $response]) ?>
                             <?php } else { ?>
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
+                                        <div class="mb-4">
+                                            <a href="login" class="d-inline-block auth-logo ">
+                                                <img class="d-inline-block auth-logo img-thumbnail bg-transparent border-0 " src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
+                                            </a>
+                                        </div>
                                         <h5 class="text-primary">¿Olvidaste tu contraseña?</h5>
                                         <p class="text-muted">¡Restablécela!</p>
                                         <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0ab39c" class="avatar-xl">

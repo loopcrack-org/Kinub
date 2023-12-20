@@ -25,70 +25,65 @@
         <!-- auth page content -->
         <div class="auth-page-content ">
             <div class="container">
-                <div class="row">
-                    <div class="text-center mt-sm-5 mb-4 text-white-50">
-                        <div>
-                            <a href="login" class="d-inline-block auth-logo bg-white p-4 rounded-circle">
-                                <img class="d-inline-block auth-logo" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card mt-4 shadow-lg">
+                    <div class="col-md-8 col-lg-6 col-xl-5 mt-5">
+                        <div class="card mt-5 shadow-lg">
 
                             <div class="card-body p-4">
-                                <div class="text-center mt-2">
 
+                                <div class="text-center mt-2">
+                                    <div class="mb-4">
+                                        <a href="login" class="d-inline-block auth-logo ">
+                                        <img class="d-inline-block auth-logo img-thumbnail bg-transparent border-0 " src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
+                                    </a>
+                                    </div>
                                     <h5 class="text-primary">Bienvenido de Vuelta!</h5>
                                     <p class="text-muted">Inicie Sesión</p>
                                 </div>
                                 <div class="p-2 mt-4">
                                     <form action="/login" method="POST">
-                                        <?php $errors = session()->get('errors'); ?>
+                                            <?php $errors = session()->get('errors'); ?>
 
-                                        <?php if(isset($errors['credentials'])): ?>
-                                            <!-- alert credentials -->
-                                            <div class="alert alert-warning" role="alert">
-                                                <?= $errors['credentials'] ?>
-                                            </div>
-                                        <?php endif ?>
-                                        <!-- email -->
-                                        <div class="mb-3">
-                                            <label for="username" class="form-label">Correo</label>
-                                            <input name="email" type="email" class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" id="username validation" placeholder="Ej: jhonson@gmail.com" value="<?= old('email') ?>"  required>
-                                            <?php if(isset($errors['email'])): ?>
-                                                <div class="invalid-feedback">
-                                                    <?= $errors['email'] ?>
+                                            <?php if(isset($errors['credentials'])): ?>
+                                                <!-- alert credentials -->
+                                                <div class="alert alert-warning" role="alert">
+                                                    <?= $errors['credentials'] ?>
                                                 </div>
                                             <?php endif ?>
-                                        </div>
-                                        <!-- password -->
-                                        <div class="mb-3">
-                                            <div class="float-end">
-                                                <a href="/password_reset" class="text-muted">Olvidaste tu contraseña?</a>
-                                            </div>
-                                            <label class="form-label" for="password-input">Contraseña</label>
-                                            <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input name="password" type="password" class="form-control pe-5 password-input <?= isset($errors['password']) ? 'is-invalid' : '' ?>" placeholder="Ingresa tu contraseña" id="password-input" style="background-image:none" required>
-                                                <?php if(isset($errors['password'])): ?>
+                                            <!-- email -->
+                                            <div class="mb-3">
+                                                <label for="username" class="form-label">Correo</label>
+                                                <input name="email" type="email" class="form-control <?= isset($errors['email']) ? 'is-invalid' : '' ?>" id="username validation" placeholder="Ej: jhonson@gmail.com" value="<?= old('email') ?>"  required>
+                                                <?php if(isset($errors['email'])): ?>
                                                     <div class="invalid-feedback">
-                                                        <?= $errors['password'] ?>
+                                                        <?= $errors['email'] ?>
                                                     </div>
                                                 <?php endif ?>
-                                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             </div>
-                                        </div>
-                                        <!-- button submit -->
-                                        <div class="mt-4">
-                                            <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
-                                        </div>
+                                            <!-- password -->
+                                            <div class="mb-3">
+                                                <div class="float-end">
+                                                    <a href="/password_reset" class="text-muted">Olvidaste tu contraseña?</a>
+                                                </div>
+                                                <label class="form-label" for="password-input">Contraseña</label>
+                                                <div class="position-relative auth-pass-inputgroup mb-3">
+                                                    <input name="password" type="password" class="form-control pe-5 password-input <?= isset($errors['password']) ? 'is-invalid' : '' ?>" placeholder="Ingresa tu contraseña" id="password-input" style="background-image:none" required>
+                                                    <?php if(isset($errors['password'])): ?>
+                                                        <div class="invalid-feedback">
+                                                            <?= $errors['password'] ?>
+                                                        </div>
+                                                    <?php endif ?>
+                                                    <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- button submit -->
+                                            <div class="mt-4">
+                                                <button class="btn btn-success w-100" type="submit">Iniciar Sesión</button>
+                                            </div>
                                     </form>
                                 </div>
                             </div>
-                            <!-- end card body -->
+                                <!-- end card body -->
                         </div>
                         <!-- end card -->
                     </div>
