@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use App\Models\ProductTagModel;
+use App\Validation\ApiPublicValidation;
 use CodeIgniter\HTTP\Response;
 use Throwable;
 
@@ -18,44 +20,41 @@ class CtrlApiPublic extends BaseController
     public function getProducts()
     {
         try {
-            $request      = $this->request;
-            $search       = (string) $request->getGet('search');
-            $categories   = $request->getGet('categories');
-            $categoryTags = $request->getGet('categoryTags');
-            $productTags  = $request->getGet('productTags');
-            $perPage      = (int) $request->getGet('perPage');
-            $page         = (int) $request->getGet('page');
-            $orderBy      = (string) $request->getGet('orderBy');
-            $direction    = (string) $request->getGet('direction');
+            $filter    = $this->request->getGet();
+            $validator = new ApiPublicValidation();
 
-            $emptyCategories   = empty($categories[0]);
-            $emptyCategoryTags = empty($categoryTags[0]);
-            $emptyProductTags  = empty($productTags[0]);
+            // validation
+            if (! $validator->validateInputs($filter)) {
+                throw new InvalidInputException($validator->getErrors());
+            }
 
-            if ($emptyCategories) {
-                $categories = [];
+            // default values
+            $filter['categorias']     = empty($filter['categorias']) ? [] : explode(',', $filter['categorias']);
+            $filter['producto-tags']  = empty($filter['producto-tags']) ? [] : explode(',', $filter['producto-tags']);
+            $filter['categoria-tags'] = empty($filter['categoria-tags']) ? [] : explode(',', $filter['categoria-tags']);
+            if (! isset($filter['busqueda'])) {
+                $filter['busqueda'] = '';
             }
-            if ($emptyCategoryTags) {
-                $categoryTags = [];
+            if (! isset($filter['clasificacion'])) {
+                $filter['clasificacion'] = 'id';
             }
-            if ($emptyProductTags) {
-                $productTags = [];
-            }
-            if ($page === 0) {
-                $page = 1;
+            if (! isset($filter['orden'])) {
+                $filter['orden'] = 'asc';
             }
 
             $productModel = new ProductModel();
             $products     = $productModel->filterProducts(
-                categories: $categories,
-                categoryTags: $categoryTags,
-                productTags: $productTags,
-                search: $search
-            )->order($orderBy, $direction)->getByPage($page, $perPage);
+                $filter['categorias'],
+                $filter['categoria-tags'],
+                $filter['producto-tags'],
+                $filter['busqueda']
+            )->order($filter['clasificacion'], $filter['orden'])->getByPage($filter['pagina'], $filter['por-pagina']);
 
-            return json_encode($products);
+            return $this->response->setJSON($products);
+        } catch (InvalidInputException $th) {
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, 'invalid request')->setJSON(['errors' => $th->getErrors()]);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode('Ha ocurrido un error en el filtro'));
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, 'error')->setJSON(['error' => 'Ha ocurrido un error en el filtro']);
         }
     }
 

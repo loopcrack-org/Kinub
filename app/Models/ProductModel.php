@@ -36,7 +36,7 @@ class ProductModel extends Model
      */
     public function filterProducts(array $categories = [], array $categoryTags = [], array $productTags = [], string $search = '')
     {
-        $builder = $this->select(['productId', 'productName', 'productModel', 'CONCAT("/producto/", productId) AS url'/* 'productDescription', 'productTechnicalInfo' */])
+        $builder = $this->select(['productName', 'productModel', 'categoryName', 'CONCAT("/producto/", productId) AS url'])
             ->join('categories', 'products.productCategoryId = categories.categoryId')
             ->join('`products-category_tags`', 'products.productId = `products-category_tags`.pctProductId', 'LEFT')
             ->join('category_tags', 'category_tags.categoryTagId = `products-category_tags`.pctCategoryTagId', 'LEFT')
@@ -80,10 +80,10 @@ class ProductModel extends Model
      *
      * @return $this
      */
-    public function order(string $orderBy = 'name', string $direction = 'asc')
+    public function order(string $sort = 'name', string $order = 'asc')
     {
-        if (! empty($orderBy) && isset($this->allowedOrderBy[$orderBy])) {
-            $this->orderBy($this->allowedOrderBy[$orderBy], $direction);
+        if (! empty($sort) && isset($this->allowedOrderBy[$sort])) {
+            $this->orderBy($this->allowedOrderBy[$sort], $order);
         }
 
         return $this;
