@@ -24,7 +24,7 @@ class CtrlSolution extends CtrlApiFiles
         $fileConfigBuilder = new FileValidationConfigBuilder(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE);
 
         $fileConfigBuilder->builder('msIcon')->isSVG()->minFiles(1)->maxFiles(1)->maxSize(1, 'MB')->build();
-        $fileConfigBuilder->builder('msImage')->isImage()->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->build();
+        $fileConfigBuilder->builder('msImage')->isImage()->minFiles(1)->maxFiles(1)->maxDims(500, 500)->maxSize(2, 'MB')->build();
 
         $this->fileConfig = $fileConfigBuilder->getConfig();
     }
@@ -67,7 +67,10 @@ class CtrlSolution extends CtrlApiFiles
         $msData = $this->request->getPost();
 
         try {
+            $fileValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+
             $msDataValidator = new SolutionValidation();
+            $msDataValidator->addRules($fileValidationRules['rules'], $fileValidationRules['messages']);
 
             if (! $msDataValidator->validateInputs($msData)) {
                 throw new InvalidInputException($msDataValidator->getErrors());
@@ -107,7 +110,10 @@ class CtrlSolution extends CtrlApiFiles
         $msUpdatedData = $this->request->getPost();
 
         try {
+            $fileValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+
             $msDataValidator = new SolutionValidation();
+            $msDataValidator->addRules($fileValidationRules['rules'], $fileValidationRules['messages']);
 
             if (! $msDataValidator->validateInputs($msUpdatedData)) {
                 throw new InvalidInputException($msDataValidator->getErrors());

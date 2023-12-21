@@ -81,8 +81,9 @@ class MeasurementSolutionModel extends Model
         try {
             $this->db->transException(true)->transStart();
 
-            $fileModel = new FileModel();
+            $this->delete($msData);
 
+            $fileModel = new FileModel();
             $fileModel->delete($msData['msIconId']);
             $fileModel->delete($msData['msImageId']);
 
