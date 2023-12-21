@@ -122,7 +122,7 @@ showAlert({
 <?php endif; ?>
 
 <div hidden>
-    <form class="modal-form" id="modal-form" method="POST" action="/email/producto">
+    <form class="modal-form <?= isset($errors) ? 'form-error' : ''?>" id="modal-form" method="POST" action="/email/producto">
         <div id="modal-form-close" class="modal-form__close">
             <svg class="modal-form__close-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00899b" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
@@ -133,34 +133,31 @@ showAlert({
 
         <div class="modal-form__field">
             <input class="modal-form__input modal-form__input--product" type="text" name="product-name" value="Medidor de nivel de radar 80G" readonly>
-        </div>
-
-        <div class="modal-form__field">
-            <input class="modal-form__input" type="text" id="model" name="product-model" value="1234" hidden>
+            <input type="text" id="model" name="product-model" value="1234" hidden>
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="name">Nombre</label>
-            <?= isset($errors['inquirer-name']) ? '<p class="modal-form__error">' . $errors['inquirer-name'] . '</p>' : '' ?>
-            <input class="modal-form__input" type="text" id="name" name="inquirer-name" value="<?=old('inquirer-name')?>">
+            <?= isset($errors['inquirer-name']) ? '<p class="modal-form__error name">' . $errors['inquirer-name'] . '</p>' : '' ?>
+            <input class="modal-form__input required" type="text" id="name" name="inquirer-name" value="<?=old('inquirer-name')?>">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="phone">Teléfono</label>
-            <?= isset($errors['inquirer-phone']) ? '<p class="modal-form__error">' . $errors['inquirer-phone'] . '</p>' : '' ?>
-            <input class="modal-form__input" type="tel" id="phone" name="inquirer-phone" value="<?=old('inquirer-phone')?>">
+            <?= isset($errors['inquirer-phone']) ? '<p class="modal-form__error phone">' . $errors['inquirer-phone'] . '</p>' : '' ?>
+            <input class="modal-form__input required custom-validate" data-validate-key="intlTelInput" type="tel" id="phone" name="inquirer-phone" value="<?=old('inquirer-phone')?>">
         </div>
 
         <div class="modal-form__field">
             <label class="modal-form__label" for="email">E-Mail</label>
-            <?= isset($errors['inquirer-email']) ? '<p class="modal-form__error">' . $errors['inquirer-email'] . '</p>' : '' ?>
-            <input class="modal-form__input" type="email" id="email" name="inquirer-email" value="<?=old('inquirer-email')?>">
+            <?= isset($errors['inquirer-email']) ? '<p class="modal-form__error email">' . $errors['inquirer-email'] . '</p>' : '' ?>
+            <input class="modal-form__input required email" type="email" id="email" name="inquirer-email" value="<?=old('inquirer-email')?>">
         </div>
 
         <div class="modal-form__field">
-            <label class="modal-form__label" for="name">Mensaje</label>
-            <?= isset($errors['message']) ? '<p class="modal-form__error">' . $errors['message'] . '</p>' : '' ?>
-            <textarea class="modal-form__textarea" id="message" name="message" rows="5"><?=old('message')?></textarea>
+            <label class="modal-form__label" for="message">Mensaje</label>
+            <?= isset($errors['message']) ? '<p class="modal-form__error message">' . $errors['message'] . '</p>' : '' ?>
+            <textarea class="modal-form__textarea required" id="message" name="message" rows="5"><?=old('message')?></textarea>
         </div>
 
         <input type="submit" class="modal-form__submit" id="modal-form-submit" value="Enviar">

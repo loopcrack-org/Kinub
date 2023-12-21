@@ -46,6 +46,7 @@
 @use 'node_modules/plyr/dist/plyr.css';
 @use '../plugins/lightgallery';
 @use '../plugins/accordion';
+@use '../plugins/intl-tel-input' as *;
 
 /* #OBJECTS
       ========================================================================== */

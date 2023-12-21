@@ -19,3 +19,11 @@
     );
   }
 }
+
+@media (min-width: 500px) {
+  .iti__country-list {
+    position: static;
+    max-width: 100%;
+    white-space: normal;
+  }
+}

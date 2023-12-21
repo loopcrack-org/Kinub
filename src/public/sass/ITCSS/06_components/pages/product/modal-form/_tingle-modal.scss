@@ -4,7 +4,7 @@
 
 .tingle-modal {
   display: block;
-  overflow: hidden;
+  overflow: auto;
   padding-top: 0;
   backdrop-filter: blur(0.09375rem);
   background-color: transparent;
@@ -17,5 +17,6 @@
 
   @include phoneXL() {
     display: flex;
+    padding: 2rem;
   }
 }

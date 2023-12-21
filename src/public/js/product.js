@@ -1,9 +1,11 @@
 import Glide from '@glidejs/glide';
+import intlTelInput from 'intl-tel-input';
 import Plyr from 'plyr';
 import ScrollMagic from 'scrollmagic';
 import Swal from 'sweetalert2';
 import Tingle from 'tingle.js';
 import '../libs/vanilla-js-accordions/AccordionElement.min.js';
+import { VanillaValidator } from '../libs/vanilla-validator/vanilla-validator-concat.js';
 import { initLightGallery } from './light.js';
 import { magnifyImage } from './magnify.js';
 
@@ -173,8 +175,17 @@ const modalForm = document.querySelector('#modal-form');
 const clonedForm = modalForm.cloneNode(true);
 const modalOpen = document.querySelector('#modal-form-btn');
 const modalClose = clonedForm.querySelector('#modal-form-close');
+const phoneInputField = clonedForm.querySelector('#phone');
+const phoneInput = intlTelInput(phoneInputField, {
+  preferredCountries: ['mx'],
+  utilsScript: require('intl-tel-input/build/js/utils.js'),
+});
 
 modal.setContent(clonedForm);
+
+if (clonedForm.classList.contains('form-error')) {
+  modal.open();
+}
 
 modalOpen.addEventListener('click', function () {
   modal.open();
@@ -184,10 +195,66 @@ modalClose.addEventListener('click', function () {
   modal.close();
 });
 
-clonedForm.addEventListener('submit', function () {
-  modal.close();
-});
-
 function isMobile() {
   return window.innerWidth < 1024;
 }
+
+const errorMap = [
+  'El número de teléfono proporcionado no es válido',
+  'Código de país no válido',
+  'El número de teléfono es demasiado corto.',
+  'El número de teléfono es demasiado largo',
+  'El número de teléfono proporcionado no es válido',
+];
+
+const commonCustomViewErrors = {
+  add: function (field, message, cls) {
+    let error = document.querySelector(`.${field.id}.${cls}`) || document.createElement('p');
+    error.textContent = message;
+
+    if (!document.querySelector(`.${field.id}.${cls}`)) {
+      error.classList.add(field.id, cls);
+      clonedForm.querySelector(`[for='${field.id}']`).after(error);
+    }
+  },
+  remove: function (field, cls) {
+    clonedForm.querySelector(`.${field.id}.${cls}`)?.remove();
+  },
+};
+
+const MESSAGES = {
+  required: 'campo obligatorio',
+  email: 'correo inválido',
+};
+
+const SELECTORS = {
+  messageError: 'modal-form__error',
+};
+
+const configValidator = {
+  container: '.modal-form',
+  validateOnFieldChanges: true,
+  button: '.modal-form__submit',
+  customValidates: {
+    intlTelInput: {
+      message: errorMap[0],
+      // eslint-disable-next-line
+      fn: function (field, container) {
+        let status = false;
+        if (field.value.trim().length > 0 && phoneInput.isValidNumber()) {
+          status = true;
+        } else {
+          const errorCode = phoneInput.getValidationError();
+          this.config.customValidates.intlTelInput.message = errorMap[errorCode] ?? errorMap[0];
+        }
+        return status;
+      },
+    },
+  },
+  validateBy: 'click',
+  selectors: SELECTORS,
+  messages: MESSAGES,
+  customViewErrors: commonCustomViewErrors,
+};
+
+new VanillaValidator(configValidator);
