@@ -8,6 +8,7 @@
 .details {
   width: 100%;
   max-width: 90%;
+  transition: height 300ms ease;
 
   &__grid {
     position: relative;
@@ -135,19 +136,16 @@
     height: 25.5rem;
 
     &__data {
-      font-size: 1.1rem;
+      @include fluid-text(0.6rem, 1.15rem);
     }
+
+    // &__btn {
+    //   @include fluid-text(0.7rem, 1rem);
+    // }
   }
 
   @include desktopXXL() {
     height: 32rem;
     margin: 3rem auto;
-
-    &__data {
-      font-size: 1.6rem;
-    }
-    &__btn {
-      font-size: 1.4rem;
-    }
   }
 }
