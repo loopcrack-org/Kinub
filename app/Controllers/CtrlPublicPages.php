@@ -2,11 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Models\HomeSectionModel;
+
 class CtrlPublicPages extends BaseController
 {
     public function index(): string
     {
-        return view('public/index');
+        $aboutUsData = (new HomeSectionModel())->getDataWithFiles();
+
+        return view('public/index', ['aboutUsData' => $aboutUsData]);
     }
 
     public function viewSupport(): string
