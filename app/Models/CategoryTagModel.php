@@ -19,11 +19,11 @@ class CategoryTagModel extends Model
      */
     public function getAllByCategories(array $categoriesIds = [])
     {
-        $builder = $this->select(['categoryTagId', 'categoryTagName']);
+        $queryBuilder = $this->select(['categoryTagId', 'categoryTagName']);
         if (empty($categoriesIds)) {
-            return $builder->findAll();
+            return $queryBuilder->findAll();
         }
 
-        return $builder->whereIn('categoryId', $categoriesIds)->findAll();
+        return $queryBuilder->whereIn('categoryId', $categoriesIds)->findAll();
     }
 }

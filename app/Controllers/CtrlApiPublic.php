@@ -20,9 +20,9 @@ class CtrlApiPublic extends BaseController
             $categoryTagModel = new CategoryTagModel();
             $categoryTags     = $categoryTagModel->getAllByCategories([$categoryIds]);
 
-            return json_encode($categoryTags);
+            return $this->response->setJSON($categoryTags);
         } catch (Throwable $th) {
-            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, json_encode('Ha ocurrido un error, porfavor inténtalo de nuevo'));
+            return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, 'error')->setJSON(['error' => 'Ha ocurrido un error, porfavor inténtalo de nuevo']);
         }
     }
 }

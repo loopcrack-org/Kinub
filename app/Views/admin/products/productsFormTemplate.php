@@ -110,7 +110,7 @@
                     <?= validation_show_error('category_tags', 'validationError') ?>
                     <label class="card-text" for="categoryTags[]">Selecciona los tags de la categoría</label>
                     <select id="categoryTags" name="categoryTags[]" class="form-control" multiple required>
-                        <option value="">Selecciona una categoría</option>
+                        <option value="">Selecciona</option>
                         <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
                         <option
                             value="<?= $categoryTag?>"
