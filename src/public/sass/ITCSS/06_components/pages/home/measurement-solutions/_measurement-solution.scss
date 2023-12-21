@@ -27,12 +27,12 @@
   z-index: 1;
   width: 5rem;
   transition: all 600ms ease;
-  /* stylelint-disable-next-line plugin/selector-bem-pattern */
-  svg {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    transition: all 600ms ease;
-  }
+}
+
+.measurement-solution__icon-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  transition: all 600ms ease;
 }
 
 .measurement-solution__content {
@@ -142,14 +142,9 @@
     visibility: visible;
   }
 
-  & .measurement-solution__icon {
-    svg {
-      scale: 0.7;
-    }
-    * {
-      /* stylelint-disable-next-line itcss/no-at-important */
-      fill: $color-white !important; //The reason for this is that the svgs imported already have a fill property
-    }
+  & .measurement-solution__icon-img {
+    filter: brightness(0) invert(1);
+    scale: 0.7;
   }
 
   & .measurement-solution__mask {

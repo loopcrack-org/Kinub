@@ -2,11 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Models\MeasurementSolutionModel;
+
 class CtrlPublicPages extends BaseController
 {
     public function index(): string
     {
-        return view('public/index');
+        $measurementSolutions = (new MeasurementSolutionModel())->getDataWithFiles();
+
+        return view('public/index', ['measurementSolutions' => $measurementSolutions]);
     }
 
     public function viewSupport(): string

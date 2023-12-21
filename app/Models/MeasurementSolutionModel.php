@@ -29,4 +29,12 @@ class MeasurementSolutionModel extends Model
             throw $th;
         }
     }
+
+    public function getDataWithFiles()
+    {
+        return $this->select('measurement_solutions.msId, measurement_solutions.msName,
+                measurement_solutions.msDescription,
+                msImg.fileRoute AS msImageRoute, msImg.fileName AS msImageName,
+                msIcon.fileRoute AS msIconRoute, msIcon.fileName AS msIconName')->join('files msImg', 'measurement_solutions.msImageId = msImg.fileId', 'left')->join('files msIcon', 'measurement_solutions.msIconId = msIcon.fileId', 'left')->findAll();
+    }
 }
