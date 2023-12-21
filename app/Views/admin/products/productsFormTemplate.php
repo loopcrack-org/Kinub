@@ -1,12 +1,12 @@
 <div class="grid gap-0 column-gap-3 position-relative">
-    <div class="g-col-12 g-col-lg-8" >
+    <div class="g-col-12 g-col-lg-8">
         <!-- Product Information -->
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title mb-0">Información del producto</h4>
             </div><!-- end card header -->
 
-            <div class="card-body grid row-gap-2">
+            <div class="card-body grid row-gap-2 column-gap-0">
                 <div class="g-col-12 g-col-xxl-6">
                     <!-- Product Name -->
                     <div class="mb-3">
@@ -81,7 +81,7 @@
         <!-- end card -->
     </div>
 
-    <div class="sidebar g-col-12 g-col-lg-4 p-0 sticky-lg-top" style="top: 5.5rem; height:min-content">
+    <div class="g-col-12 g-col-lg-4 p-0 sticky-lg-top" style="top: 5.5rem; height:min-content">
         <!-- Tags -->
         <div class="card">
             <div class="card-header">
