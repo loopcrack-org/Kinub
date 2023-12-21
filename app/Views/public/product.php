@@ -16,9 +16,9 @@
 </header>
 
 <main class="details">
+    <div class="details__grid">
     <h2 class="details__heading details__heading--mobile">Medidor de nivel de radar 80G</h2>
 
-    <div class="details__grid">
     <div class="carousel">
         <div class="carousel__img-container" id="video-container">
             <video class="carousel__main-video" id="main-video" autoplay muted></video>
@@ -102,9 +102,10 @@
             <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
-            </div>
-            <span id="modal-form-btn" class="details__btn">Más información acerca de este equipo</span>
-        </div>
+
+            <button id="modal-form-btn" class="details__btn">
+                Más información acerca de este equipo
+            </button>
     </div>
 </main>
 
