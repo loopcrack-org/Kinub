@@ -13,15 +13,18 @@ use Throwable;
 
 class CtrlSolution extends CtrlApiFiles
 {
-    private const MEASUREMENT_SOLUTIONS_BASE_ROUTE   = '/admin/soluciones/';
-    private const MEASUREMENT_SOLUTIONS_CREATE_ROUTE = self::MEASUREMENT_SOLUTIONS_BASE_ROUTE . 'crear';
-    private const MEASUREMENT_SOLUTIONS_EDIT_ROUTE   = self::MEASUREMENT_SOLUTIONS_BASE_ROUTE . 'editar/';
-
+    private static $MEASUREMENT_SOLUTIONS_BASE_ROUTE;
+    private static $MEASUREMENT_SOLUTIONS_CREATE_ROUTE;
+    private static $MEASUREMENT_SOLUTIONS_EDIT_ROUTE;
     protected FileValidationConfig $fileConfig;
 
     public function __construct()
     {
-        $fileConfigBuilder = new FileValidationConfigBuilder(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE);
+        self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE   = url_to(self::class . '::viewSolutions');
+        self::$MEASUREMENT_SOLUTIONS_CREATE_ROUTE = url_to(self::class . '::viewSolutionCreate');
+        self::$MEASUREMENT_SOLUTIONS_EDIT_ROUTE   = url_to(self::class . '::viewSolutionEdit');
+
+        $fileConfigBuilder = new FileValidationConfigBuilder(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE);
 
         $fileConfigBuilder->builder('msIcon')->isSVG()->minFiles(1)->maxFiles(1)->maxSize(1, 'MB')->build();
         $fileConfigBuilder->builder('msImage')->isImage()->minFiles(1)->maxFiles(1)->maxDims(500, 500)->maxSize(2, 'MB')->build();
@@ -50,11 +53,11 @@ class CtrlSolution extends CtrlApiFiles
     {
         $msData = (new MeasurementSolutionModel())->getMeasurementSolutionDataWithFiles($msId);
 
-        if (! session()->has('clientData')) {
+        if (session()->has('clientData')) {
+            $dataFiles = session()->get('clientData');
+        } else {
             $dataFiles['msIcon']  = [$msData['msIcon']];
             $dataFiles['msImage'] = [$msData['msImage']];
-        } else {
-            $dataFiles = session()->get('clientData');
         }
 
         $this->fileConfig->setDataInClientConfig($dataFiles);
@@ -88,11 +91,11 @@ class CtrlSolution extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $msData);
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_CREATE_ROUTE)->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_CREATE_ROUTE)->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $msData);
             $response = [
@@ -101,7 +104,7 @@ class CtrlSolution extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_CREATE_ROUTE)->withInput()->with('response', $response);
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_CREATE_ROUTE)->withInput()->with('response', $response);
         }
     }
 
@@ -133,11 +136,11 @@ class CtrlSolution extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $msUpdatedData);
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_EDIT_ROUTE . $msId)->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_EDIT_ROUTE . $msId)->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $msUpdatedData);
 
@@ -147,7 +150,7 @@ class CtrlSolution extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
         }
     }
 
@@ -172,7 +175,7 @@ class CtrlSolution extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
         } catch (Throwable $th) {
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error.',
@@ -180,7 +183,7 @@ class CtrlSolution extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->to(self::MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE)->with('response', $response);
         }
     }
 
