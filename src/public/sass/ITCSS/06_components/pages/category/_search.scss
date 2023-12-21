@@ -1,0 +1,88 @@
+@use 'sass:color';
+@use '../../../01_settings/global' as *;
+@use '../../../01_settings/colors' as *;
+@use '../../../01_settings/fonts' as *;
+@use '../../../02_tools/breakpoints' as *;
+@use '../../../02_tools/mixins' as *;
+
+.search {
+  display: flex;
+  width: 95%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 2rem 0;
+
+  &__bar {
+    padding: 0.2rem 0.4rem;
+    border: 1px solid $brand-color-secondary;
+    border-radius: 1rem;
+
+    @include desktop() {
+      padding: 0.4375rem 0.8rem;
+      font-size: 1rem;
+    }
+  }
+
+  &__displays {
+    display: none;
+
+    @include tablet() {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 0.4375rem 0.8rem;
+      border: 1px solid $brand-color-secondary;
+      border-radius: 1rem;
+      gap: 1rem;
+    }
+  }
+
+  &__display {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__filters {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    @include tablet() {
+      margin-top: 0;
+    }
+  }
+
+  &__sorting {
+    padding: 0.2rem 0.4rem;
+    border: 1px solid $brand-color-secondary;
+
+    border-radius: 1rem;
+    color: $brand-color-secondary;
+    font-size: 0.8rem;
+
+    @include desktop() {
+      padding: 0.4375rem 0.8rem;
+      font-size: 0.8rem;
+
+      &:focus {
+        border-color: $color-brand-secondary-dark;
+      }
+    }
+  }
+
+  &__filter-button {
+    display: block;
+    @include tablet {
+      display: none;
+    }
+  }
+
+  @include tablet() {
+    width: 95%;
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
