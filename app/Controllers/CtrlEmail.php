@@ -2,10 +2,11 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\EmailModel;
 use App\Models\UserModel;
+use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
-use App\Utils\TokenGenerator;
 use App\Validation\ContactEmailValidation;
 use App\Validation\PasswordEmailValidation;
 use App\Validation\SupportEmailValidation;
@@ -136,7 +137,7 @@ class CtrlEmail extends BaseController
 
         try {
             if (! $validateEmail->validateInputs($data)) {
-                throw new Exception();
+                throw new InvalidInputException($validateEmail->getErrors());
             }
 
             $userModel = new UserModel();
@@ -147,7 +148,7 @@ class CtrlEmail extends BaseController
 
             $userName = $user['userFirstName'] . ' ' . $user['userLastName'];
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => TokenGenerator::generateToken($user['userId'])]);
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $data['email'], 'Restablecer Contraseña', 'templates/emails/passwordReset', ['userName' => $userName, 'token' => (new UserTokenModel())->getNewUserToken($user['userId'])]);
 
             if (! $isSend) {
                 throw new Exception('Algo ha salido mal, por favor recargue la página e intente nuevamente');
@@ -158,19 +159,16 @@ class CtrlEmail extends BaseController
                 'message' => 'Verifique su bandeja de entrada para poder restablecer su contraseña.',
                 'type'    => 'success',
             ];
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->with('errors', $validateEmail->getErrors());
         } catch (Throwable $th) {
-            $errors = $validateEmail->getErrors();
-            if (! isset($errors['email'])) {
-                $response = [
-                    'title'   => 'Oops',
-                    'message' => $th->getMessage(),
-                    'type'    => 'danger',
-                ];
-            } else {
-                return redirect()->back()->with('errors', $errors);
-            }
+            $response = [
+                'title'   => 'Oops',
+                'message' => $th->getMessage(),
+                'type'    => 'danger',
+            ];
         }
 
-        return redirect()->back()->with('response', $response);
+        return redirect()->to('/password_response')->with('response', $response);
     }
 }

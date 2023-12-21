@@ -50,6 +50,7 @@ $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
+$routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
 $routes->group('api', static function (RouteCollection $routes) {
     $routes->get('categorytags', [CtrlApiPublic::class, 'getCategoryTags']);
 });
@@ -62,9 +63,12 @@ $routes->group('api', static function (RouteCollection $routes) {
 $routes->get('login', [CtrlLogin::class, 'index']);
 $routes->get('password_reset', [CtrlLogin::class, 'viewPasswordEmail']);
 $routes->get('password_reset/(:any)', [CtrlLogin::class, 'viewPasswordReset']);
+$routes->get('password_set/(:any)', [CtrlLogin::class, 'viewPasswordSet']);
+$routes->get('password_response', [CtrlLogin::class, 'viewPasswordResponse']);
 $routes->post('login', [CtrlLogin::class, 'login']);
 $routes->post('password_reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
 $routes->post('password_reset/(:any)', [CtrlLogin::class, 'passwordReset']);
+$routes->post('password_set/(:any)', [CtrlLogin::class, 'passwordSet']);
 $routes->post('logout', [CtrlLogin::class, 'logout']);
 /*
  * --------------------------------------------------------------------
@@ -134,11 +138,13 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlUser::class, 'viewUserEdit']);
         $routes->post('editar/(:num)', [CtrlUser::class, 'updateUser']);
         $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
+        $routes->get('reenviarConfirmacionCuenta/(:num)', [CtrlUser::class, 'resendConfirmationEmail/$1']);
     });
     $routes->group('nosotros', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlAboutUs::class, 'viewAboutUsEdit']);
         $routes->post('', [CtrlAboutUs::class, 'updateAboutUsSection']);
+        generateFileApiRoutesByController($routes, CtrlAboutUs::class);
     });
 });
 /*

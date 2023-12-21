@@ -80,15 +80,14 @@
   }
 
   @include desktop() {
-    gap: 4vw;
+    gap: 3vw;
     &__link {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
   }
-
-  @include desktopXL() {
+  @include desktopXXL() {
     &__link {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
     }
   }
 }

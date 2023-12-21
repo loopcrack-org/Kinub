@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use CodeIgniter\Model;
+use Exception;
+use Throwable;
 
 class UserModel extends Model
 {
@@ -29,5 +31,42 @@ class UserModel extends Model
         $data['data']['userPassword'] = password_hash($data['data']['userPassword'], PASSWORD_BCRYPT);
 
         return $data;
+    }
+
+    public function updatePassword($userId, $newPassword, $isConfirmed)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+            if ($isConfirmed) {
+                $this->update($userId, [
+                    'userPassword' => $newPassword,
+                ]);
+            } else {
+                $this->update($userId, [
+                    'userPassword' => $newPassword,
+                    'confirmed'    => 1,
+                ]);
+            }
+
+            $userTokenModel = new UserTokenModel();
+
+            $responseDelete = $userTokenModel->where('userId', $userId)->delete();
+            if (! $responseDelete) {
+                throw new Exception();
+            }
+            $this->db->transCommit();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
+
+    public function getUserDataToResendConfirmEmail(string $userId)
+    {
+        $userData              = $this->select('userEmail, userFirstName, userLastName')->find($userId);
+        $userData['userToken'] = (new UserTokenModel())->getNewUserToken($userId);
+
+        return $userData;
     }
 }

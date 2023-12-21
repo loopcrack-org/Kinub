@@ -33,7 +33,7 @@
                         if (session()->has('response')) {
                             $response = session()->get('response');
                             ?>
-                        <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
+                    <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
                     <?php } ?>
 
                     <!-- card-header -->
@@ -50,31 +50,34 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($users as $user) { ?>
-                                    <tr>
-                                        <td><?= $user['userId']; ?></td>
-                                        <td>
-                                            <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user['userFirstName'] . ' ' . $user['userLastName']; ?></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center fw-medium">
-                                                <p class="text-wrap"><?= $user['userEmail']; ?></p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-<?= ($user['confirmed']) ? 'success' : 'warning'?>">
-                                                <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line fs-17 align-middle"></i>
-                                                <?= ($user['confirmed']) ? 'Confirmado' : 'Por Confirmar'?>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
-                                                <a href="/admin/usuarios/editar/<?= $user['userId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id=<?= $user['userId']?> style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td><?= $user['userId']; ?></td>
+                                    <td>
+                                        <div class="d-flex align-items-center fw-medium">
+                                            <p class="text-wrap"><?= $user['userFirstName'] . ' ' . $user['userLastName']; ?></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center fw-medium">
+                                            <p class="text-wrap"><?= $user['userEmail']; ?></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-<?= ($user['confirmed']) ? 'success' : 'warning'?>">
+                                            <i class="ri-<?= ($user['confirmed']) ? 'checkbox-circle' : 'error-warning'?>-line fs-17 align-middle"></i>
+                                            <?= ($user['confirmed']) ? 'Confirmado' : 'Por Confirmar'?>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex justify-content-between column-gap-2">
+                                            <a href="/admin/usuarios/editar/<?= $user['userId']?>" class="btn btn-primary btn-icon waves-effect waves-light flex-grow-1"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <?php if (! $user['confirmed']): ?>
+                                            <a href="/admin/usuarios/reenviarConfirmacionCuenta/<?=$user['userId']?>" class="btn btn-resendEmail btn-success btn-icon waves-effect waves-light flex-grow-1"><i class="ri-mail-send-line ri-lg"></i></a>
+                                            <?php endif ?>
+                                            <button class="btn btn-danger btn-icon waves-effect waves-light flex-grow-1" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id=<?= $user['userId']?>><i class="ri-delete-bin-5-line ri-lg"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
                                 <?php }?>
                             </tbody>
                             <tfoot>
@@ -114,5 +117,6 @@
 <script src="/assets/admin/js/datatables-general-config.min.js"></script>
 <script src="/assets/admin/js/user.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="/assets/admin/js/alertToResendConfirmAccountEmail.min.js"></script>
 <script src="/assets/admin/js/deleteElement.min.js"></script>
 <?= $this->endSection() ?>
