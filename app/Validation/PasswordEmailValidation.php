@@ -2,6 +2,7 @@
 
 namespace App\Validation;
 
+use App\Exceptions\InvalidInputException;
 use Exception;
 
 class PasswordEmailValidation extends BaseValidation
@@ -21,7 +22,7 @@ class PasswordEmailValidation extends BaseValidation
         if (! $user) {
             $this->errors['email'] = 'No existe algun usuario con el email ingresado';
 
-            throw new Exception();
+            throw new InvalidInputException($this->errors);
         }
 
         return true;
