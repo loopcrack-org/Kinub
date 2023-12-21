@@ -93,7 +93,7 @@
                 <div class="mb-3">
                     <?= validation_show_error('product_category', 'validationError') ?>
                     <label class="card-text" for="product_category">Selecciona la categoría</label>
-                    <select id="category" name="category" class="" >
+                    <select id="category" name="category" class="" required>
                         <option value="" selected>Selecciona</option>
                         <?php foreach ($categories as $category):?>
                         <option
@@ -109,7 +109,7 @@
                 <div class="mb-3">
                     <?= validation_show_error('category_tags', 'validationError') ?>
                     <label class="card-text" for="categoryTags[]">Selecciona los tags de la categoría</label>
-                    <select id="categoryTags" name="categoryTags[]" class="form-control" multiple>
+                    <select id="categoryTags" name="categoryTags[]" class="form-control" multiple required>
                         <option value="">Selecciona una categoría</option>
                         <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
                         <option
@@ -137,14 +137,9 @@
                 <div class="mb-3">
                     <?= validation_show_error('productDescription', 'validationError') ?>
                     <label class="card-text">Descripción del producto</label>
-                    <div class="wysiwyg-editor"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        data-bs-title="Este campo es obligatorio"
-                        data-bs-custom-class="custom-tooltip"
-                    >
+                    <div class="wysiwyg-editor position-relative z-1">
                         <div class="editor"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? ''?>" required >
+                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required >
                     </div>
                 </div>
 
@@ -152,14 +147,9 @@
                 <div class="mb-3">
                     <?= validation_show_error('productDescription', 'validationError') ?>
                     <label class="card-text">Especificaciones técnicas</label>
-                    <div class="wysiwyg-editor"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="top"
-                        data-bs-title="Este campo es obligatorio"
-                        data-bs-custom-class="custom-tooltip"
-                    >
+                    <div class="wysiwyg-editor">
                         <div class="editor"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto de en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required >
+                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required >
                     </div>
                 </div>
 
