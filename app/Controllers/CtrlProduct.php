@@ -18,7 +18,7 @@ class CtrlProduct extends CtrlApiFiles
         $configBuilder->builder('image')->isImage()->build();
         $configBuilder->builder('video')->isVideo()->build();
         $configBuilder->builder('brochure')->isPDF()->build();
-        $configBuilder->builder('product_certificate')->isPDF()->build();
+        $configBuilder->builder('certificate')->isPDF()->build();
         $configBuilder->builder('user_manual')->isPDF()->build();
         $configBuilder->builder('datasheet')->isPDF()->build();
         $this->fileConfig = $configBuilder->getConfig();
@@ -66,7 +66,7 @@ class CtrlProduct extends CtrlApiFiles
             return redirect()->to('/admin/productos')->with('response', $response);
         }
 
-        return redirect()->back()->withInput();
+        return redirect()->to('/admin/productos/crear')->withInput();
     }
 
     public function updateProduct($id)

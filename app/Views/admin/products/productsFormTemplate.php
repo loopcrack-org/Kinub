@@ -1,172 +1,96 @@
-<div class="grid gap-0 column-gap-3 position-relative" style="--bs-rows: 2; --bs-columns: 2;">
-    <div class="g-col-12 g-col-md-8" >
+<div class="grid gap-0 column-gap-3 position-relative">
+    <div class="g-col-12 g-col-lg-8" >
         <!-- Product Information -->
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title mb-0">Información del producto</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <!-- Product Name -->
-                <div class="mb-3">
-                    <?= validation_show_error('name', 'validationError') ?>
-                    <label class="card-text" for="productName">Nombre del producto</label>
-                    <input type="text" class="form-control" name="productName" id="name" placeholder="por ejemplo: Medidor..." value="<?= old('productName') ?? ''?>" required>
-                </div>
-                <!-- Product Model -->
-                <div class="mb-3">
-                    <?= validation_show_error('productModel', 'validationError') ?>
-                    <label class="card-text" for="productModel">Ingresa el modelo</label>
-                    <input type="text" class="form-control" name="productModel" id="model" placeholder="por ejemplo: E-639" value="<?= old('productModel') ?? ''?>" required>
-                </div>
-                <!-- Product description -->
-                <div class="mb-3">
-                    <?= validation_show_error('productDescription', 'validationError') ?>
-                    <label class="card-text">Descripción del producto</label>
-                    <div class="wysiwyg-editor">
-                        <div class="editor"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto de en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" >
+            <div class="card-body grid row-gap-2">
+                <div class="g-col-12 g-col-xxl-6">
+                    <!-- Product Name -->
+                    <div class="mb-3">
+                        <?= validation_show_error('name', 'validationError') ?>
+                        <label class="card-text" for="productName">Nombre del producto</label>
+                        <input type="text" class="form-control" name="productName" id="name" placeholder="Medidor..." value="<?= old('productName') ?? ''?>" required>
+                    </div>
+                    <!-- Product Model -->
+                    <div class="mb-3">
+                        <?= validation_show_error('productModel', 'validationError') ?>
+                        <label class="card-text" for="productModel">Ingresa el modelo</label>
+                        <input type="text" class="form-control" name="productModel" id="model" placeholder="E-639..." value="<?= old('productModel') ?? ''?>" required>
+                    </div>
+                    <!-- Product Tags -->
+                    <div class="mb-3">
+                        <?= validation_show_error('productTags', 'validationError') ?>
+                        <label class="card-text" for="productTags">Selecciona los tags del producto</label>
+                        <input type="text" class="form-control" name="productTags" id="productTags" value="<?= old('productTags') ?? ''?>">
+                    </div>
+                    <!-- Technical information -->
+                    <div class="m-3">
+                        <?= validation_show_error('productTechnicalInfo', 'validationError') ?>
+                        <div class="row gap-2 mb-2 align-items-center">
+                            <div class="col-12 col-sm">
+                                <label class="card-text">Detalles del producto</label>
+                            </div>
+                            <div class="mx-auto col-12 col-sm-5 col-md-4 col-l-3 row gap-3 justify-content-end">
+                                <div id="keyValueButtonAdd" class="btn btn-sm btn-success col">Agregar</div>
+                            </div>
+                        </div>
+                        <div class="keyValue row justify-content-center px-1">
+                            <?php if(empty(old('technicalInfo'))): ?>
+                                <?=view('admin/components/keyValueInput', ['key' => '', 'value' => ''])?>
+                            <?php endif; ?>
+                            <?php foreach(old('technicalInfo') ?? [] as $key => $value):?>
+                            <?=view('admin/components/keyValueInput', ['key' => $key, 'value' => $value])?>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
                 </div>
-                <!-- Technical informatino -->
-                <div class="mb-3 mt-4">
-                    <?= validation_show_error('productTechnicalInfo', 'validationError') ?>
-                    <div class="row gap-2 mb-2 align-items-center">
-                        <div class="col-12 col-sm">
-                            <label class="card-text">Agrega aquí las especificaciones</label>
-                        </div>
-                        <div class="mx-auto col-12 col-sm-5 col-md-4 col-l-3 row gap-3 justify-content-end">
-                            <div id="keyValueButtonAdd" class="btn btn-sm btn-success col"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                                data-bs-title="Agrega un fila Clave-Valor"
-                                data-bs-custom-class="custom-tooltip"
-                            >Agregar</div>
-                        </div>
+
+                <div class="mb-3 g-col-12 g-col-xxl-6">
+                    <!-- Main Image -->
+                    <div class="mb-3">
+                        <label class="card-text">Imagen principal</label>
+                        <?= view('admin/components/inputFilePond', [
+                            'config' => $fileConfig['main_image'],
+                        ]) ?>
                     </div>
-                    <div class="keyValue row justify-content-center px-1">
-                        <?php foreach(old('technicalInfo') ?? [] as $key => $value):?>
-                        <div class="keyValueRow row gap-3 align-items-center p-2">
-                            <div class="col col-sm-auto p-0 mt-0">
-                                <div
-                                    class="btn btn-danger col keyValueButtonDelete"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    data-bs-title="Elimina esta fila Clave-Valor"
-                                    data-bs-custom-class="custom-tooltip"
-                                >
-                                    <i class="ri-delete-bin-2-line"></i>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm input-group p-0 my-auto">
-                                <div class="input-group-text">Clave:</div>
-                                <input value="<?=$key?>" type="text" class="keyValueKey form-control" id="inlineFormInputGroupUsername" placeholder="ej: Peso...">
-                            </div>
-                            <div class="col-12 col-sm input-group p-0 my-auto">
-                                <div class="input-group-text">Valor:</div>
-                                <input type="text" name="technicalInfo[<?=$key?>]" value="<?=$value?>" class="keyValueValue form-control" id="inlineFormInputGroupUsername" placeholder="5 kg">
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
+                </div>
+
+                <!-- Carrousel images and videos -->
+                <div class="g-col-12">
+                    <!-- Images -->
+                    <div class="mb-3">
+                        <label class="card-text">Imagenes</label>
+                        <?= view('admin/components/inputFilePond', [
+                            'config' => $fileConfig['image'],
+                        ]) ?>
+                    </div>
+                    <!-- Videos -->
+                    <div class="mb-3">
+                        <label class="card-text">Videos</label>
+                        <?= view('admin/components/inputFilePond', [
+                            'config' => $fileConfig['video'],
+                        ]) ?>
                     </div>
                 </div>
             </div>
             <!-- end card body -->
         </div>
         <!-- end card -->
-
-        <!-- Main Image -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Imagen principal</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['main_image'],
-            ]) ?>
-
-        </div>
-        <!-- end card -->
-
-        <!-- Images -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Imagenes</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['image'],
-            ]) ?>
-
-        </div>
-        <!-- end card -->
-
-        <!-- Videos -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Videos</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['video'],
-            ]) ?>
-
-        </div>
-        <!-- end card -->
-
-        <!-- Brochures -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Brochure</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['brochure'],
-            ]) ?>
-        </div>
-        <!-- end card -->
-
-        <!-- Certificates -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Certificados del producto</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['product_certificate'],
-            ]) ?>
-        </div>
-        <!-- end card -->
-
-        <!-- User Manual -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Brochure</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['user_manual'],
-            ]) ?>
-        </div>
-        <!-- end card -->
-
-        <!-- Datasheet -->
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title mb-0">Certificados del producto</h4>
-            </div><!-- end card header -->
-            <?= view('admin/components/inputFilePond', [
-                'config' => $fileConfig['datasheet'],
-            ]) ?>
-        </div>
-        <!-- end card -->
-
     </div>
 
-    <!-- Tags -->
-    <div class="g-col-12 g-col-md-4 p-0 sticky-md-top" style="top: 5.5rem;">
-        <div class="sticky-md-top" style="top: 5.5rem;">
-            <!-- Product Category -->
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Categoría del producto</h4>
-                </div><!-- end card header -->
+    <div class="sidebar g-col-12 g-col-lg-4 p-0 sticky-lg-top" style="top: 5.5rem; height:min-content">
+        <!-- Tags -->
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Categoría del producto</h4>
+            </div><!-- end card header -->
 
-                <div class="card-body">
+            <div class="card-body">
+                <!-- Category -->
+                <div class="mb-3">
                     <?= validation_show_error('product_category', 'validationError') ?>
                     <label class="card-text" for="product_category">Selecciona la categoría</label>
                     <select id="category" name="category" class="" >
@@ -181,17 +105,8 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <!-- end card body -->
-            </div>
-            <!-- end card -->
-
-            <!-- Category Tags -->
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Tags de categoría</h4>
-                </div><!-- end card header -->
-
-                <div class="card-body">
+                <!-- Category Tags -->
+                <div class="mb-3">
                     <?= validation_show_error('category_tags', 'validationError') ?>
                     <label class="card-text" for="categoryTags[]">Selecciona los tags de la categoría</label>
                     <select id="categoryTags" name="categoryTags[]" class="form-control" multiple>
@@ -204,24 +119,83 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-                <!-- end card body -->
             </div>
-            <!-- end card -->
+            <!-- end card body -->
+        </div>
+        <!-- end card -->
+    </div>
 
-            <!-- Product Tags -->
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="card-title mb-0">Tags del producto</h4>
-                </div><!-- end card header -->
+    <div class="g-col-12 g-col-lg-8">
+        <!-- Detail Product Information -->
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Información detallada del producto</h4>
+            </div><!-- end card header -->
 
-                <div class="card-body">
-                    <?= validation_show_error('productTags', 'validationError') ?>
-                    <label class="card-text" for="productTags">Selecciona los tags del producto</label>
-                    <input type="text" class="form-control" name="productTags" id="productTags" value="<?= old('productTags') ?? ''?>" required>
+            <div class="card-body">
+                <!-- Product description -->
+                <div class="mb-3">
+                    <?= validation_show_error('productDescription', 'validationError') ?>
+                    <label class="card-text">Descripción del producto</label>
+                    <div class="wysiwyg-editor"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        data-bs-title="Este campo es obligatorio"
+                        data-bs-custom-class="custom-tooltip"
+                    >
+                        <div class="editor"></div>
+                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? ''?>" required >
+                    </div>
                 </div>
-                <!-- end card body -->
+
+                <!-- Technical specification-->
+                <div class="mb-3">
+                    <?= validation_show_error('productDescription', 'validationError') ?>
+                    <label class="card-text">Especificaciones técnicas</label>
+                    <div class="wysiwyg-editor"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        data-bs-title="Este campo es obligatorio"
+                        data-bs-custom-class="custom-tooltip"
+                    >
+                        <div class="editor"></div>
+                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto de en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required >
+                    </div>
+                </div>
+
+                <!-- Download Área -->
+                <div class="mb-3">
+                    <h5 class="card-subtitle">Área de descarga</h5>
+                </div>
+                <!-- Brochure -->
+                <div class="mb-3">
+                    <label class="card-text" for="">Brochures</label>
+                    <?= view('admin/components/inputFilePond', [
+                        'config' => $fileConfig['brochure'],
+                    ]) ?>
+                </div>
+                <!-- Datasheet -->
+                <div class="mb-3">
+                    <label class="card-text" for="">Datasheet</label>
+                    <?= view('admin/components/inputFilePond', [
+                        'config' => $fileConfig['datasheet'],
+                    ]) ?>
+                </div>
+                <!-- User Manual -->
+                <div class="mb-3">
+                    <label class="card-text" for="">Manual de usuario</label>
+                    <?= view('admin/components/inputFilePond', [
+                        'config' => $fileConfig['user_manual'],
+                    ]) ?>
+                </div>
+                <!-- Certificate -->
+                <div class="mb-3">
+                    <label class="card-text" for="">Certificados</label>
+                    <?= view('admin/components/inputFilePond', [
+                        'config' => $fileConfig['certificate'],
+                    ]) ?>
+                </div>
             </div>
-            <!-- end card -->
         </div>
     </div>
 </div>

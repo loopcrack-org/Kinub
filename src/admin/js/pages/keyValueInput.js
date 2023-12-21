@@ -1,8 +1,3 @@
-import { Tooltip } from 'bootstrap';
-// tooltips
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
-tooltipTriggerList.forEach((tooltipTriggerEl) => new Tooltip(tooltipTriggerEl));
-
 const buttonAdd = document.querySelector('#keyValueButtonAdd');
 const keyValueContainer = document.querySelector('.keyValue');
 const keyValueRows = keyValueContainer.querySelectorAll('.keyValueRow');
@@ -39,6 +34,7 @@ function addRow() {
   keyValueKey.type = 'text';
   keyValueKey.id = 'inlineFormInputGroupUsername';
   keyValueKey.placeholder = 'ej: Peso...';
+  keyValueKey.required = true;
   keyValueKeyContainer.append(keyValueKeyLabel, keyValueKey);
 
   // create input value section
@@ -52,6 +48,7 @@ function addRow() {
   keyValueValue.type = 'text';
   keyValueValue.id = 'inlineFormInputGroupUsername';
   keyValueValue.placeholder = '5 kg';
+  keyValueValue.required = true;
   keyValueValueContainer.append(keyValueValueLabel, keyValueValue);
 
   keyValueRow.append(keyValueDeleteButtonContainer, keyValueKeyContainer, keyValueValueContainer);
