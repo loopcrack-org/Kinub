@@ -15,14 +15,12 @@ class CtrlSolution extends CtrlApiFiles
 {
     private static $MEASUREMENT_SOLUTIONS_BASE_ROUTE;
     private static $MEASUREMENT_SOLUTIONS_CREATE_ROUTE;
-    private static $MEASUREMENT_SOLUTIONS_EDIT_ROUTE;
     protected FileValidationConfig $fileConfig;
 
     public function __construct()
     {
         self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE   = url_to(self::class . '::viewSolutions');
         self::$MEASUREMENT_SOLUTIONS_CREATE_ROUTE = url_to(self::class . '::viewSolutionCreate');
-        self::$MEASUREMENT_SOLUTIONS_EDIT_ROUTE   = url_to(self::class . '::viewSolutionEdit');
 
         $fileConfigBuilder = new FileValidationConfigBuilder(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE);
 
@@ -140,7 +138,7 @@ class CtrlSolution extends CtrlApiFiles
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $msUpdatedData);
 
-            return redirect()->to(self::$MEASUREMENT_SOLUTIONS_EDIT_ROUTE . $msId)->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(url_to(self::class . '::viewSolutionEdit', $msId))->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $msUpdatedData);
 
