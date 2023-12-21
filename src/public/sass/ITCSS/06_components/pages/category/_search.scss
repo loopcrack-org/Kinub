@@ -31,16 +31,52 @@
       display: flex;
       align-items: center;
       justify-content: space-evenly;
-      padding: 0.4375rem 0.8rem;
-      border: 1px solid $brand-color-secondary;
-      border-radius: 1rem;
-      gap: 1rem;
     }
   }
 
+  &__display-icon {
+    fill: $brand-color-secondary;
+    transition: fill 300ms ease;
+  }
+
   &__display {
+    padding: 0.1rem 0.8rem;
+    border: 1px solid $brand-color-secondary;
+    transition: background-color 300ms ease;
+
+    &--grid {
+      border-right: none;
+      border-bottom-left-radius: 1rem;
+      border-top-left-radius: 1rem;
+    }
+
+    &--list {
+      border-bottom-right-radius: 1rem;
+      border-top-right-radius: 1rem;
+    }
+
+    &--active {
+      background-color: $brand-color-secondary;
+      .search__display-icon {
+        fill: $color-white;
+      }
+
+      &:hover {
+        background-color: $brand-color-secondary;
+      }
+    }
+
     &:hover {
+      background-color: color.adjust($brand-color-secondary, $lightness: 40%);
       cursor: pointer;
+
+      .search__display-icon {
+        fill: $color-white;
+      }
+    }
+
+    @include desktop {
+      padding: 0.25rem 0.8rem;
     }
   }
 
@@ -58,7 +94,6 @@
   &__sorting {
     padding: 0.2rem 0.4rem;
     border: 1px solid $brand-color-secondary;
-
     border-radius: 1rem;
     color: $brand-color-secondary;
     font-size: 0.8rem;
@@ -67,8 +102,8 @@
       padding: 0.4375rem 0.8rem;
       font-size: 0.8rem;
 
-      &:focus {
-        border-color: $color-brand-secondary-dark;
+      &:hover {
+        cursor: pointer;
       }
     }
   }
