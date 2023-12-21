@@ -28,12 +28,12 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-6 col-xl-5">
                         <div class="card mt-5 shadow-lg">
-                            <?php
+                        <?php
                             $response = session()->get('response');
 if ($response) {
+    view('login/response', ['response' => $response]);
+} else {
     ?>
-                                <?= view('login/response', ['response' => $response]) ?>
-                            <?php } else { ?>
                                 <div class="card-body p-4">
                                     <div class="text-center mt-2">
                                         <div class="mb-4">
@@ -43,16 +43,15 @@ if ($response) {
                                         </div>
                                         <h5 class="text-primary">¿Olvidaste tu contraseña?</h5>
                                         <p class="text-muted">¡Restablécela!</p>
-                                        <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0ab39c" class="avatar-xl">
+                                        <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop" colors="primary:#0ab39c" class="avatar-lg">
                                         </lord-icon>
+                                    </div>
 
-                                </div>
+                                    <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
+                                        Ingresa tu correo para enviarte las instrucciones
+                                    </div>
 
-                                <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
-                                    Ingresa tu correo para enviarte las instrucciones
-                                </div>
-
-                                <?php $errors = session()->get('errors') ?>
+                                    <?php $errors = session()->get('errors') ?>
 
                                     <div class="p-2">
                                         <form action="/password_reset" method="post">
@@ -67,14 +66,15 @@ if ($response) {
                                                 <?php endif ?>
                                             </div>
 
-                                        <div class="text-center mt-4">
-                                            <button class="btn btn-success w-100" type="submit">Enviar</button>
-                                        </div>
-                                        <div class="mt-4 text-center">
-                                            <p class="mb-0"> He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz click aquí</a> </p>
-                                        </div>
-                                    </form><!-- end form -->
-                                </div>
+                                            <div class="text-center mt-4">
+                                                <button class="btn btn-success w-100" type="submit">Enviar</button>
+                                            </div>
+                                            <div class="mt-4 text-center">
+                                                <p class="mb-0"> He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz click aquí</a> </p>
+                                            </div>
+                                        </form><!-- end form -->
+                                    </div>
+                            <?php } ?>
                             </div>
                             <!-- end card body -->
                         </div>
