@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div>
-                    <input type="text"  class="form-control <?= isset($errors['certificatefileName']) ? 'is-invalid' : '' ?>" name="certificatefileName" id="certificatefileName" value="<?= old('certificatefileName') ?? $certificate['certificatefileName'] ?? ''; ?>" placeholder="Ingrese el nombre">
+                    <input type="text"  class="form-control <?= isset($errors['certificatefileName']) ? 'is-invalid' : '' ?>" name="certificatefileName" id="certificatefileName" value="<?= old('certificatefileName') ?? $certificate['certificatefileName'] ?? ''; ?>" placeholder="Ingrese el nombre" >
                     <?php if (isset($errors['certificatefileName'])) : ?>
                         <div class="invalid-feedback">
                             <?= $errors['certificatefileName'] ?>

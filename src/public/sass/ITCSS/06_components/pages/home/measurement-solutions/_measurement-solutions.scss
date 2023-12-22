@@ -15,24 +15,7 @@
     }
   }
 
-  &__grid {
-    overflow: hidden;
-    width: 100%;
-    margin: 0 auto;
-
-    @include phone() {
-      @include grid(2, 0);
-    }
-
-    @include desktop() {
-      @include flex-columns(3, 0rem, 0rem);
-    }
-
-    @include desktopXL() {
-      @include grid(4, 0);
-    }
-  }
-  @include tablet {
-    margin-bottom: 12rem;
+  @include desktop {
+    margin-bottom: 4rem;
   }
 }

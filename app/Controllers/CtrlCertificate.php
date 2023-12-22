@@ -12,11 +12,16 @@ use Throwable;
 
 class CtrlCertificate extends CtrlApiFiles
 {
+    private static $CERTIFICATES_BASE_ROUTE;
+    private static $CERTIFICATES_CREATE_ROUTE;
     protected FileValidationConfig $fileConfig;
 
     public function __construct()
     {
-        $fileConfigBuilder = new FileValidationConfigBuilder('/admin/certificados');
+        self::$CERTIFICATES_BASE_ROUTE   = url_to(self::class . '::viewCertificates');
+        self::$CERTIFICATES_CREATE_ROUTE = url_to(self::class . '::viewCertificateCreate');
+
+        $fileConfigBuilder = new FileValidationConfigBuilder(self::$CERTIFICATES_BASE_ROUTE);
         $fileConfigBuilder->builder('certificatePreview')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(700, 700)->build();
         $fileConfigBuilder->builder('certificatefile')->minFiles(1)->maxFiles(1)->maxSize(30, 'MB')->isPDF()->build();
 
@@ -84,11 +89,11 @@ class CtrlCertificate extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to('/admin/certificados')->with('response', $response);
+            return redirect()->to(self::$CERTIFICATES_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $certificateData);
 
-            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(self::$CERTIFICATES_CREATE_ROUTE)->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $certificateData);
 
@@ -98,7 +103,7 @@ class CtrlCertificate extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->back()->withInput()->with('response', $response);
+            return redirect()->to(self::$CERTIFICATES_CREATE_ROUTE)->withInput()->with('response', $response);
         }
     }
 
@@ -155,6 +160,8 @@ class CtrlCertificate extends CtrlApiFiles
 
             return redirect()->back()->withInput()->with('response', $response);
         }
+
+        return redirect()->to(url_to(self::class . '::viewSolutionEdit', $id))->with('response', $response);
     }
 
     public function deleteCertificate()
@@ -174,6 +181,6 @@ class CtrlCertificate extends CtrlApiFiles
             ];
         }
 
-        return redirect()->back()->with('response', $response);
+        return redirect()->to(self::$CERTIFICATES_BASE_ROUTE)->with('response', $response);
     }
 }
