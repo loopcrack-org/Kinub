@@ -14,7 +14,6 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: $spacing-sm;
   }
 
@@ -65,7 +64,7 @@
     display: block;
     padding: 0.75rem 1rem;
     border-radius: 0.625rem;
-    margin: $spacing-md auto 0;
+    margin: $spacing-md 0 0 0;
     font-size: 0.75rem;
     font-weight: $weight-light;
     text-decoration: none;
@@ -89,7 +88,7 @@
   }
 
   @include fold {
-    margin: 2rem auto;
+    margin: 1rem auto;
   }
 
   @include phone {
@@ -136,12 +135,8 @@
     height: 25.5rem;
 
     &__data {
-      @include fluid-text(0.6rem, 1.15rem);
+      @include fluid-text(0.6rem, 1.2rem);
     }
-
-    // &__btn {
-    //   @include fluid-text(0.7rem, 1rem);
-    // }
   }
 
   @include desktopXXL() {

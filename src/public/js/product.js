@@ -80,6 +80,7 @@ const drift = new Drift(mainImage, {
   paneContainer: document.querySelector('.details__grid'),
   inlinePane: false,
   zoomFactor: 2,
+  hoverBoundingBox: true,
 });
 
 const mainVideo = document.querySelector('#main-video');
