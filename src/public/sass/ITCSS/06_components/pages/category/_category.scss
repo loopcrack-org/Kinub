@@ -21,7 +21,7 @@
       @include flex-columns(5, 1.25rem, 1.5625rem);
     }
     @include desktop() {
-      margin-right: 6.25rem;
+      margin-right: 3.44125rem;
     }
   }
 
@@ -35,6 +35,6 @@
 
   @include desktop() {
     display: flex;
-    gap: 6.25rem;
+    gap: 3.44125rem;
   }
 }

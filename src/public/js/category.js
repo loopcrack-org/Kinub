@@ -1,10 +1,16 @@
 const sidebar = document.querySelector('.sidebar');
 const sidebarClose = document.querySelector('#sidebar-close');
+const sidebarOpenButton = document.querySelector('#sidebar-open');
 const sidebarSections = document.querySelectorAll('.menu-section');
-const sidebarOverlay = document.querySelector('.sidebar__overlay');
+/* const sidebarOverlay = document.querySelector('.sidebar__overlay');
+ */
 
 sidebarClose.addEventListener('click', () => {
   closeSidebar();
+});
+
+sidebarOpenButton.addEventListener('click', () => {
+  openSidebar();
 });
 
 sidebarSections.forEach((section) => {
@@ -18,16 +24,10 @@ sidebarSections.forEach((section) => {
   });
 });
 
-document.addEventListener('click', (event) => {
-  if (!sidebar.contains(event.target) && sidebar.classList.contains('sidebar--active')) {
-    closeSidebar();
-  }
-});
-
-sidebarOverlay.addEventListener('click', () => {
-  closeSidebar();
-});
-
 function closeSidebar() {
   sidebar.classList.remove('sidebar--active');
+}
+
+function openSidebar() {
+  sidebar.classList.add('sidebar--active');
 }
