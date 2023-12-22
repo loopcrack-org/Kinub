@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="measurement-solution__content">
-                            <p class="measurement-solution__title"><span class="measurement-solution__title--strong"><?= explode(' ', $measurementSolution['msName'])[0]?></span><?= implode(' ', array_slice(explode(' ', $measurementSolution['msName']), 1)); ?></p>
+                            <p class="measurement-solution__title"><span class="measurement-solution__title--strong"><?= $measurementSolution['msNameStrong']?></span><?= $measurementSolution['msNameNotStrong'] ?></p>
                             <p class="measurement-solution__description">
                                 <?= $measurementSolution['msDescription']?>
                             </p>

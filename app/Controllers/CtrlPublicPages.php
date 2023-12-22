@@ -8,7 +8,12 @@ class CtrlPublicPages extends BaseController
 {
     public function index(): string
     {
-        $measurementSolutions = (new MeasurementSolutionModel())->getDataWithFiles();
+        $measurementSolutions = (new MeasurementSolutionModel())->getMeasurementSolutionsWithFiles();
+
+        foreach ($measurementSolutions as $key => $value) {
+            $measurementSolutions[$key]['msNameStrong']    = explode(' ', $value['msName'])[0];
+            $measurementSolutions[$key]['msNameNotStrong'] = implode(' ', array_slice(explode(' ', $value['msName']), 1));
+        }
 
         return view('public/index', ['measurementSolutions' => $measurementSolutions]);
     }

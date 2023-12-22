@@ -30,7 +30,7 @@ class MeasurementSolutionModel extends Model
         }
     }
 
-    public function getDataWithFiles()
+    public function getMeasurementSolutionsWithFiles()
     {
         return $this->select('measurement_solutions.msId, measurement_solutions.msName,
                 measurement_solutions.msDescription,
