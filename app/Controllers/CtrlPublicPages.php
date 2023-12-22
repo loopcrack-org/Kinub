@@ -62,4 +62,14 @@ class CtrlPublicPages extends BaseController
 
         return view('public/product', $data);
     }
+
+    public function viewPrivacyPolicy(): string
+    {
+        $data = [
+            'metaTitle'       => 'Aviso de Privacidad',
+            'metaDescription' => 'Aviso de Privacidad de Kinub',
+        ];
+
+        return view('public/privacy-policy', $data);
+    }
 }
