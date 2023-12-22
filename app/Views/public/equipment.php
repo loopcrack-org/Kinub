@@ -20,7 +20,7 @@
                 <a href="/categoria/<?= $category['categoryId']; ?>" class="equipment">
                     <img src="<?= $category['fileRoute']; ?>" alt="equipment" class="equipment__icon">
                     <h3 class="equipment__name"><?= $category['categoryName']?></h3>
-                    <p class="equipment__text">&nbsp;</p>
+                    <p class="equipment__text"><?= $category['categorySubname']?></p>
                 </a> <!--equipment-->
             <?php } ?>
         </div>
