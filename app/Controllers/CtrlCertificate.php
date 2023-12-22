@@ -144,11 +144,11 @@ class CtrlCertificate extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to('/admin/certificados')->with('response', $response);
+            return redirect()->to(self::$CERTIFICATES_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
 
-            return redirect()->back()->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(url_to(self::class . '::viewCertificateEdit', $certificateId))->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
 
@@ -158,10 +158,8 @@ class CtrlCertificate extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->back()->withInput()->with('response', $response);
+            return redirect()->to(url_to(self::class . '::viewCertificateEdit', $certificateId))->with('response', $response);
         }
-
-        return redirect()->to(url_to(self::class . '::viewSolutionEdit', $id))->with('response', $response);
     }
 
     public function deleteCertificate()
