@@ -29,13 +29,16 @@
                         ?>
                     <div id="alertElement" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
                 <?php } ?>
-                <?php $errors = session()->get('errors'); ?>
-                <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
+                <form id="form" autocomplete="off" class="needs-validation" method="POST">
 
-                    <?= view('admin/typeSolutions/solutionsFormTemplate', ['errors' => $errors]) ?>
+                    <?= $this->include('admin/typeSolutions/solutionsFormTemplate') ?>
 
                     <div class="text-end mb-3">
                         <button type="submit" class="btn btn-primary w-lg">Guardar</button>
+                    </div>
+
+                    <div class="filepondConfig">
+                        <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
                     </div>
                 </form>
                 <!-- end form -->
@@ -51,7 +54,7 @@
 
 
 <?= $this->section('js') ?>
-<!-- filepond js -->
-<script src="/assets/admin/js/form-file-upload-measurementSolution.init.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
+<!-- filepond js -->
+<script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <?= $this->endSection() ?>
