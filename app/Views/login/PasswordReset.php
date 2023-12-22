@@ -24,55 +24,51 @@
 
         <!-- auth page content -->
         <div class="auth-page-content">
-            <div class="container mt-5">
+            <div class="container">
 
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card mt-5 shadow-lg">
+                    <div class="col-md-8 col-lg-6 col-xl-5 mt-5">
+                        <div class="card mt-5">
 
-                            <?php $response ??= session()->get('response'); ?>
-
-                            <?php if ($response) : ?>
-                                <?= view('login/response', ['response' => $response]) ?>
-                            <?php else : ?>
-                                <div class="card-body p-4">
-                                    <div class="text-center mt-2">
-                                        <div class="mb-4">
+                            <div class="card-body p-4">
+                                <div class="text-center mt-2">
+                                    <div class="mb-4">
                                             <a href="login" class="d-inline-block auth-logo ">
                                                 <img class="d-inline-block auth-logo img-thumbnail bg-transparent border-0 " src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
                                             </a>
-                                        </div>
-                                        <h5 class="text-primary"><?= ($isAccountConfirmed) ? 'Restablece tu contraseña' : 'Establece tu contraseña'?></h5>
-                                        <p class="text-muted"><?= ($isAccountConfirmed) ? 'Tu nueva contraseña debe de ser diferente a la anterior' : 'Escriba una contraseña para poder confirmar su cuenta'?></p>
                                     </div>
+                                    <h5 class="text-primary">Restablece tu contraseña</h5>
+                                    <p class="text-muted">Tu nueva contraseña debe de ser diferente a la anterior</p>
+                                </div>
+
+                                <div class="p-2">
+                                    <form method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="password-input">Contraseña</label>
 
                                             <?php $errors = session()->get('errors') ?>
 
-                                                <?php $errors = session()->get('errors') ?>
-
-                                                <div class="position-relative auth-pass-inputgroup">
-                                                    <input name="password" required type="password" class="form-control pe-5 password-input <?= isset($errors['password']) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="<?= ($isAccountConfirmed) ? 'Ingresa tu nueva contraseña' : 'Ingresa su contraseña'?>" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                                    <?php if (isset($errors['password'])) : ?>
-                                                        <div class="invalid-feedback">
-                                                            <?= $errors['password'] ?>
-                                                        </div>
-                                                    <?php endif ?>
-                                                    <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                                </div>
+                                            <div class="position-relative auth-pass-inputgroup">
+                                                <input name="password" required type="password" class="form-control pe-5 password-input <?= isset($errors['password']) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Ingresa tu nueva contraseña" id="password-input" aria-describedby="passwordInput" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                                <?php if (isset($errors['password'])) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $errors['password'] ?>
+                                                    </div>
+                                                <?php endif ?>
+                                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             </div>
                                         </div>
 
-                                            <div class="mb-3">
-                                                <label class="form-label" for="confirm-password-input">Confirmar Contraseña</label>
-                                                <div class="position-relative auth-pass-inputgroup mb-3">
-                                                    <input name="confirm-password" required type="password" class="form-control pe-5 password-input <?= isset($errors['confirm-password']) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Confirma tu contraseña" id="confirm-password-input" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-                                                    <?php if (isset($errors['confirm-password'])) : ?>
-                                                        <div class="invalid-feedback">
-                                                            <?= $errors['confirm-password'] ?>
-                                                        </div>
-                                                    <?php endif ?>
-                                                    <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button"><i class="ri-eye-fill align-middle"></i></button>
-                                                </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="confirm-password-input">Confirmar Contraseña</label>
+                                            <div class="position-relative auth-pass-inputgroup mb-3">
+                                                <input name="confirm-password" required type="password" class="form-control pe-5 password-input <?= isset($errors['confirm-password']) ? 'is-invalid' : '' ?>" style="background-image:none" onpaste="return false" placeholder="Confirma tu contraseña" id="confirm-password-input" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                                                <?php if (isset($errors['confirm-password'])) : ?>
+                                                    <div class="invalid-feedback">
+                                                        <?= $errors['confirm-password'] ?>
+                                                    </div>
+                                                <?php endif ?>
+                                                <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none shadow-none text-muted password-addon" type="button"><i class="ri-eye-fill align-middle"></i></button>
                                             </div>
                                         </div>
                                         <div id="password-contain" class="p-3 bg-light mb-2 rounded">
@@ -83,16 +79,13 @@
                                             <p id="pass-number" class="invalid fs-12 mb-0">Al menos un <b>número</b> del (0-9)</p>
                                         </div>
 
-                                            <div class="mt-4">
-                                                <button class="btn btn-success w-100" type="submit"><?= ($isAccountConfirmed) ? 'Restablecer Contraseña' : 'Establecer Contraseña'?></button>
-                                            </div>
-                                            <?php if($isAccountConfirmed) { ?>
-                                                <div class="mt-4 text-center">
-                                                    <p class="mb-0">He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz Click Aquí</a> </p>
-                                                </div>
-                                            <?php }?>
-                                        </form>
-                                    </div>
+                                        <div class="mt-4">
+                                            <button class="btn btn-success w-100" type="submit">Restablecer Contraseña</button>
+                                        </div>
+                                        <div class="mt-4 text-center">
+                                            <p class="mb-0">He recordado mi contraseña... <a href="/login" class="fw-semibold text-primary text-decoration-underline"> Haz Click Aquí</a> </p>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
