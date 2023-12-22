@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\CtrlAboutUs;
 use App\Controllers\CtrlAdminEmail;
+use App\Controllers\CtrlApiPublic;
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
@@ -50,6 +51,9 @@ $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
 $routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
+$routes->group('api', static function (RouteCollection $routes) {
+    $routes->get('categorytags', [CtrlApiPublic::class, 'getCategoryTags']);
+});
 
 /*
  * --------------------------------------------------------------------
