@@ -13,12 +13,15 @@ use Throwable;
 
 class CtrlCategory extends CtrlApiFiles
 {
-    private const CATEGORIES_BASE_ROUTE = '/admin/categorias/';
-
+    private static $CATEGORIES_BASE_ROUTE;
+    private static $CATEGORIES_CATEGORY_CREATE;
     protected FileValidationConfig $fileConfig;
 
     public function __construct()
     {
+        self::$CATEGORIES_BASE_ROUTE      = url_to(self::class . '::viewCategories');
+        self::$CATEGORIES_CATEGORY_CREATE = url_to(self::class . '::viewCategoryCreate');
+
         $fileConfigBuilder = new FileValidationConfigBuilder('/admin/categorias');
         $fileConfigBuilder->builder('icon')->isSVG()->maxFiles(1)->minFiles(1)->maxSize(100, 'KB')->build();
         $fileConfigBuilder->builder('image')->isImage()->maxFiles(1)->minFiles(1)->maxSize(1, 'MB')->maxDims(1600, 500)->build();
@@ -81,11 +84,11 @@ class CtrlCategory extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to(self::CATEGORIES_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$CATEGORIES_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
 
-            return redirect()->to(self::CATEGORIES_BASE_ROUTE . 'crear')->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(self::$CATEGORIES_CATEGORY_CREATE)->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
             $response = [
@@ -94,7 +97,7 @@ class CtrlCategory extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->to(self::CATEGORIES_BASE_ROUTE . 'crear')->withInput()->with('response', $response);
+            return redirect()->to(self::$CATEGORIES_CATEGORY_CREATE)->withInput()->with('response', $response);
         }
     }
 
@@ -156,20 +159,20 @@ class CtrlCategory extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to(self::CATEGORIES_BASE_ROUTE)->with('response', $response);
+            return redirect()->to(self::$CATEGORIES_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
 
-            return redirect()->to(self::CATEGORIES_BASE_ROUTE . "/editar/{$categoryId}")->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(url_to(self::class . '::viewCategoryEdit', $categoryId))->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error.',
-                'message' => /* 'Ha ocurrido un error al actualizar los datos de la categoría, por favor intente nuevamente.' */ $th->getMessage(),
+                'message' => 'Ha ocurrido un error al actualizar los datos de la categoría, por favor intente nuevamente.',
                 'type'    => 'error',
             ];
 
-            return redirect()->to(self::CATEGORIES_BASE_ROUTE . "editar/{$categoryId}")->withInput()->with('response', $response);
+            return redirect()->to(url_to(self::class . '::viewCategoryEdit', $categoryId))->withInput()->with('response', $response);
         }
     }
 
@@ -195,6 +198,6 @@ class CtrlCategory extends CtrlApiFiles
             ];
         }
 
-        return redirect()->to(self::CATEGORIES_BASE_ROUTE)->with('response', $response);
+        return redirect()->to(self::$CATEGORIES_BASE_ROUTE)->with('response', $response);
     }
 }
