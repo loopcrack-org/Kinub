@@ -6,9 +6,11 @@
                     <h5 class="card-title mb-0">Titulo de la Solución de Medición</h5>
                 </label>
             </div>
+            <?php $errors = session()->get('errors'); ?>
             <div class="card-body">
-                <div class="hstack gap-3 align-items-start">
-                    <input type="text" class="form-control" name="name" id="name" value="<?= $solution["name"] ?? "";?>" placeholder="Ingrese el título" required>
+                <div class="hstack gap-3 align-items-start flex-column">
+                    <input type="text" class="form-control  <?= isset($errors['msName']) ? 'is-invalid' : '' ?>" name="msName" id="name" value="<?= old('msName') ?? $solution['msName'] ?? ''; ?>" placeholder="Ingrese el título" required>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['msName'] ?? null])?>
                 </div>
             </div>
         </div>
@@ -24,9 +26,10 @@
                 <h5 class="card-title mb-0">Descripción de la Solución de Medición</h5>
             </div>
             <div class="card-body">
-                <div class="hstack gap-3 align-items-start">
+                <div class="hstack gap-3 align-items-start ">
                     <div class="flex-grow-1">
-                        <textarea class="form-control" rows="3" name="description" required><?= $solution["description"] ?? "";?></textarea>
+                        <textarea class="form-control <?= isset($errors['msDescription']) ? 'is-invalid' : '' ?>" rows="3" name="msDescription" placeholder="Ingrese la descripción de la solución de medición" required><?= old('msDescription') ?? $solution['msDescription'] ?? ''; ?></textarea>
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['msDescription'] ?? null])?>
                     </div>
                 </div>
             </div>
@@ -45,7 +48,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="icon" required>
+                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msIcon']]) ?>
             </div>
             <!-- end card body -->
         </div>
@@ -60,7 +63,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="image" required>
+                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msImage']]) ?>
             </div>
             <!-- end card body -->
         </div>
@@ -68,4 +71,5 @@
     </div>
     <!-- end col -->
 </div>
+
 <!-- end row -->

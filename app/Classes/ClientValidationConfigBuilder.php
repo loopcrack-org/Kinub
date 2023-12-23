@@ -116,6 +116,7 @@ class ClientValidationConfigBuilder implements ValidationConfigBuilder, Filepond
 
     public function isSVG()
     {
+        $this->previewImage();
         $this->acceptTypesFile(['svg']);
 
         return $this;

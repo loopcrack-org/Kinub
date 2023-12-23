@@ -1,0 +1,103 @@
+/* stylelint-disable plugin/no-unsupported-browser-features */
+/* stylelint-disable plugin/selector-bem-pattern */
+@use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../02_tools/mixins' as *;
+.custom-select-container {
+  position: relative;
+  overflow: hidden;
+  border: 0.115rem solid $color-white;
+  border-radius: 2cqmax;
+  font-style: italic;
+  font-weight: $weight-light;
+  transition: transform 0.3s ease-in-out;
+
+  .custom-select-opener {
+    padding: 0.6rem;
+    padding-left: 0.8rem;
+    background: transparent;
+    @include fluid-text(0.9rem, 1rem, 0.9vw);
+    font-style: normal;
+    font-weight: $weight-light;
+    white-space: wrap;
+    @include tablet {
+      padding: 0.9rem;
+    }
+    @include desktopXXL {
+      padding: 1.3rem;
+    }
+  }
+
+  .custom-select-opener span {
+    display: block;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    text-overflow: ellipsis;
+    &::after {
+      display: block;
+      width: 2.8em;
+      height: 1.4em;
+      content: url('/assets/images/down-arrow-sm.svg');
+      transform-origin: center center;
+      transition: rotate 0.3s ease-in-out;
+    }
+  }
+  .custom-select-panel {
+    position: relative;
+    top: auto;
+    background: transparent;
+  }
+
+  .custom-select-option {
+    padding-left: $spacing-lg;
+    background: transparent;
+    cursor: pointer;
+    font-size: 0.7rem;
+    &.is-selected {
+      &:before {
+        content: none;
+      }
+    }
+    &:hover {
+      background: transparent;
+      font-style: normal;
+      font-weight: $weight-bold;
+    }
+    @include tablet {
+      font-size: 0.8rem;
+    }
+  }
+
+  &.is-open {
+    .custom-select-panel {
+      overflow-y: hidden;
+    }
+    .custom-select-opener span {
+      &::after {
+        rotate: 180deg;
+        transition: rotate 0.3s ease-in-out;
+      }
+    }
+  }
+  select {
+    z-index: -999;
+    top: 1rem;
+    left: 0rem;
+    opacity: 0;
+    visibility: visible;
+    @include phone {
+      top: 0.9rem;
+      left: 5rem;
+    }
+    @include phoneXL {
+      left: 10rem;
+    }
+    @include desktop {
+      top: 1.5rem;
+    }
+  }
+}

@@ -2,9 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\EmailNotSendException;
 use App\Models\UserModel;
+use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
-use App\Utils\TokenGenerator;
 use App\Validation\UserValidation;
 use Exception;
 use Throwable;
@@ -24,10 +25,10 @@ class CtrlUser extends BaseController
         return view('admin/users/UserCreate');
     }
 
-    public function viewUserEdit($id)
+    public function viewUserEdit(string $userId)
     {
         $userModel = new UserModel();
-        $user      = $userModel->find($id);
+        $user      = $userModel->find($userId);
 
         return view('admin/users/UserEdit', ['user' => $user]);
     }
@@ -35,27 +36,27 @@ class CtrlUser extends BaseController
     public function createUser()
     {
         $validateUser = new UserValidation();
-        $POST         = $this->request->getPost();
+        $userData     = $this->request->getPost();
 
         try {
-            if (! $validateUser->validateInputs($POST)) {
+            if (! $validateUser->validateInputs($userData)) {
                 throw new Exception();
             }
 
             $userModel = new UserModel();
-            $user      = $userModel->where('userEmail', $POST['userEmail'])->first();
+            $user      = $userModel->where('userEmail', $userData['userEmail'])->first();
             $validateUser->existUserEmail($user);
+            $userData['confirmed'] = 0;
+            $userData['isAdmin']   = 0;
 
-            $token             = TokenGenerator::generateToken();
-            $POST['userToken'] = $token;
-            $POST['confirmed'] = 0;
-            $POST['isAdmin']   = 0;
-            $userModel->insert($POST);
+            $userId = $userModel->insert($userData);
 
-            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $POST);
+            $userData['userToken'] = (new UserTokenModel())->getNewUserToken($userId);
+
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $userData['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $userData);
 
             if (! $isSend) {
-                $userModel->where('userEmail', $POST['userEmail'])->delete();
+                $userModel->where('userEmail', $userData['userEmail'])->delete();
 
                 throw new Exception('Algo salio mal al crear el usuario. Por favor, inténtalo de nuevo.');
             }
@@ -82,24 +83,89 @@ class CtrlUser extends BaseController
         return redirect()->to('/admin/usuarios')->with('response', $response);
     }
 
-    public function updateUser($id)
+    public function updateUser(string $userId)
     {
-        $isEdited = true;
-        if ($isEdited) {
+        $validateUser = new UserValidation();
+        $POST         = $this->request->getPost();
+
+        try {
+            if (! $validateUser->validateInputs($POST)) {
+                throw new Exception();
+            }
+
+            $userModel = new UserModel();
+            $user      = $userModel->find($userId);
+            if ($user['userEmail'] === $POST['userEmail']) {
+                $response = [
+                    'title'   => 'Edición exitosa',
+                    'message' => 'Se ha editado el usuario correctamente',
+                    'type'    => 'success',
+                ];
+            } else {
+                $user = $userModel->where('userEmail', $POST['userEmail'])->first();
+                $validateUser->existUserEmail($user);
+
+                $newUserToken = (new UserTokenModel())->getNewUserToken($userId);
+
+                $POST['confirmed']    = 0;
+                $POST['userPassword'] = null;
+                $emailInfo            = array_merge($POST, ['userToken' => $newUserToken]);
+
+                $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $POST['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $emailInfo);
+
+                if (! $isSend) {
+                    throw new Exception('Algo salio mal al editar el usuario. Por favor, inténtalo de nuevo.');
+                }
+
+                $response = [
+                    'title'   => 'Edición exitosa',
+                    'message' => 'La cuenta se ha actualizado con éxito. Por favor, notifique al usuario para que verifique su bandeja de entrada y confirme su cuenta.',
+                    'type'    => 'success',
+                ];
+            }
+            $userModel->update($userId, $POST);
+        } catch (Throwable $th) {
+            $errors = $validateUser->getErrors();
+
+            if (empty($errors)) {
+                $response = [
+                    'title'   => '¡Oops!',
+                    'message' => $th->getMessage(),
+                    'type'    => 'error',
+                ];
+            } else {
+                return redirect()->back()->withInput()->with('errors', $errors);
+            }
+        }
+
+        return redirect()->to('admin/usuarios')->with('response', $response);
+    }
+
+    public function resendConfirmationEmail(string $userId)
+    {
+        try {
+            $userData = (new UserModel())->getUserDataToResendConfirmEmail($userId);
+
+            $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $userData['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $userData);
+
+            if (! $isSend) {
+                throw new EmailNotSendException('Ha ocurrido un error al enviar el email para la confirmación de la cuenta, por favor intente nuevamente.');
+            }
+
             $response = [
-                'title'   => 'Edición exitosa',
-                'message' => 'Se ha editado el usuario correctamente',
+                'title'   => 'Envio Exitoso',
+                'message' => 'El email ha sido enviado correctamente, notifique al usuario para que confirme su cuenta.',
                 'type'    => 'success',
             ];
-        } else {
+        } catch (Throwable $th) {
             $response = [
-                'title'   => 'Error en la edición',
-                'message' => 'Ha ocurrido un error al editar el usuario. Por favor, inténtalo de nuevo.',
+                'title'   => 'Oops! Ha ocurrido un error',
+                'message' => 'Algo ha salido mal mientras se enviaba el email, por favor intente nuevamente',
                 'type'    => 'error',
             ];
         }
 
-        return redirect()->to('admin/usuarios')->with('response', $response);
+        return redirect()->back()->with('response', $response);
     }
 
     public function deleteUser()

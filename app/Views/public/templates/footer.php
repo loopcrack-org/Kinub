@@ -1,14 +1,14 @@
 <footer class="footer">
     <div class="footer__grid">
         <div class="footer__advice-container">
-            <a href="#" class="footer__advice">Aviso de privacidad</a>
+            <a href="/aviso" class="footer__advice">Aviso de privacidad</a>
         </div>
 
-        <div class="network">
-            <a class="network__link" href="https://youtube.com" target="_blank"><span class="network__accessible">YouTube</span></a>
-            <a class="network__link" href="https://linkedin.com" target="_blank"><span class="network__accessible">Linkedin</span></a>
-            <a class="network__link" href="https://facebook.com" target="_blank"><span class="network__accessible">Facebook</span></a>
-            <a class="network__link" href="https://instagram.com" target="_blank"><span class="network__accessible">Instagram</span></a>
+        <div class="footer__network">
+            <a class="footer__link" aria-label="Youtube Link Kinub" href="https://youtube.com" target="_blank"></a>
+            <a class="footer__link" aria-label="Linkedin Link Kinub" href="https://linkedin.com" target="_blank"></a>
+            <a class="footer__link" aria-label="Facebook Link Kinub" href="https://facebook.com" target="_blank"></a>
+            <a class="footer__link" aria-label="Instagram Link Kinub" href="https://instagram.com" target="_blank"></a>
         </div>
     </div>
 </footer>

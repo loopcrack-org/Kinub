@@ -2,136 +2,190 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
+use App\Exceptions\InvalidInputException;
 use App\Models\UserModel;
+use App\Models\UserTokenModel;
 use App\Validation\ChangePasswordValidation;
 use App\Validation\LoginValidation;
-use CodeIgniter\Database\Exceptions\DatabaseException;
-use CodeIgniter\Database\Exceptions\DataException;
 use Exception;
+use Throwable;
 
 class CtrlLogin extends BaseController
 {
     public function index(): string
     {
-        return view("login/index");
+        return view('login/index');
     }
+
     public function viewPasswordEmail(): string
     {
-        return view("login/PasswordEmail");
+        return view('login/PasswordEmail');
     }
 
-    public function viewPasswordReset($token): string
+    public function viewPasswordResponse(): string
     {
+        return view('login/PasswordResponse');
+    }
 
+    public function viewPasswordReset($token)
+    {
         try {
-            $changePasswordValidation = new ChangePasswordValidation();
-            $userModel = new UserModel();
-            $user = $userModel->where("userToken", $token)->first();
-            $changePasswordValidation->existUserWithToken($user);
-            $isAccountConfirmed = $user["confirmed"];
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
 
-        } catch (\Throwable $th) {
+            $changePasswordValidation->existUserWithToken();
+            $changePasswordValidation->validateTokenExpiration($token);
+            $changePasswordValidation->hasAccessToResetPassword();
+        } catch (Throwable $th) {
             $response = [
-                "type" => "danger",
-                "title" => "¡Oops!",
-                "message" => "Parece que no cuenta con el permiso para restablecer su contraseña o el token es invalido",
+                'type'    => 'danger',
+                'title'   => '¡Oops!',
+                'message' => $th->getMessage(),
             ];
+
+            return redirect()->to('/password_response')->with('response', $response);
         }
 
-        return view("login/PasswordReset", [
-            "token" => $token,
-            "isAccountConfirmed" => $isAccountConfirmed,
-            "response" => $response ?? null
+        return view('login/PasswordReset', [
+            'token' => $token,
+        ]);
+    }
+
+    public function viewPasswordSet($token)
+    {
+        try {
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $changePasswordValidation->existUserWithToken();
+            $changePasswordValidation->validateTokenExpiration($token);
+            $changePasswordValidation->hasAccessToSetPassword();
+        } catch (Throwable $th) {
+            $response = [
+                'type'    => 'danger',
+                'title'   => '¡Oops!',
+                'message' => $th->getMessage(),
+            ];
+
+            return redirect()->to('/password_response')->with('response', $response);
+        }
+
+        return view('login/PasswordSet', [
+            'token' => $token,
         ]);
     }
 
     public function passwordReset($token)
     {
-        $changePasswordValidation = new ChangePasswordValidation();
-
-        $data = $this->request->getPost();
-
         try {
-            if(!$changePasswordValidation->validateInputs($data)) {
-                throw new Exception();
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $data = $this->request->getPost();
+
+            if (! $changePasswordValidation->validateInputs($data)) {
+                throw new InvalidInputException($changePasswordValidation->getErrors());
             }
+
+            $changePasswordValidation->existUserWithToken();
+
             $userModel = new UserModel();
-            $user = $userModel->where("userToken", $token)->first();
+            $userModel->updatePassword($userWithToken['userId'], $data['password'], USER_IS_CONFIRMED);
 
-            $changePasswordValidation->existUserWithToken($user);
-            $isAccountConfirmed = $user["confirmed"];
-
-            if($isAccountConfirmed) {
-                $result = $userModel->update($user["userId"], [
-                    "userToken" => null,
-                    "userPassword" => $data["password"]
-                ]);
-            } else {
-                $result = $userModel->update($user["userId"], [
-                    "userToken" => null,
-                    "userPassword" => $data["password"],
-                    "confirmed" => 1
-                ]);
-            }
-
-            if($result) {
-                $response = [
-                    "type" => "success",
-                    "title" => "Contraseña actualizada correctamente",
-                    "message" => "Porfavor, inicia sesión para comenzar",
-                ];
-            }
+            $response = [
+                'type'    => 'success',
+                'title'   => 'Contraseña actualizada correctamente',
+                'message' => 'Porfavor, inicia sesión para comenzar',
+            ];
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->with('errors', $changePasswordValidation->getErrors());
         } catch (Exception $e) {
-            $errors = $changePasswordValidation->getErrors();
-            if(isset($errors["connection"])) {
-                $response = [
-                    "type" => "danger",
-                    "title" => "¡Oops!",
-                    "message" => $errors["connection"],
-                ];
-            } else {
-                return redirect()->back()->with("errors", $errors);
-            }
+            $response = [
+                'title'   => 'Oops',
+                'message' => $e->getMessage(),
+                'type'    => 'danger',
+            ];
         }
-        return redirect()->to("/password_reset")->with("response", $response);
 
+        return redirect()->to('/password_response')->with('response', $response);
     }
+
+    public function passwordSet($token)
+    {
+        try {
+            $userTokenModelo          = new UserTokenModel();
+            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $changePasswordValidation = new ChangePasswordValidation($userWithToken);
+
+            $data = $this->request->getPost();
+
+            if (! $changePasswordValidation->validateInputs($data)) {
+                throw new InvalidInputException($changePasswordValidation->getErrors());
+            }
+
+            $changePasswordValidation->existUserWithToken();
+
+            $userModel = new UserModel();
+            $userModel->updatePassword($userWithToken['userId'], $data['password'], USER_IS_NOT_CONFIRMED);
+
+            $response = [
+                'type'    => 'success',
+                'title'   => 'Contraseña establecida correctamente',
+                'message' => 'Porfavor, inicia sesión para comenzar',
+            ];
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->with('errors', $changePasswordValidation->getErrors());
+        } catch (Exception $e) {
+            $response = [
+                'title'   => 'Oops',
+                'message' => $e->getMessage(),
+                'type'    => 'danger',
+            ];
+        }
+
+        return redirect()->to('/password_response')->with('response', $response);
+    }
+
     public function login()
     {
         $loginValidation = new LoginValidation();
 
         $data = $this->request->getPost();
 
-        $email = trim($data["email"]);
-        $password = trim($data["password"]);
+        $email    = trim($data['email']);
+        $password = trim($data['password']);
 
         try {
-            if(!$loginValidation->validateInputs($data)) {
+            if (! $loginValidation->validateInputs($data)) {
                 throw new Exception();
             }
-            $user = (new UserModel())->where("userEmail", $email)->first();
+            $user = (new UserModel())->where('userEmail', $email)->first();
             $loginValidation->validateConfirmedAccount($user);
             $loginValidation->validateCredentials($user, $password);
-            session()->set("user", [
-                "name" => $user["userFirstName"] . " " . $user["userLastName"],
-                "email" => $user["userEmail"],
-                "admin" => $user["isAdmin"],
+            session()->set('user', [
+                'name'  => $user['userFirstName'] . ' ' . $user['userLastName'],
+                'email' => $user['userEmail'],
+                'admin' => $user['isAdmin'],
             ]);
-            session()->set("is_logged", true);
-        } catch (\Throwable $th) {
-            return redirect()->back()->with("errors", $loginValidation->getErrors());
+            session()->set('is_logged', true);
+        } catch (Throwable $th) {
+            return redirect()->back()->with('errors', $loginValidation->getErrors());
         }
 
-        $redirectUrl = session()->get('redirectUrl') ?? "admin";
+        $redirectUrl = session()->get('redirectUrl') ?? 'admin';
         session()->remove('redirectUrl');
 
         return redirect()->to($redirectUrl);
     }
+
     public function logout()
     {
         $session = session();
         $session->destroy();
-        return redirect()->to("login");
+
+        return redirect()->to('login');
     }
 }

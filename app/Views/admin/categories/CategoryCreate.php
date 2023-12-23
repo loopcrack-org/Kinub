@@ -1,22 +1,21 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
-<?= $this->section("title-meta") ?>
-<?php echo view('partials/title-meta', array('title' => 'Crear Categoría')); ?>
+<?= $this->section('title-meta') ?>
+<?= view('partials/title-meta', ['title' => 'Crear Categoría']); ?>
 <?= $this->endSection() ?>
 
-<?= $this->section("css") ?>
+<?= $this->section('css') ?>
 <!-- Filepond css -->
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-
-
+<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
-<?= $this->section("content") ?>
+<?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?php echo view('partials/page-title', array('title' => 'Crear categoría', "titleUrl" => "/admin/categorias", 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Crear categoría',)); ?>
+        <?= view('partials/page-title', ['title' => 'Crear categoría', 'titleUrl' => '/admin/categorias', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Crear categoría']); ?>
 
-        <form id="createproduct-form" autocomplete="off" class="needs-validation"  method="POST">
+        <form id="form" autocomplete="off" class="needs-validation" method="POST">
             <div class="row justify-content-center">
                 <div class="col-sm-11">
                     <div class="d-flex justify-content-start align-items-center mb-3">
@@ -33,6 +32,9 @@
                 </div>
             </div>
         </form>
+        <div class="filepondConfig">
+            <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
+        </div>
         <!-- end form -->
     </div>
     <!-- container-fluid -->
@@ -41,7 +43,7 @@
 <?= $this->endSection() ?>
 
 
-<?= $this->section("js") ?>
-<!-- filepond js -->
-<script src="/assets/admin/js/form-file-upload-category.init.min.js"></script>
+<?= $this->section('js') ?>
+<script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <?= $this->endSection() ?>

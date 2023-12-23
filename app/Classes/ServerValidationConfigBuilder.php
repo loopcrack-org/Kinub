@@ -105,7 +105,7 @@ class ServerValidationConfigBuilder implements ValidationConfigBuilder
     public function maxDims(int $maxWidth, int $maxHeight)
     {
         $this->fileValidationRules['rules'] .= "maxDims[{$maxWidth},{$maxHeight}]|";
-        $this->fileValidationRules['messages']['maxDims'] = "El archivo debe ser de {$maxWidth} por {$maxHeight} pixeles";
+        $this->fileValidationRules['messages']['maxDims'] = "El archivo no debe exceder estas dimensiones: {$maxWidth} por {$maxHeight} pixeles";
 
         return $this;
     }

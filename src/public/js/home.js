@@ -1,2 +1,50 @@
-import Plyr from "plyr";
-const player = new Plyr("#kinub-video");
+import customSelect from 'custom-select';
+import Plyr from 'plyr';
+import Swal from 'sweetalert2';
+
+import Swiper from 'swiper/bundle';
+// init Swiper:
+new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+  slidesPerView: 4,
+  breakpoints: {
+    280: {
+      slidesPerView: 2,
+    },
+    490: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 4,
+    },
+  },
+  pagination: {
+    el: '.swiper-pagination',
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+new Plyr('#kinub-video');
+
+const cstSel = customSelect('#product-name')[0];
+
+cstSel.container.addEventListener('custom-select:open', () => {
+  cstSel.container.classList.add('turn-arrow');
+});
+
+cstSel.container.addEventListener('custom-select:close', () => {
+  cstSel.container.classList.remove('turn-arrow');
+});
+
+const showAlert = (props) => {
+  Swal.fire({
+    ...props,
+  });
+};
+
+window.showAlert = showAlert;
