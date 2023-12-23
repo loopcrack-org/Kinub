@@ -13,7 +13,7 @@ function readInitialRows() {
 
 function createRow() {
   const keyValueRow = document.createElement('DIV');
-  keyValueRow.classList.add('keyValueRow', 'row', 'gap-3', 'align-items-center', 'p-2');
+  keyValueRow.classList.add('keyValueRow', 'row', 'gap-3', 'align-items-center', 'px-0', 'py-1');
   keyValueRow.append(createDeleteBtn(), createKeyInput(), createValueInput());
   setEventsFromElement(keyValueRow);
 
@@ -82,8 +82,7 @@ function createDeleteBtn() {
     'col-sm-auto',
     'keyValueButtonDelete'
   );
-  keyValueDeleteButton.type = 'checkbox';
-  keyValueDeleteButton.id = 'flexCheckIndeterminate';
+  keyValueDeleteButton.type = 'button';
   keyValueDeleteButton.innerHTML = '<i class="ri-delete-bin-2-line"></i>';
   keyValueDeleteButtonContainer.appendChild(keyValueDeleteButton);
   return keyValueDeleteButtonContainer;
@@ -97,7 +96,6 @@ function createKeyInput() {
   const keyValueKey = document.createElement('INPUT');
   keyValueKey.classList.add('keyValueKey', 'form-control');
   keyValueKey.type = 'text';
-  keyValueKey.id = 'inlineFormInputGroupUsername';
   keyValueKey.placeholder = 'ej: Peso...';
   keyValueKey.required = true;
   keyValueKeyContainer.append(keyValueKeyLabel, keyValueKey);

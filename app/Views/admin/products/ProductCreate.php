@@ -50,6 +50,6 @@
 <script src="/assets/admin/js/alertElement.min.js"></script>
 <script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <script src="/assets/admin/js/wysiwyg-general-config.min.js"></script>
-<script src="/assets/admin/js/choices.min.js"></script>
+<script src="/assets/admin/js/productChoices.min.js"></script>
 <script src="/assets/admin/js/keyValueInput.min.js"></script>
 <?= $this->endSection() ?>
