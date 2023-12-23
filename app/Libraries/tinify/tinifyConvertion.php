@@ -32,15 +32,13 @@ try {
     $source = Tinify\fromFile($filePath);
 
     /**
-     * mae the convertion to all formats specified
+     * make the convertion to all formats specified
      */
     foreach ($types as $typeName) {
         $converted = $source->convert(['type' => [$typeName]]);
         $newExt    = $converted->result()->extension();
         $converted->toFile("{$dirname}/{$filename}.{$newExt}");
     }
-
-    exit;
 } catch (\Throwable $th) {
     exit;
 }
