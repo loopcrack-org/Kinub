@@ -8,5 +8,5 @@ class CategoryTagModel extends Model
 {
     protected $table         = 'category_tags';
     protected $primaryKey    = 'categoryTagId';
-    protected $allowedFields = ['categoryTagName', 'categoryId'];
+    protected $allowedFields = ['categoryTagName', 'categoryTagSlug', 'categoryId'];
 }

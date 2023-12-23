@@ -22,6 +22,11 @@ class Categories extends Migration
                 'constraint' => 60,
                 'null'       => true,
             ],
+            'categorySlug' => [
+                'type'       => 'varchar',
+                'constraint' => 60,
+                'null'       => false,
+            ],
             'categoryImageId' => [
                 'type' => 'int',
                 'null' => true,

@@ -17,6 +17,10 @@ class ProductsTags extends Migration
                 'type'       => 'varchar',
                 'constraint' => 45,
             ],
+            'ptSlug' => [
+                'type'       => 'varchar',
+                'constraint' => 45,
+            ],
             'ptProductId' => [
                 'type' => 'int',
             ],
