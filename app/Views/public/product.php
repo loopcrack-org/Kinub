@@ -33,9 +33,7 @@
                     <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
                         <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
+
                     <li class="glide__slide" data-src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
                         <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
                     </li>
@@ -50,6 +48,9 @@
                     </li>
                     <li class="glide__slide" data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCWQVS1EYceqxvr8rgCxm8Q1L9htUoZCRVnw&usqp=CAU">
                         <img class="slide-media glide__slide-media" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCWQVS1EYceqxvr8rgCxm8Q1L9htUoZCRVnw&usqp=CAU" alt="Imagen Grande">
+                    </li>
+                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
                     </li>
                 </ul>
             </div>
@@ -91,6 +92,21 @@
                     <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
                 </a>
                 <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="#" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="#" class="tags__tag">
                     <p class="tags__tag-content">LoRaWAN OMS</p>
                 </a>
             </div>
@@ -100,7 +116,17 @@
             <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
+            <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
             <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
 
             <button id="modal-form-btn" class="details__btn">

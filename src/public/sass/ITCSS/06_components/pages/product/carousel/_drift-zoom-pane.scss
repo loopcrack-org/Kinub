@@ -1,11 +1,12 @@
+@use '../../../../01_settings/global' as *;
+
 .drift-zoom-pane {
-  position: absolute;
-  top: 0;
-  left: 55%;
-  overflow: hidden;
-  width: 40%;
-  height: 100%;
+  max-height: 50vh;
+  backdrop-filter: blur(0.125rem);
   background: rgba(0, 0, 0, 0.5);
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
+
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  img {
+    object-fit: contain;
+  }
 }

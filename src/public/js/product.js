@@ -53,7 +53,7 @@ sections.forEach((section, index) => {
 
 new Glide('.glide', {
   type: 'carousel',
-  startAt: 0,
+  startAt: 4,
   perView: 6,
   keyboard: true,
   focusAt: 0,
@@ -77,15 +77,17 @@ const mainImage = document.querySelector('#main-image');
 
 const drift = new Drift(mainImage, {
   sourceAttribute: 'src',
-  paneContainer: document.querySelector('.details__grid'),
+  paneContainer: document.querySelector('.details__info'),
   inlinePane: false,
-  zoomFactor: 2,
+  zoomFactor: 2.5,
   hoverBoundingBox: true,
 });
 
 const mainVideo = document.querySelector('#main-video');
 const videoContainer = document.querySelector('#video-container');
 const imageContainer = document.querySelector('#main-image-container');
+const slides = document.querySelectorAll('.glide__slide');
+let currentSlide = 14;
 
 function updateContainersDisplay(videoDisplay, imageDisplay) {
   videoContainer.style.display = videoDisplay;
@@ -107,7 +109,7 @@ function handleCarouselResize() {
     const dataVideoAttributeFirstSlide = firstSlide.getAttribute('data-video');
     const videoFirstSlide = dataVideoAttributeFirstSlide !== null;
     drift.enable();
-
+    selectSlide(14, true);
     if (videoFirstSlide) {
       updateContainersDisplay('flex', 'none');
       const dataVideoAttribute = firstSlide.getAttribute('data-video');
@@ -121,13 +123,15 @@ function handleCarouselResize() {
       mainImage.alt = imageFirstSlide.alt;
     }
 
-    document.querySelectorAll('.glide__slide').forEach((slide) => {
+    selectSlide(14, true);
+    slides.forEach((slide, index) => {
       const sliderImage = slide.querySelector('img');
       const dataVideoAttribute = slide.getAttribute('data-video');
 
       slide.addEventListener('click', () => {
         if (dataVideoAttribute === null) {
           if (mainImage.src !== sliderImage.src) {
+            selectSlide(index);
             mainImage.src = sliderImage.src;
             mainImage.alt = sliderImage.alt;
             if (imageContainer.style.display == 'none' && !isMobile()) {
@@ -138,6 +142,7 @@ function handleCarouselResize() {
           let videoData = JSON.parse(dataVideoAttribute);
           let videoSource = videoData.source[0].src;
           if (mainVideo.src !== videoSource) {
+            selectSlide(index);
             mainVideo.src = videoSource;
             if (videoContainer.style.display == 'none' && !isMobile()) {
               updateContainersDisplay('flex', 'none');
@@ -146,6 +151,21 @@ function handleCarouselResize() {
         }
       });
     });
+  }
+}
+
+function selectSlide(slideIndex, firstSlide = false) {
+  console.log(currentSlide);
+  console.log(slides[currentSlide]);
+  console.log(slideIndex);
+  if (firstSlide === false) {
+    if (currentSlide !== slideIndex) {
+      slides[slideIndex].classList.add('glide__slide--selected');
+      slides[currentSlide].classList.remove('glide__slide--selected');
+      currentSlide = slideIndex;
+    }
+  } else {
+    slides[slideIndex].classList.add('glide__slide--selected');
   }
 }
 

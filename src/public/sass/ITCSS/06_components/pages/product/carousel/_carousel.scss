@@ -1,4 +1,5 @@
 @use 'sass:color';
+@use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../02_tools/breakpoints' as *;
 
@@ -48,6 +49,8 @@
   }
 
   @include desktop() {
+    position: sticky;
+    top: $navbar-desktop-height + $spacing-md;
     width: 50%;
     max-height: 30.5rem;
   }
