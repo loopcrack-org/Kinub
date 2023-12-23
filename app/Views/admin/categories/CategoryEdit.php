@@ -1,20 +1,18 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
-<?= $this->section("title-meta") ?>
-<?php echo view('partials/title-meta', array('title' => 'Editar Categoría')); ?>
+<?= $this->section('title-meta') ?>
+<?= view('partials/title-meta', ['title' => 'Editar Categoría']); ?>
 <?= $this->endSection() ?>
 
-<?= $this->section("css") ?>
+<?= $this->section('css') ?>
 <!-- Filepond css -->
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-
-
 <?= $this->endSection() ?>
 
-<?= $this->section("content") ?>
+<?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-    <?php echo view('partials/page-title', array('title' => 'Editar categoría', "titleUrl" => "/admin/categorias", 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Editar categoría',)); ?>
+        <?= view('partials/page-title', ['title' => 'Editar categoría', 'titleUrl' => '/admin/categorias', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Editar categoría']); ?>
 
 
         <div class="row justify-content-center">
@@ -24,7 +22,7 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
-                <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
+                <form id="form" autocomplete="off" class="needs-validation" method="POST">
                     <?= $this->include('admin/categories/categoriesFormTemplate') ?>
 
                     <div class="text-end mb-3">
@@ -32,6 +30,9 @@
                     </div>
                 </form>
                 <!-- end form -->
+                <div class="filepondConfig">
+                    <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
+                </div>
             </div>
             <!-- end col -->
         </div>
@@ -43,6 +44,7 @@
 <?= $this->endSection() ?>
 
 
-<?= $this->section("js") ?>
-<script src="/assets/admin/js/form-file-upload-category.init.min.js"></script>
+<?= $this->section('js') ?>
+<script src="/assets/admin/js/filepond-general-config.min.js"></script>
+<script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>

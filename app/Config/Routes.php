@@ -108,6 +108,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
+        generateFileApiRoutesByController($routes, CtrlCategory::class);
     });
 
     $routes->group('certificados', static function ($routes) {

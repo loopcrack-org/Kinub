@@ -56,7 +56,11 @@
                                             <p><?= $category['categoryName'] ?></p>
                                         </div>
                                     </td>
-                                    <td><?= $category['categoryIconId'] . '.jpeg' ?></td>
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                            <img style="max-width: 8rem;" src="<?= $category['fileRoute']?>" alt="Icono de la categoria">
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
 
