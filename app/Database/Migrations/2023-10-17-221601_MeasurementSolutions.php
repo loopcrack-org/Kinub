@@ -19,9 +19,11 @@ class MeasurementSolutions extends Migration
             ],
             'msIconId' => [
                 'type' => 'int',
+                'null' => true,
             ],
             'msImageId' => [
                 'type' => 'int',
+                'null' => true,
             ],
             'msDescription' => [
                 'type'       => 'varchar',
@@ -31,8 +33,8 @@ class MeasurementSolutions extends Migration
 
         $this->forge->addKey('msId', true);
 
-        $this->forge->addForeignKey('msIconId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'measurement_solution_icon_FK');
-        $this->forge->addForeignKey('msImageId', 'files', 'fileId', 'CASCADE', 'CASCADE', 'measurement_solution_image_FK');
+        $this->forge->addForeignKey('msIconId', 'files', 'fileId', 'SET NULL', 'SET NULL', 'measurement_solution_icon_FK');
+        $this->forge->addForeignKey('msImageId', 'files', 'fileId', 'SET NULL', 'SET NULL', 'measurement_solution_image_FK');
 
         $this->forge->createTable('measurement_solutions');
     }
