@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div>
-                    <input type="text"  class="form-control <?= isset($errors['certificatefileName']) ? 'is-invalid' : '' ?>" name="certificatefileName" id="certificatefileName" value="<?= old('certificatefileName') ?? $certificate['certificatefileName'] ?? ''; ?>" placeholder="Ingrese el nombre" required>
+                    <input type="text"  class="form-control <?= isset($errors['certificatefileName']) ? 'is-invalid' : '' ?>" name="certificatefileName" id="certificatefileName" value="<?= old('certificatefileName') ?? $certificate['certificatefileName'] ?? ''; ?>" placeholder="Ingrese el nombre" >
                     <?php if (isset($errors['certificatefileName'])) : ?>
                         <div class="invalid-feedback">
                             <?= $errors['certificatefileName'] ?>
@@ -31,7 +31,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="certificatePreviewId">
+                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatePreview']]) ?>
             </div>
             <!-- end card body -->
         </div>
@@ -46,7 +46,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="certificatefileId">
+                 <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatefile']]) ?>
             </div>
             <!-- end card body -->
         </div>
