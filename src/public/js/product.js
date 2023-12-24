@@ -109,21 +109,23 @@ function handleCarouselResize() {
     const dataVideoAttributeFirstSlide = firstSlide.getAttribute('data-video');
     const videoFirstSlide = dataVideoAttributeFirstSlide !== null;
     drift.enable();
-    selectSlide(14, true);
+    selectSlide(4, true);
     if (videoFirstSlide) {
+      videoContainer.classList.add('carousel__img-container--selected');
       updateContainersDisplay('flex', 'none');
       const dataVideoAttribute = firstSlide.getAttribute('data-video');
       let videoData = JSON.parse(dataVideoAttribute);
       let videoSource = videoData.source[0].src;
       mainVideo.src = videoSource;
     } else {
+      imageContainer.classList.add('carousel__img-container--selected');
       updateContainersDisplay('none', 'flex');
       let imageFirstSlide = firstSlide.querySelector('img');
       mainImage.src = imageFirstSlide.src;
       mainImage.alt = imageFirstSlide.alt;
     }
 
-    selectSlide(14, true);
+    selectSlide(4, true);
     slides.forEach((slide, index) => {
       const sliderImage = slide.querySelector('img');
       const dataVideoAttribute = slide.getAttribute('data-video');
@@ -134,6 +136,15 @@ function handleCarouselResize() {
             selectSlide(index);
             mainImage.src = sliderImage.src;
             mainImage.alt = sliderImage.alt;
+            imageContainer.setAttribute('data-src', sliderImage.src);
+
+            if (
+              !imageContainer.classList.contains('carousel__img-container--selected') &&
+              !isMobile()
+            ) {
+              videoContainer.classList.remove('carousel__img-container--selected');
+              imageContainer.classList.add('carousel__img-container--selected');
+            }
             if (imageContainer.style.display == 'none' && !isMobile()) {
               updateContainersDisplay('none', 'flex');
             }
@@ -141,9 +152,17 @@ function handleCarouselResize() {
         } else {
           let videoData = JSON.parse(dataVideoAttribute);
           let videoSource = videoData.source[0].src;
+          if (
+            videoContainer.classList.contains('carousel__img-container--selected') &&
+            !isMobile()
+          ) {
+            imageContainer.classList.remove('carousel__img-container--selected');
+            videoContainer.classList.add('carousel__img-container--selected');
+          }
           if (mainVideo.src !== videoSource) {
             selectSlide(index);
             mainVideo.src = videoSource;
+            videoContainer.setAttribute('data-video', dataVideoAttribute);
             if (videoContainer.style.display == 'none' && !isMobile()) {
               updateContainersDisplay('flex', 'none');
             }
@@ -155,16 +174,17 @@ function handleCarouselResize() {
 }
 
 function selectSlide(slideIndex, firstSlide = false) {
-  console.log(currentSlide);
-  console.log(slides[currentSlide]);
-  console.log(slideIndex);
   if (firstSlide === false) {
     if (currentSlide !== slideIndex) {
+      initLightGallery();
+
       slides[slideIndex].classList.add('glide__slide--selected');
       slides[currentSlide].classList.remove('glide__slide--selected');
       currentSlide = slideIndex;
     }
   } else {
+    initLightGallery();
+
     slides[slideIndex].classList.add('glide__slide--selected');
   }
 }

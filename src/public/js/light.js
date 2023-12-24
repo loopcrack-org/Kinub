@@ -6,27 +6,64 @@ import lgZoom from 'lightgallery/plugins/zoom/lg-zoom.min.js';
 
 export function initLightGallery() {
   const lightgalleryProductContainer = document.getElementById('lightgallery-product');
-  let lightInstance = initLightGalleryInstance(lightgalleryProductContainer);
+  const [videoContainer, imageContainer] = document.querySelectorAll('.carousel__img-container');
+
+  let lightMobileInstance;
+  let lightDesktopInstance;
+
+  const isDesktopView = isDesktop();
+
+  if (isDesktopView) {
+    if (videoContainer.classList.contains('.carousel__img-container--selected')) {
+      lightDesktopInstance = initLightGalleryInstance(videoContainer, '#main-video');
+    } else if (imageContainer.classList.contains('.carousel__img-container--selected')) {
+      lightDesktopInstance = initLightGalleryInstance(imageContainer, '#main-image');
+    }
+  } else if (!isDesktopView) {
+    lightMobileInstance = initLightGalleryInstance(lightgalleryProductContainer, '.glide__slide');
+  }
 
   function handleResize() {
     const isDesktopView = isDesktop();
-    if (isDesktopView && lightInstance) {
-      lightInstance.destroy();
-      lightInstance = null;
-    } else if (!isDesktopView && !lightInstance) {
-      lightInstance = initLightGalleryInstance(lightgalleryProductContainer);
+    if (isDesktopView) {
+      if (lightMobileInstance) {
+        lightMobileInstance.destroy();
+        lightMobileInstance = null;
+      }
+
+      if (lightDesktopInstance) {
+        lightDesktopInstance.destroy();
+        lightDesktopInstance = null;
+      }
+
+      if (videoContainer.classList.contains('carousel__img-container--selected')) {
+        lightDesktopInstance = initLightGalleryInstance(videoContainer, '#main-video');
+      } else if (imageContainer.classList.contains('carousel__img-container--selected')) {
+        lightDesktopInstance = initLightGalleryInstance(imageContainer, '#main-image');
+      }
+    } else if (!isDesktopView) {
+      if (lightDesktopInstance) {
+        lightDesktopInstance.destroy();
+        lightDesktopInstance = null;
+      }
+
+      if (lightMobileInstance) {
+        lightMobileInstance.destroy();
+        lightMobileInstance = null;
+      }
+      lightMobileInstance = initLightGalleryInstance(lightgalleryProductContainer, '.glide__slide');
     }
   }
 
   window.addEventListener('resize', handleResize);
 
-  function initLightGalleryInstance(container) {
+  function initLightGalleryInstance(container, selector) {
     const light = lightGallery(container, {
       licenseKey: '927D6AF3-9D4E-4315-A976-33AFB1C334EF',
       plugins: [lgThumbnail, lgZoom, lgFullscreen, lgVideo],
       thumbnail: true,
       download: false,
-      selector: '.glide__slide',
+      selector: selector,
       hideScrollbar: true,
       mobileSettings: {
         howCloseIcon: true,
