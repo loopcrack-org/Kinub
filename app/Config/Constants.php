@@ -101,13 +101,6 @@ define('EVENT_PRIORITY_HIGH', 10);
 define('FILES_TEMP_DIRECTORY', './files/tmp/');
 define('FILES_UPLOAD_DIRECTORY', './uploads/');
 
-/**
- * Email Types ID
- */
-define('CONTACT_EMAIL_ID', 1);
-define('SUPPORT_EMAIL_ID', 2);
-define('PRODUCT_EMAIL_ID', 3);
-
 /*
  | --------------------------------------------------------------------------
  | User account status

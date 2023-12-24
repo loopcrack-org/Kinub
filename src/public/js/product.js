@@ -209,13 +209,15 @@ const errorMap = [
 
 const commonCustomViewErrors = {
   add: function (field, message, cls) {
-    let error = document.querySelector(`.${field.id}.${cls}`) || document.createElement('p');
-    error.textContent = message;
+    let errorElement = document.querySelector(`.${field.id}.${cls}`);
 
-    if (!document.querySelector(`.${field.id}.${cls}`)) {
-      error.classList.add(field.id, cls);
-      clonedForm.querySelector(`[for='${field.id}']`).after(error);
+    if (!errorElement) {
+      errorElement = document.createElement('p');
+      errorElement.classList.add(field.id, cls);
+      clonedForm.querySelector(`[for='${field.id}']`).after(errorElement);
     }
+
+    errorElement.textContent = message;
   },
   remove: function (field, cls) {
     clonedForm.querySelector(`.${field.id}.${cls}`)?.remove();
@@ -238,8 +240,7 @@ const configValidator = {
   customValidates: {
     intlTelInput: {
       message: errorMap[0],
-      // eslint-disable-next-line
-      fn: function (field, container) {
+      fn: function (field) {
         let status = false;
         if (field.value.trim().length > 0 && phoneInput.isValidNumber()) {
           status = true;

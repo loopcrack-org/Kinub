@@ -18,6 +18,10 @@ use Throwable;
 
 class CtrlEmail extends BaseController
 {
+    public const CONTACT_EMAIL_ID = 1;
+    public const SUPPORT_EMAIL_ID = 2;
+    public const PRODUCT_EMAIL_ID = 3;
+
     public function sendContactEmail(): RedirectResponse
     {
         $contactEmailValidation = new ContactEmailValidation();
@@ -53,7 +57,7 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'   => CONTACT_EMAIL_ID,
+                'emailTypeId'   => self::CONTACT_EMAIL_ID,
                 'inquirerName'  => $POST['inquirer-name'],
                 'inquirerEmail' => $POST['inquirer-email'],
                 'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
@@ -115,7 +119,7 @@ class CtrlEmail extends BaseController
             }
 
             $data = [
-                'emailTypeId'   => PRODUCT_EMAIL_ID,
+                'emailTypeId'   => self::PRODUCT_EMAIL_ID,
                 'inquirerName'  => $productEmailData['inquirer-name'],
                 'inquirerEmail' => $productEmailData['inquirer-email'],
                 'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
@@ -193,7 +197,7 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'   => SUPPORT_EMAIL_ID,
+                'emailTypeId'   => self::SUPPORT_EMAIL_ID,
                 'inquirerName'  => $POST['support-customer'],
                 'inquirerEmail' => $POST['support-email'],
                 'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
