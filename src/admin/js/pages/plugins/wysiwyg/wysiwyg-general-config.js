@@ -4,14 +4,14 @@ const wysiwygOptions = {
   modules: {
     toolbar: [
       [{ header: [4, 5, 6, false] }],
-      [{ size: ['small', false] }], // custom dropdown
-      ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+      [{ size: ['small', false] }],
+      ['bold', 'italic', 'underline', 'strike'],
       ['blockquote'],
       ['link', 'image'],
 
       [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
-      [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+      [{ script: 'sub' }, { script: 'super' }],
+      [{ indent: '-1' }, { indent: '+1' }],
 
       [{ align: [] }],
 
@@ -19,7 +19,7 @@ const wysiwygOptions = {
     ],
   },
   placeholder: 'Escribe algo aquí...',
-  theme: 'snow', // or 'bubble'
+  theme: 'snow',
 };
 
 const editorContainers = document.querySelectorAll('.wysiwyg-editor');
@@ -28,11 +28,9 @@ editorContainers.forEach((editorContainer) => {
   const inputHidden = editorContainer.querySelector('.input-wysiwyg');
   const quillEditor = new Quill(editor, wysiwygOptions);
 
-  // initial content
   quillEditor.root.innerHTML = inputHidden.value;
 
   quillEditor.on('text-change', function () {
-    // set html into input
     inputHidden.value = quillEditor.root.innerHTML;
   });
 });
