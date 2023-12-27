@@ -2,15 +2,15 @@
     <div class="col-md-6">
         <div class="card">
             <div class="card-header">
-                <label class="form-label mb-0" for="category-title-input">
-                    <h5 class="card-title mb-0">Titulo de la categoría</h5>
+                <label class="form-label mb-0" for="categoryName">
+                    <h5 class="card-title mb-0">Título de la categoría</h5>
                 </label>
             </div>
             <?php $errors = session()->get('errors') ?>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="name" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" required>
+                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="categoryName" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryName'] ?? null])?>
                     </div>
                 </div>
@@ -19,6 +19,30 @@
     </div>
     <!-- end col -->
     <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <label class="form-label mb-0" for="categorySubname">
+                    <h5 class="card-title mb-0">Subtítulo de la categoría</h5>
+                </label>
+            </div>
+            <?php $errors = session()->get('errors') ?>
+            <div class="card-body">
+                <div class="hstack gap-3 align-items-start">
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control <?= isset($errors['categorySubname']) ? 'is-invalid' : '' ?>" name="categorySubname" id="categorySubname" value="<?= old('categorySubname') ?? $category['categorySubname'] ?? ''; ?>" placeholder="Ingrese el subtitulo">
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['categorySubname'] ?? null])?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end col -->
+</div>
+<!-- end row -->
+
+
+<div class="row">
+    <div class="col-md-12">
         <div class="card">
             <div class="card-header">
                 <h5 class="card-title mb-0">Tags de la categoría</h5>
@@ -46,10 +70,7 @@
                 <h4 class="card-title mb-0">Icono</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <input type="file" class="filepond" name="icon">
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['icon']]) ?>
         </div>
         <!-- end card -->
     </div>
@@ -64,10 +85,7 @@
                 <h4 class="card-title mb-0">Imagen de fondo</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <input type="file" class="filepond" name="image">
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['image']]) ?>
         </div>
         <!-- end card -->
     </div>
