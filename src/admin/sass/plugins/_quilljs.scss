@@ -17,6 +17,10 @@
     margin-left: -1.5em;
     text-align: right;
   }
+
+  &::before {
+    color: var(--vz-body-color) !important;
+  }
 }
 
 .ql-container {
