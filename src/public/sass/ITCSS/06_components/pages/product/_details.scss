@@ -6,14 +6,17 @@
 @use '../../../02_tools/mixins' as *;
 
 .details {
-  width: 100%;
-  max-width: 90%;
+  position: relative;
+  width: 90%;
+  max-width: 90rem;
+  margin: 3vh auto;
   transition: height 300ms ease;
 
   &__grid {
     display: flex;
+    width: 100%;
     flex-direction: column;
-    gap: $spacing-sm;
+    gap: $spacing-md;
   }
 
   &__info {
@@ -82,14 +85,6 @@
     }
   }
 
-  @include fold {
-    margin: 1rem auto 0 auto;
-  }
-
-  @include phone {
-    margin: 1.2rem auto 0 auto;
-  }
-
   @include desktop() {
     &__heading {
       &--mobile {
@@ -111,8 +106,9 @@
     }
 
     &__grid {
-      flex-direction: row;
-      justify-content: center;
+      display: grid;
+      gap: 4.5rem;
+      grid-template-columns: calc(50% - 4.5rem) 1fr;
     }
 
     &__btn {
@@ -126,9 +122,6 @@
   }
 
   @include desktopXL() {
-    width: 90%;
-    max-width: 120rem;
-
     &__data {
       @include fluid-text(0.6rem, 1.2rem);
     }

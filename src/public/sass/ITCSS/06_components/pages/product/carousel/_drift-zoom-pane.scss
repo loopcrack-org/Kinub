@@ -1,9 +1,10 @@
 @use '../../../../01_settings/global' as *;
+@use '../../../../01_settings/colors' as *;
 
 .drift-zoom-pane {
-  max-height: 50vh;
-  backdrop-filter: blur(0.125rem);
-  background: rgba(0, 0, 0, 0.5);
+  max-height: min(45svh, 45vmin);
+  border: solid 1px $color-gray-10;
+  background: white;
 
   /* stylelint-disable-next-line plugin/selector-bem-pattern */
   img {
