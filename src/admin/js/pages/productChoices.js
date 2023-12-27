@@ -1,6 +1,6 @@
 import Choices from 'choices.js';
 
-const categorySelect = document.querySelector('#category');
+const categorySelect = document.querySelector('#productCategoryId');
 const categoryTagInput = document.querySelector('#categoryTags');
 const productTagInput = document.querySelector('#productTags');
 
