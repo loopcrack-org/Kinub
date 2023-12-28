@@ -1,11 +1,9 @@
-const sidebar = document.querySelector('.sidebar');
+const sidebar = document.querySelector('.sidebar__nav');
+const sidebarOverlay = document.querySelector('.sidebar__background');
 const sidebarClose = document.querySelector('#sidebar-close');
 const sidebarSections = document.querySelectorAll('.menu-section');
-const sidebarOverlay = document.querySelector('.sidebar__overlay');
 
-sidebarClose.addEventListener('click', () => {
-  closeSidebar();
-});
+sidebarClose.addEventListener('click', closeSidebar);
 
 sidebarSections.forEach((section) => {
   const sectionBtn = section.querySelector('.menu-section__button');
@@ -13,21 +11,24 @@ sidebarSections.forEach((section) => {
   const sectionIcon = section.querySelector('.menu-section__icon');
 
   sectionBtn.addEventListener('click', () => {
-    sectionDropdown.classList.toggle('menu-section__dropdown--active');
-    sectionIcon.classList.toggle('menu-section__icon--active');
+    toggleSection(sectionDropdown, sectionIcon);
   });
 });
 
-document.addEventListener('click', (event) => {
-  if (!sidebar.contains(event.target) && sidebar.classList.contains('sidebar--active')) {
-    closeSidebar();
-  }
-});
-
-sidebarOverlay.addEventListener('click', () => {
-  closeSidebar();
-});
+document.addEventListener('click', closeSidebarIfOutside);
 
 function closeSidebar() {
-  sidebar.classList.remove('sidebar--active');
+  sidebar.classList.remove('sidebar__nav--active');
+  sidebarOverlay.classList.remove('sidebar__background--active');
+}
+
+function toggleSection(sectionDropdown, sectionIcon) {
+  sectionDropdown.classList.toggle('menu-section__dropdown--active');
+  sectionIcon.classList.toggle('menu-section__icon--active');
+}
+
+function closeSidebarIfOutside(event) {
+  if (!sidebar.contains(event.target) && sidebar.classList.contains('sidebar__nav--active')) {
+    closeSidebar();
+  }
 }
