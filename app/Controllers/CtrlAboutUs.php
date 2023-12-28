@@ -12,12 +12,14 @@ use Throwable;
 
 class CtrlAboutUs extends CtrlApiFiles
 {
+    private const ABOUT_US_BASE_ROUTE = '/admin/nosotros/';
+
     protected FileValidationConfig $fileConfig;
 
     public function __construct()
     {
         $fileValidationConfigBuilder = new FileValidationConfigBuilder('/admin/nosotros');
-        $fileValidationConfigBuilder->builder('aboutUsImage')->isImage()->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->build();
+        $fileValidationConfigBuilder->builder('aboutUsImage')->isImage()->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->maxDims(860, 600)->build();
         $fileValidationConfigBuilder->builder('aboutUsVideo')->isVideo()->minFiles(1)->maxFiles(1)->maxSize(1000, 'MB')->build();
 
         $this->fileConfig = $fileValidationConfigBuilder->getConfig();
@@ -41,8 +43,11 @@ class CtrlAboutUs extends CtrlApiFiles
     public function updateAboutUsSection()
     {
         try {
-            $aboutUsData = $this->request->getPost();
-            $validator   = new AboutUsValidation();
+            $aboutUsData     = $this->request->getPost();
+            $validationRules = $this->fileConfig->getCollectionFileValidationRules();
+
+            $validator = new AboutUsValidation();
+            $validator->addRules($validationRules['rules'], $validationRules['messages']);
 
             if (! $validator->validateInputs($aboutUsData)) {
                 throw new InvalidInputException($validator->getErrors(), '');
@@ -72,11 +77,11 @@ class CtrlAboutUs extends CtrlApiFiles
                 'type'    => 'success',
             ];
 
-            return redirect()->to('/admin/nosotros')->with('response', $response);
+            return redirect()->to(self::ABOUT_US_BASE_ROUTE)->with('response', $response);
         } catch (InvalidInputException $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
 
-            return redirect()->to('/admin/nosotros')->withInput()->with('errors', $th->getErrors());
+            return redirect()->to(self::ABOUT_US_BASE_ROUTE)->withInput()->with('errors', $th->getErrors());
         } catch (Throwable $th) {
             session()->setFlashdata('clientData', $this->request->getPost());
             $response = [
@@ -85,7 +90,7 @@ class CtrlAboutUs extends CtrlApiFiles
                 'type'    => 'error',
             ];
 
-            return redirect()->to('/admin/nosotros')->with('response', $response)->withInput();
+            return redirect()->to(self::ABOUT_US_BASE_ROUTE)->with('response', $response)->withInput();
         }
     }
 }

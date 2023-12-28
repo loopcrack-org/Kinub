@@ -88,6 +88,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlSolution::class, 'viewSolutionEdit']);
         $routes->post('editar/(:num)', [CtrlSolution::class, 'updateSolution']);
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
+        generateFileApiRoutesByController($routes, CtrlSolution::class);
     });
 
     $routes->group('productos', static function ($routes) {
@@ -107,6 +108,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
+        generateFileApiRoutesByController($routes, CtrlCategory::class);
     });
 
     $routes->group('certificados', static function ($routes) {
@@ -117,6 +119,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCertificate::class, 'viewCertificateEdit']);
         $routes->post('editar/(:num)', [CtrlCertificate::class, 'updateCertificate']);
         $routes->post('borrar', [CtrlCertificate::class, 'deleteCertificate']);
+        generateFileApiRoutesByController($routes, CtrlCertificate::class);
     });
 
     $routes->group('emails', static function ($routes) {

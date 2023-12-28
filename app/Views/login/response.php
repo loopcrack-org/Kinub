@@ -1,7 +1,7 @@
 <div class="card-body p-4 text-center">
     <div class="avatar-lg mx-auto mt-2">
         <div class="avatar-title bg-light text-<?= $response['type'] ?> display-3 rounded-circle">
-            <i class="ri-<?= $response['type'] != "success" ? 'error-warning' : 'checkbox-circle' ?>-fill"></i>
+            <i class="ri-<?= $response['type'] !== 'success' ? 'error-warning' : 'checkbox-circle' ?>-fill"></i>
         </div>
     </div>
     <div class="mt-4 pt-2">
