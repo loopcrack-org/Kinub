@@ -34,15 +34,12 @@
                                 <label class="card-text">Detalles del producto</label>
                             </div>
                         </div>
-                        <div class="keyValue row justify-content-center w-100 mx-auto mb-2">
-                            <?php foreach(old('technicalInfo') ?? ['' => ''] as $key => $value):?>
-                                <?=view('admin/components/keyValueInput', ['key' => $key, 'value' => $value])?>
-                            <?php endforeach; ?>
-                        </div>
-                        <div class="row">
-                            <div class="me-0 mx-auto col-12 col-sm-5 col-md-4 col-l-3 row gap-3 justify-content-end">
-                                <button type="button" id="keyValueButtonAdd" class="btn btn-sm btn-success col">Agregar</button>
-                            </div>
+                        <div class="mb-2">
+                            <?= view('admin/components/keyValue/keyValueContainer', [
+                                'keyValues' => old('productTechnicalInfo') ?? ['' => ''],
+                                'minValues' => 1,
+                                'name'      => 'productTechnicalInfo',
+                            ]) ?>
                         </div>
                     </div>
                 </div>
@@ -55,6 +52,14 @@
                         <label class="text-muted mb-3">Ingresa la imagen principal</label>
                         <?= view('admin/components/inputFilePond', [
                             'config' => $fileConfig['mainImage'],
+                        ]) ?>
+                    </div>
+                    <!-- Main Video -->
+                    <div class="mb-4">
+                        <h5 class="fs-14 mb-2">Video principal</h5>
+                        <label class="text-muted mb-3">Ingresa el video principal</label>
+                        <?= view('admin/components/inputFilePond', [
+                            'config' => $fileConfig['mainVideo'],
                         ]) ?>
                     </div>
                     <!-- Images -->
@@ -80,7 +85,7 @@
         <!-- end card -->
     </div>
 
-    <div class="g-col-12 g-col-lg-4 p-0 sticky-lg-top" style="top: 5.5rem; height:min-content">
+    <div class="g-col-12 g-col-lg-4 p-0 sticky-lg-top z-1" style="top: 5.5rem; height:min-content">
         <!-- Tags -->
         <div class="card">
             <div class="card-header">
@@ -109,7 +114,9 @@
                     <?= validation_show_error('categoryTags', 'validationError') ?>
                     <h5 class="fs-14 mb-2">Tags de categoría</h5>
                     <label class="text-muted mb-3">Ingresa tags de la categoría</label>
-                    <select id="categoryTags" name="categoryTags[]" class="form-control" multiple required>
+                    <div class="position-relative">
+                        <div id="tagSpinner" class="position-absolute" style="z-index: 1; right:10px; top:30%;"></div>
+                        <select id="categoryTags" name="categoryTags[]" class="form-control" multiple required>
                         <option value="">Selecciona</option>
                         <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
                         <option
@@ -118,6 +125,7 @@
                         </option>
                         <?php endforeach ?>
                     </select>
+                    </div>
                 </div>
             </div>
             <!-- end card body -->

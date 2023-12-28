@@ -3,6 +3,7 @@ import Choices from 'choices.js';
 const categorySelect = document.querySelector('#productCategoryId');
 const categoryTagInput = document.querySelector('#categoryTags');
 const productTagInput = document.querySelector('#productTags');
+const tagSpinner = document.querySelector('#tagSpinner');
 
 function createChoices(input, searchEnabled = true, moreOptions = {}) {
   return new Choices(input, {
@@ -34,6 +35,7 @@ categorySelectChoice.passedElement.element.addEventListener('change', async func
   categoryTagChoice.clearStore();
 
   if (e.target.value) {
+    categoryTagChoice.disable();
     const categoryTags = await getCategoryTags(e.target.value);
     categoryTagChoice.setChoices(categoryTags);
     categoryTagChoice.enable();
@@ -65,11 +67,14 @@ async function initCategoryTags() {
 
 async function getCategoryTags(categoryId) {
   const apiBaseUrl = `/api/categorytags?category=${categoryId}`;
+  tagSpinner.innerHTML =
+    '<div class="clearfix"><div class="spinner-border spinner-border-sm float-end" role="status"></div></div>';
   const source = await fetch(apiBaseUrl);
   const result = await source.json();
   const categoryTags = result.map((categoryTag) => ({
     label: categoryTag.categoryTagName,
     value: categoryTag.categoryTagId,
   }));
+  tagSpinner.innerHTML = '';
   return categoryTags;
 }

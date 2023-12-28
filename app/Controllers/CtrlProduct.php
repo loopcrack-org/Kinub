@@ -15,6 +15,7 @@ class CtrlProduct extends CtrlApiFiles
     {
         $configBuilder = new FileValidationConfigBuilder('/admin/productos');
         $configBuilder->builder('mainImage')->isImage()->build();
+        $configBuilder->builder('mainVideo')->isVideo()->build();
         $configBuilder->builder('image')->isImage()->build();
         $configBuilder->builder('video')->isVideo()->build();
         $configBuilder->builder('brochure')->isPDF()->build();

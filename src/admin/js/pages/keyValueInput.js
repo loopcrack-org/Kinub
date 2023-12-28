@@ -1,9 +1,18 @@
-import { Tooltip } from 'bootstrap';
+import tippy from 'tippy.js';
 
 const buttonAdd = document.querySelector('#keyValueButtonAdd');
 const keyValueContainer = document.querySelector('.keyValue');
 const keyValueRows = keyValueContainer.querySelectorAll('.keyValueRow');
-const minRows = 1;
+const minRows = parseInt(keyValueContainer.getAttribute('data-min') ?? 1);
+const inputName = keyValueContainer.getAttribute('data-name') ?? 'keyValue';
+const tippyOptions = {
+  content: 'Completa este campo',
+  duration: [300, 0],
+  theme: 'alert',
+  animation: 'shift-away',
+  arrow: true,
+};
+const tooltips = {};
 
 function readInitialRows() {
   if (keyValueContainer.childElementCount === minRows) {
@@ -37,9 +46,9 @@ function setEventsFromElement(element) {
   const keyInput = element.querySelector('.keyValueKey');
   const valueInput = element.querySelector('.keyValueValue');
 
-  valueInput.name = `technicalInfo[${keyInput.value}]`;
+  valueInput.name = `${inputName}[${keyInput.value}]`;
   keyInput.addEventListener('input', (e) => {
-    valueInput.name = `technicalInfo[${e.target.value}]`;
+    valueInput.name = `${inputName}[${e.target.value}]`;
   });
   btnDelete.addEventListener('click', () => {
     deleteRow(element);
@@ -52,21 +61,25 @@ function toggleDeleteBtns(disable = true) {
     .forEach((row) => {
       const deleteBtn = row.querySelector('.btn');
       const deleteBtnContainer = deleteBtn.parentElement;
-      const tooltip = new Tooltip(row, {
-        title: `Completa este campo`,
-      });
       if (disable) {
         deleteBtn.disabled = true;
         deleteBtn.classList.remove('btn-danger');
         deleteBtn.classList.add('btn-secondary');
         deleteBtnContainer.style.cursor = 'not-allowed';
-        tooltip.enable();
+        const tooltip = tippy(row, tippyOptions);
+        tooltips[`tooltip-${tooltip.id}`] = tooltip;
+        row.setAttribute('tooltip-id', tooltip.id);
       } else {
         deleteBtn.disabled = false;
         deleteBtn.classList.remove('btn-secondary');
         deleteBtn.classList.add('btn-danger');
         deleteBtnContainer.style.cursor = 'pointer';
-        tooltip.disable();
+        const tippyId = row.getAttribute('tooltip-id');
+        const tippyKey = `tooltip-${tippyId}`;
+        if (tooltips[tippyKey]) {
+          tooltips[tippyKey].destroy();
+          delete tooltips[tippyKey];
+        }
       }
     });
 }
