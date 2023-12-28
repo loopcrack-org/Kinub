@@ -103,6 +103,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlProduct::class, 'viewProductEdit']);
         $routes->post('editar/(:num)', [CtrlProduct::class, 'updateProduct']);
         $routes->post('borrar', [CtrlProduct::class, 'deleteProduct']);
+        generateFileApiRoutesByController($routes, CtrlProduct::class);
     });
     $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */

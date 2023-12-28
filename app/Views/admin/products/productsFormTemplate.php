@@ -10,15 +10,15 @@
                 <div class="g-col-12">
                     <!-- Product Name -->
                     <div class="mb-3">
-                        <?= validation_show_error('name', 'validationError') ?>
-                        <label class="card-text" for="name">Nombre del producto</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Ingresa el nobre del producto" value="<?= old('name') ?? ''?>" required>
+                        <?= validation_show_error('productName', 'validationError') ?>
+                        <label class="card-text" for="productName">Nombre del producto</label>
+                        <input type="text" class="form-control" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
                     </div>
                     <!-- Product Model -->
                     <div class="mb-3">
-                        <?= validation_show_error('model', 'validationError') ?>
-                        <label class="card-text" for="model">Ingresa el modelo</label>
-                        <input type="text" class="form-control" name="model" id="model" placeholder="Ingresa el modelo del producto" value="<?= old('model') ?? ''?>" required>
+                        <?= validation_show_error('productModel', 'validationError') ?>
+                        <label class="card-text" for="productModel">Ingresa el modelo</label>
+                        <input type="text" class="form-control" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
                     </div>
                     <!-- Product Tags -->
                     <div class="mb-3">
@@ -90,14 +90,14 @@
             <div class="card-body">
                 <!-- Category -->
                 <div class="mb-4">
-                    <?= validation_show_error('category', 'validationError') ?>
+                    <?= validation_show_error('productCategoryId', 'validationError') ?>
                     <h5 class="fs-14 mb-3">Categoría</h5>
-                    <select id="category" name="category" required>
+                    <select id="productCategoryId" name="productCategoryId" required>
                         <option value="" selected>Selecciona</option>
                         <?php foreach ($categories as $category):?>
                         <option
                             value="<?= $category['categoryId']?>"
-                            <?=old('category') === $category['categoryId'] ? 'selected' : '' ?>
+                            <?=old('productCategoryId') === $category['categoryId'] ? 'selected' : '' ?>
                         >
                             <?=$category['categoryName']?>
                         </option>

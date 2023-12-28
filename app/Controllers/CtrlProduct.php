@@ -13,7 +13,7 @@ class CtrlProduct extends CtrlApiFiles
 
     public function __construct()
     {
-        $configBuilder = new FileValidationConfigBuilder('/admin/products');
+        $configBuilder = new FileValidationConfigBuilder('/admin/productos');
         $configBuilder->builder('mainImage')->isImage()->build();
         $configBuilder->builder('image')->isImage()->build();
         $configBuilder->builder('video')->isVideo()->build();
