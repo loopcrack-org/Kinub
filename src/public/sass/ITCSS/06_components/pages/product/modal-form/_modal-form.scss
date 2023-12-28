@@ -90,6 +90,11 @@
     &:hover {
       cursor: pointer;
     }
+
+    &:disabled {
+      cursor: progress;
+      opacity: 0.75;
+    }
   }
 
   &__close {

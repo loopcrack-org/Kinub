@@ -252,10 +252,14 @@ const configValidator = {
       },
     },
   },
-  validateBy: 'click',
+  validationBy: 'onclick',
   selectors: SELECTORS,
   messages: MESSAGES,
   customViewErrors: commonCustomViewErrors,
+  onFormSubmit: function (container) {
+    container.querySelector('.modal-form__submit').disabled = true;
+    container.submit();
+  },
 };
 
 new VanillaValidator(configValidator);
