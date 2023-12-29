@@ -49,6 +49,7 @@
   }
 }
 .swiper-slide {
+  overflow: hidden;
   box-sizing: border-box;
   border: 0.1875rem solid transparent;
   aspect-ratio: 5 / 3;
