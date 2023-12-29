@@ -4,7 +4,7 @@ import lgFullscreen from 'lightgallery/plugins/fullscreen/lg-fullscreen.min.js';
 import lgThumbnail from 'lightgallery/plugins/thumbnail/lg-thumbnail.min.js';
 import lgVideo from 'lightgallery/plugins/video/lg-video.min.js';
 import lgZoom from 'lightgallery/plugins/zoom/lg-zoom.min.js';
-import { updateCounters, updateMainContent } from './contentUpdate';
+import { updateCounters, updateMainContent } from './carouselUpdate';
 import { initializeSwiper } from './swiper';
 
 const SWIPER_SLIDE_SELECTOR = '.swiper-slide';
@@ -23,7 +23,7 @@ setActiveSlide(document.querySelector(SWIPER_SELECTED_SLIDE_SELECTOR));
 
 new Drift(document.querySelector('.carousel__main-img'), {
   sourceAttribute: 'src',
-  paneContainer: document.querySelector('.details__info'),
+  paneContainer: document.querySelector('.details__zoom-container'),
   inlinePane: false,
   zoomFactor: 3,
   hoverBoundingBox: true,
@@ -56,9 +56,9 @@ function initializeSlideClickListeners(slides) {
 }
 
 function initializeLightGallery() {
-  const container = document.getElementById('lightgallery-product');
+  const lightContainer = document.getElementById('lightgallery-product');
 
-  const lightG = lightGallery(container, {
+  const lightG = lightGallery(lightContainer, {
     licenseKey: '927D6AF3-9D4E-4315-A976-33AFB1C334EF',
     plugins: [lgThumbnail, lgZoom, lgFullscreen, lgVideo],
     thumbnail: true,
@@ -70,7 +70,7 @@ function initializeLightGallery() {
     },
   });
 
-  container.addEventListener('lgBeforeClose', () => {
+  lightContainer.addEventListener('lgBeforeClose', () => {
     swiperInstance.slideTo(lightG.index);
     const selectedSlide = document.querySelector(
       `${SWIPER_SLIDE_SELECTOR}[data-index="${lightG.index}"]`

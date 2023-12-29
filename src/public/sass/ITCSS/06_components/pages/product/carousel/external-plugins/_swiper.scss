@@ -2,8 +2,8 @@
 /* stylelint-disable itcss/no-at-important */
 /* stylelint-disable plugin/selector-bem-pattern */
 @use 'sass:color';
-@use '../../../../01_settings/colors' as *;
-@use '../../../../02_tools/breakpoints' as *;
+@use '../../../../../01_settings/colors' as *;
+@use '../../../../../02_tools/breakpoints' as *;
 
 .swiper-button-prev {
   left: 0.2rem;

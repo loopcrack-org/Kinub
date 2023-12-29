@@ -13,10 +13,18 @@
   transition: height 300ms ease;
 
   &__grid {
-    display: flex;
-    width: 100%;
+    display: grid;
     flex-direction: column;
     gap: $spacing-md;
+    grid-template-columns: 100%;
+  }
+
+  &__zoom-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
   }
 
   &__info {
@@ -25,25 +33,18 @@
   }
 
   &__heading {
-    display: none;
+    display: block;
     margin: 0;
-    @include fluid-text(1.6rem, 2.4rem, 5vw);
+    color: color.adjust($color-gray-60, $lightness: 5%);
     font-weight: $weight-bolder;
     line-height: 1;
     text-transform: capitalize;
-
-    &--mobile {
-      display: block;
-      color: color.adjust($color-gray-60, $lightness: 5%);
-    }
+    @include fluid-text(1.6rem, 2.4rem, 5vw);
 
     &--desktop {
       display: none;
+      margin-bottom: $spacing-sm;
     }
-  }
-
-  &__data-container {
-    margin-top: $spacing-md;
   }
 
   &__data {
@@ -67,7 +68,7 @@
     display: block;
     padding: 0.6rem 1rem;
     border-radius: 0.625rem;
-    margin: $spacing-md 0 0 0;
+    margin-top: $spacing-md;
     font-size: 0.75rem;
     font-weight: $weight-light;
     text-decoration: none;
@@ -87,9 +88,7 @@
 
   @include desktop() {
     &__heading {
-      &--mobile {
-        display: none;
-      }
+      display: none;
 
       &--desktop {
         display: block;
@@ -102,13 +101,12 @@
     }
 
     &__grid {
-      display: grid;
       gap: 4.5rem;
-      grid-template-columns: calc(50% - 4.5rem) 1fr;
+      grid-template-columns: calc(50% - 2.5rem) 1fr;
     }
 
     &__btn {
-      margin: $spacing-md 0 0 0;
+      margin-top: $spacing-md;
       font-size: 1rem;
     }
   }

@@ -33,6 +33,10 @@
     @include desktop() {
       display: block;
     }
+
+    @include desktopXXL {
+      aspect-ratio: 5 / 3;
+    }
   }
 
   &__video-overlay {
