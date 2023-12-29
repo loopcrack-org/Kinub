@@ -25,25 +25,18 @@
         <!-- auth page content -->
         <div class="auth-page-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center mt-sm-5 mb-4 text-white-50">
-                            <div>
-                                <a href="/" class="d-inline-block auth-logo">
-                                    <img class="d-inline-block auth-logo" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end row -->
 
                 <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
-                        <div class="card mt-4">
+                    <div class="col-md-8 col-lg-6 col-xl-5 mt-5">
+                        <div class="card mt-5">
 
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
+                                    <div class="mb-4">
+                                            <a href="login" class="d-inline-block auth-logo ">
+                                                <img class="d-inline-block auth-logo img-thumbnail bg-transparent border-0 " src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
+                                            </a>
+                                    </div>
                                     <h5 class="text-primary">Restablece tu contraseña</h5>
                                     <p class="text-muted">Tu nueva contraseña debe de ser diferente a la anterior</p>
                                 </div>

@@ -1,59 +1,70 @@
 @use 'sass:color';
+@use '../../../../01_settings/global' as *;
 @use '../../../../01_settings/colors' as *;
 @use '../../../../02_tools/breakpoints' as *;
 
 .carousel {
   width: 100%;
-  margin: 0;
+  &__wrapper {
+    position: sticky;
+    top: calc(var(--header-height) + 0.625rem);
+  }
 
-  &__img-container {
+  &__counter {
+    position: absolute;
+    z-index: 2;
+    top: 6%;
+    left: 5%;
+    padding: 0.375rem 0.5rem;
+    border-radius: 0.625rem;
+    background-color: $color-white;
+    color: $color-gray-80;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+  }
+
+  &__active-element {
     display: none;
-    overflow: hidden;
     width: 100%;
-    border: 0.0625rem solid $color-aqua-blue;
-    margin: 0 auto;
-    transition: height 300ms ease;
-
-    @include phoneXL() {
-      height: 35rem;
-    }
-
-    @include device(37.5rem) {
-      height: 40rem;
-    }
-
-    @include tablet() {
-      width: 90%;
-    }
-
+    margin-bottom: $spacing-md;
+    aspect-ratio: 8 / 4;
     @include desktop() {
-      display: flex;
-      max-height: 30rem;
+      display: block;
     }
 
-    @include desktopXL() {
-      max-height: 35rem;
-    }
-
-    @include desktopXXL() {
-      max-height: 100%;
+    @include desktopXXL {
+      aspect-ratio: 5 / 3;
     }
   }
 
-  &__main-img {
+  &__video-overlay {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
     width: 100%;
-    object-fit: cover;
+    height: 100%;
   }
 
-  @include tablet() {
+  &__main-img,
+  &__main-video-container,
+  &__main-video {
+    position: relative;
     width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  .plyr {
+    width: 100%;
+    height: 100%;
   }
 
   @include desktop() {
-    width: 50%;
-  }
-
-  @include desktopXXL() {
-    max-width: 75rem;
+    position: sticky;
+    top: $navbar-desktop-height + $spacing-md;
   }
 }

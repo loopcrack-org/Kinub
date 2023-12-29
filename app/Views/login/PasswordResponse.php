@@ -23,18 +23,11 @@
         </div>
 
         <!-- auth page content -->
-        <div class="auth-page-content">
+        <div class="auth-page-content mt-5">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center mb-4 text-white-50">
-                            <img class="d-inline-block auth-logo" src="https://www.kinub.com/images/mesa%20de%20trabajo%202.png?crc=4015297829" alt="logo kinub">
-                        </div>
-                    </div>
-                </div>
 
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-5">
+                <div class="row justify-content-center mt-5">
+                    <div class="col-md-8 col-lg-6 col-xl-5 mt-5">
                         <div class="card mt-4">
                             <?php
                             $response = session()->get('response') ?? $response = [

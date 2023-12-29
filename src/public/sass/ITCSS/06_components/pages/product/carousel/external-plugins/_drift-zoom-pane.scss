@@ -1,0 +1,15 @@
+@use '../../../../../01_settings/global' as *;
+@use '../../../../../01_settings/colors' as *;
+
+.drift-zoom-pane {
+  position: sticky;
+  top: $navbar-desktop-height + 0.4rem;
+  max-height: min(45svh, 45vmin);
+  border: solid 1px $color-gray-10;
+  background: white;
+
+  /* stylelint-disable-next-line plugin/selector-bem-pattern */
+  img {
+    object-fit: contain;
+  }
+}
