@@ -60,7 +60,7 @@
                                     <div class="hstack gap-3 align-items-start">
                                         <?php $errors = session()->get('errors') ?>
                                         <div class="flex-grow-1">
-                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" rows="3" name="aboutUsText"><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
+                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" maxlength="450" rows="3" name="aboutUsText"><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
                                             <?= view('admin/templates/invalidInputError', ['error' => $errors['aboutUsText'] ?? null])?>
                                         </div>
                                     </div>
