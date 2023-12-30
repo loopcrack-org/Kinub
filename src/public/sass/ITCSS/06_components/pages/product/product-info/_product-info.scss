@@ -8,14 +8,14 @@
 .product-info {
   width: 90%;
   max-width: 75rem;
-  margin: 2.7rem auto 2.5rem;
+  margin: 3vh auto;
   scroll-margin-top: 11rem;
   &__heading {
     margin: 0 0 0.625rem 0;
     text-align: left;
     text-transform: capitalize;
     transition: color 1000ms ease-in-out;
-    @include fluid-text(1.8rem, 3rem);
+    @include fluid-text(1.8rem, 2.5rem, 4.5vw);
 
     &--description {
       color: $color-sky-blue;
@@ -73,8 +73,7 @@
   }
 
   @include tablet() {
-    margin: 5.625rem auto;
-    margin-bottom: 5rem;
+    margin: 4.5vh auto;
     scroll-margin-top: 13.75rem;
 
     &__text-container {
@@ -117,5 +116,6 @@
 
   @include desktopXXL() {
     max-width: 112.5rem;
+    margin: 6vh auto;
   }
 }
