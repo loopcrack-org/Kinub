@@ -17,100 +17,113 @@
 
 <main class="details">
     <div class="details__grid">
+        <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
 
-    <div class="carousel">
-        <div class="carousel__img-container" id="video-container">
-            <video id="main-video" autoplay muted></video>
-        </div>
-        <div class="carousel__img-container magnify-wrapper" id="main-image-container">
-            <img class="carousel__main-img magnify-wrapper__img" id="main-image" alt="Imagen Principal">
-            <div id="large-img" class="magnify-wrapper__large-img"></div>
-        </div>
+        <div class="carousel">
+            <div class="carousel__wrapper">
+                <div class="carousel__active-element">
+                    <div class="carousel__counter"></div>
+                    <div class="carousel__main-video-container">
+                        <div class="carousel__video-overlay"></div>
+                        <video class="carousel__main-video" muted></video>
+                    </div>
+                    <img class="carousel__main-img" id="main-image" alt="Imagen Principal">
+                </div>
+                <div class="swiper_container">
+                    <div class="carousel__counter"></div>
+                    <div class="swiper">
+                        <div class="swiper-wrapper" id="lightgallery-product">
+                            <li class="swiper-slide--selected swiper-slide" data-index="0" data-lg-size="2048-1152" data-poster="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png" data-video='{"source": [{"src":"assets/video/equipment-video.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png">
+                                <img src="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png" alt="Imagen Grande">
+                            </li>
 
-        <div class="glide" id="glide">
-            <div class="glide__track" data-glide-el="track">
-                <ul class="glide__slides" id="lightgallery-product">
-                    <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
-                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg">
-                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" >
-                        <img class="slide-media glide__slide-media" src="https://u83y9h.c2.acecdn.net/wp-content/uploads/2020/06/cristiano-ronaldo_4822329.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                    <li class="glide__slide" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
-                        <img class="slide-media glide__slide-media" src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
-                    </li>
-                </ul>
-            </div>
+                            <li class="swiper-slide" data-index="1" data-lg-size="2048-1152" data-src="https://img.interempresas.net/fotos/1917174.jpeg">
+                                <img src="https://img.interempresas.net/fotos/1917174.jpeg" alt="Imagen Grande">
+                            </li>
+                            <li class="swiper-slide" data-index="2" data-lg-size="2048-1152" data-video='{"source": [{"src":"assets/video/kinub-video-example.mp4", "type":"video/mp4"}], "attributes": {"preload": false, "controls": true}}' data-poster="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png">
+                                <img src="https://mail.monitoreointeligente.com/wp-content/uploads/2021/08/v1-3.png" alt="Imagen Grande">
+                            </li>
+                            <li class="swiper-slide" data-index="3" data-lg-size="1000-1000" data-src="https://www.totalmentereflejante.com/wp-content/uploads/2021/03/Medidor-de-espesores.jpg">
+                                <img src="https://www.totalmentereflejante.com/wp-content/uploads/2021/03/Medidor-de-espesores.jpg" alt="Imagen Grande">
+                            </li>
+                            <li class="swiper-slide" data-index="4" data-lg-size="1000-1453" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                                <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                            </li>
+                            <li class="swiper-slide" data-index="5" data-lg-size="225-225" data-src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCWQVS1EYceqxvr8rgCxm8Q1L9htUoZCRVnw&usqp=CAU">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCWQVS1EYceqxvr8rgCxm8Q1L9htUoZCRVnw&usqp=CAU" alt="Imagen Grande">
+                            </li>
+                            <li class="swiper-slide" data-index="6" data-lg-size="1000-1453" data-src="https://wallpapercave.com/wp/wp8112249.jpg">
+                                <img src="https://wallpapercave.com/wp/wp8112249.jpg" alt="Imagen Grande">
+                            </li>
+                        </div>
+                        <div class="swiper-pagination"></div>
 
-            <div class="glide__bullets" data-glide-el="controls[nav]">
-                <button class="glide__bullet" data-glide-dir="=0"></button>
-                <button class="glide__bullet" data-glide-dir="=1"></button>
-                <button class="glide__bullet" data-glide-dir="=2"></button>
-                <button class="glide__bullet" data-glide-dir="=3"></button>
-                <button class="glide__bullet" data-glide-dir="=4"></button>
-                <button class="glide__bullet" data-glide-dir="=5"></button>
-                <button class="glide__bullet" data-glide-dir="=6"></button>
-            </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
 
-              <div class="glide__arrows" data-glide-el="controls">
-                <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M0 12l10.975 11 2.848-2.828-6.176-6.176H24v-3.992H7.646l6.176-6.176L10.975 1 0 12z"></path>
-                    </svg>
-                </button>
-                <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"></path>
-                    </svg>
-                </button>
+
+                </div>
             </div>
         </div>
-    </div>
 
         <div class="details__info">
-            <h2 class="details__heading">Medidor de nivel de radar 80G</h2>
+            <div class="details__zoom-container"></div>
+            <h2 class="details__heading details__heading--desktop">Medidor de nivel de radar 80G</h2>
 
             <div class="tags">
-                <a href="#" class="tags__tag">
+                <a href="/categoria" class="tags__tag">
                     <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
                 </a>
-                <a href="#" class="tags__tag">
+                <a href="/categoria" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="/categoria" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="/categoria" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="/categoria" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="/categoria" class="tags__tag">
+                    <p class="tags__tag-content">Dialog 3Gtm 9xx Mhz</p>
+                </a>
+                <a href="/categoria" class="tags__tag">
                     <p class="tags__tag-content">LoRaWAN OMS</p>
                 </a>
             </div>
 
             <div class="details__data-container">
-            <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-            <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
+
+                <p class="details__data"><span class="details__data--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Rapidez de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Lorem ipsum: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Demanda: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Lorem ipsum: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Relación: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Lorem ipsum dolor: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Potencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Electrones: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Comunicación: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Delimitación: </span>Lorem ipsum dolor sit amet consectetur</p>
+                <p class="details__data"><span class="details__data--title">Conmutación: </span>Lorem ipsum dolor sit amet consectetur</p>
+
+                <button id="modal-form-btn" class="details__btn">
+                    Más información acerca de este equipo
+                </button>
             </div>
-            <span id="modal-form-btn" class="details__btn">Más información acerca de este equipo</span>
         </div>
-    </div>
 </main>
 
 <div hidden>
     <form class="modal-form" id="modal-form" method="POST">
         <div id="modal-form-close" class="modal-form__close">
             <svg class="modal-form__close-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#00899b" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"/>
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
             </svg>
         </div>
 
@@ -180,17 +193,7 @@
     </div>
 
     <div class="product-info__video-container">
-        <video
-        id="product-video"
-        class="product-video__video"
-        preload="auto"
-        width="500"
-        height="264"
-        muted
-        autoplay
-        playsinline
-        controls
-        >
+        <video id="product-video" class="product-video__video" preload="auto" width="500" height="264" muted playsinline controls>
             <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
             <source src="assets/video/kinub-video-example.webm" type="video/webm" />
         </video>

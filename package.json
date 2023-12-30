@@ -32,6 +32,7 @@
     "custom-select": "^1.1.15",
     "del": "^6.1.1",
     "dotenv": "^16.3.1",
+    "drift-zoom": "^1.5.1",
     "filepond": "^4.30.4",
     "filepond-plugin-file-encode": "^2.1.11",
     "filepond-plugin-file-validate-size": "^2.2.8",
