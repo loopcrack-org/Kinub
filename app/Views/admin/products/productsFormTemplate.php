@@ -10,35 +10,37 @@
                 <div class="g-col-12">
                     <!-- Product Name -->
                     <div class="mb-3">
-                        <?= validation_show_error('productName', 'validationError') ?>
                         <label class="card-text" for="productName">Nombre del producto</label>
-                        <input type="text" class="form-control" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
+                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
                     </div>
                     <!-- Product Model -->
                     <div class="mb-3">
-                        <?= validation_show_error('productModel', 'validationError') ?>
                         <label class="card-text" for="productModel">Ingresa el modelo</label>
-                        <input type="text" class="form-control" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
+                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
+                        <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
                     </div>
                     <!-- Product Tags -->
                     <div class="mb-3">
-                        <?= validation_show_error('productTags', 'validationError') ?>
                         <label class="card-text" for="productTags">Tags del producto</label>
                         <input type="text" class="form-control" name="productTags" id="productTags" value="<?= old('productTags') ?? ''?>">
                     </div>
                     <!-- Technical information -->
                     <div class="mb-3">
-                        <?= validation_show_error('productTechnicalInfo', 'validationError') ?>
                         <div class="row mb-2 align-items-center">
                             <div class="col-12 col-sm">
                                 <label class="card-text">Detalles del producto</label>
                             </div>
                         </div>
                         <div class="mb-2">
+                            <?= view('admin/templates/invalidInputError', ['error' => $errors['productTechnicalInfo'] ?? null])?>
                             <?= view('admin/components/keyValue/keyValueContainer', [
-                                'keyValues' => old('productTechnicalInfo') ?? ['' => ''],
-                                'minValues' => 1,
+                                'keyValues' => old('productTechnicalInfo') ?? [
+                                    '' => '',
+                                ],
+                                'minValues' => 2,
                                 'name'      => 'productTechnicalInfo',
+                                'error'     => $errors['productTechnicalInfo'] ?? null,
                             ]) ?>
                         </div>
                     </div>
@@ -95,37 +97,57 @@
             <div class="card-body">
                 <!-- Category -->
                 <div class="mb-4">
-                    <?= validation_show_error('productCategoryId', 'validationError') ?>
                     <h5 class="fs-14 mb-3">Categoría</h5>
-                    <select id="productCategoryId" name="productCategoryId" required>
-                        <option value="" selected>Selecciona</option>
-                        <?php foreach ($categories as $category):?>
-                        <option
-                            value="<?= $category['categoryId']?>"
-                            <?=old('productCategoryId') === $category['categoryId'] ? 'selected' : '' ?>
-                        >
-                            <?=$category['categoryName']?>
-                        </option>
-                        <?php endforeach ?>
-                    </select>
+                    <div class="form-control <?=isset($errors['productCategoryId']) ? 'is-invalid' : ''?> p-0 position-relative" style="background-image: none !important;">
+                        <?php if(isset($errors['productCategoryId'])): ?>
+                            <i class="las la-exclamation-circle position-absolute z-1" style="
+                                right: 35px;
+                                top: 9px;
+                                color: var(--vz-red);
+                                font-size: 20px;"
+                            ></i>
+                        <?php endif; ?>
+                        <select id="productCategoryId" name="productCategoryId" required>
+                            <option value="" selected>Selecciona</option>
+                            <?php foreach ($categories as $category):?>
+                            <option
+                                value="<?= $category['categoryId']?>"
+                                <?=old('productCategoryId') === $category['categoryId'] ? 'selected' : '' ?>
+                            >
+                                <?=$category['categoryName']?>
+                            </option>
+                            <?php endforeach ?>
+                        </select>
+                    </div>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['productCategoryId'] ?? null])?>
                 </div>
                 <!-- Category Tags -->
                 <div class="mb-4">
-                    <?= validation_show_error('categoryTags', 'validationError') ?>
                     <h5 class="fs-14 mb-2">Tags de categoría</h5>
                     <label class="text-muted mb-3">Ingresa tags de la categoría</label>
-                    <div class="position-relative">
-                        <div id="tagSpinner" class="position-absolute" style="z-index: 1; right:10px; top:30%;"></div>
-                        <select id="categoryTags" name="categoryTags[]" class="form-control" multiple required>
-                        <option value="">Selecciona</option>
-                        <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
-                        <option
-                            value="<?= $categoryTag?>"
-                        >
-                        </option>
-                        <?php endforeach ?>
-                    </select>
+                    <div class="form-control is-invalid position-relative p-0" style="background-image: none !important;">
+                        <div class="d-flex align-items-center h-100 position-absolute z-1 gap-2" style="right: 10px">
+                            <?php if(isset($errors['productCategoryId'])): ?>
+                                <i class="las la-exclamation-circle" style="
+                                    color: var(--vz-red);
+                                    font-size: 20px;"
+                                ></i>
+                            <?php endif; ?>
+                            <div id="tagSpinner">
+                                <div class="clearfix"><div class="spinner-border spinner-border-sm float-end" role="status"></div></div>
+                            </div>
+                        </div>
+                        <select id="categoryTags" name="categoryTags[]" class="position-absolute z-1" multiple required>
+                            <option value="">Selecciona</option>
+                            <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
+                            <option
+                                value="<?= $categoryTag?>"
+                            >
+                            </option>
+                            <?php endforeach ?>
+                        </select>
                     </div>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryTags[]'] ?? null])?>
                 </div>
             </div>
             <!-- end card body -->

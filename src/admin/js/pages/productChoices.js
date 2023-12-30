@@ -1,32 +1,19 @@
-import Choices from 'choices.js';
+import { createChoice } from './plugins/choices/choices-general-config';
 
 const categorySelect = document.querySelector('#productCategoryId');
 const categoryTagInput = document.querySelector('#categoryTags');
 const productTagInput = document.querySelector('#productTags');
 const tagSpinner = document.querySelector('#tagSpinner');
 
-function createChoices(input, searchEnabled = true, moreOptions = {}) {
-  return new Choices(input, {
-    searchEnabled: searchEnabled,
-    placeholder: true,
-    removeItemButton: true,
-    noResultsText: 'No se han encontrado resultados',
-    noChoicesText: 'No hay opciones disponibles',
-    itemSelectText: 'Selecciona',
-    allowHTML: true,
-    ...moreOptions,
-  });
-}
-
-const categorySelectChoice = createChoices(categorySelect, true, {
+const categorySelectChoice = createChoice(categorySelect, true, {
   removeItemButton: false,
 });
 
-const categoryTagChoice = createChoices(categoryTagInput, false, {
+const categoryTagChoice = createChoice(categoryTagInput, false, {
   callbackOnInit: initCategoryTags,
 });
 
-createChoices(productTagInput, false, {
+createChoice(productTagInput, false, {
   placeholderValue: 'Ingresa los tags del producto',
 });
 

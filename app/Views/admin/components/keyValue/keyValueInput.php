@@ -7,10 +7,10 @@
     </div>
     <div class="col-12 col-sm input-group p-0 my-auto">
         <div class="input-group-text">Clave:</div>
-        <input value="<?= $key?>" type="text" class="keyValueKey form-control" placeholder="ej: Peso..." required>
+        <input value="<?= $key?>" type="text" class="keyValueKey form-control <?= $error ? 'is-invalid' : '' ?>" placeholder="ej: Peso..." required>
     </div>
     <div class="col-12 col-sm input-group p-0 my-auto">
         <div class="input-group-text">Valor:</div>
-        <input type="text" name=<?= $name . '[' . $key . ']' ?> value="<?= $value?>" class="keyValueValue form-control" placeholder="5 kg" required>
+        <input type="text" name=<?= $name . '[' . $key . ']' ?> value="<?= $value?>" class="keyValueValue form-control <?= $error ? 'is-invalid' : '' ?>" placeholder="5 kg" required>
     </div>
 </div>
