@@ -125,17 +125,15 @@
                 <div class="mb-4">
                     <h5 class="fs-14 mb-2">Tags de categoría</h5>
                     <label class="text-muted mb-3">Ingresa tags de la categoría</label>
-                    <div class="form-control is-invalid position-relative p-0" style="background-image: none !important;">
+                    <div class="form-control <?=isset($errors['categoryTags[]']) ? 'is-invalid' : ''?> position-relative p-0" style="background-image: none !important;">
                         <div class="d-flex align-items-center h-100 position-absolute z-1 gap-2" style="right: 10px">
-                            <?php if(isset($errors['productCategoryId'])): ?>
+                            <?php if(isset($errors['categoryTags[]'])): ?>
                                 <i class="las la-exclamation-circle" style="
                                     color: var(--vz-red);
                                     font-size: 20px;"
                                 ></i>
                             <?php endif; ?>
-                            <div id="tagSpinner">
-                                <div class="clearfix"><div class="spinner-border spinner-border-sm float-end" role="status"></div></div>
-                            </div>
+                            <div id="tagSpinner"></div>
                         </div>
                         <select id="categoryTags" name="categoryTags[]" class="position-absolute z-1" multiple required>
                             <option value="">Selecciona</option>
