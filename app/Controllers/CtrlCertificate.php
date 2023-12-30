@@ -51,9 +51,20 @@ class CtrlCertificate extends CtrlApiFiles
     public function viewCertificateEdit($id)
     {
         $certificateModel = new CertificateModel();
-        $certificate      = $certificateModel->select('certificateId, certificatefileName, fileRoute')->join('files', 'files.fileId = certificates.certificatePreviewId')->find($id);
+        $certificate      = $certificateModel->getCertificate($id);
 
-        return view('admin/certificates/CertificateEdit', ['certificate' => $certificate]);
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        } else {
+            $dataFiles['certificatePreview'] = [$certificate['previewUuid']];
+            $dataFiles['certificatefile']    = [$certificate['certificateUuid']];
+            $this->fileConfig->setDataInClientConfig($dataFiles);
+        }
+
+        return view('admin/certificates/CertificateEdit', [
+            'certificate'    => $certificate,
+            'filepondConfig' => $this->fileConfig->getClientConfig(),
+        ]);
     }
 
     public function createCertificate()
@@ -98,24 +109,59 @@ class CtrlCertificate extends CtrlApiFiles
         }
     }
 
-    public function updateCertificate($id)
+    public function updateCertificate(string $certificateId)
     {
-        $isUpdated = true;
-        if ($isUpdated) {
+        try {
+            $certificateData = $this->request->getPost();
+
+            $validateCertificate  = new CertificateValidation();
+            $filesValidationRules = $this->fileConfig->getCollectionFileValidationRules();
+            $validateCertificate->addRules($filesValidationRules['rules'], $filesValidationRules['messages']);
+
+            if (! $validateCertificate->validateInputs($certificateData)) {
+                throw new InvalidInputException($validateCertificate->getErrors());
+            }
+
+            $certificateModel = new CertificateModel();
+            $filesToSave      = $this->fileConfig->filterNewFilesInInputsFile($certificateData);
+
+            $certificateData['certificatePreviewId'] = $filesToSave['certificatePreview'];
+            $certificateData['certificatefileId']    = $filesToSave['certificatefile'];
+
+            $certificateModel->updateCertificate($certificateId, $certificateData);
+
+            foreach ($filesToSave as $files) {
+                FileManager::changeDirectoryCollectionFolder($files);
+            }
+
+            $filesToDelete = $this->fileConfig->getKeysFolderToDelete($certificateData);
+
+            foreach ($filesToDelete as $files) {
+                FileManager::deleteMultipleFoldersWithContent($files);
+            }
+
             $response = [
                 'title'   => 'Edición exitosa',
                 'message' => 'Se ha editado el certificado correctamente',
                 'type'    => 'success',
             ];
-        } else {
+
+            return redirect()->to(self::$CERTIFICATES_BASE_ROUTE)->with('response', $response);
+        } catch (InvalidInputException $th) {
+            session()->setFlashdata('clientData', $this->request->getPost());
+
+            return redirect()->to(url_to(self::class . '::viewCertificateEdit', $certificateId))->withInput()->with('errors', $th->getErrors());
+        } catch (Throwable $th) {
+            session()->setFlashdata('clientData', $this->request->getPost());
+
             $response = [
-                'title'   => 'Edición fallida',
-                'message' => 'No se pudo realizar la edición del certificado',
+                'title'   => '¡Oops! Ha ocurrido un error.',
+                'message' => 'Algo salio mal al editar el certificado. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
-        }
 
-        return redirect()->to(url_to(self::class . '::viewSolutionEdit', $id))->with('response', $response);
+            return redirect()->to(url_to(self::class . '::viewCertificateEdit', $certificateId))->with('response', $response);
+        }
     }
 
     public function deleteCertificate()
