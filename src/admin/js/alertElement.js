@@ -14,6 +14,6 @@ function displayAlert() {
         text: responseData.message,
         confirmButtonColor: '#0174F6',
       });
-    }, 5);
+    }, 1000);
   }
 }

@@ -57,12 +57,6 @@
     object-fit: contain;
   }
 
-  /* stylelint-disable-next-line plugin/selector-bem-pattern */
-  .plyr {
-    width: 100%;
-    height: 100%;
-  }
-
   @include desktop() {
     position: sticky;
     top: $navbar-desktop-height + $spacing-md;

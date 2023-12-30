@@ -3,7 +3,7 @@
 
 .drift-zoom-pane {
   position: sticky;
-  top: $navbar-desktop-height + 0.4rem;
+  top: $navbar-desktop-height + $spacing-md;
   max-height: min(45svh, 45vmin);
   border: solid 1px $color-gray-10;
   background: white;
