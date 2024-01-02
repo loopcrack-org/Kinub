@@ -9,11 +9,11 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Factory::create();
+        $faker         = Factory::create();
+        $totalProducts = 20;
+        $products      = [];
 
-        $products = [];
-
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < $totalProducts; $i++) {
             $products[] = [
                 'productName'          => 'Medidor de nivel de radar ' . $faker->randomNumber('2', true) . 'G',
                 'productModel'         => 'E-' . $faker->randomNumber('3', true),
