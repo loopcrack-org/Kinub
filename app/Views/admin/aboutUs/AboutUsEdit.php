@@ -60,8 +60,9 @@
                                     <div class="hstack gap-3 align-items-start">
                                         <?php $errors = session()->get('errors') ?>
                                         <div class="flex-grow-1">
-                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" maxlength="450" rows="3" name="aboutUsText"><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
+                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" id="aboutUsText" maxlength="450" rows="3" name="aboutUsText" required><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
                                             <?= view('admin/templates/invalidInputError', ['error' => $errors['aboutUsText'] ?? null])?>
+                                            <div class="text-primary d-block text-end mt-1" id="characterCount">0/450</div>
                                         </div>
                                     </div>
                                 </div>
@@ -100,4 +101,5 @@
 <?= $this->section('js') ?>
 <script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="/assets/admin/js/textareaCounter.min.js"></script>
 <?= $this->endSection() ?>
