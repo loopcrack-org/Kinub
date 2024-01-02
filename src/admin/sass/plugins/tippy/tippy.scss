@@ -1,0 +1,21 @@
+@use 'node_modules/tippy.js/dist/tippy.css';
+@use 'node_modules/tippy.js/animations/shift-away.css';
+
+.tippy-box[data-theme~='alert'] {
+  $theme-color: --vz-red;
+  background-color: var($theme-color);
+  color: var(--vz-white);
+
+  &[data-placement^='top'] > .tippy-arrow:before {
+    border-top-color: var($theme-color);
+  }
+  &[data-placement^='bottom'] > .tippy-arrow:before {
+    border-top-color: var($theme-color);
+  }
+  &[data-placement^='left'] > .tippy-arrow:before {
+    border-top-color: var($theme-color);
+  }
+  &[data-placement^='right'] > .tippy-arrow:before {
+    border-top-color: var($theme-color);
+  }
+}
