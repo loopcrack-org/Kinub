@@ -1,31 +1,19 @@
-import Choices from 'choices.js';
+import { createChoice } from './plugins/choices/choices-general-config';
 
 const categorySelect = document.querySelector('#productCategoryId');
 const categoryTagInput = document.querySelector('#categoryTags');
 const productTagInput = document.querySelector('#productTags');
+const tagSpinner = document.querySelector('#tagSpinner');
 
-function createChoices(input, searchEnabled = true, moreOptions = {}) {
-  return new Choices(input, {
-    searchEnabled: searchEnabled,
-    placeholder: true,
-    removeItemButton: true,
-    noResultsText: 'No se han encontrado resultados',
-    noChoicesText: 'No hay opciones disponibles',
-    itemSelectText: 'Selecciona',
-    allowHTML: true,
-    ...moreOptions,
-  });
-}
-
-const categorySelectChoice = createChoices(categorySelect, true, {
+const categorySelectChoice = createChoice(categorySelect, true, {
   removeItemButton: false,
 });
 
-const categoryTagChoice = createChoices(categoryTagInput, false, {
+const categoryTagChoice = createChoice(categoryTagInput, false, {
   callbackOnInit: initCategoryTags,
 });
 
-createChoices(productTagInput, false, {
+createChoice(productTagInput, false, {
   placeholderValue: 'Ingresa los tags del producto',
 });
 
@@ -34,6 +22,7 @@ categorySelectChoice.passedElement.element.addEventListener('change', async func
   categoryTagChoice.clearStore();
 
   if (e.target.value) {
+    categoryTagChoice.disable();
     const categoryTags = await getCategoryTags(e.target.value);
     categoryTagChoice.setChoices(categoryTags);
     categoryTagChoice.enable();
@@ -65,11 +54,14 @@ async function initCategoryTags() {
 
 async function getCategoryTags(categoryId) {
   const apiBaseUrl = `/api/categorytags?category=${categoryId}`;
+  tagSpinner.innerHTML =
+    '<div class="clearfix"><div class="spinner-border spinner-border-sm float-end" role="status"></div></div>';
   const source = await fetch(apiBaseUrl);
   const result = await source.json();
   const categoryTags = result.map((categoryTag) => ({
     label: categoryTag.categoryTagName,
     value: categoryTag.categoryTagId,
   }));
+  tagSpinner.innerHTML = '';
   return categoryTags;
 }

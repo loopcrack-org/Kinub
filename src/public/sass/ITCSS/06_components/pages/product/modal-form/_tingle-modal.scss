@@ -7,7 +7,7 @@
   overflow: hidden;
   padding-top: 0;
   backdrop-filter: blur(0.09375rem);
-  background-color: transparent;
+  background: rgba(0, 0, 0, 0.5);
   cursor: auto;
 
   &__close {

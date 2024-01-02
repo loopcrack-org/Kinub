@@ -46,11 +46,12 @@
 @use 'node_modules/plyr/dist/plyr.css';
 @use '../plugins/lightgallery';
 @use '../plugins/accordion';
+@use '../plugins/drift-zoom';
 
 /* #OBJECTS
       ========================================================================== */
 @use '../ITCSS/05_objects/__index' as *;
-
+@use 'node_modules/swiper/swiper-bundle.css';
 /* #COMPONENTS
       ========================================================================== */
 @use '../ITCSS/06_components/header/__index' as *;

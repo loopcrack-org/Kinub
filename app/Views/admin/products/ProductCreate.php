@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
 <link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
 <link href="/assets/admin/css/wysiwyg.min.css" rel="stylesheet">
+<link href="/assets/admin/css/tippy.min.css" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
