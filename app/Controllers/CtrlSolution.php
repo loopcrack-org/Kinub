@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Classes\FileValidationConfig;
 use App\Classes\FileValidationConfigBuilder;
 use App\Exceptions\InvalidInputException;
+use App\Libraries\tinify\Tinify;
 use App\Models\MeasurementSolutionModel;
 use App\Utils\FileManager;
 use App\Validation\SolutionValidation;
@@ -197,6 +198,7 @@ class CtrlSolution extends CtrlApiFiles
     {
         FileManager::changeDirectoryCollectionFolder($msData['msIcon']);
         FileManager::changeDirectoryCollectionFolder($msData['msImage']);
+        Tinify::convertImages($msData['msImage']);
     }
 
     private function deletePreviousMsFiles(array $msData)
