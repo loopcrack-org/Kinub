@@ -6,9 +6,9 @@
   display: flex;
   overflow: auto;
   align-items: center;
-  padding: 3.75rem 0;
+  padding: 0;
   backdrop-filter: blur(0.09375rem);
-  background-color: transparent;
+  background: rgba(0, 0, 0, 0.5);
   cursor: auto;
 
   &__close {
