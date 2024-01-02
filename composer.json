@@ -6,6 +6,7 @@
   "license": "MIT",
   "require": {
     "php": "^7.4 || ^8.0",
+    "ausi/slug-generator": "^1.1",
     "codeigniter4/framework": "^4.0",
     "tinify/tinify": "^1.6"
   },
