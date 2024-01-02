@@ -8,7 +8,7 @@ class CategoryTagModel extends Model
 {
     protected $table         = 'category_tags';
     protected $primaryKey    = 'categoryTagId';
-    protected $allowedFields = ['categoryTagName', 'categoryId'];
+    protected $allowedFields = ['categoryTagName', 'categoryTagSlug', 'categoryId'];
 
     /**
      * get all the category tags from all categories selected
@@ -19,11 +19,11 @@ class CategoryTagModel extends Model
      */
     public function getAllByCategories(array $categoriesIds = [])
     {
-        $builder = $this->select(['categoryTagId', 'categoryTagName']);
+        $queryBuilder = $this->select(['categoryTagId', 'categoryTagName']);
         if (empty($categoriesIds)) {
-            return $builder->findAll();
+            return $queryBuilder->findAll();
         }
 
-        return $builder->whereIn('categoryId', $categoriesIds)->findAll();
+        return $queryBuilder->whereIn('categoryId', $categoriesIds)->findAll();
     }
 }

@@ -1,11 +1,11 @@
 .btn-whatsapp {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   right: 2svw;
   bottom: 4svh;
   display: flex;
-  width: clamp(3rem, 9svmin, 10rem);
-  height: clamp(3rem, 9svmin, 10rem);
+  width: clamp(3rem, 7.3svmin, 10rem);
+  height: clamp(3rem, 7.3svmin, 10rem);
 
   align-items: center;
   justify-content: center;

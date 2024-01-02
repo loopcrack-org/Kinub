@@ -17,37 +17,37 @@
 
         <div class="content__grid">
 
-            <a href="#" class="equipment">
+            <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/Telemetria-icono.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">TELEMETRÍA</h3>
                 <p class="equipment__text"></p>
             </a> <!--equipment-->
-            <a href="#" class="equipment">
+            <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/Icono-SERIEE.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">SERIES E</h3>
                 <p class="equipment__text">electromagnéticos</p>
             </a> <!--equipment-->
-            <a href="#" class="equipment">
+            <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/icono-software.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">SOFTWARE</h3>
                 <p class="equipment__text"></p>
             </a> <!--equipment-->
-            <a href="#" class="equipment">
+            <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/icono-serie-m.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">SERIES M</h3>
                 <p class="equipment__text">mass meters</p>
             </a> <!--equipment-->
-                  <a href="#" class="equipment">
+                  <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/icono-ultrasonicos.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">SERIES U</h3>
                 <p class="equipment__text">ultrasónicos</p>
             </a> <!--equipment-->
-            <a href="#" class="equipment">
+            <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/icono-series-ele.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">SERIES L</h3>
                 <p class="equipment__text">level meters</p>
             </a> <!--equipment-->
-            <a href="#" class="equipment">
+            <a href="/categoria" class="equipment">
                 <img src="assets/images/equipments-icons/ICONO-SERIES-I.svg" alt="equipment" class="equipment__icon">
                 <h3 class="equipment__name">SERIES I</h3>
                 <p class="equipment__text">industriales</p>

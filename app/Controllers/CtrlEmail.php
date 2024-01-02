@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\InvalidInputException;
 use App\Models\EmailModel;
 use App\Models\UserModel;
 use App\Models\UserTokenModel;
@@ -136,7 +137,7 @@ class CtrlEmail extends BaseController
 
         try {
             if (! $validateEmail->validateInputs($data)) {
-                throw new Exception();
+                throw new InvalidInputException($validateEmail->getErrors());
             }
 
             $userModel = new UserModel();
@@ -158,19 +159,16 @@ class CtrlEmail extends BaseController
                 'message' => 'Verifique su bandeja de entrada para poder restablecer su contraseña.',
                 'type'    => 'success',
             ];
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->with('errors', $validateEmail->getErrors());
         } catch (Throwable $th) {
-            $errors = $validateEmail->getErrors();
-            if (! isset($errors['email'])) {
-                $response = [
-                    'title'   => 'Oops',
-                    'message' => $th->getMessage(),
-                    'type'    => 'danger',
-                ];
-            } else {
-                return redirect()->back()->with('errors', $errors);
-            }
+            $response = [
+                'title'   => 'Oops',
+                'message' => $th->getMessage(),
+                'type'    => 'danger',
+            ];
         }
 
-        return redirect()->back()->with('response', $response);
+        return redirect()->to('/password_response')->with('response', $response);
     }
 }

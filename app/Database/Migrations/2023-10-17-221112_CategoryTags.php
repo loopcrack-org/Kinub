@@ -17,6 +17,10 @@ class CategoryTags extends Migration
                 'type'       => 'varchar',
                 'constraint' => 60,
             ],
+            'categoryTagSlug' => [
+                'type'       => 'varchar',
+                'constraint' => 60,
+            ],
             'categoryId' => [
                 'type' => 'int',
             ],

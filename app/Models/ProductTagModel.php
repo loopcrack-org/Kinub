@@ -8,7 +8,7 @@ class ProductTagModel extends Model
 {
     protected $table         = 'product_tags';
     protected $primaryKey    = 'ptId';
-    protected $allowedFields = ['ptName', 'ptProductId'];
+    protected $allowedFields = ['ptName', 'ptSlug', 'ptProductId'];
 
     /**
      * get all the product tags from all categories selected
