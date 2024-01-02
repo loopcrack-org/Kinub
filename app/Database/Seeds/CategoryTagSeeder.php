@@ -18,7 +18,7 @@ class CategoryTagSeeder extends Seeder
 
         foreach ($categories as $category) {
             for ($i = 1; $i < $tagsByCategory; $i++) {
-                $categoryTagName = $faker->words(3, true);
+                $categoryTagName = $faker->words(asText: true);
                 $categoryTags[]  = [
                     'categoryTagName' => $categoryTagName,
                     'categoryTagSlug' => $slugGenerator->generate($categoryTagName),

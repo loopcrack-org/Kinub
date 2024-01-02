@@ -2,6 +2,7 @@
 
 namespace App\Database\Seeds;
 
+use App\Models\CategoryModel;
 use CodeIgniter\Database\Seeder;
 use Faker\Factory;
 
@@ -9,9 +10,10 @@ class ProductSeeder extends Seeder
 {
     public function run()
     {
-        $faker         = Factory::create();
-        $totalProducts = 20;
-        $products      = [];
+        $faker           = Factory::create();
+        $totalProducts   = 20;
+        $totalCategories = (new CategoryModel())->countAllResults();
+        $products        = [];
 
         for ($i = 0; $i < $totalProducts; $i++) {
             $products[] = [
@@ -25,7 +27,7 @@ class ProductSeeder extends Seeder
                     'Potencia'              => $faker->randomNumber('3', true) . ' MW',
                     'Comunicación'          => $faker->randomElements(['5G Ipv6', '3G', 'WPAN', 'WPA2']),
                 ]),
-                'productCategoryId' => $faker->numberBetween(1, 6),
+                'productCategoryId' => $faker->numberBetween(1, $totalCategories),
             ];
         }
 
