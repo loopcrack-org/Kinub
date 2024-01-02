@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Classes\FileValidationConfig;
 use App\Classes\FileValidationConfigBuilder;
 use App\Exceptions\InvalidInputException;
+use App\Libraries\tinify\Tinify;
 use App\Models\CategoryModel;
 use App\Models\CategoryTagModel;
 use App\Utils\FileManager;
@@ -77,6 +78,7 @@ class CtrlCategory extends CtrlApiFiles
 
             FileManager::changeDirectoryFolder(FILES_TEMP_DIRECTORY . $categoryData['icon'][0], FILES_UPLOAD_DIRECTORY . $categoryData['icon'][0]);
             FileManager::changeDirectoryFolder(FILES_TEMP_DIRECTORY . $categoryData['image'][0], FILES_UPLOAD_DIRECTORY . $categoryData['image'][0]);
+            Tinify::convertImages($categoryData['image']);
 
             $response = [
                 'title'   => 'Nueva categoría creada',
@@ -147,6 +149,7 @@ class CtrlCategory extends CtrlApiFiles
 
             foreach ($newFiles as $keyFiles) {
                 FileManager::changeDirectoryCollectionFolder($keyFiles);
+                Tinify::convertImages($keyFiles);
             }
 
             foreach ($filesToDelete as $keyFilesToDelete) {
