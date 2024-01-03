@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\CtrlAboutUs;
 use App\Controllers\CtrlAdminEmail;
+use App\Controllers\CtrlApiPublic;
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
@@ -45,10 +46,15 @@ $routes->get('/', 'CtrlPublicPages::index');
 $routes->get('/soporte', 'CtrlPublicPages::viewSupport');
 $routes->post('/email/contacto', 'CtrlEmail::sendContactEmail');
 $routes->post('/email/soporte', 'CtrlEmail::sendSupportEmail');
+$routes->post('/email/producto', 'CtrlEmail::sendProductEmail');
 $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
+$routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
+$routes->group('api', static function (RouteCollection $routes) {
+    $routes->get('categorytags', [CtrlApiPublic::class, 'getCategoryTags']);
+});
 
 /*
  * --------------------------------------------------------------------
@@ -58,9 +64,12 @@ $routes->get('/producto', 'CtrlPublicPages::viewProduct');
 $routes->get('login', [CtrlLogin::class, 'index']);
 $routes->get('password_reset', [CtrlLogin::class, 'viewPasswordEmail']);
 $routes->get('password_reset/(:any)', [CtrlLogin::class, 'viewPasswordReset']);
+$routes->get('password_set/(:any)', [CtrlLogin::class, 'viewPasswordSet']);
+$routes->get('password_response', [CtrlLogin::class, 'viewPasswordResponse']);
 $routes->post('login', [CtrlLogin::class, 'login']);
 $routes->post('password_reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
 $routes->post('password_reset/(:any)', [CtrlLogin::class, 'passwordReset']);
+$routes->post('password_set/(:any)', [CtrlLogin::class, 'passwordSet']);
 $routes->post('logout', [CtrlLogin::class, 'logout']);
 /*
  * --------------------------------------------------------------------
@@ -84,6 +93,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlSolution::class, 'viewSolutionEdit']);
         $routes->post('editar/(:num)', [CtrlSolution::class, 'updateSolution']);
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
+        generateFileApiRoutesByController($routes, CtrlSolution::class);
     });
 
     $routes->group('productos', static function ($routes) {
@@ -94,6 +104,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlProduct::class, 'viewProductEdit']);
         $routes->post('editar/(:num)', [CtrlProduct::class, 'updateProduct']);
         $routes->post('borrar', [CtrlProduct::class, 'deleteProduct']);
+        generateFileApiRoutesByController($routes, CtrlProduct::class);
     });
     $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
@@ -103,6 +114,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
+        generateFileApiRoutesByController($routes, CtrlCategory::class);
     });
 
     $routes->group('certificados', static function ($routes) {

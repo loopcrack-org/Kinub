@@ -2,12 +2,15 @@
 
 namespace App\Controllers;
 
+use App\Exceptions\EmailNotSendException;
+use App\Exceptions\InvalidInputException;
 use App\Models\EmailModel;
 use App\Models\UserModel;
 use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
 use App\Validation\ContactEmailValidation;
 use App\Validation\PasswordEmailValidation;
+use App\Validation\ProductEmailValidation;
 use App\Validation\SupportEmailValidation;
 use CodeIgniter\HTTP\RedirectResponse;
 use Exception;
@@ -15,6 +18,10 @@ use Throwable;
 
 class CtrlEmail extends BaseController
 {
+    public const CONTACT_EMAIL_ID = 1;
+    public const SUPPORT_EMAIL_ID = 2;
+    public const PRODUCT_EMAIL_ID = 3;
+
     public function sendContactEmail(): RedirectResponse
     {
         $contactEmailValidation = new ContactEmailValidation();
@@ -50,7 +57,7 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'   => 1,
+                'emailTypeId'   => self::CONTACT_EMAIL_ID,
                 'inquirerName'  => $POST['inquirer-name'],
                 'inquirerEmail' => $POST['inquirer-email'],
                 'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
@@ -65,6 +72,84 @@ class CtrlEmail extends BaseController
         }
 
         return redirect()->back()->with('response', $response);
+    }
+
+    public function sendProductEmail(): RedirectResponse
+    {
+        try {
+            $productEmailValidation = new ProductEmailValidation();
+            $productEmailData       = $this->request->getPost();
+
+            if (! $productEmailValidation->validateInputs($productEmailData)) {
+                throw new InvalidInputException($productEmailValidation->getErrors());
+            }
+
+            $subject  = 'Mensaje del formulario de producto';
+            $formData = [
+                'product-name' => [
+                    'label'  => 'Producto',
+                    'output' => $productEmailData['product-name'],
+                ],
+                'product-model' => [
+                    'label'  => 'Modelo',
+                    'output' => $productEmailData['product-model'],
+                ],
+                'customer' => [
+                    'label'  => 'Nombre del cliente',
+                    'output' => $productEmailData['inquirer-name'],
+                ],
+                'inquirer-phone' => [
+                    'label'  => 'Teléfono',
+                    'output' => $productEmailData['inquirer-phone'],
+                ],
+                'inquirer-email' => [
+                    'label'  => 'Email',
+                    'output' => $productEmailData['inquirer-email'],
+                ],
+                'message' => [
+                    'label'  => 'Mensaje',
+                    'output' => $productEmailData['message'],
+                ],
+            ];
+
+            $successEmail = EmailSender::sendEmail($productEmailData['inquirer-name'], $productEmailData['inquirer-email'], 'kinub_admin@gmail.com', $subject, 'mailDetail', $formData);
+
+            if (! $successEmail) {
+                throw new EmailNotSendException('Ha ocurrido un error al enviar email');
+            }
+
+            $data = [
+                'emailTypeId'   => self::PRODUCT_EMAIL_ID,
+                'inquirerName'  => $productEmailData['inquirer-name'],
+                'inquirerEmail' => $productEmailData['inquirer-email'],
+                'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
+            ];
+            (new EmailModel())->insert($data);
+
+            $response = [
+                'title'   => 'Mensaje enviado correctamente',
+                'message' => 'El Formulario se ha enviado a nuestro equipo, trataremos de ponernos en contacto con usted lo más pronto posible para brindarle más información del producto.',
+                'type'    => 'success',
+            ];
+
+            return redirect('producto')->with('response', $response);
+        } catch (InvalidInputException $th) {
+            $response = [
+                'title'   => 'Oops! No se ha realizado el envio del email',
+                'message' => 'Por favor corrobore que todos los datos hayan sido proporcionados para poder realizar el envio del email',
+                'type'    => 'error',
+            ];
+
+            return redirect('producto')->withInput()->with('errors', $th->getErrors())->with('response', $response);
+        } catch (Throwable $th) {
+            $response = [
+                'title'   => 'Oops! Ha ocurrido un error',
+                'message' => 'Ha ocurrido un error mientras se enviaba el email. Por favor intente nuevamente',
+                'type'    => 'error',
+            ];
+
+            return redirect('producto')->withInput()->with('response', $response);
+        }
     }
 
     public function sendSupportEmail(): RedirectResponse
@@ -112,7 +197,7 @@ class CtrlEmail extends BaseController
             ];
             $emailModel = new EmailModel();
             $data       = [
-                'emailTypeId'   => 2,
+                'emailTypeId'   => self::SUPPORT_EMAIL_ID,
                 'inquirerName'  => $POST['support-customer'],
                 'inquirerEmail' => $POST['support-email'],
                 'emailContent'  => EmailSender::getEmailBody($formData, 'mailDetail'),
@@ -136,7 +221,7 @@ class CtrlEmail extends BaseController
 
         try {
             if (! $validateEmail->validateInputs($data)) {
-                throw new Exception();
+                throw new InvalidInputException($validateEmail->getErrors());
             }
 
             $userModel = new UserModel();
@@ -158,19 +243,16 @@ class CtrlEmail extends BaseController
                 'message' => 'Verifique su bandeja de entrada para poder restablecer su contraseña.',
                 'type'    => 'success',
             ];
+        } catch (InvalidInputException $th) {
+            return redirect()->back()->with('errors', $validateEmail->getErrors());
         } catch (Throwable $th) {
-            $errors = $validateEmail->getErrors();
-            if (! isset($errors['email'])) {
-                $response = [
-                    'title'   => 'Oops',
-                    'message' => $th->getMessage(),
-                    'type'    => 'danger',
-                ];
-            } else {
-                return redirect()->back()->with('errors', $errors);
-            }
+            $response = [
+                'title'   => 'Oops',
+                'message' => $th->getMessage(),
+                'type'    => 'danger',
+            ];
         }
 
-        return redirect()->back()->with('response', $response);
+        return redirect()->to('/password_response')->with('response', $response);
     }
 }
