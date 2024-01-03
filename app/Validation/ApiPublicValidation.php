@@ -10,7 +10,7 @@ class ApiPublicValidation extends BaseValidation
         'categoria-tags' => 'if_exist|regex_match[^(?:[^,]+(?:,[^,]+)*)?$]',
         'por-pagina'     => 'required|integer',
         'pagina'         => 'required|integer',
-        'clasificacion'  => 'if_exist|regex_match[^(?:id|name)?$]',
+        'clasificacion'  => 'if_exist|regex_match[^(?:id|nombre)?$]',
         'orden'          => 'if_exist|regex_match[^(?:asc|des)?$]',
     ];
     protected $validationMessages = [

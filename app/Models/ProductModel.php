@@ -10,8 +10,8 @@ class ProductModel extends Model
     protected $primaryKey     = 'productId';
     protected $allowedFields  = ['productName', 'productModel', 'productDescription', 'productTechnicalInfo', 'productCategoryId'];
     protected $allowedOrderBy = [
-        'name' => 'productName',
-        'id'   => 'productId',
+        'nombre' => 'productName',
+        'id'     => 'productId',
     ];
 
     /**
@@ -80,7 +80,7 @@ class ProductModel extends Model
      *
      * @return $this
      */
-    public function order(string $sort = 'name', string $order = 'asc')
+    public function order(string $sort = 'id', string $order = 'asc')
     {
         if (! empty($sort) && isset($this->allowedOrderBy[$sort])) {
             $this->orderBy($this->allowedOrderBy[$sort], $order);
