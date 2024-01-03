@@ -80,8 +80,8 @@ class CtrlLogin extends BaseController
     public function passwordReset($token)
     {
         try {
-            $userTokenModelo          = new UserTokenModel();
-            $userWithToken            = $userTokenModelo->getUserWithToken($token);
+            $userTokenModel           = new UserTokenModel();
+            $userWithToken            = $userTokenModel->getUserWithToken($token);
             $changePasswordValidation = new ChangePasswordValidation($userWithToken);
 
             $data = $this->request->getPost();
