@@ -19,11 +19,6 @@ class App extends BaseConfig
      */
     public string $baseURL;
 
-    public function __construct()
-    {
-        $this->baseURL =  $_ENV['app.baseURL'];
-    }
-
     /**
      * Allowed Hostnames in the Site URL other than the hostname in the baseURL.
      * If you want to accept multiple Hostnames, set this.
@@ -451,4 +446,9 @@ class App extends BaseConfig
      * @see http://www.w3.org/TR/CSP/
      */
     public bool $CSPEnabled = false;
+
+    public function __construct()
+    {
+        $this->baseURL = $_ENV['app.baseURL'];
+    }
 }

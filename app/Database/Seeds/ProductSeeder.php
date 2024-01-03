@@ -19,7 +19,8 @@ class ProductSeeder extends Seeder
             $products[] = [
                 'productName'          => 'Medidor de nivel de radar ' . $faker->randomNumber('2', true) . 'G',
                 'productModel'         => 'E-' . $faker->randomNumber('3', true),
-                'productDescription'   => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo debitis, ipsum quae possimus error quasi aspernatur mollitia molestiae expedita! Natus velit non doloribus ea itaque libero at qui possimus aperiam.',
+                'productDescription'   => '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>',
+                'productDetails'       => '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>',
                 'productTechnicalInfo' => json_encode([
                     'Frecuencia'            => $faker->randomNumber('3', true) . '300 MHz',
                     'Rango de medición'     => $faker->randomNumber('1', true) . 'km',

@@ -25,8 +25,10 @@ class Products extends Migration
                 'type' => 'text',
             ],
             'productTechnicalInfo' => [
-                'type'       => 'varchar',
-                'constraint' => 60,
+                'type' => 'text',
+            ],
+            'productDetails' => [
+                'type' => 'text',
             ],
             'productCategoryId' => [
                 'type' => 'int',
