@@ -34,7 +34,7 @@ class ProductModel extends Model
      *
      * @return $this
      */
-    public function filterProducts(array $categories = [], array $categoryTags = [], array $productTags = [], string $search = '')
+    public function filterProducts(array $categories, array $categoryTags, array $productTags, string $search = '')
     {
         $builder = $this->select(['productName', 'productModel', 'categoryName', 'CONCAT("/producto/", productId) AS url'])
             ->join('categories', 'products.productCategoryId = categories.categoryId')
@@ -44,19 +44,19 @@ class ProductModel extends Model
 
         $whereQueries = [];
 
+        // added categories filter
         if (! empty($categories)) {
-            // added categories filter
-            $whereQueries[] = 'categories.categoryId IN (' . implode(',', $categories) . ')';
-            // added category_tags filter
-            if (! empty($categoryTags)) {
-                $whereQueries[] = 'category_tags.categoryTagId IN (' . implode(',', $categoryTags) . ')';
-            }
-            // added products_tags filter
-            if (! empty($productTags)) {
-                $whereQueries[] = ' product_tags.ptId IN (' . implode(',', $productTags) . ')';
-            }
+            $whereQueries[] = "categories.categorySlug IN ('" . str_replace(' ', '', implode("', '", $categories)) . "')";
         }
-
+        // added category_tags filter
+        if (! empty($categoryTags)) {
+            $whereQueries[] = "category_tags.categoryTagSlug IN ('" . str_replace(' ', '', implode("', '", $categoryTags)) . "')";
+        }
+        // added products_tags filter
+        if (! empty($productTags)) {
+            $whereQueries[] = "product_tags.ptSlug IN ('" . str_replace(' ', '', implode("', '", $productTags)) . "')";
+        }
+        // added search filter
         if (! empty($search)) {
             $whereQueries[] = "(products.productName LIKE '%{$search}%' OR products.productModel LIKE '%{$search}%')";
         }

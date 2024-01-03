@@ -55,12 +55,6 @@ $routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
 $routes->group('api', static function (RouteCollection $routes) {
     $routes->get('productos', [CtrlApiPublic::class, 'getProducts']);
     $routes->get('categorytags', [CtrlApiPublic::class, 'getCategoryTags']);
-    // test routes:
-    // the following routes are going to be on a public controller,
-    // but they are here in order to test.
-    $routes->get('filterproduct', [CtrlApiPublic::class, 'getFilteredProduct']);
-    $routes->get('producttags', [CtrlApiPublic::class, 'getProductTags']);
-    $routes->get('categoryimage', [CtrlApiPublic::class, 'getCategoryImage']);
 });
 
 /*
