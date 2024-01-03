@@ -1,10 +1,10 @@
 <div>
-    <div class="keyValue px-0 row gap-3 justify-content-center w-100 mx-auto" data-min="<?=$minValues?>"  data-name="<?=$name?>" >
+    <div class="keyValue px-0 row gap-3 justify-content-center w-100 mx-auto" data-min="<?=$minValues?>" data-name="<?=$name?>">
         <?php foreach($keyValues as $key => $value):?>
         <?=view(
             'admin/components/keyValue/keyValueInput',
             [
-                'key' => $key, 'value' => $value, 'name' => $name,
+                'key' => ! is_numeric($key) ? $key : '', 'value' => $value, 'name' => $name,
             ]
         )?>
         <?php endforeach; ?>

@@ -67,11 +67,8 @@ class CtrlProduct extends CtrlApiFiles
     public function createProduct()
     {
         try {
-            $productData = $this->request->getPost();
-
-            if ($productData['productTechnicalInfo'][0] === '') {
-                $productData['productTechnicalInfo'] = '';
-            }
+            $productData                         = $this->request->getPost();
+            $productData['productTechnicalInfo'] = json_encode($productData['productTechnicalInfo']);
 
             $validator = new ProductValidation();
             $fileRules = $this->fileConfig->getCollectionFileValidationRules();
@@ -83,8 +80,6 @@ class CtrlProduct extends CtrlApiFiles
             if ($dataIsIncorrect) {
                 throw new InvalidInputException($validator->getErrors());
             }
-
-            $productData['productTechnicalInfo'] = json_encode($productData['productTechnicalInfo']);
 
             (new ProductModel())->createProduct($productData);
 
