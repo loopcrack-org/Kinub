@@ -6,13 +6,9 @@ use CodeIgniter\Model;
 
 class ProductModel extends Model
 {
-    protected $table          = 'products';
-    protected $primaryKey     = 'productId';
-    protected $allowedFields  = ['productName', 'productModel', 'productDescription', 'productTechnicalInfo', 'productCategoryId'];
-    protected $allowedOrderBy = [
-        'nombre' => 'productName',
-        'id'     => 'productId',
-    ];
+    protected $table         = 'products';
+    protected $primaryKey    = 'productId';
+    protected $allowedFields = ['productName', 'productModel', 'productDescription', 'productTechnicalInfo', 'productCategoryId'];
 
     /**
      * get all products
@@ -80,11 +76,9 @@ class ProductModel extends Model
      *
      * @return $this
      */
-    public function order(string $sort = 'id', string $order = 'asc')
+    public function order(string $order = 'asc')
     {
-        if (! empty($sort) && isset($this->allowedOrderBy[$sort])) {
-            $this->orderBy($this->allowedOrderBy[$sort], $order);
-        }
+        $this->orderBy('productName', $order);
 
         return $this;
     }

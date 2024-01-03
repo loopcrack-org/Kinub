@@ -56,7 +56,7 @@ class CtrlApiPublic extends BaseController
                 $filter['categoria-tags'],
                 $filter['producto-tags'],
                 $filter['busqueda'] ?? ''
-            )->order($filter['clasificacion'] ?? 'id', $filter['orden'] ?? 'asc')->getByPage($filter['pagina'], $filter['por-pagina']);
+            )->order($filter['orden'] ?? 'asc')->getByPage($filter['pagina'], $filter['por-pagina']);
 
             return $this->response->setJSON($products);
         } catch (InvalidInputException $th) {

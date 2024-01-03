@@ -10,7 +10,6 @@ class ApiPublicValidation extends BaseValidation
         'categoria-tags' => 'if_exist|regex_match[^(?:[^,]+(?:,[^,]+)*)?$]',
         'por-pagina'     => 'required|integer',
         'pagina'         => 'required|integer',
-        'clasificacion'  => 'if_exist|regex_match[^(?:id|nombre)?$]',
         'orden'          => 'if_exist|regex_match[^(?:asc|des)?$]',
     ];
     protected $validationMessages = [
@@ -30,9 +29,6 @@ class ApiPublicValidation extends BaseValidation
         'pagina' => [
             'required' => 'pagina es requerido',
             'integer'  => 'pagina no es un entero',
-        ],
-        'clasificacion' => [
-            'regex_match' => 'se acepta id o name',
         ],
         'orden' => [
             'regex_match' => 'se acepta asc o des',
