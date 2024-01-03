@@ -10,5 +10,13 @@ class EmailModel extends Model
     protected $primaryKey       = 'emailId';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
-    protected $allowedFields    = ['emailTypeId', 'inquirerName', 'inquirerEmail', 'emailContent'];
+    protected $allowedFields    = ['emailTypeId', 'inquirerName', 'inquirerEmail', 'emailContent', 'createdAt'];
+    protected $beforeInsert     = ['setCreatedAt'];
+
+    protected function setCreatedAt(array $data)
+    {
+        $data['data']['createdAt'] = date('y-m-d H:i:m');
+
+        return $data;
+    }
 }

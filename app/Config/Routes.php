@@ -46,6 +46,7 @@ $routes->get('/', 'CtrlPublicPages::index');
 $routes->get('/soporte', 'CtrlPublicPages::viewSupport');
 $routes->post('/email/contacto', 'CtrlEmail::sendContactEmail');
 $routes->post('/email/soporte', 'CtrlEmail::sendSupportEmail');
+$routes->post('/email/producto', 'CtrlEmail::sendProductEmail');
 $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
