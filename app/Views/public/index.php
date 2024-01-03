@@ -247,14 +247,7 @@
     $response = session()->get('response');
 if (isset($response)) :
     ?>
-    <script type="module">
-    showAlert({
-        title: "<?= $response['title']; ?>",
-        text: "<?= $response['message']; ?>",
-        icon: "<?= $response['type']; ?>",
-        confirmButtonColor: '#0174F6'
-    });
-    </script>
+    <div id="alert-response" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
     <?php endif; ?>
 
     <form class="form wrapper--large" action="/email/contacto" method="POST">

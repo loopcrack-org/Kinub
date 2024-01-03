@@ -1,7 +1,7 @@
 import customSelect from 'custom-select';
 import Plyr from 'plyr';
-import Swal from 'sweetalert2';
 import { VanillaValidator } from '../libs/vanilla-validator/vanilla-validator-concat.js';
+import './components/alertModal.js';
 
 import Swiper from 'swiper/bundle';
 // init Swiper:
@@ -43,14 +43,6 @@ cstSel.container.addEventListener('custom-select:open', () => {
 cstSel.container.addEventListener('custom-select:close', () => {
   cstSel.container.classList.remove('turn-arrow');
 });
-
-const showAlert = (props) => {
-  Swal.fire({
-    ...props,
-  });
-};
-
-window.showAlert = showAlert;
 
 const commonCustomViewErrors = {
   add: function (field, message, cls) {
