@@ -33,7 +33,7 @@
 
 <section class="kinub-video">
     <div class="kinub-video__container">
-        <video id="kinub-video" class="kinub-video__video" preload="auto" width="500" height="264" muted autoplay playsinline controls>
+        <video id="kinub-video" class="kinub-video__video" preload="auto" width="500" height="264" muted playsinline controls>
             <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
             <source src="assets/video/kinub-video-example.webm" type="video/webm" />
         </video>

@@ -30,7 +30,9 @@ new Swiper('.swiper', {
   },
 });
 
-new Plyr('#kinub-video');
+new Plyr('#kinub-video', {
+  muted: true,
+});
 
 const cstSel = customSelect('#product-name')[0];
 

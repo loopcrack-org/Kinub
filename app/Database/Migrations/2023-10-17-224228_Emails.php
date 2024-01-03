@@ -27,6 +27,9 @@ class Emails extends Migration
             'emailContent' => [
                 'type' => 'text',
             ],
+            'createdAt' => [
+                'type' => 'datetime',
+            ],
         ]);
 
         $this->forge->addKey('emailId', true);
