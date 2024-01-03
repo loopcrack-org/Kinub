@@ -2,7 +2,36 @@ import customSelect from 'custom-select';
 import Plyr from 'plyr';
 import Swal from 'sweetalert2';
 
-new Plyr('#kinub-video');
+import Swiper from 'swiper/bundle';
+// init Swiper:
+new Swiper('.swiper', {
+  // Optional parameters
+  direction: 'horizontal',
+  loop: true,
+  slidesPerView: 4,
+  breakpoints: {
+    280: {
+      slidesPerView: 2,
+    },
+    490: {
+      slidesPerView: 3,
+    },
+    1024: {
+      slidesPerView: 4,
+    },
+  },
+  pagination: {
+    el: '.swiper-pagination',
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+new Plyr('#kinub-video', {
+  muted: true,
+});
 
 const cstSel = customSelect('#product-name')[0];
 

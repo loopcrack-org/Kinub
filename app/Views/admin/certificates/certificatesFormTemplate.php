@@ -31,7 +31,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="certificatePreviewId">
+                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatePreview']]) ?>
             </div>
             <!-- end card body -->
         </div>
@@ -46,7 +46,7 @@
             </div><!-- end card header -->
 
             <div class="card-body">
-                <input type="file" class="filepond" name="certificatefileId">
+                 <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatefile']]) ?>
             </div>
             <!-- end card body -->
         </div>

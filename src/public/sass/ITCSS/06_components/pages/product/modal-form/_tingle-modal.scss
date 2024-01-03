@@ -1,0 +1,21 @@
+@use 'sass:color';
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+
+.tingle-modal {
+  display: block;
+  overflow: hidden;
+  padding-top: 0;
+  backdrop-filter: blur(0.09375rem);
+  background: rgba(0, 0, 0, 0.5);
+  cursor: auto;
+
+  &__close {
+    background-color: color.adjust($color-green-blue, $lightness: 12%);
+    visibility: hidden;
+  }
+
+  @include phoneXL() {
+    display: flex;
+  }
+}

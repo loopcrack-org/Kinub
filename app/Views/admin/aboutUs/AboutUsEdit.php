@@ -22,7 +22,7 @@
                         <i class="ri-arrow-left-fill label-icon align-middle rounded-pill fs-16 me-2"></i>Volver
                     </a>
                 </div>
-                <form autocomplete="off" class="needs-validation" method="post">
+                <form id="form" autocomplete="off" class="needs-validation" method="post">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card">
@@ -30,10 +30,7 @@
                                     <h4 class="card-title mb-0">Imagen</h4>
                                 </div><!-- end card header -->
 
-                                <div class="card-body">
-                                    <input type="file" class="filepond" name="aboutUsImage">
-                                </div>
-                                <!-- end card body -->
+                                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['aboutUsImage']]) ?>
                             </div>
                             <!-- end card -->
                         </div>
@@ -45,10 +42,7 @@
                                     <h4 class="card-title mb-0">Video</h4>
                                 </div><!-- end card header -->
 
-                                <div class="card-body">
-                                    <input type="file" class="filepond" name="aboutUsVideo">
-                                </div>
-                                <!-- end card body -->
+                                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['aboutUsVideo']]) ?>
                             </div>
                             <!-- end card -->
                         </div>
@@ -89,6 +83,9 @@
         </div>
     </div>
     <!-- container-fluid -->
+    <div class="filepondConfig">
+        <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
+    </div>
     <?php
     if (session()->has('response')) {
         $response = session()->get('response');
@@ -101,6 +98,6 @@
 
 
 <?= $this->section('js') ?>
-<script src="/assets/admin/js/aboutUs.init.min.js"></script>
+<script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
 <?= $this->endSection() ?>

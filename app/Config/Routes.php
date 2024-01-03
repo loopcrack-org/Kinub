@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\CtrlAboutUs;
 use App\Controllers\CtrlAdminEmail;
+use App\Controllers\CtrlApiPublic;
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlCertificate;
 use App\Controllers\CtrlEmail;
@@ -12,6 +13,7 @@ use App\Controllers\CtrlLogin;
 use App\Controllers\CtrlProduct;
 use App\Controllers\CtrlSolution;
 use App\Controllers\CtrlUser;
+use CodeIgniter\Router\RouteCollection;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
@@ -48,6 +50,10 @@ $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
 $routes->get('/categoria', 'CtrlPublicPages::viewCategory');
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
+$routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');
+$routes->group('api', static function (RouteCollection $routes) {
+    $routes->get('categorytags', [CtrlApiPublic::class, 'getCategoryTags']);
+});
 
 /*
  * --------------------------------------------------------------------
@@ -57,9 +63,12 @@ $routes->get('/producto', 'CtrlPublicPages::viewProduct');
 $routes->get('login', [CtrlLogin::class, 'index']);
 $routes->get('password_reset', [CtrlLogin::class, 'viewPasswordEmail']);
 $routes->get('password_reset/(:any)', [CtrlLogin::class, 'viewPasswordReset']);
+$routes->get('password_set/(:any)', [CtrlLogin::class, 'viewPasswordSet']);
+$routes->get('password_response', [CtrlLogin::class, 'viewPasswordResponse']);
 $routes->post('login', [CtrlLogin::class, 'login']);
 $routes->post('password_reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
 $routes->post('password_reset/(:any)', [CtrlLogin::class, 'passwordReset']);
+$routes->post('password_set/(:any)', [CtrlLogin::class, 'passwordSet']);
 $routes->post('logout', [CtrlLogin::class, 'logout']);
 /*
  * --------------------------------------------------------------------
@@ -83,6 +92,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlSolution::class, 'viewSolutionEdit']);
         $routes->post('editar/(:num)', [CtrlSolution::class, 'updateSolution']);
         $routes->post('borrar', [CtrlSolution::class, 'deleteSolution']);
+        generateFileApiRoutesByController($routes, CtrlSolution::class);
     });
 
     $routes->group('productos', static function ($routes) {
@@ -93,6 +103,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlProduct::class, 'viewProductEdit']);
         $routes->post('editar/(:num)', [CtrlProduct::class, 'updateProduct']);
         $routes->post('borrar', [CtrlProduct::class, 'deleteProduct']);
+        generateFileApiRoutesByController($routes, CtrlProduct::class);
     });
     $routes->group('categorias', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
@@ -102,6 +113,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCategory::class, 'viewCategoryEdit']);
         $routes->post('editar/(:num)', [CtrlCategory::class, 'updateCategory']);
         $routes->post('borrar', [CtrlCategory::class, 'deleteCategory']);
+        generateFileApiRoutesByController($routes, CtrlCategory::class);
     });
 
     $routes->group('certificados', static function ($routes) {
@@ -112,6 +124,7 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlCertificate::class, 'viewCertificateEdit']);
         $routes->post('editar/(:num)', [CtrlCertificate::class, 'updateCertificate']);
         $routes->post('borrar', [CtrlCertificate::class, 'deleteCertificate']);
+        generateFileApiRoutesByController($routes, CtrlCertificate::class);
     });
 
     $routes->group('emails', static function ($routes) {
@@ -129,11 +142,13 @@ $routes->group('admin', static function ($routes) {
         $routes->get('editar/(:num)', [CtrlUser::class, 'viewUserEdit']);
         $routes->post('editar/(:num)', [CtrlUser::class, 'updateUser']);
         $routes->post('borrar', [CtrlUser::class, 'deleteUser']);
+        $routes->get('reenviarConfirmacionCuenta/(:num)', [CtrlUser::class, 'resendConfirmationEmail/$1']);
     });
     $routes->group('nosotros', static function ($routes) {
         /** @var \CodeIgniter\Router\RouteCollection $routes */
         $routes->get('', [CtrlAboutUs::class, 'viewAboutUsEdit']);
         $routes->post('', [CtrlAboutUs::class, 'updateAboutUsSection']);
+        generateFileApiRoutesByController($routes, CtrlAboutUs::class);
     });
 });
 /*
@@ -151,4 +166,14 @@ $routes->group('admin', static function ($routes) {
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+// generate routes dynamically
+function generateFileApiRoutesByController(RouteCollection $routes, string $controller)
+{
+    $routes->post('process', [$controller, 'processTemporalFile']);
+    $routes->patch('process', [$controller, 'processTemporalFileByChunks']);
+    $routes->get('restore', [$controller, 'restoreTemporalFile']);
+    $routes->get('load', [$controller, 'getFileFromServer']);
+    $routes->delete('delete', [$controller, 'deleteTemporalFile']);
 }
