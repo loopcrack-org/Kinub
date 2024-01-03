@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->include('partials/main') ?>
 
 <head>
@@ -55,9 +56,9 @@ if ($response) { ?>
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- particles js -->
-    <script src="/assets/admin/js/particles.min.js"></script>
+    <script src="<?= UrlGenerator::asset_url('admin-js','particles.min.js') ?>"></script>
     <!-- particles app js -->
-    <script src="/assets/admin/js/particles.app.min.js"></script>
+    <script src="<?= UrlGenerator::asset_url('admin-js','particles.app.min.js') ?>"></script>
 </body>
 
 </html>

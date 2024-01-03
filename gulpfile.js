@@ -20,6 +20,10 @@ const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
 const avif = require('gulp-avif');
 
+// Cache Busting
+const rev = require('gulp-rev');
+const revDelete = require('gulp-rev-delete-original');
+
 //BrowserSync
 const browserSync = require('browser-sync').create();
 require('dotenv').config();
@@ -77,6 +81,10 @@ async function compileSass(srcPath, destPath, production = false) {
       .pipe(sass())
       .pipe(postcss([autoprefixer(), cssnano()]))
       .pipe(rename({ dirname: '.', suffix: '.min' }))
+      .pipe(rev())
+      .pipe(dest(destPath))
+      .pipe(revDelete())
+      .pipe(rev.manifest('rev-manifest-css.json'))
       .pipe(dest(destPath));
   } else {
     return src(srcPath)
@@ -106,6 +114,10 @@ async function javascript(srcPath, destPath, production = false) {
       .pipe(named())
       .pipe(webpack(webpackConfig))
       .pipe(rename({ dirname: '.' }))
+      .pipe(rev())
+      .pipe(dest(destPath))
+      .pipe(revDelete())
+      .pipe(rev.manifest('rev-manifest-js.json'))
       .pipe(dest(destPath));
   } else {
     webpackConfig['devtool'] = 'source-map';

@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
@@ -5,8 +6,8 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('css') ?>
-<link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="<?= UrlGenerator::asset_url('admin-css','filepond.min.css') ?>" type="text/css" />
+<link href="<?= UrlGenerator::asset_url('common-css','sweetAlert.min.css') ?>" rel="stylesheet" type="text/css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -98,6 +99,6 @@
 
 
 <?= $this->section('js') ?>
-<script src="/assets/admin/js/filepond-general-config.min.js"></script>
-<script src="/assets/admin/js/alertElement.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','filepond-general-config.min.js') ?>"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','alertElement.min.js') ?>"></script>
 <?= $this->endSection() ?>

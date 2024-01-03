@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->include('partials/main') ?>
 
 <head>
@@ -1395,7 +1396,7 @@
     <!-- <script src="/assets/js/pages/dashboard-ecommerce.init.js"></script> -->
 
     <!-- App js -->
-    <script src="/assets/js/admin/app.js"></script>
+    <script src="<?= UrlGenerator::asset_url('admin-js','app.js') ?>"></script>
 </body>
 
 </html>
