@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Classes\FileValidationConfig;
 use App\Classes\FileValidationConfigBuilder;
 use App\Exceptions\InvalidInputException;
+use App\Libraries\tinify\Tinify;
 use App\Models\HomeSectionModel;
 use App\Utils\FileManager;
 use App\Validation\AboutUsValidation;
@@ -63,6 +64,7 @@ class CtrlAboutUs extends CtrlApiFiles
 
             foreach ($filesToSave as $files) {
                 FileManager::changeDirectoryCollectionFolder($files);
+                Tinify::convertImages($files);
             }
 
             $filesToDelete = $this->fileConfig->getKeysFolderToDelete($aboutUsData);

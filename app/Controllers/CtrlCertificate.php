@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Classes\FileValidationConfig;
 use App\Classes\FileValidationConfigBuilder;
 use App\Exceptions\InvalidInputException;
+use App\Libraries\tinify\Tinify;
 use App\Models\CertificateModel;
 use App\Utils\FileManager;
 use App\Validation\CertificateValidation;
@@ -82,6 +83,7 @@ class CtrlCertificate extends CtrlApiFiles
             (new CertificateModel())->createCertificate($certificateData);
             FileManager::changeDirectoryCollectionFolder($certificateData['certificatePreview']);
             FileManager::changeDirectoryCollectionFolder($certificateData['certificatefile']);
+            Tinify::convertImages($certificateData['certificatePreview']);
 
             $response = [
                 'title'   => 'Creación exitosa',
