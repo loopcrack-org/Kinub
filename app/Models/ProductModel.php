@@ -12,7 +12,7 @@ class ProductModel extends Model
     protected $primaryKey     = 'productId';
     protected $allowedFields  = ['productName', 'productModel', 'productDescription', 'productDetails', 'productTechnicalInfo', 'productCategoryId'];
     private $productFileTypes = [
-        'mainImage'     => 'main Image',
+        'mainImage'     => 'main image',
         'mainVideo'     => 'video demo',
         'galleryImages' => 'image',
         'galleryVideos' => 'video',
@@ -60,6 +60,10 @@ class ProductModel extends Model
 
     private function saveProductFiles(string $productId, array $files, string $fileType)
     {
+        if (! $files[0]) {
+            return [];
+        }
+
         $fileModel = new FileModel();
 
         return array_map(static function ($file) use ($productId, $fileModel, $fileType) {

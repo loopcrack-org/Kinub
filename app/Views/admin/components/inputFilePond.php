@@ -5,7 +5,7 @@
     fileValidateTypeLabelExpectedTypes:     Message with the file types available
     deleteFiles:                            Save the files the user wants to delete
  -->
-<div class="card-body p-0" data-name="<?= $config['name']?>">
+<div class="card-body filepond" data-name="<?= $config['name']?>">
     <!-- show an alert if validation failed -->
     <?= validation_show_error($config['name'], 'validationError') ?>
     <!-- show expected types -->
@@ -15,9 +15,9 @@
     <!-- for delete files -->
     <div id="delete-<?=$config['name']?>" class="deleteFile">
         <?php if(isset($config['deleteFiles'])): ?>
-            <?php foreach($config['deleteFiles'] as $forDeleteFile): ?>
-                <input type="hidden" name="delete-<?=$config['name']?>[]" value="<?=$forDeleteFile?>">
-            <?php endforeach; ?>
+        <?php foreach($config['deleteFiles'] as $forDeleteFile): ?>
+        <input type="hidden" name="delete-<?=$config['name']?>[]" value="<?=$forDeleteFile?>">
+        <?php endforeach; ?>
         <?php endif; ?>
     </div>
 </div>

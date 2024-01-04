@@ -12,7 +12,7 @@ class ProductValidation extends BaseValidation
         'productCategoryId'    => 'required',
         'productDescription'   => 'required',
         'productDetails'       => 'required',
-        'productTechnicalInfo' => 'regex_match[/"?!((\d+)"|:"\s*"|\["\w*"\])/]',
+        'productTechnicalInfo' => 'regex_match[/^(?:(?!"(\d+)"|:"\s*"|\[".*"\]).)*$/]',
         'categoryTags'         => 'required',
     ];
     protected $validationMessages = [

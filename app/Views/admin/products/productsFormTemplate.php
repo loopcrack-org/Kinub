@@ -1,4 +1,9 @@
 <?php $errors = session()->get('errors') ?>
+<style>
+.filepond {
+    padding: 0;
+}
+</style>
 
 
 <div class="grid gap-0 column-gap-3 position-relative">
@@ -126,7 +131,7 @@
                     <label class="text-muted mb-3">Ingresa tags de la categoría</label>
                     <div class="form-control <?=isset($errors['categoryTags']) ? 'is-invalid' : ''?> position-relative p-0" style="background-image: none !important;">
                         <div class="d-flex align-items-center h-100 position-absolute z-1 gap-2" style="right: 10px">
-                            <?php if(isset($errors['categoryTags[]'])): ?>
+                            <?php if(isset($errors['categoryTags'])): ?>
                             <i class="las la-exclamation-circle" style="
                                     color: var(--vz-red);
                                     font-size: 20px;"></i>
@@ -162,7 +167,7 @@
                     <h5 class="fs-14 mb-2">Descripción</h5>
                     <label class="text-muted mb-3">Ingresa una descripción para el producto</label>
                     <div class="wysiwyg-editor position-relative z-1">
-                        <div class="editor form-control <?=isset($errors['productDescription']) ? 'is-invalid' : ''?>"></div>
+                        <div class="editor <?=isset($errors['productDescription']) ? 'is-invalid' : ''?>"></div>
                         <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
                     </div>
                     <?= view('admin/templates/invalidInputError', ['error' => $errors['productDescription'] ?? null])?>
@@ -172,8 +177,8 @@
                 <div class="mb-4">
                     <h5 class="fs-14 mb-2">Especificaciones técnicas del producto</h5>
                     <label class="text-muted mb-3">Ingresa información más detallada del producto</label>
-                    <div class="wysiwyg-editor">
-                        <div class="editor form-control <?=isset($errors['productDetails']) ? 'is-invalid' : ''?>"></div>
+                    <div class="wysiwyg-editor ">
+                        <div class="editor <?=isset($errors['productDetails']) ? 'is-invalid' : ''?>"></div>
                         <input class="input-wysiwyg" type="hidden" name="productDetails" value="<?= old('productDetails') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
                     </div>
                     <?= view('admin/templates/invalidInputError', ['error' => $errors['productDetails'] ?? null])?>
