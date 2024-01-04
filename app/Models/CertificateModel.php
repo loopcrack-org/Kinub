@@ -70,15 +70,35 @@ class CertificateModel extends Model
 
     public function getCertificate($id)
     {
-        return $this->select('certificates.certificateId, certificates.certificatefileName,
-                   preview.fileId AS previewFileId, preview.uuid AS previewUuid,
-                   certfile.fileId AS certificateFileId, certfile.uuid AS certificateUuid')->join('files as preview', 'certificates.certificatePreviewId = preview.fileId', 'left')->join('files as certfile', 'certificates.certificatefileId = certfile.fileId', 'left')->where('certificates.certificateId', $id)->first();
+        return $this->select('
+            certificates.certificateId,
+            certificates.certificatefileName,
+            preview.fileId AS previewFileId,
+            preview.uuid AS previewUuid,
+            certfile.fileId AS certificateFileId,
+            certfile.uuid AS certificateUuid')
+            ->join('files as preview', 'certificates.certificatePreviewId = preview.fileId', 'left')
+            ->join('files as certfile', 'certificates.certificatefileId = certfile.fileId', 'left')
+            ->where('certificates.certificateId', $id)->first();
     }
 
     public function getAllCertificateWithFiles()
     {
-        return $this->select('certificates.certificateId, certificates.certificatefileName,
-                   preview.fileId AS previewFileId, preview.fileRoute AS previewFileRoute, preview.uuid AS previewUuid, preview.fileName AS previewFileName, preview.fileDirectoryRoute AS previewFileDirectoryRoute,
-                   certfile.fileId AS certificateFileId, certfile.fileRoute AS certificateFileRoute, certfile.uuid AS certificateUuid, certfile.fileName AS certificateFileName, certfile.fileDirectoryRoute AS certificateFileDirectoryRoute')->join('files as preview', 'certificates.certificatePreviewId = preview.fileId', 'left')->join('files as certfile', 'certificates.certificatefileId = certfile.fileId', 'left')->findAll();
+        return $this->select('
+            certificates.certificateId,
+            certificates.certificatefileName,
+            preview.fileId AS previewFileId,
+            preview.fileRoute AS previewFileRoute,
+            preview.uuid AS previewUuid,
+            preview.fileName AS previewFileName,
+            preview.fileDirectoryRoute AS previewFileDirectoryRoute,
+            certfile.fileId AS certificateFileId,
+            certfile.fileRoute AS certificateFileRoute,
+            certfile.uuid AS certificateUuid,
+            certfile.fileName AS certificateFileName,
+            certfile.fileDirectoryRoute AS certificateFileDirectoryRoute')
+            ->join('files as preview', 'certificates.certificatePreviewId = preview.fileId', 'left')
+            ->join('files as certfile', 'certificates.certificatefileId = certfile.fileId', 'left')
+            ->findAll();
     }
 }
