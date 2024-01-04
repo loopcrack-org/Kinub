@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use CodeIgniter\Database\RawSql;
 use CodeIgniter\Model;
 
 class ProductModel extends Model
@@ -32,12 +33,19 @@ class ProductModel extends Model
      */
     public function filterProducts(array $categories, array $categoryTags, array $productTags, string $search = '')
     {
-        $builder = $this->select(['productName', 'productModel', 'categoryName', 'CONCAT("/producto/", productId) AS url'])
+        $builder = $this->select([
+            'productName',
+            'productModel',
+            'categoryName',
+            'CONCAT("/producto/", productId, "/", productName) AS productUrl',
+            'GROUP_CONCAT(DISTINCT files.fileRoute) AS imageRoute',
+        ])
             ->join('categories', 'products.productCategoryId = categories.categoryId')
             ->join('`products-category_tags`', 'products.productId = `products-category_tags`.pctProductId', 'LEFT')
             ->join('category_tags', 'category_tags.categoryTagId = `products-category_tags`.pctCategoryTagId', 'LEFT')
-            ->join('product_tags', 'product_tags.ptProductId = products.productId', 'LEFT');
-
+            ->join('product_tags', 'product_tags.ptProductId = products.productId', 'LEFT')
+            ->join('product_files', new RawSql('products.productId = product_files.pfProductId AND product_files.pfFileType = "main image"'), 'LEFT')
+            ->join('files', 'product_files.pfFileId = files.fileId', 'LEFT');
         $whereQueries = [];
 
         // added categories filter
