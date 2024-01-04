@@ -14,15 +14,15 @@ class CategoryTagSeeder extends Seeder
         $tagsByCategory = 3;
         $categoryTags   = [];
         $faker          = Factory::create();
-        $slugGenerator  = new SlugGenerator();
+        // $slugGenerator  = new SlugGenerator();
 
         foreach ($categories as $category) {
             for ($i = 1; $i < $tagsByCategory; $i++) {
                 $categoryTagName = $faker->words(asText: true);
                 $categoryTags[]  = [
                     'categoryTagName' => $categoryTagName,
-                    'categoryTagSlug' => $slugGenerator->generate($categoryTagName),
-                    'categoryId'      => $category['categoryId'],
+                    // 'categoryTagSlug' => $slugGenerator->generate($categoryTagName),
+                    'categoryId' => $category['categoryId'],
                 ];
             }
         }

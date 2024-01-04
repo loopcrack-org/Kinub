@@ -4,6 +4,7 @@ namespace Config;
 
 use App\Controllers\CtrlAboutUs;
 use App\Controllers\CtrlAdminEmail;
+use App\Controllers\CtrlApiProductos;
 use App\Controllers\CtrlApiPublic;
 use App\Controllers\CtrlCategory;
 use App\Controllers\CtrlCertificate;
@@ -72,6 +73,9 @@ $routes->post('password_reset', [CtrlEmail::class, 'sendEmailToResetPassword']);
 $routes->post('password_reset/(:any)', [CtrlLogin::class, 'passwordReset']);
 $routes->post('password_set/(:any)', [CtrlLogin::class, 'passwordSet']);
 $routes->post('logout', [CtrlLogin::class, 'logout']);
+$routes->get('/filtro/productos/test', [CtrlApiProductos::class, 'index']);
+$routes->get('/filtro/productos', [CtrlApiProductos::class, 'getProductos']);
+
 /*
  * --------------------------------------------------------------------
  * ADMIN

@@ -11,31 +11,24 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: center;
   margin: 2rem auto;
   gap: 0.5rem;
 
   &__form {
-    flex-basis: calc(80% - 0.5rem);
-
-    @include desktop() {
-      flex-basis: auto;
-    }
+    flex-basis: calc(60% - 0.5rem);
   }
   &__bar {
-    width: 100%;
-    padding: 0.3rem 0.4rem;
-    border: 0.0625rem solid $brand-color-secondary;
-    border-radius: 1rem;
+    width: 75%;
+    &--no-result {
+      padding: 1rem;
+      color: color.adjust($color-gray, $lightness: 10%);
+    }
+  }
 
-    &:focus {
-      border-color: $color-gray;
-      outline: none;
-    }
-    @include desktop() {
-      padding: 0.4375rem 0.8rem;
-      font-size: 1rem;
-    }
+  &__choices {
+    display: flex;
+    gap: 1rem;
   }
 
   &__displays {
@@ -150,12 +143,12 @@
   }
 
   @include device(36.75rem) {
-    width: 95%;
     flex-direction: row;
     gap: 1rem;
   }
 
   @include desktop() {
     flex-wrap: nowrap;
+    justify-content: space-between;
   }
 }

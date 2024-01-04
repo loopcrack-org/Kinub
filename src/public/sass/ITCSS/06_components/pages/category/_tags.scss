@@ -1,0 +1,10 @@
+@use '../../../02_tools/breakpoints' as *;
+
+.tags {
+  &__tag {
+    display: none;
+    @include phoneXL {
+      display: flex;
+    }
+  }
+}

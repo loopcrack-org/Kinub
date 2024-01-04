@@ -1,0 +1,43 @@
+/* stylelint-disable plugin/selector-bem-pattern */
+@use 'node_modules/@tarekraafat/autocomplete.js/dist/css/autoComplete.02.css';
+@use '../../../../01_settings/colors' as *;
+@use '../../../../02_tools/breakpoints' as *;
+@use 'sass:color';
+
+.autoComplete_wrapper {
+  width: 100%;
+  flex-basis: calc(80% - 0.5rem);
+
+  & > input {
+    width: 100%;
+    height: auto;
+    padding: 0.3rem 0.4rem;
+    border: 0.0625rem solid $brand-color-secondary;
+    border-radius: 1rem;
+
+    &:focus {
+      border-color: $color-gray;
+      outline: none;
+    }
+
+    @include desktop() {
+      padding: 0.4375rem 0.8rem;
+      font-size: 1rem;
+    }
+  }
+
+  ul {
+    li {
+      color: $brand-color-secondary;
+
+      mark {
+        color: $brand-color-secondary;
+      }
+    }
+  }
+
+  .no_result {
+    padding: 0;
+    color: color.adjust($color-gray, $lightness: 10%);
+  }
+}
