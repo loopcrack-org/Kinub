@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <?= view('partials/page-title', ['title' => 'Crear categoría', 'titleUrl' => '/admin/categorias', 'pagetitle' => 'Categoría', 'pagetitleInner' => 'Crear categoría']); ?>
 
-        <form id="createproduct-form" autocomplete="off" class="needs-validation" method="POST">
+        <form id="form" autocomplete="off" class="needs-validation" method="POST">
             <div class="row justify-content-center">
                 <div class="col-sm-11">
                     <div class="d-flex justify-content-start align-items-center mb-3">
@@ -32,6 +32,9 @@
                 </div>
             </div>
         </form>
+        <div class="filepondConfig">
+            <input id="config" type="hidden" value="<?= htmlspecialchars(json_encode($filepondConfig)) ?? '' ?>">
+        </div>
         <!-- end form -->
     </div>
     <!-- container-fluid -->
@@ -41,7 +44,6 @@
 
 
 <?= $this->section('js') ?>
-<!-- filepond js -->
 <script src="/assets/admin/js/alertElement.min.js"></script>
-<script src="/assets/admin/js/form-file-upload-category.init.min.js"></script>
+<script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <?= $this->endSection() ?>

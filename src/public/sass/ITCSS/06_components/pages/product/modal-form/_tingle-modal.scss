@@ -3,11 +3,13 @@
 @use '../../../../02_tools/breakpoints' as *;
 
 .tingle-modal {
-  display: block;
-  overflow: hidden;
-  padding-top: 0;
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   backdrop-filter: blur(0.09375rem);
-  background-color: transparent;
+  background: rgba(0, 0, 0, 0.5);
   cursor: auto;
 
   &__close {
@@ -16,6 +18,11 @@
   }
 
   @include phoneXL() {
-    display: flex;
+    justify-content: flex-start;
+    padding: 2rem;
+  }
+
+  @include desktopXL() {
+    justify-content: flex-start;
   }
 }

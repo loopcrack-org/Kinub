@@ -33,7 +33,7 @@
 
 <section class="kinub-video">
     <div class="kinub-video__container">
-        <video id="kinub-video" class="kinub-video__video" preload="auto" width="500" height="264" muted autoplay playsinline controls>
+        <video id="kinub-video" class="kinub-video__video" preload="auto" width="500" height="264" muted playsinline controls>
             <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
             <source src="assets/video/kinub-video-example.webm" type="video/webm" />
         </video>
@@ -164,7 +164,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
-                     <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #186d96;" ></div>
+                    <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #186d96;"></div>
                 </div>
             </div>
             <div class="swiper-slide">
@@ -202,7 +202,7 @@
                     <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #0032ab;"></div>
                 </div>
             </div>
-              <div class="swiper-slide">
+            <div class="swiper-slide">
                 <div class="measurement-solution" style="background-image: url('assets/images/auth-one-bg.jpg');">
                     <div class="measurement-solution__icon">
 
@@ -228,7 +228,7 @@
 
                     <div class="measurement-solution__mask"></div>
                     <div class="measurement-solution__mask--hover"></div>
-                     <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #58b5e0;"></div>
+                    <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #58b5e0;"></div>
                 </div>
             </div>
 
@@ -247,14 +247,7 @@
     $response = session()->get('response');
 if (isset($response)) :
     ?>
-        <script type="module">
-            showAlert({
-                title: "<?= $response['title']; ?>",
-                text: "<?= $response['message']; ?>",
-                icon: "<?= $response['type']; ?>",
-                confirmButtonColor: '#0174F6'
-            });
-        </script>
+    <div id="alert-response" data-response="<?= htmlspecialchars(json_encode($response)) ?>"></div>
     <?php endif; ?>
 
     <form class="form wrapper--large" action="/email/contacto" method="POST">
@@ -268,8 +261,8 @@ if (isset($response)) :
         <div class="form__grid">
             <div class="form__field">
                 <label for="product-name" class="form__label">Equipo de mi interés</label>
-                <?= isset($errors['product-name']) ? '<p class="form__error--small">' . $errors['product-name'] . '</p>' : '' ?>
-                <select id="product-name" name="product-name" required>
+                <?= isset($errors['product-name']) ? '<p class="form__error--small product-name">' . $errors['product-name'] . '</p>' : '' ?>
+                <select id="product-name" name="product-name" class="required">
                     <option value="">Seleccionar...</option>
                     <option value="Equipos X">Equipos X</option>
                     <option value="Necesito Asesoria">Necesito Asesoria</option>
@@ -278,20 +271,20 @@ if (isset($response)) :
 
             <div class="form__field">
                 <label for="inquirer-name" class="form__label">Nombre </label>
-                <?= isset($errors['inquirer-name']) ? '<p class="form__error--small">' . $errors['inquirer-name'] . '</p>' : '' ?>
-                <input id="inquirer-name" name="inquirer-name" pattern="^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s'0-9]+$" title="'El campo nombre solo debe contener carácteres alfanuméricos y espacios'" type="text" class="form__input" value="<?= old('inquirer-name') ?>" required>
+                <?= isset($errors['inquirer-name']) ? '<p class="form__error--small inquirer-name">' . $errors['inquirer-name'] . '</p>' : '' ?>
+                <input id="inquirer-name" name="inquirer-name" pattern="^[A-Za-zÁáÉéÍíÓóÚúÜüÑñ\s'0-9]+$" title="'El campo nombre solo debe contener carácteres alfanuméricos y espacios'" type="text" class="form__input required" value="<?= old('inquirer-name') ?>">
             </div>
 
             <div class="form__field">
                 <label for="inquirer-email" class="form__label">E-Mail</label>
-                <?= isset($errors['inquirer-email']) ? '<p class="form__error">' . $errors['inquirer-email'] . '</p>' : '' ?>
-                <input id="inquirer-email" name="inquirer-email" type="email" class="form__input" value="<?= old('inquirer-email') ?>" required>
+                <?= isset($errors['inquirer-email']) ? '<p class="form__error inquirer-email">' . $errors['inquirer-email'] . '</p>' : '' ?>
+                <input id="inquirer-email" name="inquirer-email" type="email" class="form__input required email" value="<?= old('inquirer-email') ?>">
             </div>
 
             <div class="form__field">
                 <label for="message" class="form__label">Mensaje</label>
-                <?= isset($errors['message']) ? '<p class="form__error">' . $errors['message'] . '</p>' : '' ?>
-                <textarea id="message" name="message" rows="5" class="form__textarea" required><?= old('message') ?></textarea>
+                <?= isset($errors['message']) ? '<p class="form__error message">' . $errors['message'] . '</p>' : '' ?>
+                <textarea id="message" name="message" rows="5" class="form__textarea required" required><?= old('message') ?></textarea>
             </div>
         </div>
         <input class="form__submit" type="submit" value="Enviar">
