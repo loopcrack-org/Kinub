@@ -48,7 +48,7 @@
                 <div class="swiper-slide">
                     <div class="measurement-solution" style="background-image: url('<?= $measurementSolution['msImageRoute']?>');">
                         <div class="measurement-solution__icon">
-                            <img src="<?= $measurementSolution['msIconRoute']?>" alt="<?= $measurementSolution['msIconName']?>" class="measurement-solution__icon-img">
+                            <?php include ".{$measurementSolution['msIconRoute']}"?>
                         </div>
 
                         <div class="measurement-solution__content">
