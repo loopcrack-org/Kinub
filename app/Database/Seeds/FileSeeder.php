@@ -16,6 +16,18 @@ class FileSeeder extends Seeder
                 'fileDirectoryRoute' => '/assets/images/',
             ],
             [
+                'fileRoute'          => '/assets/images/auth-two-bg.jpg',
+                'uuid'               => '79c4387d-c1cb-4e6f-b418-8c391d852e2c',
+                'fileName'           => 'auth-one-bg.jpg',
+                'fileDirectoryRoute' => '/assets/images/',
+            ],
+            [
+                'fileRoute'          => '/assets/images/auth-three-bg.jpg',
+                'uuid'               => '79c4387d-c1cb-4e6f-b418-8c391d852e2c',
+                'fileName'           => 'auth-one-bg.jpg',
+                'fileDirectoryRoute' => '/assets/images/',
+            ],
+            [
                 'fileRoute'          => '/assets/images/drop.svg',
                 'uuid'               => '9d7b76e0-a31f-4e0f-9ac6-b71bc35f2ed4',
                 'fileName'           => 'drop.svg',
