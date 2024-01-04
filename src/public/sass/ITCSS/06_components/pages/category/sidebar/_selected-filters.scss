@@ -1,0 +1,58 @@
+@use 'sass:color';
+@use '../../../../01_settings/colors' as *;
+@use '../../../../01_settings/fonts' as *;
+
+.selected-filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    margin-left: 0.625rem;
+    font-size: 1.1875rem;
+  }
+  &__name-container {
+    margin-left: 0.625rem;
+    color: $color-gray-60;
+  }
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0.625rem;
+    gap: 0.125rem;
+  }
+
+  &__card {
+    padding: 0.09375rem 0.1rem 0.09375rem 0.5rem;
+    border-radius: 0.3125rem;
+    background-color: $color-bright-blue;
+    color: $color-white;
+    font-size: 0.75rem;
+  }
+
+  &__delete-card-btn {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
+  &__clear-btn {
+    padding-right: 0;
+    padding-left: 0;
+    border: none;
+    border-bottom: 0.0625rem solid $color-error-dark;
+    margin: 0.625rem auto 1rem auto;
+    background-color: $color-white;
+    color: $color-error-dark;
+    transition:
+      color 300ms ease-in-out,
+      border-bottom-color 300ms ease-in-out;
+
+    &:hover {
+      border-bottom-color: $color-error;
+      color: $color-error;
+      cursor: pointer;
+    }
+  }
+}

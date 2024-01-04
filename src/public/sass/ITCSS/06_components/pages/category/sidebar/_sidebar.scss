@@ -11,10 +11,11 @@
     top: 0;
     left: 0;
     overflow: auto;
-    min-width: 15.625rem;
+    width: 100%;
+    min-width: 100%;
     height: calc(100% - $navbar-mobile-height);
     margin-top: $navbar-mobile-height;
-    background-color: color.adjust($color-gray, $lightness: 43%);
+    background-color: $color-white;
     box-shadow: $base-box-shadow;
     transform: translateX(-16rem);
     transition:
@@ -23,17 +24,6 @@
     visibility: hidden;
 
     &--active {
-      transform: translateX(0);
-      visibility: visible;
-    }
-
-    @include tablet() {
-      margin-top: $navbar-desktop-height;
-    }
-    @include desktop() {
-      position: static;
-      min-height: 100%;
-      margin-top: 0;
       transform: translateX(0);
       visibility: visible;
     }
@@ -61,18 +51,13 @@
       opacity: 1;
       visibility: visible;
     }
-
-    @include desktop() {
-      display: none;
-    }
   }
 
-  &__header {
+  &__header-info {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0.625rem 0.875rem;
-    margin-bottom: 1.5625rem;
   }
 
   &__title {
@@ -83,13 +68,43 @@
 
   &__close {
     cursor: pointer;
-
-    @include desktop() {
-      display: none;
-    }
   }
 
   &__menu-bar {
     width: 100%;
+  }
+
+  @include device(21.9375rem) {
+    &__nav {
+      width: 21.875rem;
+      min-width: 21.875rem;
+    }
+  }
+
+  @include tablet() {
+    &__nav {
+      margin-top: $navbar-desktop-height;
+    }
+  }
+
+  @include desktop() {
+    &__nav {
+      position: static;
+      height: auto;
+      border: 0.0625rem solid $color-gray-20;
+      border-radius: 0.3125rem;
+      margin: 1.4rem 0 1.4rem 2rem;
+      box-shadow: none;
+      transform: translateX(0);
+      visibility: visible;
+    }
+
+    &__background {
+      display: none;
+    }
+
+    &__close {
+      display: none;
+    }
   }
 }
