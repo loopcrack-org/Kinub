@@ -5,7 +5,7 @@
     fileValidateTypeLabelExpectedTypes:     Message with the file types available
     deleteFiles:                            Save the files the user wants to delete
  -->
-<div class="card-body" data-name="<?= $config['name']?>">
+<div class="card-body p-0" data-name="<?= $config['name']?>">
     <!-- show an alert if validation failed -->
     <?= validation_show_error($config['name'], 'validationError') ?>
     <!-- show expected types -->
