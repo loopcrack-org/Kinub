@@ -8,9 +8,6 @@ class ApiPublicValidation extends BaseValidation
         'categorias'     => 'if_exist|regex_match[^(?:[^,]+(?:,[^,]+)*)?$]',
         'producto-tags'  => 'if_exist|regex_match[^(?:[^,]+(?:,[^,]+)*)?$]',
         'categoria-tags' => 'if_exist|regex_match[^(?:[^,]+(?:,[^,]+)*)?$]',
-        'por-pagina'     => 'required|integer',
-        'pagina'         => 'required|integer',
-        'orden'          => 'if_exist|regex_match[^(?:asc|desc)?$]',
     ];
     protected $validationMessages = [
         'categorias' => [
@@ -21,17 +18,6 @@ class ApiPublicValidation extends BaseValidation
         ],
         'categoria-tags' => [
             'regex_match' => 'tags de categoría inválidos',
-        ],
-        'por-pagina' => [
-            'required' => 'por-pagina es requerido',
-            'integer'  => 'por-pagina no es un entero',
-        ],
-        'pagina' => [
-            'required' => 'pagina es requerido',
-            'integer'  => 'pagina no es un entero',
-        ],
-        'orden' => [
-            'regex_match' => 'se acepta asc o desc',
         ],
     ];
 }

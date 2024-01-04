@@ -91,7 +91,7 @@ class ProductModel extends Model
      *
      * @return array
      */
-    public function getByPage(int $page = 1, int $perPage = 10)
+    public function findByPage(int $page = 1, int $perPage = 10)
     {
         $offset = ($page - 1) * $perPage;
 

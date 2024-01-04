@@ -11,6 +11,8 @@ use Throwable;
 
 class CtrlApiPublic extends BaseController
 {
+    private const LIMIT_PRODUCTS = 5;
+
     /**
      * get all category tags according to the requested categories
      *
@@ -55,7 +57,7 @@ class CtrlApiPublic extends BaseController
                 $filter['categoria-tags'],
                 $filter['producto-tags'],
                 $filter['busqueda'] ?? ''
-            )->order($filter['orden'] ?? 'asc')->getByPage($filter['pagina'], $filter['por-pagina']);
+            )->findAll(self::LIMIT_PRODUCTS);
 
             return $this->response->setJSON($products);
         } catch (InvalidInputException $th) {
