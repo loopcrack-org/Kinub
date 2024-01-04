@@ -20,7 +20,7 @@ class CtrlAboutUs extends CtrlApiFiles
     public function __construct()
     {
         $fileValidationConfigBuilder = new FileValidationConfigBuilder('/admin/nosotros');
-        $fileValidationConfigBuilder->builder('aboutUsImage')->isImage()->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->maxDims(860, 600)->build();
+        $fileValidationConfigBuilder->builder('aboutUsImage')->isImage()->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->maxDims(1200, 1000)->build();
         $fileValidationConfigBuilder->builder('aboutUsVideo')->isVideo()->minFiles(1)->maxFiles(1)->maxSize(1000, 'MB')->build();
 
         $this->fileConfig = $fileValidationConfigBuilder->getConfig();

@@ -59,4 +59,11 @@ class HomeSectionModel extends Model
             throw $th;
         }
     }
+
+    public function getDataWithFiles()
+    {
+        return $this->select('home_page.homePageId, home_page.aboutUsText,
+                img.fileRoute AS aboutUsImageRoute, img.fileName AS aboutUsImageName,
+                vid.fileRoute AS aboutUsVideoRoute, vid.fileName AS aboutUsVideoName')->join('files img', 'home_page.aboutUsImageId = img.fileId', 'left')->join('files vid', 'home_page.aboutUsVideoId = vid.fileId', 'left')->find('1');
+    }
 }

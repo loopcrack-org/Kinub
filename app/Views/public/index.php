@@ -17,25 +17,20 @@
 <section class="about-us">
     <div class="about-us__grid">
         <div class="about-us__image-container">
-            <picture>
-                <source srcset="assets/images/home-about-us.avif" type="image/avif">
-                <source srcset="assets/images/home-about-us.webp" type="image/webp">
-                <img class="about-us__image" src="assets/images/home-about-us.jpg" alt="About us image">
-            </picture>
+            <img class="about-us__image" src="<?= $aboutUsData['aboutUsImageRoute']?>" alt="<?= $aboutUsData['aboutUsImageName']?>">
         </div>
 
         <div class="about-us__content">
             <h2 class="about-us__heading title--level-2">Nosotros</h2>
-            <p class="about-us__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero dolor itaque sit nesciunt nihil maiores placeat sequi recusandae earum voluptatibus accusantium modi natus dolorem, tenetur, quod reprehenderit nostrum. Error, sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, illum saepe ab, sit iure dignissimos</p>
+            <p class="about-us__text"><?= $aboutUsData['aboutUsText']?></p>
         </div>
     </div>
 </section>
 
 <section class="kinub-video">
     <div class="kinub-video__container">
-        <video id="kinub-video" class="kinub-video__video" preload="auto" width="500" height="264" muted playsinline controls>
-            <source src="assets/video/kinub-video-example.mp4" type="video/mp4" />
-            <source src="assets/video/kinub-video-example.webm" type="video/webm" />
+        <video id="kinub-video" class="kinub-video__video" preload="auto" width="500" height="264" muted autoplay playsinline controls>
+            <source src="<?= $aboutUsData['aboutUsVideoRoute']?>" type="video/mp4" />
         </video>
     </div>
 </section>
