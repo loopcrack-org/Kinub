@@ -23,6 +23,10 @@
     @include desktop() {
       margin-right: 3.44125rem;
     }
+
+    &--list {
+      @include flex-columns(1, 1.25rem, 1.5625rem);
+    }
   }
 
   &__heading {

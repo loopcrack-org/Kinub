@@ -15,8 +15,8 @@ class ProductTagSeeder extends Seeder
 
         $productTagsNames = ['Dialog 3G™ 9xx Mhz', 'LoRaWAN OMS', 'ISO 39001', 'Equipment 5G', 'ISO702', 'IoT'];
 
-        $faker            = Factory::create();
-        $slugGenerator    = new SlugGenerator();
+        $faker = Factory::create();
+        // $slugGenerator    = new SlugGenerator();
         $totalProductTags = 20;
         $totalProducts    = (new ProductModel())->countAllResults();
         $productTags      = [];
@@ -24,8 +24,8 @@ class ProductTagSeeder extends Seeder
         for ($j = 0; $j < $totalProductTags; $j++) {
             $ptName        = $faker->randomElement($productTagsNames);
             $productTags[] = [
-                'ptName'      => $ptName,
-                'ptSlug'      => $slugGenerator->generate($ptName),
+                'ptName' => $ptName,
+                // 'ptSlug'      => $slugGenerator->generate($ptName),
                 'ptProductId' => $faker->numberBetween(1, $totalProducts),
             ];
         }
