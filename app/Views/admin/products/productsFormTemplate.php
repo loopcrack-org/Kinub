@@ -19,19 +19,19 @@
                     <!-- Product Name -->
                     <div class="mb-3">
                         <label class="card-text" for="productName">Nombre del producto</label>
-                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
+                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? $product['productName'] ?? ''?>" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
                     </div>
                     <!-- Product Model -->
                     <div class="mb-3">
                         <label class="card-text" for="productModel">Ingresa el modelo</label>
-                        <input type="text" class="form-control <?= isset($errors['productModel']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
+                        <input type="text" class="form-control <?= isset($errors['productModel']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? $product['productModel'] ?? ''?>" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['productModel'] ?? null])?>
                     </div>
                     <!-- Product Tags -->
                     <div class="mb-3">
                         <label class="card-text" for="productTags">Tags del producto</label>
-                        <input type="text" class="form-control" name="productTags" id="productTags" value="<?= old('productTags') ?? ''?>">
+                        <input type="text" class="form-control" name="productTags" id="productTags" value="<?= old('productTags') ?? $product['productTags'] ?? ''?>">
                     </div>
                     <!-- Technical information -->
                     <div class="mb-3">
@@ -43,9 +43,7 @@
                         <div class="mb-2">
                             <?= view('admin/templates/invalidInputError', ['error' => $errors['productTechnicalInfo'] ?? null])?>
                             <?= view('admin/components/keyValue/keyValueContainer', [
-                                'keyValues' => old('productTechnicalInfo') ?? [
-                                    '' => '',
-                                ],
+                                'keyValues' => old('productTechnicalInfo') ?? $product['productTechnicalInfo'] ?? ['' => ''],
                                 'minValues' => 1,
                                 'name'      => 'productTechnicalInfo',
                                 'error'     => $errors['productTechnicalInfo'] ?? null,
@@ -117,7 +115,7 @@
                         <select id="productCategoryId" name="productCategoryId" required>
                             <option value="" selected>Selecciona</option>
                             <?php foreach ($categories as $category):?>
-                            <option value="<?= $category['categoryId']?>" <?=old('productCategoryId') === $category['categoryId'] ? 'selected' : '' ?>>
+                            <option value="<?= $category['categoryId']?>" <?= (old('productCategoryId') ?? $product['productCategoryId'] ?? null) === $category['categoryId'] ? 'selected' : '' ?>>
                                 <?=$category['categoryName']?>
                             </option>
                             <?php endforeach ?>
@@ -140,9 +138,8 @@
                         </div>
                         <select id="categoryTags" name="categoryTags[]" class="position-absolute z-1" multiple required>
                             <option value="">Selecciona</option>
-                            <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
-                            <option value="<?= $categoryTag?>">
-                            </option>
+                            <?php foreach (old('categoryTags') ?? $product['categoryTags'] ?? [] as $categoryTag):?>
+                            <option value="<?= $categoryTag?>"></option>
                             <?php endforeach ?>
                         </select>
                     </div>
@@ -168,7 +165,7 @@
                     <label class="text-muted mb-3">Ingresa una descripción para el producto</label>
                     <div class="wysiwyg-editor position-relative z-1">
                         <div class="editor <?=isset($errors['productDescription']) ? 'is-invalid' : ''?>"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
+                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? $product['productDescription'] ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
                     </div>
                     <?= view('admin/templates/invalidInputError', ['error' => $errors['productDescription'] ?? null])?>
                 </div>
@@ -177,9 +174,9 @@
                 <div class="mb-4">
                     <h5 class="fs-14 mb-2">Especificaciones técnicas del producto</h5>
                     <label class="text-muted mb-3">Ingresa información más detallada del producto</label>
-                    <div class="wysiwyg-editor ">
+                    <div class="wysiwyg-editor">
                         <div class="editor <?=isset($errors['productDetails']) ? 'is-invalid' : ''?>"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productDetails" value="<?= old('productDetails') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
+                        <input class="input-wysiwyg" type="hidden" name="productDetails" value="<?= old('productDetails') ?? $product['productDetails'] ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
                     </div>
                     <?= view('admin/templates/invalidInputError', ['error' => $errors['productDetails'] ?? null])?>
                 </div>

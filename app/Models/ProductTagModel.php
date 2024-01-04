@@ -25,4 +25,11 @@ class ProductTagModel extends Model
 
         $this->insertBatch($tags);
     }
+
+    public function getProductTagsByProductId($productId)
+    {
+        $productTags = $this->where('ptProductId', $productId)->findAll();
+
+        return implode(',', array_map(static fn ($tag) => $tag['ptName'], $productTags));
+    }
 }

@@ -61,7 +61,23 @@ class CtrlProduct extends CtrlApiFiles
 
     public function viewProductEdit($id)
     {
-        return view('admin/products/ProductEdit', ['id' => $id]);
+        $productModel = new ProductModel();
+        $product      = $productModel->getProductById($id);
+        $categories   = (new CategoryModel())->select(['categoryId', 'categoryName'])->findAll();
+
+        // return json_encode($product);
+        if (session()->has('clientData')) {
+            $this->fileConfig->setDataInClientConfig(session()->get('clientData'));
+        } else {
+            $this->fileConfig->setDataInClientConfig($product['files']);
+            unset($product['files']);
+        }
+
+        return view('admin/products/ProductEdit', [
+            'fileConfig' => $this->fileConfig->getClientConfig(),
+            'product'    => $product,
+            'categories' => $categories,
+        ]);
     }
 
     public function createProduct()

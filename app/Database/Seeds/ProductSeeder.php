@@ -26,7 +26,7 @@ class ProductSeeder extends Seeder
                     'Rango de medición'     => $faker->randomNumber('1', true) . 'km',
                     'Precision de medición' => $faker->randomNumber('2', true) . '%',
                     'Potencia'              => $faker->randomNumber('3', true) . ' MW',
-                    'Comunicación'          => $faker->randomElements(['5G Ipv6', '3G', 'WPAN', 'WPA2']),
+                    'Comunicación'          => $faker->randomElement(['5G Ipv6', '3G', 'WPAN', 'WPA2']),
                 ]),
                 'productCategoryId' => $faker->numberBetween(1, $totalCategories),
             ];
