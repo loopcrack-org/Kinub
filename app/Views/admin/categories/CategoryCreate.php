@@ -46,4 +46,5 @@
 <?= $this->section('js') ?>
 <script src="/assets/admin/js/alertElement.min.js"></script>
 <script src="/assets/admin/js/filepond-general-config.min.js"></script>
+<script src="/assets/admin/js/categoryTitleCounter.min.js"></script>
 <?= $this->endSection() ?>

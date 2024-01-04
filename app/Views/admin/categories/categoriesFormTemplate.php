@@ -10,10 +10,11 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="categoryName" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" required>
+                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="categoryName" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" maxlength="20" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryName'] ?? null])?>
                     </div>
                 </div>
+                <div class="text-primary d-block text-end mt-1" id="categoryNameCharacterCount">0/20</div>
             </div>
         </div>
     </div>
@@ -29,10 +30,11 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <input type="text" class="form-control <?= isset($errors['categorySubname']) ? 'is-invalid' : '' ?>" name="categorySubname" id="categorySubname" value="<?= old('categorySubname') ?? $category['categorySubname'] ?? ''; ?>" placeholder="Ingrese el subtitulo">
+                        <input type="text" class="form-control <?= isset($errors['categorySubname']) ? 'is-invalid' : '' ?>" name="categorySubname" id="categorySubname" value="<?= old('categorySubname') ?? $category['categorySubname'] ?? ''; ?>" placeholder="Ingrese el subtitulo" maxlength="20" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['categorySubname'] ?? null])?>
                     </div>
                 </div>
+                <div class="text-primary d-block text-end mt-1" id="categorySubnameCharacterCount">0/20</div>
             </div>
         </div>
     </div>
