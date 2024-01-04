@@ -50,24 +50,14 @@ class CtrlApiPublic extends BaseController
             $filter['producto-tags']  = empty($filter['producto-tags']) ? [] : explode(',', $filter['producto-tags']);
             $filter['categoria-tags'] = empty($filter['categoria-tags']) ? [] : explode(',', $filter['categoria-tags']);
 
-            $productModelQueryBuilder = (new ProductModel())->filterProducts(
+            $products = (new ProductModel())->filterProducts(
                 $filter['categorias'],
                 $filter['categoria-tags'],
                 $filter['producto-tags'],
                 $filter['busqueda'] ?? ''
-            )->order($filter['orden'] ?? 'asc');
+            )->order($filter['orden'] ?? 'asc')->getByPage($filter['pagina'], $filter['por-pagina']);
 
-            $totalProducts  = $productModelQueryBuilder->countAllResults(false);
-            $productsByPage = $productModelQueryBuilder->getByPage($filter['pagina'], $filter['por-pagina']);
-
-            return $this->response->setJSON([
-                'metadata' => [
-                    'page'    => (int) ($filter['pagina']),
-                    'perPage' => (int) ($filter['por-pagina']),
-                    'total'   => $totalProducts,
-                ],
-                'products' => $productsByPage,
-            ]);
+            return $this->response->setJSON($products);
         } catch (InvalidInputException $th) {
             return $this->response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR, 'invalid request')->setJSON(['errors' => $th->getErrors()]);
         } catch (Throwable $th) {
