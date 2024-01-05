@@ -1,5 +1,5 @@
 import Tingle from 'tingle.js';
-import { VanillaValidator } from '../../libs/vanilla-validator/vanilla-validator-concat.js';
+import { VanillaValidator } from '../../../libs/vanilla-validator/vanilla-validator-concat.js';
 import createIntTelInput from './telInput.js';
 
 const modal = new Tingle.modal({
