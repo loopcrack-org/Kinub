@@ -12,11 +12,24 @@
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: center;
-  margin: 2rem auto;
+  margin: 0 auto;
+  margin-bottom: 2rem;
   gap: 0.5rem;
 
+  @include desktop() {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+
   &__form {
-    flex-basis: calc(60% - 0.5rem);
+    @include fold() {
+      width: 100%;
+    }
+    @include phoneXL() {
+      max-width: 25rem;
+      flex-basis: calc(60% - 0.5rem);
+    }
   }
   &__bar {
     width: 75%;
@@ -147,8 +160,11 @@
     gap: 1rem;
   }
 
+  @include device(50.903rem) {
+    justify-content: space-between;
+  }
+
   @include desktop() {
     flex-wrap: nowrap;
-    justify-content: space-between;
   }
 }
