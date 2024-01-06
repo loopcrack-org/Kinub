@@ -1,28 +1,5 @@
 import autoComplete from '@tarekraafat/autocomplete.js';
-import { updateDisplay } from './components/categoryComponents/displaySelect';
-// import './components/categoryComponents/sideBar';
-
-const displaySelectors = document.querySelectorAll('.search__display');
-const [gridSelector, listSelector] = displaySelectors;
-
-gridSelector.addEventListener('click', () => {
-  if (!gridSelector.classList.contains('search__display--active')) {
-    toggleActiveSelector();
-    updateDisplay(0);
-  }
-});
-
-listSelector.addEventListener('click', () => {
-  if (!listSelector.classList.contains('search__display--active')) {
-    toggleActiveSelector();
-    updateDisplay(1);
-  }
-});
-
-function toggleActiveSelector() {
-  gridSelector.classList.toggle('search__display--active');
-  listSelector.classList.toggle('search__display--active');
-}
+import './components/categoryComponents/displaySelect.js';
 
 let filter = {
   productName: '',

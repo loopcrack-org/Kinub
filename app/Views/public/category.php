@@ -28,6 +28,7 @@ for ($i = 1; $i <= 8; $i++) {
 <?php $this->section('js'); ?>
 <script src="assets/public/js/category.min.js"></script>
 <script src="assets/public/js/sideBar.min.js"></script>
+<script src="assets/public/js/categoryQueries.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -35,8 +36,6 @@ for ($i = 1; $i <= 8; $i++) {
 <header class="jumbotron" style="background-image: url(/assets/images/Telemetria.jpeg);">
     <h1 class="jumbotron__title">Telemetría</h1>
 </header>
-
-
 
 <main class="category">
     <div class="sidebar">
@@ -95,10 +94,10 @@ for ($i = 1; $i <= 8; $i++) {
                     <div class="menu-section__dropdown  menu-section__dropdown--active">
                         <div class="menu-section__list-container">
                             <div class="menu-section__list">
-                                <?php foreach($categories as $categorie): ?>
+                                <?php foreach($categories as $category): ?>
                                     <div class="menu-section__item">
-                                        <input class="menu-section__checkbox" type="checkbox" <?=$categorie['selected'] ? 'checked' : '' ?> >
-                                        <label class="menu-section__label" for="c1">Categoría <?=$categorie['name']?></label>
+                                        <input class="menu-section__checkbox" type="checkbox" <?=$category['selected'] ? 'checked' : '' ?> >
+                                        <label class="menu-section__label" for="c1">Categoría <?=$category['name']?></label>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -121,10 +120,10 @@ for ($i = 1; $i <= 8; $i++) {
                     <div class="menu-section__dropdown menu-section__dropdown--active">
                         <div class="menu-section__list-container">
                            <div class="menu-section__list">
-                                <?php foreach($categorieTags as $categorieTag): ?>
+                                <?php foreach($categorieTags as $categoryTag): ?>
                                     <div class="menu-section__item">
-                                        <input class="menu-section__checkbox" type="checkbox" <?=$categorieTag['selected'] ? 'checked' : '' ?> >
-                                        <label class="menu-section__label" for="pc2">Tag de Categoría <?=$categorieTag['name']?></label>
+                                        <input class="menu-section__checkbox" type="checkbox" <?=$categoryTag['selected'] ? 'checked' : '' ?> >
+                                        <label class="menu-section__label" for="pc2">Tag de Categoría <?=$categoryTag['name']?></label>
                                     </div>
                                 <?php endforeach; ?>
                            </div>

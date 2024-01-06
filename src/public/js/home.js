@@ -1,7 +1,7 @@
 import customSelect from 'custom-select';
 import Plyr from 'plyr';
 import { VanillaValidator } from '../libs/vanilla-validator/vanilla-validator-concat.js';
-import './components/alertModal.js';
+import './components/productComponents/alertModal.js';
 
 import Swiper from 'swiper/bundle';
 // init Swiper:
