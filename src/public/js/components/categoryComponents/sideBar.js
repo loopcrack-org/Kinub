@@ -153,10 +153,8 @@ function createSelectedFiltersCard({ content, container, onremove }) {
 
 function toggleClearFiltersBtn() {
   if (countFiltersApplied === 0) {
-    console.log('ya');
     clearFiltersBtn.classList.add('selected-filters__clear-btn--disabled');
   } else {
-    console.log('no');
     clearFiltersBtn.classList.remove('selected-filters__clear-btn--disabled');
   }
 }

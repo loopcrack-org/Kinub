@@ -1,46 +1,61 @@
-function getURL() {
+const QUERY_PARAMS = new URLSearchParams(window.location.search);
+
+export const SEARCH_PARAMS_OPTIONS = {
+  category: '0',
+  categoryTag: '1',
+  productTag: '2',
+  perPage: '3',
+  order: '4',
+  search: '5',
+};
+
+export function getURL() {
   return new URL(window.location.href);
 }
 
-export function updateURL() {
-  let queryParams = new URLSearchParams();
+export function updateURL(param, value) {
+  switch (param) {
+    case SEARCH_PARAMS_OPTIONS.category:
+      QUERY_PARAMS.set('categorias', value);
+      break;
+    case SEARCH_PARAMS_OPTIONS.categoryTag:
+      QUERY_PARAMS.set('categoria-tags', value);
+      break;
+    case SEARCH_PARAMS_OPTIONS.productTag:
+      QUERY_PARAMS.set('producto-tags', value);
+      break;
+    case SEARCH_PARAMS_OPTIONS.perPage:
+      QUERY_PARAMS.set('por-pagina', value);
+      break;
+    case SEARCH_PARAMS_OPTIONS.order:
+      QUERY_PARAMS.set('orden', value);
+      break;
+    case SEARCH_PARAMS_OPTIONS.search:
+      QUERY_PARAMS.set('busqueda', value);
+      break;
 
-  //Agregar validaciones para no agregar nada si no hay valores seleccionados
-  //Categories
-  queryParams.append('categories[]', '1');
-  queryParams.append('categories[]', '2');
-  queryParams.append('categories[]', '3');
+    default:
+      break;
+  }
 
-  //Category tags
-  queryParams.append('categoryTags[]', '1');
-  queryParams.append('categoryTags[]', '3');
-  queryParams.append('categoryTags[]', '5');
-
-  //ProductTags
-  queryParams.append('productTags[]', '1');
-  queryParams.append('productTags[]', '3');
-  queryParams.append('productTags[]', '4');
-  queryParams.append('productTags[]', '5');
-
-  //PerPage
-  queryParams.append('perPage', '5');
-
-  //Sorting
-  queryParams.append('sort', 'productName');
-
-  //Order / Direction
-  queryParams.append('order', getOrder());
-
-  //Search
-  queryParams.append('search', 'Medidor');
+  let searchParam = QUERY_PARAMS.get('busqueda');
+  if (searchParam && value != SEARCH_PARAMS_OPTIONS.search) {
+    let appendedSearch = searchParam;
+    QUERY_PARAMS.delete('busqueda');
+    QUERY_PARAMS.set('busqueda', appendedSearch);
+  }
 
   let currentUrl = getURL();
-  currentUrl.search = queryParams.toString();
+  currentUrl.search = QUERY_PARAMS.toString();
 
-  const newURL = currentUrl.href;
-  console.log(newURL);
-  console.log(decodeURIComponent(newURL));
+  let newURL = currentUrl.href;
   window.location.href = newURL;
+}
+
+export function cleanURL() {
+  let currentURL = getURL();
+  currentURL.search = '';
+  window.location.href = currentURL.href;
 }
 
 function getOrder() {
@@ -59,14 +74,63 @@ function getOrder() {
   }
 }
 
+export function addCategory(value) {
+  let categoriesString = QUERY_PARAMS.get('categorias') ?? '';
+  let categories = categoriesString === '' ? [] : categoriesString.split(',');
+  if (!categories.includes(value)) {
+    categories.push(value);
+  }
+  categories = categories.filter(Boolean).join(',');
+  updateURL(SEARCH_PARAMS_OPTIONS.category, categories);
+}
+
+export function deleteCategory(value) {
+  let categoriesString = QUERY_PARAMS.get('categorias') ?? '';
+  let categories = categoriesString === '' ? [] : categoriesString.split(',');
+
+  if (categories.includes(value)) {
+    categories = categories.filter(function (index) {
+      return index !== value;
+    });
+    categories = categories.filter(Boolean).join(',');
+    updateURL(SEARCH_PARAMS_OPTIONS.category, categories);
+  }
+}
+
+export function addCategoryTag(value) {
+  let categoryTagsString = QUERY_PARAMS.get('categoria-tags') ?? '';
+  let categoryTags = categoryTagsString.split(',') ?? [];
+  if (!categoryTags.includes(value)) {
+    categoryTags.push(value);
+  }
+  categoryTags = categoryTags.filter(Boolean).join(',');
+  updateURL(SEARCH_PARAMS_OPTIONS.categoryTag, categoryTags);
+}
+
+export function addProductTag(value) {
+  let productTagsString = QUERY_PARAMS.get('categoria-tags') ?? '';
+  let productTags = productTagsString.split(',') ?? [];
+  if (!productTags.includes(value)) {
+    productTags.push(value);
+  }
+  productTags = productTags.filter(Boolean).join(',');
+  updateURL(SEARCH_PARAMS_OPTIONS.productTag, productTags);
+}
+
 const order = document.querySelector('#sorting');
 order.addEventListener('change', () => {
-  updateURL();
-});
+  updateURL(SEARCH_PARAMS_OPTIONS.order, getOrder());
 
-console.log(getURL().searchParams.getAll('categories[]'));
-console.log(getURL().searchParams.getAll('categoryTags[]'));
-console.log(getURL().searchParams.getAll('productTags[]'));
-console.log(getURL().searchParams.get('perPage'));
-console.log(getURL().searchParams.get('order'));
-console.log(getURL().searchParams.get('search'));
+  //cleanURL();
+  addCategory('6');
+  addCategory('4');
+  addCategory('1');
+  updateURL(SEARCH_PARAMS_OPTIONS.search, 'Medidor');
+  addCategoryTag('9');
+  addCategoryTag('15');
+  addCategoryTag('1');
+  updateURL(SEARCH_PARAMS_OPTIONS.search, 'Nuevo');
+
+  // addCategoryTag(2);
+  // addProductTag(4);
+});
