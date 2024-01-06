@@ -178,8 +178,7 @@ class CtrlCertificate extends CtrlApiFiles
 
             $certificateModel->deleteCertificate($certificate);
 
-            FileManager::deleteMultipleFoldersWithContent([$certificate['previewUuid']]);
-            FileManager::deleteMultipleFoldersWithContent([$certificate['certificateUuid']]);
+            FileManager::deleteMultipleFoldersWithContent([$certificate['previewUuid'], $certificate['certificateUuid']]);
 
             $response = [
                 'title'   => 'Eliminación exitosa',
