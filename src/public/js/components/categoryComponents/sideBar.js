@@ -1,3 +1,5 @@
+import { updateURL } from './queryParams';
+
 const sidebar = document.querySelector('.sidebar__nav');
 const sidebarOverlay = document.querySelector('.sidebar__background');
 const sidebarClose = document.querySelector('#sidebar-close');
@@ -6,6 +8,20 @@ const sidebarSections = document.querySelectorAll('.menu-section');
 const clearFiltersBtn = document.querySelector('#clear-filters-btn');
 const globalSelectedFiltersContainer = document.querySelector('.selected-filters__summary');
 let countFiltersApplied = 0;
+const tags = {};
+
+function addTag(param, value) {
+  tags[`${param}`] = [...(tags[`${param}`] ?? []), value];
+}
+
+function deleteTag(param, value) {
+  tags[`${param}`] = (tags[`${param}`] ?? []).filter((element) => element !== value);
+}
+
+function getTagsByParam(param) {
+  console.log(param);
+  return (tags[`${param}`] ?? []).join(',');
+}
 
 sidebarOpen.addEventListener('click', openSidebar);
 sidebarClose.addEventListener('click', closeSidebar);
@@ -102,9 +118,12 @@ document.addEventListener('DOMContentLoaded', function () {
             checkbox.checked = false;
             countFiltersApplied--;
             toggleClearFiltersBtn();
+            deleteTag(section.dataset.param, checkbox.value);
+            updateURL(section.dataset.param, getTagsByParam(section.dataset.param));
           },
         });
         countFiltersApplied++;
+        addTag(section.dataset.param, checkbox.value);
       }
 
       item.addEventListener('click', function () {
@@ -117,16 +136,22 @@ document.addEventListener('DOMContentLoaded', function () {
               checkbox.checked = false;
               countFiltersApplied--;
               toggleClearFiltersBtn();
+              deleteTag(section.dataset.param, checkbox.value);
+              updateURL(section.dataset.param, getTagsByParam(section.dataset.param));
             },
           });
           countFiltersApplied++;
+          addTag(section.dataset.param, checkbox.value);
         } else {
           selectedFiltersList
             .querySelector(`.selected-filters__card[data-name="${itemName}"]`)
             .remove();
           countFiltersApplied--;
+          deleteTag(section.dataset.param, checkbox.value);
         }
         toggleClearFiltersBtn();
+        console.log(getTagsByParam(section.dataset.param));
+        updateURL(section.dataset.param, getTagsByParam(section.dataset.param));
       });
     });
 

@@ -1,24 +1,3 @@
-<?php
-$categories    = [];
-$categorieTags = [];
-$productTags   = [];
-
-for ($i = 1; $i <= 8; $i++) {
-    $categories[] = [
-        'name'     => "{$i}",
-        'selected' => (bool) random_int(0, 1),
-    ];
-    $categorieTags[] = [
-        'name'     => "{$i}",
-        'selected' => (bool) random_int(0, 1),
-    ];
-    $productTags[] = [
-        'name'     => "{$i}",
-        'selected' => (bool) random_int(0, 1),
-    ];
-}
-?>
-
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
@@ -31,6 +10,7 @@ for ($i = 1; $i <= 8; $i++) {
 <script src="assets/public/js/categoryQueries.min.js"></script>
 <script src="assets/public/js/searchBar.min.js"></script>
 <script src="assets/public/js/ordering.min.js"></script>
+<script src="assets/public/js/queryParams.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -85,7 +65,7 @@ for ($i = 1; $i <= 8; $i++) {
             </header>
 
             <div class="sidebar__menu-bar">
-                <div class="menu-section" data-title="Categorías">
+                <div class="menu-section" data-title="Categorías" data-param="categoria">
                     <span class="menu-section__button">
                         Categorías
 
@@ -98,8 +78,8 @@ for ($i = 1; $i <= 8; $i++) {
                             <div class="menu-section__list">
                                 <?php foreach($categories as $category): ?>
                                     <div class="menu-section__item">
-                                        <input class="menu-section__checkbox" type="checkbox" <?=$category['selected'] ? 'checked' : '' ?> >
-                                        <label class="menu-section__label" for="c1">Categoría <?=$category['name']?></label>
+                                        <input class="menu-section__checkbox" type="checkbox" <?=$category['selected'] ? 'checked' : '' ?> value="<?=$category['slug']?>">
+                                        <label class="menu-section__label" for="c1"><?=$category['name']?></label>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -110,7 +90,7 @@ for ($i = 1; $i <= 8; $i++) {
                     </div>
                 </div>
 
-                <div class="menu-section" data-title="Tags de Categorías">
+                <div class="menu-section" data-title="Tags de Categorías" data-param="categoria-tags">
                     <span class="menu-section__button">
                         Tags de la Categoría
 
@@ -122,10 +102,10 @@ for ($i = 1; $i <= 8; $i++) {
                     <div class="menu-section__dropdown menu-section__dropdown--active">
                         <div class="menu-section__list-container">
                            <div class="menu-section__list">
-                                <?php foreach($categorieTags as $categoryTag): ?>
+                                <?php foreach($categoryTags as $categoryTag): ?>
                                     <div class="menu-section__item">
-                                        <input class="menu-section__checkbox" type="checkbox" <?=$categoryTag['selected'] ? 'checked' : '' ?> >
-                                        <label class="menu-section__label" for="pc2">Tag de Categoría <?=$categoryTag['name']?></label>
+                                        <input class="menu-section__checkbox" type="checkbox" <?=$categoryTag['selected'] ? 'checked' : '' ?> value="<?=$categoryTag['slug']?>">
+                                        <label class="menu-section__label" for="pc2"><?=$categoryTag['name']?></label>
                                     </div>
                                 <?php endforeach; ?>
                            </div>
@@ -136,7 +116,7 @@ for ($i = 1; $i <= 8; $i++) {
                     </div>
                 </div>
 
-                <div class="menu-section" data-title="Tags de Producto">
+                <div class="menu-section" data-title="Tags de Producto" data-param="producto-tags">
                     <span class="menu-section__button">
                         Tags del Producto
 
@@ -150,8 +130,8 @@ for ($i = 1; $i <= 8; $i++) {
                             <div class="menu-section__list">
                                 <?php foreach($productTags as $productTag): ?>
                                     <div class="menu-section__item">
-                                        <input class="menu-section__checkbox" type="checkbox" <?=$productTag['selected'] ? 'checked' : '' ?> >
-                                        <label class="menu-section__label" for="pt1">Tag de Producto <?=$productTag['name']?></label>
+                                        <input class="menu-section__checkbox" type="checkbox" <?=$productTag['selected'] ? 'checked' : '' ?> value="<?=$productTag['slug']?>">
+                                        <label class="menu-section__label" for="pt1"><?=$productTag['name']?></label>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -204,7 +184,7 @@ for ($i = 1; $i <= 8; $i++) {
 
                 <select class="search__sorting" name="sorting" id="sorting">
                     <option value="1" class="search__sorting--option">De la A-Z</option>
-                    <option value="2" class="search__sorting--option">De la Z-A</option>
+                    <option selected value="2" class="search__sorting--option">De la Z-A</option>
                 </select>
             </div>
 

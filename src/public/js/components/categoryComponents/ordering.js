@@ -1,4 +1,6 @@
-import { SEARCH_PARAMS_OPTIONS, updateURL } from './categoryQueries';
+// import { SEARCH_PARAMS_OPTIONS, updateURL } from './categoryQueries';
+
+import { updateURL } from './queryParams';
 
 function getOrder() {
   const orderSelector = document.querySelector('#sorting');
@@ -18,5 +20,5 @@ function getOrder() {
 
 const order = document.querySelector('#sorting');
 order.addEventListener('change', () => {
-  updateURL(SEARCH_PARAMS_OPTIONS.order, getOrder());
+  updateURL('orden', getOrder());
 });
