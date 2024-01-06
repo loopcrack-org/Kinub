@@ -23,19 +23,53 @@
   }
 
   &__form {
+    display: flex;
+    align-items: center;
+    padding: 0.25rem 0.6rem;
+    border: 0.0625rem solid $color-gray-20;
+    border-radius: 1.5rem;
     @include fold() {
       width: 100%;
     }
     @include phoneXL() {
+      width: 80%;
+    }
+    @include tablet() {
       max-width: 25rem;
       flex-basis: calc(60% - 0.5rem);
     }
-  }
-  &__bar {
-    width: 75%;
-    &--no-result {
-      padding: 1rem;
-      color: color.adjust($color-gray, $lightness: 10%);
+
+    &-icon {
+      display: flex;
+      min-width: 2rem;
+      align-items: center;
+      justify-content: center;
+      color: $color-gray-20;
+      cursor: pointer;
+    }
+
+    &-bar {
+      width: 100%;
+      color: $color-gray-20;
+      outline: none;
+      @include desktop() {
+        font-size: 1rem;
+      }
+
+      &--no-result {
+        padding: 1rem;
+        color: color.adjust($color-gray, $lightness: 10%);
+      }
+    }
+
+    &:focus-within {
+      border-color: $color-bright-blue;
+      transition: border-color 0.3s ease;
+    }
+    &:focus-within > &-icon,
+    &:focus-within > &-bar {
+      color: $color-bright-blue;
+      transition: color 0.3s ease;
     }
   }
 

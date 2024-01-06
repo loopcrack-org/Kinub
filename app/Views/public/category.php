@@ -29,6 +29,7 @@ for ($i = 1; $i <= 8; $i++) {
 <script src="assets/public/js/category.min.js"></script>
 <script src="assets/public/js/sideBar.min.js"></script>
 <script src="assets/public/js/categoryQueries.min.js"></script>
+<script src="assets/public/js/searchBar.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -167,9 +168,15 @@ for ($i = 1; $i <= 8; $i++) {
 
     <div class="category__products-container">
         <section class="search">
-            <form class="search__form" method="post">
-
-                <input class="search__bar" id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" placeholder="Buscar">
+            <form class="search__form" method="GET">
+                <div class="search__form-icon" id="searchBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                </div>
+                <div class="search__form-bar">
+                    <input id="autoComplete" type="search" dir="ltr" spellcheck=false autocorrect="off" autocomplete="off" autocapitalize="off" maxlength="2048" tabindex="1" placeholder="Buscar">
+                </div>
             </form>
             <div class="search__choices">
                 <div class="search__displays">

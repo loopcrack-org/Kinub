@@ -7,31 +7,35 @@
 .autoComplete_wrapper {
   width: 100%;
   flex-basis: calc(80% - 0.5rem);
+  color: inherit;
 
   & > input {
     width: 100%;
     height: auto;
-    padding: 0.3rem 0.4rem;
-    border: 0.0625rem solid $brand-color-secondary;
-    border-radius: 1rem;
-
-    &:focus {
-      border-color: $color-gray;
-      outline: none;
-    }
-
-    @include desktop() {
-      padding: 0.4375rem 0.8rem;
-      font-size: 1rem;
-    }
+    border: none;
+    color: inherit;
   }
 
-  ul {
-    li {
-      color: $brand-color-secondary;
+  & > ul {
+    z-index: 1;
+    top: calc(100% + 0.2rem);
+    right: auto;
+    right: -0.3rem;
+    left: -2.2rem;
+    max-height: none;
+    border-radius: 0.8rem;
+    overflow-y: hidden;
 
+    li {
+      padding: 0;
+      white-space: inherit;
+      &:last-of-type {
+        .product-search-card {
+          border-bottom: none;
+        }
+      }
       mark {
-        color: $brand-color-secondary;
+        color: color.adjust($color-aqua-blue, $lightness: -20%);
       }
     }
   }
