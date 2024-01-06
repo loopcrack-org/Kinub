@@ -58,22 +58,6 @@ export function cleanURL() {
   window.location.href = currentURL.href;
 }
 
-function getOrder() {
-  const orderSelector = document.querySelector('#sorting');
-  const order = orderSelector.value;
-  const ASCENDING = 'asc';
-  const DESCENDING = 'desc';
-
-  switch (order) {
-    case '1':
-      return ASCENDING;
-    case '2':
-      return DESCENDING;
-    default:
-      return ASCENDING;
-  }
-}
-
 export function addCategory(value) {
   let categoriesString = QUERY_PARAMS.get('categorias') ?? '';
   let categories = categoriesString === '' ? [] : categoriesString.split(',');
@@ -116,21 +100,3 @@ export function addProductTag(value) {
   productTags = productTags.filter(Boolean).join(',');
   updateURL(SEARCH_PARAMS_OPTIONS.productTag, productTags);
 }
-
-const order = document.querySelector('#sorting');
-order.addEventListener('change', () => {
-  updateURL(SEARCH_PARAMS_OPTIONS.order, getOrder());
-
-  //cleanURL();
-  addCategory('6');
-  addCategory('4');
-  addCategory('1');
-  updateURL(SEARCH_PARAMS_OPTIONS.search, 'Medidor');
-  addCategoryTag('9');
-  addCategoryTag('15');
-  addCategoryTag('1');
-  updateURL(SEARCH_PARAMS_OPTIONS.search, 'Nuevo');
-
-  // addCategoryTag(2);
-  // addProductTag(4);
-});

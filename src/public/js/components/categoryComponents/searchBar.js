@@ -19,13 +19,13 @@ const search = new autoComplete({
     },
     keys: ['productModel', 'productName'],
   },
-  debounce: 300,
+  debounce: 250,
   resultsList: {
     element: (list, data) => {
       if (!data.results.length) {
         const message = document.createElement('div');
-        message.setAttribute('class', 'search__bar--no-result');
-        message.innerHTML = `<span>No se han encontrado resultados para "${data.query}"</span>`;
+        message.setAttribute('class', 'product-search-card__noresult');
+        message.textContent = `No se han encontrado resultados para "${data.query}"`;
         list.prepend(message);
       }
     },
@@ -35,7 +35,6 @@ const search = new autoComplete({
     tag: 'li',
     class: 'autoComplete_result',
     element: (item, data) => {
-      console.log(data);
       const itemHtml = `
         <div class="product-search-card">
             <div class="product-search-card__picture-container">
@@ -56,10 +55,9 @@ const search = new autoComplete({
             </div>
         </div>      
       `;
-      console.log(itemHtml.replace(data.key));
       item.innerHTML = itemHtml;
       item.addEventListener('click', () => {
-        console.log('hizo click, redireccionando a: ', data.value.productUrl);
+        window.location.href = data.value.productUrl;
       });
     },
     highlight: 'product-search-card__details--mark',
@@ -88,5 +86,7 @@ btnSearch.addEventListener('click', () => {
 });
 
 function searchAndReload() {
-  updateURL(SEARCH_PARAMS_OPTIONS.search, encodeURI(inputSearch.value));
+  if (inputSearch.value !== '') {
+    updateURL(SEARCH_PARAMS_OPTIONS.search, encodeURI(inputSearch.value));
+  }
 }

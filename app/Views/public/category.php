@@ -30,6 +30,7 @@ for ($i = 1; $i <= 8; $i++) {
 <script src="assets/public/js/sideBar.min.js"></script>
 <script src="assets/public/js/categoryQueries.min.js"></script>
 <script src="assets/public/js/searchBar.min.js"></script>
+<script src="assets/public/js/ordering.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
@@ -202,8 +203,8 @@ for ($i = 1; $i <= 8; $i++) {
                 </button>
 
                 <select class="search__sorting" name="sorting" id="sorting">
-                    <option value="1">De la A-Z</option>
-                    <option value="2">De la Z-A</option>
+                    <option value="1" class="search__sorting--option">De la A-Z</option>
+                    <option value="2" class="search__sorting--option">De la Z-A</option>
                 </select>
             </div>
 

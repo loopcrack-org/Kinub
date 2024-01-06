@@ -1,11 +1,13 @@
 const sidebar = document.querySelector('.sidebar__nav');
 const sidebarOverlay = document.querySelector('.sidebar__background');
 const sidebarClose = document.querySelector('#sidebar-close');
+const sidebarOpen = document.querySelector('#sidebar-open');
 const sidebarSections = document.querySelectorAll('.menu-section');
 const clearFiltersBtn = document.querySelector('#clear-filters-btn');
 const globalSelectedFiltersContainer = document.querySelector('.selected-filters__summary');
 let countFiltersApplied = 0;
 
+sidebarOpen.addEventListener('click', openSidebar);
 sidebarClose.addEventListener('click', closeSidebar);
 
 sidebarSections.forEach((section) => {
@@ -18,22 +20,29 @@ sidebarSections.forEach((section) => {
   });
 });
 
-document.addEventListener('click', closeSidebarIfOutside);
+function closeSidebarIfOutside(event) {
+  if (!sidebar.contains(event.target) && sidebar.classList.contains('sidebar__nav--active')) {
+    closeSidebar();
+  }
+}
+
+function openSidebar() {
+  sidebar.classList.add('sidebar__nav--active');
+  sidebarOverlay.classList.add('sidebar__background--active');
+  setTimeout(() => {
+    document.addEventListener('click', closeSidebarIfOutside);
+  }, 10);
+}
 
 function closeSidebar() {
   sidebar.classList.remove('sidebar__nav--active');
   sidebarOverlay.classList.remove('sidebar__background--active');
+  document.removeEventListener('click', closeSidebarIfOutside);
 }
 
 function toggleSection(sectionDropdown, sectionIcon) {
   sectionDropdown.classList.toggle('menu-section__dropdown--active');
   sectionIcon.classList.toggle('menu-section__icon--active');
-}
-
-function closeSidebarIfOutside(event) {
-  if (!sidebar.contains(event.target) && sidebar.classList.contains('sidebar__nav--active')) {
-    closeSidebar();
-  }
 }
 
 document.addEventListener('DOMContentLoaded', function () {
