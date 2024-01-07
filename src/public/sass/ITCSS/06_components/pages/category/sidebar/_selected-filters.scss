@@ -53,31 +53,26 @@
   }
 
   &__clear-btn {
-    padding: 0;
+    width: fit-content;
+    padding: 0.4rem 0.6rem;
     border: none;
-    border-bottom: 0.0625rem solid $color-error-dark;
-    margin: 0.625rem auto;
-    background-color: $color-white;
-    color: $color-error-dark;
-    transition:
-      color 300ms ease-in-out,
-      border-bottom-color 300ms ease-in-out;
+    border-radius: 0.5rem;
+    margin-left: 0;
+    background-color: rgba($color: $color-error-dark, $alpha: 0.75);
+    color: $color-white;
+    font-size: 0.8rem;
+    transition: background-color 300ms ease-in-out;
 
     &--disabled {
-      border-color: $color-gray-60;
-      color: $color-gray-60;
+      background-color: $color-gray-40;
 
       &:hover {
-        border-color: $color-gray-60;
-        color: $color-gray-60;
         cursor: not-allowed;
       }
     }
 
     &:not(&--disabled) {
       &:hover {
-        border-bottom-color: $color-error;
-        color: $color-error;
         cursor: pointer;
       }
     }

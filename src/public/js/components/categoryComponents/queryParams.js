@@ -9,9 +9,17 @@ export function updateURL(param, value) {
 export function cleanParam(param) {
   const url = new URLSearchParams(window.location.search);
   url.delete(param);
-  return decodeURIComponent(url.toString());
+  reloadPage(decodeURIComponent(url.toString()));
 }
 
-export function reloadPage(queyrParams) {
-  window.location.href = `/categoria?${queyrParams}`;
+export function cleanParams(paramArray) {
+  const url = new URLSearchParams(window.location.search);
+  paramArray.forEach((param) => {
+    url.delete(param);
+  });
+  reloadPage(decodeURIComponent(url.toString()));
+}
+
+export function reloadPage(queryParams) {
+  window.location.href = `/categoria?${queryParams}`;
 }
