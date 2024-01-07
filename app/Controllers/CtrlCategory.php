@@ -24,7 +24,7 @@ class CtrlCategory extends CtrlApiFiles
         self::$CATEGORIES_CATEGORY_CREATE = url_to(self::class . '::viewCategoryCreate');
 
         $fileConfigBuilder = new FileValidationConfigBuilder('/admin/categorias');
-        $fileConfigBuilder->builder('icon')->isSVG()->maxFiles(1)->minFiles(1)->maxSize(100, 'KB')->build();
+        $fileConfigBuilder->builder('icon')->isSVG()->maxFiles(1)->minFiles(1)->maxSize(5, 'KB')->build();
         $fileConfigBuilder->builder('image')->isImage()->maxFiles(1)->minFiles(1)->maxSize(1, 'MB')->maxDims(1600, 500)->build();
 
         $this->fileConfig = $fileConfigBuilder->getConfig();

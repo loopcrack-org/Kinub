@@ -1,3 +1,4 @@
+<?php $errors = session()->get('errors'); ?>
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -6,7 +7,6 @@
                     <h5 class="card-title mb-0">Titulo de la Solución de Medición</h5>
                 </label>
             </div>
-            <?php $errors = session()->get('errors'); ?>
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start flex-column">
                     <input type="text" class="form-control  <?= isset($errors['msName']) ? 'is-invalid' : '' ?>" name="msName" id="name" value="<?= old('msName') ?? $solution['msName'] ?? ''; ?>" placeholder="Ingrese el título" required>
@@ -62,10 +62,7 @@
                 <h4 class="card-title mb-0">Imagen de fondo</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msImage']]) ?>
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msImage']]) ?>
         </div>
         <!-- end card -->
     </div>

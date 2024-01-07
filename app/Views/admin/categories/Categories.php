@@ -58,14 +58,14 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-center">
-                                            <img style="max-width: 8rem;" src="<?= $category['fileRoute']?>" alt="Icono de la categoria">
+                                            <img style="max-width: 2rem;" src="<?= $category['fileRoute']?>" alt="Icono de la categoria">
                                         </div>
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
 
-                                            <a href="/admin/categorias/editar/<?= $category['categoryId'] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;" data-id=<?= $category['categoryId']?>><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                            <a href="/admin/categorias/editar/<?= $category['categoryId'] ?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;" title="Editar Categoría"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteCategoriesModal" style="width: 48%;" data-id=<?= $category['categoryId']?> title="Eliminar Categoría"><i class="ri-delete-bin-5-line ri-lg"></i></a>
 
                                         </div>
                                     </td>

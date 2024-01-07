@@ -58,13 +58,13 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center align-items-center">
-                                                <img class="mw-100 object-fit-contain" src="<?= $certificate['fileRoute']; ?>" alt="Imagen del certificado " . <?= $certificate['certificateId']; ?> height="150">
+                                                <img class="w-50 object-fit-contain" src="<?= $certificate['fileRoute']; ?>" alt="Imagen del certificado " . <?= $certificate['certificateId']; ?> height="150">
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-between">
-                                                <a href="/admin/certificados/editar/<?= $certificate['certificateId']; ?>" class="btn btn-primary btn-icon waves-effect waves-light mb-2 w-100"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light w-100" data-bs-toggle="modal" data-bs-target="#deleteCertificatesModal" data-id=<?= $certificate['certificateId']; ?> ><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                                <a href="/admin/certificados/editar/<?= $certificate['certificateId']; ?>" class="btn btn-primary btn-icon waves-effect waves-light mb-2 w-100" title="Editar Certificado"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                                <a href="#" class="btn btn-danger btn-icon waves-effect waves-light w-100" data-bs-toggle="modal" data-bs-target="#deleteCertificatesModal" data-id=<?= $certificate['certificateId']; ?> title="Eliminar Certificado"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                             </div>
                                         </td>
                                     </tr>

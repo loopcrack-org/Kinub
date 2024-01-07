@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Exceptions\EmailNotSendException;
+use App\Exceptions\UserAlreadyConfirmedException;
 use App\Models\UserModel;
 use App\Models\UserTokenModel;
 use App\Utils\EmailSender;
@@ -146,6 +147,10 @@ class CtrlUser extends BaseController
         try {
             $userData = (new UserModel())->getUserDataToResendConfirmEmail($userId);
 
+            if ($userData['confirmed'] !== '0') {
+                throw new UserAlreadyConfirmedException('No es posible enviar el correo de confirmación ya que la cuenta ya ha sido confirmada');
+            }
+
             $isSend = EmailSender::sendEmail('Kinub', 'kinub@gmail.com', $userData['userEmail'], 'Cuenta Creada de Kinub', 'templates/emails/createUserAccount', $userData);
 
             if (! $isSend) {
@@ -160,12 +165,12 @@ class CtrlUser extends BaseController
         } catch (Throwable $th) {
             $response = [
                 'title'   => 'Oops! Ha ocurrido un error',
-                'message' => 'Algo ha salido mal mientras se enviaba el email, por favor intente nuevamente',
+                'message' => $th->getMessage(),
                 'type'    => 'error',
             ];
         }
 
-        return redirect()->back()->with('response', $response);
+        return redirect()->to('admin/usuarios')->with('response', $response);
     }
 
     public function deleteUser()

@@ -23,7 +23,7 @@ class CtrlCertificate extends CtrlApiFiles
         self::$CERTIFICATES_CREATE_ROUTE = url_to(self::class . '::viewCertificateCreate');
 
         $fileConfigBuilder = new FileValidationConfigBuilder(self::$CERTIFICATES_BASE_ROUTE);
-        $fileConfigBuilder->builder('certificatePreview')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(700, 700)->build();
+        $fileConfigBuilder->builder('certificatePreview')->minFiles(1)->maxFiles(1)->maxSize(2, 'MB')->isImage()->maxDims(540, 600)->build();
         $fileConfigBuilder->builder('certificatefile')->minFiles(1)->maxFiles(1)->maxSize(30, 'MB')->isPDF()->build();
 
         $this->fileConfig = $fileConfigBuilder->getConfig();

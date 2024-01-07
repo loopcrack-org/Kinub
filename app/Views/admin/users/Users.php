@@ -70,11 +70,11 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between column-gap-2">
-                                            <a href="/admin/usuarios/editar/<?= $user['userId']?>" class="btn btn-primary btn-icon waves-effect waves-light flex-grow-1"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="/admin/usuarios/editar/<?= $user['userId']?>" class="btn btn-primary btn-icon waves-effect waves-light flex-grow-1"><i class="ri-edit-2-fill ri-lg" title="Editar Usuario"></i></a>
                                             <?php if (! $user['confirmed']): ?>
-                                            <a href="/admin/usuarios/reenviarConfirmacionCuenta/<?=$user['userId']?>" class="btn btn-resendEmail btn-success btn-icon waves-effect waves-light flex-grow-1"><i class="ri-mail-send-line ri-lg"></i></a>
+                                            <a href="/admin/usuarios/reenviarConfirmacionCuenta/<?=$user['userId']?>" class="btn btn-resendEmail btn-success btn-icon waves-effect waves-light flex-grow-1" title="Reenviar Correo de Confirmación"><i class="ri-mail-send-line ri-lg"></i></a>
                                             <?php endif ?>
-                                            <button class="btn btn-danger btn-icon waves-effect waves-light flex-grow-1" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id=<?= $user['userId']?>><i class="ri-delete-bin-5-line ri-lg"></i></button>
+                                            <button class="btn btn-danger btn-icon waves-effect waves-light flex-grow-1" data-bs-toggle="modal" data-bs-target="#deleteUsersModal" data-id=<?= $user['userId']?> title="Eliminar Usuario"><i class="ri-delete-bin-5-line ri-lg"></i></button>
                                         </div>
                                     </td>
                                 </tr>

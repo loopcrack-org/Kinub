@@ -26,7 +26,7 @@ class CtrlSolution extends CtrlApiFiles
         $fileConfigBuilder = new FileValidationConfigBuilder(self::$MEASUREMENT_SOLUTIONS_BASE_ROUTE);
 
         $fileConfigBuilder->builder('msIcon')->isSVG()->minFiles(1)->maxFiles(1)->maxSize(1, 'MB')->build();
-        $fileConfigBuilder->builder('msImage')->isImage()->minFiles(1)->maxFiles(1)->maxDims(500, 500)->maxSize(2, 'MB')->build();
+        $fileConfigBuilder->builder('msImage')->isImage()->minFiles(1)->maxFiles(1)->maxDims(500, 510)->maxSize(2, 'MB')->build();
 
         $this->fileConfig = $fileConfigBuilder->getConfig();
     }
