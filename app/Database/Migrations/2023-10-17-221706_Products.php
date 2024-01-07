@@ -33,6 +33,9 @@ class Products extends Migration
             'productCategoryId' => [
                 'type' => 'int',
             ],
+            'relevance' => [
+                'type' => 'int',
+            ],
         ]);
 
         $this->forge->addKey('productId', true);

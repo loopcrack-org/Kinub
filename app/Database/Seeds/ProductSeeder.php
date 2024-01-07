@@ -29,6 +29,7 @@ class ProductSeeder extends Seeder
                     'Comunicación'          => $faker->randomElements(['5G Ipv6', '3G', 'WPAN', 'WPA2']),
                 ]),
                 'productCategoryId' => $faker->numberBetween(1, $totalCategories),
+                'relevance'         => $faker->numberBetween(1, 100),
             ];
         }
 

@@ -14,6 +14,7 @@ class ProductValidation extends BaseValidation
         'productDetails'       => 'required',
         'productTechnicalInfo' => 'regex_match[/^(?:(?!"(\d+)"|:"\s*"|\[".*"\]).)*$/]',
         'categoryTags'         => 'required',
+        'relevance'            => 'required|integer|regex_match[/^([1-9]|[1-9][0-9]|100)$/]',
     ];
     protected $validationMessages = [
         'productName'          => ['required' => 'El nombre del producto es obligatorio'],
@@ -23,6 +24,11 @@ class ProductValidation extends BaseValidation
         'productDescription'   => ['required' => 'La descripción del producto es obligatoria'],
         'productTechnicalInfo' => ['regex_match' => 'Los detalles del producto son obligatorios'],
         'productDetails'       => ['required' => 'La ficha técnica del producto es obligatoria'],
+        'relevance'            => [
+            'required'    => 'La relevancia del producto obligatoria',
+            'integer'     => 'El la relevancia debe de ser un dato entero',
+            'regex_match' => 'La relevancia debe tener un valor entre 1 y 100',
+        ],
     ];
 
     public function existCategoryId(string $categoryId)

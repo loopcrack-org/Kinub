@@ -22,11 +22,18 @@
                         <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
                     </div>
-                    <!-- Product Model -->
-                    <div class="mb-3">
-                        <label class="card-text" for="productModel">Ingresa el modelo</label>
-                        <input type="text" class="form-control <?= isset($errors['productModel']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
-                        <?= view('admin/templates/invalidInputError', ['error' => $errors['productModel'] ?? null])?>
+
+                    <div class="row gap-3 mb-3 w-100 mx-auto align-items-center">
+                        <div class="col-12 col-sm input-group p-0 my-auto">
+                            <label class="card-text d-block" for="productModel">Modelo</label>
+                            <input type="text" class="form-control w-100 <?= isset($errors['productModel']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
+                            <?= view('admin/templates/invalidInputError', ['error' => $errors['productModel'] ?? null])?>
+                        </div>
+                        <div class="col-12 col-sm  input-group p-0 my-auto">
+                            <label class="card-text d-block" for="relevance">Relevancia</label>
+                            <input type="number" step="1" min="1" max="100" class="form-control w-100 <?= isset($errors['relevance']) ? 'is-invalid' : '' ?>" name="relevance" id="relevance" placeholder="ej: 10" value="<?= old('relevance') ?? ''?>" required>
+                            <?= view('admin/templates/invalidInputError', ['error' => $errors['relevance'] ?? null])?>
+                        </div>
                     </div>
                     <!-- Product Tags -->
                     <div class="mb-3">

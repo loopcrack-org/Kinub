@@ -10,7 +10,7 @@ class ProductModel extends Model
     protected $DBGroup        = 'default';
     protected $table          = 'products';
     protected $primaryKey     = 'productId';
-    protected $allowedFields  = ['productName', 'productModel', 'productDescription', 'productDetails', 'productTechnicalInfo', 'productCategoryId'];
+    protected $allowedFields  = ['productName', 'productModel', 'productDescription', 'productDetails', 'productTechnicalInfo', 'productCategoryId', 'relevance'];
     private $productFileTypes = [
         'mainImage'     => 'main image',
         'mainVideo'     => 'video demo',
