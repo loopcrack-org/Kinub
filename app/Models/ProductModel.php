@@ -7,9 +7,13 @@ use CodeIgniter\Model;
 
 class ProductModel extends Model
 {
-    protected $table         = 'products';
-    protected $primaryKey    = 'productId';
-    protected $allowedFields = ['productName', 'productModel', 'productDescription', 'productTechnicalInfo', 'productCategoryId'];
+    protected $table            = 'products';
+    protected $primaryKey       = 'productId';
+    protected $allowedFields    = ['productName', 'productModel', 'productDescription', 'productTechnicalInfo', 'productCategoryId'];
+    private $allowedFilterOrder = [
+        'name'      => 'productName',
+        'relevance' => 'productRelevance',
+    ];
 
     /**
      * get all products
@@ -33,45 +37,14 @@ class ProductModel extends Model
      */
     public function filterProducts(array $categories, array $categoryTags, array $productTags, string $search = '')
     {
-        $builder = $this->select([
-            'productName',
-            'productModel',
-            'categoryName',
-            'CONCAT("/producto/", productId, "/", productName) AS productUrl',
-            'GROUP_CONCAT(DISTINCT files.fileRoute) AS imageRoute',
-        ])
-            ->join('categories', 'products.productCategoryId = categories.categoryId')
-            ->join('`products-category_tags`', 'products.productId = `products-category_tags`.pctProductId', 'LEFT')
-            ->join('category_tags', 'category_tags.categoryTagId = `products-category_tags`.pctCategoryTagId', 'LEFT')
-            ->join('product_tags', 'product_tags.ptProductId = products.productId', 'LEFT')
-            ->join('product_files', new RawSql('products.productId = product_files.pfProductId AND product_files.pfFileType = "main image"'), 'LEFT')
-            ->join('files', 'product_files.pfFileId = files.fileId', 'LEFT');
-        $whereQueries = [];
+        $this->buildBaseFilterQuery();
 
-        // added categories filter
-        if (! empty($categories)) {
-            $whereQueries[] = "categories.categorySlug IN ('" . str_replace(' ', '', implode("', '", $categories)) . "')";
-        }
-        // added category_tags filter
-        if (! empty($categoryTags)) {
-            $whereQueries[] = "category_tags.categoryTagSlug IN ('" . str_replace(' ', '', implode("', '", $categoryTags)) . "')";
-        }
-        // added products_tags filter
-        if (! empty($productTags)) {
-            $whereQueries[] = "product_tags.ptSlug IN ('" . str_replace(' ', '', implode("', '", $productTags)) . "')";
-        }
-        // added search filter
-        if (! empty($search)) {
-            $whereQueries[] = "(products.productName LIKE '%{$search}%' OR products.productModel LIKE '%{$search}%')";
-        }
+        $this->applyFilter('categories.categorySlug', $categories);
+        $this->applyFilter('category_tags.categoryTagSlug', $categoryTags);
+        $this->applyFilter('product_tags.ptSlug', $productTags);
+        $this->filterBySearch($search);
 
-        $builder->groupBy('productId');
-
-        if (empty($whereQueries)) {
-            return $this;
-        }
-        $whereQuery = implode(' AND ', $whereQueries);
-        $builder->where($whereQuery);
+        $this->groupBy('productId');
 
         return $this;
     }
@@ -84,9 +57,9 @@ class ProductModel extends Model
      *
      * @return $this
      */
-    public function order(string $order = 'asc')
+    public function order(string $orderType = 'name', string $order = 'asc')
     {
-        $this->orderBy('productName', $order);
+        $this->orderBy(in_array($orderType, $this->allowedFilterOrder, true) ? $orderType : $this->allowedFilterOrder['name'], $order);
 
         return $this;
     }
@@ -104,5 +77,53 @@ class ProductModel extends Model
         $offset = ($page - 1) * $perPage;
 
         return $this->findAll(limit: $perPage, offset: $offset);
+    }
+
+    /**
+     * Build a base joins to filter by products
+     */
+    private function buildBaseFilterQuery()
+    {
+        $this->select([
+            'productName',
+            'productModel',
+            'categoryName',
+            'CONCAT("/producto/", productId, "/", productName) AS productUrl',
+            'GROUP_CONCAT(DISTINCT files.fileRoute) AS imageRoute',
+        ])
+            ->join('categories', 'products.productCategoryId = categories.categoryId')
+            ->join('`products-category_tags`', 'products.productId = `products-category_tags`.pctProductId', 'LEFT')
+            ->join('category_tags', 'category_tags.categoryTagId = `products-category_tags`.pctCategoryTagId', 'LEFT')
+            ->join('product_tags', 'product_tags.ptProductId = products.productId', 'LEFT')
+            ->join('product_files', new RawSql('products.productId = product_files.pfProductId AND product_files.pfFileType = "main image"'), 'LEFT')
+            ->join('files', 'product_files.pfFileId = files.fileId', 'LEFT');
+    }
+
+    /**
+     * Apply a filter to a field on model
+     *
+     * @param string $fieldName the name on filter apply
+     * @param array  $values    the values to filter
+     */
+    private function applyFilter(string $fieldName, array $values)
+    {
+        if (! empty($values)) {
+            $this->whereIn($fieldName, $values);
+        }
+    }
+
+    /**
+     * Apply a filter on productName and productModel
+     *
+     * @param string $search the search to filter
+     */
+    private function filterBySearch(string $search)
+    {
+        if (! empty($search)) {
+            $this->groupStart()
+                ->like('products.productName', $search)
+                ->orLike('products.productModel', $search)
+                ->groupEnd();
+        }
     }
 }

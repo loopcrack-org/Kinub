@@ -48,9 +48,9 @@ class CtrlApiPublic extends BaseController
             }
 
             // default values
-            $filter['categorias']     = empty($filter['categorias']) ? [] : explode(',', $filter['categorias']);
-            $filter['producto-tags']  = empty($filter['producto-tags']) ? [] : explode(',', $filter['producto-tags']);
-            $filter['categoria-tags'] = empty($filter['categoria-tags']) ? [] : explode(',', $filter['categoria-tags']);
+            foreach (['categorias', 'producto-tags', 'categoria-tags'] as $param) {
+                $filter[$param] = empty($filter[$param]) ? [] : explode(',', $filter[$param]);
+            }
 
             $products = (new ProductModel())->filterProducts(
                 $filter['categorias'],
