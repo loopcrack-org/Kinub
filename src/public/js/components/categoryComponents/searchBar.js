@@ -1,5 +1,6 @@
 import autoComplete from '@tarekraafat/autocomplete.js';
-import { SEARCH_PARAMS_OPTIONS, updateURL } from './categoryQueries';
+// import { SEARCH_PARAMS_OPTIONS, updateURL } from './categoryQueries';
+import { updateURL } from './queryParams';
 
 const inputSearch = document.querySelector('#autoComplete');
 const btnSearch = document.querySelector('#searchBtn');
@@ -87,6 +88,6 @@ btnSearch.addEventListener('click', () => {
 
 function searchAndReload() {
   if (inputSearch.value !== '') {
-    updateURL(SEARCH_PARAMS_OPTIONS.search, encodeURI(inputSearch.value));
+    updateURL('busqueda', encodeURIComponent(inputSearch.value));
   }
 }

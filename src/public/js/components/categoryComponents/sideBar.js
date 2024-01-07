@@ -1,4 +1,4 @@
-import { cleanParams, updateURL } from './queryParams';
+import { cleanParam, updateURL } from './queryParams';
 
 const sidebar = document.querySelector('.sidebar__nav');
 const sidebarOverlay = document.querySelector('.sidebar__background');
@@ -19,7 +19,6 @@ function deleteTag(param, value) {
 }
 
 function getTagsByParam(param) {
-  console.log(param);
   return (tags[`${param}`] ?? []).join(',');
 }
 
@@ -66,7 +65,7 @@ function createSelectedFiltersCard({ content, container, param, value, onremove 
     countFiltersApplied--;
     deleteTag(param, value);
     toggleClearFiltersBtn();
-    updateURL(param, getTagsByParam(param));
+    updateURL(param, getTagsByParam(param), true);
   });
   container.appendChild(card);
   countFiltersApplied++;
@@ -168,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           deleteSelectedFilterCard(cardOptions);
         }
-        updateURL(section.dataset.param, getTagsByParam(section.dataset.param));
+        updateURL(section.dataset.param, getTagsByParam(section.dataset.param), true);
       });
     });
   });
@@ -188,6 +187,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     countFiltersApplied = 0;
     toggleClearFiltersBtn();
-    cleanParams(Array.from(sidebarSections).map((sidebar) => sidebar.dataset.param));
+    cleanParam(Array.from(sidebarSections).map((sidebar) => sidebar.dataset.param));
   });
 });
