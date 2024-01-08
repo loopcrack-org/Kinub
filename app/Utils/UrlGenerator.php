@@ -31,7 +31,7 @@ class UrlGenerator
                 $filesPath = '/assets/admin/js/';
                 break;
         }
-        if (file_exists($manifestPath)) {
+        if (getenv('CI_ENVIRONMENT') == "production" && file_exists($manifestPath)) {
             $manifest = json_decode(file_get_contents($manifestPath), true);
             if (isset($manifest[$filename])) {
                 return base_url($filesPath . $manifest[$filename]);
