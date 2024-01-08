@@ -30,6 +30,7 @@
     display: flex;
     width: 100%;
     flex-direction: column;
+    margin-bottom: 1.25rem;
   }
 
   &__label {
@@ -39,12 +40,17 @@
     font-weight: $weight-bold;
   }
 
+  &__error {
+    margin-bottom: 0.3125rem;
+    color: $color-error;
+  }
+
   &__input,
   &__textarea {
+    width: 100%;
     padding: 0.625rem;
     border: 0.0625rem solid color.adjust($color-green-blue, $lightness: 12%);
     border-radius: 0.625rem;
-    margin-bottom: 1.25rem;
     background-color: $color-white;
     font-size: 1rem;
     resize: none;
@@ -84,6 +90,11 @@
     &:hover {
       cursor: pointer;
     }
+
+    &:disabled {
+      cursor: progress;
+      opacity: 0.75;
+    }
   }
 
   &__close {
@@ -107,12 +118,14 @@
         font-size: 1.875rem;
       }
     }
+
     &__input {
       &--product {
         padding: 0.4814rem 0.625rem;
         font-size: 1.25rem;
       }
     }
+
     &__close {
       display: none;
     }
