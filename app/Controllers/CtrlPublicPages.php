@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\CategoryModel;
+use App\Models\CertificateModel;
 
 class CtrlPublicPages extends BaseController
 {
@@ -50,9 +51,11 @@ class CtrlPublicPages extends BaseController
 
     public function viewCertificates(): string
     {
-        $data = [
+        $certificates = (new CertificateModel())->getAllCertificateWithFiles();
+        $data         = [
             'metaTitle'       => 'Certificados',
             'metaDescription' => 'Conoce los Certificados que acreditan la experiencia y excelencia de Kinub',
+            'certificates'    => $certificates,
         ];
 
         return view('public/certificates', $data);
