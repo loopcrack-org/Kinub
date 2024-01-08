@@ -35,12 +35,13 @@ class CtrlPublicPages extends BaseController
         return view('public/equipment', $data);
     }
 
-    public function viewCategory($categoryId): string
+    public function viewCategory(): string
     {
-        // title, description and image for metadata here will be dynamic and will need to be according to the category that is loaded
+        $categoryName  = $this->request->getGet('categoria') ?? '';
         $categoryModel = new CategoryModel();
-        $category      = $categoryModel->join('files', 'files.fileId = categories.categoryImageId')->find($categoryId);
-        $data          = [
+        $category      = $categoryModel->join('files', 'files.fileId = categories.categoryImageId')->where('categoryName', $categoryName)->first();
+
+        $data = [
             'metaTitle'       => $category['categoryName'],
             'metaDescription' => 'Explora los mejores productos de ' . $category['categoryName'],
             'metaImage'       => $category['fileRoute'],

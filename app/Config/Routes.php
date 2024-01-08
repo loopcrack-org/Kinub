@@ -49,7 +49,7 @@ $routes->post('/email/contacto', 'CtrlEmail::sendContactEmail');
 $routes->post('/email/soporte', 'CtrlEmail::sendSupportEmail');
 $routes->post('/email/producto', 'CtrlEmail::sendProductEmail');
 $routes->get('/equipos', 'CtrlPublicPages::viewEquipment');
-$routes->get('/categoria/(:num)', [CtrlPublicPages::class, 'viewCategory']);
+$routes->get('/categoria', [CtrlPublicPages::class, 'viewCategory']);
 $routes->get('/certificados', 'CtrlPublicPages::viewCertificates');
 $routes->get('/producto', 'CtrlPublicPages::viewProduct');
 $routes->get('/aviso', 'CtrlPublicPages::viewPrivacyPolicy');

@@ -10,7 +10,7 @@
             <div class="card-body">
                 <div class="hstack gap-3 align-items-start">
                     <div class="flex-grow-1">
-                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="categoryName" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" maxlength="20" required>
+                        <input type="text" class="form-control <?= isset($errors['categoryName']) ? 'is-invalid' : '' ?>" name="categoryName" id="categoryName" value="<?= old('categoryName') ?? $category['categoryName'] ?? ''; ?>" placeholder="Ingrese el título" maxlength="20">
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryName'] ?? null])?>
                     </div>
                 </div>

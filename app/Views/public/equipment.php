@@ -17,7 +17,7 @@
 
         <div class="content__grid">
             <?php foreach ($categories as $category) { ?>
-                <a href="/categoria/<?= $category['categoryId']; ?>" class="equipment">
+                <a href="/categoria?categoria=<?= $category['categoryName']; ?>" class="equipment">
                     <img src="<?= $category['fileRoute']; ?>" alt="equipment" class="equipment__icon">
                     <h3 class="equipment__name"><?= $category['categoryName']?></h3>
                     <p class="equipment__text"><?= $category['categorySubname']?></p>
