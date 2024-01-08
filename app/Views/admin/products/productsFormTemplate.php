@@ -19,7 +19,7 @@
                     <!-- Product Name -->
                     <div class="mb-3">
                         <label class="card-text" for="productName">Nombre del producto</label>
-                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
+                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nombre del producto" value="<?= old('productName') ?? ''?>" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
                     </div>
 

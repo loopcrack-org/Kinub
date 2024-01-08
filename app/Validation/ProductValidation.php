@@ -25,8 +25,8 @@ class ProductValidation extends BaseValidation
         'productTechnicalInfo' => ['regex_match' => 'Los detalles del producto son obligatorios'],
         'productDetails'       => ['required' => 'La ficha técnica del producto es obligatoria'],
         'relevance'            => [
-            'required'    => 'La relevancia del producto obligatoria',
-            'integer'     => 'El la relevancia debe de ser un dato entero',
+            'required'    => 'La relevancia del producto es obligatoria',
+            'integer'     => 'La relevancia debe de ser un dato entero',
             'regex_match' => 'La relevancia debe tener un valor entre 1 y 100',
         ],
     ];
