@@ -1,14 +1,15 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?php $this->extend('public/templates/layout'); ?>
 
 <!-- CSS -->
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/support.min.css" type="text/css">
+<link rel="stylesheet" href="<?= UrlGenerator::asset_url('public-css','support.min.css') ?>" type="text/css">
 <?php $this->endSection(); ?>
 
 <!-- JS -->
 <?php $this->section('js'); ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="assets/public/js/support.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('public-js','support.min.js') ?>"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>

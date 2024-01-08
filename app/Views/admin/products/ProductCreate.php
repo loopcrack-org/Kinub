@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
@@ -6,10 +7,10 @@
 
 <?= $this->section('css') ?>
 <!-- Filepond css -->
-<link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
-<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet">
-<link href="/assets/admin/css/wysiwyg.min.css" rel="stylesheet">
-<link href="/assets/admin/css/tippy.min.css" rel="stylesheet">
+<link rel="stylesheet" href="<?= UrlGenerator::asset_url('admin-css','filepond.min.css') ?>" type="text/css" />
+<link href="<?= UrlGenerator::asset_url('common-css','sweetAlert.min.css') ?>" rel="stylesheet">
+<link href="<?= UrlGenerator::asset_url('admin-css','wysiwyg.min.css') ?>" rel="stylesheet">
+<link href="<?= UrlGenerator::asset_url('admin-css','tippy.min.css') ?>" rel="stylesheet">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -48,9 +49,9 @@
 
 <?= $this->section('js') ?>
 <!-- filepond js -->
-<script src="/assets/admin/js/alertElement.min.js"></script>
-<script src="/assets/admin/js/filepond-general-config.min.js"></script>
-<script src="/assets/admin/js/wysiwyg-general-config.min.js"></script>
-<script src="/assets/admin/js/productChoices.min.js"></script>
-<script src="/assets/admin/js/keyValueInput.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','alertElement.min.js') ?>"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','filepond-general-config.min.js') ?>"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','wysiwyg-general-config.min.js') ?>"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','productChoices.min.js') ?>"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','keyValueInput.min.js') ?>"></script>
 <?= $this->endSection() ?>

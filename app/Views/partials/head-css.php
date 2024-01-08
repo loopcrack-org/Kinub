@@ -1,6 +1,7 @@
+<?php use App\Utils\UrlGenerator; ?>
 <!-- Layout config Js -->
-<script src="/assets/admin/js/layout.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','layout.min.js') ?>"></script>
 <!-- Bootstrap Css -->
-<link href="/assets/common/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= UrlGenerator::asset_url('common-css','bootstrap.min.css') ?>" rel="stylesheet" type="text/css" />
 <!-- App Css-->
-<link href="/assets/admin/css/app.min.css" rel="stylesheet" type="text/css" />
+<link href="<?= UrlGenerator::asset_url('admin-css','app.min.css') ?>" rel="stylesheet" type="text/css" />

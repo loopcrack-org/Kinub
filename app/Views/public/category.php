@@ -1,11 +1,12 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/category.min.css" type="text/css">
+<link rel="stylesheet" href="<?= UrlGenerator::asset_url('public-css','category.min.css') ?>" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
-<script src="assets/public/js/multiple-options-select.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('public-js','multiple-options-select.min.js') ?>"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>

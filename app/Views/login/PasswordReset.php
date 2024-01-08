@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->include('partials/main') ?>
 
 <head>
@@ -104,12 +105,11 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- particles js -->
-    <script src="/assets/admin/js/particles.min.js"></script>
+    <script src="<?= UrlGenerator::asset_url('admin-js','particles.min.js') ?>"></script>
     <!-- particles app js -->
-    <script src="/assets/admin/js/particles.app.min.js"></script>
-
+    <script src="<?= UrlGenerator::asset_url('admin-js','particles.app.min.js') ?>"></script>
     <!-- password-create init -->
-    <script src="/assets/admin/js/passowrd-create.init.min.js"></script>
+    <script src="<?= UrlGenerator::asset_url('admin-js','passowrd-create.init.min.js') ?>"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?php $this->section('js'); ?>
-<script src="assets/public/js/menuMobile.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('public-js','menuMobile.min.js') ?>"></script>
 <?php $this->endSection(); ?>
 <header class="header" id="header">
     <a href="/" class="header__logo">

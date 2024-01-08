@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
@@ -110,7 +111,7 @@
 
 <?= $this->section('js') ?>
 <!-- particles js -->
-<script src="/assets/admin/js/particles.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','particles.min.js') ?>"></script>
 <!-- particles app js -->
-<script src="/assets/admin/js/particles.app.min.js"></script>
+<script src="<?= UrlGenerator::asset_url('admin-js','particles.app.min.js') ?>"></script>
 <?= $this->endSection() ?>

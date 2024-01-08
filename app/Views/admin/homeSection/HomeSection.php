@@ -1,3 +1,4 @@
+<?php use App\Utils\UrlGenerator; ?>
 <?= $this->include('partials/main') ?>
 
 <head>
@@ -198,7 +199,7 @@
     <?= $this->include('partials/vendor-scripts') ?>
 
     <!-- App js -->
-    <script src="/assets/admin/js/app.min.js"></script>
+    <script src="<?= UrlGenerator::asset_url('admin-js','app.min.js') ?>"></script>
 </body>
 
 </html>
