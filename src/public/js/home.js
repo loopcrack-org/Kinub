@@ -84,4 +84,13 @@ const configValidator = {
   },
 };
 
+const msBottomHighlight = document.querySelectorAll('.measurement-solution__bottom-highlight');
+
+const colors = ['#1b90c7', '#0174f6', '#186d96', '#0032ab', '#58b5e0'];
+
+msBottomHighlight.forEach((element, index) => {
+  const colorIndex = index % colors.length;
+  element.style.setProperty('--bottom-highlight-color', colors[colorIndex]);
+});
+
 new VanillaValidator(configValidator);

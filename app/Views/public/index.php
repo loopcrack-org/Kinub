@@ -60,7 +60,7 @@
 
                         <div class="measurement-solution__mask"></div>
                         <div class="measurement-solution__mask--hover"></div>
-                        <div class="measurement-solution__bottom-highlight" style="--bottom-highlight-color: #1b90c7;"></div>
+                        <div class="measurement-solution__bottom-highlight"></div>
                     </div>
                 </div>
             <?php }?>
