@@ -68,6 +68,24 @@ class CertificateModel extends Model
         }
     }
 
+    public function deleteCertificate(array $certificate)
+    {
+        try {
+            $this->db->transException(true)->transStart();
+            $this->delete($certificate['certificateId']);
+
+            $fileModel = new FileModel();
+
+            $fileModel->whereIn('uuid', [$certificate['previewUuid'], $certificate['certificateUuid']])->delete();
+
+            $this->db->transCommit();
+        } catch (Throwable $th) {
+            $this->db->transRollback();
+
+            throw $th;
+        }
+    }
+
     public function getCertificate($id)
     {
         return $this->select('

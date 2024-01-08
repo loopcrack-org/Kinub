@@ -9,6 +9,7 @@ use App\Libraries\tinify\Tinify;
 use App\Models\CertificateModel;
 use App\Utils\FileManager;
 use App\Validation\CertificateValidation;
+use Exception;
 use Throwable;
 
 class CtrlCertificate extends CtrlApiFiles
@@ -166,17 +167,28 @@ class CtrlCertificate extends CtrlApiFiles
 
     public function deleteCertificate()
     {
-        $isDeleted = true;
-        if ($isDeleted) {
+        try {
+            $certificateId    = $this->request->getPost('certificateId');
+            $certificateModel = new CertificateModel();
+            $certificate      = $certificateModel->getCertificate($certificateId);
+
+            if (empty($certificate)) {
+                throw new Exception();
+            }
+
+            $certificateModel->deleteCertificate($certificate);
+
+            FileManager::deleteMultipleFoldersWithContent([$certificate['previewUuid'], $certificate['certificateUuid']]);
+
             $response = [
                 'title'   => 'Eliminación exitosa',
                 'message' => 'Se ha elimnado el certificado correctamente',
                 'type'    => 'success',
             ];
-        } else {
+        } catch (Throwable $th) {
             $response = [
                 'title'   => 'Eliminación fallida',
-                'message' => 'No se pudo realizar la elimiación del certificado',
+                'message' => 'Algo salió mal al eliminar el certificado. Por favor, inténtalo de nuevo.',
                 'type'    => 'error',
             ];
         }
