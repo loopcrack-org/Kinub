@@ -1,3 +1,11 @@
+<?php $errors = session()->get('errors') ?>
+<style>
+.filepond {
+    padding: 0;
+}
+</style>
+
+
 <div class="grid gap-0 column-gap-3 position-relative">
     <div class="g-col-12 g-col-lg-8">
         <!-- Product Information -->
@@ -11,14 +19,21 @@
                     <!-- Product Name -->
                     <div class="mb-3">
                         <label class="card-text" for="productName">Nombre del producto</label>
-                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nobre del producto" value="<?= old('productName') ?? ''?>" required>
+                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productName" id="productName" placeholder="Ingresa el nombre del producto" value="<?= old('productName') ?? ''?>" required>
                         <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
                     </div>
-                    <!-- Product Model -->
-                    <div class="mb-3">
-                        <label class="card-text" for="productModel">Ingresa el modelo</label>
-                        <input type="text" class="form-control <?= isset($errors['productName']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
-                        <?= view('admin/templates/invalidInputError', ['error' => $errors['productName'] ?? null])?>
+
+                    <div class="row gap-3 mb-3 w-100 mx-auto align-items-center">
+                        <div class="col-12 col-sm input-group p-0 my-auto">
+                            <label class="card-text d-block" for="productModel">Modelo</label>
+                            <input type="text" class="form-control w-100 <?= isset($errors['productModel']) ? 'is-invalid' : '' ?>" name="productModel" id="productModel" placeholder="Ingresa el modelo del producto" value="<?= old('productModel') ?? ''?>" required>
+                            <?= view('admin/templates/invalidInputError', ['error' => $errors['productModel'] ?? null])?>
+                        </div>
+                        <div class="col-12 col-sm  input-group p-0 my-auto">
+                            <label class="card-text d-block" for="relevance">Relevancia</label>
+                            <input type="number" step="1" min="1" max="100" class="form-control w-100 <?= isset($errors['relevance']) ? 'is-invalid' : '' ?>" name="relevance" id="relevance" placeholder="ej: 10" value="<?= old('relevance') ?? ''?>" required>
+                            <?= view('admin/templates/invalidInputError', ['error' => $errors['relevance'] ?? null])?>
+                        </div>
                     </div>
                     <!-- Product Tags -->
                     <div class="mb-3">
@@ -38,7 +53,7 @@
                                 'keyValues' => old('productTechnicalInfo') ?? [
                                     '' => '',
                                 ],
-                                'minValues' => 2,
+                                'minValues' => 1,
                                 'name'      => 'productTechnicalInfo',
                                 'error'     => $errors['productTechnicalInfo'] ?? null,
                             ]) ?>
@@ -69,7 +84,7 @@
                         <h5 class="fs-14 mb-2">Imagenes</h5>
                         <label class="text-muted mb-3">Ingresa imagenes de galería</label>
                         <?= view('admin/components/inputFilePond', [
-                            'config' => $fileConfig['image'],
+                            'config' => $fileConfig['galleryImages'],
                         ]) ?>
                     </div>
                     <!-- Videos -->
@@ -77,7 +92,7 @@
                         <h5 class="fs-14 mb-2">Videos</h5>
                         <label class="text-muted mb-3">Ingresa videos de galería</label>
                         <?= view('admin/components/inputFilePond', [
-                            'config' => $fileConfig['video'],
+                            'config' => $fileConfig['galleryVideos'],
                         ]) ?>
                     </div>
                 </div>
@@ -100,20 +115,16 @@
                     <h5 class="fs-14 mb-3">Categoría</h5>
                     <div class="form-control <?=isset($errors['productCategoryId']) ? 'is-invalid' : ''?> p-0 position-relative" style="background-image: none !important;">
                         <?php if(isset($errors['productCategoryId'])): ?>
-                            <i class="las la-exclamation-circle position-absolute z-1" style="
+                        <i class="las la-exclamation-circle position-absolute z-1" style="
                                 right: 35px;
                                 top: 9px;
                                 color: var(--vz-red);
-                                font-size: 20px;"
-                            ></i>
+                                font-size: 20px;"></i>
                         <?php endif; ?>
                         <select id="productCategoryId" name="productCategoryId" required>
                             <option value="" selected>Selecciona</option>
                             <?php foreach ($categories as $category):?>
-                            <option
-                                value="<?= $category['categoryId']?>"
-                                <?=old('productCategoryId') === $category['categoryId'] ? 'selected' : '' ?>
-                            >
+                            <option value="<?= $category['categoryId']?>" <?=old('productCategoryId') === $category['categoryId'] ? 'selected' : '' ?>>
                                 <?=$category['categoryName']?>
                             </option>
                             <?php endforeach ?>
@@ -125,27 +136,24 @@
                 <div class="mb-4">
                     <h5 class="fs-14 mb-2">Tags de categoría</h5>
                     <label class="text-muted mb-3">Ingresa tags de la categoría</label>
-                    <div class="form-control <?=isset($errors['categoryTags[]']) ? 'is-invalid' : ''?> position-relative p-0" style="background-image: none !important;">
+                    <div class="form-control <?=isset($errors['categoryTags']) ? 'is-invalid' : ''?> position-relative p-0" style="background-image: none !important;">
                         <div class="d-flex align-items-center h-100 position-absolute z-1 gap-2" style="right: 10px">
-                            <?php if(isset($errors['categoryTags[]'])): ?>
-                                <i class="las la-exclamation-circle" style="
+                            <?php if(isset($errors['categoryTags'])): ?>
+                            <i class="las la-exclamation-circle" style="
                                     color: var(--vz-red);
-                                    font-size: 20px;"
-                                ></i>
+                                    font-size: 20px;"></i>
                             <?php endif; ?>
                             <div id="tagSpinner"></div>
                         </div>
                         <select id="categoryTags" name="categoryTags[]" class="position-absolute z-1" multiple required>
                             <option value="">Selecciona</option>
                             <?php foreach (old('categoryTags') ?? [] as $categoryTag):?>
-                            <option
-                                value="<?= $categoryTag?>"
-                            >
+                            <option value="<?= $categoryTag?>">
                             </option>
                             <?php endforeach ?>
                         </select>
                     </div>
-                    <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryTags[]'] ?? null])?>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['categoryTags'] ?? null])?>
                 </div>
             </div>
             <!-- end card body -->
@@ -163,24 +171,24 @@
             <div class="card-body">
                 <!-- Product description -->
                 <div class="mb-4">
-                    <?= validation_show_error('productDescription', 'validationError') ?>
                     <h5 class="fs-14 mb-2">Descripción</h5>
                     <label class="text-muted mb-3">Ingresa una descripción para el producto</label>
                     <div class="wysiwyg-editor position-relative z-1">
-                        <div class="editor"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required >
+                        <div class="editor <?=isset($errors['productDescription']) ? 'is-invalid' : ''?>"></div>
+                        <input class="input-wysiwyg" type="hidden" name="productDescription" value="<?= old('productDescription') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
                     </div>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['productDescription'] ?? null])?>
                 </div>
 
                 <!-- Product specific information-->
                 <div class="mb-4">
-                    <?= validation_show_error('productSpecificInformation', 'validationError') ?>
                     <h5 class="fs-14 mb-2">Especificaciones técnicas del producto</h5>
                     <label class="text-muted mb-3">Ingresa información más detallada del producto</label>
-                    <div class="wysiwyg-editor">
-                        <div class="editor"></div>
-                        <input class="input-wysiwyg" type="hidden" name="productSpecificInformation" value="<?= old('productSpecificInformation') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required >
+                    <div class="wysiwyg-editor ">
+                        <div class="editor <?=isset($errors['productDetails']) ? 'is-invalid' : ''?>"></div>
+                        <input class="input-wysiwyg" type="hidden" name="productDetails" value="<?= old('productDetails') ?? '<h2>Producto de software</h2><p>El mejor producto en el área de software</p><ul><li>Precio</li><li>Calidad</li><li>Rapidez</li></ul>'?>" required>
                     </div>
+                    <?= view('admin/templates/invalidInputError', ['error' => $errors['productDetails'] ?? null])?>
                 </div>
 
                 <!-- Download Área -->
@@ -192,28 +200,28 @@
                 <div class="mb-4">
                     <h5 class="fs-14 mb-3">Brochure</h5>
                     <?= view('admin/components/inputFilePond', [
-                        'config' => $fileConfig['brochure'],
+                        'config' => $fileConfig['brochures'],
                     ]) ?>
                 </div>
                 <!-- Datasheet -->
                 <div class="mb-4">
                     <h5 class="fs-14 mb-3">Datasheet</h5>
                     <?= view('admin/components/inputFilePond', [
-                        'config' => $fileConfig['datasheet'],
+                        'config' => $fileConfig['datasheets'],
                     ]) ?>
                 </div>
                 <!-- User Manual -->
                 <div class="mb-4">
                     <h5 class="fs-14 mb-3">Manual de usuario</h5>
                     <?= view('admin/components/inputFilePond', [
-                        'config' => $fileConfig['userManual'],
+                        'config' => $fileConfig['userManuals'],
                     ]) ?>
                 </div>
                 <!-- Certificate -->
                 <div class="mb-4">
                     <h5 class="fs-14 mb-3">Certificados</h5>
                     <?= view('admin/components/inputFilePond', [
-                        'config' => $fileConfig['certificate'],
+                        'config' => $fileConfig['certificates'],
                     ]) ?>
                 </div>
             </div>

@@ -9,12 +9,13 @@ use CodeIgniter\Model;
  */
 class FileModel extends Model
 {
-    protected $table            = 'files';
-    protected $primaryKey       = 'fileId';
-    protected $allowedFields    = ['fileRoute', 'uuid', 'fileDirectoryRoute', 'fileName'];
-    protected $lastIds          = [];
-    protected $afterInsertBatch = ['setLastIds'];
-    protected $beforeInsert     = ['getFileEntity'];
+    protected $table             = 'files';
+    protected $primaryKey        = 'fileId';
+    protected $allowedFields     = ['fileRoute', 'uuid', 'fileDirectoryRoute', 'fileName'];
+    protected $lastIds           = [];
+    protected $afterInsertBatch  = ['setLastIds'];
+    protected $beforeInsert      = ['getFileEntity'];
+    protected $beforeInsertBatch = ['getFileEntity'];
 
     /**
      * Callback after saving files

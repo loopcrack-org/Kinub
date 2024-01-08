@@ -31,6 +31,10 @@ editorContainers.forEach((editorContainer) => {
   quillEditor.root.innerHTML = inputHidden.value;
 
   quillEditor.on('text-change', function () {
-    inputHidden.value = quillEditor.root.innerHTML;
+    if (quillEditor.root.textContent !== '') {
+      inputHidden.value = quillEditor.root.innerHTML;
+    } else {
+      inputHidden.value = '';
+    }
   });
 });

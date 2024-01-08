@@ -53,4 +53,5 @@
 <script src="/assets/admin/js/wysiwyg-general-config.min.js"></script>
 <script src="/assets/admin/js/productChoices.min.js"></script>
 <script src="/assets/admin/js/keyValueInput.min.js"></script>
+<script src="/assets/admin/js/validateInputNumber.min.js"></script>
 <?= $this->endSection() ?>

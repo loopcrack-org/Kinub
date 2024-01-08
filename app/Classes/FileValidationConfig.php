@@ -64,8 +64,12 @@ class FileValidationConfig
         $validationsRules = [];
 
         foreach ($this->config as $key => $value) {
-            $validationsRules['rules'][$key]    = $value[1]->getCollectionFileValidationRules()['rules'];
-            $validationsRules['messages'][$key] = $value[1]->getCollectionFileValidationRules()['messages'];
+            $fileValidation = $value[1]->getCollectionFileValidationRules();
+
+            if ($fileValidation['rules']) {
+                $validationsRules['rules'][$key]    = $fileValidation['rules'];
+                $validationsRules['messages'][$key] = $fileValidation['messages'];
+            }
         }
 
         return $validationsRules;
