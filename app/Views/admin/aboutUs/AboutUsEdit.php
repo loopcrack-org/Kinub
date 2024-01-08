@@ -54,15 +54,39 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-header">
+                                    <h5 class="card-title mb-0">Titulo de Sobre Nosotros</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="hstack gap-3 align-items-start">
+                                        <?php $errors = session()->get('errors') ?>
+                                        <div class="flex-grow-1">
+                                            <input class="form-control <?= isset($errors['aboutUsTitle']) ? 'is-invalid' : '' ?>" id="aboutUsTitle" maxlength="20" rows="3" name="aboutUsTitle" value="<?= old('aboutUsTitle') ?? $aboutUsData['aboutUsTitle'] ?? ''?>" required>
+                                            <?= view('admin/templates/invalidInputError', ['error' => $errors['aboutUsTitle'] ?? null])?>
+                                            <div class="text-primary d-block text-end mt-1" id="aboutUsTitleCharacterCount"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
                                     <h5 class="card-title mb-0">Descripción de Sobre Nosotros</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="hstack gap-3 align-items-start">
                                         <?php $errors = session()->get('errors') ?>
                                         <div class="flex-grow-1">
-                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" id="aboutUsText" maxlength="450" rows="3" name="aboutUsText" required><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
+                                            <textarea class="form-control <?= isset($errors['aboutUsText']) ? 'is-invalid' : '' ?>" id="aboutUsText" maxlength="330" rows="3" name="aboutUsText" required><?= old('aboutUsText') ?? $aboutUsData['aboutUsText'] ?? ''?></textarea>
                                             <?= view('admin/templates/invalidInputError', ['error' => $errors['aboutUsText'] ?? null])?>
-                                            <div class="text-primary d-block text-end mt-1" id="characterCount">0/450</div>
+                                            <div class="text-primary d-block text-end mt-1" id="aboutUsTextCharacterCount"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -101,5 +125,5 @@
 <?= $this->section('js') ?>
 <script src="/assets/admin/js/filepond-general-config.min.js"></script>
 <script src="/assets/admin/js/alertElement.min.js"></script>
-<script src="/assets/admin/js/textareaCounter.min.js"></script>
+<script src="/assets/admin/js/aboutUsCounter.min.js"></script>
 <?= $this->endSection() ?>

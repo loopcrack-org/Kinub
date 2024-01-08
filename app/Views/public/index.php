@@ -21,7 +21,7 @@
         </div>
 
         <div class="about-us__content">
-            <h2 class="about-us__heading title--level-2">Nosotros</h2>
+            <h2 class="about-us__heading title--level-2"><?= $aboutUsData['aboutUsTitle']?></h2>
             <p class="about-us__text"><?= $aboutUsData['aboutUsText']?></p>
         </div>
     </div>

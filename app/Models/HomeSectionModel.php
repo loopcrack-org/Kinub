@@ -11,7 +11,7 @@ class HomeSectionModel extends Model
     protected $DBGroup       = 'default';
     protected $table         = 'home_page';
     protected $primaryKey    = 'homePageId';
-    protected $allowedFields = ['aboutUsText', 'aboutUsImageId', 'aboutUsVideoId'];
+    protected $allowedFields = ['aboutUsTitle', 'aboutUsText', 'aboutUsImageId', 'aboutUsVideoId'];
 
     public function updateData($homeSectionData)
     {
@@ -62,8 +62,17 @@ class HomeSectionModel extends Model
 
     public function getDataWithFiles()
     {
-        return $this->select('home_page.homePageId, home_page.aboutUsText,
-                img.fileRoute AS aboutUsImageRoute, img.fileName AS aboutUsImageName,
-                vid.fileRoute AS aboutUsVideoRoute, vid.fileName AS aboutUsVideoName')->join('files img', 'home_page.aboutUsImageId = img.fileId', 'left')->join('files vid', 'home_page.aboutUsVideoId = vid.fileId', 'left')->find('1');
+        return $this->select(
+            'home_page.homePageId,
+        home_page.aboutUsText,
+        home_page.aboutUsTitle,
+        img.fileRoute AS aboutUsImageRoute,
+        img.fileName AS aboutUsImageName,
+        vid.fileRoute AS aboutUsVideoRoute,
+        vid.fileName AS aboutUsVideoName'
+        )
+            ->join('files img', 'home_page.aboutUsImageId = img.fileId', 'left')
+            ->join('files vid', 'home_page.aboutUsVideoId = vid.fileId', 'left')
+            ->find('1');
     }
 }

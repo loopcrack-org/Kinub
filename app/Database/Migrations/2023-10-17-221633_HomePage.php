@@ -13,6 +13,10 @@ class HomePage extends Migration
                 'type'           => 'int',
                 'auto_increment' => true,
             ],
+            'aboutUsTitle' => [
+                'type'       => 'varchar',
+                'constraint' => 60,
+            ],
             'aboutUsText' => [
                 'type' => 'text',
             ],
