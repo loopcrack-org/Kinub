@@ -12,86 +12,16 @@
     <h1 class="certificates__heading title--level-3">Certificados</h1>
 
     <section class="certificates__grid">
-        <a href="#" target="_blank" class="certificate kinub-card">
+        <?php foreach ($certificates as $certificate) { ?>
+        <a href="<?= $certificate['certificateFileRoute']?>" target="_blank" class="certificate kinub-card">
             <div class="certificate__image-container">
-                <img class="certificate__image " src="assets/images/pdf-example.png" alt="Certificado">
+                <img class="certificate__image " src="<?= $certificate['previewFileRoute']?>" alt="<?= $certificate['certificatefileName']?>">
             </div>
             <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
+                <p class="certificate__name"><?= $certificate['certificatefileName']?></p>
             </div>
         </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-        <img class="certificate__image " src="assets/images/pdf-example.png" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con nombre un poco más largo que el otro</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-            <img class="certificate__image " src="assets/images/pdf-horizontal-example.jpg" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-                <img class="certificate__image " src="assets/images/pdf-example.png" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-              <img class="certificate__image " src="assets/images/pdf-example.png" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-                <img class="certificate__image " src="assets/images/pdf-horizontal-example.jpg" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-                <img class="certificate__image " src="assets/images/pdf-horizontal-example.jpg" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-                <img class="certificate__image " src="assets/images/pdf-example.png" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
-
-        <a href="#" target="_blank" class="certificate kinub-card">
-            <div class="certificate__image-container">
-                <img class="certificate__image " src="assets/images/pdf-example.png" alt="Certificado">
-            </div>
-            <div class="certificate__information">
-                <p class="certificate__name">Certificado con algún nombre no tan largo</p>
-            </div>
-        </a>
+        <?php }?>
     </section>
 </main>
 
