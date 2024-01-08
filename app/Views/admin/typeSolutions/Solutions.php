@@ -56,8 +56,8 @@
                                     </td>
                                     <td>
                                         <div class="d-flex justify-content-between">
-                                            <a href="/admin/soluciones/editar/<?= $measurementSolution['msId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;"><i class="ri-edit-2-fill ri-lg"></i></a>
-                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteMeasurementSolutionsModal"  data-id=<?= $measurementSolution['msId']?> style="width: 48%;"><i class="ri-delete-bin-5-line ri-lg"></i></a>
+                                            <a href="/admin/soluciones/editar/<?= $measurementSolution['msId']?>" class="btn btn-primary btn-icon waves-effect waves-light" style="width: 48%;" title="Editar solución de medición"><i class="ri-edit-2-fill ri-lg"></i></a>
+                                            <a href="#" class="btn btn-danger btn-icon waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#deleteMeasurementSolutionsModal"  data-id=<?= $measurementSolution['msId']?> style="width: 48%;" title="Eliminar solución de medición"><i class="ri-delete-bin-5-line ri-lg"></i></a>
                                         </div>
                                     </td>
                                 </tr>

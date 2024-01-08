@@ -30,10 +30,7 @@
                 <h4 class="card-title mb-0">Imagen de previsualización</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatePreview']]) ?>
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatePreview']]) ?>
         </div>
         <!-- end card -->
     </div>
@@ -45,10 +42,7 @@
                 <h4 class="card-title mb-0">Archivo del certificado</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                 <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatefile']]) ?>
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatefile']]) ?>
         </div>
         <!-- end card -->
     </div>

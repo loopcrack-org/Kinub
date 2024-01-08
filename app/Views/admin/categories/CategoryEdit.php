@@ -7,6 +7,7 @@
 <?= $this->section('css') ?>
 <!-- Filepond css -->
 <link rel="stylesheet" href="/assets/admin/css/filepond.min.css" type="text/css" />
+<link href="/assets/common/css/sweetAlert.min.css" rel="stylesheet" type="text/css">
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
