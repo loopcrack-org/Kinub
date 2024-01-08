@@ -1,7 +1,7 @@
 <?= $this->extend('templates/admin/dashboardTemplate') ?>
 
 <?= $this->section('title-meta') ?>
-<?= view('partials/title-meta', ['title' => 'Crear Producto']); ?>
+<?= view('partials/title-meta', ['title' => 'Editar Producto']); ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('css') ?>
@@ -15,7 +15,7 @@
 <?= $this->section('content') ?>
 <div class="page-content">
     <div class="container-fluid">
-        <?= view('partials/page-title', ['title' => 'Crear producto', 'titleUrl' => '/admin/productos', 'pagetitle' => 'Producto', 'pagetitleInner' => 'Crear producto']); ?>
+        <?= view('partials/page-title', ['title' => 'Editar producto', 'titleUrl' => '/admin/productos', 'pagetitle' => 'Producto', 'pagetitleInner' => 'Editar producto']); ?>
 
         <form id="form" autocomplete="off" class="needs-validation" method="POST">
             <div class="row justify-content-center">
