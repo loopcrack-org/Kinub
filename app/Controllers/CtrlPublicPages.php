@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\CategoryModel;
 use App\Models\CertificateModel;
 
 class CtrlPublicPages extends BaseController
@@ -23,9 +24,12 @@ class CtrlPublicPages extends BaseController
 
     public function viewEquipment(): string
     {
-        $data = [
+        $categoryModel = new CategoryModel();
+        $categories    = $categoryModel->join('files', 'files.fileId = categories.categoryIconId')->findAll();
+        $data          = [
             'metaTitle'       => 'Equipos',
             'metaDescription' => 'Descubre los mejores equipos que puedes encontrar solo en Kinub',
+            'categories'      => $categories,
         ];
 
         return view('public/equipment', $data);
@@ -33,11 +37,14 @@ class CtrlPublicPages extends BaseController
 
     public function viewCategory(): string
     {
-        // title, description and image for metadata here will be dynamic and will need to be according to the category that is loaded
+        $categoryName  = $this->request->getGet('categoria') ?? '';
+        $categoryModel = new CategoryModel();
+        $category      = $categoryModel->join('files', 'files.fileId = categories.categoryImageId')->where('categoryName', $categoryName)->first();
+
         $data = [
-            'metaTitle'       => 'Categoría',
-            'metaDescription' => 'Explora los mejores productos de la categoría',
-            // 'metaImage' => 'imagenCategoria.jpg'
+            'metaTitle'       => $category['categoryName'],
+            'metaDescription' => 'Explora los mejores productos de ' . $category['categoryName'],
+            'metaImage'       => $category['fileRoute'],
         ];
 
         return view('public/category', $data);

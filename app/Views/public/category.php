@@ -1,17 +1,17 @@
 <?php $this->extend('public/templates/layout'); ?>
 
 <?php $this->section('css'); ?>
-<link rel="stylesheet" href="assets/public/css/category.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/public/css/category.min.css" type="text/css">
 <?php $this->endSection(); ?>
 
 <?php $this->section('js'); ?>
-<script src="assets/public/js/multiple-options-select.min.js"></script>
+<script src="/assets/public/js/multiple-options-select.min.js"></script>
 <?php $this->endSection(); ?>
 
 <?php $this->section('content'); ?>
 
-<header class="jumbotron" style="background-image: url(/assets/images/Telemetria.jpeg);">
-    <h1 class="jumbotron__title">Telemetría</h1>
+<header class="jumbotron" style="background-image: url(<?= $metaImage?>);">
+    <h1 class="jumbotron__title"><?= $metaTitle?></h1>
 </header>
 
 <main class="category">
@@ -19,7 +19,7 @@
 
         <div class="product kinub-card">
             <div class="product__image-container">
-                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+                <img src="/assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -49,7 +49,7 @@
 
         <div class="product kinub-card">
             <div class="product__image-container">
-                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+                <img src="/assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -87,7 +87,7 @@
         </div> <!--product-->
         <div class="product kinub-card">
             <div class="product__image-container">
-                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+                <img src="/assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
@@ -96,7 +96,7 @@
         </div> <!--product-->
         <div class="product kinub-card">
             <div class="product__image-container">
-                <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
+                <img src="/assets/images/imagen-catalogo.png" alt="" class="product__image">
             </div>
             <div class="product__content">
                 <p class="product__name">E-101</p>
