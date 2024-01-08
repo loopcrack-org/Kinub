@@ -47,10 +47,7 @@
                 <h4 class="card-title mb-0">Icono</h4>
             </div><!-- end card header -->
 
-            <div class="card-body">
-                <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msIcon']]) ?>
-            </div>
-            <!-- end card body -->
+            <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['msIcon']]) ?>
         </div>
         <!-- end card -->
     </div>

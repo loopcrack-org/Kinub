@@ -43,7 +43,6 @@
             </div><!-- end card header -->
 
             <?= view('admin/components/inputFilePond', ['config' => $filepondConfig['certificatefile']]) ?>
-            <!-- end card body -->
         </div>
         <!-- end card -->
     </div>
