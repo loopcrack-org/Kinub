@@ -2,6 +2,7 @@ const products = document.querySelectorAll('.product');
 const productsSection = document.querySelector('.category__grid');
 const productListContent = document.querySelectorAll('.list-content');
 const productContent = document.querySelectorAll('.product__content');
+const productImageContainer = document.querySelectorAll('.product__image-container');
 
 const GRID = 0;
 const LIST = 1;
@@ -12,6 +13,9 @@ function updateDisplay(display) {
     productsSection.classList.remove('category__grid--list');
     productListContent.forEach((listContent) => {
       listContent.classList.add('list-content--disabled');
+    });
+    productImageContainer.forEach((imageContainer) => {
+      imageContainer.classList.remove('product__image-container--list');
     });
     productContent.forEach((content) => {
       content.classList.remove('product__content--list');
@@ -26,6 +30,9 @@ function updateDisplay(display) {
     productsSection.classList.add('category__grid--list');
     productListContent.forEach((listContent) => {
       listContent.classList.remove('list-content--disabled');
+    });
+    productImageContainer.forEach((imageContainer) => {
+      imageContainer.classList.add('product__image-container--list');
     });
     productContent.forEach((content) => {
       content.classList.add('product__content--list');

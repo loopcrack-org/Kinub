@@ -7,12 +7,15 @@ function getOrder() {
   const order = orderSelector.value;
   const ASCENDING = 'asc';
   const DESCENDING = 'desc';
+  const RELEVANCE = 'rel';
 
   switch (order) {
     case '1':
       return ASCENDING;
     case '2':
       return DESCENDING;
+    case '3':
+      return RELEVANCE;
     default:
       return ASCENDING;
   }

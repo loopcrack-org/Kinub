@@ -1,10 +1,17 @@
 @use '../../../02_tools/breakpoints' as *;
 
 .tags {
+  margin-bottom: 0;
+
   &__tag {
     display: none;
+    margin: 0;
     @include phoneXL {
       display: flex;
     }
+  }
+
+  @include phoneXL {
+    margin-bottom: 1rem;
   }
 }

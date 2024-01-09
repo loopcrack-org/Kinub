@@ -7,7 +7,7 @@
 
 .category {
   max-width: 90rem;
-  margin: 1.8rem auto;
+  margin: 1.2rem auto 2rem auto;
 
   &__grid {
     width: 90%;
@@ -18,14 +18,10 @@
     }
     @include desktop {
       width: 100%;
-      margin: 0;
-      @include flex-columns(4, 1.25rem, 1.5625rem);
     }
     @include desktopXL {
-      @include flex-columns(5, 1.25rem, 1.5625rem);
-    }
-    @include desktop() {
-      // margin-right: 3.44125rem;
+      margin: 0;
+      @include flex-columns(4, 1.25rem, 1.5625rem);
     }
 
     &--list {
@@ -44,6 +40,6 @@
   @include desktop() {
     display: flex;
     padding: 0 1.4rem;
-    gap: 3.44125rem;
+    gap: 2rem;
   }
 }

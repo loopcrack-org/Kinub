@@ -10,7 +10,7 @@
   flex-direction: column;
   &__details {
     display: none;
-    @include phoneXL {
+    @include phone {
       display: block;
       margin-bottom: 1rem;
       line-height: $base-line-height;
@@ -18,9 +18,15 @@
   }
 
   &__detail {
+    display: -webkit-box;
+    overflow: hidden;
+    padding: 0;
     margin-bottom: 0.7rem;
+    -webkit-box-orient: vertical;
     color: color.adjust($color-gray-60, $lightness: 5%);
     font-size: 0.8rem;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
 
     &--title {
       margin: 0;

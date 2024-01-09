@@ -183,8 +183,9 @@
                 </button>
 
                 <select class="search__sorting" name="sorting" id="sorting">
-                    <option value="1" class="search__sorting--option">De la A-Z</option>
-                    <option selected value="2" class="search__sorting--option">De la Z-A</option>
+                    <option value="1" class="search__sorting--option">Nombre Ascendente</option>
+                    <option selected value="2" class="search__sorting--option">Nombre Descendente</option>
+                    <option selected value="3" class="search__sorting--option">Relevancia</option>
                 </select>
             </div>
 
@@ -198,7 +199,7 @@
                     <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
                 </div>
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -210,15 +211,20 @@
                     </div>
 
                     <div class="list-content__details">
-                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -228,7 +234,7 @@
                     <img src="https://tse3.mm.bing.net/th?id=OIP.ZTQLS9hW-oRg1SxK6at9TQHaFj&pid=Api&P=0&h=180" alt="" class="product__image">
                 </div>
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -242,13 +248,18 @@
                     <div class="list-content__details">
                         <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
                         <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -259,7 +270,7 @@
                 </div>
 
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -273,13 +284,18 @@
                     <div class="list-content__details">
                         <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
                         <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -289,7 +305,7 @@
                     <img src="assets/images/imagen-catalogo.png" alt="" class="product__image">
                 </div>
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -301,15 +317,20 @@
                     </div>
 
                     <div class="list-content__details">
-                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -320,7 +341,7 @@
                 </div>
 
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -332,16 +353,21 @@
                     </div>
 
                     <div class="list-content__details">
-                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
 
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -352,7 +378,7 @@
                 </div>
 
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -364,16 +390,21 @@
                     </div>
 
                     <div class="list-content__details">
-                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
 
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -383,7 +414,7 @@
                 </div>
 
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -395,16 +426,21 @@
                     </div>
 
                     <div class="list-content__details">
-                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
 
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -414,7 +450,7 @@
                 </div>
 
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -428,14 +464,19 @@
                     <div class="list-content__details">
                         <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
                         <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
 
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->
@@ -445,7 +486,7 @@
                 </div>
 
                 <div class="list-content list-content--disabled">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name product__name--list">Medidor De Nivel De Radar 80G</p>
 
                     <div class="tags">
                         <a href="#" class="tags__tag">
@@ -459,14 +500,19 @@
                     <div class="list-content__details">
                         <p class="list-content__detail"><span class="list-content__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consectetur</p>
                         <p class="list-content__detail"><span class="list-content__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
-                        <p class="list-content__detail"><span class="list-content__detail--title">Precisión de medición: </span>Lorem ipsum dolor sit amet consectetur</p>
                     </div>
 
                     <a href="/producto" class="product__button product__button--list">Ver más</a>
                 </div>
 
                 <div class="product__content">
-                    <p class="product__name">E-101</p>
+                    <p class="product__name">Medidor De Nivel De Radar 80G</p>
+
+                    <div class="product__details">
+                        <p class="product__detail"><span class="product__detail--title">Frecuencia: </span>Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                        <p class="product__detail"><span class="product__detail--title">Rango de medición: </span>Lorem ipsum dolor sit amet consectetur Lorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consecteturLorem ipsum dolor sit amet consectetur</p>
+                    </div>
+
                     <a href="/producto" class="product__button">Ver más</a>
                 </div>
             </div> <!--product-->

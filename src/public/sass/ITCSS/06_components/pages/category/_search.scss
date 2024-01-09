@@ -12,14 +12,13 @@
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: center;
-  margin: 0 auto;
-  margin-bottom: 2rem;
-  gap: 0.5rem;
+  margin: 0 auto 1.5rem auto;
+  gap: 1rem;
 
   @include desktop() {
     width: 100%;
     margin: 0;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
   }
 
   &__form {
@@ -75,7 +74,7 @@
 
   &__choices {
     display: flex;
-    gap: 1rem;
+    gap: 0.8rem;
   }
 
   &__displays {
@@ -157,7 +156,7 @@
 
   &__filter-button {
     display: block;
-    flex-basis: calc(20% - 0.5rem);
+    flex-basis: calc(30% - 0.5rem);
     padding: 0.3rem 0.5rem;
     border: 0.0625rem solid $brand-color-secondary;
     border-radius: 1rem;
@@ -186,6 +185,12 @@
     display: none;
     @include device(32.9rem) {
       display: inline-block;
+    }
+  }
+
+  @include phone {
+    &__choices {
+      gap: 1rem;
     }
   }
 
