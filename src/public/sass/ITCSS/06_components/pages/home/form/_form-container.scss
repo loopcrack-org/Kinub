@@ -1,7 +1,7 @@
 @use '../../../../02_tools/breakpoints' as *;
 .form-container {
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 2rem;
   @include desktop {
-    scroll-margin-top: 8.5rem;
+    scroll-margin-top: 3rem;
   }
 }

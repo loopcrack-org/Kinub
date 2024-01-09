@@ -9,7 +9,7 @@
   width: 90%;
   max-width: 75rem;
   margin: 3vh auto;
-  scroll-margin-top: 11rem;
+  scroll-margin-top: 7.5rem;
   &__heading {
     margin: 0 0 0.625rem 0;
     text-align: left;
@@ -69,12 +69,12 @@
 
   @include phone() {
     font-size: 0.9rem;
-    scroll-margin-top: 8.125rem;
+    scroll-margin-top: 5rem;
   }
 
   @include tablet() {
     margin: 4.5vh auto;
-    scroll-margin-top: 13.75rem;
+    scroll-margin-top: 10rem;
 
     &__text-container {
       padding-top: 0;

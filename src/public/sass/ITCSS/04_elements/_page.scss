@@ -16,6 +16,8 @@ html {
   font-size: 1rem;
   line-height: $base-line-height;
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header-height);
+  scroll-snap-type: y proximity;
 }
 
 body {
