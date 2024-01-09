@@ -12,6 +12,7 @@
   justify-content: space-between;
   padding: 0.7rem 0;
   border: 0.0625rem solid color.adjust($color-aqua-blue, $lightness: 40%);
+  border-radius: 0.75rem;
   transition: border 100ms ease-in-out;
   transition: box-shadow 500ms ease-in-out;
 
