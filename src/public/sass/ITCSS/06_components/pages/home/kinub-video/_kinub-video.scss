@@ -5,6 +5,7 @@
 .kinub-video {
   padding: 0 $spacing-md;
   margin: 5rem 0;
+  scroll-margin-top: 2rem;
 
   &__container {
     width: 100%;
@@ -21,12 +22,14 @@
   }
   @include desktop() {
     margin: 10rem 0;
+    scroll-snap-align: start;
     &__container {
       max-width: 85vw;
     }
   }
   @include desktopXL() {
     margin: 10rem 0;
+    scroll-margin-top: 4rem;
     &__container {
       max-width: 75vw;
     }

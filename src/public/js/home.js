@@ -23,6 +23,7 @@ new Swiper('.swiper', {
   },
   pagination: {
     el: '.swiper-pagination',
+    clickable: true,
   },
   navigation: {
     nextEl: '.swiper-button-next',
@@ -30,9 +31,50 @@ new Swiper('.swiper', {
   },
 });
 
-new Plyr('#kinub-video', {
-  muted: true,
+const videoElement = document.getElementById('kinub-video');
+new Plyr(videoElement, {
+  storage: { enabled: false },
+  controls: [
+    'play-large',
+    'play',
+    'progress',
+    'current-time',
+    'mute',
+    'volume',
+    'captions',
+    'airplay',
+    'fullscreen',
+  ],
+  volume: 0.7,
 });
+
+// Options for the observer
+const observerOptions = {
+  root: null, // null means the viewport is observed
+  rootMargin: '0px',
+  threshold: 0.8, // 80% of the element must be visible
+};
+
+// Function executed when the video enters the viewport
+function handleIntersect(entries) {
+  entries.forEach((entry) => {
+    // If 80% of the video is visible, play the video
+    if (entry.isIntersecting) {
+      entry.target.play().catch(() => {
+        entry.target.volume = 0; // mute the video on error
+        entry.target.play(); // try to play again
+      });
+    } else {
+      entry.target.pause(); // pause the video if not visible
+    }
+  });
+}
+
+// Create the observer
+const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+// Observe the video element
+observer.observe(videoElement);
 
 const cstSel = customSelect('#product-name')[0];
 
