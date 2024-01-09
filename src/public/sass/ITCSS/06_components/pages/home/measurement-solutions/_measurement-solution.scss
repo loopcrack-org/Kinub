@@ -146,6 +146,7 @@
     svg {
       scale: 0.7;
     }
+
     * {
       /* stylelint-disable-next-line itcss/no-at-important */
       fill: $color-white !important; //The reason for this is that the svgs imported already have a fill property

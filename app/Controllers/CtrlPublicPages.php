@@ -2,13 +2,22 @@
 
 namespace App\Controllers;
 
+use App\Models\MeasurementSolutionModel;
 use App\Models\CertificateModel;
+
 
 class CtrlPublicPages extends BaseController
 {
     public function index(): string
     {
-        return view('public/index');
+        $measurementSolutions = (new MeasurementSolutionModel())->getMeasurementSolutionsWithFiles();
+
+        foreach ($measurementSolutions as $key => $value) {
+            $measurementSolutions[$key]['msNameStrong']    = explode(' ', $value['msName'])[0];
+            $measurementSolutions[$key]['msNameNotStrong'] = implode(' ', array_slice(explode(' ', $value['msName']), 1));
+        }
+
+        return view('public/index', ['measurementSolutions' => $measurementSolutions]);
     }
 
     public function viewSupport(): string
